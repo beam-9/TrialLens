@@ -99,7 +99,7 @@ export default function Home() {
   }
 
   return (
-    <main className="film-grain min-h-screen overflow-hidden">
+    <main className="son-flow film-grain min-h-screen overflow-hidden">
       <nav className="fixed left-0 right-0 top-4 z-40 mx-auto flex max-w-7xl items-center justify-between px-4">
         <a href="#home" className="flex items-center gap-2 text-paper drop-shadow">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-paper text-ink">
@@ -120,7 +120,10 @@ export default function Home() {
       </nav>
 
       <section id="home" className="relative min-h-screen bg-black p-3 sm:p-6">
-        <div className="hero-landscape relative grid min-h-[calc(100vh-3rem)] overflow-hidden rounded-sm border border-paper/20 shadow-2xl">
+        <div className="hero-landscape valley-current relative grid min-h-[calc(100vh-3rem)] overflow-hidden rounded-sm border border-paper/20 shadow-2xl">
+          <div className="flow-ribbon ribbon-one" aria-hidden="true" />
+          <div className="flow-ribbon ribbon-two" aria-hidden="true" />
+          <div className="flow-ribbon ribbon-three" aria-hidden="true" />
           <div className="drift-figures" aria-hidden="true">
             <span />
             <span />
@@ -133,6 +136,10 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto grid w-full max-w-7xl content-end gap-8 px-5 pb-8 pt-28 text-paper lg:grid-cols-[1fr_430px] lg:items-end lg:pb-14">
             <div>
+              <p className="poem-line mb-6 max-w-sm font-display text-3xl leading-none text-paper/72">
+                I am a valley of evidence
+                <span className="block pl-20 text-paper/45">see you in the sources</span>
+              </p>
               <h1 className="font-display text-[19vw] font-semibold leading-[0.72] tracking-[-0.09em] drop-shadow-2xl sm:text-[14vw] lg:text-[10.8rem]">
                 TrialLens
               </h1>
@@ -239,7 +246,7 @@ export default function Home() {
           <textarea
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
-            className="min-h-28 w-full rounded-none border border-paper/20 bg-paper/8 p-3 text-paper outline-none placeholder:text-paper/40 focus:border-paper/60"
+            className="min-h-28 w-full rounded-none border border-paper/20 bg-paper p-3 text-ink shadow-inner shadow-black/20 outline-none placeholder:text-ink/45 focus:border-fog"
           />
           {answer && (
             <div id="answer" className="mt-6 grid gap-4 lg:grid-cols-[1fr_380px]">

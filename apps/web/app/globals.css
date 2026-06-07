@@ -29,6 +29,10 @@ body {
   font-family: Aptos, "Helvetica Neue", ui-sans-serif, system-ui;
 }
 
+body::selection {
+  background: rgba(57, 95, 67, 0.28);
+}
+
 button,
 input,
 select,
@@ -65,13 +69,24 @@ textarea {
   border-color: rgba(57, 95, 67, 0.55);
 }
 
+.son-flow {
+  background:
+    radial-gradient(circle at 8% 7%, rgba(248, 214, 204, 0.58), transparent 20rem),
+    radial-gradient(circle at 86% 16%, rgba(60, 116, 78, 0.16), transparent 26rem),
+    linear-gradient(180deg, #fbf7ef 0%, #f1eadf 42%, #f8f4ec 100%);
+}
+
 .hero-landscape {
   background:
-    linear-gradient(180deg, rgba(169, 221, 234, 0.88), rgba(229, 237, 225, 0.22) 42%, rgba(4, 30, 25, 0.88)),
-    radial-gradient(ellipse at 48% 100%, rgba(222, 209, 95, 0.94) 0 4%, transparent 20%),
-    radial-gradient(ellipse at 22% 88%, rgba(45, 125, 74, 0.9) 0 12%, transparent 34%),
-    radial-gradient(ellipse at 76% 86%, rgba(18, 91, 66, 0.84) 0 16%, transparent 42%),
-    linear-gradient(150deg, #8ad1e2 0 22%, #2a6670 22% 34%, #0a302a 34% 57%, #061511 57%);
+    linear-gradient(180deg, rgba(174, 224, 235, 0.9), rgba(235, 239, 226, 0.2) 40%, rgba(4, 30, 25, 0.92)),
+    radial-gradient(ellipse at 50% 100%, rgba(225, 213, 97, 0.94) 0 4%, transparent 21%),
+    radial-gradient(ellipse at 19% 88%, rgba(45, 125, 74, 0.92) 0 12%, transparent 36%),
+    radial-gradient(ellipse at 78% 86%, rgba(18, 91, 66, 0.85) 0 16%, transparent 44%),
+    linear-gradient(150deg, #9dd9e6 0 20%, #2f7078 20% 33%, #0a302a 33% 57%, #061511 57%);
+}
+
+.valley-current {
+  isolation: isolate;
 }
 
 .hero-landscape::before,
@@ -91,6 +106,65 @@ textarea {
   height: 34%;
   clip-path: polygon(0 58%, 19% 33%, 35% 45%, 50% 18%, 64% 42%, 80% 25%, 100% 52%, 100% 100%, 0 100%);
   background: linear-gradient(90deg, rgba(7, 59, 72, 0.6), rgba(4, 24, 21, 0.82));
+}
+
+.valley-current::before {
+  z-index: 1;
+  height: 54%;
+  background:
+    radial-gradient(ellipse at 20% 100%, rgba(53, 122, 67, 0.88) 0 16%, transparent 42%),
+    radial-gradient(ellipse at 68% 96%, rgba(18, 87, 63, 0.82) 0 21%, transparent 48%),
+    linear-gradient(180deg, transparent 0%, rgba(3, 23, 18, 0.72) 58%, rgba(1, 13, 10, 0.96) 100%);
+}
+
+.valley-current::after {
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(8, 60, 71, 0.62), rgba(4, 24, 21, 0.84)),
+    repeating-linear-gradient(160deg, rgba(238, 245, 222, 0.06) 0 1px, transparent 1px 18px);
+}
+
+.flow-ribbon {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  width: 120%;
+  height: 20rem;
+  left: -10%;
+  border-radius: 50%;
+  filter: blur(0.2px);
+  opacity: 0.72;
+  transform-origin: center;
+}
+
+.ribbon-one {
+  bottom: 11%;
+  background:
+    radial-gradient(ellipse at 42% 52%, rgba(232, 241, 210, 0.38), transparent 34%),
+    linear-gradient(99deg, transparent 8%, rgba(205, 228, 169, 0.18) 38%, rgba(105, 148, 91, 0.22) 58%, transparent 82%);
+  clip-path: polygon(0 64%, 12% 52%, 26% 58%, 42% 38%, 62% 48%, 82% 30%, 100% 43%, 100% 72%, 0 86%);
+  animation: slow-current 18s ease-in-out infinite alternate;
+}
+
+.ribbon-two {
+  bottom: 22%;
+  background: linear-gradient(103deg, transparent 7%, rgba(191, 225, 229, 0.18) 28%, rgba(241, 232, 193, 0.2) 52%, transparent 80%);
+  clip-path: polygon(0 50%, 16% 42%, 34% 49%, 50% 35%, 69% 46%, 86% 36%, 100% 48%, 100% 58%, 0 68%);
+  opacity: 0.44;
+  animation: slow-current 22s ease-in-out infinite alternate-reverse;
+}
+
+.ribbon-three {
+  top: 19%;
+  height: 14rem;
+  background: linear-gradient(92deg, transparent 12%, rgba(247, 249, 235, 0.16) 37%, rgba(41, 105, 112, 0.14) 62%, transparent 84%);
+  clip-path: polygon(0 58%, 20% 35%, 37% 46%, 56% 25%, 75% 42%, 100% 29%, 100% 45%, 0 77%);
+  opacity: 0.5;
+  animation: upper-drift 26s ease-in-out infinite alternate;
+}
+
+.poem-line {
+  text-shadow: 0 24px 42px rgba(0, 0, 0, 0.44);
 }
 
 .bio-bloom {
@@ -120,6 +194,7 @@ textarea {
     repeating-radial-gradient(ellipse at 50% 55%, rgba(187, 126, 82, 0.52) 0 1px, transparent 2px 9px),
     radial-gradient(ellipse at 45% 55%, rgba(255, 250, 240, 1) 0 33%, transparent 34%);
   filter: blur(0.1px) drop-shadow(0 26px 32px rgba(7, 19, 15, 0.2));
+  animation: bloom-breathe 16s ease-in-out infinite alternate;
 }
 
 .left-cloud {
@@ -132,6 +207,7 @@ textarea {
   top: 16%;
   transform: scale(0.84) rotate(18deg);
   opacity: 0.48;
+  animation-delay: -6s;
 }
 
 .drift-figures {
@@ -179,6 +255,47 @@ textarea {
 .drift-figures span:nth-child(5) {
   left: 77%;
   height: 16rem;
+}
+
+@keyframes slow-current {
+  from {
+    transform: translate3d(-1.4%, 0, 0) scaleX(1.02);
+  }
+
+  to {
+    transform: translate3d(1.6%, -1.5%, 0) scaleX(0.98);
+  }
+}
+
+@keyframes upper-drift {
+  from {
+    transform: translate3d(1%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-2%, 4%, 0);
+  }
+}
+
+@keyframes bloom-breathe {
+  from {
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+
+  to {
+    transform: translate3d(1.5%, -1.5%, 0) scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flow-ribbon,
+  .mycelium-cloud {
+    animation: none;
+  }
 }
 
 @media (max-width: 760px) {
