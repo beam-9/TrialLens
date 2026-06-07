@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Local runtime data
+apps/api/data/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+
