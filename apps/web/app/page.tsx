@@ -42,6 +42,8 @@ export default function Home() {
   const [evals, setEvals] = useState<EvalReport | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showAllRetrieved, setShowAllRetrieved] = useState(false);
+  const [showAllSources, setShowAllSources] = useState(false);
 
   const counts = useMemo(() => {
     return sources.reduce<Record<string, number>>((acc, source) => {
@@ -52,6 +54,10 @@ export default function Home() {
 
   const totalSources = sources.length;
   const isReady = Boolean(workspace && totalSources > 0);
+  const visibleRetrieved = showAllRetrieved ? answer?.retrieved_chunks ?? [] : answer?.retrieved_chunks.slice(0, 3) ?? [];
+  const hiddenRetrievedCount = Math.max((answer?.retrieved_chunks.length ?? 0) - visibleRetrieved.length, 0);
+  const visibleSources = showAllSources ? sources : sources.slice(0, 6);
+  const hiddenSourceCount = Math.max(sources.length - visibleSources.length, 0);
 
   async function buildWorkspace(event?: FormEvent) {
     event?.preventDefault();
@@ -61,6 +67,8 @@ export default function Home() {
     setBrief(null);
     setEvals(null);
     setSources([]);
+    setShowAllRetrieved(false);
+    setShowAllSources(false);
     setBusy("Creating workspace");
     try {
       const created = await api.createWorkspace(condition.trim(), intervention.trim());
@@ -90,6 +98,7 @@ export default function Home() {
     try {
       const response = await api.ask(workspace.id, question.trim());
       setAnswer(response);
+      setShowAllRetrieved(false);
       document.querySelector("#answer")?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Question failed.");
@@ -109,15 +118,15 @@ export default function Home() {
         </a>
         <div className="hidden rounded-full border border-paper/35 bg-paper/12 px-2 py-2 text-sm text-paper shadow-xl backdrop-blur-xl md:flex">
           {navItems.map((item) => (
-            <a key={item.href} className="rounded-full px-4 py-1.5 transition hover:bg-paper hover:text-ink" href={item.href}>
+            <a key={item.href} className="nav-link rounded-full px-4 py-1.5" href={item.href}>
               {item.label}
             </a>
           ))}
         </div>
       </nav>
 
-      <section id="home" className="relative min-h-screen bg-black p-3 sm:p-6">
-        <div className="hero-landscape valley-current relative grid min-h-[calc(100vh-3rem)] overflow-hidden rounded-sm border border-paper/20 shadow-2xl">
+      <section id="home" className="relative min-h-screen bg-black">
+        <div className="hero-landscape valley-current relative grid min-h-screen overflow-hidden shadow-2xl">
           <div className="flow-ribbon ribbon-one" aria-hidden="true" />
           <div className="flow-ribbon ribbon-two" aria-hidden="true" />
           <div className="flow-ribbon ribbon-three" aria-hidden="true" />
@@ -267,16 +276,30 @@ export default function Home() {
                 </div>
               </div>
               <div className="space-y-3">
-                {answer.retrieved_chunks.map((chunk) => (
+                <p className="text-xs leading-5 text-paper/55">
+                  Match shows how strongly each retrieved passage aligned with your question. It is a retrieval relevance signal, not medical certainty.
+                </p>
+                {visibleRetrieved.map((chunk) => (
                   <div key={chunk.chunk_id} className="border border-paper/15 bg-paper/8 p-3">
                     <div className="mb-2 flex items-center justify-between gap-2">
                       <span className="text-xs font-bold uppercase tracking-[0.16em]">{sourceLabels[chunk.source_type]}</span>
-                      <span className="rounded-full bg-paper px-2 py-1 text-xs font-semibold text-ink">{chunk.score}</span>
+                      <span className="rounded-full bg-paper px-2 py-1 text-xs font-semibold text-ink">
+                        {Math.round(chunk.score * 100)}% match
+                      </span>
                     </div>
                     <p className="mb-2 font-semibold">{chunk.citation}</p>
                     <p className="text-sm leading-6 text-paper/72">{chunk.text}</p>
                   </div>
                 ))}
+                {hiddenRetrievedCount > 0 || showAllRetrieved ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllRetrieved((value) => !value)}
+                    className="w-full rounded-full border border-paper/20 px-4 py-2 text-sm font-semibold text-paper/82 transition hover:border-paper/60 hover:bg-paper/10"
+                  >
+                    {showAllRetrieved ? "Show fewer passages" : `See ${hiddenRetrievedCount} more passages`}
+                  </button>
+                ) : null}
               </div>
             </div>
           )}
@@ -291,7 +314,7 @@ export default function Home() {
           </div>
           <div className="space-y-3">
             {sources.length === 0 && <p className="text-ink/65">Build a workspace to inspect normalized biomedical sources.</p>}
-            {sources.map((source) => (
+            {visibleSources.map((source) => (
               <article key={source.id} className="source-card p-4 transition hover:-translate-y-0.5">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <span className="rounded-full bg-moss/10 px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-moss">
@@ -304,6 +327,15 @@ export default function Home() {
                 <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink/70">{source.abstract}</p>
               </article>
             ))}
+            {hiddenSourceCount > 0 || showAllSources ? (
+              <button
+                type="button"
+                onClick={() => setShowAllSources((value) => !value)}
+                className="w-full rounded-full border border-moss/25 bg-paper/60 px-4 py-2 text-sm font-semibold text-ink transition hover:border-moss/60 hover:bg-paper"
+              >
+                {showAllSources ? "Show fewer sources" : `See all sources (${hiddenSourceCount} more)`}
+              </button>
+            ) : null}
           </div>
         </div>
 

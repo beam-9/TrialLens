@@ -70,6 +70,35 @@ textarea {
   border-color: rgba(57, 95, 67, 0.55);
 }
 
+.nav-link {
+  position: relative;
+  overflow: hidden;
+  transition: color 420ms ease 120ms;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(247, 243, 234, 0.92);
+  opacity: 0;
+  transform: scaleX(0.72);
+  transition:
+    opacity 460ms ease 140ms,
+    transform 540ms cubic-bezier(0.2, 0.8, 0.2, 1) 140ms;
+}
+
+.nav-link:hover {
+  color: var(--ink);
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
 .son-flow {
   background:
     radial-gradient(circle at 8% 7%, rgba(248, 214, 204, 0.58), transparent 20rem),
@@ -126,6 +155,7 @@ textarea {
     radial-gradient(ellipse at 19% 88%, rgba(45, 125, 74, 0.92) 0 12%, transparent 36%),
     radial-gradient(ellipse at 78% 86%, rgba(18, 91, 66, 0.85) 0 16%, transparent 44%),
     linear-gradient(150deg, #9dd9e6 0 20%, #2f7078 20% 33%, #0a302a 33% 57%, #061511 57%);
+  border-radius: 0;
 }
 
 .valley-current {
