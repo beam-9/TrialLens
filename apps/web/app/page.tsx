@@ -27,8 +27,6 @@ const navItems = [
   { label: "Workspace", href: "#workspace" },
   { label: "Ask", href: "#ask" },
   { label: "Sources", href: "#sources" },
-  { label: "Brief", href: "#brief" },
-  { label: "Evals", href: "#evals" },
 ];
 
 export default function Home() {
@@ -197,6 +195,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="transition-band relative px-5 py-16 text-paper">
+        <div className="contour-field" aria-hidden="true" />
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+          <p className="font-display text-5xl leading-none tracking-[-0.05em] text-paper/80">
+            From landscape
+            <span className="block pl-14 text-paper/42">to literature.</span>
+          </p>
+          <p className="max-w-2xl text-balance text-lg leading-7 text-paper/68">
+            The workspace keeps the atmosphere of the landing page, but turns the scenery into a practical evidence trail: sources, passages, citations, and uncertainty.
+          </p>
+        </div>
+      </section>
+
       <section id="workspace" className="workspace-section relative mx-auto max-w-7xl px-5 py-14">
         <div className="bio-bloom pointer-events-none absolute -left-20 top-20 h-80 w-80 rounded-full opacity-70" />
         <div className="mb-8 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
@@ -306,7 +317,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="sources" className="mx-auto grid max-w-7xl gap-6 px-5 pb-10 xl:grid-cols-[1fr_420px]">
+      <section id="sources" className="lower-evidence-section relative mx-auto grid max-w-7xl gap-6 px-5 pb-16 xl:grid-cols-[1fr_420px]">
+        <div className="lower-contours" aria-hidden="true" />
         <div className="paper-panel rounded-sm p-5 md:p-7">
           <div className="mb-5 flex items-center gap-3">
             <BookOpen className="text-moss" />
