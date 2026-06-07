@@ -114,9 +114,6 @@ export default function Home() {
             </a>
           ))}
         </div>
-        <a className="rounded-full bg-paper px-5 py-2 text-sm font-semibold text-ink shadow-xl shadow-black/20" href="#workspace">
-          Open app
-        </a>
       </nav>
 
       <section id="home" className="relative min-h-screen bg-black p-3 sm:p-6">
@@ -191,17 +188,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="workspace" className="relative mx-auto max-w-7xl px-5 py-14">
+      <section id="workspace" className="workspace-section relative mx-auto max-w-7xl px-5 py-14">
         <div className="bio-bloom pointer-events-none absolute -left-20 top-20 h-80 w-80 rounded-full opacity-70" />
         <div className="mb-8 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative z-10 rounded-sm bg-slide p-6 shadow-2xl shadow-ink/15 ring-1 ring-ink/10">
+          <div className="paper-panel relative z-10 rounded-sm p-6">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-ink/45">Workspace</p>
             <h2 className="mt-3 font-display text-6xl font-semibold leading-none tracking-[-0.06em]">A readable map of the evidence.</h2>
             <p className="mt-5 max-w-2xl text-lg leading-7 text-ink/68">
               TrialLens keeps the generated answer secondary to the evidence trail: source type, citation, retrieved passage, and limitation.
             </p>
           </div>
-          <div className="relative z-10 rounded-sm bg-[#20211f] p-6 text-paper shadow-2xl shadow-ink/20">
+          <div className="dark-panel relative z-10 rounded-sm p-6 text-paper">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-paper/45">Current topic</p>
             <p className="mt-4 font-display text-5xl font-semibold leading-none tracking-[-0.05em]">
               {condition || "Condition"}
@@ -215,7 +212,7 @@ export default function Home() {
 
         <div className="relative z-10 grid gap-4 md:grid-cols-4">
           {Object.entries(sourceLabels).map(([key, label]) => (
-            <a key={key} href="#sources" className="rounded-sm bg-slide p-4 shadow-xl shadow-ink/10 ring-1 ring-ink/10 transition hover:-translate-y-1 hover:shadow-2xl">
+            <a key={key} href="#sources" className="metric-card rounded-sm p-4 transition hover:-translate-y-1 hover:shadow-2xl">
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">{label}</p>
               <p className="mt-4 font-display text-6xl font-semibold tracking-[-0.06em]">{counts[key] ?? 0}</p>
             </a>
@@ -224,7 +221,7 @@ export default function Home() {
       </section>
 
       <section id="ask" className="mx-auto max-w-7xl px-5 pb-10">
-        <div className="rounded-sm bg-[#20211f] p-5 text-paper shadow-2xl shadow-ink/25 md:p-7">
+        <div className="dark-panel rounded-sm p-5 text-paper md:p-7">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-paper/45">Ask</p>
@@ -287,7 +284,7 @@ export default function Home() {
       </section>
 
       <section id="sources" className="mx-auto grid max-w-7xl gap-6 px-5 pb-10 xl:grid-cols-[1fr_420px]">
-        <div className="rounded-sm bg-slide p-5 shadow-xl shadow-ink/10 ring-1 ring-ink/10 md:p-7">
+        <div className="paper-panel rounded-sm p-5 md:p-7">
           <div className="mb-5 flex items-center gap-3">
             <BookOpen className="text-moss" />
             <h2 className="font-display text-5xl font-semibold tracking-[-0.05em]">Source explorer</h2>
@@ -311,7 +308,7 @@ export default function Home() {
         </div>
 
         <div id="brief" className="space-y-6">
-          <div className="rounded-sm bg-slide p-5 shadow-xl shadow-ink/10 ring-1 ring-ink/10 md:p-7">
+          <div className="paper-panel rounded-sm p-5 md:p-7">
             <div className="mb-5 flex items-center gap-3">
               <FlaskConical className="text-clinical" />
               <h2 className="font-display text-5xl font-semibold tracking-[-0.05em]">Evidence brief</h2>
@@ -331,7 +328,7 @@ export default function Home() {
             )}
           </div>
 
-          <div id="evals" className="rounded-sm bg-slide p-5 shadow-xl shadow-ink/10 ring-1 ring-ink/10 md:p-7">
+          <div id="evals" className="paper-panel rounded-sm p-5 md:p-7">
             <div className="mb-5 flex items-center gap-3">
               <Activity className="text-moss" />
               <h2 className="font-display text-5xl font-semibold tracking-[-0.05em]">Evaluation lab</h2>
