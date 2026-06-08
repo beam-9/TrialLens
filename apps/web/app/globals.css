@@ -103,40 +103,7 @@ textarea {
   background:
     radial-gradient(circle at 8% 7%, rgba(248, 214, 204, 0.58), transparent 20rem),
     radial-gradient(circle at 86% 16%, rgba(60, 116, 78, 0.16), transparent 26rem),
-    linear-gradient(180deg, #061511 0%, #10241f 56%, #d8d0bd 84%, #e3dac8 100%);
-}
-
-.transition-band {
-  margin-top: -1px;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 12% 4%, rgba(226, 213, 97, 0.18), transparent 24rem),
-    radial-gradient(ellipse at 85% 12%, rgba(154, 217, 230, 0.12), transparent 24rem),
-    linear-gradient(180deg, #061511 0%, #0d211c 42%, #10241f 100%);
-}
-
-.contour-field,
-.lower-contours {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.42;
-  background-image:
-    repeating-radial-gradient(ellipse at 24% 10%, transparent 0 24px, rgba(237, 231, 209, 0.11) 25px 26px, transparent 27px 52px),
-    repeating-radial-gradient(ellipse at 78% 46%, transparent 0 30px, rgba(154, 217, 230, 0.08) 31px 32px, transparent 33px 64px);
-  mask-image: linear-gradient(180deg, transparent, black 20%, black 78%, transparent);
-}
-
-.transition-band::after {
-  content: "";
-  position: absolute;
-  inset: auto -10% -16rem;
-  height: 24rem;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 40% 50%, rgba(216, 208, 189, 0.32), transparent 42%),
-    linear-gradient(180deg, transparent, rgba(216, 208, 189, 0.58));
-  filter: blur(10px);
+    linear-gradient(180deg, #fbf7ef 0%, #10241f 48%, #d8cfbd 78%, #cec2ac 100%);
 }
 
 .workspace-section::before {
@@ -183,30 +150,6 @@ textarea {
 
 .metric-card:hover {
   border-color: rgba(225, 213, 97, 0.58);
-}
-
-.lower-evidence-section {
-  isolation: isolate;
-}
-
-.lower-evidence-section::before {
-  content: "";
-  position: absolute;
-  inset: -6rem -4rem -4rem;
-  z-index: -1;
-  border-radius: 4rem;
-  background:
-    radial-gradient(ellipse at 18% 6%, rgba(16, 36, 31, 0.22), transparent 28rem),
-    radial-gradient(ellipse at 90% 20%, rgba(57, 95, 67, 0.2), transparent 24rem),
-    radial-gradient(ellipse at 42% 100%, rgba(154, 217, 230, 0.1), transparent 30rem),
-    linear-gradient(180deg, rgba(16, 36, 31, 0.18), rgba(227, 218, 200, 0.86) 42%, rgba(215, 205, 186, 0.92));
-}
-
-.lower-contours {
-  z-index: -1;
-  opacity: 0.28;
-  mix-blend-mode: multiply;
-  mask-image: linear-gradient(180deg, black, black 80%, transparent);
 }
 
 .hero-landscape {
