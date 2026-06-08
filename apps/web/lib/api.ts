@@ -23,17 +23,27 @@ export type EvidenceSource = {
 
 export type RetrievedChunk = {
   chunk_id: string;
+  source_id: string;
   source_type: SourceType;
   citation: string;
   text: string;
   score: number;
+  title: string;
+  url?: string | null;
+  external_id: string;
+  matched_terms: string[];
+  relevance_note: string;
 };
 
 export type Answer = {
   id: string;
   question: string;
   short_answer: string;
+  direct_answer: string;
   evidence: string[];
+  supporting_evidence: string[];
+  safety_limitations: string[];
+  uncertainty: string[];
   limitations: string[];
   citations: string[];
   retrieved_chunks: RetrievedChunk[];
@@ -73,6 +83,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  workspaces: () => request<Workspace[]>("/workspaces"),
   createWorkspace: (condition: string, intervention: string) =>
     request<Workspace>("/workspaces", {
       method: "POST",
@@ -80,9 +91,11 @@ export const api = {
     }),
   ingest: (id: string) => request<{ sources: number; chunks: number }>(`/workspaces/${id}/ingest`, { method: "POST" }),
   sources: (id: string) => request<EvidenceSource[]>(`/workspaces/${id}/sources`),
-  ask: (id: string, question: string) =>
-    request<Answer>(`/workspaces/${id}/ask`, { method: "POST", body: JSON.stringify({ question }) }),
+  ask: (id: string, question: string, sourceTypes?: SourceType[] | null) =>
+    request<Answer>(`/workspaces/${id}/ask`, {
+      method: "POST",
+      body: JSON.stringify({ question, source_types: sourceTypes && sourceTypes.length > 0 ? sourceTypes : null }),
+    }),
   brief: (id: string) => request<Brief>(`/workspaces/${id}/brief`),
   evals: () => request<EvalReport>("/evals"),
 };
-

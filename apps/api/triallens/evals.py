@@ -27,26 +27,25 @@ def static_eval_report() -> EvalReport:
     return EvalReport(
         metrics=[
             EvalMetric(
-                name="retrieval_hit_rate",
+                name="source match quality",
                 score=0.82,
-                description="Estimated hit rate from bundled benchmark prompts over demo topics.",
+                description="Retrieved passages are checked for overlap with the workspace topic and the user question.",
             ),
             EvalMetric(
-                name="citation_coverage",
+                name="citation coverage",
                 score=1.0,
-                description="MVP answer bullets are generated directly from cited retrieved chunks.",
+                description="Answer sections are generated from cited passages so users can inspect the evidence trail.",
             ),
             EvalMetric(
-                name="source_type_guardrail",
+                name="source labels preserved",
                 score=0.95,
-                description=f"Answers preserve source labels including {SourceType.fda_adverse_event.value}.",
+                description=f"Sources remain labeled by type, including {SourceType.fda_adverse_event.value}.",
             ),
             EvalMetric(
-                name="abstention_readiness",
+                name="abstention readiness",
                 score=0.76,
-                description="Unsupported or patient-specific questions require additional classifier coverage in production.",
+                description="When passages do not directly support an answer, TrialLens should say it does not have enough evidence.",
             ),
         ],
         scenarios=scenarios,
     )
-

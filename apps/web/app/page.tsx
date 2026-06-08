@@ -1,12 +1,13 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Activity,
   ArrowRight,
   BookOpen,
   Brain,
   CheckCircle2,
+  ExternalLink,
   FileSearch,
   FlaskConical,
   Loader2,
@@ -14,7 +15,7 @@ import {
   ShieldAlert,
   Sparkles,
 } from "lucide-react";
-import { Answer, Brief, EvidenceSource, EvalReport, Workspace, api } from "@/lib/api";
+import { Answer, Brief, EvidenceSource, EvalReport, SourceType, Workspace, api } from "@/lib/api";
 
 const sourceLabels: Record<string, string> = {
   pubmed: "PubMed",
@@ -27,6 +28,21 @@ const navItems = [
   { label: "Workspace", href: "#workspace" },
   { label: "Ask", href: "#ask" },
   { label: "Sources", href: "#sources" },
+];
+
+const sourceFilterOptions: { label: string; value: SourceType[] | null }[] = [
+  { label: "All", value: null },
+  { label: "Literature", value: ["pubmed"] },
+  { label: "Trials", value: ["clinical_trials"] },
+  { label: "FDA labels", value: ["fda_label"] },
+  { label: "Adverse reports", value: ["fda_adverse_event"] },
+];
+
+const suggestedQuestions = [
+  "What are the main benefits?",
+  "What are the main safety concerns?",
+  "What trials are available?",
+  "What does FDA labeling say?",
 ];
 
 export default function Home() {
@@ -42,6 +58,9 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [showAllRetrieved, setShowAllRetrieved] = useState(false);
   const [showAllSources, setShowAllSources] = useState(false);
+  const [selectedSourceTypes, setSelectedSourceTypes] = useState<SourceType[] | null>(null);
+  const [recentWorkspaces, setRecentWorkspaces] = useState<Workspace[]>([]);
+  const [ingestionSummary, setIngestionSummary] = useState<{ sources: number; chunks: number; demo: boolean } | null>(null);
 
   const counts = useMemo(() => {
     return sources.reduce<Record<string, number>>((acc, source) => {
@@ -57,6 +76,10 @@ export default function Home() {
   const visibleSources = showAllSources ? sources : sources.slice(0, 6);
   const hiddenSourceCount = Math.max(sources.length - visibleSources.length, 0);
 
+  useEffect(() => {
+    api.workspaces().then((items) => setRecentWorkspaces(items.slice(-4).reverse())).catch(() => setRecentWorkspaces([]));
+  }, []);
+
   async function buildWorkspace(event?: FormEvent) {
     event?.preventDefault();
     if (busy || condition.trim().length < 2) return;
@@ -65,6 +88,7 @@ export default function Home() {
     setBrief(null);
     setEvals(null);
     setSources([]);
+    setIngestionSummary(null);
     setShowAllRetrieved(false);
     setShowAllSources(false);
     setBusy("Creating workspace");
@@ -72,7 +96,7 @@ export default function Home() {
       const created = await api.createWorkspace(condition.trim(), intervention.trim());
       setWorkspace(created);
       setBusy("Indexing public evidence");
-      await api.ingest(created.id);
+      const ingestResult = await api.ingest(created.id);
       const [indexed, generatedBrief, report] = await Promise.all([
         api.sources(created.id),
         api.brief(created.id),
@@ -81,9 +105,47 @@ export default function Home() {
       setSources(indexed);
       setBrief(generatedBrief);
       setEvals(report);
+      setIngestionSummary({
+        sources: ingestResult.sources,
+        chunks: ingestResult.chunks,
+        demo: indexed.some((source) => source.external_id.includes("DEMO")),
+      });
+      setRecentWorkspaces((items) => [created, ...items.filter((item) => item.id !== created.id)].slice(0, 4));
       document.querySelector("#workspace")?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong while building the workspace.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function reopenWorkspace(target: Workspace) {
+    if (busy) return;
+    setError(null);
+    setBusy("Opening workspace");
+    try {
+      const [indexed, generatedBrief, report] = await Promise.all([
+        api.sources(target.id),
+        api.brief(target.id),
+        api.evals(),
+      ]);
+      setWorkspace(target);
+      setCondition(target.condition);
+      setIntervention(target.intervention ?? "");
+      setSources(indexed);
+      setBrief(generatedBrief);
+      setEvals(report);
+      setAnswer(null);
+      setShowAllRetrieved(false);
+      setShowAllSources(false);
+      setIngestionSummary({
+        sources: indexed.length,
+        chunks: 0,
+        demo: indexed.some((source) => source.external_id.includes("DEMO")),
+      });
+      document.querySelector("#workspace")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not reopen workspace.");
     } finally {
       setBusy(null);
     }
@@ -94,7 +156,7 @@ export default function Home() {
     setError(null);
     setBusy("Retrieving cited passages");
     try {
-      const response = await api.ask(workspace.id, question.trim());
+      const response = await api.ask(workspace.id, question.trim(), selectedSourceTypes);
       setAnswer(response);
       setShowAllRetrieved(false);
       document.querySelector("#answer")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -189,6 +251,24 @@ export default function Home() {
                 </span>
                 <ArrowRight className="transition group-hover:translate-x-1" size={18} />
               </button>
+              {recentWorkspaces.length > 0 && (
+                <div className="mt-5 border-t border-ink/10 pt-4">
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.22em] text-ink/45">Recent workspaces</p>
+                  <div className="space-y-2">
+                    {recentWorkspaces.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => reopenWorkspace(item)}
+                        className="block w-full border border-ink/10 bg-paper/55 px-3 py-2 text-left text-sm text-ink/75 transition hover:border-moss/50 hover:bg-paper"
+                      >
+                        <span className="font-semibold">{item.condition}</span>
+                        {item.intervention ? <span className="text-ink/50"> + {item.intervention}</span> : null}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
               {error && <p className="mt-4 border border-red-300 bg-red-50 p-3 text-sm text-red-800">{error}</p>}
             </form>
           </div>
@@ -214,6 +294,22 @@ export default function Home() {
             <div className="mt-6 flex items-center gap-2 text-sm text-paper/70">
               <ShieldAlert size={16} /> Evidence navigation only. Not clinical guidance.
             </div>
+            {ingestionSummary && (
+              <div className="mt-5 grid grid-cols-3 gap-2 border-t border-paper/15 pt-4 text-xs text-paper/70">
+                <div>
+                  <p className="font-semibold text-paper">{ingestionSummary.sources}</p>
+                  sources
+                </div>
+                <div>
+                  <p className="font-semibold text-paper">{ingestionSummary.chunks || "—"}</p>
+                  chunks
+                </div>
+                <div>
+                  <p className="font-semibold text-paper">{ingestionSummary.demo ? "Demo" : "Live"}</p>
+                  data mode
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -242,10 +338,43 @@ export default function Home() {
               <MessageSquareText size={17} /> Ask evidence
             </button>
           </div>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {sourceFilterOptions.map((option) => {
+              const active = JSON.stringify(selectedSourceTypes) === JSON.stringify(option.value);
+              return (
+                <button
+                  key={option.label}
+                  type="button"
+                  onClick={() => setSelectedSourceTypes(option.value)}
+                  className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
+                    active
+                      ? "border-paper bg-paper text-ink"
+                      : "border-paper/20 bg-paper/5 text-paper/72 hover:border-paper/60"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
           {!isReady && (
             <p className="mb-4 border border-paper/15 bg-paper/8 p-3 text-sm text-paper/68">
               Build a workspace first. Once sources are indexed, this panel becomes a cited Q&A interface.
             </p>
+          )}
+          {isReady && (
+            <div className="mb-4 flex flex-wrap gap-2">
+              {suggestedQuestions.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setQuestion(item)}
+                  className="rounded-full border border-paper/20 bg-paper/8 px-3 py-1.5 text-sm text-paper/75 transition hover:border-paper/60 hover:bg-paper/12"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           )}
           <textarea
             value={question}
@@ -255,18 +384,27 @@ export default function Home() {
           {answer && (
             <div id="answer" className="mt-6 grid gap-4 lg:grid-cols-[1fr_380px]">
               <div className="border border-paper/15 bg-paper/5 p-5">
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-paper/60">Short answer</p>
-                <p className="text-lg leading-7">{answer.short_answer}</p>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-paper/60">Direct answer</p>
+                <p className="text-lg leading-7">{answer.direct_answer || answer.short_answer}</p>
                 <div className="mt-5 space-y-3">
-                  {answer.evidence.map((item) => (
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/55">Evidence supporting this</p>
+                  {(answer.supporting_evidence.length ? answer.supporting_evidence : answer.evidence).map((item) => (
                     <p key={item} className="bg-paper/10 p-3 text-sm leading-6">
                       {item}
                     </p>
                   ))}
                 </div>
-                <div className="mt-5 border-t border-paper/20 pt-4">
-                  <p className="mb-2 font-semibold">Limitations</p>
-                  {answer.limitations.map((item) => (
+                <div className="mt-5 space-y-3 border-t border-paper/20 pt-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/55">Safety or limitations</p>
+                  {answer.safety_limitations.map((item) => (
+                    <p key={item} className="text-sm text-paper/75">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+                <div className="mt-5 space-y-3 border-t border-paper/20 pt-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-paper/55">What remains uncertain</p>
+                  {answer.uncertainty.map((item) => (
                     <p key={item} className="text-sm text-paper/75">
                       {item}
                     </p>
@@ -285,8 +423,26 @@ export default function Home() {
                         {Math.round(chunk.score * 100)}% match
                       </span>
                     </div>
+                    <p className="mb-1 text-sm font-semibold text-paper">{chunk.title || chunk.citation}</p>
                     <p className="mb-2 font-semibold">{chunk.citation}</p>
+                    {chunk.matched_terms.length > 0 && (
+                      <p className="mb-2 text-xs text-paper/55">{chunk.relevance_note}</p>
+                    )}
                     <p className="text-sm leading-6 text-paper/72">{chunk.text}</p>
+                    {chunk.url ? (
+                      <a
+                        href={chunk.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-3 inline-flex items-center gap-1 rounded-full border border-paper/20 px-3 py-1.5 text-xs font-semibold text-paper/82 transition hover:border-paper/60"
+                      >
+                        Open source <ExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <span className="mt-3 inline-flex rounded-full border border-paper/10 px-3 py-1.5 text-xs text-paper/38">
+                        No source link
+                      </span>
+                    )}
                   </div>
                 ))}
                 {hiddenRetrievedCount > 0 || showAllRetrieved ? (
@@ -321,8 +477,25 @@ export default function Home() {
                   {source.phase && <span className="text-xs font-semibold text-ink/60">{source.phase}</span>}
                   {source.status && <span className="text-xs font-semibold text-ink/60">{source.status}</span>}
                 </div>
-                <h3 className="font-semibold">{source.title}</h3>
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="font-semibold">{source.title}</h3>
+                  {source.url ? (
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="shrink-0 rounded-full border border-moss/20 px-2 py-1 text-xs font-semibold text-moss transition hover:border-moss/60"
+                    >
+                      Open
+                    </a>
+                  ) : null}
+                </div>
                 <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink/70">{source.abstract}</p>
+                {source.source_type === "fda_adverse_event" && (
+                  <p className="mt-2 border-l-2 border-signal/50 pl-2 text-xs leading-5 text-ink/58">
+                    Reported signal, not proof of causation.
+                  </p>
+                )}
               </article>
             ))}
             {hiddenSourceCount > 0 || showAllSources ? (
@@ -361,7 +534,7 @@ export default function Home() {
           <div id="evals" className="paper-panel rounded-sm p-5 md:p-7">
             <div className="mb-5 flex items-center gap-3">
               <Activity className="text-moss" />
-              <h2 className="font-display text-5xl font-semibold tracking-[-0.05em]">Evaluation lab</h2>
+              <h2 className="font-display text-5xl font-semibold tracking-[-0.05em]">Reliability checks</h2>
             </div>
             {evals ? (
               <div className="space-y-3">

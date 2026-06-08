@@ -72,7 +72,8 @@ def list_sources(workspace_id: str) -> list[EvidenceSource]:
 def ask(workspace_id: str, payload: AskRequest) -> Answer:
     workspace = _workspace_or_404(workspace_id)
     chunks = store.list_chunks(workspace_id)
-    retrieved = retriever.retrieve(payload.question, chunks, payload.source_types)
+    sources = store.list_sources(workspace_id)
+    retrieved = retriever.retrieve(workspace, payload.question, chunks, sources, payload.source_types)
     answer = answer_service.answer(workspace, payload.question, retrieved)
     return store.save_answer(answer)
 

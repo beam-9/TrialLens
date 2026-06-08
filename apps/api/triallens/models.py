@@ -75,6 +75,11 @@ class RetrievedChunk(BaseModel):
     citation: str
     text: str
     score: float
+    title: str = ""
+    url: Optional[str] = None
+    external_id: str = ""
+    matched_terms: list[str] = Field(default_factory=list)
+    relevance_note: str = ""
 
 
 class AskRequest(BaseModel):
@@ -87,7 +92,11 @@ class Answer(BaseModel):
     workspace_id: str
     question: str
     short_answer: str
+    direct_answer: str = ""
     evidence: list[str]
+    supporting_evidence: list[str] = Field(default_factory=list)
+    safety_limitations: list[str] = Field(default_factory=list)
+    uncertainty: list[str] = Field(default_factory=list)
     limitations: list[str]
     citations: list[str]
     retrieved_chunks: list[RetrievedChunk]
