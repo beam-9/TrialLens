@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
+import re
 
 from triallens.models import Answer, EvidenceBrief, EvidenceChunk, EvidenceSource, RetrievedChunk, SourceType, Workspace
 from triallens.text import chunk_text, cosine, lexical_score, stable_embedding, tokenize
@@ -183,6 +184,9 @@ class Retriever:
                 title=source.title if source else "",
                 url=source.url if source else None,
                 external_id=source.external_id if source else "",
+                publication_date=source.publication_date if source else None,
+                status=source.status if source else None,
+                phase=source.phase if source else None,
                 matched_terms=matched_terms,
                 relevance_note=relevance_note(matched_terms, chunk.source_type),
             )
@@ -196,25 +200,14 @@ class AnswerService:
         if not retrieved or not strong_enough(retrieved):
             return abstention_answer(workspace.id, question, retrieved)
 
-        is_safety_question = bool(set(tokenize(question)).intersection(SAFETY_TERMS))
+        intent = question_intent(question)
         citations = list(dict.fromkeys(chunk.citation for chunk in retrieved))
-        safety_chunks = [chunk for chunk in retrieved if classify_chunk(chunk) == "safety"][:4]
-        evidence_chunks = (
-            safety_chunks
-            if is_safety_question and safety_chunks
-            else [chunk for chunk in retrieved if classify_chunk(chunk) in {"benefit", "trial", "label"}][:4]
-        )
-        uncertainty_chunks = [chunk for chunk in retrieved if classify_chunk(chunk) in {"weak", "trial"}][:3]
-        supporting_evidence = [self._evidence_sentence(chunk) for chunk in evidence_chunks] or [
-            self._evidence_sentence(chunk) for chunk in retrieved[:3]
-        ]
-        safety_limitations = [self._evidence_sentence(chunk) for chunk in safety_chunks]
-        uncertainty = [
-            "Retrieved sources may not include full-text articles, all trial outcomes, unpublished evidence, or all regulatory updates.",
-            "Use the source links and citations to inspect the original records before drawing conclusions.",
-        ]
-        if uncertainty_chunks:
-            uncertainty.insert(0, self._evidence_sentence(uncertainty_chunks[0]))
+        evidence_chunks = select_evidence_chunks(retrieved, intent)
+        safety_chunks = select_safety_chunks(retrieved)
+        direct_answer = direct_answer_text(workspace, question, retrieved, bool(safety_chunks))
+        supporting_evidence = synthesize_supporting_evidence(workspace, intent, evidence_chunks)
+        safety_limitations = synthesize_safety_limitations(intent, safety_chunks, retrieved)
+        uncertainty = synthesize_uncertainty(intent, retrieved)
         limitations = [
             "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
             "It is not medical advice, diagnosis, or treatment guidance.",
@@ -222,7 +215,6 @@ class AnswerService:
         if any(chunk.source_type == SourceType.fda_adverse_event for chunk in retrieved):
             limitations.append("FDA adverse event reports are suspected reports and do not prove causality or incidence.")
 
-        direct_answer = direct_answer_text(workspace, question, retrieved, bool(safety_limitations))
         return Answer(
             workspace_id=workspace.id,
             question=question,
@@ -236,12 +228,6 @@ class AnswerService:
             citations=citations,
             retrieved_chunks=retrieved,
         )
-
-    def _evidence_sentence(self, chunk: RetrievedChunk) -> str:
-        text = chunk.text
-        if len(text) > 260:
-            text = text[:257].rsplit(" ", 1)[0] + "..."
-        return f"{text} [{chunk.citation}]"
 
 
 class BriefService:
@@ -348,23 +334,311 @@ def abstention_answer(workspace_id: str, question: str, retrieved: list[Retrieve
     )
 
 
+def question_intent(question: str) -> str:
+    terms = set(tokenize(question))
+    if terms.intersection(SAFETY_TERMS):
+        return "safety"
+    if terms.intersection(TRIAL_TERMS):
+        return "trial"
+    if terms.intersection(LABEL_TERMS):
+        return "label"
+    return "benefit"
+
+
+def select_evidence_chunks(retrieved: list[RetrievedChunk], intent: str, limit: int = 4) -> list[RetrievedChunk]:
+    priority = {
+        "safety": {"safety"},
+        "trial": {"trial"},
+        "label": {"label", "safety"},
+        "benefit": {"benefit", "trial", "label"},
+    }[intent]
+    selected = unique_source_chunks([chunk for chunk in retrieved if classify_chunk(chunk) in priority], limit)
+    if selected:
+        return selected
+    return unique_source_chunks(retrieved, limit)
+
+
+def select_safety_chunks(retrieved: list[RetrievedChunk], limit: int = 3) -> list[RetrievedChunk]:
+    safety_chunks = [chunk for chunk in retrieved if classify_chunk(chunk) == "safety"]
+    ranked = sorted(safety_chunks, key=safety_chunk_quality, reverse=True)
+    return unique_source_chunks([chunk for chunk in ranked if safety_chunk_quality(chunk) > 0], limit)
+
+
+def unique_source_chunks(chunks: list[RetrievedChunk], limit: int) -> list[RetrievedChunk]:
+    selected: list[RetrievedChunk] = []
+    seen_sources: set[str] = set()
+    for chunk in chunks:
+        if chunk.source_id in seen_sources:
+            continue
+        selected.append(chunk)
+        seen_sources.add(chunk.source_id)
+        if len(selected) == limit:
+            break
+    if len(selected) < limit:
+        for chunk in chunks:
+            if chunk.chunk_id in {item.chunk_id for item in selected}:
+                continue
+            selected.append(chunk)
+            if len(selected) == limit:
+                break
+    return selected
+
+
+def synthesize_supporting_evidence(workspace: Workspace, intent: str, chunks: list[RetrievedChunk]) -> list[str]:
+    if not chunks:
+        return ["No directly supportive passage was retrieved strongly enough to summarize."]
+    topic = topic_text(workspace)
+    lead = {
+        "benefit": f"The indexed evidence suggests potential benefit or therapeutic relevance for {topic}, but the strength of that evidence depends on source type and study design.",
+        "safety": f"The indexed evidence points to safety considerations for {topic}; these should be read as evidence-navigation findings, not patient-specific guidance.",
+        "trial": f"The indexed trial records describe how {topic} is being or has been studied, including comparator and eligibility context where available.",
+        "label": f"The indexed regulatory-label passages describe approved-use, warning, or limitation context for {topic}.",
+    }[intent]
+    summaries = [lead]
+    for chunk in chunks[:4]:
+        summaries.append(synthesized_claim(chunk, intent))
+    return summaries
+
+
+def synthesize_safety_limitations(intent: str, safety_chunks: list[RetrievedChunk], retrieved: list[RetrievedChunk]) -> list[str]:
+    clean_chunks = [chunk for chunk in safety_chunks if has_usable_sentence(chunk, SAFETY_TERMS | LABEL_TERMS)]
+    if clean_chunks:
+        notes = []
+        if intent == "benefit":
+            notes.append(
+                "Safety was not the main focus of this benefits question, but the retrieved evidence includes relevant tolerability or adverse-event context."
+            )
+        for chunk in clean_chunks[:3]:
+            sentence = best_sentence(chunk, SAFETY_TERMS | LABEL_TERMS)
+            notes.append(
+                f"{source_context_phrase(chunk)} reports or describes {claim_clause(sentence)} {inline_citation(chunk)}. {apa_reference(chunk)}"
+            )
+        return notes
+    if intent == "benefit":
+        return [
+            "The retrieved passages for this question focus more on possible benefit, use, or trial context than on safety. Check FDA labels or ask a safety-specific question for a more targeted safety review."
+        ]
+    return ["No safety-specific passage was retrieved strongly enough for this workspace/question."]
+
+
+def synthesize_uncertainty(intent: str, retrieved: list[RetrievedChunk]) -> list[str]:
+    source_counts = Counter(chunk.source_type for chunk in retrieved)
+    notes = [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+    ]
+    if source_counts.get(SourceType.clinical_trials, 0):
+        notes.append("ClinicalTrials.gov records may describe protocols, eligibility, or planned outcomes even when peer-reviewed results are unavailable.")
+    if source_counts.get(SourceType.fda_adverse_event, 0):
+        notes.append("FDA adverse-event reports are reports of suspected events and should not be interpreted as proof that the drug caused the event.")
+    if intent == "benefit":
+        notes.append("Benefit claims should be treated as preliminary unless the cited source reports measured outcomes, comparator results, or trial completion details.")
+    else:
+        notes.append("Use the source links and retrieved passages to inspect whether each cited record directly addresses the question.")
+    return notes
+
+
+def synthesized_claim(chunk: RetrievedChunk, intent: str) -> str:
+    sentence = best_sentence(chunk, terms_for_intent(intent))
+    context = source_context_phrase(chunk)
+    verb = {
+        "benefit": "supports the relevance of this intervention by noting that",
+        "safety": "highlights a safety consideration by noting that",
+        "trial": "describes study context by noting that",
+        "label": "provides regulatory context by noting that",
+    }[intent]
+    return f"{context} {verb} {claim_clause(sentence)} {inline_citation(chunk)}. {apa_reference(chunk)}"
+
+
+def terms_for_intent(intent: str) -> set[str]:
+    if intent == "safety":
+        return SAFETY_TERMS | LABEL_TERMS
+    if intent == "trial":
+        return TRIAL_TERMS | BENEFIT_TERMS
+    if intent == "label":
+        return LABEL_TERMS | SAFETY_TERMS | BENEFIT_TERMS
+    return BENEFIT_TERMS | TRIAL_TERMS | LABEL_TERMS
+
+
+def safety_chunk_quality(chunk: RetrievedChunk) -> int:
+    terms = set(tokenize(chunk.text))
+    quality = len(terms.intersection(SAFETY_TERMS))
+    if chunk.source_type in {SourceType.fda_label, SourceType.fda_adverse_event}:
+        quality += 4
+    if terms.intersection({"tolerability", "tolerated", "phototoxicity", "photoallergenicity", "postmarketing"}):
+        quality += 3
+    if "risk factor" in chunk.text.lower() or table_like(chunk.text):
+        quality -= 3
+    if has_usable_sentence(chunk, SAFETY_TERMS | LABEL_TERMS):
+        quality += 2
+    return quality
+
+
+def has_usable_sentence(chunk: RetrievedChunk, preferred_terms: set[str]) -> bool:
+    text = normalize_passage(chunk.text)
+    return any(
+        set(tokenize(sentence)).intersection(preferred_terms) and sentence_quality(sentence) >= 0
+        for sentence in split_sentences(text)
+    )
+
+
+def best_sentence(chunk: RetrievedChunk, preferred_terms: set[str]) -> str:
+    text = normalize_passage(chunk.text)
+    sentences = split_sentences(text)
+    polished = [sentence for sentence in sentences if sentence_quality(sentence) >= 0]
+    if polished:
+        sentences = polished
+    if not sentences:
+        return fallback_claim(chunk)
+    scored = sorted(
+        sentences,
+        key=lambda sentence: (
+            len(set(tokenize(sentence)).intersection(preferred_terms)),
+            benefit_signal(sentence),
+            len(set(tokenize(sentence)).intersection(set(chunk.matched_terms))),
+            -abs(len(sentence) - 180),
+        ),
+        reverse=True,
+    )
+    return trim_sentence(scored[0])
+
+
+def split_sentences(text: str) -> list[str]:
+    candidates = re.split(r"(?<=[.!?])\s+", text)
+    return [
+        candidate.strip(" -•\n\t")
+        for candidate in candidates
+        if 55 <= len(candidate.strip()) <= 360 and not table_like(candidate)
+    ]
+
+
+def normalize_passage(text: str) -> str:
+    cleaned = re.sub(r"\s+", " ", text.replace("•", ". "))
+    cleaned = re.sub(r"\[\s*see[^\]]+\]", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\b\d+(\.\d+)?\s+(Postmarketing Experience|Clinical Trials Experience|Adverse Reactions)\b", " ", cleaned)
+    return cleaned.strip()
+
+
+def table_like(text: str) -> bool:
+    tokens = text.split()
+    if not tokens:
+        return False
+    numeric = sum(1 for token in tokens if any(char.isdigit() for char in token))
+    return numeric / len(tokens) > 0.28
+
+
+def benefit_signal(sentence: str) -> int:
+    terms = set(tokenize(sentence))
+    signal = len(terms.intersection({"used", "treat", "treats", "reduced", "reduce", "improve", "efficacy", "therapeutic"}))
+    if sentence.strip().lower().startswith(("therefore", "the results", "this is a", "the current study")):
+        signal -= 2
+    return signal
+
+
+def sentence_quality(sentence: str) -> int:
+    stripped = sentence.strip()
+    lowered = sentence.strip().lower()
+    quality = 0
+    if lowered.startswith(("therefore", "as described before", "the following adverse reactions", "the results of the study")):
+        quality -= 4
+    if lowered.startswith(("defined as", "based on the data", "to subject dropouts")):
+        quality -= 3
+    if re.match(r"^\d+(\.\d+)?\b", lowered):
+        quality -= 3
+    if stripped and stripped[0].islower():
+        quality -= 2
+    if lowered.startswith(("no ", "azelaic", "treatment", "cosmeceuticals", "microcomedones", "it is non")):
+        quality += 2
+    if table_like(sentence):
+        quality -= 5
+    return quality
+
+
+def trim_sentence(sentence: str, limit: int = 280) -> str:
+    sentence = sentence.strip().rstrip(".")
+    if len(sentence) <= limit:
+        return sentence
+    return sentence[:limit].rsplit(" ", 1)[0].rstrip(",;:")
+
+
+def fallback_claim(chunk: RetrievedChunk) -> str:
+    source = chunk.title or chunk.citation
+    return f"{source} contains a retrieved passage relevant to {', '.join(chunk.matched_terms[:3]) or 'the question'}"
+
+
+def claim_clause(sentence: str) -> str:
+    cleaned = re.sub(r"^(moreover|therefore|because|as described before),?\s+", "", sentence.strip(), flags=re.IGNORECASE)
+    if not cleaned:
+        return sentence
+    return cleaned[0].lower() + cleaned[1:]
+
+
+def source_context_phrase(chunk: RetrievedChunk) -> str:
+    if chunk.source_type == SourceType.pubmed:
+        return f"The PubMed record {source_title(chunk)}"
+    if chunk.source_type == SourceType.clinical_trials:
+        details = ", ".join(item for item in [chunk.status, chunk.phase] if item)
+        suffix = f" ({details})" if details else ""
+        return f"The ClinicalTrials.gov record {source_title(chunk)}{suffix}"
+    if chunk.source_type == SourceType.fda_label:
+        return f"The FDA label record {source_title(chunk)}"
+    return f"The openFDA adverse-event record {source_title(chunk)}"
+
+
+def source_title(chunk: RetrievedChunk) -> str:
+    return f"“{chunk.title}”" if chunk.title else chunk.citation
+
+
+def inline_citation(chunk: RetrievedChunk) -> str:
+    if chunk.source_type == SourceType.pubmed:
+        return f"(PubMed, {chunk.external_id or chunk.citation})"
+    if chunk.source_type == SourceType.clinical_trials:
+        return f"(ClinicalTrials.gov, {chunk.external_id or chunk.citation})"
+    if chunk.source_type == SourceType.fda_label:
+        return f"(openFDA, {chunk.external_id or chunk.citation})"
+    return f"(openFDA adverse-event reports, {chunk.external_id or chunk.citation})"
+
+
+def apa_reference(chunk: RetrievedChunk) -> str:
+    year = publication_year(chunk.publication_date)
+    date = year or "n.d."
+    title = chunk.title.rstrip(".") if chunk.title else chunk.citation
+    if chunk.source_type == SourceType.pubmed:
+        return f"Reference: {title}. ({date}). PubMed. {chunk.external_id}."
+    if chunk.source_type == SourceType.clinical_trials:
+        return f"Reference: ClinicalTrials.gov. ({date}). {title}. {chunk.external_id}."
+    if chunk.source_type == SourceType.fda_label:
+        return f"Reference: openFDA. ({date}). {title}. Drug label record {chunk.external_id}."
+    return f"Reference: openFDA. ({date}). {title}. Adverse-event report summary {chunk.external_id}."
+
+
+def publication_year(value: str | None) -> str | None:
+    if not value:
+        return None
+    match = re.search(r"(19|20)\d{2}", value)
+    return match.group(0) if match else None
+
+
 def direct_answer_text(workspace: Workspace, question: str, retrieved: list[RetrievedChunk], has_safety: bool) -> str:
-    topic = f"{workspace.intervention or ''} {workspace.condition}".strip()
+    topic = topic_text(workspace)
     source_mix = source_mix_text(retrieved)
     if set(tokenize(question)).intersection(SAFETY_TERMS):
         return (
             f"For {topic}, the retrieved sources include safety-relevant evidence from {source_mix}. "
-            "Review the cited passages and original source links because these findings are evidence navigation, not clinical guidance."
+            "The answer below synthesizes the cited records first, while the retrieved passages remain available for inspection."
         )
     if has_safety:
         return (
-            f"For {topic}, the retrieved evidence includes both use/effectiveness context and safety limitations. "
-            "The strongest directly relevant passages are cited below."
+            f"For {topic}, the indexed evidence suggests possible benefit or therapeutic relevance, with safety notes separated below. "
+            "The summary below separates benefit evidence from safety notes and uncertainty."
         )
     return (
         f"For {topic}, the retrieved evidence provides relevant context from {source_mix}. "
-        "The directly matched passages are cited below for inspection."
+        "The summary below synthesizes the highest-matching records and cites each source for inspection."
     )
+
+
+def topic_text(workspace: Workspace) -> str:
+    return f"{workspace.intervention or ''} {workspace.condition}".strip()
 
 
 def source_mix_text(retrieved: list[RetrievedChunk]) -> str:

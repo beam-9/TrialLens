@@ -31,6 +31,9 @@ export type RetrievedChunk = {
   title: string;
   url?: string | null;
   external_id: string;
+  publication_date?: string | null;
+  status?: string | null;
+  phase?: string | null;
   matched_terms: string[];
   relevance_note: string;
 };

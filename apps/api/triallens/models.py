@@ -78,6 +78,9 @@ class RetrievedChunk(BaseModel):
     title: str = ""
     url: Optional[str] = None
     external_id: str = ""
+    publication_date: Optional[str] = None
+    status: Optional[str] = None
+    phase: Optional[str] = None
     matched_terms: list[str] = Field(default_factory=list)
     relevance_note: str = ""
 
