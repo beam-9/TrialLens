@@ -141,14 +141,14 @@ export default function Home() {
           <div className="relative z-10 mx-auto grid w-full max-w-7xl content-end gap-8 px-5 pb-8 pt-28 text-paper lg:grid-cols-[1fr_430px] lg:items-end lg:pb-14">
             <div>
               <p className="poem-line mb-6 max-w-sm font-display text-3xl leading-none text-paper/72">
-                I am a valley of evidence
-                <span className="block pl-20 text-paper/45">see you in the sources</span>
+                Evidence, gathered quietly
+                <span className="block pl-20 text-paper/45">sources kept in view</span>
               </p>
               <h1 className="font-display text-[19vw] font-semibold leading-[0.72] tracking-[-0.09em] drop-shadow-2xl sm:text-[14vw] lg:text-[10.8rem]">
                 TrialLens
               </h1>
-              <p className="mt-6 max-w-3xl text-balance text-lg leading-7 text-paper/88 md:text-2xl">
-                Explore biomedical literature, trials, and FDA records through a calmer evidence workspace with citations you can inspect.
+              <p className="mt-6 max-w-3xl text-balance text-lg leading-7 text-paper/88 md:ml-12 md:text-2xl lg:ml-20">
+                Explore biomedical literature, trials, and FDA records through a focused research workspace with citations you can inspect.
               </p>
             </div>
 
