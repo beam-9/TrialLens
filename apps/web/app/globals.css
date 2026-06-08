@@ -103,7 +103,7 @@ textarea {
   background:
     radial-gradient(circle at 8% 7%, rgba(248, 214, 204, 0.58), transparent 20rem),
     radial-gradient(circle at 86% 16%, rgba(60, 116, 78, 0.16), transparent 26rem),
-    linear-gradient(180deg, #fbf7ef 0%, #10241f 48%, #d8cfbd 78%, #cec2ac 100%);
+    linear-gradient(180deg, #fbf7ef 0%, #10241f 48%, #e3d9c8 78%, #e8dfcf 100%);
 }
 
 .workspace-section::before {
