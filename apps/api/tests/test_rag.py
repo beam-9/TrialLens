@@ -82,3 +82,44 @@ def test_answer_abstains_without_direct_evidence():
     assert answer.citations == []
     assert answer.uncertainty
 
+
+def test_statistics_question_does_not_invent_numbers_from_topical_sources():
+    workspace = Workspace(condition="acne", intervention="azelaic acid", source_types=[SourceType.pubmed])
+    source = EvidenceSource(
+        workspace_id=workspace.id,
+        source_type=SourceType.pubmed,
+        external_id="topical",
+        title="Azelaic acid and acne",
+        abstract="Azelaic acid is used to treat acne and is discussed as a topical therapy in dermatology.",
+    )
+    chunks = build_chunks([source])
+    retrieved = Retriever().retrieve(
+        workspace,
+        "What statistics back up the effectiveness of azelaic acid on acne?",
+        chunks,
+        [source],
+    )
+    answer = AnswerService().answer(workspace, "What statistics back up the effectiveness of azelaic acid on acne?", retrieved)
+    assert "did not find quantitative effectiveness statistics" in answer.direct_answer
+    assert "does not invent statistics" in answer.limitations[0]
+
+
+def test_statistics_question_surfaces_numeric_outcome_passages():
+    workspace = Workspace(condition="acne", intervention="azelaic acid", source_types=[SourceType.pubmed])
+    source = EvidenceSource(
+        workspace_id=workspace.id,
+        source_type=SourceType.pubmed,
+        external_id="stats",
+        title="Azelaic acid acne efficacy trial",
+        abstract="Azelaic acid improved acne lesion counts by 42% at 12 weeks, with a response rate of 65% compared with 40% for vehicle.",
+    )
+    chunks = build_chunks([source])
+    retrieved = Retriever().retrieve(
+        workspace,
+        "What statistics back up the effectiveness of azelaic acid on acne?",
+        chunks,
+        [source],
+    )
+    answer = AnswerService().answer(workspace, "What statistics back up the effectiveness of azelaic acid on acne?", retrieved)
+    assert "42%" in " ".join(answer.supporting_evidence)
+    assert "65%" in " ".join(answer.supporting_evidence)

@@ -111,6 +111,77 @@ BENEFIT_TERMS = {
 
 TRIAL_TERMS = {"trial", "trials", "phase", "recruiting", "completed", "eligibility", "protocol"}
 LABEL_TERMS = {"fda", "label", "labeling", "indication", "contraindication", "warning", "dosage"}
+COMPARISON_TERMS = {"against", "compare", "compared", "comparator", "comparison", "versus", "vs"}
+MECHANISM_TERMS = {
+    "absorption",
+    "anti-inflammatory",
+    "barrier",
+    "delivery",
+    "how",
+    "mechanism",
+    "permeability",
+    "pharmacology",
+    "receptor",
+    "solubility",
+    "transdermal",
+    "work",
+    "works",
+}
+STATISTIC_TERMS = {
+    "absolute",
+    "average",
+    "back",
+    "ci",
+    "confidence",
+    "count",
+    "counts",
+    "effectiveness",
+    "mean",
+    "median",
+    "number",
+    "numbers",
+    "odds",
+    "percent",
+    "percentage",
+    "pvalue",
+    "rate",
+    "rates",
+    "ratio",
+    "reduction",
+    "relative",
+    "result",
+    "results",
+    "score",
+    "scores",
+    "statistic",
+    "statistics",
+    "stats",
+}
+OUTCOME_TERMS = {
+    "acne",
+    "clearance",
+    "comedones",
+    "efficacy",
+    "effective",
+    "effectiveness",
+    "improvement",
+    "lesion",
+    "lesions",
+    "microcomedones",
+    "outcome",
+    "response",
+    "success",
+}
+
+INTENT_TERMS = {
+    "benefit": BENEFIT_TERMS | OUTCOME_TERMS,
+    "comparison": COMPARISON_TERMS | BENEFIT_TERMS | OUTCOME_TERMS,
+    "label": LABEL_TERMS | SAFETY_TERMS | BENEFIT_TERMS,
+    "mechanism": MECHANISM_TERMS,
+    "safety": SAFETY_TERMS | LABEL_TERMS,
+    "statistics": STATISTIC_TERMS | OUTCOME_TERMS | BENEFIT_TERMS,
+    "trial": TRIAL_TERMS | COMPARISON_TERMS | OUTCOME_TERMS,
+}
 
 
 def build_chunks(sources: list[EvidenceSource]) -> list[EvidenceChunk]:
@@ -155,6 +226,7 @@ class Retriever:
     ) -> list[RetrievedChunk]:
         query_embedding = stable_embedding(question)
         source_lookup = {source.id: source for source in sources}
+        intent = question_intent(question)
         question_terms = meaningful_terms(question)
         topic_terms = meaningful_terms(f"{workspace.condition} {workspace.intervention or ''}")
         filtered = [chunk for chunk in chunks if source_types is None or chunk.source_type in source_types]
@@ -167,9 +239,14 @@ class Retriever:
             topic_overlap = term_overlap(topic_terms, source_text)
             question_overlap = term_overlap(question_terms, source_text)
             source_boost = source_type_boost(question, chunk.source_type)
+            intent_alignment = intent_relevance(intent, source_text)
             off_topic_penalty = 0.16 if topic_terms and topic_overlap == 0 else 0.0
             score = (0.42 * semantic) + (0.28 * lexical) + (0.22 * topic_overlap) + (0.18 * question_overlap)
-            score = score + source_boost - off_topic_penalty
+            score = score + source_boost + (0.16 * intent_alignment) - off_topic_penalty
+            if intent == "statistics":
+                score += quantitative_relevance(source_text) * 0.18
+                if not has_quantitative_signal(source_text):
+                    score -= 0.1
             matched_terms = sorted((topic_terms | question_terms).intersection(tokenize(source_text)))[:8]
             scored.append((score, chunk, matched_terms, source))
         ranked = sorted(scored, key=lambda item: item[0], reverse=True)[:limit]
@@ -204,8 +281,13 @@ class AnswerService:
         citations = list(dict.fromkeys(chunk.citation for chunk in retrieved))
         evidence_chunks = select_evidence_chunks(retrieved, intent)
         safety_chunks = select_safety_chunks(retrieved)
+        if intent == "statistics" and not evidence_chunks:
+            return statistics_abstention_answer(workspace, question, retrieved, citations, safety_chunks)
         direct_answer = direct_answer_text(workspace, question, retrieved, bool(safety_chunks))
         supporting_evidence = synthesize_supporting_evidence(workspace, intent, evidence_chunks)
+        if not direct_answer_supported(intent, evidence_chunks):
+            direct_answer = partial_direct_answer(workspace, intent, retrieved)
+            supporting_evidence.insert(0, directness_warning(intent))
         safety_limitations = synthesize_safety_limitations(intent, safety_chunks, retrieved)
         uncertainty = synthesize_uncertainty(intent, retrieved)
         limitations = [
@@ -274,6 +356,9 @@ def term_overlap(terms: set[str], text: str) -> float:
 
 def source_type_boost(question: str, source_type: SourceType) -> float:
     terms = set(tokenize(question))
+    if terms.intersection(STATISTIC_TERMS):
+        if source_type in {SourceType.pubmed, SourceType.clinical_trials}:
+            return 0.1
     if terms.intersection(SAFETY_TERMS):
         if source_type in {SourceType.fda_label, SourceType.fda_adverse_event}:
             return 0.12
@@ -281,6 +366,10 @@ def source_type_boost(question: str, source_type: SourceType) -> float:
         return 0.14
     if terms.intersection(LABEL_TERMS) and source_type == SourceType.fda_label:
         return 0.14
+    if terms.intersection(COMPARISON_TERMS) and source_type in {SourceType.pubmed, SourceType.clinical_trials}:
+        return 0.1
+    if terms.intersection(MECHANISM_TERMS) and source_type in {SourceType.pubmed, SourceType.fda_label}:
+        return 0.08
     return 0.0
 
 
@@ -334,8 +423,50 @@ def abstention_answer(workspace_id: str, question: str, retrieved: list[Retrieve
     )
 
 
+def statistics_abstention_answer(
+    workspace: Workspace,
+    question: str,
+    retrieved: list[RetrievedChunk],
+    citations: list[str],
+    safety_chunks: list[RetrievedChunk],
+) -> Answer:
+    topic = topic_text(workspace)
+    direct = (
+        f"I did not find quantitative effectiveness statistics for {topic} in the retrieved passages. "
+        "The indexed sources mention relevance, study design, or safety context, but they do not provide usable numerical outcome results for this question."
+    )
+    return Answer(
+        workspace_id=workspace.id,
+        question=question,
+        short_answer=direct,
+        direct_answer=direct,
+        evidence=[
+            "No retrieved passage contained a usable effectiveness statistic such as a percentage improvement, lesion-count change, response rate, p-value, confidence interval, or comparator result.",
+            "Try filtering to Literature or Trials, or rebuild the workspace with more result-focused sources if you need numerical efficacy estimates.",
+        ],
+        supporting_evidence=[],
+        safety_limitations=synthesize_safety_limitations("statistics", safety_chunks, retrieved),
+        uncertainty=[
+            "ClinicalTrials.gov records often describe planned outcomes without posting numerical results.",
+            "PubMed abstracts may omit detailed statistics that appear only in full text.",
+        ],
+        limitations=[
+            "TrialLens does not invent statistics when indexed sources do not contain them.",
+            "It is not medical advice, diagnosis, or treatment guidance.",
+        ],
+        citations=citations,
+        retrieved_chunks=retrieved,
+    )
+
+
 def question_intent(question: str) -> str:
     terms = set(tokenize(question))
+    if terms.intersection(STATISTIC_TERMS):
+        return "statistics"
+    if terms.intersection(COMPARISON_TERMS):
+        return "comparison"
+    if terms.intersection(MECHANISM_TERMS):
+        return "mechanism"
     if terms.intersection(SAFETY_TERMS):
         return "safety"
     if terms.intersection(TRIAL_TERMS):
@@ -346,13 +477,27 @@ def question_intent(question: str) -> str:
 
 
 def select_evidence_chunks(retrieved: list[RetrievedChunk], intent: str, limit: int = 4) -> list[RetrievedChunk]:
+    if intent == "statistics":
+        numeric_chunks = sorted(
+            [chunk for chunk in retrieved if has_effectiveness_statistic(chunk.text)],
+            key=lambda chunk: effectiveness_statistic_relevance(chunk.text),
+            reverse=True,
+        )
+        return unique_source_chunks(numeric_chunks, limit)
+    intent_chunks = sorted(
+        [chunk for chunk in retrieved if intent_relevance(intent, f"{chunk.title} {chunk.text}") > 0],
+        key=lambda chunk: intent_relevance(intent, f"{chunk.title} {chunk.text}"),
+        reverse=True,
+    )
+    if intent in {"comparison", "mechanism"}:
+        return unique_source_chunks(intent_chunks, limit)
     priority = {
         "safety": {"safety"},
         "trial": {"trial"},
         "label": {"label", "safety"},
         "benefit": {"benefit", "trial", "label"},
     }[intent]
-    selected = unique_source_chunks([chunk for chunk in retrieved if classify_chunk(chunk) in priority], limit)
+    selected = unique_source_chunks(intent_chunks or [chunk for chunk in retrieved if classify_chunk(chunk) in priority], limit)
     if selected:
         return selected
     return unique_source_chunks(retrieved, limit)
@@ -390,13 +535,16 @@ def synthesize_supporting_evidence(workspace: Workspace, intent: str, chunks: li
     topic = topic_text(workspace)
     lead = {
         "benefit": f"The indexed evidence suggests potential benefit or therapeutic relevance for {topic}, but the strength of that evidence depends on source type and study design.",
+        "comparison": f"The indexed evidence contains comparison-oriented context for {topic}. The strongest passages below mention comparator arms, alternative treatments, or versus-style study designs.",
+        "mechanism": f"The indexed evidence contains mechanism or delivery context for {topic}. The passages below explain how the intervention is described as working or being delivered.",
         "safety": f"The indexed evidence points to safety considerations for {topic}; these should be read as evidence-navigation findings, not patient-specific guidance.",
         "trial": f"The indexed trial records describe how {topic} is being or has been studied, including comparator and eligibility context where available.",
         "label": f"The indexed regulatory-label passages describe approved-use, warning, or limitation context for {topic}.",
+        "statistics": f"The indexed passages below contain quantitative signals relevant to {topic}. Interpret them by source type: trial protocols may describe planned measures, while labels may report safety rates rather than effectiveness.",
     }[intent]
     summaries = [lead]
     for chunk in chunks[:4]:
-        summaries.append(synthesized_claim(chunk, intent))
+        summaries.append(statistical_claim(chunk) if intent == "statistics" else synthesized_claim(chunk, intent))
     return summaries
 
 
@@ -430,11 +578,71 @@ def synthesize_uncertainty(intent: str, retrieved: list[RetrievedChunk]) -> list
         notes.append("ClinicalTrials.gov records may describe protocols, eligibility, or planned outcomes even when peer-reviewed results are unavailable.")
     if source_counts.get(SourceType.fda_adverse_event, 0):
         notes.append("FDA adverse-event reports are reports of suspected events and should not be interpreted as proof that the drug caused the event.")
-    if intent == "benefit":
+    if intent == "statistics":
+        notes.append("Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible.")
+    elif intent == "comparison":
+        notes.append("Comparison claims are limited unless the cited source reports comparator outcomes, not just a comparator study design.")
+    elif intent == "mechanism":
+        notes.append("Mechanism explanations may be based on abstracts, labels, or formulation studies rather than clinical outcome evidence.")
+    elif intent == "benefit":
         notes.append("Benefit claims should be treated as preliminary unless the cited source reports measured outcomes, comparator results, or trial completion details.")
     else:
         notes.append("Use the source links and retrieved passages to inspect whether each cited record directly addresses the question.")
     return notes
+
+
+def intent_relevance(intent: str, text: str) -> float:
+    terms = INTENT_TERMS.get(intent, BENEFIT_TERMS)
+    overlap = term_overlap(set(terms), text)
+    if intent == "statistics":
+        return effectiveness_statistic_relevance(text)
+    if intent == "comparison" and set(tokenize(text)).intersection(COMPARISON_TERMS):
+        overlap += 0.35
+    if intent == "mechanism" and set(tokenize(text)).intersection(MECHANISM_TERMS):
+        overlap += 0.35
+    if intent == "trial" and set(tokenize(text)).intersection(TRIAL_TERMS):
+        overlap += 0.25
+    if intent == "label" and set(tokenize(text)).intersection(LABEL_TERMS):
+        overlap += 0.25
+    if intent == "safety" and set(tokenize(text)).intersection(SAFETY_TERMS):
+        overlap += 0.25
+    return min(overlap, 1.0)
+
+
+def direct_answer_supported(intent: str, chunks: list[RetrievedChunk]) -> bool:
+    if intent == "benefit":
+        return bool(chunks)
+    if intent == "statistics":
+        return any(has_effectiveness_statistic(chunk.text) for chunk in chunks)
+    return any(intent_relevance(intent, f"{chunk.title} {chunk.text}") >= 0.18 for chunk in chunks)
+
+
+def partial_direct_answer(workspace: Workspace, intent: str, retrieved: list[RetrievedChunk]) -> str:
+    topic = topic_text(workspace)
+    requested = {
+        "comparison": "a direct comparison",
+        "label": "direct FDA-label context",
+        "mechanism": "a direct mechanism explanation",
+        "safety": "direct safety evidence",
+        "statistics": "quantitative effectiveness statistics",
+        "trial": "direct trial evidence",
+    }.get(intent, "direct evidence")
+    return (
+        f"For {topic}, I found topical sources, but the retrieved passages do not strongly provide {requested}. "
+        "The evidence below is the closest indexed context rather than a complete answer."
+    )
+
+
+def directness_warning(intent: str) -> str:
+    requested = {
+        "comparison": "direct comparator outcomes",
+        "label": "specific FDA-label statements",
+        "mechanism": "mechanism-specific explanations",
+        "safety": "safety-specific evidence",
+        "statistics": "usable numerical effectiveness results",
+        "trial": "trial-specific details",
+    }.get(intent, "direct support")
+    return f"Closest-match warning: the retrieved passages have limited {requested}; inspect the source links before relying on this answer."
 
 
 def synthesized_claim(chunk: RetrievedChunk, intent: str) -> str:
@@ -442,6 +650,8 @@ def synthesized_claim(chunk: RetrievedChunk, intent: str) -> str:
     context = source_context_phrase(chunk)
     verb = {
         "benefit": "supports the relevance of this intervention by noting that",
+        "comparison": "addresses comparison context by noting that",
+        "mechanism": "addresses mechanism or delivery context by noting that",
         "safety": "highlights a safety consideration by noting that",
         "trial": "describes study context by noting that",
         "label": "provides regulatory context by noting that",
@@ -449,7 +659,25 @@ def synthesized_claim(chunk: RetrievedChunk, intent: str) -> str:
     return f"{context} {verb} {claim_clause(sentence)} {inline_citation(chunk)}. {apa_reference(chunk)}"
 
 
+def statistical_claim(chunk: RetrievedChunk) -> str:
+    sentence = best_sentence(chunk, STATISTIC_TERMS | OUTCOME_TERMS | BENEFIT_TERMS)
+    numbers = extract_numbers(sentence) or extract_numbers(chunk.text)
+    number_text = ", ".join(numbers[:5])
+    if number_text:
+        return (
+            f"{source_context_phrase(chunk)} provides the quantitative signal {number_text}; the relevant passage says "
+            f"{claim_clause(sentence)} {inline_citation(chunk)}. {apa_reference(chunk)}"
+        )
+    return synthesized_claim(chunk, "benefit")
+
+
 def terms_for_intent(intent: str) -> set[str]:
+    if intent == "statistics":
+        return STATISTIC_TERMS | OUTCOME_TERMS | BENEFIT_TERMS
+    if intent == "comparison":
+        return COMPARISON_TERMS | BENEFIT_TERMS | OUTCOME_TERMS
+    if intent == "mechanism":
+        return MECHANISM_TERMS | BENEFIT_TERMS
     if intent == "safety":
         return SAFETY_TERMS | LABEL_TERMS
     if intent == "trial":
@@ -457,6 +685,78 @@ def terms_for_intent(intent: str) -> set[str]:
     if intent == "label":
         return LABEL_TERMS | SAFETY_TERMS | BENEFIT_TERMS
     return BENEFIT_TERMS | TRIAL_TERMS | LABEL_TERMS
+
+
+def has_quantitative_signal(text: str) -> bool:
+    return bool(extract_numbers(text)) and quantitative_relevance(text) > 0
+
+
+def has_effectiveness_statistic(text: str) -> bool:
+    return any(effectiveness_statistic_relevance(sentence) >= 0.72 for sentence in split_sentences(normalize_passage(text)))
+
+
+def effectiveness_statistic_relevance(text: str) -> float:
+    numbers = extract_numbers(text)
+    if not numbers:
+        return 0.0
+    terms = set(tokenize(text))
+    lowered = text.lower()
+    score = min(len(numbers), 4) / 8
+    if terms.intersection({"efficacy", "effective", "effectiveness", "improved", "improvement", "reduced", "reduction", "response", "success"}):
+        score += 0.38
+    if terms.intersection({"lesion", "lesions", "comedones", "microcomedones", "clearance", "outcome", "score", "scores"}):
+        score += 0.28
+    if any(term in lowered for term in ["p =", "p<", "confidence interval", "response rate", "lesion count", "mean reduction"]):
+        score += 0.3
+    if any(term in lowered for term in ["molar ratio", "dose", "mg", "formulation", "containing 3%", "cream containing"]):
+        score -= 0.32
+    if any(term in lowered for term in ["adverse event", "adverse reaction", "erythema", "contact dermatitis", "edema"]):
+        score -= 0.25
+    if lowered.startswith(("this is a", "the current study proposes", "the results of the study will")):
+        score -= 0.3
+    return max(score, 0.0)
+
+
+def quantitative_relevance(text: str) -> float:
+    terms = set(tokenize(text))
+    numbers = extract_numbers(text)
+    if not numbers:
+        return 0.0
+    score = min(len(numbers), 6) / 6
+    if terms.intersection(OUTCOME_TERMS):
+        score += 0.35
+    if terms.intersection(STATISTIC_TERMS):
+        score += 0.25
+    lowered = text.lower()
+    if any(term in lowered for term in ["p =", "p<", "confidence interval", "ci ", "response rate", "lesion count"]):
+        score += 0.25
+    if table_like(text):
+        score -= 0.15
+    if terms.intersection({"dose", "mg", "ratio", "molar", "phase"}):
+        score -= 0.12
+    return max(score, 0.0)
+
+
+def extract_numbers(text: str) -> list[str]:
+    patterns = [
+        r"\b\d+(?:\.\d+)?\s?%",
+        r"\bp\s?[<=>]\s?0?\.\d+",
+        r"\b\d+(?:\.\d+)?\s?(?:mg|mcg|g|weeks?|months?|years?|subjects?|patients?|participants?)\b",
+        r"\bn\s?=\s?\d+",
+        r"\b\d+(?:\.\d+)?\s?(?:to|-)\s?\d+(?:\.\d+)?\b",
+    ]
+    found: list[str] = []
+    for pattern in patterns:
+        found.extend(re.findall(pattern, text, flags=re.IGNORECASE))
+    seen: set[str] = set()
+    unique = []
+    for value in found:
+        cleaned = value.strip()
+        key = cleaned.lower()
+        if key not in seen:
+            unique.append(cleaned)
+            seen.add(key)
+    return unique
 
 
 def safety_chunk_quality(chunk: RetrievedChunk) -> int:
@@ -493,6 +793,7 @@ def best_sentence(chunk: RetrievedChunk, preferred_terms: set[str]) -> str:
         sentences,
         key=lambda sentence: (
             len(set(tokenize(sentence)).intersection(preferred_terms)),
+            quantitative_relevance(sentence),
             benefit_signal(sentence),
             len(set(tokenize(sentence)).intersection(set(chunk.matched_terms))),
             -abs(len(sentence) - 180),
@@ -621,6 +922,33 @@ def publication_year(value: str | None) -> str | None:
 def direct_answer_text(workspace: Workspace, question: str, retrieved: list[RetrievedChunk], has_safety: bool) -> str:
     topic = topic_text(workspace)
     source_mix = source_mix_text(retrieved)
+    intent = question_intent(question)
+    if intent == "statistics":
+        numeric_count = sum(1 for chunk in retrieved if has_quantitative_signal(chunk.text))
+        return (
+            f"For {topic}, I found {numeric_count} retrieved passage{'s' if numeric_count != 1 else ''} with quantitative signals. "
+            "The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness."
+        )
+    if intent == "comparison":
+        return (
+            f"For {topic}, the answer focuses on comparison evidence from {source_mix}. "
+            "Where the retrieved records only describe a comparator study design rather than results, the uncertainty section calls that out."
+        )
+    if intent == "mechanism":
+        return (
+            f"For {topic}, the answer focuses on mechanism, pharmacology, or delivery evidence from {source_mix}. "
+            "Clinical benefits and safety are kept separate from mechanism claims."
+        )
+    if intent == "trial":
+        return (
+            f"For {topic}, the answer focuses on indexed trial records from {source_mix}. "
+            "Trial status, phase, comparator context, and outcome availability are treated separately from proven effectiveness."
+        )
+    if intent == "label":
+        return (
+            f"For {topic}, the answer focuses on regulatory-label context from {source_mix}. "
+            "Label statements are cited separately from literature or trial evidence."
+        )
     if set(tokenize(question)).intersection(SAFETY_TERMS):
         return (
             f"For {topic}, the retrieved sources include safety-relevant evidence from {source_mix}. "
