@@ -7,6 +7,8 @@ __pycache__/
 node_modules/
 .next/
 out/
+playwright-report/
+test-results/
 
 # Local runtime data
 apps/api/data/
@@ -18,4 +20,9 @@ apps/api/data/
 
 # OS
 .DS_Store
+*.tsbuildinfo
 
+# Local research caches and design review artifacts
+graphify-out/
+.impeccable/review/
+.impeccable/mocks/

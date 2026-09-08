@@ -2,7 +2,7 @@
 
 ## System Shape
 
-TrialLens is organized around research workspaces. A workspace has a condition, optional intervention, normalized evidence sources, chunks, question answers, and evaluation results.
+TrialLens is organized around research workspaces. A workspace has a condition, optional intervention, normalized evidence sources, chunks, structured evidence extraction rows, question answers, and evaluation results.
 
 ```mermaid
 flowchart LR
@@ -10,8 +10,10 @@ flowchart LR
   API --> Ingest["Ingestion service"]
   Ingest --> Sources["PubMed / ClinicalTrials.gov / openFDA"]
   Ingest --> Store["Workspace store"]
+  Store --> Extract["Evidence extraction table"]
   Store --> Retriever["Hybrid retriever"]
-  Retriever --> Answer["Citation-grounded answer service"]
+  Extract --> Answer["Extraction-first answer service"]
+  Retriever --> Answer
   Answer --> API
   Store --> Evals["RAG evaluation service"]
 ```
@@ -23,6 +25,7 @@ The MVP uses a JSON-backed repository to keep local setup simple. The schema mir
 - workspaces
 - evidence sources
 - chunks
+- evidence extractions
 - answers
 - retrieval traces
 - briefs
@@ -43,6 +46,7 @@ The frontend does not know whether retrieval uses local embeddings, pgvector, Qd
 - ingest evidence
 - list sources
 - ask question
+- extract and list evidence rows
 - inspect retrievals
 - generate brief
 - view evals
@@ -50,4 +54,3 @@ The frontend does not know whether retrieval uses local embeddings, pgvector, Qd
 ## Safety Positioning
 
 TrialLens is not a diagnosis or treatment recommender. It separates evidence source types and explicitly labels FDA adverse events as reports rather than proof of causality.
-

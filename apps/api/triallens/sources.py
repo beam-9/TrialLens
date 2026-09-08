@@ -38,8 +38,25 @@ class PubMedClient(SourceClient):
             for article in root.findall(".//PubmedArticle"):
                 pmid = article.findtext(".//PMID") or "unknown"
                 title = normalize(" ".join(article.findtext(".//ArticleTitle", default="").split()))
-                abstract = normalize(" ".join(node.text or "" for node in article.findall(".//AbstractText")))
+                abstract_sections = {}
+                abstract_parts = []
+                for idx, node in enumerate(article.findall(".//AbstractText"), start=1):
+                    text = normalize(node.text or "")
+                    if not text:
+                        continue
+                    label = node.attrib.get("Label") or node.attrib.get("NlmCategory") or f"Abstract {idx}"
+                    abstract_sections[label] = text
+                    abstract_parts.append(text)
+                abstract = normalize(" ".join(abstract_parts))
                 year = article.findtext(".//PubDate/Year")
+                authors = []
+                for author in article.findall(".//AuthorList/Author"):
+                    last_name = normalize(author.findtext("LastName", default=""))
+                    initials = normalize(author.findtext("Initials", default=""))
+                    collective_name = normalize(author.findtext("CollectiveName", default=""))
+                    display_name = collective_name or " ".join(item for item in [last_name, initials] if item)
+                    if display_name:
+                        authors.append(display_name)
                 if title and abstract:
                     records.append(
                         EvidenceSource(
@@ -50,6 +67,10 @@ class PubMedClient(SourceClient):
                             abstract=html.unescape(abstract),
                             publication_date=year,
                             url=f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+                            metadata={
+                                "sections": {key: html.unescape(value) for key, value in abstract_sections.items()},
+                                "authors": authors,
+                            },
                         )
                     )
             return records
@@ -95,6 +116,12 @@ class ClinicalTrialsClient(SourceClient):
                             url=f"https://clinicaltrials.gov/study/{nct_id}",
                             status=status.get("overallStatus"),
                             phase=", ".join(design.get("phases", [])) if design.get("phases") else None,
+                            metadata={
+                                "sections": {
+                                    "Brief summary": normalize(description.get("briefSummary", "")),
+                                    "Detailed description": normalize(description.get("detailedDescription", "")),
+                                }
+                            },
                         )
                     )
             return records
@@ -123,8 +150,12 @@ class OpenFdaClient(SourceClient):
                 openfda = item.get("openfda", {})
                 title = ", ".join(openfda.get("brand_name") or openfda.get("generic_name") or [term])
                 sections = []
+                section_map = {}
                 for key in ["indications_and_usage", "warnings", "adverse_reactions", "drug_interactions"]:
-                    sections.extend(item.get(key, [])[:1])
+                    values = item.get(key, [])[:1]
+                    sections.extend(values)
+                    if values:
+                        section_map[key.replace("_", " ").title()] = normalize(values[0])
                 abstract = normalize(" ".join(sections))
                 if abstract:
                     records.append(
@@ -135,6 +166,7 @@ class OpenFdaClient(SourceClient):
                             title=f"FDA label: {title}",
                             abstract=abstract,
                             url="https://open.fda.gov/apis/drug/label/",
+                            metadata={"sections": section_map},
                         )
                     )
             return records
@@ -187,4 +219,3 @@ async def fetch_sources(workspace: Workspace) -> list[EvidenceSource]:
     if selected:
         return selected
     return [source for source in sample_sources(workspace.id, workspace.condition, workspace.intervention) if source.source_type in workspace.source_types]
-

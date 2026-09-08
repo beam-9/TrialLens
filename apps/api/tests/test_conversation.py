@@ -1,0 +1,91 @@
+import json
+
+import httpx
+import pytest
+
+from triallens.conversation import ConversationService, retrieval_question
+from triallens.models import Answer, EvidenceSource, SourceType, Workspace
+
+
+@pytest.fixture
+def context(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test-only")
+    monkeypatch.setenv("TRIALLENS_CHAT_MODEL", "test-model")
+    workspace = Workspace(condition="diabetes", source_types=[SourceType.pubmed])
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed,
+                            external_id="123", title="Trial results", abstract="The intervention reduced HbA1c by 0.5 percentage points versus placebo at 12 weeks.")
+    fallback = Answer(workspace_id=workspace.id, question="What changed?", short_answer="Extracted result",
+                      evidence=[], limitations=[], citations=[], retrieved_chunks=[])
+    return workspace, source, fallback
+
+
+def mock_generation(monkeypatch, output, status="completed"):
+    captured = []
+    def post(url, **kwargs):
+        captured.append(kwargs["json"])
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"status": status,
+            "output": [{"type": "message", "content": [{"type": "output_text", "text": json.dumps(output)}]}]})
+    monkeypatch.setattr("triallens.conversation.httpx.post", post)
+    return captured
+
+
+def test_conversational_generation_preserves_history_and_provenance(monkeypatch, context):
+    workspace, source, fallback = context
+    captured = mock_generation(monkeypatch, {"paragraphs": ["At 12 weeks, HbA1c was 0.5 percentage points lower than with placebo [PubMed:123]."], "cited_sources": ["PubMed:123"], "uncertainty": ["Longer-term outcomes are not available."]})
+    result = ConversationService().generate(workspace, "Explain that result", [fallback], [source], fallback)
+    assert result.generation_mode == "conversational"
+    assert result.citations == ["PubMed:123"]
+    assert captured[0]["store"] is False
+    payload = json.loads(captured[0]["input"])
+    assert payload["history"][0]["question"] == "What changed?"
+    assert payload["evidence"][0]["citation"] == "PubMed:123"
+
+
+@pytest.mark.parametrize("output,status", [
+    ({"paragraphs": ["It works [PubMed:999]."], "cited_sources": ["PubMed:999"], "uncertainty": []}, "completed"),
+    ({"paragraphs": ["It works."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "completed"),
+    ({"paragraphs": ["It works."], "cited_sources": [], "uncertainty": []}, "completed"),
+    ({"paragraphs": ["It works [PubMed:123]."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "incomplete"),
+    ({"paragraphs": ["   "], "cited_sources": [], "uncertainty": []}, "completed"),
+])
+def test_invalid_generation_falls_back(monkeypatch, context, output, status):
+    workspace, source, fallback = context
+    mock_generation(monkeypatch, output, status)
+    result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
+    assert result.generation_mode == "extractive"
+    assert result.short_answer == "Extracted result"
+    assert "failed validation" in result.generation_note
+
+
+def test_long_copied_passage_rejected(monkeypatch, context):
+    workspace, source, fallback = context
+    source.abstract = " ".join(f"word{i}" for i in range(35))
+    mock_generation(monkeypatch, {"paragraphs": [source.abstract + " [PubMed:123]"], "cited_sources": ["PubMed:123"], "uncertainty": []})
+    assert ConversationService().generate(workspace, "What changed?", [], [source], fallback).generation_mode == "extractive"
+
+
+def test_missing_config_does_not_call_provider(monkeypatch, context):
+    workspace, source, fallback = context
+    monkeypatch.delenv("OPENAI_API_KEY")
+    def unexpected(*args, **kwargs):
+        pytest.fail("Provider must not be called without configuration")
+    monkeypatch.setattr("triallens.conversation.httpx.post", unexpected)
+    assert "not connected" in ConversationService().generate(workspace, "What changed?", [], [source], fallback).generation_note
+
+
+def test_timeout_falls_back(monkeypatch, context):
+    workspace, source, fallback = context
+    def timeout(*args, **kwargs):
+        raise httpx.ReadTimeout("test timeout")
+    monkeypatch.setattr("triallens.conversation.httpx.post", timeout)
+    assert ConversationService().generate(workspace, "What changed?", [], [source], fallback).generation_mode == "extractive"
+
+
+def test_follow_up_retrieval_keeps_original_referent(context):
+    _, _, first = context
+    first.question = "What is the HbA1c result?"
+    second = first.model_copy(update={"question": "Explain that more simply"})
+    query = retrieval_question("Why is that important?", [first, second])
+    assert "HbA1c" in query
+    assert first.short_answer not in query
+    assert retrieval_question("What safety concerns exist?", [first]) == "What safety concerns exist?"

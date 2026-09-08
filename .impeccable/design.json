@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-20T22:40:35Z",
+  "title": "Design System: TrialLens",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Mineral Teal",
+        "canonical": "rgb(0 121 115)",
+        "tonalRamp": [
+          "oklch(15% 0.08 185)",
+          "oklch(27% 0.08 185)",
+          "oklch(39% 0.08 185)",
+          "oklch(51% 0.08 185)",
+          "oklch(63% 0.08 185)",
+          "oklch(74% 0.08 185)",
+          "oklch(85% 0.08 185)",
+          "oklch(95% 0.08 185)"
+        ]
+      },
+      "primary-foreground": {
+        "role": "neutral",
+        "displayName": "Primary Foreground",
+        "canonical": "rgb(250 252 251)",
+        "tonalRamp": [
+          "oklch(15% 0.006 170)",
+          "oklch(27% 0.006 170)",
+          "oklch(39% 0.006 170)",
+          "oklch(51% 0.006 170)",
+          "oklch(63% 0.006 170)",
+          "oklch(74% 0.006 170)",
+          "oklch(85% 0.006 170)",
+          "oklch(95% 0.006 170)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Cool Canvas",
+        "canonical": "rgb(242 246 245)",
+        "tonalRamp": [
+          "oklch(15% 0.008 170)",
+          "oklch(27% 0.008 170)",
+          "oklch(39% 0.008 170)",
+          "oklch(51% 0.008 170)",
+          "oklch(63% 0.008 170)",
+          "oklch(74% 0.008 170)",
+          "oklch(85% 0.008 170)",
+          "oklch(95% 0.008 170)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Graphite Ink",
+        "canonical": "rgb(17 24 23)",
+        "tonalRamp": [
+          "oklch(15% 0.012 170)",
+          "oklch(27% 0.012 170)",
+          "oklch(39% 0.012 170)",
+          "oklch(51% 0.012 170)",
+          "oklch(63% 0.012 170)",
+          "oklch(74% 0.012 170)",
+          "oklch(85% 0.012 170)",
+          "oklch(95% 0.012 170)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "rgb(250 252 251)",
+        "tonalRamp": [
+          "oklch(15% 0.006 170)",
+          "oklch(27% 0.006 170)",
+          "oklch(39% 0.006 170)",
+          "oklch(51% 0.006 170)",
+          "oklch(63% 0.006 170)",
+          "oklch(74% 0.006 170)",
+          "oklch(85% 0.006 170)",
+          "oklch(95% 0.006 170)"
+        ]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Mineral Slide",
+        "canonical": "rgb(232 239 237)",
+        "tonalRamp": [
+          "oklch(15% 0.014 170)",
+          "oklch(27% 0.014 170)",
+          "oklch(39% 0.014 170)",
+          "oklch(51% 0.014 170)",
+          "oklch(63% 0.014 170)",
+          "oklch(74% 0.014 170)",
+          "oklch(85% 0.014 170)",
+          "oklch(95% 0.014 170)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "rgb(79 94 91)",
+        "tonalRamp": [
+          "oklch(15% 0.022 170)",
+          "oklch(27% 0.022 170)",
+          "oklch(39% 0.022 170)",
+          "oklch(51% 0.022 170)",
+          "oklch(63% 0.022 170)",
+          "oklch(74% 0.022 170)",
+          "oklch(85% 0.022 170)",
+          "oklch(95% 0.022 170)"
+        ]
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Mineral Fog",
+        "canonical": "rgb(221 233 230)",
+        "tonalRamp": [
+          "oklch(15% 0.02 170)",
+          "oklch(27% 0.02 170)",
+          "oklch(39% 0.02 170)",
+          "oklch(51% 0.02 170)",
+          "oklch(63% 0.02 170)",
+          "oklch(74% 0.02 170)",
+          "oklch(85% 0.02 170)",
+          "oklch(95% 0.02 170)"
+        ]
+      },
+      "destructive": {
+        "role": "tertiary",
+        "displayName": "Safety Red",
+        "canonical": "rgb(173 52 63)",
+        "tonalRamp": [
+          "oklch(15% 0.13 20)",
+          "oklch(27% 0.13 20)",
+          "oklch(39% 0.13 20)",
+          "oklch(51% 0.13 20)",
+          "oklch(63% 0.13 20)",
+          "oklch(74% 0.13 20)",
+          "oklch(85% 0.13 20)",
+          "oklch(95% 0.13 20)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Mineral Border",
+        "canonical": "rgb(190 205 201)",
+        "tonalRamp": [
+          "oklch(15% 0.025 170)",
+          "oklch(27% 0.025 170)",
+          "oklch(39% 0.025 170)",
+          "oklch(51% 0.025 170)",
+          "oklch(63% 0.025 170)",
+          "oklch(74% 0.025 170)",
+          "oklch(85% 0.025 170)",
+          "oklch(95% 0.025 170)"
+        ]
+      },
+      "input": {
+        "role": "neutral",
+        "displayName": "Mineral Input",
+        "canonical": "rgb(168 187 182)",
+        "tonalRamp": [
+          "oklch(15% 0.03 170)",
+          "oklch(27% 0.03 170)",
+          "oklch(39% 0.03 170)",
+          "oklch(51% 0.03 170)",
+          "oklch(63% 0.03 170)",
+          "oklch(74% 0.03 170)",
+          "oklch(85% 0.03 170)",
+          "oklch(95% 0.03 170)"
+        ]
+      },
+      "ring": {
+        "role": "primary",
+        "displayName": "Focus Teal",
+        "canonical": "rgb(0 121 115)",
+        "tonalRamp": [
+          "oklch(15% 0.08 185)",
+          "oklch(27% 0.08 185)",
+          "oklch(39% 0.08 185)",
+          "oklch(51% 0.08 185)",
+          "oklch(63% 0.08 185)",
+          "oklch(74% 0.08 185)",
+          "oklch(85% 0.08 185)",
+          "oklch(95% 0.08 185)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero statements only; the compressed silhouette carries the evidence-path identity."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major workspace views and evidence landmarks."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Launcher, provenance, and section titles in the body family."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanatory copy, extraction content, and citations."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Compact controls, rail items, status readouts, and evidence metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-soft",
+        "value": "var(--shadow-soft)",
+        "purpose": "Theme-aware ambient lift for provenance and workspace frames that overlap the canvas."
+      },
+      {
+        "name": "ambient-float",
+        "value": "var(--shadow-float)",
+        "purpose": "Theme-aware focal lift for the workspace launcher and similarly important floating surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "180ms ease",
+        "purpose": "Color, background, border, and icon-opacity feedback."
+      },
+      {
+        "name": "press-fast",
+        "value": "120ms ease",
+        "purpose": "Direct press and scale feedback on buttons and the theme toggle."
+      },
+      {
+        "name": "reveal-standard",
+        "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Underline and icon transform reveals."
+      },
+      {
+        "name": "source-arrival",
+        "value": "760ms cubic-bezier(0.16, 1, 0.3, 1); 90ms stagger after 100ms",
+        "purpose": "The four source streams reveal left to right before convergence."
+      },
+      {
+        "name": "spine-arrival",
+        "value": "900ms cubic-bezier(0.16, 1, 0.3, 1) after 380ms",
+        "purpose": "The unified evidence spine follows the individual source streams."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "workflow-wrap",
+        "value": "1180px"
+      },
+      {
+        "name": "rail-collapse",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "680px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Workspace Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The 48px mineral-teal action used to start the extraction-first workflow.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\"><span>Build workspace</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; min-width: 10.5rem; height: 48px; align-items: center; justify-content: space-between; gap: 0.9rem; border: 1px solid transparent; border-radius: 12px; padding: 0 16px; background: rgb(var(--teal-rgb, 0 121 115)); color: var(--primary-foreground, rgb(250 252 251)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 680; cursor: pointer; transition: filter 180ms ease, transform 120ms ease; } .ds-btn-primary svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; } .ds-btn-primary:hover { filter: brightness(0.94); } .ds-btn-primary:focus-visible { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 3px; } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Outline Research Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A quiet secondary action for reopening, filtering, inspecting, and review controls.",
+      "html": "<button class=\"ds-btn-outline\" type=\"button\">Inspect source</button>",
+      "css": ".ds-btn-outline { display: inline-flex; height: 36px; align-items: center; justify-content: center; border: 1px solid rgb(var(--ink-rgb, 17 24 23) / 0.13); border-radius: 10px; padding: 0 12px; background: rgb(var(--canvas-rgb, 242 246 245) / 0.66); color: rgb(var(--ink-rgb, 17 24 23)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 120ms ease; } .ds-btn-outline:hover { border-color: rgb(var(--teal-rgb, 0 121 115) / 0.55); background: rgb(var(--fog-rgb, 221 233 230) / 0.65); } .ds-btn-outline:focus-visible { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 3px; } .ds-btn-outline:active { transform: translateY(1px); } .ds-btn-outline:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Workspace Input",
+      "kind": "input",
+      "refersTo": "input-workspace",
+      "description": "The large, exact field used inside the softly irregular workspace launcher.",
+      "html": "<label class=\"ds-workspace-field\"><span>Condition</span><input class=\"ds-workspace-input\" value=\"type 2 diabetes\" aria-label=\"Condition\"></label>",
+      "css": ".ds-workspace-field { display: grid; gap: 0.48rem; color: rgb(var(--ink-rgb, 17 24 23)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; } .ds-workspace-field > span { color: rgb(var(--ink-rgb, 17 24 23) / 0.78); font-size: 0.78rem; font-weight: 620; } .ds-workspace-input { width: 100%; height: 48px; border: 1px solid rgb(var(--ink-rgb, 17 24 23) / 0.18); border-radius: 12px; padding: 0 14px; background: rgb(var(--canvas-rgb, 242 246 245) / 0.7); color: rgb(var(--ink-rgb, 17 24 23)); font: inherit; outline: none; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-workspace-input::placeholder { color: rgb(var(--ink-rgb, 17 24 23) / 0.68); } .ds-workspace-input:hover { border-color: rgb(var(--teal-rgb, 0 121 115) / 0.55); } .ds-workspace-input:focus-visible { border-color: rgb(var(--teal-rgb, 0 121 115)); box-shadow: 0 0 0 3px rgb(var(--teal-rgb, 0 121 115) / 0.16); } .ds-workspace-input:invalid { border-color: rgb(var(--signal-rgb, 173 52 63)); box-shadow: 0 0 0 3px rgb(var(--signal-rgb, 173 52 63) / 0.2); } .ds-workspace-input:disabled { background: color-mix(in srgb, var(--input, rgb(168 187 182)) 50%, transparent); opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Workspace Tab Rail",
+      "kind": "nav",
+      "refersTo": "tab-active",
+      "description": "The narrow desktop research rail that becomes a sticky horizontal scroller on compact screens.",
+      "html": "<nav class=\"ds-tab-rail\" aria-label=\"Workspace views\"><span class=\"ds-tab-kicker\">Workspace</span><button class=\"ds-tab-item\" aria-selected=\"true\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 5h16l-6 7v5l-4 2v-7z\"/></svg>Evidence</button><button class=\"ds-tab-item\" aria-selected=\"false\" type=\"button\">Ask</button><button class=\"ds-tab-item\" aria-selected=\"false\" type=\"button\">Sources</button></nav>",
+      "css": ".ds-tab-rail { display: flex; width: 184px; min-height: 260px; flex-direction: column; gap: 0.3rem; padding: 20px 12px; background: rgb(var(--slide-rgb, 232 239 237) / 0.72); color: rgb(var(--ink-rgb, 17 24 23)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; } .ds-tab-kicker { margin: 2px 11px 13px; color: rgb(var(--ink-rgb, 17 24 23) / 0.68); font-size: 0.7rem; font-weight: 650; } .ds-tab-item { display: inline-flex; width: 100%; min-height: 42px; align-items: center; justify-content: flex-start; gap: 10px; border: 0; border-radius: 11px; padding: 10px 12px; background: transparent; color: rgb(var(--ink-rgb, 17 24 23) / 0.62); font: inherit; font-size: 0.84rem; font-weight: 580; cursor: pointer; transition: background 180ms ease, color 180ms ease; } .ds-tab-item svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; } .ds-tab-item:hover { background: rgb(var(--fog-rgb, 221 233 230) / 0.58); color: rgb(var(--ink-rgb, 17 24 23)); } .ds-tab-item[aria-selected=\"true\"] { background: rgb(var(--teal-rgb, 0 121 115) / 0.13); color: rgb(var(--teal-rgb, 0 121 115)); } .ds-tab-item:focus-visible { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 2px; } @media (max-width: 900px) { .ds-tab-rail { width: 100%; min-height: auto; flex-direction: row; overflow-x: auto; padding: 10px; } .ds-tab-kicker { display: none; } .ds-tab-item { width: auto; min-width: max-content; } }"
+    },
+    {
+      "name": "Inspectable Source Card",
+      "kind": "card",
+      "refersTo": "card-surface",
+      "description": "A flat, rule-led source container that keeps record type, title, and supporting text inspectable.",
+      "html": "<article class=\"ds-source-card\" tabindex=\"0\"><div class=\"ds-source-tags\"><span class=\"ds-source-chip\">PubMed</span><span class=\"ds-source-chip\">Reviewed</span></div><h3>Metformin and glycemic outcomes</h3><p>Structured source text remains visible before any cited synthesis.</p></article>",
+      "css": ".ds-source-card { display: grid; gap: 10px; border: 1px solid rgb(var(--ink-rgb, 17 24 23) / 0.12); border-radius: 14px; padding: 16px; background: rgb(var(--canvas-rgb, 242 246 245) / 0.62); color: rgb(var(--ink-rgb, 17 24 23)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; outline: none; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; } .ds-source-card h3 { margin: 0; font-size: 0.95rem; line-height: 1.35; font-weight: 650; } .ds-source-card p { margin: 0; color: rgb(var(--ink-rgb, 17 24 23) / 0.7); font-size: 0.875rem; line-height: 1.5; } .ds-source-tags { display: flex; flex-wrap: wrap; gap: 6px; } .ds-source-chip { display: inline-flex; border-radius: 999px; padding: 4px 8px; background: rgb(var(--slide-rgb, 232 239 237)); color: rgb(var(--ink-rgb, 17 24 23) / 0.74); font-size: 0.68rem; font-weight: 620; } .ds-source-card:hover { border-color: rgb(var(--teal-rgb, 0 121 115) / 0.55); background: rgb(var(--fog-rgb, 221 233 230) / 0.34); transform: translateY(-2px); } .ds-source-card:focus-visible { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Evidence Ribbon",
+      "kind": "custom",
+      "description": "The signature provenance current: four named source streams visibly converge before synthesis.",
+      "html": "<div class=\"ds-evidence-ribbon\" aria-label=\"Four evidence source families converge into one inspectable path\"><div class=\"ds-ribbon-row\" style=\"--ds-index:0\"><span>PubMed</span><i></i></div><div class=\"ds-ribbon-row\" style=\"--ds-index:1\"><span>ClinicalTrials.gov</span><i></i></div><div class=\"ds-ribbon-row\" style=\"--ds-index:2\"><span>FDA labels</span><i></i></div><div class=\"ds-ribbon-row\" style=\"--ds-index:3\"><span>FDA adverse reports</span><i></i></div><b class=\"ds-ribbon-spine\"></b></div>",
+      "css": ".ds-evidence-ribbon { position: relative; display: grid; width: min(100%, 620px); gap: 5px; padding-bottom: 25px; color: rgb(var(--ink-rgb, 17 24 23) / 0.68); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; } .ds-ribbon-row { display: grid; grid-template-columns: 150px minmax(80px, 1fr); align-items: center; gap: 13px; font-size: 0.7rem; font-weight: 610; line-height: 1; } .ds-ribbon-row i { display: block; height: 1px; background: linear-gradient(90deg, rgb(var(--teal-rgb, 0 121 115) / 0.26), rgb(var(--teal-rgb, 0 121 115) / 0.9)); transform-origin: left; animation: ds-source-arrival 760ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--ds-index) * 90ms + 100ms); } .ds-ribbon-spine { position: absolute; right: -4%; bottom: 4px; width: 65%; height: 13px; border-radius: 999px; background: rgb(var(--teal-rgb, 0 121 115)); transform: rotate(7deg); transform-origin: right; animation: ds-source-arrival 900ms 380ms cubic-bezier(0.16, 1, 0.3, 1) both; } @keyframes ds-source-arrival { from { opacity: 0.25; transform: scaleX(0.08); } to { opacity: 1; transform: scaleX(1); } } @media (max-width: 680px) { .ds-ribbon-row { grid-template-columns: 120px 1fr; font-size: 0.61rem; } .ds-ribbon-spine { width: 72%; height: 9px; } } @media (prefers-reduced-motion: reduce) { .ds-ribbon-row i, .ds-ribbon-spine { animation-duration: 0.01ms; opacity: 1; transform: none; } }"
+    },
+    {
+      "name": "Provenance Summary",
+      "kind": "custom",
+      "description": "A broad paper band that turns the four source families into inspectable counts before the workspace shell.",
+      "html": "<section class=\"ds-provenance-summary\"><div class=\"ds-provenance-copy\"><h2>Four source families. One inspectable path.</h2><p>Source records become structured rows before synthesis.</p></div><div class=\"ds-provenance-counts\"><div><span>PubMed</span><strong>12</strong></div><div><span>ClinicalTrials.gov</span><strong>4</strong></div><div><span>FDA labels</span><strong>2</strong></div><div><span>Adverse reports</span><strong>3</strong></div></div></section>",
+      "css": ".ds-provenance-summary { display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(420px, 1.45fr); align-items: center; gap: 32px; min-height: 120px; border-radius: 18px; padding: 22px 28px; background: rgb(var(--paper-rgb, 250 252 251)); color: rgb(var(--ink-rgb, 17 24 23)); box-shadow: var(--shadow-soft, 0 24px 70px rgb(28 55 50 / 0.1)); font-family: var(--font-sans), \"Helvetica Neue\", ui-sans-serif, system-ui, sans-serif; } .ds-provenance-copy h2 { max-width: 22ch; margin: 0; font-size: clamp(1.2rem, 2vw, 1.7rem); line-height: 1.08; letter-spacing: -0.028em; font-weight: 690; } .ds-provenance-copy p { max-width: 34ch; margin: 9px 0 0; color: rgb(var(--ink-rgb, 17 24 23) / 0.62); font-size: 0.82rem; line-height: 1.48; } .ds-provenance-counts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; } .ds-provenance-counts > div { display: grid; gap: 6px; min-width: 0; border-left: 1px solid rgb(var(--teal-rgb, 0 121 115) / 0.32); padding: 11px 12px 11px 16px; } .ds-provenance-counts span { overflow: hidden; color: rgb(var(--ink-rgb, 17 24 23) / 0.6); font-size: 0.67rem; font-weight: 590; text-overflow: ellipsis; white-space: nowrap; } .ds-provenance-counts strong { font-size: 1.2rem; font-weight: 690; } .ds-provenance-summary:focus-within { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 3px; } @media (max-width: 900px) { .ds-provenance-summary { grid-template-columns: 1fr; gap: 20px; } } @media (max-width: 680px) { .ds-provenance-summary { padding: 18px; } .ds-provenance-counts { grid-template-columns: 1fr 1fr; } }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "description": "The persistent 44px utility control that switches the semantic light and dark palettes.",
+      "html": "<button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"Switch to dark theme\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41\"/></svg></button>",
+      "css": ".ds-theme-toggle { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgb(var(--ink-rgb, 17 24 23) / 0.14); border-radius: 14px; background: rgb(var(--paper-rgb, 250 252 251)); color: rgb(var(--ink-rgb, 17 24 23)); cursor: pointer; transition: background 180ms ease, border-color 180ms ease, transform 120ms ease; } .ds-theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; } .ds-theme-toggle:hover { border-color: rgb(var(--teal-rgb, 0 121 115) / 0.65); background: rgb(var(--fog-rgb, 221 233 230) / 0.72); } .ds-theme-toggle:focus-visible { outline: 3px solid rgb(var(--teal-rgb, 0 121 115)); outline-offset: 3px; } .ds-theme-toggle:active { transform: scale(0.97); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Evidence Ribbon",
+    "overview": "The Evidence Ribbon makes evidence provenance the composition. Cool mineral surfaces, graphite type, and one teal signal create a trustworthy, exact workspace that feels softly irregular rather than rigid; the visual world stays sober enough for biomedical review without becoming sterile.\n\nFour source families visibly converge into inspectable extraction rows before synthesis. Large flowing fields carry the path through the product, while the controls inside them remain compact, precise, and immediately legible. Atmospheric or cinematic research dashboards and generic equal-weight card grids are explicit anti-references.",
+    "keyCharacteristics": [
+      "Provenance remains visible from source families to extraction.",
+      "One mineral teal signal organizes action, focus, and evidence flow.",
+      "Cool paper and fog layers support graphite data typography in both themes.",
+      "Softly irregular fields frame the entry sequence; controls remain exact and compact.",
+      "Tonal layering carries hierarchy; shadows are reserved for floating or focal surfaces."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Mineral teal is the only non-semantic accent; reserve safety red for risk, error, and uncertainty that needs attention.",
+        "section": "colors"
+      },
+      {
+        "name": "The Theme Parity Rule",
+        "body": "Light and dark modes preserve role, hierarchy, and contrast; dark mode is a semantic remap, not a decorative alternate palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Compression Rule",
+        "body": "Use League Gothic for large navigational or section landmarks only; keep evidence content in Geist so dense rows remain legible.",
+        "section": "typography"
+      },
+      {
+        "name": "The Visible Path Rule",
+        "body": "Keep the launcher, four source families, extraction shell, and cited inspection context in one continuous spatial story.",
+        "section": "layout"
+      },
+      {
+        "name": "The Ambient Lift Rule",
+        "body": "Resting panels rely on tone and 1px rules; apply ambient shadow only to floating, overlapping, or focal surfaces.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Flow-and-Precision Rule",
+        "body": "Soft irregularity belongs to large flow fields; controls and evidence containers use exact, modest radii.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Inspectable State Rule",
+        "body": "Every active, reviewed, risky, or selected state must pair color with visible text, structure, or iconography.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do keep provenance visible before any synthesis surface.",
+      "Do use mineral teal sparingly for action, focus, active state, and evidence flow.",
+      "Do use 14–18px radii for data surfaces and 10–12px radii for precise controls.",
+      "Do preserve semantic role and readable contrast across both light and dark themes.",
+      "Do retain the 3px visible focus treatment and reduced-motion fallback."
+    ],
+    "donts": [
+      "Don't turn the interface into an atmospheric or cinematic research dashboard.",
+      "Don't arrange the workflow as a generic equal-weight card grid.",
+      "Don't use safety red as a general accent or encode risk through color alone.",
+      "Don't stack a border and a heavy shadow on every surface.",
+      "Don't introduce serif display type or additional decorative font families."
+    ]
+  }
+}
