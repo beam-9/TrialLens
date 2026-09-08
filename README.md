@@ -56,6 +56,8 @@ Open `http://localhost:3000`.
 
 Set `OPENAI_API_KEY` and `TRIALLENS_CHAT_MODEL` in the API process environment. Choose a model available to your account that supports Responses API strict structured outputs. See `apps/api/.env.example`. To load a local environment file, start the backend from `apps/api` with `uvicorn triallens.main:app --env-file .env --port 8000`. The example is a template; `.env` is ignored by Git. Never put the key in frontend code or a `NEXT_PUBLIC_*` variable.
 
+For local startup, run `apps/api/.venv/bin/python apps/api/run.py` from the repository root. The launcher loads `apps/api/.env` automatically; restart it after saving changes. Use `apps/api/.venv/bin/python apps/api/run.py --check` to check configuration without displaying the key or making an API request. The template selects `gpt-4.1-mini` as an initial model; live quality evaluation is still required.
+
 `GET /health` reports whether chat is configured. Without both values, answers are explicitly labeled source excerpts. Provider errors, incomplete output, invented citation identifiers, and long copied passages also fall back with a visible explanation. Requests use `store: false`; the provider receives the research question, up to six prior turns, and selected indexed source content.
 
 Ask preserves answers in the workspace and uses `previous_answer_id` to continue a scoped conversation. Changing the source scope starts a new conversation. Reopen a workspace and use **Continue conversation** on an earlier answer to resume it.
