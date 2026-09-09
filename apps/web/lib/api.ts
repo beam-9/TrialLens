@@ -97,6 +97,12 @@ export type Answer = {
   retrieved_chunks: RetrievedChunk[];
 };
 
+export type Usage = {
+  budget_usd: number; used_or_reserved_usd: number; remaining_usd: number;
+  generated_answers: number; answer_alert_at: number; answer_alert: boolean;
+  pending_requests: number; budget_exhausted: boolean;
+};
+
 export type Brief = {
   title: string;
   overview: string;
@@ -137,6 +143,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  usage: () => request<Usage>("/usage"),
   workspaces: () => request<Workspace[]>("/workspaces"),
   createWorkspace: (condition: string, intervention: string) =>
     request<Workspace>("/workspaces", {

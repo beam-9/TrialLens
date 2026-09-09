@@ -71,3 +71,12 @@ Use **Save to brief** on useful answers after checking their citations. Brief co
 ## Verification and remaining release work
 
 Run `cd apps/api && .venv/bin/python -m pytest tests -q`; run `cd apps/web && npx tsc --noEmit && npm run build`. Build requires access to Google Fonts. See `docs/product-review.md` for the product assessment and the remaining live-model evaluation. Reliability percentages are illustrative development targets, not measured workspace scores.
+
+
+## Small-scale usage limits
+
+TrialLens enforces a **US$0.10 cumulative model budget** across all workspaces, with no automatic reset. A persistent SQLite ledger at `apps/api/data/usage.sqlite3` reserves a conservative request allowance before sending to OpenAI, then settles against reported input/output tokens. Concurrent requests share the same ledger. Unknown model pricing or unavailable usage storage stops paid generation. Timeout/unknown-usage reservations remain held; explicit pre-generation HTTP rejections release their reservation. Keep this file when restarting or deploying so the cap persists.
+
+Ask shows the generated-answer count and budget usage and displays an alert at **100 successfully generated answers**. Failed attempts and extractive fallbacks do not count as generated answers; any billable provider work still counts toward the spending cap. The spending cap can stop generation before 100 answers. This is an in-app alert, not an email or background notification. Source browsing and brief export do not call the model.
+
+Pricing is configured for GPT-4.1 mini (US$0.40/M input tokens and US$1.60/M output tokens, ignoring cache discounts conservatively). The cap covers requests made through this TrialLens installation and this ledger, not other applications using the same API key, taxes, hosting, or independently deployed copies. `GET /usage` returns counts and costs, never credentials. There is no public reset or budget-increase endpoint.

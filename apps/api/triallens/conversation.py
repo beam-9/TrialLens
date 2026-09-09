@@ -4,11 +4,13 @@ from __future__ import annotations
 import json
 import os
 import re
+import sqlite3
 
 import httpx
 from pydantic import BaseModel, ConfigDict, Field
 
 from triallens.models import Answer, EvidenceSource, Workspace
+from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
@@ -78,19 +80,29 @@ class ConversationService:
             "history": [{"question": a.question, "answer": a.direct_answer[:4000]} for a in history[-6:]],
             "question": question, "evidence": records,
         }
+        ledger = UsageLedger()
+        request_payload = {"model": os.environ["TRIALLENS_CHAT_MODEL"], "store": False,
+                           "instructions": INSTRUCTIONS, "input": json.dumps(payload),
+                           "max_output_tokens": 2200,
+                           "text": {"format": {"type": "json_schema", "name": "research_answer",
+                                                "strict": True, "schema": GeneratedAnswer.model_json_schema()}}}
         try:
+            reservation = ledger.reserve(request_payload)
             response = httpx.post(
                 "https://api.openai.com/v1/responses",
                 headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
-                json={"model": os.environ["TRIALLENS_CHAT_MODEL"], "store": False,
-                      "instructions": INSTRUCTIONS, "input": json.dumps(payload),
-                      "max_output_tokens": 2200,
-                      "text": {"format": {"type": "json_schema", "name": "research_answer",
-                                           "strict": True, "schema": GeneratedAnswer.model_json_schema()}}},
-                timeout=45,
+                json=request_payload, timeout=45,
             )
+            if response.status_code in {400, 401, 403, 404, 429}:
+                ledger.rejected(reservation)
+                if response.status_code == 429:
+                    code = response.json().get("error", {}).get("code")
+                    if code in {"credit_balance_exhausted", "insufficient_quota"}:
+                        fallback.generation_note = "OpenAI API credits are exhausted. Add API credit in your OpenAI account to enable conversational answers. Showing source excerpts."
+                        return fallback
             response.raise_for_status()
             body = response.json()
+            ledger.settle(reservation, body.get("usage", {}))
             if body.get("status") != "completed":
                 raise ValueError("Incomplete generation")
             content = "".join(part.get("text", "") for item in body.get("output", [])
@@ -111,11 +123,16 @@ class ConversationService:
             if any(" ".join(normalized[i:i + 28]) in text
                    for i in range(max(0, len(normalized) - 27)) for text in source_text):
                 raise ValueError("Answer copies long source passages")
+            ledger.answered(reservation)
             fallback.direct_answer = fallback.short_answer = direct
             fallback.citations = list(dict.fromkeys(generated.cited_sources))
             fallback.uncertainty = generated.uncertainty
             fallback.generation_mode = "conversational"
             fallback.generation_note = "Synthesized from indexed sources; open citations to check support."
+        except BudgetUnavailable as error:
+            fallback.generation_note = str(error)
+        except (sqlite3.Error, OSError):
+            fallback.generation_note = "Usage tracking is unavailable. Paid generation is paused to protect your budget."
         except (httpx.HTTPError, ValueError, KeyError, TypeError):
             fallback.generation_note = "Conversational generation was unavailable or failed validation. Showing source excerpts; try again."
         return fallback

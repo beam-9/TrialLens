@@ -20,6 +20,7 @@ from triallens.models import (
 from triallens.rag import AnswerService, BriefService, Retriever, build_chunks, build_extractions
 from triallens.sources import fetch_sources
 from triallens.store import JsonStore
+from triallens.usage import UsageLedger
 
 app = FastAPI(
     title="TrialLens API",
@@ -45,6 +46,11 @@ conversation_service = ConversationService()
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "triallens-api", "chat": "configured" if chat_configured() else "extractive"}
+
+
+@app.get("/usage")
+def usage() -> dict:
+    return UsageLedger().status()
 
 
 @app.post("/workspaces", response_model=Workspace)

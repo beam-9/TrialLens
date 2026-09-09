@@ -18,15 +18,18 @@ TrialLens should help a researcher move from a biomedical question to an underst
 
 ## Verification
 
-- 29 backend tests pass, including provider timeout/unavailable mode, output validation, invented citations, copied passages, follow-up retrieval, source-scope enforcement, cross-workspace rejection, save/remove brief lifecycle, and current review counts.
+- 35 backend tests pass, including provider timeout/unavailable mode, output validation, invented citations, copied passages, follow-up retrieval, source-scope enforcement, cross-workspace rejection, save/remove brief lifecycle, and current review counts.
 - TypeScript and production build pass. Google Fonts require network during build.
 - Browser exercised existing workspace, Ask, saving to brief, and follow-up retention with the real local API. Console showed no warnings/errors during this flow. The downloaded Markdown was inspected and contains the saved answer, citations, generation mode, gaps, and next steps.
 - Independent baseline browser assessment covered desktop and mobile. Mobile navigation relies on horizontal scrolling and its last items are not initially visible. The source diagram is partially obscured by the launcher; these are lower-priority design follow-ups.
 
 ## Required before considering chat resolved
 
-The local setup now selects `gpt-4.1-mini`, but no API key has been configured. OpenAI was an implementation choice, not an original TrialLens requirement. The user has questioned that choice; resolve the desired approach before connecting a provider. Existing extractive operation remains available without a key. No Ollama executable was found on PATH and no local model server was listening on ports 11434 or 1234 in the latest check; this does not rule out other installed runtimes.
+The user authorized OpenAI for this small-scale project, a 100-generated-answer alert, and a US$0.10 total budget. Both limits are now implemented with a persistent app-wide ledger and visible Ask usage. Budget tests cover concurrent reservations, restart persistence, threshold alerts, rejection before sending, and zero charge for definitive pre-generation rejections.
 
-Real conversational answer quality is **not verified**. Mock responses prove integration behavior only. After choosing and connecting the generation approach, evaluate real answers for directness, semantic citation support, numerical fidelity, missing-evidence behavior, combined benefit/safety questions, and multi-turn references. Include retrieved passages outside the first 10,000 source characters and contradictory sources. Do not deploy on the strength of the static reliability targets or mocked generation tests.
+The first approved live request was rejected with HTTP 429 / `credit_balance_exhausted`. No conversational answer was produced; remaining live tests were stopped. The rejected reservation was released, leaving US$0.00 used/reserved and zero generated answers. API credit must be available before live answer quality can be verified. The app now explains this billing failure explicitly.
+
+Real conversational answer quality is **not verified**. Mock responses prove integration behavior only. After API credit is available, evaluate real answers for directness, semantic citation support, numerical fidelity, missing-evidence behavior, combined benefit/safety questions, and multi-turn references. Include retrieved passages outside the first 10,000 source characters and contradictory sources. Do not deploy on the strength of the static reliability targets or mocked generation tests.
+
 
 The JSON store remains a local prototype without authentication, multi-process transactional writes, or deployment-specific rate limiting. These need a deployment architecture decision when deployment starts; this review does not claim public-production readiness.

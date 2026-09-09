@@ -32,7 +32,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Answer, Brief, EvidenceExtraction, EvidenceSource, EvalReport, RetrievedChunk, SourceType, Workspace, api } from "@/lib/api";
+import { Answer, Brief, EvidenceExtraction, EvidenceSource, EvalReport, RetrievedChunk, SourceType, Workspace, Usage, api } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 const sourceLabels: Record<SourceType, string> = {
@@ -78,6 +78,7 @@ export default function Home() {
   const [sources, setSources] = useState<EvidenceSource[]>([]);
   const [extractions, setExtractions] = useState<EvidenceExtraction[]>([]);
   const [answer, setAnswer] = useState<Answer | null>(null);
+  const [usage, setUsage] = useState<Usage | null>(null);
   const [conversation, setConversation] = useState<Answer[]>([]);
   const [askFilter, setAskFilter] = useState<SourceType | "all">("all");
   const [brief, setBrief] = useState<Brief | null>(null);
@@ -120,6 +121,7 @@ export default function Home() {
   const hiddenSourceCount = Math.max(sources.length - visibleSources.length, 0);
 
   useEffect(() => {
+    api.usage().then(setUsage).catch(() => setUsage(null));
     const cached = readCachedWorkspaces();
     if (cached.length) {
       setRecentWorkspaces(cached);
@@ -252,6 +254,7 @@ export default function Home() {
     try {
       const response = await api.ask(workspace.id, question.trim(), sourceTypesForAsk, "workspace", null, answer?.id);
       setAnswer(response);
+      api.usage().then(setUsage).catch(() => setUsage(null));
       setConversation((items) => [...items, response]);
       setQuestion("");
       window.requestAnimationFrame(() => {
@@ -459,6 +462,12 @@ export default function Home() {
                     ))}
                   </div>
                 )}
+                {usage && <div className="text-sm text-ink/68" role={usage.answer_alert || usage.budget_exhausted ? "alert" : "status"}>
+                  <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · US${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US${usage.budget_usd.toFixed(2)}</p>
+                  {usage.answer_alert && <p>You’ve reached {usage.answer_alert_at} generated answers. Review your usage before continuing.</p>}
+                  {usage.budget_exhausted && <p>Your spending cap has been reached. Paid generation is paused.</p>}
+                  {usage.pending_requests > 0 && <p>Includes reserved cost for requests with unconfirmed usage.</p>}
+                </div>}
                 {isReady && <div className="conversation-toolbar">
                   <p>{workspace?.condition}{workspace?.intervention ? ` / ${workspace.intervention}` : ""}</p>
                   <label>Sources
