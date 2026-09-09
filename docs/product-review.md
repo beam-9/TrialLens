@@ -18,18 +18,19 @@ TrialLens should help a researcher move from a biomedical question to an underst
 
 ## Verification
 
-- 35 backend tests pass, including provider timeout/unavailable mode, output validation, invented citations, copied passages, follow-up retrieval, source-scope enforcement, cross-workspace rejection, save/remove brief lifecycle, and current review counts.
+- 38 backend tests pass, including provider timeout/unavailable mode, output validation, invented citations, copied passages, follow-up retrieval, source-scope enforcement, cross-workspace rejection, save/remove brief lifecycle, and current review counts.
 - TypeScript and production build pass. Google Fonts require network during build.
 - Browser exercised existing workspace, Ask, saving to brief, and follow-up retention with the real local API. Console showed no warnings/errors during this flow. The downloaded Markdown was inspected and contains the saved answer, citations, generation mode, gaps, and next steps.
 - Independent baseline browser assessment covered desktop and mobile. Mobile navigation relies on horizontal scrolling and its last items are not initially visible. The source diagram is partially obscured by the launcher; these are lower-priority design follow-ups.
 
-## Required before considering chat resolved
+## Local model and answer-quality review
 
-The user authorized OpenAI for this small-scale project, a 100-generated-answer alert, and a US$0.10 total budget. Both limits are now implemented with a persistent app-wide ledger and visible Ask usage. Budget tests cover concurrent reservations, restart persistence, threshold alerts, rejection before sending, and zero charge for definitive pre-generation rejections.
+The user chose local generation after an OpenAI request returned `credit_balance_exhausted`. Ollama 0.32.14 and Qwen3 8B (approximately 5.2 GB) are installed on the development Mac with 16 GB RAM. Local generation is the default. The launcher starts a loopback-only runtime with cloud features disabled; the client sends no authorization header and never falls back to a paid provider. Tests cover those boundaries and reject cloud model tags.
 
-The first approved live request was rejected with HTTP 429 / `credit_balance_exhausted`. No conversational answer was produced; remaining live tests were stopped. The rejected reservation was released, leaving US$0.00 used/reserved and zero generated answers. API credit must be available before live answer quality can be verified. The app now explains this billing failure explicitly.
+The persistent 100-generated-answer alert includes successful local answers at zero API cost. Optional OpenAI mode retains the separate US$0.10 cumulative cap; switching providers does not reset it. Local test answers count toward the alert.
 
-Real conversational answer quality is **not verified**. Mock responses prove integration behavior only. After API credit is available, evaluate real answers for directness, semantic citation support, numerical fidelity, missing-evidence behavior, combined benefit/safety questions, and multi-turn references. Include retrieved passages outside the first 10,000 source characters and contradictory sources. Do not deploy on the strength of the static reliability targets or mocked generation tests.
+Live testing uses a temporary copy of the existing metformin workspace, preserving its saved answers. Initial tests found clinically meaningful wording errors: combination-label warnings were attributed to metformin alone, and “not studied” became “not recommended.” Citation formatting checks did not catch these semantic errors. Instructions were tightened to preserve product identity, distinguish missing information from contraindications, recheck prior claims, and keep citations attached to the source that supports each claim. These are prompt mitigations, not a proof of medical reliability.
 
+Local generation is appropriate for a research prototype with source inspection. Public release still needs a representative semantic evaluation, including numerical fidelity, contradictory sources, missing evidence, and follow-up accuracy. Static reliability targets are not measured accuracy. Public hosting also needs its own inference architecture: deploying the frontend cannot connect visitors to this Mac's loopback model.
 
 The JSON store remains a local prototype without authentication, multi-process transactional writes, or deployment-specific rate limiting. These need a deployment architecture decision when deployment starts; this review does not claim public-production readiness.

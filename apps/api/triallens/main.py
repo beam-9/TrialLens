@@ -5,7 +5,7 @@ from typing import Union
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from triallens.conversation import ConversationService, chat_configured, retrieval_question
+from triallens.conversation import ConversationService, chat_configured, chat_provider, chat_model, retrieval_question
 from triallens.evals import static_eval_report
 from triallens.models import (
     Answer,
@@ -45,12 +45,12 @@ conversation_service = ConversationService()
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "service": "triallens-api", "chat": "configured" if chat_configured() else "extractive"}
+    return {"status": "ok", "service": "triallens-api", "chat": "configured" if chat_configured() else "extractive", "provider": chat_provider(), "model": chat_model()}
 
 
 @app.get("/usage")
 def usage() -> dict:
-    return UsageLedger().status()
+    return {**UsageLedger().status(), "provider": chat_provider()}
 
 
 @app.post("/workspaces", response_model=Workspace)

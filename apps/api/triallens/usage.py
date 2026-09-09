@@ -73,6 +73,11 @@ class UsageLedger:
             connection.execute("UPDATE requests SET answered = 1 WHERE id = ?", (identifier,))
             connection.commit()
 
+    def local_answer(self):
+        with self.connection() as connection:
+            connection.execute("INSERT INTO requests (id, charge, pending, answered) VALUES (?, 0, 0, 1)", ("local-" + str(uuid4()),))
+            connection.commit()
+
     def status(self) -> dict:
         with self.connection() as connection:
             charge, answered, pending = connection.execute("SELECT COALESCE(SUM(charge),0), COALESCE(SUM(answered),0), COALESCE(SUM(pending),0) FROM requests").fetchone()

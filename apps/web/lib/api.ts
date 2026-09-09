@@ -98,6 +98,7 @@ export type Answer = {
 };
 
 export type Usage = {
+  provider: "ollama" | "openai";
   budget_usd: number; used_or_reserved_usd: number; remaining_usd: number;
   generated_answers: number; answer_alert_at: number; answer_alert: boolean;
   pending_requests: number; budget_exhausted: boolean;

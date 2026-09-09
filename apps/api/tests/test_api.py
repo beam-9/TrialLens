@@ -25,6 +25,7 @@ def test_document_ask_requires_source_id(monkeypatch, tmp_path):
 def test_conversation_scope_and_brief_lifecycle(monkeypatch, tmp_path):
     from triallens.models import EvidenceSource
     from triallens.rag import build_chunks, build_extractions
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "openai")
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     test_store = JsonStore(tmp_path / "triallens.json")
     workspace = test_store.create_workspace(Workspace(condition="diabetes", intervention="metformin", source_types=[SourceType.pubmed, SourceType.fda_label]))

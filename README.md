@@ -32,7 +32,7 @@ cd apps/api
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
-uvicorn triallens.main:app --reload --port 8000
+python run.py
 ```
 
 Frontend:
@@ -54,15 +54,22 @@ Open `http://localhost:3000`.
 
 ## Conversational answers
 
-TrialLens's original answer engine does not require a language-model API key: it selects extracted evidence and assembles deterministic text. The new OpenAI integration is an optional generation layer, not a requirement for running TrialLens. It is the only hosted provider adapter implemented so far. Another hosted provider or a local model would require its own adapter and quality evaluation; neither is connected automatically.
+TrialLens uses **Ollama locally by default**, with `qwen3:8b`. No API key or per-answer API credits are needed. Install Ollama from its official distribution or Homebrew (`brew install ollama`), then download the model once with `ollama pull qwen3:8b` while Ollama is running. The model download is approximately 5.2 GB.
 
-For the optional OpenAI path, set `OPENAI_API_KEY` and `TRIALLENS_CHAT_MODEL` in the API process environment. Choose a model available to your account that supports Responses API strict structured outputs. See `apps/api/.env.example`. To load a local environment file, start the backend from `apps/api` with `uvicorn triallens.main:app --env-file .env --port 8000`. The example is a template; `.env` is ignored by Git. Never put the key in frontend code or a `NEXT_PUBLIC_*` variable.
+Run `apps/api/.venv/bin/python apps/api/run.py` from the repository root. The launcher loads `apps/api/.env`, starts Ollama on localhost when needed with cloud features disabled, and starts the API. It stops only the Ollama process it started when the API exits. Start the frontend separately with `cd apps/web && npm run dev`. Local configuration:
 
-For local startup, run `apps/api/.venv/bin/python apps/api/run.py` from the repository root. The launcher loads `apps/api/.env` automatically; restart it after saving changes. Use `apps/api/.venv/bin/python apps/api/run.py --check` to check configuration without displaying the key or making an API request. The template selects `gpt-4.1-mini` as an initial model; live quality evaluation is still required.
+```dotenv
+TRIALLENS_CHAT_PROVIDER=ollama
+TRIALLENS_LOCAL_MODEL=qwen3:8b
+```
 
-`GET /health` reports whether chat is configured. Without both values, answers are explicitly labeled source excerpts. Provider errors, incomplete output, invented citation identifiers, and long copied passages also fall back with a visible explanation. Requests use `store: false`; the provider receives the research question, up to six prior turns, and selected indexed source content.
+The first answer may take longer while the model loads. Source retrieval still contacts the public research services, but answer generation goes only to `127.0.0.1:11434`. Local failures show a labeled extractive fallback; they never trigger paid OpenAI requests. Citations, structured output, incomplete responses, and copied passages are checked for both providers. These checks do not prove semantic correctness; inspect cited evidence.
 
-Ask preserves answers in the workspace and uses `previous_answer_id` to continue a scoped conversation. Changing the source scope starts a new conversation. Reopen a workspace and use **Continue conversation** on an earlier answer to resume it.
+This setup runs on the developer's Mac. A public deployment needs a separately planned inference host; deploying the web frontend does not make this Mac's local model available to visitors. There are no per-token API fees for local generation, but it consumes memory, electricity, and compute time.
+
+`GET /health` reports the selected provider/model and configuration (not model readiness). `python apps/api/run.py --check` checks settings without displaying keys. Ask preserves answers and source-scoped conversation context. Reopen a workspace and use **Continue conversation** on an earlier answer to resume it.
+
+For optional paid OpenAI generation, explicitly set `TRIALLENS_CHAT_PROVIDER=openai`, `OPENAI_API_KEY`, and `TRIALLENS_CHAT_MODEL=gpt-4.1-mini` in the backend environment. `.env` stays out of Git. No frontend variable should contain a key. This mode retains the US$0.10 spending cap; switching to local does not reset the paid ledger.
 
 ## Research brief
 
@@ -75,8 +82,8 @@ Run `cd apps/api && .venv/bin/python -m pytest tests -q`; run `cd apps/web && np
 
 ## Small-scale usage limits
 
-TrialLens enforces a **US$0.10 cumulative model budget** across all workspaces, with no automatic reset. A persistent SQLite ledger at `apps/api/data/usage.sqlite3` reserves a conservative request allowance before sending to OpenAI, then settles against reported input/output tokens. Concurrent requests share the same ledger. Unknown model pricing or unavailable usage storage stops paid generation. Timeout/unknown-usage reservations remain held; explicit pre-generation HTTP rejections release their reservation. Keep this file when restarting or deploying so the cap persists.
+For optional OpenAI mode, TrialLens enforces a **US$0.10 cumulative model budget** across all workspaces, with no automatic reset. A persistent SQLite ledger at `apps/api/data/usage.sqlite3` reserves a conservative request allowance before sending to OpenAI, then settles against reported input/output tokens. Concurrent requests share the same ledger. Unknown model pricing or unavailable usage storage stops paid generation. Timeout/unknown-usage reservations remain held; explicit pre-generation HTTP rejections release their reservation. Keep this file when restarting or deploying so the cap persists.
 
-Ask shows the generated-answer count and budget usage and displays an alert at **100 successfully generated answers**. Failed attempts and extractive fallbacks do not count as generated answers; any billable provider work still counts toward the spending cap. The spending cap can stop generation before 100 answers. This is an in-app alert, not an email or background notification. Source browsing and brief export do not call the model.
+Ask shows the generated-answer count and either local mode or paid budget usage and displays an alert at **100 successfully generated answers**. Successful local answers count toward the alert at zero API cost. Failed attempts and extractive fallbacks do not count as generated answers; any billable provider work still counts toward the spending cap. The spending cap can stop generation before 100 answers. This is an in-app alert, not an email or background notification. Source browsing and brief export do not call the model.
 
 Pricing is configured for GPT-4.1 mini (US$0.40/M input tokens and US$1.60/M output tokens, ignoring cache discounts conservatively). The cap covers requests made through this TrialLens installation and this ledger, not other applications using the same API key, taxes, hosting, or independently deployed copies. `GET /usage` returns counts and costs, never credentials. There is no public reset or budget-increase endpoint.

@@ -10,6 +10,7 @@ from triallens.models import Answer, EvidenceSource, SourceType, Workspace
 @pytest.fixture
 def context(monkeypatch, tmp_path):
     monkeypatch.setenv("TRIALLENS_USAGE_PATH", str(tmp_path / "usage.sqlite3"))
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "openai")
     monkeypatch.setenv("OPENAI_API_KEY", "test-only")
     monkeypatch.setenv("TRIALLENS_CHAT_MODEL", "gpt-4.1-mini")
     workspace = Workspace(condition="diabetes", source_types=[SourceType.pubmed])
@@ -117,3 +118,46 @@ def test_credit_exhaustion_releases_reservation(monkeypatch, context):
     assert status["used_or_reserved_usd"] == 0
     assert status["generated_answers"] == 0
     assert status["pending_requests"] == 0
+
+
+def test_local_generation_needs_no_key_and_never_sends_auth(monkeypatch, context):
+    from triallens.usage import UsageLedger
+    workspace, source, fallback = context
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
+    monkeypatch.delenv("OPENAI_API_KEY")
+    requests = []
+    def local(url, **kwargs):
+        requests.append(url)
+        assert url == "http://127.0.0.1:11434/api/chat"
+        assert "headers" not in kwargs
+        assert kwargs["json"]["think"] is False
+        assert kwargs["json"]["format"]["type"] == "object"
+        content = json.dumps({"paragraphs": ["HbA1c was lower at 12 weeks with the intervention [PubMed:123]."], "cited_sources": ["PubMed:123"], "uncertainty": []})
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"done": True, "done_reason": "stop", "message": {"content": content}})
+    monkeypatch.setattr("triallens.conversation.httpx.post", local)
+    result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
+    assert result.generation_mode == "conversational"
+    assert len(requests) == 1
+    assert UsageLedger().status()["used_or_reserved_usd"] == 0
+    assert UsageLedger().status()["generated_answers"] == 1
+
+
+def test_local_failure_never_falls_back_to_paid_provider(monkeypatch, context):
+    workspace, source, fallback = context
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
+    requests = []
+    def offline(url, **kwargs):
+        requests.append(url)
+        raise httpx.ConnectError("Ollama is stopped")
+    monkeypatch.setattr("triallens.conversation.httpx.post", offline)
+    result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
+    assert result.generation_mode == "extractive"
+    assert "local model" in result.generation_note
+    assert requests == ["http://127.0.0.1:11434/api/chat"]
+
+
+def test_cloud_tag_is_rejected_in_local_mode(monkeypatch, context):
+    from triallens.conversation import chat_configured
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
+    monkeypatch.setenv("TRIALLENS_LOCAL_MODEL", "some-model:cloud")
+    assert not chat_configured()

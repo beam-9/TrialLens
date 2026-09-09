@@ -463,9 +463,9 @@ export default function Home() {
                   </div>
                 )}
                 {usage && <div className="text-sm text-ink/68" role={usage.answer_alert || usage.budget_exhausted ? "alert" : "status"}>
-                  <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · US${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US${usage.budget_usd.toFixed(2)}</p>
+                  <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · {usage.provider === "ollama" ? "Local model · No API credits used" : `US$${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US$${usage.budget_usd.toFixed(2)}`}</p>
                   {usage.answer_alert && <p>You’ve reached {usage.answer_alert_at} generated answers. Review your usage before continuing.</p>}
-                  {usage.budget_exhausted && <p>Your spending cap has been reached. Paid generation is paused.</p>}
+                  {usage.provider === "openai" && usage.budget_exhausted && <p>Your spending cap has been reached. Paid generation is paused.</p>}
                   {usage.pending_requests > 0 && <p>Includes reserved cost for requests with unconfirmed usage.</p>}
                 </div>}
                 {isReady && <div className="conversation-toolbar">
@@ -490,7 +490,7 @@ export default function Home() {
                   <AnswerPanel answer={answer} extractions={extractions} onInspect={setSelectedRow} />
                   <div><Button variant="outline" disabled={Boolean(busy)} onClick={() => saveToBrief(answer, !answer.saved_to_brief)}>{answer.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button></div>
                 </>}
-                {busy === "Synthesizing from evidence table" && <p role="status" className="text-sm text-ink/68">Reading sources and preparing your answer…</p>}
+                {busy === "Synthesizing from evidence table" && <p role="status" className="text-sm text-ink/68">{usage?.provider === "ollama" ? "Reading sources on your Mac… Local answers can take about a minute, especially while the model loads." : "Reading sources and preparing your answer…"}</p>}
                 <div className="ask-composer">
                   <label htmlFor="ask-question" className="flex flex-col gap-2 text-sm font-semibold text-ink">
                     {answer ? "Ask a follow-up" : "Research question"}
