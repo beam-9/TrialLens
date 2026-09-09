@@ -54,7 +54,9 @@ Open `http://localhost:3000`.
 
 ## Conversational answers
 
-Set `OPENAI_API_KEY` and `TRIALLENS_CHAT_MODEL` in the API process environment. Choose a model available to your account that supports Responses API strict structured outputs. See `apps/api/.env.example`. To load a local environment file, start the backend from `apps/api` with `uvicorn triallens.main:app --env-file .env --port 8000`. The example is a template; `.env` is ignored by Git. Never put the key in frontend code or a `NEXT_PUBLIC_*` variable.
+TrialLens's original answer engine does not require a language-model API key: it selects extracted evidence and assembles deterministic text. The new OpenAI integration is an optional generation layer, not a requirement for running TrialLens. It is the only hosted provider adapter implemented so far. Another hosted provider or a local model would require its own adapter and quality evaluation; neither is connected automatically.
+
+For the optional OpenAI path, set `OPENAI_API_KEY` and `TRIALLENS_CHAT_MODEL` in the API process environment. Choose a model available to your account that supports Responses API strict structured outputs. See `apps/api/.env.example`. To load a local environment file, start the backend from `apps/api` with `uvicorn triallens.main:app --env-file .env --port 8000`. The example is a template; `.env` is ignored by Git. Never put the key in frontend code or a `NEXT_PUBLIC_*` variable.
 
 For local startup, run `apps/api/.venv/bin/python apps/api/run.py` from the repository root. The launcher loads `apps/api/.env` automatically; restart it after saving changes. Use `apps/api/.venv/bin/python apps/api/run.py --check` to check configuration without displaying the key or making an API request. The template selects `gpt-4.1-mini` as an initial model; live quality evaluation is still required.
 
