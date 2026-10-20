@@ -1750,3 +1750,32 @@ textarea:focus-visible,
 .brief-saved-answer { padding-block: 24px; border-bottom: 1px solid var(--border); display: grid; gap: 16px; }
 .brief-saved-answer h4 { font-size: 1.125rem; font-weight: 650; }
 .brief-empty { display: grid; justify-items: start; gap: 16px; }
+
+
+/* Keep orientation, focus and feedback aligned with the research task. */
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); padding: 12px 18px; border-radius: 10px; background: var(--primary); color: var(--primary-foreground); font-weight: 650; }
+.skip-link:focus { transform: translateY(0); }
+.workspace-context { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; padding: 1.15rem 1.5rem; border-bottom: 1px solid var(--border); }
+.workspace-context > span { color: var(--muted-foreground); font-size: .75rem; }
+.workspace-context h2 { margin: 0; font-size: 1rem; font-weight: 650; overflow-wrap: anywhere; }
+.workspace-context p { margin: 0 0 0 auto; color: var(--muted-foreground); font-size: .8rem; }
+.workspace-issue { margin: 1rem; width: auto; scroll-margin-top: 88px; }
+.answer-progress { display: flex; align-items: flex-start; gap: .8rem; padding: 1rem; border: 1px solid var(--border); border-radius: 12px; background: var(--secondary); }
+.answer-progress > svg { flex: 0 0 20px; width: 20px; height: 20px; margin-top: 3px; color: var(--primary); }
+.answer-progress p { margin: 0; font-size: .875rem; line-height: 1.5; }
+.answer-progress p:first-child { font-weight: 650; }
+.answer-progress p + p { margin-top: .3rem; color: var(--muted-foreground); }
+.answer-progress > span { margin-left: auto; color: var(--muted-foreground); font-size: .8rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 680px) {
+  [data-slot="button"] { min-height: 44px; white-space: normal; height: auto; padding-block: .6rem; }
+  .workspace-context { padding: 1rem; }
+  .workspace-context h2 { flex-basis: 100%; }
+  .workspace-context p { margin-left: 0; }
+  .answer-progress { flex-wrap: wrap; }
+  .answer-progress > div { flex: 1; min-width: 150px; }
+  .conversation-toolbar select, textarea { font-size: 1rem; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .field-header { background: var(--background); backdrop-filter: none; }
+}
+.provenance-source span { white-space: normal; overflow-wrap: anywhere; line-height: 1.35; }

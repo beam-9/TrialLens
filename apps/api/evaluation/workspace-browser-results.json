@@ -1,0 +1,80 @@
+[
+  {
+    "answer_id": "85be359d-cbea-4b55-85a9-6c53c061b5ef",
+    "previous_answer_id": null,
+    "created_at": "2026-10-20T22:16:36.318303+00:00",
+    "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+    "answer": "The supplied evidence indicates that metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. However, the provided text does not quantify the specific magnitude of this benefit or report changes from baseline within treatment groups; it only establishes the indication for use [openFDA label:FDA-LABEL-metformin-1][openFDA label:FDA-LABEL-metformin-2][openFDA label:FDA-LABEL-metformin-3].\n\nRegarding limitations, the labels highlight that metformin is not recommended for patients with type 1 diabetes and has not been studied in those with a history of pancreatitis. The most common adverse reactions reported in clinical trials include gastrointestinal issues such as diarrhea, nausea, and vomiting, which can lead to discontinuation in some patients. Additionally, long-term use may result in decreased serum vitamin B12 levels [openFDA label:FDA-LABEL-metformin-1][openFDA label:FDA-LABEL-metformin-2][openFDA label:FDA-LABEL-metformin-3]. Safety concerns also extend to rare but serious risks identified in postmarketing experience, including lactic acidosis, particularly when metformin is used with drugs that reduce its clearance or with alcohol [openFDA label:FDA-LABEL-metformin-1][openFDA label:FDA-LABEL-metformin-2][openFDA label:FDA-LABEL-metformin-3].",
+    "uncertainty": [
+      "The provided excerpts do not quantify the size of the glycemic control benefit or describe baseline trends.",
+      "Adverse reaction rates in clinical trials may not reflect real-world practice due to varying trial conditions.",
+      "Postmarketing safety data relies on voluntary reporting, limiting the ability to estimate precise frequencies for rare events."
+    ],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-1",
+      "openFDA label:FDA-LABEL-metformin-2",
+      "openFDA label:FDA-LABEL-metformin-3"
+    ],
+    "mode": "conversational",
+    "note": "Generated with the local model; no API credits used.",
+    "semantic_verdict": "fail",
+    "semantic_review": "Combination-label pancreatitis limitation wrongly attributed to metformin alone; irrelevant baseline caveat; frequency claims not supported by spontaneous reporting."
+  },
+  {
+    "answer_id": "d64a7ba2-c779-402a-b36a-866910e08641",
+    "previous_answer_id": "85be359d-cbea-4b55-85a9-6c53c061b5ef",
+    "created_at": "2026-10-20T22:18:26.006758+00:00",
+    "question": "Can you explain that more simply, in everyday language?",
+    "answer": "Metformin is used with diet and exercise to help control blood sugar in adults with type 2 diabetes, though the provided labels do not specify exactly how much it lowers glucose levels or how patient numbers change from the start of treatment [openFDA label:FDA-LABEL-metformin-3][openFDA label:FDA-LABEL-metformin-2]. The most common side effects are digestive issues like diarrhea and nausea, which happen more often than in people taking a placebo and can cause some patients to stop the drug [openFDA label:FDA-LABEL-metformin-3][openFDA label:FDA-LABEL-metformin-2].\n\nLong-term use may lower vitamin B12 levels in about 7% of patients, and rare but serious risks like lactic acidosis exist, especially with certain other drugs or alcohol [openFDA label:FDA-LABEL-metformin-3][openFDA label:FDA-LABEL-metformin-2]. Some labels also cover combination pills containing metformin, such as ZITUVIMET, where safety warnings apply to the whole product rather than just the metformin ingredient [openFDA label:FDA-LABEL-metformin-1].",
+    "uncertainty": [
+      "The provided labels do not quantify the magnitude of glycemic benefit or baseline changes within groups.",
+      "Adverse reaction rates from clinical trials may not reflect real-world practice due to varying trial conditions.",
+      "Postmarketing reports of serious events like liver injury are voluntary and lack reliable frequency estimates."
+    ],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-3",
+      "openFDA label:FDA-LABEL-metformin-2",
+      "openFDA label:FDA-LABEL-metformin-1"
+    ],
+    "mode": "conversational",
+    "note": "Generated with the local model; no API credits used.",
+    "semantic_verdict": "fail",
+    "semantic_review": "Corrects combination identity but invents patient numbers changing from treatment baseline, and omits the B12 statistic timeframe."
+  },
+  {
+    "answer_id": "9b8df164-4dbf-45f7-9287-11762fc142ea",
+    "previous_answer_id": null,
+    "created_at": "2026-10-20T22:20:32.240216+00:00",
+    "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+    "answer": "The supplied FDA labels establish that metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. However, these excerpts do not quantify the specific magnitude of this benefit, such as the exact reduction in HbA1c or the number needed to treat, because they focus primarily on safety profiles rather than efficacy outcomes.\n\nRegarding limitations, the most common adverse reactions are gastrointestinal disturbances; specifically, diarrhea occurred in 53% of patients versus 12% on placebo in one trial, and nausea/vomiting was reported in 26% versus 8% [openFDA label:FDA-LABEL-metformin-2]. These side effects led to discontinuation in up to 6% of patients in certain studies. Additionally, long-term use is associated with a decrease in serum vitamin B12 levels to subnormal ranges in approximately 7% of patients after 29 weeks [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. Serious but rare risks include lactic acidosis and postmarketing reports of liver injury, which necessitate caution regarding concomitant use with drugs that reduce metformin clearance or alcohol consumption [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+    "uncertainty": [
+      "The supplied excerpts do not quantify the size of the glycemic control benefit, only stating that improvement occurs.",
+      "Incidence rates for severe adverse events like lactic acidosis are not provided in the clinical trial data within the excerpts.",
+      "Postmarketing liver injury frequencies cannot be reliably estimated due to voluntary reporting limitations."
+    ],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-3",
+      "openFDA label:FDA-LABEL-metformin-2"
+    ],
+    "mode": "conversational",
+    "note": "Generated with the local model; no API credits used. Combination-product labels were excluded from this single-ingredient summary.",
+    "semantic_verdict": "partial",
+    "semantic_review": "Combination attribution fixed and scope disclosed. GI and B12 numbers supported, with B12 timeframe retained. Pediatric age10+ qualifier omitted and rare qualifier unsupported by supplied labeling, which says postmarketing frequency cannot be established."
+  },
+  {
+    "answer_id": "6a7860c6-a6cd-4dab-af6e-90a0c8506719",
+    "previous_answer_id": "9b8df164-4dbf-45f7-9287-11762fc142ea",
+    "created_at": "2026-10-20T22:22:05.919724+00:00",
+    "question": "Can you explain that more simply, in everyday language?",
+    "answer": "Metformin is an FDA-approved medication used alongside diet and exercise to help lower blood sugar levels in adults and children with type 2 diabetes. However, these specific documents do not state exactly how much it lowers HbA1c or how many patients need to take it for one person to benefit, because they focus on safety rather than measuring the precise size of the treatment effect [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+    "uncertainty": [],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-3",
+      "openFDA label:FDA-LABEL-metformin-2"
+    ],
+    "mode": "conversational",
+    "note": "Generated with the local model; no API credits used. Combination-product labels were excluded from this single-ingredient summary.",
+    "semantic_verdict": "partial",
+    "semantic_review": "Conversational simplification preserves indication and unquantified benefit but broadens age10+ to children and drops safety limitations from prior answer. Combination remains excluded."
+  }
+]

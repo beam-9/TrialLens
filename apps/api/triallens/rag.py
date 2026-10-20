@@ -689,6 +689,37 @@ def citation_for(source: EvidenceSource) -> str:
 
 
 class Retriever:
+    def retrieve_conversation(
+        self, workspace: Workspace, question: str, chunks: list[EvidenceChunk],
+        sources: list[EvidenceSource], source_types: list[SourceType] | None = None,
+    ) -> list[RetrievedChunk]:
+        """Give both sides of benefit/risk questions space in the evidence context."""
+        benefits = re.search(r"\b(benefits?|effectiveness|efficacy)\b", question, re.I)
+        safety = re.search(r"\b(safety|risks?|harms?|side effects?)\b", question, re.I)
+        if not (benefits and safety):
+            broad = re.search(r"\b(overall|overview|summari[sz]e|summary|conclude|conclusions?|takeaways?)\b", question, re.I)
+            if broad:
+                ranked = self.retrieve(workspace, question, chunks, sources, source_types, limit=len(chunks))
+                return unique_source_chunks(ranked, 8)
+            return self.retrieve(workspace, question, chunks, sources, source_types)
+        # The original query still ranks the evidence within each half. Remove the
+        # opposite intent terms so question_intent cannot collapse both to safety.
+        benefit_query = re.sub(r"\b(safety|risks?|harms?|side effects?|limitations?)\b", "", question, flags=re.I)
+        safety_query = re.sub(r"\b(benefits?|effectiveness|efficacy)\b", "", question, flags=re.I)
+        groups = [unique_source_chunks(self.retrieve(workspace, query, chunks, sources, source_types, limit=len(chunks)), 8)
+                  for query in (benefit_query, safety_query)]
+        selected: list[RetrievedChunk] = []
+        seen: set[str] = set()
+        # Round-robin prevents a long label from consuming the entire result list.
+        for pair in zip(*[group + [None] * (8 - len(group)) for group in groups]):
+            for chunk in pair:
+                if chunk is not None and chunk.chunk_id not in seen:
+                    selected.append(chunk)
+                    seen.add(chunk.chunk_id)
+                    if len(selected) == 8:
+                        return selected
+        return selected
+
     def retrieve(
         self,
         workspace: Workspace,

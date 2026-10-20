@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 from typing import Union
 
 from fastapi import FastAPI, HTTPException
@@ -30,7 +32,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[origin.strip() for origin in os.getenv("TRIALLENS_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001").split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -68,17 +70,36 @@ def list_workspaces() -> list[Workspace]:
     return store.list_workspaces()
 
 
-@app.post("/workspaces/{workspace_id}/ingest", response_model=dict[str, Union[int, str]])
-async def ingest_workspace(workspace_id: str) -> dict[str, Union[int, str]]:
+@app.post("/workspaces/{workspace_id}/ingest")
+async def ingest_workspace(workspace_id: str) -> dict:
     workspace = _workspace_or_404(workspace_id)
-    sources = await fetch_sources(workspace)
+    diagnostics = {}
+    sources = await fetch_sources(workspace, diagnostics=diagnostics)
+    if not sources and store.list_sources(workspace_id):
+        raise HTTPException(status_code=409, detail="No sources were returned. Existing evidence was kept. Try again or refine the research topic.")
+    previous_sources = {(item.source_type, item.external_id): item for item in store.list_sources(workspace_id)}
+    previous_rows = {item.source_id: item for item in store.list_extractions(workspace_id)}
+    unchanged_ids = set()
+    for source in sources:
+        previous = previous_sources.get((source.source_type, source.external_id))
+        if previous:
+            source.id = previous.id
+            if (source.title, source.abstract, source.metadata, source.status, source.phase) == (previous.title, previous.abstract, previous.metadata, previous.status, previous.phase):
+                unchanged_ids.add(source.id)
     chunks = build_chunks(sources)
     extractions = build_extractions(sources, workspace)
-    store.replace_workspace_evidence(workspace.id, sources, chunks)
-    store.replace_workspace_extractions(workspace.id, extractions)
-    workspace.status = "ingested" if sources else "partial"
+    for index, row in enumerate(extractions):
+        previous = previous_rows.get(row.source_id)
+        if previous and row.source_id in unchanged_ids:
+            extractions[index] = previous
+    store.replace_workspace_evidence(workspace.id, sources, chunks, extractions)
+    labels = {"pubmed": "PubMed", "clinical_trials": "ClinicalTrials.gov", "fda_label": "FDA labels", "fda_adverse_event": "FDA adverse-event reports"}
+    workspace.ingestion_warnings = [f"{labels[kind]} could not be retrieved. The indexed evidence is incomplete; try again later." for kind, state in diagnostics.items() if state == "unavailable"]
+    if not sources:
+        workspace.ingestion_warnings.append("No matching records were retrieved. Refine the topic or try again later; no demo records were added.")
+    workspace.status = "ingested" if sources and not workspace.ingestion_warnings else "partial"
     store.update_workspace(workspace)
-    return {"workspace_id": workspace.id, "sources": len(sources), "chunks": len(chunks), "extractions": len(extractions)}
+    return {"workspace_id": workspace.id, "sources": len(sources), "chunks": len(chunks), "extractions": len(extractions), "source_status": diagnostics, "ingestion_warnings": workspace.ingestion_warnings, "status": workspace.status}
 
 
 @app.get("/workspaces/{workspace_id}/sources", response_model=list[EvidenceSource])
@@ -150,7 +171,7 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         retrieved = retriever.retrieve(workspace, query, document_chunks, [source], [source.source_type])
         answer = answer_service.answer_document(workspace, source, query, document_chunks, retrieved, document_extractions)
     else:
-        retrieved = retriever.retrieve(workspace, query, chunks, sources, payload.source_types)
+        retrieved = retriever.retrieve_conversation(workspace, query, chunks, sources, payload.source_types)
         answer = answer_service.answer(workspace, query, retrieved, extractions)
     answer.question = payload.question
     answer.previous_answer_id = payload.previous_answer_id

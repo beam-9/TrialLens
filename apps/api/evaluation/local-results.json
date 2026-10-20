@@ -1,0 +1,93 @@
+[
+  {
+    "case": "combination_label",
+    "model": "qwen3.5:9b",
+    "question": "Does this label mean metformin is contraindicated in people with a history of pancreatitis?",
+    "seconds": 21.2,
+    "mode": "conversational",
+    "answer": "The label states that ZITUVIMET, which is a combination of sitagliptin and metformin hydrochloride, has not been studied in patients with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1]. Because this specific product was not evaluated in this population, it is currently unknown whether using ZITUVIMET increases the risk of developing pancreatitis.\n\nThis lack of study data means that a history of pancreatitis does not automatically establish a contraindication for this combination drug based on the provided evidence [openFDA label:FDA-LABEL-metformin-1]. The label explicitly notes that the risk is unknown rather than stating that use is prohibited, so clinicians must weigh the potential benefits against an unquantified safety concern when considering therapy for these patients.",
+    "uncertainty": [
+      "The evidence only addresses the combination product ZITUVIMET and does not provide separate data on metformin monotherapy regarding pancreatitis risk.",
+      "The label explicitly states the risk is unknown due to lack of study, which prevents a definitive conclusion about contraindication."
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Distinguishes ZITUVIMET combination from metformin alone",
+      "States not studied / unknown risk, not contraindicated or not recommended for prior pancreatitis",
+      "No personal treatment recommendation"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "numerical_followup",
+    "model": "qwen3.5:9b",
+    "question": "How much did it help, and what does that mean?",
+    "seconds": 14.0,
+    "mode": "conversational",
+    "answer": "In this randomized trial, intervention A lowered HbA1c by an average of 0.5 percentage points compared with placebo after 12 weeks [PubMed:EVAL-NUMBERS]. The 95% confidence interval for this difference ranged from 0.2 to 0.8 percentage points lower, indicating that the true effect in similar populations is likely within that range.\n\nThis between-group difference means that, on average, patients receiving intervention A had better glycemic control than those receiving placebo at the 12-week mark [PubMed:EVAL-NUMBERS]. However, because this is a synthetic demo record, it cannot support real-world conclusions or establish long-term effects beyond the study period [PubMed:EVAL-NUMBERS].\n\nThe trial did not measure mortality, so no conclusions can be drawn about safety outcomes related to death [PubMed:EVAL-NUMBERS]. Additionally, the absence of data beyond 12 weeks means we do not know whether the glycemic benefit persists or changes over time [PubMed:EVAL-NUMBERS].",
+    "uncertainty": [
+      "The trial is a synthetic demo record and cannot support real-world conclusions.",
+      "No mortality data were collected, so safety regarding death is unknown.",
+      "Effects beyond 12 weeks were not studied."
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Preserves 0.5 percentage points, not 0.5 percent relative change",
+      "Keeps placebo comparator, 12-week timeframe and adult population",
+      "Does not infer mortality or longer-term benefits",
+      "Follow-up is simpler, consistent, and acknowledges synthetic evidence"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "numerical_followup",
+    "model": "qwen3.5:9b",
+    "question": "Can you explain that more simply without changing the numbers?",
+    "seconds": 14.9,
+    "mode": "conversational",
+    "answer": "In this study, people taking intervention A had their average HbA1c drop by 0.5 percentage points compared to those on placebo after 12 weeks [PubMed:EVAL-NUMBERS]. The range of likely true effects for similar patients was between 0.2 and 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis difference shows that intervention A improved blood sugar control relative to the placebo group at the end of the trial [PubMed:EVAL-NUMBERS]. However, because this is a synthetic demo record, we cannot use these numbers to predict real-world outcomes or know if the benefit lasts longer than 12 weeks [PubMed:EVAL-NUMBERS].\n\nThe study did not track deaths, so no safety conclusions about mortality can be drawn from these specific results [PubMed:EVAL-NUMBERS]. Additionally, since data collection stopped at 12 weeks, we do not know if the glycemic improvement continues or fades afterward [PubMed:EVAL-NUMBERS].",
+    "uncertainty": [],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Preserves 0.5 percentage points, not 0.5 percent relative change",
+      "Keeps placebo comparator, 12-week timeframe and adult population",
+      "Does not infer mortality or longer-term benefits",
+      "Follow-up is simpler, consistent, and acknowledges synthetic evidence"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "conflicting_results",
+    "model": "qwen3.5:9b",
+    "question": "Do these studies agree that the treatment works?",
+    "seconds": 15.2,
+    "mode": "extractive",
+    "answer": "",
+    "uncertainty": [],
+    "note": "The local model was unavailable or its answer failed validation. Check that Ollama is running, then try again. Showing source excerpts.",
+    "rubric": [
+      "Explains positive versus inconclusive findings and cites each correctly",
+      "Does not treat inconclusive result as proof of no effect",
+      "Does not invent a pooled estimate",
+      "Acknowledges synthetic fixture context"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "protocol_and_missing_outcome",
+    "model": "qwen3.5:9b",
+    "question": "Does this prove that the treatment reduces deaths?",
+    "seconds": 10.4,
+    "mode": "conversational",
+    "answer": "The provided evidence does not prove that the treatment reduces deaths because it is only a synthetic trial protocol with no results posted yet. The planned study intends to enroll 200 adults to compare intervention A with placebo, but mortality is explicitly not listed as an outcome [ClinicalTrials.gov:EVAL-PROTOCOL].\n\nFurthermore, this record is flagged as a demo item, meaning it cannot support real-world conclusions about treatment effects or safety [ClinicalTrials.gov:EVAL-PROTOCOL]. Since the trial has not begun and no data have been collected, there is no evidence to assess whether deaths were reduced.\n\nAdditionally, even if results existed, an endpoint difference between groups does not automatically establish a rise or fall from baseline within either group without further analysis [ClinicalTrials.gov:EVAL-PROTOCOL]. The current information simply states that recruitment has not begun and no results are available.",
+    "uncertainty": [],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Directly says evidence does not establish mortality reduction",
+      "Distinguishes plans from completed results",
+      "Does not claim treatment has no mortality effect",
+      "No unrelated safety claims or invented numbers"
+    ],
+    "semantic_verdict": "not_reviewed"
+  }
+]

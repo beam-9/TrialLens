@@ -1,16 +1,37 @@
 from __future__ import annotations
 
 import json
+import fcntl
+import os
+import tempfile
+from functools import wraps
 import re
 from pathlib import Path
 
 from triallens.models import Answer, EvidenceBrief, EvidenceChunk, EvidenceExtraction, EvidenceSource, Workspace, utc_now
 
 
+def serialized_write(method):
+    """Lock the entire read/modify/write operation, including across API workers."""
+    @wraps(method)
+    def locked(self, *args, **kwargs):
+        with self.path.with_suffix(self.path.suffix + ".lock").open("a") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            try:
+                return method(self, *args, **kwargs)
+            finally:
+                fcntl.flock(lock, fcntl.LOCK_UN)
+    return locked
+
+
 class JsonStore:
     def __init__(self, path: Path | None = None) -> None:
         self.path = path or Path(__file__).resolve().parents[1] / "data" / "triallens.json"
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self._initialize()
+
+    @serialized_write
+    def _initialize(self):
         if not self.path.exists():
             self._write({"workspaces": {}, "sources": {}, "chunks": {}, "extractions": {}, "answers": {}, "briefs": {}})
 
@@ -21,8 +42,20 @@ class JsonStore:
         return data
 
     def _write(self, data: dict) -> None:
-        self.path.write_text(json.dumps(data, indent=2, sort_keys=True))
+        # Publish a complete snapshot: concurrent readers see the old or new file.
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(mode="w", dir=self.path.parent, delete=False) as file:
+                temporary = file.name
+                json.dump(data, file, indent=2, sort_keys=True)
+                file.flush()
+                os.fsync(file.fileno())
+            os.replace(temporary, self.path)
+        finally:
+            if temporary and os.path.exists(temporary):
+                os.unlink(temporary)
 
+    @serialized_write
     def create_workspace(self, workspace: Workspace) -> Workspace:
         data = self._read()
         data["workspaces"][workspace.id] = workspace.model_dump(mode="json")
@@ -36,6 +69,7 @@ class JsonStore:
     def list_workspaces(self) -> list[Workspace]:
         return [Workspace(**item) for item in self._read()["workspaces"].values()]
 
+    @serialized_write
     def update_workspace(self, workspace: Workspace) -> Workspace:
         data = self._read()
         workspace.updated_at = utc_now()
@@ -43,8 +77,10 @@ class JsonStore:
         self._write(data)
         return workspace
 
+    @serialized_write
     def replace_workspace_evidence(
-        self, workspace_id: str, sources: list[EvidenceSource], chunks: list[EvidenceChunk]
+        self, workspace_id: str, sources: list[EvidenceSource], chunks: list[EvidenceChunk],
+        extractions: list[EvidenceExtraction] | None = None
     ) -> None:
         data = self._read()
         data["sources"] = {
@@ -66,6 +102,8 @@ class JsonStore:
             data["sources"][source.id] = source.model_dump(mode="json")
         for chunk in chunks:
             data["chunks"][chunk.id] = chunk.model_dump(mode="json")
+        for extraction in extractions or []:
+            data["extractions"][extraction.id] = extraction.model_dump(mode="json")
         self._write(data)
 
     def list_sources(self, workspace_id: str) -> list[EvidenceSource]:
@@ -82,6 +120,7 @@ class JsonStore:
             if item["workspace_id"] == workspace_id
         ]
 
+    @serialized_write
     def replace_workspace_extractions(self, workspace_id: str, extractions: list[EvidenceExtraction]) -> None:
         data = self._read()
         data["extractions"] = {
@@ -100,6 +139,7 @@ class JsonStore:
             if item["workspace_id"] == workspace_id
         ]
 
+    @serialized_write
     def update_extraction(self, workspace_id: str, extraction_id: str, updates: dict) -> EvidenceExtraction | None:
         data = self._read()
         raw = data["extractions"].get(extraction_id)
@@ -113,6 +153,7 @@ class JsonStore:
         self._write(data)
         return EvidenceExtraction(**raw)
 
+    @serialized_write
     def save_answer(self, answer: Answer) -> Answer:
         data = self._read()
         data["answers"][answer.id] = answer.model_dump(mode="json")
@@ -130,6 +171,7 @@ class JsonStore:
             if item["workspace_id"] == workspace_id
         ]
 
+    @serialized_write
     def save_brief(self, brief: EvidenceBrief) -> EvidenceBrief:
         data = self._read()
         data["briefs"][brief.workspace_id] = brief.model_dump(mode="json")

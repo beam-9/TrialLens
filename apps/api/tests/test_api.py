@@ -59,3 +59,56 @@ def test_conversation_scope_and_brief_lifecycle(monkeypatch, tmp_path):
     other = test_store.create_workspace(Workspace(condition="migraine", source_types=[]))
     assert client.post(f"/workspaces/{other.id}/ask", json={"question": "Explain that", "previous_answer_id": answer["id"]}).status_code == 404
     assert client.patch(f'/workspaces/{other.id}/answers/{answer["id"]}/brief').status_code == 404
+
+
+def test_empty_refresh_preserves_existing_evidence(monkeypatch, tmp_path):
+    from triallens.models import EvidenceSource
+    test_store = JsonStore(tmp_path / "triallens.json")
+    workspace = test_store.create_workspace(Workspace(condition="diabetes", source_types=[SourceType.pubmed]))
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed, external_id="123", title="Existing evidence")
+    test_store.replace_workspace_evidence(workspace.id, [source], [])
+    async def empty_fetch(workspace, **kwargs):
+        return []
+    monkeypatch.setattr(main, "store", test_store)
+    monkeypatch.setattr(main, "fetch_sources", empty_fetch)
+    response = TestClient(main.app).post(f"/workspaces/{workspace.id}/ingest")
+    assert response.status_code == 409
+    assert test_store.list_sources(workspace.id)[0].id == source.id
+
+
+def test_identical_refresh_keeps_source_identity_and_review(monkeypatch, tmp_path):
+    from triallens.models import EvidenceSource
+    from triallens.rag import build_chunks, build_extractions
+    test_store = JsonStore(tmp_path / "triallens.json")
+    workspace = test_store.create_workspace(Workspace(condition="diabetes", source_types=[SourceType.pubmed]))
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed, external_id="123", title="Trial", abstract="A clinical trial improved symptoms.")
+    test_store.replace_workspace_evidence(workspace.id, [source], build_chunks([source]))
+    rows = build_extractions([source], workspace)
+    test_store.replace_workspace_extractions(workspace.id, rows)
+    test_store.update_extraction(workspace.id, rows[0].id, {"review_status": "reviewed", "outcome_result": "Manually corrected: outcome is inconclusive."})
+    async def same_fetch(workspace, **kwargs):
+        return [source.model_copy(update={"id": "new-fetch-id"})]
+    monkeypatch.setattr(main, "store", test_store)
+    monkeypatch.setattr(main, "fetch_sources", same_fetch)
+    assert TestClient(main.app).post(f"/workspaces/{workspace.id}/ingest").status_code == 200
+    assert test_store.list_sources(workspace.id)[0].id == source.id
+    assert test_store.list_extractions(workspace.id)[0].review_status == "reviewed"
+    assert test_store.list_extractions(workspace.id)[0].outcome_result == "Manually corrected: outcome is inconclusive."
+
+
+def test_partial_ingestion_persists_coverage_warning(monkeypatch, tmp_path):
+    from triallens.models import EvidenceSource
+    test_store = JsonStore(tmp_path / "triallens.json")
+    workspace = test_store.create_workspace(Workspace(condition="diabetes", source_types=[SourceType.pubmed, SourceType.clinical_trials]))
+    async def partial_fetch(workspace, diagnostics):
+        diagnostics.update({"pubmed": "available", "clinical_trials": "unavailable"})
+        return [EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed, external_id="123", title="Trial", abstract="A trial evaluated the intervention.")]
+    monkeypatch.setattr(main, "store", test_store)
+    monkeypatch.setattr(main, "fetch_sources", partial_fetch)
+    client = TestClient(main.app)
+    response = client.post(f"/workspaces/{workspace.id}/ingest")
+    assert response.status_code == 200
+    assert response.json()["status"] == "partial"
+    assert response.json()["source_status"]["clinical_trials"] == "unavailable"
+    persisted = client.get("/workspaces").json()[0]
+    assert "ClinicalTrials.gov could not be retrieved" in persisted["ingestion_warnings"][0]

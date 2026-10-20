@@ -137,7 +137,7 @@ def test_local_generation_needs_no_key_and_never_sends_auth(monkeypatch, context
     monkeypatch.setattr("triallens.conversation.httpx.post", local)
     result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
     assert result.generation_mode == "conversational"
-    assert len(requests) == 1
+    assert len(requests) == 2
     assert UsageLedger().status()["used_or_reserved_usd"] == 0
     assert UsageLedger().status()["generated_answers"] == 1
 
@@ -161,3 +161,195 @@ def test_cloud_tag_is_rejected_in_local_mode(monkeypatch, context):
     monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
     monkeypatch.setenv("TRIALLENS_LOCAL_MODEL", "some-model:cloud")
     assert not chat_configured()
+
+
+def test_unknown_citation_in_limitations_is_rejected(monkeypatch, context):
+    workspace, source, fallback = context
+    mock_generation(monkeypatch, {"paragraphs": ["HbA1c was lower than placebo [PubMed:123]."],
+        "cited_sources": ["PubMed:123"], "uncertainty": ["Long-term results are unclear [PubMed:999]."]})
+    assert ConversationService().generate(workspace, "What changed?", [], [source], fallback).generation_mode == "extractive"
+
+
+def test_copied_retrieved_passage_outside_abstract_prefix_is_rejected(monkeypatch, context):
+    from triallens.models import RetrievedChunk
+    workspace, source, fallback = context
+    passage = " ".join(f"word{i}" for i in range(35))
+    fallback.retrieved_chunks = [RetrievedChunk(chunk_id="late", source_id=source.id,
+        source_type=source.source_type, citation="PubMed:123", text=passage, score=1)]
+    captured = mock_generation(monkeypatch, {"paragraphs": [passage + " [PubMed:123]"],
+        "cited_sources": ["PubMed:123"], "uncertainty": []})
+    result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
+    assert passage in json.loads(captured[0]['input'])['evidence'][0]['matched_passages']
+    assert result.generation_mode == "extractive"
+
+
+def test_local_revision_replaces_draft_and_preserves_demo_notice(monkeypatch, context):
+    from triallens.usage import UsageLedger
+    workspace, source, fallback = context
+    source.metadata['demo'] = True
+    monkeypatch.setenv('TRIALLENS_CHAT_PROVIDER', 'ollama')
+    calls = []
+    def local(url, **kwargs):
+        messages = kwargs['json']['messages']
+        calls.append(len(messages))
+        if len(calls) == 1:
+            assert json.loads(messages[1]['content'])['evidence'][0]['demo'] is True
+            answer = 'Unsupported draft [PubMed:123].'
+        else:
+            assert 'Unsupported draft' in messages[-2]['content']
+            assert 'Check the draft' in messages[-1]['content']
+            answer = 'The supplied result is lower than placebo [PubMed:123].'
+        content = json.dumps({'paragraphs':[answer], 'cited_sources':['PubMed:123'], 'uncertainty':[]})
+        return httpx.Response(200, request=httpx.Request('POST',url), json={'done':True,'message':{'content':content}})
+    monkeypatch.setattr('triallens.conversation.httpx.post',local)
+    result = ConversationService().generate(workspace,'What changed?',[],[source],fallback)
+    assert result.generation_mode == 'conversational'
+    assert 'Unsupported draft' not in result.direct_answer
+    assert 'demo evidence' in result.generation_note
+    assert calls == [2,4]
+    assert UsageLedger().status()['generated_answers'] == 1
+
+
+def test_failed_local_revision_does_not_show_or_count_draft(monkeypatch, context):
+    from triallens.usage import UsageLedger
+    workspace, source, fallback = context
+    monkeypatch.setenv('TRIALLENS_CHAT_PROVIDER','ollama')
+    calls = []
+    def local(url, **kwargs):
+        calls.append(url)
+        if len(calls) == 2:
+            raise httpx.ReadTimeout('revision timeout')
+        content = json.dumps({'paragraphs':['Unrevised draft [PubMed:123].'], 'cited_sources':['PubMed:123'], 'uncertainty':[]})
+        return httpx.Response(200,request=httpx.Request('POST',url),json={'done':True,'message':{'content':content}})
+    monkeypatch.setattr('triallens.conversation.httpx.post',local)
+    result = ConversationService().generate(workspace,'What changed?',[],[source],fallback)
+    assert result.generation_mode == 'extractive'
+    assert result.short_answer == 'Extracted result'
+    assert calls == ['http://127.0.0.1:11434/api/chat'] * 2
+    assert UsageLedger().status()['generated_answers'] == 0
+
+
+def test_citation_format_repair_requires_exact_known_ids():
+    from triallens.conversation import normalize_citations
+    allowed = {'PubMed:A', 'PubMed:B'}
+    assert normalize_citations('Finding [citation: PubMed:A, citation: PubMed:B].', allowed) == 'Finding [PubMed:A] [PubMed:B].'
+    unknown = 'Finding [citation: PubMed:A, citation: PubMed:UNKNOWN].'
+    assert normalize_citations(unknown, allowed) == unknown
+    assert normalize_citations('Finding [PubMed:AB].', allowed) == 'Finding [PubMed:AB].'
+
+
+def test_conversational_abstention_accepts_contracted_negative(monkeypatch, context):
+    workspace, source, fallback = context
+    mock_generation(monkeypatch, {"paragraphs": ["The supplied evidence doesn't answer who won that football match. It only covers this research workspace."], "cited_sources": [], "uncertainty": []})
+    answer = ConversationService().generate(workspace, "Who won the football match?", [], [source], fallback)
+    assert answer.generation_mode == "conversational"
+
+
+def test_ambiguous_comparator_without_history_asks_for_clarification(monkeypatch, context):
+    workspace, source, fallback = context
+    def unexpected(*args, **kwargs):
+        pytest.fail("An unresolved comparator should be clarified before generating a comparison")
+    monkeypatch.setattr("triallens.conversation.httpx.post", unexpected)
+    answer = ConversationService().generate(workspace, "Is it better than the other one?", [], [source], fallback)
+    assert answer.generation_mode == "conversational"
+    assert "Which" in answer.direct_answer
+    assert answer.citations == []
+
+
+def test_local_busy_does_not_queue_or_count(monkeypatch, context):
+    from triallens.conversation import _LOCAL_GENERATION_LOCK
+    from triallens.usage import UsageLedger
+    workspace, source, fallback = context
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
+    def unexpected(*args, **kwargs):
+        pytest.fail("Busy local model must not queue another provider request")
+    monkeypatch.setattr("triallens.conversation.httpx.post", unexpected)
+    assert _LOCAL_GENERATION_LOCK.acquire(blocking=False)
+    try:
+        answer = ConversationService().generate(workspace, "Explain the result", [], [source], fallback)
+        assert "another question" in answer.generation_note
+        assert UsageLedger().status()["generated_answers"] == 0
+    finally:
+        _LOCAL_GENERATION_LOCK.release()
+
+
+def test_local_lock_released_after_provider_failure(monkeypatch, context):
+    from triallens.conversation import _LOCAL_GENERATION_LOCK
+    workspace, source, fallback = context
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "ollama")
+    def offline(*args, **kwargs):
+        raise httpx.ConnectError("test offline")
+    monkeypatch.setattr("triallens.conversation.httpx.post", offline)
+    ConversationService().generate(workspace, "Explain the result", [], [source], fallback)
+    assert _LOCAL_GENERATION_LOCK.acquire(blocking=False)
+    _LOCAL_GENERATION_LOCK.release()
+
+
+def test_generation_context_has_total_budget_and_preserves_retrieved_passage(monkeypatch, context):
+    from triallens.models import RetrievedChunk
+    workspace, first, fallback = context
+    sources = [first.model_copy(update={"id": f"source-{i}", "external_id": str(i), "abstract": "Long context. " * 2000}) for i in range(8)]
+    fallback.retrieved_chunks = [RetrievedChunk(chunk_id="selected", source_id=sources[0].id,
+        source_type=SourceType.pubmed, citation="PubMed:0", text="Critical outcome near the end of the source.", score=1)]
+    captured = mock_generation(monkeypatch, {"paragraphs": ["I cannot establish the requested result from this evidence."], "cited_sources": [], "uncertainty": []})
+    ConversationService().generate(workspace, "What does the evidence establish?", [], sources, fallback)
+    records = json.loads(captured[0]["input"])["evidence"]
+    assert sum(len(r["text"]) + sum(map(len, r["matched_passages"])) for r in records) <= 28000
+    assert "Critical outcome near the end of the source." in records[0]["matched_passages"]
+    assert all(record["content_truncated"] for record in records)
+
+
+@pytest.mark.parametrize("question", ["I am pregnant and have kidney disease. Should I start intervention A today?", "Should I stop taking metformin?", "Should I increase my dose?"])
+def test_personal_treatment_decision_does_not_infer_population_or_suitability(monkeypatch, context, question):
+    from triallens.usage import UsageLedger
+    workspace, source, fallback = context
+    def unexpected(*args, **kwargs):
+        pytest.fail("Personal treatment decisions should not be inferred by the model")
+    monkeypatch.setattr("triallens.conversation.httpx.post", unexpected)
+    workspace.intervention = "metformin"
+    answer = ConversationService().generate(workspace, question, [], [source], fallback)
+    assert answer.generation_mode == "conversational"
+    assert "individual" in answer.direct_answer
+    assert "clinician" in answer.direct_answer
+    assert answer.citations == [] and answer.uncertainty == []
+    assert UsageLedger().status()["generated_answers"] == 0
+
+
+@pytest.mark.parametrize("question,include_combination", [("What are the benefits and limitations of metformin?", False), ("What does the ZITUVIMET combination label say?", True)])
+def test_single_ingredient_synthesis_does_not_mix_combination_label(monkeypatch, context, question, include_combination):
+    workspace, source, fallback = context
+    workspace.intervention = "metformin"
+    source.source_type = SourceType.fda_label
+    source.title = "FDA label: Metformin hydrochloride"
+    source.abstract = "Metformin hydrochloride is indicated to improve glycemic control in adults with type 2 diabetes."
+    combination = source.model_copy(update={"id": "combo", "external_id": "combo", "title": "FDA label: ZITUVIMET", "abstract": "ZITUVIMET is a combination of sitagliptin and metformin. ZITUVIMET has not been studied in patients with a history of pancreatitis."})
+    captured = mock_generation(monkeypatch, {"paragraphs": ["The excerpt does not establish individual suitability."], "cited_sources": [], "uncertainty": []})
+    ConversationService().generate(workspace, question, [], [combination, source], fallback)
+    records = json.loads(captured[0]["input"])["evidence"]
+    assert any(r["citation"] == "openFDA label:combo" for r in records) is include_combination
+
+
+def test_combination_followup_keeps_named_product_from_user_history(monkeypatch, context):
+    workspace, source, fallback = context
+    workspace.intervention = "metformin"
+    source.source_type = SourceType.fda_label
+    source.title = "FDA label: Metformin hydrochloride"
+    combination = source.model_copy(update={"id": "combo", "external_id": "combo", "title": "FDA label: ZITUVIMET", "metadata": {"substance_names": ["SITAGLIPTIN", "METFORMIN HYDROCHLORIDE"]}})
+    prior = fallback.model_copy(update={"question": "What does the ZITUVIMET label say?"})
+    captured = mock_generation(monkeypatch, {"paragraphs": ["The excerpt does not establish individual suitability."], "cited_sources": [], "uncertainty": []})
+    answer = ConversationService().generate(workspace, "Explain that more simply", [prior], [combination, source], fallback)
+    records = json.loads(captured[0]["input"])["evidence"]
+    assert any(r["citation"] == "openFDA label:combo" for r in records)
+    assert "excluded" not in answer.generation_note
+
+
+def test_combination_brand_alias_keeps_product_when_title_lists_multiple_brands(monkeypatch, context):
+    workspace, source, fallback = context
+    workspace.intervention = "metformin"
+    source.source_type = SourceType.fda_label
+    source.title = "FDA label: Metformin hydrochloride"
+    combination = source.model_copy(update={"id": "combo", "external_id": "combo", "title": "FDA label: ZITUVIMET, ZITUVIMET XR", "metadata": {"substance_names": ["SITAGLIPTIN", "METFORMIN HYDROCHLORIDE"], "brand_names": ["ZITUVIMET", "ZITUVIMET XR"]}})
+    captured = mock_generation(monkeypatch, {"paragraphs": ["The excerpt does not establish individual suitability."], "cited_sources": [], "uncertainty": []})
+    ConversationService().generate(workspace, "What does ZITUVIMET's label say?", [], [combination, source], fallback)
+    records = json.loads(captured[0]["input"])["evidence"]
+    assert any(r["citation"] == "openFDA label:combo" for r in records)

@@ -7,6 +7,7 @@ export type Workspace = {
   source_types: SourceType[];
   status: string;
   created_at: string;
+  ingestion_warnings?: string[];
 };
 
 export type EvidenceSource = {
@@ -124,9 +125,7 @@ export type EvalReport = {
   scenarios: { name: string; question: string; expected: string; status: string }[];
 };
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE ??
-  (typeof window === "undefined" ? "http://127.0.0.1:8000" : `${window.location.protocol}//${window.location.hostname}:8000`);
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "/api";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -138,7 +137,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     cache: "no-store",
   });
   if (!response.ok) {
-    throw new Error(await response.text());
+    let detail = "";
+    try {
+      const body = await response.json();
+      if (typeof body.detail === "string") detail = body.detail;
+      else if (Array.isArray(body.detail)) detail = body.detail.map((issue: { msg?: string }) => issue.msg).filter(Boolean).join(". ");
+    } catch { /* HTML proxy errors are not useful product messages. */ }
+    throw new Error(detail || (response.status >= 500 ? "The research service is temporarily unavailable. Try again in a moment." : `This request could not be completed (${response.status}). Check the input and try again.`));
   }
   return response.json();
 }
@@ -152,7 +157,7 @@ export const api = {
       body: JSON.stringify({ condition, intervention: intervention || null }),
     }),
   ingest: (id: string) =>
-    request<{ sources: number; chunks: number; extractions: number }>(`/workspaces/${id}/ingest`, { method: "POST" }),
+    request<{ sources: number; chunks: number; extractions: number; ingestion_warnings?: string[]; status?: string }>(`/workspaces/${id}/ingest`, { method: "POST" }),
   sources: (id: string) => request<EvidenceSource[]>(`/workspaces/${id}/sources`),
   extract: (id: string) =>
     request<{ extractions: number }>(`/workspaces/${id}/extract`, { method: "POST" }),

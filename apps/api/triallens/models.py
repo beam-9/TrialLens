@@ -40,6 +40,7 @@ class Workspace(BaseModel):
     created_at: str = Field(default_factory=utc_now)
     updated_at: str = Field(default_factory=utc_now)
     status: Literal["created", "ingested", "partial", "failed"] = "created"
+    ingestion_warnings: list[str] = Field(default_factory=list)
 
 
 class EvidenceSource(BaseModel):

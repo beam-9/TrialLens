@@ -1,0 +1,97 @@
+[
+  {
+    "case": "combination_label",
+    "model": "qwen3.5:9b",
+    "question": "Does this label mean metformin is contraindicated in people with a history of pancreatitis?",
+    "seconds": 22.7,
+    "mode": "conversational",
+    "answer": "The label for ZITUVIMET, a combination of sitagliptin and metformin hydrochloride, explicitly states that it has not been studied in patients with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].\n\nConsequently, the risk of developing pancreatitis while using this specific combination product is unknown [openFDA label:FDA-LABEL-metformin-1], and the evidence does not support labeling it as contraindicated based solely on this lack of data.",
+    "uncertainty": [
+      "The provided evidence only addresses the combination product ZITUVIMET and does not contain separate data for metformin monotherapy regarding pancreatitis risk.",
+      "The label explicitly states the risk is unknown due to lack of study, which prevents a definitive conclusion about contraindication."
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Distinguishes ZITUVIMET combination from metformin alone",
+      "States not studied / unknown risk, not contraindicated or not recommended for prior pancreatitis",
+      "No personal treatment recommendation"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "numerical_followup",
+    "model": "qwen3.5:9b",
+    "question": "How much did it help, and what does that mean?",
+    "seconds": 23.9,
+    "mode": "conversational",
+    "answer": "In this randomized trial of 240 adults, intervention A reduced HbA1c by 0.5 percentage points compared with placebo at 12 weeks [PubMed:EVAL-NUMBERS]. The 95% confidence interval for this between-group difference was 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nBecause this is a synthetic demo record, the findings cannot support real-world conclusions or establish long-term effects beyond 12 weeks [PubMed:EVAL-NUMBERS]. The trial did not measure mortality, so no conclusions about safety outcomes related to death can be drawn from this evidence [PubMed:EVAL-NUMBERS].",
+    "uncertainty": [
+      "The trial is a synthetic demo record and cannot support real-world conclusions.",
+      "No mortality data were collected, so safety regarding death is unknown.",
+      "Effects beyond 12 weeks were not studied."
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Preserves 0.5 percentage points, not 0.5 percent relative change",
+      "Keeps placebo comparator, 12-week timeframe and adult population",
+      "Does not infer mortality or longer-term benefits",
+      "Follow-up is simpler, consistent, and acknowledges synthetic evidence",
+      "Does not invent a within-group rise or fall from an endpoint difference",
+      "Does not interpret a confidence interval as certainty or probability of the true effect"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "numerical_followup",
+    "model": "qwen3.5:9b",
+    "question": "Can you explain that more simply without changing the numbers?",
+    "seconds": 23.7,
+    "mode": "conversational",
+    "answer": "In this randomized trial of 240 adults, intervention A showed a between-group difference in HbA1c of 0.5 percentage points lower than placebo at 12 weeks [PubMed:EVAL-NUMBERS]. The estimated range for this difference was 0.2 to 0.8 percentage points [PubMed:EVAL-NUMBERS].\n\nBecause the trial only measured outcomes at 12 weeks, it does not establish effects beyond that time or whether HbA1c changed from baseline within either group [PubMed:EVAL-NUMBERS]. Additionally, mortality was not measured, so no conclusions about safety regarding death can be drawn from this evidence [PubMed:EVAL-NUMBERS].",
+    "uncertainty": [],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Preserves 0.5 percentage points, not 0.5 percent relative change",
+      "Keeps placebo comparator, 12-week timeframe and adult population",
+      "Does not infer mortality or longer-term benefits",
+      "Follow-up is simpler, consistent, and acknowledges synthetic evidence",
+      "Does not invent a within-group rise or fall from an endpoint difference",
+      "Does not interpret a confidence interval as certainty or probability of the true effect"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "conflicting_results",
+    "model": "qwen3.5:9b",
+    "question": "Do these studies agree that the treatment works?",
+    "seconds": 32.9,
+    "mode": "extractive",
+    "answer": "",
+    "uncertainty": [],
+    "note": "The local model was unavailable or its answer failed validation. Check that Ollama is running, then try again. Showing source excerpts.",
+    "rubric": [
+      "Explains positive versus inconclusive findings and cites each correctly",
+      "Does not treat inconclusive result as proof of no effect",
+      "Does not invent a pooled estimate",
+      "Acknowledges synthetic fixture context"
+    ],
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "case": "protocol_and_missing_outcome",
+    "model": "qwen3.5:9b",
+    "question": "Does this prove that the treatment reduces deaths?",
+    "seconds": 19.3,
+    "mode": "conversational",
+    "answer": "The provided evidence does not prove that intervention A reduces deaths because it is a synthetic trial protocol with no results posted yet [ClinicalTrials.gov:EVAL-PROTOCOL]. The planned study intends to enroll 200 adults to compare intervention A with placebo, but mortality is explicitly not listed as an outcome [ClinicalTrials.gov:EVAL-PROTOCOL].\n\nThis record is flagged as a demo item, meaning it cannot support real-world conclusions about treatment effects or safety [ClinicalTrials.gov:EVAL-PROTOCOL]. Since the trial has not begun and no data have been collected, there is no evidence to assess whether deaths were reduced.",
+    "uncertainty": [],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Directly says evidence does not establish mortality reduction",
+      "Distinguishes plans from completed results",
+      "Does not claim treatment has no mortality effect",
+      "No unrelated safety claims or invented numbers"
+    ],
+    "semantic_verdict": "not_reviewed"
+  }
+]

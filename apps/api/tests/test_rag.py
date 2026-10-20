@@ -493,3 +493,56 @@ def test_fda_adverse_extraction_keeps_causality_caveat():
     )
     extraction = build_extractions([source], workspace)[0]
     assert "cannot establish causality" in extraction.safety_note.lower()
+
+
+def test_combined_benefit_safety_retrieval_keeps_both_sides():
+    from triallens.models import EvidenceChunk
+    from triallens.rag import stable_embedding
+    workspace = Workspace(condition="migraine", intervention="sumatriptan", source_types=list(SourceType))
+    benefit = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed,
+        external_id="benefit", title="Sumatriptan effectiveness in migraine",
+        abstract="Sumatriptan improved migraine pain relief compared with placebo.")
+    label = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.fda_label,
+        external_id="safety", title="Sumatriptan migraine safety warnings",
+        abstract="Sumatriptan safety risks include myocardial ischemia and stroke.")
+    chunks = []
+    for source, count in [(benefit, 1), (label, 10)]:
+        for _ in range(count):
+            chunks.append(EvidenceChunk(workspace_id=workspace.id, source_id=source.id,
+                source_type=source.source_type, citation=source.external_id,
+                text=source.abstract, embedding=stable_embedding(source.abstract)))
+    retriever = Retriever()
+    retrieved = retriever.retrieve_conversation(workspace,
+        "What are the benefits and safety risks?", chunks, [benefit, label])
+    assert {benefit.id, label.id}.issubset({chunk.source_id for chunk in retrieved})
+    assert len(retrieved) <= 8
+    assert len({chunk.chunk_id for chunk in retrieved}) == len(retrieved)
+    filtered = retriever.retrieve_conversation(workspace,
+        "What are the benefits and safety risks?", chunks, [benefit, label], [SourceType.pubmed])
+    assert all(chunk.source_type == SourceType.pubmed for chunk in filtered)
+
+
+def test_open_ended_conversation_retrieves_multiple_sources_before_repeated_label_chunks():
+    from triallens.models import EvidenceChunk
+    from triallens.rag import stable_embedding
+    workspace = Workspace(condition="migraine", intervention="sumatriptan", source_types=list(SourceType))
+    label = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.fda_label,
+        external_id="label", title="Sumatriptan migraine overall evidence",
+        abstract="Sumatriptan migraine overall evidence includes safety warnings and indication.")
+    paper = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed,
+        external_id="paper", title="Sumatriptan migraine trial",
+        abstract="Sumatriptan improved migraine pain relief compared with placebo.")
+    chunks = [EvidenceChunk(workspace_id=workspace.id, source_id=source.id,
+        source_type=source.source_type, citation=source.external_id,
+        text=source.abstract, embedding=stable_embedding(source.abstract))
+        for source, count in [(label, 12), (paper, 1)] for _ in range(count)]
+    retrieved = Retriever().retrieve_conversation(workspace,
+        "What can we conclude from the overall evidence?", chunks, [label, paper])
+    assert {label.id, paper.id}.issubset({chunk.source_id for chunk in retrieved})
+    assert len(retrieved) <= 8
+    filtered = Retriever().retrieve_conversation(workspace,
+        "Summarize the overall evidence", chunks, [label, paper], [SourceType.pubmed])
+    assert filtered and all(chunk.source_id == paper.id for chunk in filtered)
+    narrow = "What exact warnings does the label report?"
+    assert Retriever().retrieve_conversation(workspace, narrow, chunks, [label, paper]) == Retriever().retrieve(
+        workspace, narrow, chunks, [label, paper])

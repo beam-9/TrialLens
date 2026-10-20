@@ -1,0 +1,22 @@
+[
+  {
+    "case": "conflicting_results",
+    "model": "qwen3.5:9b",
+    "question": "Do these studies agree that the treatment works?",
+    "seconds": 29.9,
+    "mode": "conversational",
+    "answer": "The available evidence does not show agreement on whether intervention A works because the two synthetic trials report conflicting results. Trial A found that the treatment reduced symptom scores by an average of 3 points compared to placebo after 8 weeks, with a 95% confidence interval ranging from 1 to 5 points lower [PubMed:EVAL-A]. In contrast, Trial B observed a difference of 0.1 points between the intervention and placebo after 8 weeks, with a confidence interval from -1.0 to 1.2 that included zero [PubMed:EVAL-B].\n\nBecause one study suggests a benefit while the other finds no statistically clear difference, these studies do not reach a consistent conclusion about the treatment's efficacy. It is important to note that both of these records are explicitly marked as demo fixtures and were generated for testing purposes rather than representing real-world clinical data [PubMed:EVAL-A] [PubMed:EVAL-B]. Consequently, their conflicting findings cannot be used to draw definitive conclusions about the actual effectiveness of intervention A in practice.",
+    "uncertainty": [
+      "Both evidence records are identified as demo fixtures, meaning they do not reflect real-world clinical data or outcomes.",
+      "No pooled analysis was performed to combine the results of these two trials into a single estimate of effect."
+    ],
+    "note": "Includes demo evidence; cannot support real-world conclusions. Generated locally on your Mac; no API credits used.",
+    "rubric": [
+      "Explains positive versus inconclusive findings and cites each correctly",
+      "Does not treat inconclusive result as proof of no effect",
+      "Does not invent a pooled estimate",
+      "Acknowledges synthetic fixture context"
+    ],
+    "semantic_verdict": "not_reviewed"
+  }
+]

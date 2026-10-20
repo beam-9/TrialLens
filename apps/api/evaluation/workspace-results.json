@@ -1,0 +1,64 @@
+[
+  {
+    "workspace_id": "eb4c29ab-69dd-45a8-bdc5-f6eb5454a12d",
+    "condition": "type 2 diabetes",
+    "intervention": "metformin",
+    "model": "qwen3.5:9b",
+    "question": "What does the evidence say about benefits and safety limitations?",
+    "seconds": 118.1,
+    "mode": "conversational",
+    "answer": "Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus, though the provided evidence does not quantify the specific size of this benefit. When used alone, common adverse reactions occurring in greater than 5% of patients include diarrhea (reported at 53% in one trial versus 12% for placebo), nausea/vomiting (26% vs 8%), and flatulence (12% vs 6%) [openFDA label:FDA-LABEL-metformin-2]. These gastrointestinal effects are the primary reasons for discontinuation, with diarrhea leading to stopping therapy in approximately 6% of patients in one study [openFDA label:FDA-LABEL-metformin-2].\n\nSafety limitations include a risk of lactic acidosis, particularly when metformin is combined with carbonic anhydrase inhibitors or alcohol, which can potentiate lactate metabolism effects. The combination product ZITUVIMET (sitagliptin and metformin) also carries warnings for pancreatitis, heart failure, acute renal failure, and vitamin B12 deficiency; notably, it has not been studied in patients with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1]. When sitagliptin is added to metformin plus insulin or sulfonylureas, the incidence of hypoglycemia increases compared to placebo combinations, reaching 15.3% overall in trials with insulin add-on versus 8.2% for placebo [openFDA label:FDA-LABEL-metformin-1]. Additionally, metformin use is associated with a decrease in serum vitamin B12 levels to subnormal ranges in approximately 7% of patients after 29 weeks of treatment [openFDA label:FDA-LABEL-metformin-2].",
+    "uncertainty": [
+      "The provided evidence does not quantify the magnitude of glycemic benefit for metformin monotherapy.",
+      "Adverse reaction rates from clinical trials may not reflect real-world practice due to varying trial conditions."
+    ],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-2",
+      "openFDA label:FDA-LABEL-metformin-1"
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "workspace_id": "eb4c29ab-69dd-45a8-bdc5-f6eb5454a12d",
+    "condition": "type 2 diabetes",
+    "intervention": "metformin",
+    "model": "qwen3.5:9b",
+    "question": "Explain that more simply. What can we actually conclude?",
+    "seconds": 84.0,
+    "mode": "conversational",
+    "answer": "Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus, though the provided evidence does not quantify the specific size of this benefit. When used alone, common adverse reactions occurring in greater than 5% of patients include diarrhea (reported at 53% in one trial versus 12% for placebo), nausea/vomiting (26% vs 8%), and flatulence (12% vs 6%) [openFDA label:FDA-LABEL-metformin-2]. These gastrointestinal effects are the primary reasons for discontinuation, with diarrhea leading to stopping therapy in approximately 6% of patients in one study [openFDA label:FDA-LABEL-metformin-2].",
+    "uncertainty": [
+      "The provided evidence does not quantify the specific size of the glycemic control benefit.",
+      "Adverse reaction rates from clinical trials may not reflect real-world practice due to varying trial conditions."
+    ],
+    "citations": [
+      "openFDA label:FDA-LABEL-metformin-2"
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "semantic_verdict": "not_reviewed"
+  },
+  {
+    "workspace_id": "eb4c29ab-69dd-45a8-bdc5-f6eb5454a12d",
+    "condition": "type 2 diabetes",
+    "intervention": "metformin",
+    "model": "qwen3.5:9b",
+    "question": "Does this evidence show a reduction in mortality?",
+    "seconds": 114.9,
+    "mode": "conversational",
+    "answer": "The provided evidence does not show a reduction in mortality for metformin. The available sources describe studies focused on glycemic control, vascular function, and safety profiles like gastrointestinal side effects or lactic acidosis risk, but none report mortality outcomes.\n\nOne network meta-analysis included metformin plus intensive lifestyle intervention as an effective strategy to prevent type 2 diabetes in prediabetes patients, showing a relative risk reduction compared with control [PubMed:42711998]. However, this study assessed the incidence of new-onset diabetes rather than death rates.\n\nClinical trial protocols listed in the evidence focus on safety monitoring and intermediate endpoints such as hypoglycemia or endothelial function, without presenting mortality data [ClinicalTrials.gov:NCT05164263] [ClinicalTrials.gov:NCT00353834] [ClinicalTrials.gov:NCT01890122].",
+    "uncertainty": [
+      "The evidence lacks mortality data for metformin monotherapy or in combination regimens.",
+      "The network meta-analysis focused on diabetes prevention incidence rather than survival outcomes.",
+      "Clinical trial summaries provided are limited to study objectives and safety monitoring plans without reporting final mortality results."
+    ],
+    "citations": [
+      "PubMed:42711998",
+      "ClinicalTrials.gov:NCT05164263",
+      "ClinicalTrials.gov:NCT00353834",
+      "ClinicalTrials.gov:NCT01890122"
+    ],
+    "note": "Generated locally on your Mac; no API credits used.",
+    "semantic_verdict": "not_reviewed"
+  }
+]

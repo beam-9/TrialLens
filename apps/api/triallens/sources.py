@@ -2,15 +2,18 @@ from __future__ import annotations
 
 import html
 import xml.etree.ElementTree as ET
+from urllib.parse import urlencode
 
 import httpx
 
 from triallens.models import EvidenceSource, SourceType, Workspace
-from triallens.sample_data import sample_sources
 from triallens.text import normalize
 
 
 class SourceClient:
+    def __init__(self):
+        self.errors: dict[SourceType, str] = {}
+
     async def fetch(self, workspace: Workspace) -> list[EvidenceSource]:
         raise NotImplementedError
 
@@ -37,11 +40,12 @@ class PubMedClient(SourceClient):
             records: list[EvidenceSource] = []
             for article in root.findall(".//PubmedArticle"):
                 pmid = article.findtext(".//PMID") or "unknown"
-                title = normalize(" ".join(article.findtext(".//ArticleTitle", default="").split()))
+                title_node = article.find(".//ArticleTitle")
+                title = normalize("".join(title_node.itertext())) if title_node is not None else ""
                 abstract_sections = {}
                 abstract_parts = []
                 for idx, node in enumerate(article.findall(".//AbstractText"), start=1):
-                    text = normalize(node.text or "")
+                    text = normalize("".join(node.itertext()))
                     if not text:
                         continue
                     label = node.attrib.get("Label") or node.attrib.get("NlmCategory") or f"Abstract {idx}"
@@ -75,6 +79,7 @@ class PubMedClient(SourceClient):
                     )
             return records
         except Exception:
+            self.errors[SourceType.pubmed] = "unavailable"
             return []
 
 
@@ -126,6 +131,7 @@ class ClinicalTrialsClient(SourceClient):
                     )
             return records
         except Exception:
+            self.errors[SourceType.clinical_trials] = "unavailable"
             return []
 
 
@@ -133,8 +139,10 @@ class OpenFdaClient(SourceClient):
     async def fetch(self, workspace: Workspace) -> list[EvidenceSource]:
         term = workspace.intervention or workspace.condition
         records: list[EvidenceSource] = []
-        records.extend(await self._fetch_label(workspace, term))
-        records.extend(await self._fetch_events(workspace, term))
+        if SourceType.fda_label in workspace.source_types:
+            records.extend(await self._fetch_label(workspace, term))
+        if SourceType.fda_adverse_event in workspace.source_types:
+            records.extend(await self._fetch_events(workspace, term))
         return records
 
     async def _fetch_label(self, workspace: Workspace, term: str) -> list[EvidenceSource]:
@@ -144,6 +152,8 @@ class OpenFdaClient(SourceClient):
                     "https://api.fda.gov/drug/label.json",
                     params={"search": f'openfda.generic_name:"{term}"', "limit": 3},
                 )
+                if response.status_code == 404 and response.json().get("error", {}).get("code") == "NOT_FOUND":
+                    return []
                 response.raise_for_status()
             records = []
             for idx, item in enumerate(response.json().get("results", []), start=1):
@@ -151,7 +161,7 @@ class OpenFdaClient(SourceClient):
                 title = ", ".join(openfda.get("brand_name") or openfda.get("generic_name") or [term])
                 sections = []
                 section_map = {}
-                for key in ["indications_and_usage", "warnings", "adverse_reactions", "drug_interactions"]:
+                for key in ["indications_and_usage", "boxed_warning", "contraindications", "warnings", "warnings_and_cautions", "adverse_reactions", "drug_interactions", "clinical_studies"]:
                     values = item.get(key, [])[:1]
                     sections.extend(values)
                     if values:
@@ -162,15 +172,20 @@ class OpenFdaClient(SourceClient):
                         EvidenceSource(
                             workspace_id=workspace.id,
                             source_type=SourceType.fda_label,
-                            external_id=f"FDA-LABEL-{term}-{idx}",
+                            external_id=f"FDA-LABEL-{item['id']}" if item.get("id") else f"FDA-LABEL-{term}-{idx}",
                             title=f"FDA label: {title}",
                             abstract=abstract,
-                            url="https://open.fda.gov/apis/drug/label/",
-                            metadata={"sections": section_map},
+                            url=("https://api.fda.gov/drug/label.json?" + urlencode({"search": f'id:"{item["id"]}"', "limit": 1})) if item.get("id") else None,
+                            publication_date=item.get("effective_time"),
+                            metadata={"sections": section_map, "label_id": item.get("id"), "set_id": item.get("set_id"),
+                                      "generic_names": openfda.get("generic_name", []),
+                                      "brand_names": openfda.get("brand_name", []),
+                                      "substance_names": openfda.get("substance_name", [])},
                         )
                     )
             return records
         except Exception:
+            self.errors[SourceType.fda_label] = "unavailable"
             return []
 
     async def _fetch_events(self, workspace: Workspace, term: str) -> list[EvidenceSource]:
@@ -184,6 +199,8 @@ class OpenFdaClient(SourceClient):
                         "limit": 5,
                     },
                 )
+                if response.status_code == 404 and response.json().get("error", {}).get("code") == "NOT_FOUND":
+                    return []
                 response.raise_for_status()
             top = response.json().get("results", [])
             if not top:
@@ -199,23 +216,29 @@ class OpenFdaClient(SourceClient):
                         f"Top reported reactions in openFDA for {term}: {summary}. "
                         "These are spontaneous reports and cannot establish causality or incidence."
                     ),
-                    url="https://open.fda.gov/apis/drug/event/",
+                    url=str(response.request.url),
                 )
             ]
         except Exception:
+            self.errors[SourceType.fda_adverse_event] = "unavailable"
             return []
 
 
-async def fetch_sources(workspace: Workspace) -> list[EvidenceSource]:
+async def fetch_sources(workspace: Workspace, diagnostics: dict | None = None) -> list[EvidenceSource]:
     sources: list[EvidenceSource] = []
+    clients = []
     if SourceType.pubmed in workspace.source_types:
-        sources.extend(await PubMedClient().fetch(workspace))
+        clients.append(PubMedClient())
     if SourceType.clinical_trials in workspace.source_types:
-        sources.extend(await ClinicalTrialsClient().fetch(workspace))
+        clients.append(ClinicalTrialsClient())
     if SourceType.fda_label in workspace.source_types or SourceType.fda_adverse_event in workspace.source_types:
-        sources.extend(await OpenFdaClient().fetch(workspace))
-
+        clients.append(OpenFdaClient())
+    errors = {}
+    for client in clients:
+        sources.extend(await client.fetch(workspace))
+        errors.update(client.errors)
     selected = [source for source in sources if source.source_type in workspace.source_types]
-    if selected:
-        return selected
-    return [source for source in sample_sources(workspace.id, workspace.condition, workspace.intervention) if source.source_type in workspace.source_types]
+    if diagnostics is not None:
+        diagnostics.update({kind.value: "unavailable" if kind in errors else "available" if any(s.source_type == kind for s in selected) else "no_matches" for kind in workspace.source_types})
+    # Empty or unavailable upstream results must never manufacture research evidence.
+    return selected

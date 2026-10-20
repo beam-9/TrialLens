@@ -1,7 +1,7 @@
 "use client";
 
 import { CSSProperties, FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import {
   Activity,
   ArrowLeftRight,
@@ -93,6 +93,7 @@ export default function Home() {
   const [selectedRow, setSelectedRow] = useState<EvidenceExtraction | null>(null);
   const [showAllRows, setShowAllRows] = useState(false);
   const [showAllSources, setShowAllSources] = useState(false);
+  const [compactWorkspace, setCompactWorkspace] = useState(false);
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("table");
 
   const counts = useMemo(() => {
@@ -124,12 +125,13 @@ export default function Home() {
     api.usage().then(setUsage).catch(() => setUsage(null));
     const cached = readCachedWorkspaces();
     if (cached.length) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Hydrate the browser-only convenience cache after SSR.
       setRecentWorkspaces(cached);
     }
     api
       .workspaces()
       .then((items) => {
-        const merged = mergeRecentWorkspaces(items.slice(-4).reverse(), cached);
+        const merged = mergeRecentWorkspaces([...items].sort((a, b) => b.created_at.localeCompare(a.created_at)), cached);
         setRecentWorkspaces(merged);
         writeCachedWorkspaces(merged);
       })
@@ -137,6 +139,21 @@ export default function Home() {
         if (!cached.length) setRecentWorkspaces([]);
       });
   }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 900px)");
+    const sync = () => setCompactWorkspace(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (!error) return;
+    const issue = document.querySelector<HTMLElement>("#workspace-issue");
+    issue?.focus({ preventScroll: true });
+    issue?.scrollIntoView({ behavior: preferredScrollBehavior(), block: "center" });
+  }, [error]);
 
   useEffect(() => {
     function syncTabFromHash() {
@@ -169,6 +186,8 @@ export default function Home() {
       setWorkspace(created);
       setBusy("Retrieving sources");
       const ingestResult = await api.ingest(created.id);
+      created.ingestion_warnings = ingestResult.ingestion_warnings ?? [];
+      setWorkspace({ ...created });
       setWorkflowStatus("extracting fields");
       const [indexed, extracted, generatedBrief, report] = await Promise.all([
         api.sources(created.id),
@@ -208,7 +227,8 @@ export default function Home() {
       ]);
       if (indexed.length === 0) {
         setBusy("Retrieving sources");
-        await api.ingest(target.id);
+        const ingested = await api.ingest(target.id);
+        target = { ...target, ingestion_warnings: ingested.ingestion_warnings ?? [] };
         [indexed, extracted, generatedBrief, report] = await Promise.all([
           api.sources(target.id),
           api.extractions(target.id),
@@ -250,7 +270,7 @@ export default function Home() {
   async function ask() {
     if (!workspace || busy || question.trim().length < 3) return;
     setError(null);
-    setBusy("Synthesizing from evidence table");
+    setBusy("Preparing your answer");
     try {
       const response = await api.ask(workspace.id, question.trim(), sourceTypesForAsk, "workspace", null, answer?.id);
       setAnswer(response);
@@ -330,7 +350,9 @@ export default function Home() {
   }
 
   return (
+    <MotionConfig reducedMotion="user">
     <main className="triallens-shell min-h-screen overflow-x-clip">
+      <a className="skip-link" href="#workspace">Skip to workspace</a>
       <FixedInstrumentationHeader
         activeTab={activeTab}
         busy={busy}
@@ -348,7 +370,7 @@ export default function Home() {
           <WorkspaceLauncher
             busy={busy}
             condition={condition}
-            error={error}
+            error={workspace ? null : error}
             intervention={intervention}
             recentWorkspaces={recentWorkspaces}
             onBuildWorkspace={buildWorkspace}
@@ -369,20 +391,23 @@ export default function Home() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
         >
-        <Tabs value={activeTab} onValueChange={(value) => selectWorkspaceTab(value as WorkspaceTab)} orientation="vertical" className="workspace-shell">
+        {workspace && <div className="workspace-context"><span>Research focus</span><h2>{workspace.condition}{workspace.intervention ? ` · ${workspace.intervention}` : ""}</h2><p>{totalSources} sources · {extractions.length} evidence rows</p></div>}
+        {workspace?.ingestion_warnings?.length ? <Alert className="workspace-issue"><CircleAlert aria-hidden="true" /><AlertTitle>Evidence coverage</AlertTitle><AlertDescription><ul>{workspace.ingestion_warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></AlertDescription></Alert> : null}
+        {error && workspace && <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="workspace-issue"><AlertTitle>Action could not be completed</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
+        <Tabs value={activeTab} onValueChange={(value) => selectWorkspaceTab(value as WorkspaceTab)} orientation={compactWorkspace ? "horizontal" : "vertical"} className="workspace-shell">
           <TabsList className="workspace-rail" aria-label="Workspace views">
-            <TabsTrigger value="table" className="workspace-rail-item"><Filter /> Evidence</TabsTrigger>
-            <TabsTrigger id="ask" value="ask" className="workspace-rail-item"><MessageSquareText /> Ask</TabsTrigger>
-            <TabsTrigger id="sources" value="sources" className="workspace-rail-item"><BookOpen /> Sources</TabsTrigger>
-            <TabsTrigger value="brief" className="workspace-rail-item"><FlaskConical /> Brief</TabsTrigger>
-            <TabsTrigger value="reliability" className="workspace-rail-item"><Activity /> Reliability</TabsTrigger>
+            <TabsTrigger value="table" className="workspace-rail-item"><Filter aria-hidden="true" /> Evidence</TabsTrigger>
+            <TabsTrigger id="ask" value="ask" className="workspace-rail-item"><MessageSquareText aria-hidden="true" /> Ask</TabsTrigger>
+            <TabsTrigger id="sources" value="sources" className="workspace-rail-item"><BookOpen aria-hidden="true" /> Sources</TabsTrigger>
+            <TabsTrigger value="brief" className="workspace-rail-item"><FlaskConical aria-hidden="true" /> Brief</TabsTrigger>
+            <TabsTrigger value="reliability" className="workspace-rail-item"><Activity aria-hidden="true" /> Reliability</TabsTrigger>
           </TabsList>
 
           <TabsContent value="table" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
-                  <Filter data-icon="inline-start" /> Evidence extraction table
+                  <Filter aria-hidden="true" data-icon="inline-start" /> Evidence extraction table
                 </CardTitle>
                 <CardDescription className="text-ink/68">
                   Each row is a source-level extraction. Use Inspect for the supporting quote, extracted fields, and original source.
@@ -401,13 +426,13 @@ export default function Home() {
                   <LoadingRows />
                 ) : !extractions.length ? (
                   <Alert>
-                    <Search data-icon="inline-start" />
+                    <Search aria-hidden="true" data-icon="inline-start" />
                     <AlertTitle>No extraction table yet</AlertTitle>
                     <AlertDescription>Create a workspace to retrieve sources and extract structured evidence rows.</AlertDescription>
                   </Alert>
                 ) : filteredExtractions.length === 0 ? (
                   <Alert className="border-ink/15 bg-paper/80 text-ink">
-                    <Filter data-icon="inline-start" />
+                    <Filter aria-hidden="true" data-icon="inline-start" />
                     <AlertTitle>No rows match these filters</AlertTitle>
                     <AlertDescription className="flex flex-col gap-3 text-ink/68">
                       <span>Try a broader source type, include all review states, or turn off the quantitative-result filter.</span>
@@ -490,13 +515,14 @@ export default function Home() {
                   <AnswerPanel answer={answer} extractions={extractions} onInspect={setSelectedRow} />
                   <div><Button variant="outline" disabled={Boolean(busy)} onClick={() => saveToBrief(answer, !answer.saved_to_brief)}>{answer.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button></div>
                 </>}
-                {busy === "Synthesizing from evidence table" && <p role="status" className="text-sm text-ink/68">{usage?.provider === "ollama" ? "Reading sources on your Mac… Local answers can take about a minute, especially while the model loads." : "Reading sources and preparing your answer…"}</p>}
+                {busy === "Preparing your answer" && <AnswerProgress local={usage?.provider === "ollama"} />}
                 <div className="ask-composer">
                   <label htmlFor="ask-question" className="flex flex-col gap-2 text-sm font-semibold text-ink">
                     {answer ? "Ask a follow-up" : "Research question"}
                     <Textarea
                       id="ask-question"
                       value={question}
+                      disabled={busy === "Preparing your answer"}
                       onChange={(event) => setQuestion(event.target.value)}
                       onKeyDown={(event) => {
                         if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
@@ -513,7 +539,7 @@ export default function Home() {
                       {askFilter === "all" ? "Searching all indexed sources" : `Searching ${sourceLabels[askFilter]}`} · Ctrl/⌘ + Enter to ask
                     </p>
                     <Button onClick={ask} disabled={!isReady || Boolean(busy) || question.trim().length < 3} className="rounded-sm bg-ink text-paper hover:bg-moss">
-                      <MessageSquareText data-icon="inline-start" /> {answer ? "Ask follow-up" : "Answer with citations"}
+                      <MessageSquareText aria-hidden="true" data-icon="inline-start" /> {answer ? "Ask follow-up" : "Answer with citations"}
                     </Button>
                   </div>
                 </div>
@@ -525,7 +551,7 @@ export default function Home() {
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
-                  <BookOpen data-icon="inline-start" /> Source explorer
+                  <BookOpen aria-hidden="true" data-icon="inline-start" /> Source explorer
                 </CardTitle>
                 <CardDescription className="text-ink/68">Inspect normalized source records and open original PubMed, ClinicalTrials.gov, or FDA pages.</CardDescription>
               </CardHeader>
@@ -536,6 +562,7 @@ export default function Home() {
                     <article key={source.id} className="source-card p-4 transition hover:-translate-y-0.5">
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <Badge variant="secondary">{sourceLabels[source.source_type]}</Badge>
+                        {source.external_id.toUpperCase().includes("DEMO") && <Badge variant="outline">Demo evidence</Badge>}
                         {source.phase && <Badge variant="outline">{source.phase}</Badge>}
                         {source.status && <Badge variant="outline">{source.status}</Badge>}
                       </div>
@@ -548,7 +575,7 @@ export default function Home() {
                             rel="noreferrer"
                             className="inline-flex h-7 shrink-0 items-center gap-1 rounded-lg border border-border bg-background px-2.5 text-[0.8rem] font-medium text-foreground transition hover:bg-muted"
                           >
-                            Open <ExternalLink data-icon="inline-end" />
+                            Open <ExternalLink aria-hidden="true" data-icon="inline-end" />
                           </a>
                         ) : null}
                       </div>
@@ -574,7 +601,7 @@ export default function Home() {
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
-                  <FlaskConical data-icon="inline-start" /> Evidence brief
+                  <FlaskConical aria-hidden="true" data-icon="inline-start" /> Evidence brief
                 </CardTitle>
                 <CardDescription className="text-ink/68">Collect the answers worth keeping, check outstanding evidence gaps, and export a research handoff.</CardDescription>
               </CardHeader>
@@ -637,7 +664,7 @@ export default function Home() {
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
-                  <Activity data-icon="inline-start" /> Reliability checks
+                  <Activity aria-hidden="true" data-icon="inline-start" /> Reliability checks
                 </CardTitle>
                 <CardDescription className="text-ink/68">Human-readable checks for retrieval, extraction coverage, citation support, and abstention.</CardDescription>
               </CardHeader>
@@ -695,6 +722,7 @@ export default function Home() {
 
       <CitationSheet row={selectedRow} onOpenChange={(open) => !open && setSelectedRow(null)} onReview={markRow} />
     </main>
+    </MotionConfig>
   );
 }
 
@@ -722,7 +750,8 @@ function writeCachedWorkspaces(items: Workspace[]) {
 function mergeRecentWorkspaces(primary: Workspace[], secondary: Workspace[]) {
   const byKey = new Map<string, Workspace>();
   for (const item of [...primary, ...secondary]) {
-    byKey.set(`${item.condition.toLowerCase()}::${item.intervention?.toLowerCase() ?? ""}`, item);
+    const key = `${item.condition.toLowerCase()}::${item.intervention?.toLowerCase() ?? ""}`;
+    if (!byKey.has(key)) byKey.set(key, item);
   }
   return Array.from(byKey.values()).slice(0, 4);
 }
@@ -730,7 +759,7 @@ function mergeRecentWorkspaces(primary: Workspace[], secondary: Workspace[]) {
 function workspaceErrorMessage(err: unknown, fallback = "Something went wrong while building the workspace.") {
   const message = err instanceof Error ? err.message : fallback;
   if (message === "Failed to fetch" || message.includes("fetch failed")) {
-    return "Could not reach the TrialLens API at http://localhost:8000. Start the FastAPI backend, then create the workspace again.";
+    return "Could not reach the research service. Check your connection and try again.";
   }
   return message || fallback;
 }
@@ -775,7 +804,7 @@ function FixedInstrumentationHeader({
       <div className="field-header-inner">
         <a href="#home" className="field-brand" aria-label="TrialLens home">
           <span className="field-brand-mark" aria-hidden="true">
-            <FileSearch />
+            <FileSearch aria-hidden="true" />
           </span>
           <span>TrialLens</span>
         </a>
@@ -787,7 +816,7 @@ function FixedInstrumentationHeader({
               className="nav-link"
               href={item.href}
               aria-current={activeTab === item.tab ? "page" : undefined}
-              onClick={() => onNavigate(item.tab)}
+              onClick={(event) => { event.preventDefault(); window.history.replaceState(null, "", item.href); onNavigate(item.tab); }}
             >
               {item.label}
             </a>
@@ -821,6 +850,7 @@ function ThemeToggle() {
     document.documentElement.classList.toggle("dark", next === "dark");
     document.documentElement.classList.toggle("light", next === "light");
     document.cookie = `triallens.theme=${next}; path=/; max-age=31536000; samesite=lax`;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Synchronize the browser preference with the hydrated theme control.
     setTheme(next);
   }, []);
 
@@ -848,6 +878,20 @@ function ThemeToggle() {
       <Moon className="theme-icon theme-icon-moon" aria-hidden="true" />
     </button>
   );
+}
+
+function AnswerProgress({ local }: { local: boolean }) {
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    const started = Date.now();
+    const timer = window.setInterval(() => setElapsed(Math.floor((Date.now() - started) / 1000)), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  return <div className="answer-progress">
+    <Loader2 aria-hidden="true" className="animate-spin" />
+    <div><p role="status">Reading sources and checking your answer</p><p>{local ? "Running locally. Longer questions can take a minute or two." : "Preparing a response from the sources in this workspace."} You can browse the other workspace views while you wait.</p></div>
+    <span aria-label={`${elapsed} seconds elapsed`}>{elapsed}s</span>
+  </div>;
 }
 
 function HeroParallaxScene() {
@@ -909,7 +953,7 @@ function WorkspaceLauncher({
         <p>Choose a condition and optional intervention. TrialLens gathers sources and extracts inspectable rows.</p>
       </div>
       {error && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="mb-4">
           <AlertTitle>Workspace issue</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -941,9 +985,9 @@ function WorkspaceLauncher({
           size="lg"
           className="build-workspace-button"
         >
-          {busy ? <Loader2 className="animate-spin" data-icon="inline-start" /> : null}
+          {busy ? <Loader2 aria-hidden="true" className="animate-spin" data-icon="inline-start" /> : null}
           <span>{busy ?? "Build workspace"}</span>
-          <ArrowRight data-icon="inline-end" />
+          <ArrowRight aria-hidden="true" data-icon="inline-end" />
         </Button>
       </div>
       {recentWorkspaces.length > 0 && (
@@ -1029,7 +1073,7 @@ function EvidenceFilters({
   return (
     <div className="flex flex-col gap-3 rounded-sm border border-ink/10 bg-paper/60 p-3">
       <div>
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/68">Source type</p>
+        <h3 className="mb-2 text-xs font-semibold text-ink/68">Source type</h3>
         <div className="flex flex-wrap gap-1.5">
         {sourceFilterOptions.map((option) => (
           <FilterButton
@@ -1045,9 +1089,9 @@ function EvidenceFilters({
         </div>
       </div>
       <div>
-        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/68">Review state</p>
+        <h3 className="mb-1 text-xs font-semibold text-ink/68">Review state</h3>
         <p className="mb-2 text-xs leading-5 text-ink/62">
-          Use "Mark checked" on a study row after you inspect it. Low confidence means TrialLens thinks the extraction needs human review.
+          Use &quot;Mark checked&quot; on a study row after you inspect it. Low confidence means TrialLens thinks the extraction needs human review.
         </p>
         <div className="flex flex-wrap gap-1.5">
           {[
@@ -1102,7 +1146,7 @@ function FilterButton({
       )}
       onClick={onClick}
     >
-      {active && <CheckCircle2 data-icon="inline-start" />}
+      {active && <CheckCircle2 aria-hidden="true" data-icon="inline-start" />}
       {children}
     </Button>
   );
@@ -1134,6 +1178,7 @@ function EvidenceTable({
               <div className="flex flex-col gap-2">
                 <div className="flex flex-wrap gap-1">
                   <Badge variant="secondary">{sourceLabels[row.source_type]}</Badge>
+                  {row.external_id.toUpperCase().includes("DEMO") && <Badge variant="outline">Demo evidence</Badge>}
                   {row.status && <Badge variant="outline">{row.status}</Badge>}
                   {row.phase && <Badge variant="outline">{row.phase}</Badge>}
                   {row.has_quantitative_result && <Badge>quant</Badge>}
@@ -1150,12 +1195,12 @@ function EvidenceTable({
               <div className="flex flex-wrap items-center gap-1.5">
                 <Tooltip>
                   <TooltipTrigger render={<Badge variant={row.review_status === "needs_review" ? "destructive" : "outline"} />}>
-                    {Math.round(row.confidence * 100)}%
+                    {reviewLabel(row.review_status)}
                   </TooltipTrigger>
-                  <TooltipContent>Review status: {row.review_status.replace("_", " ")}</TooltipContent>
+                  <TooltipContent>Extraction review status. Automated extraction is not an independent evidence review.</TooltipContent>
                 </Tooltip>
                 {row.review_status === "reviewed" ? (
-                  <Badge className="bg-moss text-paper">Checked</Badge>
+                  null
                 ) : (
                   <Button type="button" size="xs" variant="outline" className="h-6 rounded-sm bg-paper/75 px-2 text-xs" onClick={() => onReview(row, "reviewed")}>
                     Mark checked
@@ -1176,7 +1221,7 @@ function EvidenceTable({
                     className="inline-flex h-7 max-w-full items-center gap-1 rounded-sm border border-ink/15 bg-paper px-2 text-[0.8rem] font-semibold text-ink transition hover:border-moss hover:bg-fog"
                   >
                     <span>Open source</span>
-                    <ExternalLink className="size-3.5 shrink-0" data-icon="inline-end" />
+                    <ExternalLink aria-hidden="true" className="size-3.5 shrink-0" data-icon="inline-end" />
                   </a>
                 ) : (
                   <span className="inline-flex rounded-sm border border-ink/10 px-2 py-1 text-xs text-ink/68">No source link</span>
@@ -1212,7 +1257,7 @@ function AnswerPanel({
   const uncertainty = safeList(answer.uncertainty);
   const citations = safeList(answer.citations);
   const retrievedChunks = safeList(answer.retrieved_chunks);
-  const caveats = Array.from(new Set([...uncertainty, ...safetyLimitations])).slice(0, 1);
+  const caveats = answer.generation_mode === "conversational" ? uncertainty.slice(0, 1) : Array.from(new Set([...uncertainty, ...safetyLimitations])).slice(0, 1);
   const answerMethodCount = answerTrace.length + facetCoverage.length + evidenceQuality.length + evidenceMap.length + reasoningSummary.length;
 
   return (
@@ -1246,7 +1291,7 @@ function AnswerPanel({
       <div className="answer-boundary">
         <section aria-labelledby="answer-boundary-title">
           <h4 id="answer-boundary-title"><CircleAlert aria-hidden="true" /> Evidence boundary</h4>
-          <p>{caveats[0] || "No additional uncertainty note was returned for this answer."}</p>
+          <p>{caveats[0] || "This answer is limited to the indexed source excerpts. Check the original sources for full context."}</p>
         </section>
       </div>
 
@@ -1466,7 +1511,7 @@ function CitationSheet({
                   rel="noreferrer"
                   className="mt-3 inline-flex h-8 w-fit items-center gap-1 rounded-sm border border-ink/15 bg-ink px-3 text-sm font-semibold text-paper transition hover:bg-ink/85"
                 >
-                  Open original source <ExternalLink data-icon="inline-end" />
+                  Open original source <ExternalLink aria-hidden="true" data-icon="inline-end" />
                 </a>
               ) : (
                 <span className="mt-3 inline-flex h-8 w-fit items-center rounded-sm border border-ink/10 px-3 text-sm font-semibold text-ink/68">
@@ -1478,8 +1523,9 @@ function CitationSheet({
               <div className="flex flex-col gap-4 py-4">
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">{sourceLabels[row.source_type]}</Badge>
+                  {row.external_id.toUpperCase().includes("DEMO") && <Badge variant="outline">Demo evidence</Badge>}
                   <Badge variant={row.review_status === "needs_review" ? "destructive" : "outline"}>{reviewLabel(row.review_status)}</Badge>
-                  <Badge variant="outline">{Math.round(row.confidence * 100)}% confidence</Badge>
+                  <Badge variant="outline">Automated extraction estimate: {Math.round(row.confidence * 100)}%</Badge>
                 </div>
                 <Separator />
                 <ListField label="TrialLens source understanding" items={row.source_understanding} empty="No source-understanding profile was stored for this row." />

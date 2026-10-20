@@ -180,3 +180,60 @@ test("keeps the mobile evidence workspace within the viewport", async ({ page })
   await expect(sourcesTab).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel", { name: "Sources" })).toContainText("Source explorer");
 });
+
+test("matches tab keyboard direction to the responsive workspace", async ({ page }) => {
+  const evidence = page.getByRole("tab", { name: "Evidence", exact: true });
+  const ask = page.getByRole("tab", { name: "Ask", exact: true });
+  await expect(page.getByRole("tablist")).toHaveAttribute("aria-orientation", "vertical");
+  await evidence.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(ask).toBeFocused();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('[data-slot="tabs"]')).toHaveAttribute("data-orientation", "horizontal");
+  await evidence.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(ask).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(ask).toHaveAttribute("aria-selected", "true");
+});
+
+test("keeps failed Ask requests recoverable in the workspace", async ({ page }) => {
+  await page.locator(".recent-workspace-button").first().click();
+  await expect(page.locator(".workspace-context")).toBeVisible({ timeout: 20_000 });
+  await page.route("**/workspaces/*/ask", (route) => route.fulfill({
+    status: 503,
+    contentType: "application/json",
+    body: JSON.stringify({ detail: "The local model is busy. Try again in a moment." }),
+  }));
+  await page.getByRole("tab", { name: "Ask", exact: true }).click();
+  await page.locator("#ask-question").fill("What does the evidence show?");
+  await page.getByRole("button", { name: "Answer with citations", exact: true }).click();
+  const issue = page.locator("#workspace-issue");
+  await expect(issue).toContainText("The local model is busy. Try again in a moment.");
+  await expect(issue).toBeFocused();
+  await expect(page.locator("#ask-question")).toHaveValue("What does the evidence show?");
+  await expect(page.getByRole("button", { name: "Answer with citations", exact: true })).toBeEnabled();
+});
+
+test("reopens the newest workspace instead of a stale cached duplicate", async ({ page }) => {
+  const older = { id: "cached-old", condition: "cache regression topic", intervention: "example", source_types: [], status: "created", created_at: "2026-01-01T00:00:00Z" };
+  const newer = { ...older, id: "server-new", created_at: "2026-10-20T00:00:00Z" };
+  await page.evaluate((item) => localStorage.setItem("triallens.recentWorkspaces", JSON.stringify([item])), older);
+  await page.route("**/api/workspaces", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify([newer, older]) }));
+  await page.reload();
+  const target = page.locator(".recent-workspace-button").filter({ hasText: "cache regression topic" });
+  await expect(target).toHaveCount(1);
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("triallens.recentWorkspaces") || "[]")[0]?.id)).toBe("server-new");
+});
+
+test("keeps a conversational evidence boundary readable without uncertainty notes", async ({ page }) => {
+  await page.locator(".recent-workspace-button").first().click();
+  await expect(page.locator(".workspace-context")).toBeVisible({ timeout: 20_000 });
+  await page.route("**/workspaces/*/ask", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...answerFixture, generation_mode: "conversational", uncertainty: [], safety_limitations: ["Raw extracted safety fragment"] }) }));
+  await page.getByRole("tab", { name: "Ask", exact: true }).click();
+  await page.locator("#ask-question").fill("Explain the findings simply");
+  await page.getByRole("button", { name: "Answer with citations", exact: true }).click();
+  const boundary = page.locator(".answer-boundary");
+  await expect(boundary).toContainText("This answer is limited to the indexed source excerpts.");
+  await expect(boundary).not.toContainText("Raw extracted safety fragment");
+});

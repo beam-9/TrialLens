@@ -1,38 +1,44 @@
-# TrialLens product review
+# TrialLens product assessment
 
-Review method: independent design assessment (design_review) and detector/browser assessment (design_evidence), followed by implementation and functional verification. Baseline UX score: 24/40. The detector returned zero findings; that did not prove the product flows worked well. The browser detector overlay was unavailable because the supported browser evaluation API is read-only. No overlay server or temporary overlay artifacts were created.
+Assessment updated 20 October 2026. Reviewed the current implementation and iterated with separate chat-quality, design/browser, and deployment agents. This report supersedes the September prototype assessment; retained evaluation traces include earlier failures so improvements are inspectable.
 
 ## Purpose and what to keep
 
-TrialLens should help a researcher move from a biomedical question to an understandable answer with inspectable support, then retain useful conclusions for a research handoff. Keep the source-level extraction table, citations, review controls, document inspection, recent workspaces, keyboard submission, mineral palette, restrained teal, and condensed section headings. These provide a distinct and useful evidence-navigation foundation.
+TrialLens helps biomedical researchers move from a question to understandable, inspectable evidence, then retain useful findings for a research handoff. Its strongest features are the source-level evidence table, supporting passages, citations, review controls, document inspection, recent workspaces and saved-answer brief. Keep the mineral palette, restrained teal and condensed headings: a quiet research utility suits this task.
 
-## Problems and changes
+The product is an evidence navigation workspace. Indexed abstracts, registry descriptions and regulatory excerpts are a bounded source set, not a comprehensive literature review or a clinical treatment recommendation. Accurate writing must preserve that distinction.
 
-- **P1: Chat was a sentence/template assembler.** It could output incomplete fragments while looking like a synthesized answer. Added an optional language-model generation layer instructed to explain findings conversationally and respond to follow-ups. Citations are checked against supplied records; copied 28-word runs, invalid structure, and incomplete responses trigger a visibly labeled fallback. This checks provenance and formatting, not semantic correctness.
-- **P1: Follow-ups had no memory.** Answers now persist and remain available in the interface. Server-owned answer chains provide up to six prior turns; referential retrieval retains earlier research questions. New conversation and source-scope changes establish fresh context. Scope and workspace membership are validated on the backend.
-- **P1: Source filters leaked.** The selected type previously filtered retrieved chunks but left all extraction rows eligible for synthesis. The endpoint now applies scope to sources, chunks, and extraction rows together.
-- **P1: Brief duplicated abstracts.** Replaced arbitrary first-abstract snippets with deliberately saved answers, current review gaps, next steps, cited source links, and Markdown export. Saved material is clearly described as working notes.
-- **P1: Reliability looked measured.** Static percentages are now labeled targets and scenario statuses are unmeasured. They are not evidence of accuracy.
-- **P2: Research scope was easy to lose.** Ask now displays the condition/intervention and its own explicit source selector.
-- **P2: Generic FDA links overpromised.** Answer links to API documentation are now labeled source documentation. Some ingested FDA records still lack a record-specific URL; improve this in ingestion before promising complete original-document provenance.
+## Completion assessment
 
-## Verification
+The core workflow is implemented, including persistent question history, source-scoped follow-ups, citation inspection, reversible saved notes and Markdown export. The Brief now serves a distinct purpose: a researcher selects useful answers, sees current review gaps and next steps, and exports working notes. It no longer duplicates the first abstracts automatically.
 
-- 38 backend tests pass, including provider timeout/unavailable mode, output validation, invented citations, copied passages, follow-up retrieval, source-scope enforcement, cross-workspace rejection, save/remove brief lifecycle, and current review counts.
-- TypeScript and production build pass. Google Fonts require network during build.
-- Browser exercised existing workspace, Ask, saving to brief, and follow-up retention with the real local API. Console showed no warnings/errors during this flow. The downloaded Markdown was inspected and contains the saved answer, citations, generation mode, gaps, and next steps.
-- Independent baseline browser assessment covered desktop and mobile. Mobile navigation relies on horizontal scrolling and its last items are not initially visible. The source diagram is partially obscured by the launcher; these are lower-priority design follow-ups.
+The next appropriate milestone is a **trusted private pilot**. A public multiuser launch still needs a chosen inference host and protected access architecture, plus deployment-host smoke tests. The shared installation has no accounts or workspace ownership. Publishing a frontend alone does not make the local model available. An arbitrary completion percentage would hide these concrete gates.
 
-## Local model and answer-quality review
+## Functionality and trust improvements
 
-The user chose local generation after an OpenAI request returned `credit_balance_exhausted`. Ollama 0.32.14 and Qwen3 8B (approximately 5.2 GB) are installed on the development Mac with 16 GB RAM. Local generation is the default. The launcher starts a loopback-only runtime with cloud features disabled; the client sends no authorization header and never falls back to a paid provider. Tests cover those boundaries and reject cloud model tags.
+- **Conversational Ask:** local Qwen3.5 9B drafts and revises against supplied evidence, supports follow-ups, validates exact citation identifiers and rejects long copied passages. Invalid or unavailable generation visibly falls back to source excerpts. It never automatically switches to paid generation.
+- **Open-ended retrieval:** broad summaries diversify relevant sources before truncation; combined benefit/safety questions retrieve both facets. Narrow question rankings and source filters remain covered by regressions.
+- **Clarification and limits:** unresolved comparisons ask which treatments the user means. Unsupported questions can give conversational explanations of what is missing. Numerical fidelity, product identity, absent outcomes and contradictory findings are checked with live diagnostic fixtures; see the separate semantic review for actual results and remaining errors.
+- **Usage:** the persistent 100-generated-answer alert remains. Successful local answers count at zero API cost. Optional paid mode retains the US$0.10 cumulative cap. Single-process admission control prevents overlapping local generations from queuing indefinitely.
+- **Evidence discovery:** empty searches never manufacture demo records. Source-service failures are distinguished from no matches and reported as coverage warnings. A failed empty refresh preserves existing evidence.
+- **Provenance:** new FDA records use stable identifiers and exact API record links, retain safety/clinical-study sections and label metadata. PubMed XML parsing preserves inline text and numerical values. Old source snapshots are not silently relabeled as newly fetched evidence.
+- **Persistence:** full mutations hold a process file lock; complete snapshots replace JSON atomically. Concurrent saves preserve all records in the regression. Identical-source refreshes retain source IDs and reviewed extraction corrections; changed evidence requires fresh review.
+- **Interface:** current research focus stays visible, actionable errors appear at the workspace, local generation has honest elapsed feedback, mobile tabs use matching keyboard orientation and controls have comfortable touch targets. Reduced motion and keyboard focus are respected.
+- **Deployment path:** browser requests use a same-origin server proxy. Compose packages a private shared installation with persistent data/model volumes and only a loopback web port. Instructions cover provisioning, access protection, backups and rollback.
 
-The persistent 100-generated-answer alert includes successful local answers at zero API cost. Optional OpenAI mode retains the separate US$0.10 cumulative cap; switching providers does not reset it. Local test answers count toward the alert.
+## Verification and limits
 
-Live testing uses a temporary copy of the existing metformin workspace, preserving its saved answers. Initial tests found clinically meaningful wording errors: combination-label warnings were attributed to metformin alone, and “not studied” became “not recommended.” Citation formatting checks did not catch these semantic errors. Instructions were tightened to preserve product identity, distinguish missing information from contraindications, recheck prior claims, and keep citations attached to the source that supports each claim. These are prompt mitigations, not a proof of medical reliability.
+67 backend tests, 8 production-browser regressions, ESLint, TypeScript and a clean-install production build pass. Manual browser checks also verified source inspection, Brief save/export/remove and restored QA flags. Browser evidence is recorded in the linked design review. Production dependencies report zero published advisories; nine build/lint-toolchain advisories remain documented separately in the deployment review. Structural validation and passing mocked-provider tests are not measurements of biomedical accuracy. The real local-model diagnostic cases are small and partly synthetic; they do not justify an accuracy percentage.
 
-Final live rerun: all three responses passed structural validation and were conversational, taking 48, 58, and 94 seconds. API spend remained US$0.00. Semantic review still failed: the model repeated the pancreatitis restriction error and combination-product attribution errors despite the updated prompt. These answers are not evidence that chat quality is resolved; further model or grounding changes are required before deployment. Six successful local test generations are recorded in the persistent counter.
+The JSON store is suitable for the current small shared pilot after its locking fixes; a transactional, ownership-aware database remains the better public multiuser architecture. Ingestion is bounded (currently five PubMed matches, five registry summaries and three labels), registry posted-results tables are not ingested, and full papers may contain decisive information absent from abstracts.
 
-Local generation is appropriate for a research prototype with source inspection. Public release still needs a representative semantic evaluation, including numerical fidelity, contradictory sources, missing evidence, and follow-up accuracy. Static reliability targets are not measured accuracy. Public hosting also needs its own inference architecture: deploying the frontend cannot connect visitors to this Mac's loopback model.
+The four QA-generated browser answers are visibly marked with their failed or partial semantic review and remain unsaved; original user answers were preserved.
 
-The JSON store remains a local prototype without authentication, multi-process transactional writes, or deployment-specific rate limiting. These need a deployment architecture decision when deployment starts; this review does not claim public-production readiness.
+No public deployment was performed. Docker configuration is validated, but the Docker daemon was unavailable for image/startup/restore testing. A chosen host must pass real inference, restart/persistence, access-boundary and slow/error-path checks before users are invited.
+
+## Detailed evidence
+
+- [Chat quality and retained semantic failures](chat-quality-review.md)
+- [Design and browser review](design-review-2026-10.md)
+- [Deployment readiness and release gates](deployment-readiness.md)
+- [Private pilot operations](private-pilot.md)

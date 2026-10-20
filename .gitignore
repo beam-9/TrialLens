@@ -26,3 +26,6 @@ apps/api/data/
 graphify-out/
 .impeccable/review/
 .impeccable/mocks/
+
+# Private deployment snapshots
+backups/
