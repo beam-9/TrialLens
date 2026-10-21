@@ -1,0 +1,177 @@
+{
+  "workspace": {
+    "id": "m0-numerical",
+    "condition": "evaluation condition",
+    "intervention": "intervention A",
+    "source_types": [
+      "pubmed"
+    ],
+    "created_at": "2026-10-20T00:00:00+00:00",
+    "updated_at": "2026-10-20T00:00:00+00:00",
+    "status": "ingested",
+    "ingestion_warnings": []
+  },
+  "sources": [
+    {
+      "id": "m0-numerical-source-1",
+      "workspace_id": "m0-numerical",
+      "source_type": "pubmed",
+      "external_id": "EVAL-NUMBERS",
+      "title": "Synthetic evaluation fixture: randomized trial",
+      "abstract": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+      "url": null,
+      "publication_date": null,
+      "status": null,
+      "phase": null,
+      "metadata": {
+        "demo": true
+      },
+      "created_at": "2026-10-20T00:00:00+00:00"
+    }
+  ],
+  "chunks": [
+    {
+      "id": "m0-numerical-chunk-1",
+      "workspace_id": "m0-numerical",
+      "source_id": "m0-numerical-source-1",
+      "source_type": "pubmed",
+      "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+      "citation": "PubMed:EVAL-NUMBERS",
+      "section": "summary",
+      "embedding": [
+        0.0,
+        0.0,
+        0.0,
+        -0.114708,
+        0.114708,
+        0.0,
+        0.0,
+        0.0,
+        0.114708,
+        0.229416,
+        0.0,
+        -0.229416,
+        0.114708,
+        -0.229416,
+        0.114708,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.114708,
+        0.0,
+        -0.114708,
+        0.114708,
+        0.0,
+        0.0,
+        0.114708,
+        0.0,
+        0.114708,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.114708,
+        0.0,
+        -0.114708,
+        0.114708,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.229416,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.229416,
+        -0.344124,
+        0.0,
+        0.229416,
+        0.0,
+        0.0,
+        -0.114708,
+        -0.573539,
+        0.0,
+        0.0,
+        -0.229416,
+        0.0
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "id": "m0-numerical-extraction-1",
+      "workspace_id": "m0-numerical",
+      "source_id": "m0-numerical-source-1",
+      "source_type": "pubmed",
+      "external_id": "EVAL-NUMBERS",
+      "title": "Synthetic evaluation fixture: randomized trial",
+      "source_url": null,
+      "publication_date": null,
+      "authors": [],
+      "citation": "PubMed:EVAL-NUMBERS",
+      "population_context": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+      "intervention": "intervention A",
+      "comparator": "placebo",
+      "outcome_result": "At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+      "safety_note": "The trial does not establish effects beyond 12 weeks",
+      "supporting_quote": "At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+      "source_overview": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+      "methods_context": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+      "source_sections": [
+        "Overview: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Methods/context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Outcome/result: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+        "Safety: The trial does not establish effects beyond 12 weeks"
+      ],
+      "key_findings": [
+        "At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+        "The trial does not establish effects beyond 12 weeks"
+      ],
+      "evidence_limitations": [
+        "The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables"
+      ],
+      "source_understanding": [
+        "Source profile: Literature source record about intervention A evaluation condition; TrialLens read the indexed summary and any available structured source sections",
+        "Design/context understood: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Population/use context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Intervention context: intervention A",
+        "Comparator context: placebo",
+        "Outcome/result understood: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+        "Safety context understood: The trial does not establish effects beyond 12 weeks",
+        "Primary extracted signal: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)"
+      ],
+      "source_passages": [
+        "Overview: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Methods/context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Population: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Outcome/result: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+        "Safety: The trial does not establish effects beyond 12 weeks",
+        "Source section: Overview: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Source section: Methods/context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Source section: Outcome/result: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)"
+      ],
+      "field_evidence": {
+        "Population / context": "Population: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Intervention": "Methods/context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Comparator": "Methods/context: In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo",
+        "Outcome / result": "Outcome/result: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)",
+        "Safety note": "Safety: The trial does not establish effects beyond 12 weeks"
+      },
+      "confidence": 0.94,
+      "review_status": "unreviewed",
+      "has_quantitative_result": false,
+      "status": null,
+      "phase": null,
+      "created_at": "2026-10-20T00:00:00+00:00"
+    }
+  ]
+}

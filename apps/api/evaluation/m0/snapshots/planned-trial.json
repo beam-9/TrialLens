@@ -1,0 +1,177 @@
+{
+  "workspace": {
+    "id": "m0-planned-trial",
+    "condition": "evaluation condition",
+    "intervention": "intervention A",
+    "source_types": [
+      "clinical_trials"
+    ],
+    "created_at": "2026-10-20T00:00:00+00:00",
+    "updated_at": "2026-10-20T00:00:00+00:00",
+    "status": "ingested",
+    "ingestion_warnings": []
+  },
+  "sources": [
+    {
+      "id": "m0-planned-trial-source-1",
+      "workspace_id": "m0-planned-trial",
+      "source_type": "clinical_trials",
+      "external_id": "EVAL-PROTOCOL",
+      "title": "Synthetic evaluation fixture: planned trial",
+      "abstract": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+      "url": null,
+      "publication_date": null,
+      "status": null,
+      "phase": null,
+      "metadata": {
+        "demo": true
+      },
+      "created_at": "2026-10-20T00:00:00+00:00"
+    }
+  ],
+  "chunks": [
+    {
+      "id": "m0-planned-trial-chunk-1",
+      "workspace_id": "m0-planned-trial",
+      "source_id": "m0-planned-trial-source-1",
+      "source_type": "clinical_trials",
+      "text": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+      "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+      "section": "summary",
+      "embedding": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.145865,
+        0.0,
+        0.145865,
+        0.0,
+        0.0,
+        0.145865,
+        0.0,
+        -0.29173,
+        0.145865,
+        -0.145865,
+        0.0,
+        0.0,
+        -0.29173,
+        -0.145865,
+        0.0,
+        0.145865,
+        0.145865,
+        -0.145865,
+        -0.29173,
+        0.0,
+        -0.145865,
+        0.29173,
+        0.0,
+        0.0,
+        -0.145865,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.29173,
+        0.0,
+        0.145865,
+        0.0,
+        -0.145865,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.145865,
+        -0.145865,
+        0.0,
+        0.145865,
+        0.0,
+        0.145865,
+        -0.145865,
+        -0.145865,
+        -0.29173,
+        0.0,
+        -0.29173,
+        0.0
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "id": "m0-planned-trial-extraction-1",
+      "workspace_id": "m0-planned-trial",
+      "source_id": "m0-planned-trial-source-1",
+      "source_type": "clinical_trials",
+      "external_id": "EVAL-PROTOCOL",
+      "title": "Synthetic evaluation fixture: planned trial",
+      "source_url": null,
+      "publication_date": null,
+      "authors": [],
+      "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+      "population_context": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+      "intervention": "intervention A",
+      "comparator": "placebo",
+      "outcome_result": "Recruitment has not begun and no results have been posted",
+      "safety_note": "No safety-specific note extracted from the indexed summary.",
+      "supporting_quote": "Recruitment has not begun and no results have been posted",
+      "source_overview": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+      "methods_context": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+      "source_sections": [
+        "Overview: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Methods/context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Outcome/result: Recruitment has not begun and no results have been posted"
+      ],
+      "key_findings": [
+        "Recruitment has not begun and no results have been posted",
+        "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo"
+      ],
+      "evidence_limitations": [
+        "Trial registry records can describe protocols or planned outcomes even when peer-reviewed results are unavailable",
+        "No safety-specific sentence was confidently extracted from this source"
+      ],
+      "source_understanding": [
+        "Source profile: Trial record record about intervention A evaluation condition; TrialLens read the indexed summary and any available structured source sections",
+        "Design/context understood: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Population/use context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Intervention context: intervention A",
+        "Comparator context: placebo",
+        "Outcome/result understood: Recruitment has not begun and no results have been posted",
+        "Primary extracted signal: Recruitment has not begun and no results have been posted",
+        "Use caveat: Trial registry records can describe protocols or planned outcomes even when peer-reviewed results are unavailable"
+      ],
+      "source_passages": [
+        "Overview: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Methods/context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Population: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Outcome/result: Recruitment has not begun and no results have been posted",
+        "Safety: No safety-specific note extracted from the indexed summary",
+        "Source section: Overview: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Source section: Methods/context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Source section: Outcome/result: Recruitment has not begun and no results have been posted"
+      ],
+      "field_evidence": {
+        "Population / context": "Population: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Intervention": "Methods/context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Comparator": "Methods/context: This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo",
+        "Outcome / result": "Outcome/result: Recruitment has not begun and no results have been posted",
+        "Safety note": "Safety: No safety-specific note extracted from the indexed summary"
+      },
+      "confidence": 0.86,
+      "review_status": "unreviewed",
+      "has_quantitative_result": false,
+      "status": null,
+      "phase": null,
+      "created_at": "2026-10-20T00:00:00+00:00"
+    }
+  ]
+}

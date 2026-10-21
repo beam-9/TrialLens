@@ -96,3 +96,7 @@ The browser uses the website's same-origin `/api` routes. The Next.js server con
 [Private-pilot instructions](docs/private-pilot.md) cover Docker Compose, explicit model provisioning, persistent data, backups and a protected access gateway. Compose publishes only the website on loopback. The API and local model share a network namespace. This is a shared research installation for trusted users; it has no accounts or per-user workspace isolation. A public multiuser launch needs that access architecture separately.
 
 Workspace mutations hold a process file lock and publish atomic snapshots on macOS/Linux. Keep the entire `apps/api/data` directory (or the Compose data volume), including the usage ledger. Identical-source refreshes preserve source identity and review flags; changed source content requires review again. Empty refreshes preserve existing evidence. Historical saved answers remain snapshots of the evidence used at the time.
+
+## Ask profiling baseline
+
+[M0 measurements and unresolved gates](docs/performance/baseline.md) record the native local-model baseline, frozen QA evidence and memory stop. Optional `TRIALLENS_PERF_TELEMETRY=1` emits text-free request timing; it is off by default and changes no answer settings. No model/pipeline optimization has been promoted.

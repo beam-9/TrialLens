@@ -1,0 +1,1393 @@
+{
+  "schema_version": 1,
+  "release_status": "LOCAL BASELINE",
+  "baseline_commit": "031ff95daa553d874a8c2ef36ab7b18ec96e0e0f",
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "pipeline_variant": "two_pass",
+  "environment": {
+    "ollama_version": "0.32.14",
+    "model_name": "qwen3.5:9b",
+    "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "9.7B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 4096
+    }
+  },
+  "python_version": "3.9.6",
+  "instrumented_code_sha256": "b3e26cd84943d409a35fc1b4aa0cd82f39d66b364f6b5d4b14c97753b87f00ce",
+  "settings": {
+    "think": false,
+    "temperature": 0,
+    "num_ctx": 16384,
+    "num_predict": 1800,
+    "keep_alive": "10m",
+    "httpx_timeout_per_operation_s": 180
+  },
+  "method": {
+    "boundary": "loopback HTTP API through actual FastAPI route, serialization and isolated persistence",
+    "p95": "nearest rank; small-sample estimate",
+    "cold": "model unloaded; native Ollama server and OS file caches not restarted",
+    "token_counts": "Ollama final-response counts; no character-to-token conversion",
+    "context_truncation": "27 slot records report truncated=0 and no other truncation warnings observed in native log segment. All 26 completed final-response prompt+output counts <=5067 vs16384ctx. Pre-truncation token length unknown; character budget is not a token guarantee.",
+    "store": "only frozen public snapshots, no production histories; smaller than developer store",
+    "paid_inference_api_calls": 0
+  },
+  "requests": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "sample_group": "cold_two_pass",
+      "client_wall_ms": 65232.17066699999,
+      "trace": {
+        "trace_id": "40f707ed-99de-4081-8696-85f351bfd0a4",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 12425,
+        "phases_ms": {
+          "storage_read": 5.486167,
+          "retrieval": 11.513292,
+          "extractive_synthesis": 15.683333,
+          "context_build": 0.448083,
+          "draft": 38663.328958,
+          "revision": 26479.100667,
+          "validation": 7.352125,
+          "store": 21.99575
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 16707,
+            "message_count": 2,
+            "serialized_messages_char_count": 16903,
+            "wall_ms": 38663.328958,
+            "load_duration_ns": 5879561958,
+            "prompt_eval_duration_ns": 13294334000,
+            "eval_duration_ns": 19435728000,
+            "total_duration_ns": 38648329875,
+            "prompt_eval_count": 3754,
+            "eval_count": 415,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 21.352428887665024,
+            "prompt_tokens_per_second": 282.37593549251886
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 20893,
+            "message_count": 4,
+            "serialized_messages_char_count": 21218,
+            "wall_ms": 26479.100667,
+            "load_duration_ns": 242618166,
+            "prompt_eval_duration_ns": 3409091000,
+            "eval_duration_ns": 22766090000,
+            "total_duration_ns": 26463462250,
+            "prompt_eval_count": 4596,
+            "eval_count": 471,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 20.688664588429546,
+            "prompt_tokens_per_second": 1348.1599640490676
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 65230.038792,
+        "serialization_ms": 2.371959
+      },
+      "memory_before": {
+        "at_monotonic_s": 0.422403583,
+        "pressure_level": "1",
+        "swap_usage": "total = 5120.00M  used = 3765.56M  free = 1354.44M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    15128.\nPages active:                                 302281.\nPages inactive:                               290941.\nPages speculative:                             10333.\nPages throttled:                                   0.\nPages wired down:                             189893.\nPages purgeable:                               16984.\n\"Translation faults\":                     8995379677.\nPages copy-on-write:                        24563979.\nPages zero filled:                        6661841398.\nPages reactivated:                         162756204.\nPages purged:                               17697441.\nFile-backed pages:                            204747.\nAnonymous pages:                              398808.\nPages stored in compressor:                   720093.\nPages occupied by compressor:                 187349.\nDecompressions:                            138407065.\nCompressions:                              173895791.\nPageins:                                    29718710.\nPageouts:                                     626918.\nSwapins:                                     2477933.\nSwapouts:                                    3798071."
+      },
+      "memory_after": {
+        "at_monotonic_s": 65.6667485,
+        "pressure_level": "2",
+        "swap_usage": "total = 6144.00M  used = 5762.94M  free = 381.06M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3889.\nPages active:                                  87808.\nPages inactive:                                85337.\nPages speculative:                              1230.\nPages throttled:                                   0.\nPages wired down:                             620052.\nPages purgeable:                                   2.\n\"Translation faults\":                     8996922989.\nPages copy-on-write:                        24584817.\nPages zero filled:                        6664830408.\nPages reactivated:                         163261762.\nPages purged:                               17732396.\nFile-backed pages:                             58812.\nAnonymous pages:                              115563.\nPages stored in compressor:                   969518.\nPages occupied by compressor:                 197456.\nDecompressions:                            138886776.\nCompressions:                              174748472.\nPageins:                                    30189028.\nPageouts:                                     627640.\nSwapins:                                     2483413.\nSwapouts:                                    3931027."
+      }
+    },
+    {
+      "case_id": "real-simplify",
+      "snapshot_id": "real-metformin",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 34957.666875,
+      "trace": {
+        "trace_id": "6d4458c5-88b4-429a-a428-faf3a0484f59",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 12425,
+        "phases_ms": {
+          "storage_read": 8.659292,
+          "retrieval": 12.495125,
+          "extractive_synthesis": 15.795458,
+          "context_build": 0.815375,
+          "draft": 23712.926375,
+          "revision": 11176.069292,
+          "validation": 2.227167,
+          "store": 19.309459
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 18155,
+            "message_count": 2,
+            "serialized_messages_char_count": 18361,
+            "wall_ms": 23712.926375,
+            "load_duration_ns": 234455125,
+            "prompt_eval_duration_ns": 14784862000,
+            "eval_duration_ns": 8472010000,
+            "total_duration_ns": 23702192583,
+            "prompt_eval_count": 4098,
+            "eval_count": 182,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 21.48250533226472,
+            "prompt_tokens_per_second": 277.17539737604585
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 21065,
+            "message_count": 4,
+            "serialized_messages_char_count": 21388,
+            "wall_ms": 11176.069292,
+            "load_duration_ns": 238157333,
+            "prompt_eval_duration_ns": 2442174000,
+            "eval_duration_ns": 8452075000,
+            "total_duration_ns": 11165949625,
+            "prompt_eval_count": 4696,
+            "eval_count": 175,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 20.704974813877065,
+            "prompt_tokens_per_second": 1922.8769121282921
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 34955.596333,
+        "serialization_ms": 2.04075
+      },
+      "memory_before": {
+        "at_monotonic_s": 65.679455416,
+        "pressure_level": "2",
+        "swap_usage": "total = 6144.00M  used = 5762.94M  free = 381.06M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4542.\nPages active:                                  87908.\nPages inactive:                                85453.\nPages speculative:                              1230.\nPages throttled:                                   0.\nPages wired down:                             619461.\nPages purgeable:                                   2.\n\"Translation faults\":                     8996925252.\nPages copy-on-write:                        24585364.\nPages zero filled:                        6664830832.\nPages reactivated:                         163261762.\nPages purged:                               17732396.\nFile-backed pages:                             58817.\nAnonymous pages:                              115774.\nPages stored in compressor:                   969416.\nPages occupied by compressor:                 197401.\nDecompressions:                            138886887.\nCompressions:                              174748472.\nPageins:                                    30189033.\nPageouts:                                     627640.\nSwapins:                                     2483413.\nSwapouts:                                    3931027."
+      },
+      "memory_after": {
+        "at_monotonic_s": 100.64666425,
+        "pressure_level": "2",
+        "swap_usage": "total = 6144.00M  used = 5840.44M  free = 303.56M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     7331.\nPages active:                                  80624.\nPages inactive:                                77003.\nPages speculative:                              1856.\nPages throttled:                                   0.\nPages wired down:                             613744.\nPages purgeable:                                   2.\n\"Translation faults\":                     8997359369.\nPages copy-on-write:                        24593914.\nPages zero filled:                        6666605232.\nPages reactivated:                         163462304.\nPages purged:                               17743641.\nFile-backed pages:                             54936.\nAnonymous pages:                              104547.\nPages stored in compressor:                   991530.\nPages occupied by compressor:                 215142.\nDecompressions:                            139087430.\nCompressions:                              174981920.\nPageins:                                    30198143.\nPageouts:                                     627799.\nSwapins:                                     2484987.\nSwapouts:                                    3938547."
+      }
+    },
+    {
+      "case_id": "combination-identity",
+      "snapshot_id": "combination-label",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 33113.851582999996,
+      "trace": {
+        "trace_id": "ed057127-3762-40c9-923e-4df474d65d51",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 474,
+        "phases_ms": {
+          "storage_read": 6.21225,
+          "retrieval": 0.419458,
+          "extractive_synthesis": 1.424709,
+          "context_build": 0.077292,
+          "draft": 18559.159875,
+          "revision": 14516.998542,
+          "validation": 0.788,
+          "store": 20.236292
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4444,
+            "message_count": 2,
+            "serialized_messages_char_count": 4612,
+            "wall_ms": 18559.159875,
+            "load_duration_ns": 227782500,
+            "prompt_eval_duration_ns": 3502603000,
+            "eval_duration_ns": 14642731000,
+            "total_duration_ns": 18551379583,
+            "prompt_eval_count": 933,
+            "eval_count": 339,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 23.15141895319937,
+            "prompt_tokens_per_second": 266.37332292583545
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 8317,
+            "message_count": 4,
+            "serialized_messages_char_count": 8597,
+            "wall_ms": 14516.998542,
+            "load_duration_ns": 236888958,
+            "prompt_eval_duration_ns": 3005949000,
+            "eval_duration_ns": 11246279000,
+            "total_duration_ns": 14505437208,
+            "prompt_eval_count": 1698,
+            "eval_count": 253,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.496329674908477,
+            "prompt_tokens_per_second": 564.879843270794
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 33111.618875,
+        "serialization_ms": 1.491625
+      },
+      "memory_before": {
+        "at_monotonic_s": 100.662708291,
+        "pressure_level": "2",
+        "swap_usage": "total = 6144.00M  used = 5840.44M  free = 303.56M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6008.\nPages active:                                  81304.\nPages inactive:                                77584.\nPages speculative:                              1862.\nPages throttled:                                   0.\nPages wired down:                             614353.\nPages purgeable:                                   2.\n\"Translation faults\":                     8997362941.\nPages copy-on-write:                        24594464.\nPages zero filled:                        6666606149.\nPages reactivated:                         163462304.\nPages purged:                               17743641.\nFile-backed pages:                             54943.\nAnonymous pages:                              105807.\nPages stored in compressor:                   990353.\nPages occupied by compressor:                 214628.\nDecompressions:                            139088622.\nCompressions:                              174981920.\nPageins:                                    30198148.\nPageouts:                                     627799.\nSwapins:                                     2484987.\nSwapouts:                                    3938547."
+      },
+      "memory_after": {
+        "at_monotonic_s": 133.787446375,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6070.62M  free = 1097.38M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4962.\nPages active:                                  75706.\nPages inactive:                                71721.\nPages speculative:                              2228.\nPages throttled:                                   0.\nPages wired down:                             615173.\nPages purgeable:                                   2.\n\"Translation faults\":                     8997887657.\nPages copy-on-write:                        24605712.\nPages zero filled:                        6668284584.\nPages reactivated:                         163749502.\nPages purged:                               17749507.\nFile-backed pages:                             55406.\nAnonymous pages:                               94249.\nPages stored in compressor:                  1012013.\nPages occupied by compressor:                 226113.\nDecompressions:                            139335924.\nCompressions:                              175270767.\nPageins:                                    30222156.\nPageouts:                                     627992.\nSwapins:                                     2490159.\nSwapouts:                                    3957887."
+      }
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "snapshot_id": "numerical",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 25514.71112499999,
+      "trace": {
+        "trace_id": "767b7408-3f25-4018-ae21-d5f569541e3b",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 6.612959,
+          "retrieval": 0.5245,
+          "extractive_synthesis": 0.634125,
+          "context_build": 0.063708,
+          "draft": 12453.455833,
+          "revision": 13026.742459,
+          "validation": 0.688375,
+          "store": 18.771333
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4310,
+            "message_count": 2,
+            "serialized_messages_char_count": 4478,
+            "wall_ms": 12453.455833,
+            "load_duration_ns": 231368750,
+            "prompt_eval_duration_ns": 1850827000,
+            "eval_duration_ns": 10193471000,
+            "total_duration_ns": 12445517458,
+            "prompt_eval_count": 894,
+            "eval_count": 236,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 23.152074499451658,
+            "prompt_tokens_per_second": 483.0273169777618
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 7559,
+            "message_count": 4,
+            "serialized_messages_char_count": 7833,
+            "wall_ms": 13026.742459,
+            "load_duration_ns": 238252667,
+            "prompt_eval_duration_ns": 2542458000,
+            "eval_duration_ns": 10213913000,
+            "total_duration_ns": 13014137959,
+            "prompt_eval_count": 1547,
+            "eval_count": 232,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.71411554024398,
+            "prompt_tokens_per_second": 608.466295215103
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 25512.5445,
+        "serialization_ms": 1.490666
+      },
+      "memory_before": {
+        "at_monotonic_s": 133.802459333,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6070.62M  free = 1097.38M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4659.\nPages active:                                  75699.\nPages inactive:                                72135.\nPages speculative:                              2235.\nPages throttled:                                   0.\nPages wired down:                             615165.\nPages purgeable:                                   2.\n\"Translation faults\":                     8997890131.\nPages copy-on-write:                        24606271.\nPages zero filled:                        6668284948.\nPages reactivated:                         163749502.\nPages purged:                               17749507.\nFile-backed pages:                             55422.\nAnonymous pages:                               94647.\nPages stored in compressor:                  1011705.\nPages occupied by compressor:                 225993.\nDecompressions:                            139336247.\nCompressions:                              175270767.\nPageins:                                    30222169.\nPageouts:                                     627992.\nSwapins:                                     2490159.\nSwapouts:                                    3957887."
+      },
+      "memory_after": {
+        "at_monotonic_s": 159.327531625,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6262.88M  free = 905.12M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4594.\nPages active:                                  79262.\nPages inactive:                                76686.\nPages speculative:                              1342.\nPages throttled:                                   0.\nPages wired down:                             614267.\nPages purgeable:                                   2.\n\"Translation faults\":                     8998386113.\nPages copy-on-write:                        24618153.\nPages zero filled:                        6669582660.\nPages reactivated:                         163951963.\nPages purged:                               17755822.\nFile-backed pages:                             55132.\nAnonymous pages:                              102158.\nPages stored in compressor:                  1019764.\nPages occupied by compressor:                 219734.\nDecompressions:                            139558367.\nCompressions:                              175505733.\nPageins:                                    30228679.\nPageouts:                                     628102.\nSwapins:                                     2491395.\nSwapouts:                                    3970703."
+      }
+    },
+    {
+      "case_id": "numerical-simplify",
+      "snapshot_id": "numerical",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 19764.481708000007,
+      "trace": {
+        "trace_id": "e143eeb9-0cb3-4009-943d-0df0014e4db9",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 8.2315,
+          "retrieval": 0.557666,
+          "extractive_synthesis": 0.584333,
+          "context_build": 0.076417,
+          "draft": 9974.846334,
+          "revision": 9750.143625,
+          "validation": 0.734458,
+          "store": 18.846625
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 5235,
+            "message_count": 2,
+            "serialized_messages_char_count": 5413,
+            "wall_ms": 9974.846334,
+            "load_duration_ns": 235379583,
+            "prompt_eval_duration_ns": 2628133000,
+            "eval_duration_ns": 6935102000,
+            "total_duration_ns": 9965093125,
+            "prompt_eval_count": 1097,
+            "eval_count": 161,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 23.215231729828922,
+            "prompt_tokens_per_second": 417.40657721660205
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 8045,
+            "message_count": 4,
+            "serialized_messages_char_count": 8340,
+            "wall_ms": 9750.143625,
+            "load_duration_ns": 233888791,
+            "prompt_eval_duration_ns": 2266916000,
+            "eval_duration_ns": 7221131000,
+            "total_duration_ns": 9737905250,
+            "prompt_eval_count": 1674,
+            "eval_count": 161,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.295676397506153,
+            "prompt_tokens_per_second": 738.4481824646347
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 19762.368042,
+        "serialization_ms": 1.460917
+      },
+      "memory_before": {
+        "at_monotonic_s": 159.344249083,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6262.88M  free = 905.12M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3847.\nPages active:                                  79271.\nPages inactive:                                76494.\nPages speculative:                              1341.\nPages throttled:                                   0.\nPages wired down:                             615273.\nPages purgeable:                                   0.\n\"Translation faults\":                     8998389074.\nPages copy-on-write:                        24618707.\nPages zero filled:                        6669583846.\nPages reactivated:                         163952334.\nPages purged:                               17755835.\nFile-backed pages:                             55136.\nAnonymous pages:                              101971.\nPages stored in compressor:                  1019452.\nPages occupied by compressor:                 219563.\nDecompressions:                            139559026.\nCompressions:                              175506065.\nPageins:                                    30228684.\nPageouts:                                     628102.\nSwapins:                                     2491399.\nSwapouts:                                    3970703."
+      },
+      "memory_after": {
+        "at_monotonic_s": 179.119813125,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6488.81M  free = 679.19M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4091.\nPages active:                                  81906.\nPages inactive:                                78930.\nPages speculative:                              1653.\nPages throttled:                                   0.\nPages wired down:                             613782.\nPages purgeable:                                   2.\n\"Translation faults\":                     8998806300.\nPages copy-on-write:                        24629153.\nPages zero filled:                        6670614987.\nPages reactivated:                         164099862.\nPages purged:                               17766049.\nFile-backed pages:                             54347.\nAnonymous pages:                              108142.\nPages stored in compressor:                  1021993.\nPages occupied by compressor:                 215339.\nDecompressions:                            139742727.\nCompressions:                              175709106.\nPageins:                                    30233800.\nPageouts:                                     628186.\nSwapins:                                     2492627.\nSwapouts:                                    3986699."
+      }
+    },
+    {
+      "case_id": "mixed-significance",
+      "snapshot_id": "mixed-results",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 30546.167792000007,
+      "trace": {
+        "trace_id": "471a31c5-3576-46ac-a002-45e250f1890b",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 2,
+        "retrieved_passage_count": 2,
+        "context_char_count": 389,
+        "phases_ms": {
+          "storage_read": 6.805,
+          "retrieval": 0.312417,
+          "extractive_synthesis": 2.556833,
+          "context_build": 0.077917,
+          "draft": 15791.971292,
+          "revision": 14716.560375,
+          "validation": 0.711875,
+          "store": 19.38425
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4628,
+            "message_count": 2,
+            "serialized_messages_char_count": 4822,
+            "wall_ms": 15791.971292,
+            "load_duration_ns": 231682375,
+            "prompt_eval_duration_ns": 2181663000,
+            "eval_duration_ns": 13195717000,
+            "total_duration_ns": 15783854500,
+            "prompt_eval_count": 973,
+            "eval_count": 303,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.961995926405514,
+            "prompt_tokens_per_second": 445.9900543759508
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 8173,
+            "message_count": 4,
+            "serialized_messages_char_count": 8496,
+            "wall_ms": 14716.560375,
+            "load_duration_ns": 228426834,
+            "prompt_eval_duration_ns": 2770990000,
+            "eval_duration_ns": 11689372000,
+            "total_duration_ns": 14706817625,
+            "prompt_eval_count": 1690,
+            "eval_count": 264,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.58461789050772,
+            "prompt_tokens_per_second": 609.8903280055143
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 30543.826208,
+        "serialization_ms": 1.438458
+      },
+      "memory_before": {
+        "at_monotonic_s": 179.137003625,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6488.81M  free = 679.19M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4107.\nPages active:                                  81041.\nPages inactive:                                78759.\nPages speculative:                              1660.\nPages throttled:                                   0.\nPages wired down:                             614982.\nPages purgeable:                                   2.\n\"Translation faults\":                     8998808236.\nPages copy-on-write:                        24629677.\nPages zero filled:                        6670615751.\nPages reactivated:                         164099862.\nPages purged:                               17766054.\nFile-backed pages:                             53803.\nAnonymous pages:                              107657.\nPages stored in compressor:                  1021877.\nPages occupied by compressor:                 215268.\nDecompressions:                            139742858.\nCompressions:                              175709106.\nPageins:                                    30233803.\nPageouts:                                     628186.\nSwapins:                                     2492627.\nSwapouts:                                    3986699."
+      },
+      "memory_after": {
+        "at_monotonic_s": 209.694321208,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6648.25M  free = 519.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6042.\nPages active:                                  79909.\nPages inactive:                                78248.\nPages speculative:                              1668.\nPages throttled:                                   0.\nPages wired down:                             607300.\nPages purgeable:                                   2.\n\"Translation faults\":                     8999422531.\nPages copy-on-write:                        24643333.\nPages zero filled:                        6672170449.\nPages reactivated:                         164335362.\nPages purged:                               17775337.\nFile-backed pages:                             53586.\nAnonymous pages:                              106239.\nPages stored in compressor:                  1039150.\nPages occupied by compressor:                 222635.\nDecompressions:                            140031009.\nCompressions:                              176024289.\nPageins:                                    30244320.\nPageouts:                                     628517.\nSwapins:                                     2496422.\nSwapouts:                                    4001515."
+      }
+    },
+    {
+      "case_id": "protocol-deaths",
+      "snapshot_id": "planned-trial",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 16309.982667000015,
+      "trace": {
+        "trace_id": "69c43ff0-1ebe-4278-896e-f31c3fbdba7a",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 245,
+        "phases_ms": {
+          "storage_read": 6.919292,
+          "retrieval": 0.292792,
+          "extractive_synthesis": 0.819167,
+          "context_build": 0.060249000000000004,
+          "draft": 7604.44625,
+          "revision": 8672.280708,
+          "validation": 0.66475,
+          "store": 17.233833
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4274,
+            "message_count": 2,
+            "serialized_messages_char_count": 4442,
+            "wall_ms": 7604.44625,
+            "load_duration_ns": 228778583,
+            "prompt_eval_duration_ns": 1692084000,
+            "eval_duration_ns": 5565760000,
+            "total_duration_ns": 7596745250,
+            "prompt_eval_count": 864,
+            "eval_count": 132,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 23.716437647329386,
+            "prompt_tokens_per_second": 510.6129482933472
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 7166,
+            "message_count": 4,
+            "serialized_messages_char_count": 7438,
+            "wall_ms": 8672.280708,
+            "load_duration_ns": 220406500,
+            "prompt_eval_duration_ns": 2175983000,
+            "eval_duration_ns": 6236803000,
+            "total_duration_ns": 8657576167,
+            "prompt_eval_count": 1410,
+            "eval_count": 142,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.76807524624395,
+            "prompt_tokens_per_second": 647.9830035436858
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 16307.728292,
+        "serialization_ms": 1.69225
+      },
+      "memory_before": {
+        "at_monotonic_s": 209.709718875,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6648.25M  free = 519.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6520.\nPages active:                                  80111.\nPages inactive:                                78239.\nPages speculative:                              1672.\nPages throttled:                                   0.\nPages wired down:                             606672.\nPages purgeable:                                  22.\n\"Translation faults\":                     8999424920.\nPages copy-on-write:                        24643902.\nPages zero filled:                        6672171517.\nPages reactivated:                         164335362.\nPages purged:                               17775337.\nFile-backed pages:                             53591.\nAnonymous pages:                              106431.\nPages stored in compressor:                  1039017.\nPages occupied by compressor:                 222578.\nDecompressions:                            140031154.\nCompressions:                              176024289.\nPageins:                                    30244325.\nPageouts:                                     628517.\nSwapins:                                     2496422.\nSwapouts:                                    4001515."
+      },
+      "memory_after": {
+        "at_monotonic_s": 226.029525416,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6688.50M  free = 479.50M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     5796.\nPages active:                                  76120.\nPages inactive:                                73266.\nPages speculative:                              1241.\nPages throttled:                                   0.\nPages wired down:                             614548.\nPages purgeable:                                   2.\n\"Translation faults\":                     8999736461.\nPages copy-on-write:                        24650780.\nPages zero filled:                        6673029601.\nPages reactivated:                         164457886.\nPages purged:                               17780223.\nFile-backed pages:                             54321.\nAnonymous pages:                               96306.\nPages stored in compressor:                  1045710.\nPages occupied by compressor:                 225020.\nDecompressions:                            140189348.\nCompressions:                              176194745.\nPageins:                                    30248617.\nPageouts:                                     628592.\nSwapins:                                     2497158.\nSwapouts:                                    4004603."
+      }
+    },
+    {
+      "case_id": "unrelated-question",
+      "snapshot_id": "numerical",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 19641.91475000001,
+      "trace": {
+        "trace_id": "074b56a2-c2ed-44d6-ba6b-def93ceeebc1",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 10.229792,
+          "retrieval": 0.337,
+          "extractive_synthesis": 0.89975,
+          "context_build": 0.060376,
+          "draft": 8753.314958,
+          "revision": 10826.318625,
+          "validation": 7.037916,
+          "store": 32.596125
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4301,
+            "message_count": 2,
+            "serialized_messages_char_count": 4469,
+            "wall_ms": 8753.314958,
+            "load_duration_ns": 235865208,
+            "prompt_eval_duration_ns": 1877741000,
+            "eval_duration_ns": 6485886000,
+            "total_duration_ns": 8745556083,
+            "prompt_eval_count": 889,
+            "eval_count": 146,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.510417235208884,
+            "prompt_tokens_per_second": 473.44122538731375
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 7193,
+            "message_count": 4,
+            "serialized_messages_char_count": 7473,
+            "wall_ms": 10826.318625,
+            "load_duration_ns": 260960584,
+            "prompt_eval_duration_ns": 2492763000,
+            "eval_duration_ns": 7803244000,
+            "total_duration_ns": 10795385125,
+            "prompt_eval_count": 1446,
+            "eval_count": 161,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 20.63244466019517,
+            "prompt_tokens_per_second": 580.0792133066801
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 19637.552375,
+        "serialization_ms": 3.062208
+      },
+      "memory_before": {
+        "at_monotonic_s": 226.045397333,
+        "pressure_level": "2",
+        "swap_usage": "total = 7168.00M  used = 6688.50M  free = 479.50M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3817.\nPages active:                                  76766.\nPages inactive:                                73606.\nPages speculative:                              1251.\nPages throttled:                                   0.\nPages wired down:                             615717.\nPages purgeable:                                   4.\n\"Translation faults\":                     8999739885.\nPages copy-on-write:                        24651345.\nPages zero filled:                        6673031972.\nPages reactivated:                         164457886.\nPages purged:                               17780223.\nFile-backed pages:                             54335.\nAnonymous pages:                               97288.\nPages stored in compressor:                  1044819.\nPages occupied by compressor:                 224617.\nDecompressions:                            140190254.\nCompressions:                              176194745.\nPageins:                                    30248630.\nPageouts:                                     628592.\nSwapins:                                     2497162.\nSwapouts:                                    4004603."
+      },
+      "memory_after": {
+        "at_monotonic_s": 245.698950333,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7620.12M  free = 571.88M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4733.\nPages active:                                  74249.\nPages inactive:                                67825.\nPages speculative:                              4848.\nPages throttled:                                   0.\nPages wired down:                             620792.\nPages purgeable:                                   2.\n\"Translation faults\":                     9001046172.\nPages copy-on-write:                        24667871.\nPages zero filled:                        6674158174.\nPages reactivated:                         165059116.\nPages purged:                               17803744.\nFile-backed pages:                             53459.\nAnonymous pages:                               93463.\nPages stored in compressor:                  1152192.\nPages occupied by compressor:                 223387.\nDecompressions:                            140837850.\nCompressions:                              177021410.\nPageins:                                    30314814.\nPageouts:                                     629316.\nSwapins:                                     2517197.\nSwapouts:                                    4083591."
+      }
+    },
+    {
+      "case_id": "ambiguous-followup",
+      "snapshot_id": "numerical",
+      "sample_group": "non_model",
+      "client_wall_ms": 49.86408299998857,
+      "trace": {
+        "trace_id": "20a62f5b-0622-4d12-9fd9-f94e7b16609a",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "ambiguous_comparator",
+        "busy_response": false,
+        "result_kind": "clarification",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 0,
+        "retrieved_passage_count": 1,
+        "context_char_count": 0,
+        "phases_ms": {
+          "storage_read": 12.27925,
+          "retrieval": 0.916292,
+          "extractive_synthesis": 1.012167,
+          "context_build": 0.0,
+          "draft": 0.0,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 16.636042
+        },
+        "model_calls": [],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 44.717417,
+        "serialization_ms": 0.480375
+      },
+      "memory_before": {
+        "at_monotonic_s": 245.728665083,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7636.50M  free = 555.50M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3485.\nPages active:                                  74786.\nPages inactive:                                68246.\nPages speculative:                              4925.\nPages throttled:                                   0.\nPages wired down:                             621704.\nPages purgeable:                                   0.\n\"Translation faults\":                     9001054874.\nPages copy-on-write:                        24668460.\nPages zero filled:                        6674160279.\nPages reactivated:                         165059861.\nPages purged:                               17803762.\nFile-backed pages:                             53568.\nAnonymous pages:                               94389.\nPages stored in compressor:                  1151276.\nPages occupied by compressor:                 222680.\nDecompressions:                            140842807.\nCompressions:                              177025444.\nPageins:                                    30314870.\nPageouts:                                     629316.\nSwapins:                                     2517237.\nSwapouts:                                    4084219."
+      },
+      "memory_after": {
+        "at_monotonic_s": 245.810657583,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7661.25M  free = 530.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4561.\nPages active:                                  74594.\nPages inactive:                                67256.\nPages speculative:                              5078.\nPages throttled:                                   0.\nPages wired down:                             621456.\nPages purgeable:                                   2.\n\"Translation faults\":                     9001064071.\nPages copy-on-write:                        24669081.\nPages zero filled:                        6674167355.\nPages reactivated:                         165062552.\nPages purged:                               17803775.\nFile-backed pages:                             53792.\nAnonymous pages:                               93136.\nPages stored in compressor:                  1154378.\nPages occupied by compressor:                 222936.\nDecompressions:                            140846380.\nCompressions:                              177032111.\nPageins:                                    30315033.\nPageouts:                                     629316.\nSwapins:                                     2517257.\nSwapouts:                                    4085803."
+      }
+    },
+    {
+      "case_id": "personal-treatment",
+      "snapshot_id": "numerical",
+      "sample_group": "non_model",
+      "client_wall_ms": 23.74799999998345,
+      "trace": {
+        "trace_id": "b77037fa-08ba-448c-a8ec-e24e05ab7cfe",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "treatment_decision",
+        "busy_response": false,
+        "result_kind": "treatment_guard",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 0,
+        "retrieved_passage_count": 1,
+        "context_char_count": 0,
+        "phases_ms": {
+          "storage_read": 6.967667,
+          "retrieval": 0.216667,
+          "extractive_synthesis": 0.796333,
+          "context_build": 0.0,
+          "draft": 0.0,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 12.779208
+        },
+        "model_calls": [],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 22.027667,
+        "serialization_ms": 0.50625
+      },
+      "memory_before": {
+        "at_monotonic_s": 245.827188625,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7661.25M  free = 530.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4717.\nPages active:                                  74158.\nPages inactive:                                67210.\nPages speculative:                              5081.\nPages throttled:                                   0.\nPages wired down:                             621467.\nPages purgeable:                                   2.\n\"Translation faults\":                     9001066665.\nPages copy-on-write:                        24669636.\nPages zero filled:                        6674168516.\nPages reactivated:                         165062790.\nPages purged:                               17803777.\nFile-backed pages:                             53795.\nAnonymous pages:                               92654.\nPages stored in compressor:                  1155238.\nPages occupied by compressor:                 223153.\nDecompressions:                            140846604.\nCompressions:                              177033192.\nPageins:                                    30315036.\nPageouts:                                     629316.\nSwapins:                                     2517257.\nSwapouts:                                    4086071."
+      },
+      "memory_after": {
+        "at_monotonic_s": 245.865292166,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7665.44M  free = 526.56M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4482.\nPages active:                                  74735.\nPages inactive:                                68073.\nPages speculative:                              5175.\nPages throttled:                                   0.\nPages wired down:                             620124.\nPages purgeable:                                   2.\n\"Translation faults\":                     9001070979.\nPages copy-on-write:                        24670188.\nPages zero filled:                        6674171220.\nPages reactivated:                         165062790.\nPages purged:                               17803777.\nFile-backed pages:                             53904.\nAnonymous pages:                               94079.\nPages stored in compressor:                  1155159.\nPages occupied by compressor:                 223147.\nDecompressions:                            140846692.\nCompressions:                              177033192.\nPageins:                                    30315125.\nPageouts:                                     629316.\nSwapins:                                     2517265.\nSwapouts:                                    4086071."
+      }
+    },
+    {
+      "case_id": "pediatric-floor",
+      "snapshot_id": "standalone-label",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 26459.835874999982,
+      "trace": {
+        "trace_id": "5a62559d-18aa-4b7c-8d5f-8240058464a6",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 6294,
+        "phases_ms": {
+          "storage_read": 7.727208,
+          "retrieval": 1.526084,
+          "extractive_synthesis": 3.105208,
+          "context_build": 0.373625,
+          "draft": 16741.208334,
+          "revision": 9672.478541,
+          "validation": 3.937834,
+          "store": 21.171375
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 10277,
+            "message_count": 2,
+            "serialized_messages_char_count": 10447,
+            "wall_ms": 16741.208334,
+            "load_duration_ns": 451452375,
+            "prompt_eval_duration_ns": 7457667000,
+            "eval_duration_ns": 8448463000,
+            "total_duration_ns": 16712526833,
+            "prompt_eval_count": 2298,
+            "eval_count": 189,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.37093303243442,
+            "prompt_tokens_per_second": 308.1392612461779
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 13285,
+            "message_count": 4,
+            "serialized_messages_char_count": 13572,
+            "wall_ms": 9672.478541,
+            "load_duration_ns": 249822583,
+            "prompt_eval_duration_ns": 2473483000,
+            "eval_duration_ns": 6895805000,
+            "total_duration_ns": 9652300458,
+            "prompt_eval_count": 2908,
+            "eval_count": 154,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.332418042563557,
+            "prompt_tokens_per_second": 1175.6700975911297
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 26457.75275,
+        "serialization_ms": 2.883834
+      },
+      "memory_before": {
+        "at_monotonic_s": 245.879895833,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7657.44M  free = 534.56M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4093.\nPages active:                                  75136.\nPages inactive:                                68252.\nPages speculative:                              5310.\nPages throttled:                                   0.\nPages wired down:                             619526.\nPages purgeable:                                   2.\n\"Translation faults\":                     9001073797.\nPages copy-on-write:                        24670729.\nPages zero filled:                        6674172104.\nPages reactivated:                         165063685.\nPages purged:                               17803799.\nFile-backed pages:                             54071.\nAnonymous pages:                               94627.\nPages stored in compressor:                  1155226.\nPages occupied by compressor:                 223385.\nDecompressions:                            140847137.\nCompressions:                              177033699.\nPageins:                                    30315253.\nPageouts:                                     629316.\nSwapins:                                     2517289.\nSwapouts:                                    4086071."
+      },
+      "memory_after": {
+        "at_monotonic_s": 272.354115833,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7764.25M  free = 427.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6711.\nPages active:                                  94530.\nPages inactive:                                91936.\nPages speculative:                              1770.\nPages throttled:                                   0.\nPages wired down:                             610074.\nPages purgeable:                                 487.\n\"Translation faults\":                     9001912622.\nPages copy-on-write:                        24682626.\nPages zero filled:                        6675563315.\nPages reactivated:                         165404323.\nPages purged:                               17823263.\nFile-backed pages:                             60773.\nAnonymous pages:                              127463.\nPages stored in compressor:                  1088466.\nPages occupied by compressor:                 190851.\nDecompressions:                            141248883.\nCompressions:                              177456232.\nPageins:                                    30371238.\nPageouts:                                     629717.\nSwapins:                                     2531379.\nSwapouts:                                    4107755."
+      }
+    },
+    {
+      "case_id": "postmarketing-frequency",
+      "snapshot_id": "standalone-label",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 27446.833374999984,
+      "trace": {
+        "trace_id": "9ab68723-2a26-4921-ad3f-d01f6afd9a1f",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 6294,
+        "phases_ms": {
+          "storage_read": 8.011708,
+          "retrieval": 1.46275,
+          "extractive_synthesis": 2.311,
+          "context_build": 0.339958,
+          "draft": 15800.345625,
+          "revision": 11606.16675,
+          "validation": 1.401125,
+          "store": 20.142833
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 10272,
+            "message_count": 2,
+            "serialized_messages_char_count": 10442,
+            "wall_ms": 15800.345625,
+            "load_duration_ns": 216750541,
+            "prompt_eval_duration_ns": 6801438000,
+            "eval_duration_ns": 8759885000,
+            "total_duration_ns": 15792438125,
+            "prompt_eval_count": 2295,
+            "eval_count": 197,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.48887970561257,
+            "prompt_tokens_per_second": 337.4286437662153
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 13444,
+            "message_count": 4,
+            "serialized_messages_char_count": 13718,
+            "wall_ms": 11606.16675,
+            "load_duration_ns": 234686666,
+            "prompt_eval_duration_ns": 2439379000,
+            "eval_duration_ns": 8890207000,
+            "total_duration_ns": 11591152958,
+            "prompt_eval_count": 2910,
+            "eval_count": 197,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.159214065544255,
+            "prompt_tokens_per_second": 1192.9265604073823
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 27444.171167,
+        "serialization_ms": 1.455792
+      },
+      "memory_before": {
+        "at_monotonic_s": 272.373164125,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7764.25M  free = 427.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6466.\nPages active:                                  94688.\nPages inactive:                                92022.\nPages speculative:                              1791.\nPages throttled:                                   0.\nPages wired down:                             610083.\nPages purgeable:                                 487.\n\"Translation faults\":                     9001915025.\nPages copy-on-write:                        24683180.\nPages zero filled:                        6675563795.\nPages reactivated:                         165404323.\nPages purged:                               17823263.\nFile-backed pages:                             60803.\nAnonymous pages:                              127698.\nPages stored in compressor:                  1088344.\nPages occupied by compressor:                 190794.\nDecompressions:                            141249014.\nCompressions:                              177456232.\nPageins:                                    30371255.\nPageouts:                                     629717.\nSwapins:                                     2531379.\nSwapouts:                                    4107755."
+      },
+      "memory_after": {
+        "at_monotonic_s": 299.830631791,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7740.25M  free = 451.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4719.\nPages active:                                  88162.\nPages inactive:                                78632.\nPages speculative:                              8416.\nPages throttled:                                   0.\nPages wired down:                             611498.\nPages purgeable:                                  26.\n\"Translation faults\":                     9002186266.\nPages copy-on-write:                        24692306.\nPages zero filled:                        6676921409.\nPages reactivated:                         165542374.\nPages purged:                               17835952.\nFile-backed pages:                             68802.\nAnonymous pages:                              106408.\nPages stored in compressor:                  1102231.\nPages occupied by compressor:                 204321.\nDecompressions:                            141354611.\nCompressions:                              177580376.\nPageins:                                    30381964.\nPageouts:                                     629871.\nSwapins:                                     2533772.\nSwapouts:                                    4107755."
+      }
+    },
+    {
+      "case_id": "b12-time-window",
+      "snapshot_id": "standalone-label",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 31306.174208000015,
+      "trace": {
+        "trace_id": "bcc174ab-8ae2-4e9f-8603-21612881ca71",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 6294,
+        "phases_ms": {
+          "storage_read": 6.823333,
+          "retrieval": 3.846375,
+          "extractive_synthesis": 4.989875,
+          "context_build": 0.33612499999999995,
+          "draft": 18754.412583,
+          "revision": 12499.278583,
+          "validation": 1.430791,
+          "store": 28.03125
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 10291,
+            "message_count": 2,
+            "serialized_messages_char_count": 10461,
+            "wall_ms": 18754.412583,
+            "load_duration_ns": 232911792,
+            "prompt_eval_duration_ns": 6770111000,
+            "eval_duration_ns": 11720864000,
+            "total_duration_ns": 18745669667,
+            "prompt_eval_count": 2300,
+            "eval_count": 260,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.182665032202404,
+            "prompt_tokens_per_second": 339.7285509794448
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 13657,
+            "message_count": 4,
+            "serialized_messages_char_count": 13937,
+            "wall_ms": 12499.278583,
+            "load_duration_ns": 226024750,
+            "prompt_eval_duration_ns": 2688534000,
+            "eval_duration_ns": 9546620000,
+            "total_duration_ns": 12487237250,
+            "prompt_eval_count": 2983,
+            "eval_count": 210,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 21.997314232681305,
+            "prompt_tokens_per_second": 1109.5266044617624
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 31304.273917,
+        "serialization_ms": 1.464542
+      },
+      "memory_before": {
+        "at_monotonic_s": 299.846970833,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7740.25M  free = 451.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3915.\nPages active:                                  88418.\nPages inactive:                                78643.\nPages speculative:                              8473.\nPages throttled:                                   0.\nPages wired down:                             612107.\nPages purgeable:                                 426.\n\"Translation faults\":                     9002188782.\nPages copy-on-write:                        24692869.\nPages zero filled:                        6676922567.\nPages reactivated:                         165542374.\nPages purged:                               17835952.\nFile-backed pages:                             68879.\nAnonymous pages:                              106655.\nPages stored in compressor:                  1102120.\nPages occupied by compressor:                 204260.\nDecompressions:                            141354740.\nCompressions:                              177580376.\nPageins:                                    30381970.\nPageouts:                                     629871.\nSwapins:                                     2533772.\nSwapouts:                                    4107755."
+      },
+      "memory_after": {
+        "at_monotonic_s": 331.163622833,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7668.25M  free = 523.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6839.\nPages active:                                  91152.\nPages inactive:                                89157.\nPages speculative:                               794.\nPages throttled:                                   0.\nPages wired down:                             610201.\nPages purgeable:                                   2.\n\"Translation faults\":                     9002625125.\nPages copy-on-write:                        24701476.\nPages zero filled:                        6678462054.\nPages reactivated:                         165741916.\nPages purged:                               17849269.\nFile-backed pages:                             59877.\nAnonymous pages:                              121226.\nPages stored in compressor:                  1088498.\nPages occupied by compressor:                 197674.\nDecompressions:                            141569900.\nCompressions:                              177785461.\nPageins:                                    30393677.\nPageouts:                                     630167.\nSwapins:                                     2538065.\nSwapouts:                                    4107755."
+      }
+    },
+    {
+      "case_id": "combination-add-on",
+      "snapshot_id": "combination-full",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 47557.30062499998,
+      "trace": {
+        "trace_id": "54cd4e41-4db7-4100-a722-da95089e6fa3",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 10000,
+        "phases_ms": {
+          "storage_read": 7.278208,
+          "retrieval": 10.8385,
+          "extractive_synthesis": 4.356291,
+          "context_build": 0.5157919999999999,
+          "draft": 31777.1165,
+          "revision": 15722.328958,
+          "validation": 4.017334,
+          "store": 22.814375
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 14043,
+            "message_count": 2,
+            "serialized_messages_char_count": 14223,
+            "wall_ms": 31777.1165,
+            "load_duration_ns": 231086917,
+            "prompt_eval_duration_ns": 12249457000,
+            "eval_duration_ns": 19095053000,
+            "total_duration_ns": 31767935209,
+            "prompt_eval_count": 3809,
+            "eval_count": 405,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 21.209681900333035,
+            "prompt_tokens_per_second": 310.9525589583277
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 17843,
+            "message_count": 4,
+            "serialized_messages_char_count": 18129,
+            "wall_ms": 15722.328958,
+            "load_duration_ns": 228551750,
+            "prompt_eval_duration_ns": 3411182000,
+            "eval_duration_ns": 12039394000,
+            "total_duration_ns": 15708263625,
+            "prompt_eval_count": 4650,
+            "eval_count": 251,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 20.84822541732582,
+            "prompt_tokens_per_second": 1363.163853467801
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 47555.0935,
+        "serialization_ms": 1.587334
+      },
+      "memory_before": {
+        "at_monotonic_s": 331.183562458,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7668.25M  free = 523.75M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     6775.\nPages active:                                  91312.\nPages inactive:                                89181.\nPages speculative:                               811.\nPages throttled:                                   0.\nPages wired down:                             610210.\nPages purgeable:                                   2.\n\"Translation faults\":                     9002627550.\nPages copy-on-write:                        24702028.\nPages zero filled:                        6678463180.\nPages reactivated:                         165741916.\nPages purged:                               17849269.\nFile-backed pages:                             59899.\nAnonymous pages:                              121405.\nPages stored in compressor:                  1088431.\nPages occupied by compressor:                 197615.\nDecompressions:                            141569982.\nCompressions:                              177785461.\nPageins:                                    30393686.\nPageouts:                                     630167.\nSwapins:                                     2538065.\nSwapouts:                                    4107755."
+      },
+      "memory_after": {
+        "at_monotonic_s": 378.751904208,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7780.12M  free = 411.88M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4268.\nPages active:                                  81058.\nPages inactive:                                78700.\nPages speculative:                               802.\nPages throttled:                                   0.\nPages wired down:                             617085.\nPages purgeable:                                   2.\n\"Translation faults\":                     9003196159.\nPages copy-on-write:                        24715530.\nPages zero filled:                        6680800437.\nPages reactivated:                         165989810.\nPages purged:                               17859382.\nFile-backed pages:                             54786.\nAnonymous pages:                              105774.\nPages stored in compressor:                  1112281.\nPages occupied by compressor:                 213875.\nDecompressions:                            141842372.\nCompressions:                              178088391.\nPageins:                                    30408322.\nPageouts:                                     630472.\nSwapins:                                     2541117.\nSwapouts:                                    4117475."
+      }
+    },
+    {
+      "case_id": "addon-hba1c",
+      "snapshot_id": "add-on-control",
+      "sample_group": "warm_two_pass",
+      "client_wall_ms": 19978.750125000035,
+      "trace": {
+        "trace_id": "3d836110-d36b-44d0-b739-64a8e65bcd92",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 659,
+        "phases_ms": {
+          "storage_read": 7.790708,
+          "retrieval": 0.387375,
+          "extractive_synthesis": 1.177625,
+          "context_build": 0.073332,
+          "draft": 9802.931792,
+          "revision": 10138.315333,
+          "validation": 0.707625,
+          "store": 20.060542
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4640,
+            "message_count": 2,
+            "serialized_messages_char_count": 4808,
+            "wall_ms": 9802.931792,
+            "load_duration_ns": 236289834,
+            "prompt_eval_duration_ns": 2109806000,
+            "eval_duration_ns": 7292495000,
+            "total_duration_ns": 9794116917,
+            "prompt_eval_count": 965,
+            "eval_count": 169,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 23.174510232780413,
+            "prompt_tokens_per_second": 457.38802524971493
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 7593,
+            "message_count": 4,
+            "serialized_messages_char_count": 7865,
+            "wall_ms": 10138.315333,
+            "load_duration_ns": 223444583,
+            "prompt_eval_duration_ns": 2290677000,
+            "eval_duration_ns": 7600266000,
+            "total_duration_ns": 10127859791,
+            "prompt_eval_count": 1556,
+            "eval_count": 169,
+            "done": true,
+            "done_reason": "stop",
+            "generation_tokens_per_second": 22.23606384302865,
+            "prompt_tokens_per_second": 679.2751662499776
+          }
+        ],
+        "model_name": "qwen3.5:9b",
+        "http_status": 200,
+        "total_wall_ms": 19976.420542,
+        "serialization_ms": 1.4195
+      },
+      "memory_before": {
+        "at_monotonic_s": 378.771637041,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7780.12M  free = 411.88M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     4123.\nPages active:                                  81091.\nPages inactive:                                78795.\nPages speculative:                               823.\nPages throttled:                                   0.\nPages wired down:                             617094.\nPages purgeable:                                   2.\n\"Translation faults\":                     9003198747.\nPages copy-on-write:                        24716083.\nPages zero filled:                        6680801535.\nPages reactivated:                         165989868.\nPages purged:                               17859391.\nFile-backed pages:                             54812.\nAnonymous pages:                              105897.\nPages stored in compressor:                  1112251.\nPages occupied by compressor:                 213878.\nDecompressions:                            141842601.\nCompressions:                              178088575.\nPageins:                                    30408335.\nPageouts:                                     630472.\nSwapins:                                     2541117.\nSwapouts:                                    4117475."
+      },
+      "memory_after": {
+        "at_monotonic_s": 398.762546041,
+        "pressure_level": "2",
+        "swap_usage": "total = 8192.00M  used = 7714.38M  free = 477.62M  (encrypted)",
+        "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     5444.\nPages active:                                  89964.\nPages inactive:                                84873.\nPages speculative:                              3732.\nPages throttled:                                   0.\nPages wired down:                             613315.\nPages purgeable:                                   2.\n\"Translation faults\":                     9003604307.\nPages copy-on-write:                        24724083.\nPages zero filled:                        6681828385.\nPages reactivated:                         166152492.\nPages purged:                               17865562.\nFile-backed pages:                             55484.\nAnonymous pages:                              123085.\nPages stored in compressor:                  1090675.\nPages occupied by compressor:                 198475.\nDecompressions:                            142043713.\nCompressions:                              178291976.\nPageins:                                    30415222.\nPageouts:                                     630612.\nSwapins:                                     2545784.\nSwapouts:                                    4118391."
+      }
+    }
+  ],
+  "summary": {
+    "cold_two_pass": {
+      "n": 1,
+      "p50_ms": 65230.038792,
+      "p95_ms": 65230.038792,
+      "phase_p50_ms": {
+        "storage_read": 5.486167,
+        "retrieval": 11.513292,
+        "extractive_synthesis": 15.683333,
+        "context_build": 0.448083,
+        "draft": 38663.328958,
+        "revision": 26479.100667,
+        "validation": 7.352125,
+        "store": 21.99575
+      },
+      "successful_model_answers": 1,
+      "result_counts": {
+        "model_answer": 1
+      }
+    },
+    "warm_two_pass": {
+      "n": 12,
+      "p50_ms": 26457.75275,
+      "p95_ms": 47555.0935,
+      "phase_p50_ms": {
+        "storage_read": 7.278208,
+        "retrieval": 0.5245,
+        "extractive_synthesis": 1.424709,
+        "context_build": 0.077292,
+        "draft": 15791.971292,
+        "revision": 11176.069292,
+        "validation": 0.788,
+        "store": 20.060542
+      },
+      "successful_model_answers": 11,
+      "result_counts": {
+        "excerpt_fallback": 1,
+        "model_answer": 11
+      }
+    },
+    "non_model": {
+      "n": 2,
+      "p50_ms": 22.027667,
+      "p95_ms": 44.717417,
+      "phase_p50_ms": {
+        "storage_read": 6.967667,
+        "retrieval": 0.216667,
+        "extractive_synthesis": 0.796333,
+        "context_build": 0.0,
+        "draft": 0.0,
+        "revision": 0.0,
+        "validation": 0.0,
+        "store": 12.779208
+      },
+      "successful_model_answers": 0,
+      "result_counts": {
+        "clarification": 1,
+        "treatment_guard": 1
+      }
+    },
+    "incomplete_pipeline": {
+      "n": 0,
+      "p50_ms": null,
+      "p95_ms": null,
+      "phase_p50_ms": {
+        "storage_read": null,
+        "retrieval": null,
+        "extractive_synthesis": null,
+        "context_build": null,
+        "draft": null,
+        "revision": null,
+        "validation": null,
+        "store": null
+      },
+      "successful_model_answers": 0,
+      "result_counts": {}
+    }
+  },
+  "complete": false,
+  "stop": {
+    "reason": "sustained_system_swap_growth",
+    "decision": "Conservative stop required by handoff; no runtime/model/pipeline tuning attempted.",
+    "completed_cases": 15,
+    "fixture_cases": 18,
+    "interrupted_case": "addon-fasting-glucose",
+    "not_run_cases": [
+      "filtered-first",
+      "filtered-followup"
+    ],
+    "interrupted_trace": "unavailable: SIGINT interrupted HTTP client before final ASGI telemetry emission; no latency or token counts inferred",
+    "pressure_level": 2,
+    "critical_pressure_level_4_observed": false,
+    "preload_swap_mib": 3837.56,
+    "stop_swap_mib": 7788.12,
+    "recent_swap_growth_mib": 1140,
+    "recent_interval_s": 149,
+    "gpu_residency": "100% GPU observed",
+    "cleanup": "qwen3.5:9b unloaded after stop; /api/ps confirms zero loaded models"
+  },
+  "acceptance": {
+    "instrumentation_implemented": true,
+    "frozen_fixture_count": 18,
+    "one_cold_request_observed": true,
+    "warm_two_call_attempts": 12,
+    "successful_warm_model_answers": 11,
+    "minimum_timing_sample_met": true,
+    "full_frozen_suite_completed": false,
+    "m0_fully_complete": false,
+    "next_milestone_started": false
+  },
+  "isolation_verification": {
+    "apps/api/data/triallens.json": true,
+    "apps/api/data/usage.sqlite3": true
+  },
+  "instrumentation_note": "An opt-in default-logging emission fix was added after this process imported telemetry; the explicit benchmark handler was already configured. Prompt, provider payload, phase clocks, validation and selection semantics were unchanged. Final code also ignores malformed structured done_reason and out-of-range numeric metadata; recorded normal provider usage and pipeline behavior are unchanged.",
+  "analysis": {
+    "warm_two_pass_attempts": 12,
+    "warm_api_wall_sum_ms": 332568.94650099997,
+    "phase_sums_ms": {
+      "storage_read": 91.30125,
+      "retrieval": 33.000042,
+      "extractive_synthesis": 38.654374,
+      "context_build": 2.8701659999999998,
+      "draft": 189726.135751,
+      "revision": 142323.681791,
+      "validation": 24.34725,
+      "store": 258.598292
+    },
+    "phase_shares_of_warm_wall": {
+      "storage_read": 0.0002745332989161857,
+      "retrieval": 9.922767097528986e-05,
+      "extractive_synthesis": 0.00011622965525400842,
+      "context_build": 8.63028863698003e-06,
+      "draft": 0.5704866246447021,
+      "revision": 0.42795240893175834,
+      "validation": 7.320963143480623e-05,
+      "store": 0.0007775779871234083
+    },
+    "model_call_count": 26,
+    "model_calls_missing_usage": 0,
+    "prompt_eval_count_range": [
+      864,
+      4696
+    ],
+    "eval_count_range": [
+      132,
+      471
+    ],
+    "prompt_char_count_range": [
+      4274,
+      21065
+    ],
+    "serialized_messages_char_count_range": [
+      4442,
+      21388
+    ],
+    "generation_tokens_per_second": {
+      "min": 20.63244466019517,
+      "median": 22.351675537498988,
+      "max": 23.716437647329386
+    },
+    "prompt_tokens_per_second": {
+      "min": 266.37332292583545,
+      "median": 537.7463957820706,
+      "max": 1922.8769121282921
+    },
+    "observed_max_prompt_plus_output_tokens": 5067,
+    "all_provider_done_stop": true,
+    "token_totals": {
+      "prompt_eval_count_sum": 58933,
+      "eval_count_sum": 5974
+    },
+    "provider_duration_totals_ns": {
+      "load_duration_ns": 11935495706,
+      "prompt_eval_duration_ns": 111610305000,
+      "eval_duration_ns": 270844364000,
+      "total_duration_ns": 396864840499
+    }
+  },
+  "native_log_observation": {
+    "boundary": "between the last two /api/generate control responses (cold unload and cleanup unload)",
+    "log_segment_found": true,
+    "slot_truncation_records": 27,
+    "slot_truncated_nonzero_count": 0,
+    "other_truncation_warning_count": 0,
+    "chat_response_log_entries": 27,
+    "interpretation": "Slot flags and warning absence are observed signals, not a pre-truncation token guarantee. Includes interrupted native call."
+  }
+}

@@ -23,6 +23,7 @@ from triallens.rag import AnswerService, BriefService, Retriever, build_chunks, 
 from triallens.sources import fetch_sources
 from triallens.store import JsonStore
 from triallens.usage import UsageLedger
+from triallens.performance import AskPerformanceMiddleware, annotate, phase, route_finished
 
 app = FastAPI(
     title="TrialLens API",
@@ -37,6 +38,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.add_middleware(AskPerformanceMiddleware)
 
 store = JsonStore()
 retriever = Retriever()
@@ -136,25 +139,26 @@ def update_extraction(workspace_id: str, extraction_id: str, payload: Extraction
 
 @app.post("/workspaces/{workspace_id}/ask", response_model=Answer)
 def ask(workspace_id: str, payload: AskRequest) -> Answer:
-    workspace = _workspace_or_404(workspace_id)
-    chunks = store.list_chunks(workspace_id)
-    sources = store.list_sources(workspace_id)
-    extractions = store.list_extractions(workspace_id)
-    history = []
-    previous_id = payload.previous_answer_id
-    seen = set()
-    while previous_id and len(history) < 6:
-        previous = store.get_answer(previous_id)
-        if not previous or previous.workspace_id != workspace_id:
-            raise HTTPException(status_code=404, detail="Previous answer not found in workspace")
-        if previous.id in seen:
-            raise HTTPException(status_code=400, detail="Invalid conversation chain")
-        if (previous.mode != payload.mode or previous.source_id != payload.source_id
-                or set(previous.source_types or []) != set(payload.source_types or [])):
-            raise HTTPException(status_code=400, detail="Source scope changed. Start a new conversation.")
-        seen.add(previous.id)
-        history.insert(0, previous)
-        previous_id = previous.previous_answer_id
+    with phase("storage_read"):
+        workspace = _workspace_or_404(workspace_id)
+        chunks = store.list_chunks(workspace_id)
+        sources = store.list_sources(workspace_id)
+        extractions = store.list_extractions(workspace_id)
+        history = []
+        previous_id = payload.previous_answer_id
+        seen = set()
+        while previous_id and len(history) < 6:
+            previous = store.get_answer(previous_id)
+            if not previous or previous.workspace_id != workspace_id:
+                raise HTTPException(status_code=404, detail="Previous answer not found in workspace")
+            if previous.id in seen:
+                raise HTTPException(status_code=400, detail="Invalid conversation chain")
+            if (previous.mode != payload.mode or previous.source_id != payload.source_id
+                    or set(previous.source_types or []) != set(payload.source_types or [])):
+                raise HTTPException(status_code=400, detail="Source scope changed. Start a new conversation.")
+            seen.add(previous.id)
+            history.insert(0, previous)
+            previous_id = previous.previous_answer_id
     query = retrieval_question(payload.question, history)
     if payload.source_types is not None:
         sources = [source for source in sources if source.source_type in payload.source_types]
@@ -168,11 +172,15 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
             raise HTTPException(status_code=404, detail="Source not found in workspace")
         document_chunks = [chunk for chunk in chunks if chunk.source_id == source.id]
         document_extractions = [row for row in extractions if row.source_id == source.id]
-        retrieved = retriever.retrieve(workspace, query, document_chunks, [source], [source.source_type])
-        answer = answer_service.answer_document(workspace, source, query, document_chunks, retrieved, document_extractions)
+        with phase("retrieval"):
+            retrieved = retriever.retrieve(workspace, query, document_chunks, [source], [source.source_type])
+        with phase("extractive_synthesis"):
+            answer = answer_service.answer_document(workspace, source, query, document_chunks, retrieved, document_extractions)
     else:
-        retrieved = retriever.retrieve_conversation(workspace, query, chunks, sources, payload.source_types)
-        answer = answer_service.answer(workspace, query, retrieved, extractions)
+        with phase("retrieval"):
+            retrieved = retriever.retrieve_conversation(workspace, query, chunks, sources, payload.source_types)
+        with phase("extractive_synthesis"):
+            answer = answer_service.answer(workspace, query, retrieved, extractions)
     answer.question = payload.question
     answer.previous_answer_id = payload.previous_answer_id
     answer.mode, answer.source_id, answer.source_types = payload.mode, payload.source_id, payload.source_types
@@ -181,8 +189,17 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
     selected_sources = [source_by_id[sid] for sid in ranked_ids if sid in source_by_id]
     if payload.mode == "document":
         selected_sources = [source]
+    annotate(retrieved_passage_count=len(retrieved))
     answer = conversation_service.generate(workspace, payload.question, history, selected_sources, answer)
-    return store.save_answer(answer)
+    try:
+        with phase("store"):
+            saved = store.save_answer(answer)
+    except Exception:
+        annotate(error_kind="storage_error", result_kind="storage_error")
+        raise
+    finally:
+        route_finished()
+    return saved
 
 
 @app.get("/workspaces/{workspace_id}/retrievals/{answer_id}", response_model=Answer)

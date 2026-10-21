@@ -1,0 +1,254 @@
+{
+  "captured_at_utc": "2026-10-21T05:26:39.437630+00:00",
+  "baseline_commit": "031ff95daa553d874a8c2ef36ab7b18ec96e0e0f",
+  "initial_worktree_clean": true,
+  "os": {
+    "name": "macOS",
+    "version": "26.5.2",
+    "build": "25F84",
+    "architecture": "arm64"
+  },
+  "hardware": {
+    "chip": "Apple M2 Pro",
+    "unified_memory_bytes": 17179869184
+  },
+  "runtime": {
+    "name": "Ollama",
+    "version": "0.32.14",
+    "native": true,
+    "binary": "/opt/homebrew/bin/ollama",
+    "ownership": "child of native TrialLens apps/api/run.py launcher",
+    "startup_settings_observed_in_log": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "true",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "0",
+      "OLLAMA_HOST": "http://127.0.0.1:11434",
+      "OLLAMA_NO_CLOUD": "true"
+    }
+  },
+  "baseline_model": {
+    "tag": "qwen3.5:9b",
+    "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "size_bytes": 6594474711,
+    "architecture": "qwen35",
+    "parameters": "9.7B",
+    "quantization": "Q4_K_M",
+    "advertised_context_length": 262144,
+    "model_default_parameters": {
+      "presence_penalty": 1.5,
+      "temperature": 1,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "request_overrides": {
+      "temperature": 0,
+      "num_ctx": 16384,
+      "num_predict": 1800,
+      "think": false,
+      "stream": false,
+      "keep_alive": "10m"
+    }
+  },
+  "other_installed_models": [
+    {
+      "tag": "qwen3:8b",
+      "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "size_bytes": 5225388164,
+      "quantization": "Q4_K_M"
+    }
+  ],
+  "pre_inference_observation": {
+    "model_loaded": false,
+    "ollama_ps_rows": 0,
+    "memory_pressure_level": 1,
+    "memory_pressure_free_percent": 58,
+    "swap_used_mib": 3837.56,
+    "vm_stat_page_bytes": 16384,
+    "swapins_pages": 2473105,
+    "swapouts_pages": 3798071,
+    "activity_monitor": {
+      "actually_observed": true,
+      "pressure_graph_color": "green",
+      "physical_memory_gb": 16,
+      "memory_used_gb": 13.25,
+      "cached_files_gb": 2.72,
+      "swap_used_gb": 3.72,
+      "app_memory_gb": 5.67,
+      "wired_memory_gb": 2.91,
+      "compressed_gb": 3.73
+    },
+    "caveat": "System-wide snapshot with other applications running. Swap/counters predate this benchmark; deltas are needed."
+  },
+  "during_inference_observations": [
+    {
+      "captured_at_utc": "2026-10-21T05:32:23Z",
+      "phase": "first cold request in progress",
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_size": "5.7 GB",
+      "allocated_context": 16384,
+      "api_model_size_bytes": 5662425741,
+      "api_model_size_vram_bytes": 5662425741,
+      "memory_pressure_level": 2,
+      "memory_pressure_free_percent": 19,
+      "swap_used_mib": 5818.94,
+      "swapins_pages": 2479444,
+      "swapouts_pages": 3931027,
+      "vm_stat_wired_pages": 615697,
+      "vm_stat_compressor_pages": 185575,
+      "activity_monitor": {
+        "actually_observed": true,
+        "pressure_graph_color": "green",
+        "physical_memory_gb": 16,
+        "memory_used_gb": 14.94,
+        "swap_used_gb": 5.68,
+        "app_memory_gb": 1.96,
+        "wired_memory_gb": 9.4,
+        "compressed_gb": 2.78
+      },
+      "caveat": "AX and screenshot sampled a few seconds apart; values differ slightly. System-wide existing applications remain running."
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:33:09.627844+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 5762.94,
+      "swapins_pages": 2483333,
+      "swapouts_pages": 3931027,
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now"
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:33:39.676997+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 5856.44,
+      "swapins_pages": 2484268,
+      "swapouts_pages": 3938547,
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now",
+      "activity_monitor": {
+        "actually_observed": true,
+        "pressure_graph_color": "green",
+        "physical_memory_gb": 16,
+        "memory_used_gb": 15.06,
+        "cached_files_mb": 869.6,
+        "swap_used_gb": 5.88,
+        "app_memory_gb": 1.44,
+        "wired_memory_gb": 9.44,
+        "compressed_gb": 3.39,
+        "caveat": "Observed during sustained inference after the 05:33:39Z sample, not synchronized exactly with kernel sample."
+      }
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:34:09.737398+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 6020.81,
+      "swapins_pages": 2488240,
+      "swapouts_pages": 3953163,
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now"
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:34:39.786484+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 6260.88,
+      "swapins_pages": 2491287,
+      "swapouts_pages": 3970575,
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now"
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:35:09.842982+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 6647.75,
+      "swapins_pages": 2492996,
+      "swapouts_pages": 3997383,
+      "model_loaded": true,
+      "ollama_ps_processor": "100% GPU",
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now"
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:35:40.917234+00:00",
+      "phase": "sustained baseline loop",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 6648.25,
+      "swapins_pages": 2496618,
+      "swapouts_pages": 4001515,
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now"
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:37:39.769185+00:00",
+      "phase": "independent late baseline memory check",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 7668.25,
+      "swapins_pages": 2538492,
+      "swapouts_pages": 4107755,
+      "vm_stat_wired_pages": 616067,
+      "vm_stat_compressor_pages": 213520,
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now",
+      "ollama_process_memory_columns": "PID PPID RSS_KiB VSZ_KiB COMM",
+      "ollama_processes": [
+        "28162 28161  43728 436823840 /opt/homebrew/bin/ollama",
+        "37244 28162 6685520 445568688 /opt/homebrew/Cellar/ollama/0.32.14/libexec/lib/ollama/llama-server"
+      ]
+    },
+    {
+      "captured_at_utc": "2026-10-21T05:38:09.860285+00:00",
+      "phase": "independent late baseline memory check",
+      "memory_pressure_level": 2,
+      "swap_used_mib": 7788.12,
+      "swapins_pages": 2540616,
+      "swapouts_pages": 4117475,
+      "vm_stat_wired_pages": 614084,
+      "vm_stat_compressor_pages": 215790,
+      "ollama_ps_text": "NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3.5:9b    6488c96fa5fa    5.7 GB    100% GPU     16384      9 minutes from now",
+      "ollama_process_memory_columns": "PID PPID RSS_KiB VSZ_KiB COMM",
+      "ollama_processes": [
+        "28162 28161  65536 436823840 /opt/homebrew/bin/ollama",
+        "37244 28162 6376656 445568688 /opt/homebrew/Cellar/ollama/0.32.14/libexec/lib/ollama/llama-server"
+      ]
+    }
+  ],
+  "python_runtime": {
+    "observed_venv_version": "3.9.6",
+    "project_requires_python": ">=3.11",
+    "caveat": "Existing local virtualenv differs from declared project minimum; no upgrade performed during M0. Parent confirmed version."
+  },
+  "memory_assessment": "Conservative stop recommended to root at05:38:09Z: swap7788.12MiB, +3950.56MiB versus pre-load and +1140MiB over149s after earlier near-plateau. Swapouts increased to4117475pages. Kernelpressure remained2,not4;100%GPU/16384context unchanged. Sustained growth has no observed stable plateau; handoff says stop for unbounded swap/offload. This is an operational conservative interpretation, not proof of mathematically unbounded growth or causality from inference alone. Root owns safe interruption and final run status.",
+  "post_cleanup_observation": {
+    "captured_at_utc": "2026-10-21T05:40:42.368369+00:00",
+    "phase": "post-interruption cleanup; no model inference",
+    "memory_pressure_level": 1,
+    "swap_used_mib": 7578.31,
+    "swapins_pages": 2554180,
+    "swapouts_pages": 4118391,
+    "vm_stat_wired_pages": 180836,
+    "vm_stat_compressor_pages": 87062,
+    "ollama_ps_text": "NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL",
+    "api_ps_models": []
+  },
+  "baseline_stop_status": {
+    "stop_reason": "Conservative stop for sustained system-wide swap growth",
+    "root_reported_interruption": "SIGINT during request16; interrupted request not included as completed latency",
+    "completed_fixtures": 15,
+    "planned_fixtures": 18,
+    "completed_cold_requests": 1,
+    "completed_warm_two_pass_requests": 12,
+    "completed_warm_two_pass_model_answers": 11,
+    "completed_warm_two_pass_fallbacks": 1,
+    "completed_guards": 2,
+    "unrun_or_incomplete_fixtures": 3,
+    "model_restored_to_initial_unloaded_state": true,
+    "optimization_started": false,
+    "m0_acceptance": "Partial minimum latency baseline; fullQA gate incomplete"
+  }
+}

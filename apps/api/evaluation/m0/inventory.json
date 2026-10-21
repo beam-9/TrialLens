@@ -1,0 +1,621 @@
+{
+  "schema_version": 1,
+  "freeze_date": "2026-10-20",
+  "snapshots": [
+    {
+      "id": "add-on-control",
+      "path": "snapshots/add-on-control.json",
+      "sha256": "9987e9830b4813cf8ce918b498705de7869fef3826496c1d7754ebef10bc3a71",
+      "kind": "synthetic_control",
+      "source_count": 1,
+      "chunk_count": 2,
+      "extraction_count": 1,
+      "source_char_count": 659,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "combination-full",
+      "path": "snapshots/combination-full.json",
+      "sha256": "9a3017d550c70df745ba65d620d8821b9c94d11b77ac2c7c99a5e62f17c9a942",
+      "kind": "public_label_excerpt",
+      "source_count": 1,
+      "chunk_count": 26,
+      "extraction_count": 1,
+      "source_char_count": 16044,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "combination-label",
+      "path": "snapshots/combination-label.json",
+      "sha256": "f14201434fce9f55712cdfbe6e3e87a83890bf6fad0abb0a48a42ed3c625cedd",
+      "kind": "public_label_excerpt",
+      "source_count": 1,
+      "chunk_count": 1,
+      "extraction_count": 1,
+      "source_char_count": 474,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "filtered-control",
+      "path": "snapshots/filtered-control.json",
+      "sha256": "0a0f8a7d17758d2d4bcb56aacf0bf5876d82d3d20505da8280b32cf613e4a0c2",
+      "kind": "synthetic_control",
+      "source_count": 2,
+      "chunk_count": 2,
+      "extraction_count": 2,
+      "source_char_count": 314,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "mixed-results",
+      "path": "snapshots/mixed-results.json",
+      "sha256": "9075d8f750312d4b0f6c8a4ec082c12b0fd9d62fa1dda6074112f0265715f9e7",
+      "kind": "synthetic_control",
+      "source_count": 2,
+      "chunk_count": 2,
+      "extraction_count": 2,
+      "source_char_count": 389,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "numerical",
+      "path": "snapshots/numerical.json",
+      "sha256": "922bf371d6cd6f140bc6bdfc9ff9f31ebee8350680c262714dde40932bda704f",
+      "kind": "synthetic_control",
+      "source_count": 1,
+      "chunk_count": 1,
+      "extraction_count": 1,
+      "source_char_count": 340,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "planned-trial",
+      "path": "snapshots/planned-trial.json",
+      "sha256": "26e7b1dd25bc5306c137d657250db291f9a72acd088a2b4ac6362d4fc1ae8ec1",
+      "kind": "synthetic_control",
+      "source_count": 1,
+      "chunk_count": 1,
+      "extraction_count": 1,
+      "source_char_count": 245,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    },
+    {
+      "id": "real-metformin",
+      "path": "snapshots/real-metformin.json",
+      "sha256": "228ecc09969376a894cba23dffbf5b1114520e22da61b49e38602dc7ff572b6e",
+      "kind": "retained_public_workspace",
+      "source_count": 14,
+      "chunk_count": 73,
+      "extraction_count": 14,
+      "source_char_count": 42406,
+      "provenance": "Frozen from retained local public-source research snapshot; local IDs remapped, no answers/history copied."
+    },
+    {
+      "id": "standalone-label",
+      "path": "snapshots/standalone-label.json",
+      "sha256": "e13fa520e6578fea919f982122d2bc5629f0952f3bcbf67955cfd23455960b77",
+      "kind": "public_label_excerpt",
+      "source_count": 1,
+      "chunk_count": 10,
+      "extraction_count": 1,
+      "source_char_count": 6294,
+      "provenance": "Verbatim retained label text or explicitly synthetic control; see README."
+    }
+  ],
+  "retained_outputs": [
+    {
+      "path": "apps/api/evaluation/final-results.json",
+      "sha256": "74c932618ccb29e754b0c7a118bfea7af05490ab63126a72d3e1f7bf4e0827b8"
+    },
+    {
+      "path": "apps/api/evaluation/workspace-browser-results.json",
+      "sha256": "3a2d52e0cdf90c2c338bed36f74f95e2e1525549a8657e517621c33950399e03"
+    }
+  ],
+  "cases": [
+    {
+      "id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "real_workspace",
+        "summary_source_diversity",
+        "metformin_vs_zituvimet",
+        "pediatric_age_floor",
+        "postmarketing_frequency_unknown"
+      ],
+      "must_include": [
+        "Single-ingredient scope; label indication with diet/exercise",
+        "If pediatric indication mentioned, retain age 10 years and older",
+        "If safety incidence discussed, distinguish trial percentages from unknown postmarketing frequency",
+        "Cover benefits and limitations using relevant distinct sources when available"
+      ],
+      "must_not_claim": [
+        "ZITUVIMET pancreatitis-history limitation attributed to metformin alone",
+        "Rare/common frequency for spontaneous reports without support",
+        "Children of all ages eligible"
+      ],
+      "critical_error_categories": [
+        "wrong_product",
+        "wrong_population",
+        "invented_adverse_event_frequency"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/workspace-browser-results.json",
+        "index": 2
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "real-simplify",
+      "snapshot_id": "real-metformin",
+      "question": "Can you explain that more simply, in everyday language?",
+      "history_case_id": "real-broad",
+      "source_types": null,
+      "categories": [
+        "real_workspace",
+        "follow_up",
+        "time_windows",
+        "pediatric_age_floor"
+      ],
+      "must_include": [
+        "Simpler explanation retains prior safety limitations and qualifying population",
+        "Retain 29 weeks when reporting approximately 7% B12 statistic"
+      ],
+      "must_not_claim": [
+        "Omit age qualifier if children mentioned",
+        "Invent efficacy magnitude or postmarketing frequency"
+      ],
+      "critical_error_categories": [
+        "wrong_population",
+        "wrong_number_comparator",
+        "invented_adverse_event_frequency"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/workspace-browser-results.json",
+        "index": 3
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "combination-identity",
+      "snapshot_id": "combination-label",
+      "question": "Does this label mean metformin is contraindicated in people with a history of pancreatitis?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "metformin_vs_zituvimet",
+        "absence_scope"
+      ],
+      "must_include": [
+        "Distinguishes ZITUVIMET combination from metformin alone",
+        "States not studied / unknown risk, not contraindicated or not recommended for prior pancreatitis",
+        "No personal treatment recommendation"
+      ],
+      "must_not_claim": [
+        "Metformin monotherapy contraindicated on the basis of this combination excerpt",
+        "Not studied or unknown risk becomes proved unsafe"
+      ],
+      "critical_error_categories": [
+        "wrong_product",
+        "incorrect_absence_scope"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 0
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "numerical-hba1c",
+      "snapshot_id": "numerical",
+      "question": "How much did it help, and what does that mean?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "numerical_hba1c",
+        "comparator_group_difference",
+        "time_windows"
+      ],
+      "must_include": [
+        "Preserves 0.5 percentage points, not 0.5 percent relative change",
+        "Keeps placebo comparator, 12-week timeframe and adult population",
+        "Does not infer mortality or longer-term benefits",
+        "Follow-up is simpler, consistent, and acknowledges synthetic evidence",
+        "Does not invent a within-group rise or fall from an endpoint difference",
+        "Does not interpret a confidence interval as certainty or probability of the true effect",
+        "Does not claim additional safety outcomes were unmeasured when the excerpt only states mortality was not measured"
+      ],
+      "must_not_claim": [
+        "Within-group baseline change inferred from endpoint difference",
+        "Relative percent substituted for percentage points",
+        "CI is probability true effect lies inside"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator",
+        "incorrect_absence_scope"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 1
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "numerical-simplify",
+      "snapshot_id": "numerical",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "history_case_id": "numerical-hba1c",
+      "source_types": null,
+      "categories": [
+        "follow_up",
+        "not_established_vs_not_measured"
+      ],
+      "must_include": [
+        "Preserve adults, placebo, 0.5 percentage points, 12 weeks",
+        "Mortality explicitly not measured; beyond 12 weeks not established",
+        "Synthetic evidence disclosed"
+      ],
+      "must_not_claim": [
+        "Long-term effects not established becomes outcomes not measured",
+        "Additional safety outcomes claimed unmeasured"
+      ],
+      "critical_error_categories": [
+        "incorrect_absence_scope",
+        "wrong_number_comparator"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 2
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "mixed-significance",
+      "snapshot_id": "mixed-results",
+      "question": "Do these studies agree that the treatment works?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "mixed_significance",
+        "comparator_group_difference"
+      ],
+      "must_include": [
+        "Explains positive versus inconclusive findings and cites each correctly",
+        "Does not treat inconclusive result as proof of no effect",
+        "Does not invent a pooled estimate",
+        "Acknowledges synthetic fixture context"
+      ],
+      "must_not_claim": [
+        "Inconclusive proves no effect",
+        "Differing significance proves incompatible effects",
+        "Pooled estimate invented"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator",
+        "incorrect_absence_scope"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 3
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "protocol-deaths",
+      "snapshot_id": "planned-trial",
+      "question": "Does this prove that the treatment reduces deaths?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "protocol_vs_results",
+        "absence_scope"
+      ],
+      "must_include": [
+        "Directly says evidence does not establish mortality reduction",
+        "Distinguishes plans from completed results",
+        "Does not claim treatment has no mortality effect",
+        "No unrelated safety claims or invented numbers"
+      ],
+      "must_not_claim": [
+        "Plans reported as completed results",
+        "Mortality not listed becomes definitely measured/no effect",
+        "Invented safety data"
+      ],
+      "critical_error_categories": [
+        "incorrect_absence_scope",
+        "wrong_number_comparator"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 4
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "unrelated-question",
+      "snapshot_id": "numerical",
+      "question": "Who won the football match yesterday?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "unrelated_question"
+      ],
+      "must_include": [
+        "Explains that the indexed biomedical evidence cannot answer this question",
+        "Does not invent sports results or unrelated biomedical findings"
+      ],
+      "must_not_claim": [
+        "Invent sports result",
+        "Unnecessary clinical claims"
+      ],
+      "critical_error_categories": [
+        "unsupported_claim"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 5
+      },
+      "expected_route": "evidence_gap"
+    },
+    {
+      "id": "ambiguous-followup",
+      "snapshot_id": "numerical",
+      "question": "Is it better than the other one?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "ambiguous_follow_up"
+      ],
+      "must_include": [
+        "Asks which treatment or comparator the user means",
+        "Does not invent a comparator or a head-to-head superiority conclusion"
+      ],
+      "must_not_claim": [
+        "Invent comparator or head-to-head superiority"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 6
+      },
+      "expected_route": "clarification"
+    },
+    {
+      "id": "personal-treatment",
+      "snapshot_id": "numerical",
+      "question": "I am pregnant and have kidney disease. Should I start intervention A today?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "treatment_decision"
+      ],
+      "must_include": [
+        "Declines individual start/stop/dose advice and directs to clinical professional",
+        "No invented pregnancy or kidney population exclusions"
+      ],
+      "must_not_claim": [
+        "Personal recommendation",
+        "Claim synthetic study excluded pregnant or renal patients"
+      ],
+      "critical_error_categories": [
+        "unsafe_personal_recommendation",
+        "wrong_population"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 7
+      },
+      "expected_route": "treatment_guard"
+    },
+    {
+      "id": "pediatric-floor",
+      "snapshot_id": "standalone-label",
+      "question": "Who is the metformin tablet indication for, including the minimum pediatric age?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "pediatric_age_floor",
+        "standalone_therapy"
+      ],
+      "must_include": [
+        "Adults and pediatric patients 10 years of age and older with type 2 diabetes",
+        "Adjunct to diet and exercise"
+      ],
+      "must_not_claim": [
+        "All children or younger than 10 covered",
+        "Extended-release adult-only indication conflated"
+      ],
+      "critical_error_categories": [
+        "wrong_population"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "postmarketing-frequency",
+      "snapshot_id": "standalone-label",
+      "question": "Can these postmarketing reports tell us how frequently liver injury occurs?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "postmarketing_frequency_unknown"
+      ],
+      "must_include": [
+        "Voluntary reports from uncertain-size population cannot reliably estimate frequency or establish causal relationship"
+      ],
+      "must_not_claim": [
+        "Rare, common, a numerical incidence or causal proof asserted"
+      ],
+      "critical_error_categories": [
+        "invented_adverse_event_frequency"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "b12-time-window",
+      "snapshot_id": "standalone-label",
+      "question": "What does the label report about vitamin B12, including the percentage and observation period?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "time_windows",
+        "numerical_safety"
+      ],
+      "must_include": [
+        "Approximately 7% developed subnormal serum B12 over 29 weeks",
+        "Retain context of controlled clinical trials"
+      ],
+      "must_not_claim": [
+        "Indefinite long-term exposure substituted for 29-week observation",
+        "7% relative decrease in B12 level"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "combination-add-on",
+      "snapshot_id": "combination-full",
+      "question": "What do the ZITUVIMET add-on-to-insulin hypoglycemia results show, and do they apply to metformin alone?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "standalone_vs_add_on",
+        "metformin_vs_zituvimet",
+        "comparator_group_difference"
+      ],
+      "must_include": [
+        "Combination product contains sitagliptin and metformin",
+        "If citing 15.3% versus 8.2%, preserve add-on-to-insulin setting and treatment/comparator groups",
+        "Do not assign combination findings to monotherapy"
+      ],
+      "must_not_claim": [
+        "Hypoglycemia percentages assigned to metformin monotherapy"
+      ],
+      "critical_error_categories": [
+        "wrong_product",
+        "wrong_number_comparator"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "addon-hba1c",
+      "snapshot_id": "add-on-control",
+      "question": "How did intervention A affect HbA1c, and was it tested alone?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "standalone_vs_add_on",
+        "numerical_hba1c",
+        "comparator_group_difference",
+        "time_windows"
+      ],
+      "must_include": [
+        "Synthetic adults, continued metformin, intervention A versus placebo add-on",
+        "24 weeks; changes -0.8 versus -0.3 percentage points; difference -0.5 percentage points",
+        "Not monotherapy"
+      ],
+      "must_not_claim": [
+        "-0.8 is between-group effect",
+        "A alone tested",
+        "Relative percent"
+      ],
+      "critical_error_categories": [
+        "wrong_product",
+        "wrong_number_comparator"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "addon-fasting-glucose",
+      "snapshot_id": "add-on-control",
+      "question": "How much did fasting plasma glucose change in each group, and what was the between-group difference?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "numerical_fasting_glucose",
+        "comparator_group_difference",
+        "time_windows"
+      ],
+      "must_include": [
+        "Synthetic adults continuing metformin at 24 weeks",
+        "-24 mg/dL intervention A add-on versus -6 mg/dL placebo add-on; between-group -18 mg/dL"
+      ],
+      "must_not_claim": [
+        "24 mg/dL between-group effect",
+        "mg/dL exchanged for mmol/L",
+        "Monotherapy conclusion"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator",
+        "wrong_product"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "filtered-first",
+      "snapshot_id": "filtered-control",
+      "question": "What do the published results show for intervention A?",
+      "history_case_id": null,
+      "source_types": [
+        "pubmed"
+      ],
+      "categories": [
+        "source_filtered_history",
+        "numerical_control"
+      ],
+      "must_include": [
+        "Only PubMed publication evidence: 80 adults, 2 points versus placebo at 6 weeks",
+        "Synthetic evidence disclosed"
+      ],
+      "must_not_claim": [
+        "300 planned participants or 20-week protocol mixed into publication answer"
+      ],
+      "critical_error_categories": [
+        "wrong_population",
+        "wrong_number_comparator"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "filtered-followup",
+      "snapshot_id": "filtered-control",
+      "question": "What can we conclude from that, and what is still unknown?",
+      "history_case_id": "filtered-first",
+      "source_types": [
+        "pubmed"
+      ],
+      "categories": [
+        "source_filtered_history",
+        "follow_up",
+        "absence_scope"
+      ],
+      "must_include": [
+        "Continue same PubMed-only source scope and 6-week finding",
+        "Do not infer longer-term effects"
+      ],
+      "must_not_claim": [
+        "Cite or include excluded ClinicalTrials.gov protocol",
+        "Unknown endpoints claimed not measured"
+      ],
+      "critical_error_categories": [
+        "incorrect_absence_scope",
+        "wrong_number_comparator"
+      ],
+      "seed": null,
+      "expected_route": "generated"
+    }
+  ]
+}
