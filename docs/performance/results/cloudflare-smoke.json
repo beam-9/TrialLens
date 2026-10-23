@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "code_sha256": "1d7cb420904cbc3a6d7401708e1f9a012c49eee7d79d24b11c3d559ff626256c",
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures and temporary SQLite ledger",
+    "quota": "temporary evaluation ledger; free provider account hard quota still applies"
+  },
+  "requests": [
+    {
+      "case_id": "numerical-hba1c",
+      "snapshot_id": "numerical",
+      "client_wall_ms": 9347.97975,
+      "trace": {
+        "trace_id": "e7f5b63f-de36-4e8b-add0-b151e3b6310c",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 5.360709,
+          "retrieval": 1.146834,
+          "extractive_synthesis": 0.711584,
+          "context_build": 0.117,
+          "draft": 6201.053709,
+          "revision": 3112.881833,
+          "validation": 1.157083,
+          "store": 13.06175
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 4310,
+            "message_count": 2,
+            "serialized_messages_char_count": 4478,
+            "wall_ms": 6201.053709,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 891,
+            "eval_count": 205,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 7440,
+            "message_count": 4,
+            "serialized_messages_char_count": 7722,
+            "wall_ms": 3112.881833,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1507,
+            "eval_count": 102,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "http_status": 200,
+        "total_wall_ms": 9344.699625,
+        "serialization_ms": 0.801416
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 1,
+    "model_answer_p50_ms": 9344.699625,
+    "model_answer_p95_ms": 9344.699625,
+    "result_counts": {
+      "model_answer": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 126.824999,
+    "remaining_neurons": 8873.175001,
+    "pending_requests": 0,
+    "requests": 2
+  },
+  "isolation_verified": true
+}

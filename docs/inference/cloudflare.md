@@ -68,7 +68,7 @@ It defaults to the existing `triallens_data` volume to preserve workspace/Brief/
 
 Mocked adapter, quota/concurrency and Ask integration tests exercise both passes, scopes, guards, schema/citation/copy failures, missing usage, provider outage and no fallback. These establish implementation behavior, **not model accuracy or real speed**. No paid requests or local model inference were run for this change.
 
-**Activation is pending account setup and a real source-backed evaluation.** Keep this candidate explicit; it does not become the code's default provider automatically. Fresh `.env.example` recommends it, while unconfigured installs show labeled source excerpts. The existing native default remains available only through explicit local configuration when using the example. Once credentials are configured, evaluate frozen M0 cases in an isolated store and usage ledger, preserving failed outputs and previous-answer dependencies; do not use the native-only `evaluation/m0/benchmark.py` for Cloudflare. Measure hosted p50/p95, per-pass tokens, quota consumption and all critical factual categories before a pilot promotion. Do not claim the unresolved native M0 suite has been completed by mocked Cloudflare tests.
+**Connection is now verified by a full 18-turn live evaluation; quality promotion remains blocked by required qualifier omissions.** See [first hosted results](../performance/cloudflare-first.md). Keep this candidate explicit; it does not become the code's default provider automatically. Fresh `.env.example` recommends it, while unconfigured installs show labeled source excerpts. The existing native default remains available only through explicit local configuration when using the example. Subsequent comparisons must evaluate frozen M0 cases in an isolated store and usage ledger, preserving failed outputs and previous-answer dependencies; do not use the native-only `evaluation/m0/benchmark.py` for Cloudflare. Measure hosted p50/p95, per-pass tokens, quota consumption and all critical factual categories before a pilot promotion. Do not claim the unresolved native M0 suite has been completed by mocked Cloudflare tests.
 
 
 ## Verification of this implementation
@@ -80,3 +80,8 @@ Mocked adapter, quota/concurrency and Ask integration tests exercise both passes
 - `git diff --check` — passed.
 
 Test API was forced into Cloudflare mode with an empty token; no local model could start. Temporary servers were stopped after verification. Real hosted results, hosted latency, account quota and biomedical improvement remain unverified until setup is complete. No native benchmark artifacts were overwritten. Unrelated local research files were excluded from this change.
+
+
+## First live evaluation
+
+The saved Cloudflare setup was connected and the full 18-turn frozen suite completed on 22 October. See [measured latency and outstanding quality gates](../performance/cloudflare-first.md). The implementation is locally active through explicit `.env` selection; comparator/timeframe/population omissions still prevent a clean pilot-quality promotion. Earlier pending-setup statements above describe the initial integration stage, not the current connection status.

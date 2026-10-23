@@ -54,7 +54,7 @@ Open `http://localhost:3000`.
 
 ## Hosted Ask with Cloudflare
 
-To avoid running inference on your Mac, use [Cloudflare Workers AI setup](docs/inference/cloudflare.md). The integration preserves drafting, revision and citation checks, uses a fixed hosted model and a persistent daily quota guard, and returns labeled source excerpts when unavailable. It never automatically starts local inference or switches to a paid provider. A Workers Free account, Account ID and server-only token are required. The candidate still needs real source-quality and latency evaluation before pilot promotion. Fresh `.env.example` recommends this provider; credentials remain local and are never committed.
+To avoid running inference on your Mac, use [Cloudflare Workers AI setup](docs/inference/cloudflare.md). The integration preserves drafting, revision and citation checks, uses a fixed hosted model and a persistent daily quota guard, and returns labeled source excerpts when unavailable. It never automatically starts local inference or switches to a paid provider. A Workers Free account, Account ID and server-only token are required. The [first live evaluation](docs/performance/cloudflare-first.md) shows lower latency, but required source qualifiers are still omitted in some answers, so pilot-quality promotion remains blocked. Fresh `.env.example` recommends this provider; credentials remain local and are never committed.
 
 `compose.cloudflare.yaml` packages the API and website without an Ollama container. It is an alternative to the existing local-inference Compose profile, not an overlay. Hosting/access/backup gates still apply.
 
