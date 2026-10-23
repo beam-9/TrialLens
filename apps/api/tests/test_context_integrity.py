@@ -32,3 +32,29 @@ def test_context_truncation_tracks_actual_loss(monkeypatch, tmp_path, abstract, 
     assert record["content_truncated"] is truncated
     if not truncated:
         assert record["text"] == abstract and record["matched_passages"] == []
+
+
+@pytest.mark.parametrize("status,phase,date", [("COMPLETED", "PHASE2", "2024-03-12"), (None, None, None)])
+def test_registry_status_reaches_both_passes_without_inventing_results(monkeypatch, tmp_path, status, phase, date):
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "cloudflare")
+    monkeypatch.setenv("TRIALLENS_USAGE_PATH", str(tmp_path / "usage.sqlite3"))
+    monkeypatch.setattr("triallens.conversation.chat_configured", lambda: True)
+    workspace = Workspace(condition="diabetes", source_types=[SourceType.clinical_trials])
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.clinical_trials,
+        external_id="NCT-CONTEXT", title="Study registration", status=status, phase=phase, publication_date=date,
+        abstract="The trial will evaluate glucose metabolism; this stored description has no posted results.")
+    fallback = Answer(workspace_id=workspace.id, question="Is it ongoing?", short_answer="Source excerpt",
+                      evidence=[], limitations=[], citations=[], retrieved_chunks=[])
+    captured = []
+    def completion(messages, schema):
+        captured.append(json.loads(messages[1]["content"])["evidence"][0])
+        return json.dumps({"paragraphs": ["The supplied description does not establish measured treatment effects [ClinicalTrials.gov:NCT-CONTEXT]."],
+                           "cited_sources": ["ClinicalTrials.gov:NCT-CONTEXT"], "uncertainty": []})
+    monkeypatch.setattr("triallens.conversation.cloudflare.completion", completion)
+    monkeypatch.setattr("triallens.conversation.httpx.post", lambda *a, **k: pytest.fail("No inference permitted"))
+    answer = ConversationService().generate(workspace, "Is this trial ongoing and does it provide results?", [], [source], fallback)
+    assert answer.generation_mode == "conversational" and len(captured) == 2
+    for record in captured:
+        assert record["status"] == status and record["phase"] == phase and record["publication_date"] == date
+        assert record["text"] == source.abstract
+        assert "not whether measured results are posted" in record["metadata_scope"]

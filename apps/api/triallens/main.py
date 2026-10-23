@@ -261,11 +261,10 @@ def answers(workspace_id: str) -> list[Answer]:
 @app.patch("/workspaces/{workspace_id}/answers/{answer_id}/brief", response_model=Answer)
 def save_answer_to_brief(workspace_id: str, answer_id: str, saved: bool = True) -> Answer:
     _workspace_or_404(workspace_id)
-    answer = store.get_answer(answer_id)
-    if not answer or answer.workspace_id != workspace_id:
+    answer = store.set_answer_saved_to_brief(workspace_id, answer_id, saved)
+    if not answer:
         raise HTTPException(status_code=404, detail="Answer not found in workspace")
-    answer.saved_to_brief = saved
-    return store.save_answer(answer)
+    return answer
 
 
 @app.get("/evals")

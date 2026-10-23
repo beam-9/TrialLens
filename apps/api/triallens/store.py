@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 
 from triallens.models import Answer, EvidenceBrief, EvidenceChunk, EvidenceExtraction, EvidenceSource, Workspace, utc_now
+from triallens.answer_views import answer_read_view
 
 
 def serialized_write(method):
@@ -162,14 +163,25 @@ class JsonStore:
 
     def get_answer(self, answer_id: str) -> Answer | None:
         raw = self._read()["answers"].get(answer_id)
-        return Answer(**raw) if raw else None
+        return answer_read_view(Answer(**raw)) if raw else None
 
     def list_answers(self, workspace_id: str) -> list[Answer]:
         return [
-            Answer(**item)
+            answer_read_view(Answer(**item))
             for item in self._read()["answers"].values()
             if item["workspace_id"] == workspace_id
         ]
+
+    @serialized_write
+    def set_answer_saved_to_brief(self, workspace_id: str, answer_id: str, saved: bool) -> Answer | None:
+        # Update the stored flag, never write a read-view projection over history.
+        data = self._read()
+        raw = data["answers"].get(answer_id)
+        if not raw or raw["workspace_id"] != workspace_id:
+            return None
+        raw["saved_to_brief"] = saved
+        self._write(data)
+        return answer_read_view(Answer(**raw))
 
     @serialized_write
     def save_brief(self, brief: EvidenceBrief) -> EvidenceBrief:
@@ -180,7 +192,11 @@ class JsonStore:
 
     def get_brief(self, workspace_id: str) -> EvidenceBrief | None:
         raw = self._read()["briefs"].get(workspace_id)
-        return EvidenceBrief(**raw) if raw else None
+        if not raw:
+            return None
+        brief = EvidenceBrief(**raw)
+        brief.saved_answers = [answer_read_view(answer) for answer in brief.saved_answers]
+        return brief
 
 
 def _has_number(text: str) -> bool:

@@ -264,6 +264,10 @@ class ConversationService:
                 records.append({
                     "citation": citation_for(source), "title": source.title[:500],
                     "source_type": source.source_type.value,
+                    "status": source.status, "phase": source.phase,
+                    "publication_date": source.publication_date,
+                    "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
+                                       if source.source_type == SourceType.clinical_trials else "Stored source metadata; missing fields are unknown."),
                     "content_scope": document_content_scope(source),
                     "content_truncated": content_truncated,
                     "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
