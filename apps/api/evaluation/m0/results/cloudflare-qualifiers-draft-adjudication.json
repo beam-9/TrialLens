@@ -1,0 +1,550 @@
+{
+  "schema_version": 1,
+  "assessment_type": "Offline source-backed engineering draft-versus-revision review; not clinical validation",
+  "review_date": "2026-10-23 America/Vancouver",
+  "source_answers": "apps/api/evaluation/m0/results/cloudflare-qualifiers-final-answers.json",
+  "source_answers_sha256": "19cd2b0ed1edd1935f28dec5a1c5859ac15fde8c9fd56a1e740835d8084b76fc",
+  "review_order": "Drafts and frozen passages reviewed before consulting existing final adjudication. Final comparison added afterward.",
+  "model_cases_reviewed": 16,
+  "excluded_deterministic_guards": [
+    "ambiguous-followup",
+    "personal-treatment"
+  ],
+  "provider_calls": 0,
+  "draft_verdict_counts": {
+    "partially_supported": 8,
+    "unsupported": 1,
+    "supported": 7
+  },
+  "critical_error_answer_count": 4,
+  "critical_error_counts_by_category": {
+    "unsupported_claim": 2,
+    "incorrect_absence_scope": 2,
+    "wrong_number_comparator": 1
+  },
+  "quality_promotion_gate_passed": false,
+  "interpretation": "A draft-only swap is not supported. Revision repairs some defects, creates others, and fails to repair pre-existing numerical reasoning. These are source-backed judgments, not model-call success or lexical-similarity scores.",
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "0c18b77097d441d57e70ec70438b1187ccceb25a6b4c782864ffb404b500e321",
+      "draft_response": {
+        "paragraphs": [
+          "The sources provide information on the benefits and limitations of metformin for type 2 diabetes. Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2]. The most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache [openFDA label:FDA-LABEL-metformin-2].",
+          "A clinical trial aims to investigate whether the intake of a hybrid product containing arabinoxylan-oligosaccharides (AXOS) together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes [ClinicalTrials.gov:NCT05689684]. The current standard treatment metformin has low adherence due to its main side effect gut dysbiosis, which also results in more complications and high overall costs [ClinicalTrials.gov:NCT05689684].",
+          "The benefits of metformin include improving glycemic control, and it may also have a potential effect on slowing down clonal expansion of clonal hematopoiesis, which is associated with a higher risk of type 2 diabetes [PubMed:42374733]. However, the main limitations of metformin are its adverse reactions, such as diarrhea, nausea/vomiting, and flatulence, and the potential for lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-3]."
+        ],
+        "cited_sources": [
+          "ClinicalTrials.gov:NCT05689684",
+          "openFDA label:FDA-LABEL-metformin-2",
+          "openFDA label:FDA-LABEL-metformin-3",
+          "PubMed:42374733"
+        ],
+        "uncertainty": [
+          "The sources do not provide a comprehensive review of all the benefits and limitations of metformin for type 2 diabetes.",
+          "The clinical trial on AXOS and metformin is still ongoing, and the results are not yet available.",
+          "The potential effect of metformin on clonal hematopoiesis is still being researched and requires further study."
+        ]
+      },
+      "coverage": "Partial: indication, age floor, adjunct, common harms and source diversity retained; hypothesis/study-stage qualifications weakened.",
+      "relevance_and_explanation": "Mostly relevant but paper-by-paper and label-like. The CH statement omits that support is preclinical. The AXOS protocol rationale is repeated as established explanation rather than attributed investigator rationale.",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "The clinical trial on AXOS and metformin is still ongoing, and the results are not yet available.",
+          "rationale": "The frozen source status is COMPLETED, but the original f17a1ed generation records omitted status, phase and publication_date. AXOS abstract text does not contain COMPLETED. This is a context-construction omission plus an unsupported inference from future-tense protocol text, not a generator ignoring supplied status. Registry completion status does not establish whether results are posted or available elsewhere."
+        }
+      ],
+      "source_passages": [
+        "real-metformin:m0-real-chunk-006: adults and pediatric patients 10 years and older; adjunct to diet and exercise.",
+        "real-metformin:m0-real-chunk-039: Preclinical studies found ... metformin might slow down clonal expansion ... relevance for patients with diabetes remains to be elucidated.",
+        "real-metformin:m0-real-source-06 status=COMPLETED; m0-real-chunk-049: a clinical trial will be performed ..."
+      ],
+      "syntax_or_copy_notes": [
+        "Combined citation marker needs existing normalize_citations presentation repair; does not resolve evidence-stage issues."
+      ],
+      "revision_comparison": "Revision removes the unsupported ongoing/no-results assertion and speculative CH benefit. The original generator lacked structured status metadata; the root context fix now supplies it with a registry-scope note, without regenerating these retained outputs. Population and adjunct survive, but protocol rationale still displaces quantitative-benefit gaps.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "unsupported",
+      "draft_sha256": "6b4f9c7c0fcc2f0af95a04c0fcdd09dbf53caac5fab176424c001314071161ba",
+      "draft_response": {
+        "paragraphs": [
+          "Metformin is a medication used to help control blood sugar levels in people with type 2 diabetes. It's often prescribed along with a healthy diet and regular exercise. The medication can cause some side effects, such as diarrhea, nausea, and stomach discomfort. In some cases, it can also lead to more serious issues like lactic acidosis, vitamin B12 deficiency, and hypoglycemia.",
+          "Researchers are exploring ways to improve the effectiveness of metformin and reduce its side effects. For example, one study is investigating whether adding a specific fiber supplement to metformin can improve glucose metabolism and gut health in people with type 2 diabetes. Another study is looking at the potential benefits of combining metformin with other medications, such as insulin degludec and liraglutide, to better manage the condition.",
+          "It's essential to carefully monitor patients taking metformin and adjust the treatment plan as needed to minimize the risk of adverse reactions. Additionally, patients should be aware of the potential side effects and report any concerns to their healthcare provider."
+        ],
+        "cited_sources": [],
+        "uncertainty": [
+          "The exact mechanisms by which metformin works are not fully understood.",
+          "More research is needed to determine the long-term effects of metformin on patients with type 2 diabetes.",
+          "The optimal dosage and treatment duration for metformin have not been established."
+        ]
+      },
+      "coverage": "Missing population floor, all inline citations and preservation of evidence boundaries. Prior safety limitations are present in draft but supplemented with unsupported prescribing uncertainties.",
+      "relevance_and_explanation": "Everyday wording improves readability, but novel combination detail and generic monitoring advice displace a simple explanation of the preceding answer.",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "The optimal dosage and treatment duration for metformin have not been established.",
+          "rationale": "No supplied passage establishes this sweeping prescribing uncertainty. Lack of a dose passage in selected excerpts cannot justify saying an optimal dose/treatment duration has not been established."
+        }
+      ],
+      "source_passages": [
+        "real-metformin:m0-real-chunk-006: adults and pediatric patients 10 years and older; diet/exercise adjunct.",
+        "real-metformin FDA labels identify lactic acidosis, B12 deficiency and hypoglycemia; their presence does not establish the generated mechanism/dose uncertainty."
+      ],
+      "syntax_or_copy_notes": [
+        "No cited_sources or inline markers despite biomedical claims; separate from semantic review."
+      ],
+      "revision_comparison": "Revision restores inline attribution, age floor and adjunct and removes unsupported dose/mechanism claims. However it drops earlier lactic-acidosis, B12 and hypoglycemia limitations and repeats fiber investigation; not a satisfactory safety-preserving follow-up.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "combination-identity",
+      "support_verdict": "supported",
+      "draft_sha256": "a878bb25f0b84595bf21226fecbf533a22dd9459dd399defa4f3c7e94aa5a2ad",
+      "draft_response": {
+        "paragraphs": [
+          "The label for ZITUVIMET, a combination of sitagliptin and metformin hydrochloride, states that it has not been studied in patients with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].",
+          "It also says that it is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET [openFDA label:FDA-LABEL-metformin-1].",
+          "This does not mean that metformin is contraindicated in people with a history of pancreatitis, but rather that the risk is unknown due to a lack of studies [openFDA label:FDA-LABEL-metformin-1]."
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-1"
+        ],
+        "uncertainty": [
+          "The label does not provide information on the risk of pancreatitis in patients with a history of pancreatitis taking metformin.",
+          "The lack of studies on this population limits the understanding of the potential risk.",
+          "The label's statement of unknown risk does not imply a contraindication, but rather a need for further study."
+        ]
+      },
+      "coverage": "Core product and not-studied/unknown-risk distinctions retained; no personal recommendation.",
+      "relevance_and_explanation": "Draft directly answers the contraindication question; third paragraph is wordy but does not infer a proved metformin contraindication.",
+      "critical_errors": [],
+      "source_passages": [
+        "combination-label:m0-combination-label-chunk-1: ZITUVIMET is a combination ... has not been studied ... unknown whether ... increased risk ... while using ZITUVIMET."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision preserves identity/unknown risk but removes the direct answer and adds less relevant indication/type-1 context. Draft is more responsive.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "52970b1109578a1ec6112b19c244587cae7a57552295a1905add3aad2ab7cb03",
+      "draft_response": {
+        "paragraphs": [
+          "The trial found that intervention A lowered HbA1c by 0.5 percentage points more than placebo at 12 weeks [PubMed:EVAL-NUMBERS].",
+          "This means that, on average, people who received intervention A had a slightly lower HbA1c level after 12 weeks compared to those who received a placebo.",
+          "The difference was between 0.2 and 0.8 percentage points lower with intervention A, as indicated by the 95% confidence interval [PubMed:EVAL-NUMBERS]."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-NUMBERS"
+        ],
+        "uncertainty": [
+          "The trial was synthetic, which may limit its generalizability to real-world scenarios.",
+          "The trial only measured effects up to 12 weeks, so it is unclear if the benefits of intervention A persist beyond that time period.",
+          "The evidence is from a demo record, which cannot support real-world conclusions."
+        ]
+      },
+      "coverage": "Adults omitted. Exact 0.5 percentage-point placebo difference, CI and 12-week endpoint retained; synthetic disclosure in uncertainty. Mortality omission is a coverage limitation, especially for a meaning explanation.",
+      "relevance_and_explanation": "Second sentence correctly describes lower endpoint levels, so the initial lowered-more wording is ambiguous rather than independently scored as an explicit baseline-change assertion. The measured-only time restriction is unsupported.",
+      "critical_errors": [
+        {
+          "category": "incorrect_absence_scope",
+          "claim": "The trial only measured effects up to 12 weeks",
+          "rationale": "Source says effects beyond 12 weeks are not established; it does not say no later outcomes were measured."
+        }
+      ],
+      "source_passages": [
+        "numerical:m0-numerical-chunk-1: 240 adults ... At 12 weeks, HbA1c was 0.5 percentage points lower ... This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision adds adults and removes measured-only claim. Its lowered-more wording remains less precise than endpoint-level difference, but no explicit baseline trend is stated; this matches the existing final review distinction.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "numerical-simplify",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "9a68319f35abeb6ff2e793c73a9bb8533892ffe1acc6d868c17d42fc7f95c8ad",
+      "draft_response": {
+        "paragraphs": [
+          "In a demo trial, 240 adults received either intervention A or a placebo [PubMed:EVAL-NUMBERS].",
+          "After 12 weeks, intervention A lowered HbA1c by 0.5 percentage points more than the placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].",
+          "This means that intervention A was able to reduce HbA1c levels slightly more than the placebo over the 12-week period."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-NUMBERS"
+        ],
+        "uncertainty": [
+          "The trial was a demo, which may not reflect real-world results",
+          "The trial only lasted 12 weeks, so we don't know what happens after that",
+          "We can't be certain that the true effect is within the given confidence interval"
+        ]
+      },
+      "coverage": "Adult/placebo/0.5-point/12-week tuple, CI and demo retained; mortality not measured omitted.",
+      "relevance_and_explanation": "Repeats technical result instead of meaningfully simplifying. The added explanation converts endpoint difference into comparative change; trial-only-lasted language also overstates the source window.",
+      "critical_errors": [
+        {
+          "category": "wrong_number_comparator",
+          "claim": "This means that intervention A was able to reduce HbA1c levels slightly more than the placebo over the 12-week period.",
+          "rationale": "Endpoint group difference does not establish group changes from baseline."
+        },
+        {
+          "category": "incorrect_absence_scope",
+          "claim": "The trial only lasted 12 weeks",
+          "rationale": "Source establishes a 12-week result and no established later effects; it does not establish that no later observation or study duration existed."
+        }
+      ],
+      "source_passages": [
+        "numerical:m0-numerical-chunk-1: At 12 weeks ... between-group difference ... Mortality was not measured ... does not establish effects beyond 12 weeks."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision removes trial-only-lasted phrasing but retains the unsupported greater-reduction interpretation and omits mortality. The material comparison failure is already in the draft; revision does not originate it.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "mixed-significance",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "a5975ac69d84cd0e57b25407027f0da1b42d5d17c2d7ec05201e3765dfa30c56",
+      "draft_response": {
+        "paragraphs": [
+          "The two studies do not agree on the effectiveness of intervention A. In one study of 100 adults, intervention A reduced symptom score by 3 points compared to placebo after 8 weeks [PubMed:EVAL-A].",
+          "In contrast, another study of 120 adults found that intervention A differed from placebo by only 0.1 symptom-score points after 8 weeks, with a 95% confidence interval of -1.0 to 1.2, indicating no statistically clear difference [PubMed:EVAL-B]."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-A",
+          "PubMed:EVAL-B"
+        ],
+        "uncertainty": [
+          "The studies are synthetic and demo, which may limit their generalizability to real-world populations.",
+          "The confidence interval in the second study suggests that the true effect could be anywhere from a slight reduction to a slight increase in symptom score.",
+          "The studies had different sample sizes, which could affect their ability to detect statistically significant differences."
+        ]
+      },
+      "coverage": "Adult sample sizes, 8 weeks, placebo, 3 versus 0.1 points, second CI and synthetic disclosure retained; no pooled result or no-effect assertion.",
+      "relevance_and_explanation": "Opening says studies do not agree on effectiveness, stronger than supported positive-versus-inconclusive interpretation. No explicit claim of statistically incompatible effects; scored a framing/coverage defect rather than critical incompatibility.",
+      "critical_errors": [],
+      "source_passages": [
+        "mixed-results:m0-mixed-results-chunk-1: 3 points versus placebo at 8 weeks; CI 1 to 5 lower.",
+        "mixed-results:m0-mixed-results-chunk-2: 0.1 points; CI -1.0 to 1.2; no statistically clear difference; no pooled analysis."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision improves opening to mixed evidence and removes speculative explanation based on differing sample sizes; acceptable improvement.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "protocol-deaths",
+      "support_verdict": "supported",
+      "draft_sha256": "962251cdae768245571afbf70b80eedbafc09ec296c34d5f75481b31432ffe6c",
+      "draft_response": {
+        "paragraphs": [
+          "This demo protocol does not provide any results on the effect of intervention A on mortality [ClinicalTrials.gov:EVAL-PROTOCOL]."
+        ],
+        "cited_sources": [
+          "ClinicalTrials.gov:EVAL-PROTOCOL"
+        ],
+        "uncertainty": [
+          "The protocol is a demo and does not contain actual results",
+          "Mortality is not a listed outcome in the protocol",
+          "No results have been posted"
+        ]
+      },
+      "coverage": "Correctly says protocol contains no mortality results, mortality not listed and no results posted; demo retained.",
+      "relevance_and_explanation": "Concise and relevant. Could begin with a more explicit no, this does not prove a reduction, but no effect is not asserted.",
+      "critical_errors": [],
+      "source_passages": [
+        "planned-trial:m0-planned-trial-chunk-1: plans ... Recruitment has not begun and no results have been posted. Mortality is not a listed outcome."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision preserves material distinctions and integrates caveats into one sentence; no material degradation.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "unrelated-question",
+      "support_verdict": "supported",
+      "draft_sha256": "94a90d3baa37978a8813d49ef121223a31e497ac8f44f3c455e30659850a930c",
+      "draft_response": {
+        "paragraphs": [
+          "The supplied evidence does not answer the question about the football match. It discusses a synthetic evaluation trial of intervention A, which is not related to football."
+        ],
+        "cited_sources": [],
+        "uncertainty": [
+          "The question is outside the scope of the supplied evidence",
+          "The supplied evidence is a demo record and cannot support real-world conclusions"
+        ]
+      },
+      "coverage": "Abstains from football answer without an invented sports result or clinical result dump.",
+      "relevance_and_explanation": "Short, natural scope explanation. Naming the synthetic trial is incidental context, with no unnecessary biomedical finding.",
+      "critical_errors": [],
+      "source_passages": [
+        "numerical:m0-numerical-chunk-1: synthetic biomedical trial only; no football information."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision adds a full HbA1c/sample-size/timeframe/CI recap. Facts are grounded but irrelevant and explicitly forbidden by this frozen case; revision introduces the relevance failure.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "pediatric-floor",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "31a29c6405711fd8d771c6ec345ec486731887c0c1c5eb449fb992d9f2709c45",
+      "draft_response": {
+        "paragraphs": [
+          "The metformin tablet is indicated for adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2]."
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-2"
+        ],
+        "uncertainty": [
+          "The source does not discuss the appropriateness of metformin for pediatric patients under 10 years of age."
+        ]
+      },
+      "coverage": "Adult/age-10-plus/type-2 population retained; diet/exercise adjunct required by case is omitted.",
+      "relevance_and_explanation": "Direct answer, but near-label phrasing. Under-10 absence statement is bounded to supplied source.",
+      "critical_errors": [],
+      "source_passages": [
+        "standalone-label:m0-standalone-label-chunk-1: indicated as an adjunct to diet and exercise ... adults and pediatric patients 10 years of age and older ..."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision restores required adjunct condition. Both versions remain close to label language; root will assess exact copying guard mechanically.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "postmarketing-frequency",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "aaf45a4dccd2ecfad5b16718b05b7a488ee9a7452f3f685e7a7dc529f80cd4e1",
+      "draft_response": {
+        "paragraphs": [
+          "The postmarketing reports of liver injury with metformin do not provide information on the frequency of this adverse reaction [openFDA label:FDA-LABEL-metformin-2]."
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-2"
+        ],
+        "uncertainty": [
+          "The postmarketing reports are based on voluntary submissions from a population of uncertain size, which makes it difficult to estimate the frequency of the adverse reaction."
+        ]
+      },
+      "coverage": "Frequency cannot be estimated from voluntary reports of uncertain population size is covered; explicit inability to establish causation is omitted.",
+      "relevance_and_explanation": "Faithful and directly responsive to frequency question. The strict must_include item also names causal inference; absence of that explanation is a coverage issue, not an invented causal claim.",
+      "critical_errors": [],
+      "source_passages": [
+        "standalone-label:m0-standalone-label-chunk-5/6: reported voluntarily from a population of uncertain size ... not always possible to reliably estimate frequency or establish a causal relationship ..."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision preserves the frequency explanation but still omits the causal-inference limitation. Existing final adjudication accepts this because question asks frequency; this review records strict frozen-requirement coverage separately.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "b12-time-window",
+      "support_verdict": "supported",
+      "draft_sha256": "660ed8c57ae458592ecd8809454cddd911d427454adae6a9e1087208997ab47c",
+      "draft_response": {
+        "paragraphs": [
+          "The label reports that in metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2]."
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-2"
+        ],
+        "uncertainty": [
+          "The source does not discuss the long-term implications of this decrease in vitamin B12 levels."
+        ]
+      },
+      "coverage": "Approximately 7%, subnormal serum levels, clinical trials and 29 weeks retained in the same sentence.",
+      "relevance_and_explanation": "Direct and accurate but almost a sentence copied from the label; lexical overlap is not a faithfulness failure and should be checked separately by existing copy guard.",
+      "critical_errors": [],
+      "source_passages": [
+        "standalone-label:m0-standalone-label-chunk-5: clinical trials of 29-week duration ... decrease to subnormal ... approximately 7% of patients."
+      ],
+      "syntax_or_copy_notes": [
+        "Long near-verbatim source wording; evaluate existing copy guard separately, not as evidence of semantic error."
+      ],
+      "revision_comparison": "Revision moves the requested 29-week observation into uncertainty, although it remains true and present when whole response is read. This weakens presentation, not factual support.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "combination-add-on",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "d5f8df8ca83cabbbfdef2a8a2d29b58a8177ad85b802cdaad80dbc06e793d6a0",
+      "draft_response": {
+        "paragraphs": [
+          "The ZITUVIMET add-on-to-insulin hypoglycemia results show that in a 24-week trial, the overall incidence of reported adverse reactions of hypoglycemia was 15.3% in patients given sitagliptin 100 mg + metformin + insulin, with a rate of 0.98 episodes/patient-year, and 8.2% in patients given placebo + metformin + insulin, with a rate of 0.61 episodes/patient-year [openFDA label:FDA-LABEL-metformin-1].",
+          "These results apply to the combination of sitagliptin and metformin, not metformin alone. The results for metformin alone are reported separately in the label, with an overall incidence of adverse reactions of hypoglycemia of 0.8% in patients given metformin alone [openFDA label:FDA-LABEL-metformin-1]."
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-1"
+        ],
+        "uncertainty": [
+          "The supplied evidence does not provide a direct comparison of hypoglycemia rates between metformin alone and the combination of sitagliptin and metformin."
+        ]
+      },
+      "coverage": "Correct 24-week insulin/metformin background, groups, 15.3% versus 8.2% and rates. It distinguishes combination from metformin alone, but adds 0.8% monotherapy without its diet/exercise-only setting.",
+      "relevance_and_explanation": "The separate 0.8% value is present in the source, and draft says reported separately rather than explicitly asserting cross-trial superiority. Missing setting invites an invalid comparison; do not treat it as a safe monotherapy comparison.",
+      "critical_errors": [],
+      "source_passages": [
+        "combination-full:m0-combination-full-chunk-15: Add-On to Insulin + Metformin (24 weeks) ... 35 (15.3) ... 19 (8.2) ... 0.98 0.61.",
+        "Same chunk: separate patients inadequately controlled on diet and exercise ... 0.8% ... metformin alone."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision drops 24 weeks and converts the separately described monotherapy figure into which had a lower incidence. That is an explicit unsupported comparison for the selected add-on trial. Revision introduces/strengthens the material error from a pre-existing unsafe juxtaposition.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "addon-hba1c",
+      "support_verdict": "supported",
+      "draft_sha256": "b21be150a63d253433dbe381e3da6a229fb501c5927690c9eb0fa1784b27b4d6",
+      "draft_response": {
+        "paragraphs": [
+          "In a 24-week randomized trial, adults with type 2 diabetes taking metformin received either intervention A or placebo as add-on therapy [PubMed:EVAL-ADDON]. The mean HbA1c change from baseline was -0.8 percentage points in the intervention A add-on group and -0.3 percentage points in the placebo add-on group, with a between-group difference of -0.5 percentage points.",
+          "This trial did not test intervention A as monotherapy, only as an add-on to metformin [PubMed:EVAL-ADDON]."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-ADDON"
+        ],
+        "uncertainty": [
+          "The trial only lasted 24 weeks, so effects beyond that timeframe are not established",
+          "The trial did not measure mortality",
+          "This is a demo record and may not reflect real-world outcomes"
+        ]
+      },
+      "coverage": "Adults, stable/continued metformin, add-on comparator, 24 weeks, -0.8 versus -0.3 and -0.5 percentage points, no monotherapy and demo disclosure preserved.",
+      "relevance_and_explanation": "Responsive with a complete numerical tuple. Demo only in uncertainty is less prominent but explicit. Beyond-24-week uncertainty should be bounded to this evidence record.",
+      "critical_errors": [],
+      "source_passages": [
+        "add-on-control:m0-add-on-control-chunk-1/2: adults ... continued metformin ... 24 weeks ... -0.8 ... -0.3 ... between-group -0.5 ... did not test monotherapy ... synthetic ... beyond 24 weeks not established."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision simplifies wording but removes explicitly required -0.5-point between-group difference. Draft is more complete.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "addon-fasting-glucose",
+      "support_verdict": "partially_supported",
+      "draft_sha256": "753f97fa035764568180ed0c3b96158e5c8128305637cf8355037af65504a7e4",
+      "draft_response": {
+        "paragraphs": [
+          "In the synthetic randomized trial, the fasting plasma glucose change was -24 mg/dL in the intervention A add-on group and -6 mg/dL in the placebo add-on group [PubMed:EVAL-ADDON].",
+          "The between-group difference in fasting plasma glucose change was -18 mg/dL [PubMed:EVAL-ADDON]."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-ADDON"
+        ],
+        "uncertainty": [
+          ")n intervention A was not tested as monotherapy",
+          "effects beyond 24 weeks were not established"
+        ]
+      },
+      "coverage": "Synthetic disclosure and -24/-6/-18 mg/dL retained. Adult population, stable metformin background and observation at 24 weeks are absent from main result; generic beyond-24 uncertainty is not equivalent.",
+      "relevance_and_explanation": "Direct arithmetic and direction correct, but add-on alone does not identify background therapy. Uncertainty starts with literal )n typo, a presentation issue separate from semantics.",
+      "critical_errors": [],
+      "source_passages": [
+        "add-on-control:m0-add-on-control-chunk-1/2: 180 adults ... stable metformin ... continued metformin ... 24 weeks ... fasting plasma glucose change -24 versus -6 mg/dL ... between-group -18 mg/dL."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision restores adult/background/time qualifiers and removes typo. Signed -18 becomes an unsigned 18 mg/dL magnitude; preceding directions make meaning recoverable. Demo disclosure survives in server generation metadata, not revised prose.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "filtered-first",
+      "support_verdict": "supported",
+      "draft_sha256": "54b3151f182fd384dadcded1d978f751784490b8b3ad83aa3360b391d4172997",
+      "draft_response": {
+        "paragraphs": [
+          "The published results show that intervention A lowered symptom score by 2 points compared to placebo after 6 weeks in a synthetic randomized trial of 80 adults [PubMed:EVAL-FILTER-PUBLICATION]."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-FILTER-PUBLICATION"
+        ],
+        "uncertainty": [
+          "The evidence is from a demo record, which cannot support real-world conclusions."
+        ]
+      },
+      "coverage": "Synthetic 80 adults, 2 points versus placebo and 6 weeks with only permitted PubMed evidence.",
+      "relevance_and_explanation": "Clear and relevant short answer. No excluded protocol contamination.",
+      "critical_errors": [],
+      "source_passages": [
+        "filtered-control:m0-filtered-control-chunk-1: synthetic randomized trial of 80 adults ... 2 points versus placebo after 6 weeks ... completed results."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision paraphrases same complete claim; no material difference.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    },
+    {
+      "case_id": "filtered-followup",
+      "support_verdict": "supported",
+      "draft_sha256": "cf6e3a73c24c3f6005a3ec177c2a000cff0ed564acaf2ff7d9d68d46b2455c28",
+      "draft_response": {
+        "paragraphs": [
+          "We can conclude that in a synthetic randomized trial of 80 adults, intervention A was found to lower symptom score by 2 points compared to placebo after 6 weeks [PubMed:EVAL-FILTER-PUBLICATION].",
+          "However, since this is a demo record, it cannot support real-world conclusions. Additionally, the supplied evidence is a synthetic trial, which may not reflect real-world outcomes.",
+          "What is still unknown includes the long-term effects of intervention A, as well as its efficacy in different populations or under different conditions. The supplied evidence does not provide information on these aspects."
+        ],
+        "cited_sources": [
+          "PubMed:EVAL-FILTER-PUBLICATION"
+        ],
+        "uncertainty": [
+          "The evidence is from a demo record and may not reflect real-world outcomes",
+          "The supplied evidence does not provide long-term follow-up data",
+          "The generalizability of the results to different populations or conditions is unknown"
+        ]
+      },
+      "coverage": "Same PubMed-only scope, adults/comparator/2 points/6 weeks and synthetic limitation retained; later effects explicitly limited by supplied evidence.",
+      "relevance_and_explanation": "Relevant answer plus limitations, but repeated synthetic disclaimers could be combined. No excluded protocol or asserted unmeasured endpoint.",
+      "critical_errors": [],
+      "source_passages": [
+        "filtered-control:m0-filtered-control-chunk-1: 80 adults ... 2 points versus placebo after 6 weeks. Scoped excerpt contains no later effects or other-population results."
+      ],
+      "syntax_or_copy_notes": [],
+      "revision_comparison": "Revision removes repetition and bounds the later-effects statement to supplied evidence; improvement.",
+      "reviewer": "Codex independent source-backed engineering draft review; no biomedical-expert or clinical validation",
+      "human_review_status": "pending"
+    }
+  ],
+  "limitations": [
+    "Single candidate run; not independent clinical expert review or generalization proof.",
+    "Draft response is assessed without borrowing final server metadata to repair missing draft qualifiers.",
+    "Frozen inventory has some stricter coverage requirements than existing final adjudication; postmarketing causality omission is explicitly distinguished from a false causal claim.",
+    "The artifact retains final retrieved chunks, not the exact entire serialized first-pass prompt. Source-scope diagnosis uses scoped frozen snapshots plus retained chunks and must not claim exact prompt-recall metrics.",
+    "No production changes, provider calls, token access or prior-artifact rewriting performed.",
+    "AXOS structured registry status was unavailable in the original generation record; do not diagnose its omission as solely a model-attention or reasoning failure."
+  ],
+  "context_availability_amendment": {
+    "reviewed_commit": "f17a1ed",
+    "finding": "Original generation record dict excludes source.status, phase and publication_date. Frozen AXOS abstract has no COMPLETED status word; retained matched passages do not provide it. The AXOS study-status failure therefore involves missing model context as well as unsupported status inference.",
+    "subsequent_fix": "Root added explicit status/phase/publication_date and registry-scope note plus two tests. No new model output is inferred from this fix.",
+    "registry_boundary": "COMPLETED describes registry study status, not confirmation of posted structured results."
+  },
+  "deterministic_validation_replay": {
+    "artifact": "docs/performance/results/cloudflare-expanded-validation-replay-status-context.json",
+    "method": "Offline deterministic final-validation replay; not generation or semantic adjudication",
+    "draft_accepted": 13,
+    "draft_total": 16,
+    "revision_accepted": 16,
+    "revision_total": 16,
+    "draft_rejected_case_ids": [
+      "real-broad",
+      "real-simplify",
+      "addon-hba1c"
+    ],
+    "provider_requests": 0,
+    "interpretation": "Existing validators reject three drafts while accepting all revised outputs, including semantic failures identified by source review. Syntax/copy validation does not prove answer accuracy."
+  }
+}

@@ -19,3 +19,7 @@ apps/api/.venv/bin/python apps/api/evaluation/cloudflare_run.py \
 ```
 
 The CLI's persistent evaluation ledger defaults to ignored `apps/api/data/evaluation-usage.sqlite3`. Do not delete/reset it to bypass daily reservations. Provider-account quota applies across applications and ledgers. A draft completed before a blocked revision is retained for diagnosis but is never displayed as an accepted generated answer. No local GPU or paid-provider fallback is used.
+
+`comparison-examples.json` is the next **unexecuted, unapproved** candidate. It preserves the baseline evidence rules while adding explicit controlled examples of endpoint levels versus baseline changes and of independent trial settings. Its examples are wording demonstrations, never evidence or facts to reuse. Registry status/phase/date context is now supplied separately by the application. Run focused cases first when the persistent allowance permits; do not promote from offline syntax checks.
+
+For a no-inference check of retained outputs, use `evaluation/replay_validation.py` with `--input` pointing to a retained paired-response artifact and `--output` to a new JSON path. It seeds hash-checked frozen fixtures and the original predecessor answers, mocks each recorded candidate through the actual Ask validation path, blocks provider HTTP and disables usage writes. It restores process globals afterward. Its acceptance counts measure deterministic safeguards only; they neither adjudicate claims nor measure a single-pass strategy's latency.

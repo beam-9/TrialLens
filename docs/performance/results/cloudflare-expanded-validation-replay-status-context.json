@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "method": "Deterministic final-validation replay, not a new generation or semantic adjudication",
+  "input_sha256": "19cd2b0ed1edd1935f28dec5a1c5859ac15fde8c9fd56a1e740835d8084b76fc",
+  "inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "validation_code_sha256": "146a83090a1c6f608f372e55353bd9e86b295f586598e0c3360147995c4fd5a3",
+  "provider_requests": 0,
+  "local_model_calls": 0,
+  "production_mutations": 0,
+  "observations": [
+    {
+      "case_id": "real-broad",
+      "stage": "draft",
+      "accepted": false,
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "real-broad",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "real-simplify",
+      "stage": "draft",
+      "accepted": false,
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "real-simplify",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "combination-identity",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "combination-identity",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "numerical-simplify",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "numerical-simplify",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "mixed-significance",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "mixed-significance",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "protocol-deaths",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "protocol-deaths",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "unrelated-question",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "unrelated-question",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "pediatric-floor",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "pediatric-floor",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "postmarketing-frequency",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "postmarketing-frequency",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "b12-time-window",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "b12-time-window",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "combination-add-on",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "combination-add-on",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "addon-hba1c",
+      "stage": "draft",
+      "accepted": false,
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "addon-hba1c",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "addon-fasting-glucose",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "addon-fasting-glucose",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "filtered-first",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "filtered-first",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "filtered-followup",
+      "stage": "draft",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    },
+    {
+      "case_id": "filtered-followup",
+      "stage": "revision",
+      "accepted": true,
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "mock_completion_calls": 2
+    }
+  ],
+  "summary": {
+    "draft": {
+      "n": 16,
+      "accepted": 13
+    },
+    "revision": {
+      "n": 16,
+      "accepted": 16
+    }
+  }
+}
