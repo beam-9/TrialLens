@@ -695,7 +695,10 @@ class Retriever:
     ) -> list[RetrievedChunk]:
         """Give both sides of benefit/risk questions space in the evidence context."""
         benefits = re.search(r"\b(benefits?|effectiveness|efficacy)\b", question, re.I)
-        safety = re.search(r"\b(safety|risks?|harms?|side effects?)\b", question, re.I)
+        # Broad questions commonly say "benefits and limitations" rather than
+        # "benefits and safety". Give both intents space before a long label
+        # consumes every result slot.
+        safety = re.search(r"\b(safety|risks?|harms?|side effects?|limitations?)\b", question, re.I)
         if not (benefits and safety):
             broad = re.search(r"\b(overall|overview|summari[sz]e|summary|conclude|conclusions?|takeaways?)\b", question, re.I)
             if broad:
@@ -2607,14 +2610,23 @@ def effectiveness_statistic_relevance(text: str) -> float:
         return 0.0
     terms = set(tokenize(text))
     lowered = text.lower()
+    # A quantified planned endpoint is not a measured treatment result. Keep this
+    # sentence-local so a protocol sentence does not hide results elsewhere.
+    if re.search(r"\b(?:will|aims? to|plans? to|planned to|proposes? to|is designed to|expected to|hypothesized to)\b", lowered):
+        return 0.0
+    if (re.search(r"\b(?:primary|secondary) outcome(?: measure)?\s*(?:is\b|:)", lowered)
+            and not re.search(r"\b(?:was|were|observed|found|showed|reported|achieved)\b", lowered)):
+        return 0.0
     score = min(len(numbers), 4) / 8
-    if terms.intersection({"efficacy", "effective", "effectiveness", "improved", "improvement", "reduced", "reduction", "response", "success"}):
+    if terms.intersection({"efficacy", "effective", "effectiveness", "improved", "improvement", "reduced", "reduction", "response", "success", "lower", "higher", "decreased", "increased"}):
         score += 0.38
-    if terms.intersection({"lesion", "lesions", "comedones", "microcomedones", "clearance", "outcome", "score", "scores"}):
+    measured_units = bool(re.search(r"\b\d+(?:\.\d+)?\s*(?:percentage points?|points?|mm\s*hg|mmol\s*/\s*l|mg\s*/\s*dl)\b", lowered))
+    if measured_units or terms.intersection({"lesion", "lesions", "comedones", "microcomedones", "clearance", "outcome", "score", "scores"}):
         score += 0.28
     if any(term in lowered for term in ["p =", "p<", "confidence interval", "response rate", "lesion count", "mean reduction"]):
         score += 0.3
-    if any(term in lowered for term in ["molar ratio", "dose", "mg", "formulation", "containing 3%", "cream containing"]):
+    if (any(term in lowered for term in ["molar ratio", "dose", "formulation", "containing 3%", "cream containing"])
+            or re.search(r"\b\d+(?:\.\d+)?\s*(?:mg|mcg|g)\b(?!\s*/)", lowered)):
         score -= 0.32
     if any(term in lowered for term in ["adverse event", "adverse reaction", "erythema", "contact dermatitis", "edema"]):
         score -= 0.25
@@ -2646,6 +2658,7 @@ def quantitative_relevance(text: str) -> float:
 def extract_numbers(text: str) -> list[str]:
     patterns = [
         r"\b\d+(?:\.\d+)?\s?%",
+        r"\b\d+(?:\.\d+)?\s*(?:percentage points?|points?|mm\s*hg|mmol\s*/\s*l|mg\s*/\s*dl)\b",
         r"\bp\s?[<=>]\s?0?\.\d+",
         r"\b\d+(?:\.\d+)?\s?(?:mg|mcg|g|weeks?|months?|years?|subjects?|patients?|participants?)\b",
         r"\bn\s?=\s?\d+",

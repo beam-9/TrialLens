@@ -10,7 +10,7 @@ import threading
 import httpx
 from pydantic import BaseModel, ConfigDict, Field
 
-from triallens.models import Answer, EvidenceSource, SourceType, Workspace
+from triallens.models import Answer, AnswerTraceItem, EvidenceSource, SourceType, Workspace
 from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope
 from triallens.performance import annotate, phase, provider_usage
@@ -113,6 +113,59 @@ def normalize_citations(text: str, allowed: set[str]) -> str:
 _LOCAL_GENERATION_LOCK = threading.Lock()
 
 
+def reconcile_conversational_provenance(answer: Answer, records: list[dict], *, generated: bool = True) -> None:
+    """Replace excerpt-answer judgments after a different final answer is accepted.
+
+    Retrieval ranking describes candidate context, not the model's final claims. In
+    particular, an old extraction's CITED status or confidence score must never be
+    presented as verification of a newly generated answer (including an abstention).
+    """
+    selected = {record["citation"] for record in records}
+    cited = set(answer.citations)
+    answer.retrieved_chunks = [chunk for chunk in answer.retrieved_chunks if chunk.citation in selected]
+    answer.evidence = []
+    answer.supporting_evidence = []
+    answer.evidence_synthesis = []
+    answer.facet_coverage = []
+    answer.evidence_map = []
+    answer.source_readouts = [
+        f"{'CITED IN ANSWER' if record['citation'] in cited else 'CONTEXT ONLY'} · "
+        f"{record['citation']} · {record['title']} · {record['content_scope']}"
+        + (" · partial excerpt" if record["content_truncated"] else "")
+        for record in records
+    ]
+    answer.reasoning_summary = [
+        f"Generation received {len(records)} source records; the final answer uses {len(cited)} citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer.",
+    ]
+    answer.evidence_quality = [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources.",
+    ]
+    answer.safety_limitations = []
+    for record in records:
+        if record["citation"] not in cited:
+            continue
+        if record["demo"]:
+            answer.safety_limitations.append("Demo evidence cannot support real-world conclusions.")
+        if record["source_type"] == SourceType.clinical_trials.value:
+            answer.safety_limitations.append("Trial registration records may describe planned methods rather than measured results.")
+        if record["source_type"] == SourceType.fda_adverse_event.value:
+            answer.safety_limitations.append("Adverse-event reports cannot establish incidence or causality.")
+    answer.safety_limitations = list(dict.fromkeys(answer.safety_limitations))
+    answer.limitations = list(dict.fromkeys([
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        *answer.uncertainty, *answer.safety_limitations,
+    ]))
+    answer.answer_trace = [
+        AnswerTraceItem(label="Generation context", value=f"{len(records)} source records", detail="Selected context may include records that the final answer does not cite."),
+        AnswerTraceItem(label="Final attribution", value=f"{len(cited)} citations", detail="Citation use is distinct from independent claim verification."),
+    ]
+    if not generated:
+        answer.reasoning_summary = ["This is a deterministic boundary or clarification response. No source-based answer was generated."]
+        answer.evidence_quality = []
+        answer.answer_trace = [AnswerTraceItem(label="Response method", value="No model generation", detail="No source-based answer or citation-support judgment was made.")]
+
+
 class ConversationService:
     @staticmethod
     def _local_completion(messages: list[dict[str, str]]) -> str:
@@ -149,6 +202,7 @@ class ConversationService:
             fallback.uncertainty = []
             fallback.generation_mode = "conversational"
             fallback.generation_note = "Individual treatment decision; no model generation or API credits used."
+            reconcile_conversational_provenance(fallback, [], generated=False)
             return fallback
         if not history and re.search(r"\b(?:the other one|the other treatment|the other drug)\b", question, re.I):
             annotate(result_kind="clarification", fallback_reason="ambiguous_comparator")
@@ -157,6 +211,7 @@ class ConversationService:
             fallback.uncertainty = []
             fallback.generation_mode = "conversational"
             fallback.generation_note = "Clarification needed; no model generation or API credits used."
+            reconcile_conversational_provenance(fallback, [], generated=False)
             return fallback
         if not sources:
             annotate(fallback_reason="no_sources")
@@ -305,6 +360,7 @@ class ConversationService:
             fallback.citations = list(dict.fromkeys(generated.cited_sources))
             fallback.uncertainty = generated.uncertainty
             fallback.generation_mode = "conversational"
+            reconcile_conversational_provenance(fallback, records)
             fallback.generation_note = ("Generated with Cloudflare Workers AI using indexed sources. Check citations for support." if hosted_free else "Generated with the local model; no API credits used." if local else "Synthesized from indexed sources; open citations to check support.")
             if scope_reduced:
                 fallback.generation_note += " Combination-product labels were excluded from this single-ingredient summary."

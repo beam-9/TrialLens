@@ -43,6 +43,47 @@ def test_conversational_generation_preserves_history_and_provenance(monkeypatch,
     assert payload["evidence"][0]["citation"] == "PubMed:123"
 
 
+@pytest.mark.parametrize("abstain", [False, True])
+def test_final_attribution_replaces_extractive_support_judgments(monkeypatch, context, abstain):
+    from triallens.models import AnswerTraceItem, RetrievedChunk
+    workspace, source, fallback = context
+    other = source.model_copy(update={"id": "other", "external_id": "456", "title": "Other retrieved record"})
+    stale = "STALE extractive claim: PubMed:456 directly supported the answer"
+    for field in ("evidence", "supporting_evidence", "evidence_synthesis", "reasoning_summary", "evidence_map", "source_readouts", "evidence_quality", "facet_coverage", "safety_limitations", "limitations"):
+        setattr(fallback, field, [stale])
+    fallback.answer_trace = [AnswerTraceItem(label="Old selection", value=stale)]
+    fallback.citations = ["PubMed:456"]
+    fallback.retrieved_chunks = [RetrievedChunk(chunk_id=item.id, source_id=item.id, source_type=item.source_type, citation=f"PubMed:{item.external_id}", text=item.abstract, score=0.9) for item in (source, other)]
+    mock_generation(monkeypatch, {
+        "paragraphs": ["The supplied evidence does not provide enough information to answer." if abstain else "At 12 weeks, HbA1c was 0.5 percentage points lower than with placebo [PubMed:123]."],
+        "cited_sources": [] if abstain else ["PubMed:123"], "uncertainty": [],
+    })
+    answer = ConversationService().generate(workspace, "Explain that result", [], [source, other], fallback)
+    assert answer.generation_mode == "conversational"
+    assert "STALE" not in answer.model_dump_json()
+    assert answer.evidence == answer.supporting_evidence == answer.evidence_synthesis == answer.facet_coverage == []
+    assert len(answer.retrieved_chunks) == 2
+    assert answer.source_readouts[1].startswith("CONTEXT ONLY · PubMed:456")
+    assert answer.source_readouts[0].startswith("CONTEXT ONLY" if abstain else "CITED IN ANSWER · PubMed:123")
+    assert "do not independently verify" in answer.evidence_quality[0]
+    if abstain:
+        assert not any(item.startswith("CITED") for item in answer.source_readouts)
+
+
+@pytest.mark.parametrize("question", ["Should I take metformin?", "Compare the other one"])
+def test_boundary_responses_clear_source_based_fallback_metadata(monkeypatch, context, question):
+    workspace, source, fallback = context
+    workspace.intervention = "metformin"
+    fallback.source_readouts = ["CITED · PubMed:123"]
+    fallback.evidence = fallback.supporting_evidence = ["Old study finding"]
+    fallback.evidence_quality = ["Directness high: study supports answer"]
+    fallback.reasoning_summary = ["Old answer cites one row"]
+    monkeypatch.setattr("triallens.conversation.httpx.post", lambda *args, **kwargs: pytest.fail("No inference expected"))
+    answer = ConversationService().generate(workspace, question, [], [source], fallback)
+    assert answer.citations == answer.source_readouts == answer.evidence == answer.supporting_evidence == answer.evidence_quality == []
+    assert "No source-based answer was generated" in answer.reasoning_summary[0]
+
+
 @pytest.mark.parametrize("output,status", [
     ({"paragraphs": ["It works [PubMed:999]."], "cited_sources": ["PubMed:999"], "uncertainty": []}, "completed"),
     ({"paragraphs": ["It works."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "completed"),
@@ -317,16 +358,22 @@ def test_personal_treatment_decision_does_not_infer_population_or_suitability(mo
 
 @pytest.mark.parametrize("question,include_combination", [("What are the benefits and limitations of metformin?", False), ("What does the ZITUVIMET combination label say?", True)])
 def test_single_ingredient_synthesis_does_not_mix_combination_label(monkeypatch, context, question, include_combination):
+    from triallens.models import RetrievedChunk
     workspace, source, fallback = context
     workspace.intervention = "metformin"
     source.source_type = SourceType.fda_label
     source.title = "FDA label: Metformin hydrochloride"
     source.abstract = "Metformin hydrochloride is indicated to improve glycemic control in adults with type 2 diabetes."
     combination = source.model_copy(update={"id": "combo", "external_id": "combo", "title": "FDA label: ZITUVIMET", "abstract": "ZITUVIMET is a combination of sitagliptin and metformin. ZITUVIMET has not been studied in patients with a history of pancreatitis."})
+    fallback.retrieved_chunks = [RetrievedChunk(chunk_id="combo-chunk", source_id=combination.id, source_type=combination.source_type, citation="openFDA label:combo", text=combination.abstract, score=0.9)]
+    fallback.source_readouts = ["CITED · openFDA label:combo · Old extractive selection"]
     captured = mock_generation(monkeypatch, {"paragraphs": ["The excerpt does not establish individual suitability."], "cited_sources": [], "uncertainty": []})
-    ConversationService().generate(workspace, question, [], [combination, source], fallback)
+    answer = ConversationService().generate(workspace, question, [], [combination, source], fallback)
     records = json.loads(captured[0]["input"])["evidence"]
     assert any(r["citation"] == "openFDA label:combo" for r in records) is include_combination
+    assert any(chunk.source_id == combination.id for chunk in answer.retrieved_chunks) is include_combination
+    assert any("openFDA label:combo" in item for item in answer.source_readouts) is include_combination
+    assert not any(item.startswith("CITED") for item in answer.source_readouts)
 
 
 def test_combination_followup_keeps_named_product_from_user_history(monkeypatch, context):
