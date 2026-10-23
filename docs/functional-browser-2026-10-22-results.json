@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-22",
+  "scope": "production frontend 3002 -> Next proxy -> isolated FastAPI 8002",
+  "inference": "deterministic completion stub; outbound provider HTTP blocked; no .env loaded",
+  "tests_passed": 13,
+  "tests_failed": 0,
+  "duration_seconds": 18.6,
+  "tests": [
+    "\u2713   1 tests/functional-integration.spec.ts:7:7 \u203a isolated UI to proxy to API functionality \u203a validates workspace fields and bounds research questions (381ms)",
+    "\u2713   2 tests/functional-integration.spec.ts:25:7 \u203a isolated UI to proxy to API functionality \u203a persists created evidence, reviewed rows, scoped follow-ups and exported brief (5.0s)",
+    "\u2713   3 tests/functional-integration.spec.ts:126:7 \u203a isolated UI to proxy to API functionality \u203a keeps treatment and ambiguous-reference guards visible and starts a clean conversation (1.9s)",
+    "\u2713   4 tests/triallens.spec.ts:60:5 \u203a persists the user's light and dark theme choice (402ms)",
+    "\u2713   5 tests/triallens.spec.ts:77:5 \u203a opens a real workspace and exposes every evidence view (2.9s)",
+    "\u2713   6 tests/triallens.spec.ts:120:5 \u203a distills Ask results and keeps complete evidence behind disclosures (1.5s)",
+    "\u2713   7 tests/triallens.spec.ts:148:5 \u203a keeps the mobile evidence workspace within the viewport (440ms)",
+    "\u2713   8 tests/triallens.spec.ts:184:5 \u203a matches tab keyboard direction to the responsive workspace (281ms)",
+    "\u2713   9 tests/triallens.spec.ts:200:5 \u203a keeps failed Ask requests recoverable in the workspace (1.4s)",
+    "\u2713  10 tests/triallens.spec.ts:218:5 \u203a reopens the newest workspace instead of a stale cached duplicate (284ms)",
+    "\u2713  11 tests/triallens.spec.ts:229:5 \u203a keeps a conversational evidence boundary readable without uncertainty notes (1.4s)",
+    "\u2713  12 tests/triallens.spec.ts:254:5 \u203a identifies Cloudflare hosted inference without local or paid API claims (363ms)",
+    "\u2713  13 tests/triallens.spec.ts:267:5 \u203a preserves the 100-answer alert and grounded follow-ups when Cloudflare allowance is exhausted (1.6s)"
+  ],
+  "actual_upstream_outage": {
+    "method": "stop isolated FastAPI server, submit browser workspace form, request /api/health through Next proxy",
+    "status": 502,
+    "message": "The research service is unavailable or took too long. Check that the API is running, then try again.",
+    "focused_error": true,
+    "input_retained": true,
+    "retry_enabled": true
+  },
+  "lint": "passed",
+  "typecheck": "passed",
+  "limits": [
+    "No live source-provider availability test",
+    "No live model inference or answer quality adjudication",
+    "No deployment authentication/backup/restore/load test",
+    "Desktop Chromium and existing mobile viewport checks, not real mobile device/browser matrix"
+  ]
+}

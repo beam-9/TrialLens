@@ -1,5 +1,7 @@
 # TrialLens deployment readiness
 
+> Provider note (22 October): these instructions primarily describe the retained native Ollama profile. For the explicitly selected Cloudflare provider and standalone hosting profile, use [Cloudflare setup](inference/cloudflare.md). See the [current functional audit](functional-audit-2026-10-22.md) for measured checks and unresolved release gates. Do not start the local-model stack when you intend hosted inference.
+
 Assessment date: 20 October 2026. Scope: source/API review, isolated backend tests, real public-source ingestion, local-model integration and deployment configuration. Browser/design and live-model semantic reviews are tracked separately. This is a readiness assessment, not a claim of clinical validation.
 
 ## Completion assessment

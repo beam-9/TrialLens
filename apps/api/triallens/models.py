@@ -5,7 +5,7 @@ from enum import Enum
 from typing import Any, Literal, Optional
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 def utc_now() -> str:
@@ -20,6 +20,16 @@ class SourceType(str, Enum):
 
 
 class WorkspaceCreate(BaseModel):
+    @field_validator("condition", mode="before")
+    @classmethod
+    def trim_condition(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+    @field_validator("intervention", mode="before")
+    @classmethod
+    def trim_intervention(cls, value):
+        return (value.strip() or None) if isinstance(value, str) else value
+
     condition: str = Field(min_length=2, max_length=120)
     intervention: Optional[str] = Field(default=None, max_length=120)
     source_types: list[SourceType] = Field(
@@ -121,6 +131,11 @@ class RetrievedChunk(BaseModel):
 
 
 class AskRequest(BaseModel):
+    @field_validator("question", mode="before")
+    @classmethod
+    def trim_question(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
     question: str = Field(min_length=3, max_length=500)
     source_types: Optional[list[SourceType]] = None
     mode: Literal["workspace", "document"] = "workspace"

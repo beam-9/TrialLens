@@ -1,5 +1,7 @@
 # Run a private TrialLens pilot
 
+> Provider note (22 October): these instructions primarily describe the retained native Ollama profile. For the explicitly selected Cloudflare provider and standalone hosting profile, use [Cloudflare setup](inference/cloudflare.md). See the [current functional audit](functional-audit-2026-10-22.md) for measured checks and unresolved release gates. Do not start the local-model stack when you intend hosted inference.
+
 The Compose setup packages the web app, API and Ollama on one host. Only the website is published, on **127.0.0.1:3001** by default. It is a starting point for a trusted private pilot, not a public multiuser deployment. It does not add accounts or workspace ownership: people with access share the installation's research workspaces.
 
 ## Choose the inference host first

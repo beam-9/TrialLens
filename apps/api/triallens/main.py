@@ -89,14 +89,25 @@ async def ingest_workspace(workspace_id: str) -> dict:
         raise HTTPException(status_code=409, detail="No sources were returned. Existing evidence was kept. Try again or refine the research topic.")
     previous_sources = {(item.source_type, item.external_id): item for item in store.list_sources(workspace_id)}
     previous_rows = {item.source_id: item for item in store.list_extractions(workspace_id)}
+    # A transient failure for one provider must not delete its already indexed
+    # evidence while other providers successfully refresh.
+    retained_kinds = {
+        kind for kind in workspace.source_types
+        if diagnostics.get(kind.value) == "unavailable"
+        and any(source.source_type == kind for source in previous_sources.values())
+    }
+    sources.extend(source for source in previous_sources.values() if source.source_type in retained_kinds)
     unchanged_ids = set()
     for source in sources:
         previous = previous_sources.get((source.source_type, source.external_id))
         if previous:
             source.id = previous.id
-            if (source.title, source.abstract, source.metadata, source.status, source.phase) == (previous.title, previous.abstract, previous.metadata, previous.status, previous.phase):
+            if (source.title, source.abstract, source.metadata, source.status, source.phase, source.url, source.publication_date) == (previous.title, previous.abstract, previous.metadata, previous.status, previous.phase, previous.url, previous.publication_date):
                 unchanged_ids.add(source.id)
     chunks = build_chunks(sources)
+    if retained_kinds:
+        chunks = [chunk for chunk in chunks if chunk.source_type not in retained_kinds]
+        chunks.extend(chunk for chunk in store.list_chunks(workspace_id) if chunk.source_type in retained_kinds)
     extractions = build_extractions(sources, workspace)
     for index, row in enumerate(extractions):
         previous = previous_rows.get(row.source_id)
@@ -105,6 +116,10 @@ async def ingest_workspace(workspace_id: str) -> dict:
     store.replace_workspace_evidence(workspace.id, sources, chunks, extractions)
     labels = {"pubmed": "PubMed", "clinical_trials": "ClinicalTrials.gov", "fda_label": "FDA labels", "fda_adverse_event": "FDA adverse-event reports"}
     workspace.ingestion_warnings = [f"{labels[kind]} could not be retrieved. The indexed evidence is incomplete; try again later." for kind, state in diagnostics.items() if state == "unavailable"]
+    workspace.ingestion_warnings.extend(
+        f"{labels[kind.value]}: previously indexed evidence was kept and may be outdated because this provider could not be refreshed."
+        for kind in workspace.source_types if kind in retained_kinds
+    )
     if not sources:
         workspace.ingestion_warnings.append("No matching records were retrieved. Refine the topic or try again later; no demo records were added.")
     workspace.status = "ingested" if sources and not workspace.ingestion_warnings else "partial"
@@ -125,6 +140,15 @@ def extract_workspace(workspace_id: str) -> dict[str, Union[int, str]]:
     if not sources:
         raise HTTPException(status_code=400, detail="No sources indexed for this workspace")
     extractions = build_extractions(sources, workspace)
+    previous_rows = {row.source_id: row for row in store.list_extractions(workspace_id)}
+    for row in extractions:
+        previous = previous_rows.get(row.source_id)
+        if previous:
+            # Rebuilding derived details must not erase a reviewer's saved work.
+            # Sources are the same stored records; ingestion handles changed sources.
+            for field in ("id", "created_at", *ExtractionUpdate.model_fields):
+                setattr(row, field, getattr(previous, field))
+            row.has_quantitative_result = any(character.isdigit() for character in row.outcome_result)
     store.replace_workspace_extractions(workspace_id, extractions)
     return {"workspace_id": workspace_id, "extractions": len(extractions)}
 
@@ -161,6 +185,7 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
             if previous.id in seen:
                 raise HTTPException(status_code=400, detail="Invalid conversation chain")
             if (previous.mode != payload.mode or previous.source_id != payload.source_id
+                    or (previous.source_types is None) != (payload.source_types is None)
                     or set(previous.source_types or []) != set(payload.source_types or [])):
                 raise HTTPException(status_code=400, detail="Source scope changed. Start a new conversation.")
             seen.add(previous.id)

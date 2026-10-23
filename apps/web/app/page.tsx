@@ -522,6 +522,7 @@ export default function Home() {
                     {answer ? "Ask a follow-up" : "Research question"}
                     <Textarea
                       id="ask-question"
+                      maxLength={500}
                       value={question}
                       disabled={busy === "Preparing your answer"}
                       onChange={(event) => setQuestion(event.target.value)}
@@ -964,6 +965,9 @@ function WorkspaceLauncher({
           <span>Condition</span>
           <Input
             id="condition"
+            required
+            minLength={2}
+            maxLength={120}
             value={condition}
             onChange={(event) => onConditionChange(event.target.value)}
             className="launcher-input"
@@ -974,6 +978,7 @@ function WorkspaceLauncher({
           <span>Drug or intervention</span>
           <Input
             id="intervention"
+            maxLength={120}
             value={intervention}
             onChange={(event) => onInterventionChange(event.target.value)}
             className="launcher-input"
@@ -982,7 +987,7 @@ function WorkspaceLauncher({
         </label>
         <Button
           type="submit"
-          disabled={Boolean(busy)}
+          disabled={Boolean(busy) || condition.trim().length < 2}
           size="lg"
           className="build-workspace-button"
         >

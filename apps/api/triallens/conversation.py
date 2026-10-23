@@ -202,13 +202,15 @@ class ConversationService:
                     passages.append(passage)
                     remaining -= len(passage)
                 prefix = source.abstract[:min(10000, remaining)]
+                content_truncated = len(prefix) < len(source.abstract) or passages != matches
                 # Avoid sending a passage twice when the allocated prefix contains it.
+                # Deduplication does not lose evidence already present in the prefix.
                 passages = [passage for passage in passages if " ".join(passage.split()) not in " ".join(prefix.split())]
                 records.append({
                     "citation": citation_for(source), "title": source.title[:500],
                     "source_type": source.source_type.value,
                     "content_scope": document_content_scope(source),
-                    "content_truncated": len(prefix) < len(source.abstract) or passages != matches,
+                    "content_truncated": content_truncated,
                     "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
                     "text": prefix, "matched_passages": passages,
                 })

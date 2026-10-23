@@ -106,3 +106,7 @@ Workspace mutations hold a process file lock and publish atomic snapshots on mac
 ## Ask profiling baseline
 
 [M0 measurements and unresolved gates](docs/performance/baseline.md) record the native local-model baseline, frozen QA evidence and memory stop. Optional `TRIALLENS_PERF_TELEMETRY=1` emits text-free request timing; it is off by default and changes no answer settings. No model/pipeline optimization has been promoted.
+
+## Functionality before design
+
+The [22 October functional audit](docs/functional-audit-2026-10-22.md) records the full workflow assessment, data-preservation fixes and remaining answer-quality/provenance gates. Design changes remain a later stage.

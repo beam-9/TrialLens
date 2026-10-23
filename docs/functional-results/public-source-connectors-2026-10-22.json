@@ -1,0 +1,229 @@
+{
+  "query": {
+    "condition": "type 2 diabetes",
+    "intervention": "metformin"
+  },
+  "elapsed_seconds": 1.686,
+  "diagnostics": {
+    "pubmed": "available",
+    "clinical_trials": "available",
+    "fda_label": "available",
+    "fda_adverse_event": "available"
+  },
+  "sources": [
+    {
+      "type": "pubmed",
+      "external_id": "42903999",
+      "title": "Severe Suspected Metformin-Associated Lactic Acidosis With Relatively Preserved Serum Creatinine at Presentation: Sequential Intermittent Hemodialysis and Continuous Venovenous Hemodialysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42903999/",
+      "publication_date": "2026",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 1902,
+      "section_names": [
+        "Abstract 1"
+      ]
+    },
+    {
+      "type": "pubmed",
+      "external_id": "42899606",
+      "title": "Effectiveness of Weekly Semaglutide Treatment (0.5 or 1 mg) in Chilean Patients with Type 2 Diabetes Mellitus.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42899606/",
+      "publication_date": "2026",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 1870,
+      "section_names": [
+        "UNLABELLED",
+        "AIM",
+        "METHODS",
+        "RESULTS",
+        "CONCLUSIONS"
+      ]
+    },
+    {
+      "type": "pubmed",
+      "external_id": "42898695",
+      "title": "Hepatic biomarker trajectories and mortality in septic adults with type 2 diabetes and recorded dipeptidyl peptidase-4 inhibitor exposure versus metformin-based therapy: A propensity-score-matched cohort study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42898695/",
+      "publication_date": "2026",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 1790,
+      "section_names": [
+        "AIMS",
+        "METHODS",
+        "RESULTS",
+        "CONCLUSIONS"
+      ]
+    },
+    {
+      "type": "pubmed",
+      "external_id": "42898168",
+      "title": "Effects of intensive insulin therapy combined with non-insulin antihyperglycemic agents on glycemic control, variability, and metabolic outcomes in patients with type 2 diabetes mellitus: a systematic review and meta-analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42898168/",
+      "publication_date": "2026",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 3761,
+      "section_names": [
+        "BACKGROUND",
+        "METHODS",
+        "RESULTS",
+        "CONCLUSIONS",
+        "SYSTEMATIC REVIEW REGISTRATION"
+      ]
+    },
+    {
+      "type": "pubmed",
+      "external_id": "42893515",
+      "title": "Targeting the Gut Microbiota-Metabolism Axis: Novel Pharmacological Mechanisms and Translational Application Strategies for Oral Antidiabetic Drugs.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42893515/",
+      "publication_date": "2026",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 1911,
+      "section_names": [
+        "Abstract 1"
+      ]
+    },
+    {
+      "type": "clinical_trials",
+      "external_id": "NCT02077803",
+      "title": "A Bioequivalence Study of the Fixed Dose Combination Tablets of Canagliflozin and Metformin Extended Release (XR) With Respect to the Individual Components in Healthy Fed Participants",
+      "url": "https://clinicaltrials.gov/study/NCT02077803",
+      "publication_date": null,
+      "status": "COMPLETED",
+      "phase": "PHASE1",
+      "abstract_chars": 2052,
+      "section_names": [
+        "Brief summary",
+        "Detailed description"
+      ]
+    },
+    {
+      "type": "clinical_trials",
+      "external_id": "NCT00835861",
+      "title": "Effectiveness of Metformin Compared to Insulin in Pregnant Women With Mild Preexisting or Early Gestational Diabetes",
+      "url": "https://clinicaltrials.gov/study/NCT00835861",
+      "publication_date": null,
+      "status": "COMPLETED",
+      "phase": "PHASE2",
+      "abstract_chars": 921,
+      "section_names": [
+        "Brief summary",
+        "Detailed description"
+      ]
+    },
+    {
+      "type": "clinical_trials",
+      "external_id": "NCT02515773",
+      "title": "Metformin for Overweight & OBese ChILdren and Adolescents With BDS Treated With SGAs",
+      "url": "https://clinicaltrials.gov/study/NCT02515773",
+      "publication_date": null,
+      "status": "COMPLETED",
+      "phase": "PHASE4",
+      "abstract_chars": 1431,
+      "section_names": [
+        "Brief summary",
+        "Detailed description"
+      ]
+    },
+    {
+      "type": "clinical_trials",
+      "external_id": "NCT00282451",
+      "title": "Effect of Biphasic Insulin Compared to Biphasic Insulin Combined With Insulin Aspart, With or Without Metformin in Type 2 Diabetes",
+      "url": "https://clinicaltrials.gov/study/NCT00282451",
+      "publication_date": null,
+      "status": "COMPLETED",
+      "phase": "PHASE4",
+      "abstract_chars": 354,
+      "section_names": [
+        "Brief summary",
+        "Detailed description"
+      ]
+    },
+    {
+      "type": "clinical_trials",
+      "external_id": "NCT03766256",
+      "title": "Shared Decision Making in Diabetes Prevention for Women With a History of GDM",
+      "url": "https://clinicaltrials.gov/study/NCT03766256",
+      "publication_date": null,
+      "status": "COMPLETED",
+      "phase": "NA",
+      "abstract_chars": 2888,
+      "section_names": [
+        "Brief summary",
+        "Detailed description"
+      ]
+    },
+    {
+      "type": "fda_label",
+      "external_id": "FDA-LABEL-8c26dc1a-fba3-4266-bfaf-624b0941ef8b",
+      "title": "FDA label: ZITUVIMET",
+      "url": "https://api.fda.gov/drug/label.json?search=id%3A%228c26dc1a-fba3-4266-bfaf-624b0941ef8b%22&limit=1",
+      "publication_date": "20260812",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 53591,
+      "section_names": [
+        "Indications And Usage",
+        "Boxed Warning",
+        "Contraindications",
+        "Warnings And Cautions",
+        "Adverse Reactions",
+        "Drug Interactions",
+        "Clinical Studies"
+      ]
+    },
+    {
+      "type": "fda_label",
+      "external_id": "FDA-LABEL-19e4bfb8-2ed1-4a6b-adf5-853ad2953362",
+      "title": "FDA label: Metformin Hydrochloride",
+      "url": "https://api.fda.gov/drug/label.json?search=id%3A%2219e4bfb8-2ed1-4a6b-adf5-853ad2953362%22&limit=1",
+      "publication_date": "20240821",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 22824,
+      "section_names": [
+        "Indications And Usage",
+        "Boxed Warning",
+        "Contraindications",
+        "Warnings And Cautions",
+        "Adverse Reactions",
+        "Drug Interactions",
+        "Clinical Studies"
+      ]
+    },
+    {
+      "type": "fda_label",
+      "external_id": "FDA-LABEL-4b81b8de-7de7-2dc4-e063-6294a90a7a10",
+      "title": "FDA label: Metformin Hydrochloride",
+      "url": "https://api.fda.gov/drug/label.json?search=id%3A%224b81b8de-7de7-2dc4-e063-6294a90a7a10%22&limit=1",
+      "publication_date": "20260101",
+      "status": null,
+      "phase": null,
+      "abstract_chars": 20897,
+      "section_names": [
+        "Indications And Usage",
+        "Boxed Warning",
+        "Contraindications",
+        "Warnings And Cautions",
+        "Adverse Reactions",
+        "Drug Interactions",
+        "Clinical Studies"
+      ]
+    },
+    {
+      "type": "fda_adverse_event",
+      "external_id": "FDA-AE-metformin",
+      "title": "openFDA adverse event report counts for metformin",
+      "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22&count=patient.reaction.reactionmeddrapt.exact&limit=5",
+      "publication_date": null,
+      "status": null,
+      "phase": null,
+      "abstract_chars": 274,
+      "section_names": []
+    }
+  ]
+}
