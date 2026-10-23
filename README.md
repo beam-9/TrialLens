@@ -52,9 +52,15 @@ Open `http://localhost:3000`.
 - Ask uses local Ollama generation with source-grounded drafting and revision. Source excerpts remain available if generation fails. Optional OpenAI mode requires explicit configuration and retains the spending cap.
 
 
-## Conversational answers
+## Hosted Ask with Cloudflare
 
-TrialLens uses **Ollama locally by default**, with `qwen3.5:9b`. No API key or per-answer API credits are needed. Install Ollama from its official distribution or Homebrew (`brew install ollama`), then download the model once with `ollama pull qwen3.5:9b` while Ollama is running. The model download is approximately 6.6 GB.
+To avoid running inference on your Mac, use [Cloudflare Workers AI setup](docs/inference/cloudflare.md). The integration preserves drafting, revision and citation checks, uses a fixed hosted model and a persistent daily quota guard, and returns labeled source excerpts when unavailable. It never automatically starts local inference or switches to a paid provider. A Workers Free account, Account ID and server-only token are required. The candidate still needs real source-quality and latency evaluation before pilot promotion. Fresh `.env.example` recommends this provider; credentials remain local and are never committed.
+
+`compose.cloudflare.yaml` packages the API and website without an Ollama container. It is an alternative to the existing local-inference Compose profile, not an overlay. Hosting/access/backup gates still apply.
+
+## Local conversational answers (explicit alternative)
+
+Without an explicit provider setting the code retains **Ollama locally by default**, with `qwen3.5:9b`. No API key or per-answer API credits are needed. Install Ollama from its official distribution or Homebrew (`brew install ollama`), then download the model once with `ollama pull qwen3.5:9b` while Ollama is running. The model download is approximately 6.6 GB.
 
 Run `apps/api/.venv/bin/python apps/api/run.py` from the repository root. The launcher loads `apps/api/.env`, starts Ollama on localhost when needed with cloud features disabled, and starts the API. It stops only the Ollama process it started when the API exits. Start the frontend separately with `cd apps/web && npm run dev`. Local configuration:
 

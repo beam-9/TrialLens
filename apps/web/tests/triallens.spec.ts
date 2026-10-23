@@ -237,3 +237,59 @@ test("keeps a conversational evidence boundary readable without uncertainty note
   await expect(boundary).toContainText("This answer is limited to the indexed source excerpts.");
   await expect(boundary).not.toContainText("Raw extracted safety fragment");
 });
+
+const cloudflareUsage = {
+  provider: "cloudflare",
+  budget_usd: 0.1,
+  used_or_reserved_usd: 0.025,
+  remaining_usd: 0.075,
+  generated_answers: 12,
+  answer_alert_at: 100,
+  answer_alert: false,
+  pending_requests: 1,
+  budget_exhausted: false,
+  cloudflare: { available: true, remaining_neurons: 8000 },
+};
+
+test("identifies Cloudflare hosted inference without local or paid API claims", async ({ page }) => {
+  await page.route("**/api/usage", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(cloudflareUsage) }));
+  await page.reload();
+  await page.getByRole("tab", { name: "Ask", exact: true }).click();
+  const usage = page.getByRole("status").filter({ hasText: "12 / 100 generated answers" });
+  await expect(usage).toContainText("Cloudflare Workers AI · Hosted inference");
+  await expect(usage).not.toContainText("Local model");
+  await expect(usage).not.toContainText("No API credits used");
+  await expect(usage).not.toContainText("US$");
+  await expect(usage).not.toContainText("reserved cost");
+  await expect(usage).not.toContainText("daily allowance");
+});
+
+test("preserves the 100-answer alert and grounded follow-ups when Cloudflare allowance is exhausted", async ({ page }) => {
+  await page.route("**/api/usage", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...cloudflareUsage, generated_answers: 100, answer_alert: true, cloudflare: { available: true, remaining_neurons: 0 } }) }));
+  await page.reload();
+  await page.locator(".recent-workspace-button").first().click();
+  await expect(page.locator(".workspace-context")).toBeVisible({ timeout: 20_000 });
+  const requests: Record<string, unknown>[] = [];
+  const fallbackNote = "Cloudflare’s daily allowance is unavailable. Showing source excerpts instead of a generated answer.";
+  await page.route("**/workspaces/*/ask", (route) => {
+    const request = route.request().postDataJSON();
+    requests.push(request);
+    return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ...answerFixture, id: `fallback-${requests.length}`, question: request.question, generation_mode: "extractive", generation_note: fallbackNote }) });
+  });
+  await page.getByRole("tab", { name: "Ask", exact: true }).click();
+  const usage = page.getByRole("alert").filter({ hasText: "100 / 100 generated answers" });
+  await expect(usage).toContainText("You’ve reached 100 generated answers. Review your usage before continuing.");
+  await expect(usage).toContainText("Cloudflare’s daily allowance or usage tracking is unavailable. Source excerpts remain available.");
+  await expect(usage).not.toContainText("US$");
+  await page.locator("#ask-question").fill("What are the main benefits?");
+  await page.getByRole("button", { name: "Answer with citations", exact: true }).click();
+  await expect(page.locator("#answer-result")).toContainText(fallbackNote);
+  await expect(page.locator("#answer-result").getByRole("link", { name: /Open cited source/ })).toHaveCount(2);
+  await page.getByLabel("Ask a follow-up").fill("What are the limitations?");
+  await page.getByRole("button", { name: "Ask follow-up", exact: true }).click();
+  await expect(page.locator("#answer-result").getByRole("heading", { name: "What are the limitations?", exact: true })).toBeVisible();
+  await expect(page.locator("#answer-result")).toContainText(fallbackNote);
+  expect(requests).toHaveLength(2);
+  expect(requests[1]).toMatchObject({ question: "What are the limitations?", previous_answer_id: "fallback-1" });
+  await expect(usage).toContainText("You’ve reached 100 generated answers.");
+});

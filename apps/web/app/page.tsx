@@ -488,10 +488,11 @@ export default function Home() {
                   </div>
                 )}
                 {usage && <div className="text-sm text-ink/68" role={usage.answer_alert || usage.budget_exhausted ? "alert" : "status"}>
-                  <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · {usage.provider === "ollama" ? "Local model · No API credits used" : `US$${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US$${usage.budget_usd.toFixed(2)}`}</p>
+                  <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · {usage.provider === "cloudflare" ? "Cloudflare Workers AI · Hosted inference" : usage.provider === "ollama" ? "Local model · No API credits used" : `US$${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US$${usage.budget_usd.toFixed(2)}`}</p>
                   {usage.answer_alert && <p>You’ve reached {usage.answer_alert_at} generated answers. Review your usage before continuing.</p>}
+                  {usage.provider === "cloudflare" && usage.cloudflare && (!usage.cloudflare.available || usage.cloudflare.remaining_neurons === 0) && <p>Cloudflare’s daily allowance or usage tracking is unavailable. Source excerpts remain available.</p>}
                   {usage.provider === "openai" && usage.budget_exhausted && <p>Your spending cap has been reached. Paid generation is paused.</p>}
-                  {usage.pending_requests > 0 && <p>Includes reserved cost for requests with unconfirmed usage.</p>}
+                  {usage.provider === "openai" && usage.pending_requests > 0 && <p>Includes reserved cost for requests with unconfirmed usage.</p>}
                 </div>}
                 {isReady && <div className="conversation-toolbar">
                   <p>{workspace?.condition}{workspace?.intervention ? ` / ${workspace.intervention}` : ""}</p>

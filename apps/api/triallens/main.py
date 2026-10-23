@@ -55,7 +55,14 @@ def health() -> dict[str, str]:
 
 @app.get("/usage")
 def usage() -> dict:
-    return {**UsageLedger().status(), "provider": chat_provider()}
+    status = {**UsageLedger().status(), "provider": chat_provider()}
+    if chat_provider() == "cloudflare":
+        from triallens.cloudflare import CloudflareUnavailable, quota_status
+        try:
+            status["cloudflare"] = {**quota_status(), "available": True}
+        except CloudflareUnavailable:
+            status["cloudflare"] = {"available": False}
+    return status
 
 
 @app.post("/workspaces", response_model=Workspace)

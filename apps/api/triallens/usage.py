@@ -74,8 +74,14 @@ class UsageLedger:
             connection.commit()
 
     def local_answer(self):
+        self.free_answer("local")
+
+    def free_answer(self, provider: str):
+        """Count one validated answer without reserving paid-provider credit."""
+        if provider not in {"local", "cloudflare"}:
+            raise ValueError("Unknown free answer provider")
         with self.connection() as connection:
-            connection.execute("INSERT INTO requests (id, charge, pending, answered) VALUES (?, 0, 0, 1)", ("local-" + str(uuid4()),))
+            connection.execute("INSERT INTO requests (id, charge, pending, answered) VALUES (?, 0, 0, 1)", (provider + "-" + str(uuid4()),))
             connection.commit()
 
     def status(self) -> dict:

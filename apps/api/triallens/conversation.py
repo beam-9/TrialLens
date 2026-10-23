@@ -14,6 +14,7 @@ from triallens.models import Answer, EvidenceSource, SourceType, Workspace
 from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope
 from triallens.performance import annotate, phase, provider_usage
+from triallens import cloudflare
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
 Answer the latest question directly in natural, plain English. Usually use 2–4 short
@@ -73,12 +74,16 @@ def chat_provider() -> str:
 
 
 def chat_model() -> str:
+    if chat_provider() == "cloudflare":
+        return cloudflare.MODEL
     if chat_provider() == "ollama":
         return os.getenv("TRIALLENS_LOCAL_MODEL", "qwen3.5:9b").strip()
     return os.getenv("TRIALLENS_CHAT_MODEL", "").strip()
 
 
 def chat_configured() -> bool:
+    if chat_provider() == "cloudflare":
+        return cloudflare.configured()
     if chat_provider() == "ollama":
         return bool(chat_model()) and "cloud" not in chat_model().lower()
     return chat_provider() == "openai" and bool(os.getenv("OPENAI_API_KEY")) and bool(chat_model())
@@ -128,9 +133,12 @@ class ConversationService:
     def generate(self, workspace: Workspace, question: str, history: list[Answer],
                  sources: list[EvidenceSource], fallback: Answer) -> Answer:
         annotate(model_name=chat_model(), result_kind="excerpt_fallback")
+        if chat_provider() == "cloudflare":
+            annotate(model_digest_or_version=None)
         if not chat_configured():
             annotate(fallback_reason="not_configured")
-            fallback.generation_note = "Source excerpts mode: conversational generation is not connected yet."
+            fallback.generation_note = ("Cloudflare setup is incomplete. Add the server credentials and confirm the Workers Free plan. Showing source excerpts; no local model or paid provider was called."
+                                        if chat_provider() == "cloudflare" else "Source excerpts mode: conversational generation is not connected yet.")
             return fallback
         treatment_subject = re.search(r"\b(treatment|drug|medication|medicine|dose|intervention)\b", question, re.I) or (
             workspace.intervention and workspace.intervention.lower() in question.lower())
@@ -213,29 +221,31 @@ class ConversationService:
         annotate(source_count_selected=len(records), context_char_count=sum(len(r["text"]) + sum(map(len, r["matched_passages"])) for r in records))
         ledger = UsageLedger()
         local = chat_provider() == "ollama"
+        hosted_free = chat_provider() == "cloudflare"
         local_acquired = False
         try:
-            if local:
+            if local or hosted_free:
                 local_acquired = _LOCAL_GENERATION_LOCK.acquire(blocking=False)
                 if not local_acquired:
                     annotate(busy_response=True, fallback_reason="busy", result_kind="busy")
-                    fallback.generation_note = "The local model is answering another question. Wait for that answer, then try again. Showing source excerpts; no answer was counted."
+                    fallback.generation_note = ("Cloudflare is answering another question. Wait for that answer, then try again. Showing source excerpts; no answer was counted." if hosted_free else "The local model is answering another question. Wait for that answer, then try again. Showing source excerpts; no answer was counted.")
                     return fallback
-                # Bound follow-up context on a 16 GB laptop. Never send a local
-                # request to a remote host or fall back to a paid provider.
+                # Share bounded source/history semantics between the two-pass
+                # providers. Provider selection is explicit, with no failover.
                 with phase("context_build"):
                     payload["history"] = [{"question": a.question, "answer": a.direct_answer[:2000]} for a in history[-3:]]
                     messages = [{"role": "system", "content": INSTRUCTIONS},
                                 {"role": "user", "content": json.dumps(payload)}]
+                completion = (lambda items: cloudflare.completion(items, GeneratedAnswer.model_json_schema())) if hosted_free else self._local_completion
                 with phase("draft", messages):
-                    content = self._local_completion(messages)
+                    content = completion(messages)
                 with phase("context_build"):
                     messages.extend([{"role": "assistant", "content": content},
                                      {"role": "user", "content": REVISION_INSTRUCTIONS + "\nLatest research question: " + question
                                       + "\nAnswer this latest question. If asked to simplify, use everyday language instead of repeating the earlier answer."}])
                 annotate(revision_ran=True, revision_reason="baseline_always")
                 with phase("revision", messages):
-                    content = self._local_completion(messages)
+                    content = completion(messages)
             else:
                 request_payload = {"model": os.environ["TRIALLENS_CHAT_MODEL"], "store": False,
                                    "instructions": INSTRUCTIONS, "input": json.dumps(payload),
@@ -282,7 +292,9 @@ class ConversationService:
                 if any(" ".join(normalized[i:i + 28]) in text
                        for i in range(max(0, len(normalized) - 27)) for text in source_text):
                     raise ValueError("Answer copies long source passages")
-            if local:
+            if hosted_free:
+                ledger.free_answer("cloudflare")
+            elif local:
                 ledger.local_answer()
             else:
                 ledger.answered(reservation)
@@ -291,17 +303,25 @@ class ConversationService:
             fallback.citations = list(dict.fromkeys(generated.cited_sources))
             fallback.uncertainty = generated.uncertainty
             fallback.generation_mode = "conversational"
-            fallback.generation_note = "Generated with the local model; no API credits used." if local else "Synthesized from indexed sources; open citations to check support."
+            fallback.generation_note = ("Generated with Cloudflare Workers AI using indexed sources. Check citations for support." if hosted_free else "Generated with the local model; no API credits used." if local else "Synthesized from indexed sources; open citations to check support.")
             if scope_reduced:
                 fallback.generation_note += " Combination-product labels were excluded from this single-ingredient summary."
             if any(record["demo"] for record in records):
                 fallback.generation_note = "Includes demo evidence; cannot support real-world conclusions. " + fallback.generation_note
+        except cloudflare.CloudflareUnavailable as error:
+            annotate(fallback_reason="cloudflare_" + error.reason, error_kind="cloudflare_" + error.reason)
+            notes = {
+                "quota": "Cloudflare's free allowance or request limit is unavailable. Try later or after the daily reset.",
+                "auth": "Cloudflare could not authorize this request. Check the server's Workers AI credentials.",
+                "configuration": "Cloudflare setup is incomplete. Check the server configuration and Workers Free plan.",
+            }
+            fallback.generation_note = notes.get(error.reason, "Cloudflare generation was unavailable or returned an incomplete answer.") + " Showing source excerpts; no local model or paid fallback was called."
         except BudgetUnavailable as error:
             annotate(fallback_reason="budget_unavailable")
             fallback.generation_note = str(error)
         except (sqlite3.Error, OSError):
             annotate(fallback_reason="usage_tracking_error", error_kind="usage_tracking_error")
-            fallback.generation_note = "Usage tracking is unavailable. Showing source excerpts until tracking is restored." if local else "Usage tracking is unavailable. Paid generation is paused to protect your budget."
+            fallback.generation_note = "Usage tracking is unavailable. Showing source excerpts until tracking is restored." if local or hosted_free else "Usage tracking is unavailable. Paid generation is paused to protect your budget."
         except httpx.HTTPError as error:
             kind = "provider_timeout" if isinstance(error, httpx.TimeoutException) else "provider_http_error" if isinstance(error, httpx.HTTPStatusError) else "provider_disconnect" if isinstance(error, (httpx.ReadError, httpx.RemoteProtocolError)) else "provider_connection_error"
             annotate(fallback_reason=kind, error_kind=kind, provider_status=error.response.status_code if isinstance(error, httpx.HTTPStatusError) else None)

@@ -1,0 +1,38 @@
+# Standalone hosted-inference profile: do not combine with compose.yaml.
+name: triallens-cloudflare
+services:
+  api:
+    build:
+      context: .
+      dockerfile: deploy/api.Dockerfile
+    environment:
+      TRIALLENS_CHAT_PROVIDER: cloudflare
+      CLOUDFLARE_ACCOUNT_ID: ${CLOUDFLARE_ACCOUNT_ID:-}
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN:-}
+      TRIALLENS_CLOUDFLARE_FREE_PLAN_CONFIRMED: ${TRIALLENS_CLOUDFLARE_FREE_PLAN_CONFIRMED:-false}
+      TRIALLENS_USAGE_PATH: /app/data/usage.sqlite3
+    volumes:
+      - data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 15s
+      timeout: 6s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+  web:
+    build:
+      context: .
+      dockerfile: deploy/web.Dockerfile
+    environment:
+      TRIALLENS_API_BASE: http://api:8000
+    ports:
+      - "127.0.0.1:${TRIALLENS_WEB_PORT:-3001}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  data:
+    # Reuse the existing installation's data volume unless explicitly overridden.
+    name: ${TRIALLENS_DATA_VOLUME:-triallens_data}
