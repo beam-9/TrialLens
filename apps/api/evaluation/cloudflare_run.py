@@ -1,12 +1,14 @@
 """Frozen public-fixture HTTP evaluation for the explicit hosted candidate.
 
 Never invokes Ollama or OpenAI, never refreshes evidence, never uses production
-workspace history/counters. Provider-account quotas still apply. No .env contents
+workspace history/counters. CLI experiments share a persistent evaluation ledger;
+provider-account quotas still apply. No .env contents
 or raw HTTP errors are printed; answers are explicit public-fixture artifacts.
 """
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -25,7 +27,23 @@ from m0 import benchmark
 from triallens import cloudflare, conversation
 
 
-def run(output, answer_path, case_ids=None):
+@contextmanager
+def candidate_instructions(path):
+    previous = conversation.INSTRUCTIONS, conversation.REVISION_INSTRUCTIONS
+    try:
+        if path is not None:
+            candidate = json.loads(path.read_text())
+            if (not isinstance(candidate, dict) or set(candidate) != {"instructions", "revision_instructions"}
+                    or any(not isinstance(value, str) or not value.strip() or len(value) > 20000 for value in candidate.values())):
+                raise ValueError("Candidate must supply two nonempty instruction strings")
+            conversation.INSTRUCTIONS = candidate["instructions"]
+            conversation.REVISION_INSTRUCTIONS = candidate["revision_instructions"]
+        yield
+    finally:
+        conversation.INSTRUCTIONS, conversation.REVISION_INSTRUCTIONS = previous
+
+
+def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
     inventory = json.loads(benchmark.INVENTORY.read_text())
     selected = [c for c in inventory["cases"] if not case_ids or c["id"] in case_ids]
     if not selected or (case_ids and (len(case_ids) != len(set(case_ids)) or len(selected) != len(case_ids))):
@@ -45,30 +63,47 @@ def run(output, answer_path, case_ids=None):
         path.parent.mkdir(parents=True, exist_ok=True)
     protected = [API_ROOT / "data/triallens.json", Path(os.getenv("TRIALLENS_USAGE_PATH", str(API_ROOT / "data/usage.sqlite3")))]
     original_hashes = {p: benchmark.sha256(p) for p in protected if p.exists()}
+    if quota_path is not None:
+        quota_path = quota_path.resolve()
+        if quota_path in {p.resolve() for p in protected} or quota_path in {output.resolve(), answer_path.resolve()}:
+            raise ValueError("Evaluation quota ledger must be separate from production data and outputs")
     records, answers, history = [], [], {}
     result = {"schema_version": 1, "provider": "cloudflare", "model": cloudflare.MODEL,
               "pipeline_variant": "two_pass", "status": "HOSTED CANDIDATE; not pilot verified", "complete": False,
               "fixture_inventory_sha256": benchmark.sha256(benchmark.INVENTORY),
+              "candidate_prompt_sha256": benchmark.sha256(prompt_path) if prompt_path else None,
               "code_sha256": hashlib.sha256(b"".join((API_ROOT / "triallens" / name).read_bytes() for name in ("cloudflare.py", "conversation.py", "main.py", "performance.py", "rag.py", "store.py"))).hexdigest(),
               "method": {"boundary": "loopback HTTP Ask API including serialization; hosted inference",
                          "cold_warm": "provider cache/residency unknown; no cold/warm classification",
                          "paid_provider_fallbacks": 0, "local_model_calls": 0,
                          "tokens": "provider reported only; distinct tokenizer from native baseline",
-                         "store": "isolated frozen public fixtures and temporary SQLite ledger",
-                         "quota": "temporary evaluation ledger; free provider account hard quota still applies"},
+                         "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+                         "quota": "persistent evaluation ledger" if quota_path else "temporary test ledger; not for repeated live experiments"},
               "requests": records, "summary": {}}
     native_post = conversation.httpx.post
     account = os.environ["CLOUDFLARE_ACCOUNT_ID"]
     endpoint = "https://api.cloudflare.com/client/v4/accounts/" + account + "/ai/run/" + cloudflare.MODEL
+    case_outputs = []
     def hosted_only(url, *args, **kwargs):
         if url != endpoint:
             raise RuntimeError("Evaluation blocked unexpected provider destination")
-        return native_post(url, *args, **kwargs)
-    with tempfile.TemporaryDirectory(prefix="triallens-cloudflare-") as temporary:
+        response = native_post(url, *args, **kwargs)
+        # Public frozen fixtures only: retain draft/revision text to diagnose
+        # validation failures without logging credentials or HTTP headers.
+        try:
+            body = response.json()
+            candidate = body.get("result", {}) if isinstance(body, dict) else {}
+            case_outputs.append({"response": candidate.get("response"), "usage": candidate.get("usage")})
+        except (ValueError, AttributeError):
+            case_outputs.append({"response": None, "usage": None})
+        return response
+    with candidate_instructions(prompt_path), tempfile.TemporaryDirectory(prefix="triallens-cloudflare-") as temporary:
         # Reuse the proven frozen HTTP/store isolation seam, never its native
         # model metadata or cold-start controls. Override provider BEFORE Ask.
         with benchmark.isolated_server(Path(temporary), inventory, "") as (base, ids, handler):
             os.environ["TRIALLENS_CHAT_PROVIDER"] = "cloudflare"
+            if quota_path is not None:
+                os.environ["TRIALLENS_USAGE_PATH"] = str(quota_path)
             os.environ.pop("TRIALLENS_PERF_MODEL_DIGEST", None)
             conversation.httpx.post = hosted_only
             def persist():
@@ -82,6 +117,7 @@ def run(output, answer_path, case_ids=None):
                 answer_path.write_text(json.dumps(answers, indent=2) + "\n")
             with httpx.Client(base_url=base, trust_env=False, timeout=400) as client:
                 for case in selected:
+                    case_outputs.clear()
                     previous = case.get("history_case_id")
                     started = time.monotonic()
                     trace_index = len(handler.records)
@@ -97,7 +133,8 @@ def run(output, answer_path, case_ids=None):
                     answer = response.json()
                     history[case["id"]] = answer["id"]
                     records.append({"case_id": case["id"], "snapshot_id": case["snapshot_id"], "client_wall_ms": client_ms, "trace": trace})
-                    answers.append({"case_id": case["id"], "snapshot_id": case["snapshot_id"], "answer": answer})
+                    answers.append({"case_id": case["id"], "snapshot_id": case["snapshot_id"], "answer": answer,
+                                    "provider_outputs": list(case_outputs)})
                     persist()
                     print(json.dumps({"case_id": case["id"], "wall_s": round(client_ms / 1000, 2), "result_kind": trace["result_kind"], "fallback_reason": trace["fallback_reason"]}), flush=True)
                     # Do not spend the rest of the allowance repeating setup/provider
@@ -117,9 +154,12 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--answers", type=Path, required=True)
     parser.add_argument("--case", action="append")
+    parser.add_argument("--quota-ledger", type=Path, default=API_ROOT / "data/evaluation-usage.sqlite3",
+                        help="Persistent evaluation-only daily allowance shared across experiments")
+    parser.add_argument("--prompt-file", type=Path, help="Evaluate a candidate without changing production instructions")
     args = parser.parse_args()
     load_dotenv(API_ROOT / ".env", override=False)
-    result = run(args.output, args.answers, args.case)
+    result = run(args.output, args.answers, args.case, args.quota_ledger, args.prompt_file)
     return 0 if result["complete"] else 1
 
 

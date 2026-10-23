@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "assessment_type": "Source-backed engineering review; not independent clinical validation",
+  "review_date": "2026-10-23 America/Vancouver",
+  "complete": false,
+  "quality_promotion_gate_passed": false,
+  "reason": "Only two of three selected cases generated; follow-up revision stopped at conservative quota reservation. Numerical answer loses required adult population and adds baseline-reduction interpretation. No full suite reviewed for this candidate.",
+  "cases": [
+    {
+      "case_id": "combination-identity",
+      "support_verdict": "supported",
+      "rationale": "Correct combination identity; unknown history-of-pancreatitis risk remains distinct from contraindication or metformin-only evidence."
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "support_verdict": "partially_supported",
+      "rationale": "Omits adult population and demo disclosure from standalone response (demo is visible in generation note); explanatory paragraph infers greater reduction over time from endpoint difference.",
+      "critical_errors": [
+        "wrong_number_comparator"
+      ]
+    },
+    {
+      "case_id": "numerical-simplify",
+      "support_verdict": "not_adjudicated_as_generation",
+      "rationale": "Revision blocked before request by persistent evaluation quota; extractive fallback displayed, not draft. Fallback incorrectly reports no quantitative statistics despite supplied endpoint finding; deterministic detector fix pending."
+    }
+  ],
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8490.254725,
+    "remaining_neurons": 509.745275,
+    "pending_requests": 0,
+    "requests": 56
+  },
+  "production_promoted": false
+}

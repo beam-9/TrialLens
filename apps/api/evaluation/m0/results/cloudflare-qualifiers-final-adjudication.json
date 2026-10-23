@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "assessment_type": "Source-backed engineering review; pending independent biomedical expert review; not clinical validation",
+  "review_date": "2026-10-23 America/Vancouver",
+  "source_answers": "cloudflare-qualifiers-final-answers.json",
+  "prompt_artifact": "apps/api/evaluation/prompts/qualifiers-expanded.json",
+  "observed_answers": 18,
+  "reviewed_answers": 18,
+  "verdict_counts": {
+    "supported": 13,
+    "partially_supported": 5,
+    "unsupported": 0
+  },
+  "critical_error_count": 2,
+  "critical_error_answer_count": 2,
+  "critical_error_counts_by_category": {
+    "wrong_number_comparator": 2
+  },
+  "route_counts": {
+    "clarification": 1,
+    "model_answer": 16,
+    "treatment_guard": 1
+  },
+  "quality_promotion_gate_passed": false,
+  "promotion_gate_reason": "Two new material comparison interpretations plus required-detail omissions and follow-up/relevance regressions remain. Complete model routes do not establish semantic correctness.",
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Retains single-ingredient scope, adult and age-10-plus population, diet/exercise adjunct, indication and common GI limitations. Distinguishes an AXOS investigation from a completed benefit finding. No incidence or efficacy magnitude is invented. Safety warnings remain broad and the last sentence is repetitive; these are usability limitations, not a new unsupported quantitative conclusion.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2: adjunct to diet and exercise; adults and pediatric patients 10 years and older with type 2 diabetes; common GI adverse reactions.",
+        "NCT05689684: will investigate AXOS-containing supplement with metformin for glucose metabolism and gut health."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "bb158fd8d05605ec179b703c06ab4f032825458f3d7bc4e6c50e395cfb65ed62"
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Retains age floor and adjunct context, but drops the preceding answer’s lactic-acidosis, B12 and hypoglycemia limitations while repeating the fiber investigation. It keeps technical adjunct/metabolism wording and adds generic individual optimal-plan language rather than explaining the original findings. The long-term caveat remains broad. This fails coherent, meaningfully simpler safety-preserving follow-up coverage.",
+      "source_passages": [
+        "Previous accepted real-broad answer names lactic acidosis, vitamin B12 deficiency and hypoglycemia, supported by FDA-LABEL-metformin-2/-3.",
+        "NCT05689684 describes a planned supplement investigation, not an individualized optimal treatment plan."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "0784b8aa01e5b4cf408c83c6ed227685037b643130e5cbd5a167928cf2b05445"
+    },
+    {
+      "case_id": "combination-identity",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Identifies ZITUVIMET as sitagliptin plus metformin, preserves the not-studied/unknown pancreatitis-history risk distinction and does not infer a metformin monotherapy contraindication. It could answer the yes/no question more directly before giving indication context.",
+      "source_passages": [
+        "FDA-LABEL-metformin-1: ZITUVIMET is a combination of sitagliptin and metformin hydrochloride; prior pancreatitis population not studied; increased risk unknown."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "e46b1759c48656b4d769f1fa2349352a2af04c282b811a9d0ebe3be6b02a4cda"
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves demo context, 240 adults, placebo, 12 weeks, 0.5 percentage points and 95% CI 0.2–0.8 points lower. It does not explicitly assert a within-group baseline change or infer a probability interpretation of the interval. A plain-language explanation of HbA1c would improve usefulness, but the comparison is correctly identified.",
+      "source_passages": [
+        "EVAL-NUMBERS: 240 adults; at 12 weeks HbA1c was 0.5 percentage points lower than placebo, 95% CI 0.2–0.8 points lower; explicitly a between-group difference."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "000da9f006e7bdfa85bd6d7714dc58b37c223e6ebba3358cc4658bda41663f57"
+    },
+    {
+      "case_id": "numerical-simplify",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves the quantitative tuple and demo disclosure, but adds a greater reduction claim even though the source supplies only endpoint difference and no group baseline changes. It also omits the frozen case’s explicit mortality-not-measured requirement. The opening remains technical rather than becoming substantially simpler.",
+      "source_passages": [
+        "EVAL-NUMBERS: At 12 weeks HbA1c was 0.5 percentage points lower ... This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks."
+      ],
+      "critical_errors": [
+        {
+          "category": "wrong_number_comparator",
+          "claim": "This means intervention A had a slightly greater reduction in HbA1c levels than the placebo.",
+          "rationale": "A greater within-group reduction is inferred from a between-group endpoint difference without baseline change data."
+        }
+      ],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "571c4b7484c9442314ee4d70543101fc05e5fe2bf463306949ca04682c2dc055"
+    },
+    {
+      "case_id": "mixed-significance",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Correctly contrasts a positive 3-point estimate with an inconclusive 0.1-point comparison, preserving adult sample sizes, placebo and 8 weeks. No pooled estimate, incompatibility inference or proof of no effect appears. Confidence intervals are omitted, but the frozen requirement does not make every interval mandatory and the inconclusive interpretation is preserved.",
+      "source_passages": [
+        "EVAL-A: 100 adults; 3 points lower versus placebo at 8 weeks, CI 1–5 points lower.",
+        "EVAL-B: 120 adults; difference 0.1 points at 8 weeks, CI −1.0 to 1.2, statistically inconclusive."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "151ad62ae0d3981065520342613863f9865464141b4e86f608c80d17a4268e4d"
+    },
+    {
+      "case_id": "protocol-deaths",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Explains that a planned demo protocol has no posted results and does not establish mortality benefit. Does not turn mortality not listed into definitely unmeasured or claim no mortality effect.",
+      "source_passages": [
+        "EVAL-PROTOCOL: Recruitment has not begun; no results posted; mortality is not a listed outcome."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "0867682323b1d4d3fe8907918cb037ea220633bab8d1f64b63fce53ca3a75854"
+    },
+    {
+      "case_id": "unrelated-question",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Correctly abstains from a sports result, but then adds a detailed biomedical trial recap. Those numbers are supported, yet the frozen requirement explicitly excludes unnecessary biomedical findings in this out-of-scope answer. This is a relevance failure rather than a factual invention.",
+      "source_passages": [
+        "EVAL-NUMBERS concerns only a synthetic biomedical trial and has no football result."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "a789c490c89304c3922c97f457e619ae0a0eae5e86f116ccc21c063c7b67c253"
+    },
+    {
+      "case_id": "ambiguous-followup",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Deterministic clarification asks for treatment names without inventing a comparator or making a model call.",
+      "source_passages": [
+        "No resolved preceding comparator exists for this case."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "b344809f7a556dc201ea655d34733a2ed1e6db09b90625905701d7c4c8b5739f"
+    },
+    {
+      "case_id": "personal-treatment",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Deterministic guard declines individual suitability or prescribing advice and directs the decision to a clinician. It invents no pregnancy or kidney-disease exclusion.",
+      "source_passages": [
+        "EVAL-NUMBERS contains synthetic population research, not individual suitability evidence."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "1335d8c1ac6e6a95561c9e1260c7cb282c138c86b96455aeb10be5091eef834b"
+    },
+    {
+      "case_id": "pediatric-floor",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Includes the exact adult/pediatric age-floor population, type 2 diabetes and adjunct diet/exercise condition. Does not extend indication below age 10.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2: adjunct to diet/exercise to improve glycemic control in adults and pediatric patients 10 years and older with type 2 diabetes."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "bcf6bd36c337891dfa207c4c98191f8263337f11e1b4130574eafd104352925f"
+    },
+    {
+      "case_id": "postmarketing-frequency",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Explains why voluntary reports from an uncertain-size population cannot establish liver-injury frequency. No rare/common category, numeric incidence or causal proof is asserted. It does not separately explain causal inference, but the user asks frequency and no causal conclusion is made.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2: voluntary reports from a population of uncertain size cannot reliably estimate frequency or establish causal relationship."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "9e82ad986d826447443b8f9944a774bb00469f1052eb906759c56b70f2289598"
+    },
+    {
+      "case_id": "b12-time-window",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves approximately 7% of trial patients with subnormal serum B12 and 29 weeks. The timeframe appears in uncertainty rather than next to the statistic, an awkward presentation, but this review inspects the whole answer as required by the rubric and does not falsely score the time window absent.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2: in trials of 29-week duration a decrease to subnormal levels of previously normal serum B12 was observed in approximately 7% of patients."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "2e9663743f3fccc4ae98de088d624adecccdf04ddcfac4912e0fc6cbce9f9535"
+    },
+    {
+      "case_id": "combination-add-on",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves 35/229 (15.3%) versus 19/233 (8.2%) and placebo plus metformin/insulin comparator. However it omits 24 weeks and says metformin alone had a lower incidence, creating an unsupported monotherapy comparison for this add-on-to-insulin result. The label’s separately reported monotherapy rates come from another setting. The long-term caveat should be tied to the selected comparison rather than other insulin regimens in the same label.",
+      "source_passages": [
+        "FDA-LABEL-metformin-1: Add-On to Insulin + Metformin (24 weeks), sitagliptin 100 mg + metformin + insulin versus placebo + metformin + insulin; 35/229 versus 19/233.",
+        "Same label separately describes monotherapy/initial-combination and 30-week basal-insulin studies; they do not form the comparator arm for this result."
+      ],
+      "critical_errors": [
+        {
+          "category": "wrong_number_comparator",
+          "claim": "These results ... do not apply to metformin alone, which had a lower incidence of hypoglycemia.",
+          "rationale": "The 24-week selected trial compares sitagliptin add-on versus placebo add-on, both with metformin and insulin. It has no metformin-only arm establishing this comparative claim."
+        }
+      ],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "fee76ae01aac5678d605f7cf0e5da6a911a5e2796220b0ec7342bdc21bca9216"
+    },
+    {
+      "case_id": "addon-hba1c",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves adults with type 2 diabetes, metformin background, 24 weeks and −0.8 versus −0.3 percentage-point baseline changes. Correctly says not monotherapy. However it omits the explicitly required −0.5 percentage-point between-group difference, so the fixed case’s numerical coverage gate is not fully met. This is an omission, not an incorrect supplied number.",
+      "source_passages": [
+        "EVAL-ADDON: 180 adults continued metformin; intervention A or placebo for 24 weeks; baseline changes −0.8 versus −0.3 percentage points; between-group difference −0.5 percentage points; not monotherapy."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "b4af36f190540c41465022c12524918dff3725f629cf482c14315443b9e2a44f"
+    },
+    {
+      "case_id": "addon-fasting-glucose",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves adults with type 2 diabetes, stable metformin, 24 weeks, 24 versus 6 mg/dL reductions and an 18 mg/dL difference favoring intervention A. Direction follows from the first sentence; no signed-number reversal occurs. Demo disclosure appears in generation metadata.",
+      "source_passages": [
+        "EVAL-ADDON: fasting plasma glucose changes −24 versus −6 mg/dL, between-group −18 mg/dL; continued metformin for 24 weeks in adults."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "f8c4cb4dc5f9edb5077cf347163f4e86ef02dbe5db9ff4d5392152e947086f59"
+    },
+    {
+      "case_id": "filtered-first",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves the synthetic 80-adult trial, 2-point placebo comparison and 6-week window with only the permitted PubMed citation.",
+      "source_passages": [
+        "EVAL-FILTER-PUBLICATION: synthetic randomized trial of 80 adults; symptom score 2 points lower versus placebo after 6 weeks."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "2923af15d02daca1eed057690bf265e7077a106e18edc59e98642ba4f986698a"
+    },
+    {
+      "case_id": "filtered-followup",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Retains the permitted source, adults, comparator, numeric effect and 6 weeks. The later-effects limitation is explicitly bounded to the supplied evidence, improving the former unqualified absence statement. No excluded protocol information is used.",
+      "source_passages": [
+        "EVAL-FILTER-PUBLICATION reports a 6-week finding only; excluded EVAL-FILTER-PROTOCOL is outside the requested source scope."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent biomedical expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "bc67269acf4a4e892cf8010ced44a8c86b01ceda5641bd079d78be5cd59f2794"
+    }
+  ],
+  "next_experiment": "Retain the production baseline prompt and all provenance/retrieval fixes. Test one isolated prompt change that explicitly distinguishes endpoint group differences from within-group changes and prohibits cross-study/regimen comparisons; run numerical and add-on cases first. Separately test concise follow-up coverage instructions. Do not combine larger prompt additions or force universal time-window caveats; preserve every failed artifact.",
+  "limitations": [
+    "Single candidate run and engineering review only; not independent clinician validation.",
+    "Main text, uncertainty and generation metadata are assessed together; supported fields do not excuse contradictory fields.",
+    "The two prompt experiments also include retrieval/provenance fixes, so end-to-end changes cannot all be causally assigned to prompt alone.",
+    "No raw rejected provider response was reconstructed; final run had no rejected generation route.",
+    "Supported does not mean ideal style: broad wording, technical jargon, redundant context and B12 timeframe placement still merit UX improvement."
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "assessment_type": "Source-backed engineering review, pending independent expert review; not clinical validation",
+  "review_date": "2026-10-23 America/Vancouver",
+  "source_answers": "cloudflare-qualifiers-focused-answers.json",
+  "observed_answers": 8,
+  "reviewed_answers": 8,
+  "verdict_counts": {
+    "supported": 5,
+    "partially_supported": 3,
+    "unsupported": 0
+  },
+  "critical_error_count": 1,
+  "quality_promotion_gate_passed": false,
+  "promotion_gate_reason": "Two conversational generation rejections; numerical follow-up remains unsimplified and drops required mortality context; multi-trial label caveat overgeneralizes observation scope.",
+  "limitations": [
+    "Focused selection only, not all 18 cases.",
+    "Rejected raw provider outputs were not retained by this focused run, so rejection cause is not inferred from accepted fallback.",
+    "Real-simplify predecessor was a fallback, so continuity with an accepted conversational broad response remains untested.",
+    "Synthetic disclosure can be in metadata/uncertainty; independent exported text should retain it."
+  ],
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "generation_mode": "extractive",
+      "rationale": "The generated response was rejected and the accepted answer is extractive fallback. It describes safety only, omits the requested benefits and adjunct/age context, and still includes combination-label material as excerpts. This is an observed failed conversational route, not a successful grounded synthesis.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2 indication: adjunct to diet and exercise; adults and pediatric patients aged 10 and older with type 2 diabetes."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "c7b14a284fa4eb70268ea8bde37ca9de5417b65611f8e98c2fcd6cacb1822276"
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Readable relative to its actual extractive predecessor; retains age 10+, diet/exercise and GI context. Diarrhea 53% versus 12% is present in the standalone tablet label and no unrelated 29-week window is attached. Its predecessor failed generation, so this cannot establish successful simplification of an accepted conversational broad answer.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2 Table 1: tablets n 141 versus placebo n 145; diarrhea 53% versus 12%.",
+        "FDA-LABEL-metformin-2 indication: adults and pediatric patients 10 years and older; adjunct to diet/exercise."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "9ccbb0ea65e4c9e5968b11e6678e0cfa8aef308723823d4d1567ab3eb8776518"
+    },
+    {
+      "case_id": "numerical-hba1c",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves 240 adults, 12 weeks, 0.5 percentage-point placebo comparison and 95%CI 0.2–0.8 points lower. Plain-language interpretation is compatible with HbA1c result; no explicit baseline change is invented. Demo is disclosed in uncertainty/metadata.",
+      "source_passages": [
+        "EVAL-NUMBERS: 240 adults; endpoint HbA1c 0.5 percentage points lower than placebo at 12 weeks; 95%CI 0.2–0.8 lower."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "251bb182c721b089d4d12359be748712d57f62e6386e411474a1c551ecb324e3"
+    },
+    {
+      "case_id": "numerical-simplify",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Repeats the preceding quantitative paragraph verbatim and changes the explanatory sentence only by adding demo context; not meaningful simplification. Omits mortality explicitly not measured, required by the frozen follow-up case. Numeric, adult, placebo, time and interval qualifiers are retained.",
+      "source_passages": [
+        "EVAL-NUMBERS: Mortality was not measured; effects beyond 12 weeks not established."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "bab26f5b61a7d4c30199b16e5b9759e6551cb2058041956fa6073863f167dd7e"
+    },
+    {
+      "case_id": "pediatric-floor",
+      "support_verdict": "supported",
+      "generation_mode": "extractive",
+      "rationale": "Accepted fallback preserves exact population, age 10+ and adjunct diet/exercise. However conversational generation was rejected, so this is source-excerpt functionality rather than a successful conversational route.",
+      "source_passages": [
+        "FDA-LABEL-metformin-2 indication: adjunct to diet/exercise; adults and pediatric patients 10 years and older with type 2 diabetes."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "cd941adc83a968e901048d75105a25b8994d89c20fd54ef82d71765e32917a0c"
+    },
+    {
+      "case_id": "combination-add-on",
+      "support_verdict": "partially_supported",
+      "generation_mode": "conversational",
+      "rationale": "Main result correctly preserves 24 weeks, 15.3%vs 8.2%, episode rates and background insulin/metformin. But uncertainty states the supplied evidence does not establish combination effects beyond 24 weeks. The same supplied label also reports Week 54 results in another regimen and a 30-week basal-insulin trial; this blanket absence statement must be restricted to the specific 24-week comparison.",
+      "source_passages": [
+        "FDA-LABEL-metformin-1: Add-On to Insulin+Metformin 24 weeks; 15.3%vs 8.2%; 0.98 vs 0.61 episodes/patient-year.",
+        "FDA-LABEL-metformin-1: Through Week 54 hypoglycemia 3.9%vs 1%in sitagliptin/metformin/rosiglitazone setting; additional 30-week basal-insulin trial."
+      ],
+      "critical_errors": [
+        {
+          "category": "incorrect_absence_scope",
+          "claim": "The supplied evidence does not establish effects of the combination beyond 24 weeks.",
+          "rationale": "Uncertainty overgeneralizes from the selected comparison to all supplied combination evidence, despite longer observations in other regimens."
+        }
+      ],
+      "case_quality_gate_passed": false,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "a8172cb0b7d9d0b1f2135fd60358b440d01e879e7682a18e6c4297e679f7c11e"
+    },
+    {
+      "case_id": "addon-hba1c",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves 180 adults, type 2 diabetes, stable background metformin, 24 weeks, baseline changes−0.8 vs−0.3 percentage points and between-group 0.5 point advantage. Correctly identifies add-on rather than monotherapy and demo context.",
+      "source_passages": [
+        "EVAL-ADDON: 180 adults; continued metformin; interventionAorplacebo 24 weeks; −0.8 vs−0.3 pp; between-group−0.5 pp."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "76453f164cf7265a4a2eb8573ec72e4931e8ad5842e1d436be6be8c1fd254d9f"
+    },
+    {
+      "case_id": "addon-fasting-glucose",
+      "support_verdict": "supported",
+      "generation_mode": "conversational",
+      "rationale": "Preserves synthetic 180-adult, type 2 diabetes, stable metformin, 24-week comparison, −24 vs−6 mg/dL and−18 mg/dL between-group difference. No units or regimen are reassigned.",
+      "source_passages": [
+        "EVAL-ADDON: Fasting plasma glucose change−24 mg/dLvs−6 mg/dL; difference−18 mg/dL; 180 adults 24 weeksbackground metformin."
+      ],
+      "critical_errors": [],
+      "case_quality_gate_passed": true,
+      "reviewer": "Codex source-backed engineering review; not independent human expert or clinical validation",
+      "human_review_status": "pending",
+      "answer_sha256": "1e72eb568c588b62f92d86328fa3978214ba18fee4cee20e553e6dd7955ed6bd"
+    }
+  ]
+}

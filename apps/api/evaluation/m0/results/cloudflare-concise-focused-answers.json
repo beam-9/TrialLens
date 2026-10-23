@@ -1,0 +1,361 @@
+[
+  {
+    "case_id": "combination-identity",
+    "snapshot_id": "combination-label",
+    "answer": {
+      "id": "c5178c7a-c3fa-4307-9909-f28322233c26",
+      "workspace_id": "m0-combination-label",
+      "question": "Does this label mean metformin is contraindicated in people with a history of pancreatitis?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "short_answer": "The label does not say metformin is contraindicated in people with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].\n\nIt actually talks about a combination of sitagliptin and metformin, saying that this combination has not been studied in patients with a history of pancreatitis, and it's unknown if these patients are at higher risk of pancreatitis while using this combination [openFDA label:FDA-LABEL-metformin-1].",
+      "direct_answer": "The label does not say metformin is contraindicated in people with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].\n\nIt actually talks about a combination of sitagliptin and metformin, saying that this combination has not been studied in patients with a history of pancreatitis, and it's unknown if these patients are at higher risk of pancreatitis while using this combination [openFDA label:FDA-LABEL-metformin-1].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-1 \u00b7 FDA label: ZITUVIMET \u00b7 Stored FDA label sections available in TrialLens."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The label does not provide information on the risk of pancreatitis in patients with a history of pancreatitis using metformin alone."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The label does not provide information on the risk of pancreatitis in patients with a history of pancreatitis using metformin alone."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-1"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-combination-label-chunk-1",
+          "source_id": "m0-combination-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "ZITUVIMET is a combination of sitagliptin and metformin hydrochloride, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET.",
+          "score": 0.732,
+          "section": "summary",
+          "title": "FDA label: ZITUVIMET",
+          "url": null,
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "history",
+            "metformin",
+            "pancreatitis",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, history, metformin, pancreatitis, type in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-10-23T07:42:51.645219+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": {
+          "paragraphs": [
+            "The label does not contraindicate metformin in people with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].",
+            "It states that ZITUVIMET, a combination of sitagliptin and metformin hydrochloride, has not been studied in patients with a history of pancreatitis, and it is unknown whether these patients are at increased risk for the development of pancreatitis while using ZITUVIMET [openFDA label:FDA-LABEL-metformin-1]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-1"
+          ],
+          "uncertainty": [
+            "The label does not provide information on the risk of pancreatitis in patients with a history of pancreatitis using metformin alone."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 793,
+          "completion_tokens": 171,
+          "total_tokens": 964,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 56.16917037963867
+        }
+      },
+      {
+        "response": {
+          "paragraphs": [
+            "The label does not say metformin is contraindicated in people with a history of pancreatitis [openFDA label:FDA-LABEL-metformin-1].",
+            "It actually talks about a combination of sitagliptin and metformin, saying that this combination has not been studied in patients with a history of pancreatitis, and it's unknown if these patients are at higher risk of pancreatitis while using this combination [openFDA label:FDA-LABEL-metformin-1]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-1"
+          ],
+          "uncertainty": [
+            "The label does not provide information on the risk of pancreatitis in patients with a history of pancreatitis using metformin alone."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 1191,
+          "completion_tokens": 163,
+          "total_tokens": 1354,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 65.14446258544922
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "numerical-hba1c",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "4d79727d-472a-4ad6-a3f2-5b3c1704aba1",
+      "workspace_id": "m0-numerical",
+      "question": "How much did it help, and what does that mean?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "short_answer": "Intervention A helped by lowering HbA1c levels 0.5 percentage points more than placebo at 12 weeks [PubMed:EVAL-NUMBERS].\n\nThis means that intervention A was more effective in reducing average blood sugar levels compared to placebo over the 12-week period [PubMed:EVAL-NUMBERS].",
+      "direct_answer": "Intervention A helped by lowering HbA1c levels 0.5 percentage points more than placebo at 12 weeks [PubMed:EVAL-NUMBERS].\n\nThis means that intervention A was more effective in reducing average blood sugar levels compared to placebo over the 12-week period [PubMed:EVAL-NUMBERS].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The trial does not establish effects beyond 12 weeks",
+        "Mortality was not measured in the trial"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The trial does not establish effects beyond 12 weeks",
+        "Mortality was not measured in the trial",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.4994,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-10-23T07:43:04.675392+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": {
+          "paragraphs": [
+            "In this synthetic evaluation, intervention A lowered HbA1c by 0.5 percentage points more than placebo at 12 weeks [PubMed:EVAL-NUMBERS].",
+            "This difference means that, on average, participants who received intervention A had a greater reduction in HbA1c levels compared to those who received placebo, indicating a potential benefit of intervention A in improving glycemic control [PubMed:EVAL-NUMBERS]."
+          ],
+          "cited_sources": [
+            "PubMed:EVAL-NUMBERS"
+          ],
+          "uncertainty": [
+            "The trial was synthetic",
+            "The effect of intervention A beyond 12 weeks is unknown",
+            "Mortality was not measured in the trial"
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 750,
+          "completion_tokens": 141,
+          "total_tokens": 891,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 48.87830352783203
+        }
+      },
+      {
+        "response": {
+          "paragraphs": [
+            "Intervention A helped by lowering HbA1c levels 0.5 percentage points more than placebo at 12 weeks [PubMed:EVAL-NUMBERS].",
+            "This means that intervention A was more effective in reducing average blood sugar levels compared to placebo over the 12-week period [PubMed:EVAL-NUMBERS]."
+          ],
+          "cited_sources": [
+            "PubMed:EVAL-NUMBERS"
+          ],
+          "uncertainty": [
+            "The trial does not establish effects beyond 12 weeks",
+            "Mortality was not measured in the trial"
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 1109,
+          "completion_tokens": 112,
+          "total_tokens": 1221,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 52.51264190673828
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "numerical-simplify",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "bd18db81-a335-42a8-970a-a680a7e81cd9",
+      "workspace_id": "m0-numerical",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "previous_answer_id": "4d79727d-472a-4ad6-a3f2-5b3c1704aba1",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Cloudflare's free allowance or request limit is unavailable. Try later or after the daily reset. Showing source excerpts; no local model or paid fallback was called.",
+      "saved_to_brief": false,
+      "short_answer": "I did not find quantitative effectiveness statistics for intervention A evaluation condition in the retrieved passages. The indexed sources mention relevance, study design, or safety context, but they do not provide usable numerical outcome results for this question.",
+      "direct_answer": "I did not find quantitative effectiveness statistics for intervention A evaluation condition in the retrieved passages. The indexed sources mention relevance, study design, or safety context, but they do not provide usable numerical outcome results for this question.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "No retrieved passage contained a usable effectiveness statistic such as a percentage improvement, lesion-count change, response rate, p-value, confidence interval, or comparator result.",
+        "Try filtering to Literature or Trials, or rebuild the workspace with more result-focused sources if you need numerical efficacy estimates."
+      ],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "No safety-specific passage was retrieved strongly enough for this workspace/question."
+      ],
+      "uncertainty": [
+        "ClinicalTrials.gov records often describe planned outcomes without posting numerical results.",
+        "PubMed abstracts may omit detailed statistics that appear only in full text."
+      ],
+      "limitations": [
+        "TrialLens does not invent statistics when indexed sources do not contain them.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.4937,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-10-23T07:43:16.720324+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": {
+          "paragraphs": [
+            "Intervention A was more effective in reducing blood sugar levels than a placebo over 12 weeks, as shown by a 0.5 percentage point greater decrease in HbA1c levels [PubMed:EVAL-NUMBERS].",
+            "This difference means that, on average, people who received intervention A had lower blood sugar levels after 12 weeks compared to those who received a placebo [PubMed:EVAL-NUMBERS]."
+          ],
+          "cited_sources": [
+            "PubMed:EVAL-NUMBERS"
+          ],
+          "uncertainty": [
+            "The trial only measured effects up to 12 weeks",
+            "The trial did not measure mortality",
+            "This evidence is from a synthetic evaluation fixture, not a real-world study"
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 837,
+          "completion_tokens": 145,
+          "total_tokens": 982,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 52.01761245727539
+        }
+      }
+    ]
+  }
+]
