@@ -60,3 +60,11 @@ Further work was completed without additional hosted or local inference:
 **Current verification:** 198 backend tests pass, with two upstream deprecation warnings. The 13 browser regressions passed again in 15.7 seconds after the historical read/Brief flag changes. An additional real browser download and save/remove check confirmed the warning appears in Markdown, stale support claims are absent, original content survives and only the Brief flag changes in raw storage. Fixture servers, browser and temporary data were cleaned up. No UI/aesthetic changes were made.
 
 The full minimal research-dashboard redesign remains the chosen direction, and its implementation still follows the unresolved live quality gate. The persistent free-evaluation allowance has not been reset or bypassed.
+
+## Evaluation context capture preparation
+
+The allowance was checked again at 11:37 AM Vancouver time on 23 October: 509.745 neurons remained in the evaluation ledger; its daily UTC reset had not occurred. No additional hosted request was made.
+
+The standalone frozen-fixture runner now retains the actual source/topic/question/history object sent to the provider and its serialized-context SHA-256. Draft and revision must reference the same hash. This addresses the earlier need to reconstruct missing context when distinguishing retrieval/context omissions from generation errors. Capture is limited to the isolated public/synthetic fixture runner; provider URLs, authentication headers, credentials and production histories are not retained. Historical observations stay unchanged. Tests verify equality with the actual submitted payload, exact content hashes, actual frozen predecessor history and absence of authentication data in the saved artifacts.
+
+The six focused evaluation tests passed with mocked inference, including explicit context clearing for no-model guards. No additional production model, pipeline, UI or quota-policy change was made.

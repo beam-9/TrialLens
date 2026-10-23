@@ -1,5 +1,6 @@
 """Real isolated HTTP evaluation seam with mocked hosted inference only."""
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -38,9 +39,11 @@ def test_evaluation_calls_only_hosted_model_and_preserves_original_store(configu
     from triallens import main, conversation
     store = main.store
     calls = []
+    submitted_contexts = []
     def post(url, **kwargs):
         assert url == "https://api.cloudflare.com/client/v4/accounts/" + "b" * 32 + "/ai/run/" + runner.cloudflare.MODEL
         calls.append(url)
+        submitted_contexts.append(kwargs["json"]["messages"][1]["content"])
         return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {"response": {"paragraphs": ["Adults had a 0.5-point lower HbA1c result than placebo at 12 weeks [PubMed:EVAL-NUMBERS]."], "cited_sources": ["PubMed:EVAL-NUMBERS"], "uncertainty": []}, "usage": {"prompt_tokens": 900, "completion_tokens": 100}}})
     monkeypatch.setattr(conversation.httpx, "post", post)
     result = runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"])
@@ -51,7 +54,41 @@ def test_evaluation_calls_only_hosted_model_and_preserves_original_store(configu
     assert not (tmp_path / "original.sqlite3").exists()
     encoded = (tmp_path / "metrics").read_text()
     assert "test-token" not in encoded and "b" * 32 not in encoded
-    assert len(json.loads((tmp_path / "answers").read_text())) == 1
+    saved_answers = json.loads((tmp_path / "answers").read_text())
+    assert len(saved_answers) == 1
+    captured = saved_answers[0]
+    context = captured["generation_context"]
+    assert context["history"] == []
+    assert context["question"] == "How much did it help, and what does that mean?"
+    assert context["evidence"][0]["citation"] == "PubMed:EVAL-NUMBERS"
+    assert "240 adults" in context["evidence"][0]["text"]
+    assert context == json.loads(submitted_contexts[0])
+    assert captured["generation_context_sha256"] == hashlib.sha256(submitted_contexts[0].encode("utf-8")).hexdigest()
+    assert {item["generation_context_sha256"] for item in captured["provider_outputs"]} == {captured["generation_context_sha256"]}
+    encoded_answers = (tmp_path / "answers").read_text()
+    assert "test-token" not in encoded_answers and "b" * 32 not in encoded_answers
+    assert "Authorization" not in encoded_answers
+
+
+@pytest.mark.parametrize("next_case", ["numerical-simplify", "personal-treatment"])
+def test_captured_context_tracks_followup_and_resets_before_guard(configured, monkeypatch, tmp_path, next_case):
+    from triallens import conversation
+    def post(url, **kwargs):
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {
+            "response": {"paragraphs": ["Adults had a 0.5-point lower HbA1c result than placebo at 12 weeks [PubMed:EVAL-NUMBERS]."],
+                         "cited_sources": ["PubMed:EVAL-NUMBERS"], "uncertainty": []},
+            "usage": {"prompt_tokens": 900, "completion_tokens": 100}}})
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c", next_case])
+    first, followup = json.loads((tmp_path / "answers").read_text())
+    context = followup["generation_context"]
+    if next_case == "personal-treatment":
+        assert context is None and followup["generation_context_sha256"] is None
+        assert followup["provider_outputs"] == []
+        return
+    assert context["question"] == "Can you explain that more simply without changing the numbers?"
+    assert context["history"] == [{"question": first["answer"]["question"], "answer": first["answer"]["direct_answer"]}]
+    assert context["evidence"] == first["generation_context"]["evidence"]
 
 
 def test_experiments_share_separate_daily_ledger(configured, monkeypatch, tmp_path):

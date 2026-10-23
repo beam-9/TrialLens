@@ -84,16 +84,26 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
     account = os.environ["CLOUDFLARE_ACCOUNT_ID"]
     endpoint = "https://api.cloudflare.com/client/v4/accounts/" + account + "/ai/run/" + cloudflare.MODEL
     case_outputs = []
+    case_context = {}
     def hosted_only(url, *args, **kwargs):
         if url != endpoint:
             raise RuntimeError("Evaluation blocked unexpected provider destination")
+        # This seam runs only with a hash-checked public frozen store. Capture
+        # the exact evidence/history object sent, never URL/auth/header values.
+        context_text = kwargs["json"]["messages"][1]["content"]
+        context_digest = hashlib.sha256(context_text.encode("utf-8")).hexdigest()
+        if not case_context:
+            case_context.update(value=json.loads(context_text), sha256=context_digest)
+        elif context_digest != case_context["sha256"]:
+            raise RuntimeError("Evaluation source context unexpectedly changed between passes")
         response = native_post(url, *args, **kwargs)
         # Public frozen fixtures only: retain draft/revision text to diagnose
         # validation failures without logging credentials or HTTP headers.
         try:
             body = response.json()
             candidate = body.get("result", {}) if isinstance(body, dict) else {}
-            case_outputs.append({"response": candidate.get("response"), "usage": candidate.get("usage")})
+            case_outputs.append({"response": candidate.get("response"), "usage": candidate.get("usage"),
+                                 "generation_context_sha256": context_digest})
         except (ValueError, AttributeError):
             case_outputs.append({"response": None, "usage": None})
         return response
@@ -118,6 +128,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
             with httpx.Client(base_url=base, trust_env=False, timeout=400) as client:
                 for case in selected:
                     case_outputs.clear()
+                    case_context.clear()
                     previous = case.get("history_case_id")
                     started = time.monotonic()
                     trace_index = len(handler.records)
@@ -134,7 +145,9 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
                     history[case["id"]] = answer["id"]
                     records.append({"case_id": case["id"], "snapshot_id": case["snapshot_id"], "client_wall_ms": client_ms, "trace": trace})
                     answers.append({"case_id": case["id"], "snapshot_id": case["snapshot_id"], "answer": answer,
-                                    "provider_outputs": list(case_outputs)})
+                                    "provider_outputs": list(case_outputs),
+                                    "generation_context": case_context.get("value"),
+                                    "generation_context_sha256": case_context.get("sha256")})
                     persist()
                     print(json.dumps({"case_id": case["id"], "wall_s": round(client_ms / 1000, 2), "result_kind": trace["result_kind"], "fallback_reason": trace["fallback_reason"]}), flush=True)
                     # Do not spend the rest of the allowance repeating setup/provider
