@@ -99,6 +99,33 @@ def retrieval_question(question: str, history: list[Answer]) -> str:
     return question
 
 
+def scope_product_sources(workspace: Workspace, question: str, history: list[Answer],
+                          sources: list[EvidenceSource]) -> tuple[list[EvidenceSource], bool]:
+    """Keep product identity consistent across retrieval, excerpts, and generation."""
+    # A combination label describes a different product. When standalone
+    # labeling is available, do not let its warnings migrate to one ingredient
+    # in a broad answer. Historical records may lack structured substance data.
+    def combination_label(source: EvidenceSource) -> bool:
+        substances = source.metadata.get("substance_names", [])
+        return source.source_type == SourceType.fda_label and (
+            len(set(substances)) > 1 or bool(re.search(r"\bis a combination of\b", source.abstract[:1200], re.I)))
+    topic = (workspace.intervention or "").lower()
+    has_standalone_label = bool(topic) and any(
+        source.source_type == SourceType.fda_label and not combination_label(source)
+        and topic in source.title.lower() for source in sources)
+    question_context = " ".join([answer.question for answer in history[-3:]] + [question])
+    asks_combination = bool(re.search(r"\b(combination|combined|combinations|coadministration)\b", question_context, re.I))
+    combination_sources = [source for source in sources if combination_label(source)]
+    names = [re.sub(r"^FDA label:\s*", "", source.title, flags=re.I).strip()
+             for source in combination_sources]
+    names.extend(name for source in combination_sources for name in source.metadata.get("brand_names", []) if isinstance(name, str))
+    asks_named_product = any(name and re.search(r"\b" + re.escape(name) + r"\b", question_context, re.I) for name in names)
+    exclude_combinations = has_standalone_label and not (asks_combination or asks_named_product)
+    scoped_sources = [source for source in sources if not (exclude_combinations and combination_label(source))]
+    scope_reduced = len(scoped_sources) < len(sources)
+    return scoped_sources, scope_reduced
+
+
 def normalize_citations(text: str, allowed: set[str]) -> str:
     """Repair presentation only when every marker maps exactly to a supplied ID."""
     def replace(match: re.Match) -> str:
@@ -218,27 +245,7 @@ class ConversationService:
             fallback.generation_note = "No matching source content is available to synthesize."
             return fallback
         with phase("context_build"):
-            # A combination label describes a different product. When standalone
-            # labeling is available, do not let its warnings migrate to one ingredient
-            # in a broad answer. Historical records may lack structured substance data.
-            def combination_label(source: EvidenceSource) -> bool:
-                substances = source.metadata.get("substance_names", [])
-                return source.source_type == SourceType.fda_label and (
-                    len(set(substances)) > 1 or bool(re.search(r"\bis a combination of\b", source.abstract[:1200], re.I)))
-            topic = (workspace.intervention or "").lower()
-            has_standalone_label = bool(topic) and any(
-                source.source_type == SourceType.fda_label and not combination_label(source)
-                and topic in source.title.lower() for source in sources)
-            question_context = " ".join([answer.question for answer in history[-3:]] + [question])
-            asks_combination = bool(re.search(r"\b(combination|combined|combinations|coadministration)\b", question_context, re.I))
-            combination_sources = [source for source in sources if combination_label(source)]
-            names = [re.sub(r"^FDA label:\s*", "", source.title, flags=re.I).strip()
-                     for source in combination_sources]
-            names.extend(name for source in combination_sources for name in source.metadata.get("brand_names", []) if isinstance(name, str))
-            asks_named_product = any(name and re.search(r"\b" + re.escape(name) + r"\b", question_context, re.I) for name in names)
-            exclude_combinations = has_standalone_label and not (asks_combination or asks_named_product)
-            scoped_sources = [source for source in sources if not (exclude_combinations and combination_label(source))]
-            scope_reduced = len(scoped_sources) < len(sources)
+            scoped_sources, scope_reduced = scope_product_sources(workspace, question, history, sources)
             records = []
             selected_sources = scoped_sources[:8]
             per_source_budget = 28000 // len(selected_sources)

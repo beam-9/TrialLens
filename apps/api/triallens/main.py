@@ -7,7 +7,7 @@ from typing import Union
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from triallens.conversation import ConversationService, chat_configured, chat_provider, chat_model, retrieval_question
+from triallens.conversation import ConversationService, chat_configured, chat_provider, chat_model, retrieval_question, scope_product_sources
 from triallens.evals import static_eval_report
 from triallens.models import (
     Answer,
@@ -196,6 +196,7 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         sources = [source for source in sources if source.source_type in payload.source_types]
         extractions = [row for row in extractions if row.source_type in payload.source_types]
         chunks = [chunk for chunk in chunks if chunk.source_type in payload.source_types]
+    scope_reduced = False
     if payload.mode == "document":
         if not payload.source_id:
             raise HTTPException(status_code=400, detail="source_id is required for document mode")
@@ -209,6 +210,12 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         with phase("extractive_synthesis"):
             answer = answer_service.answer_document(workspace, source, query, document_chunks, retrieved, document_extractions)
     else:
+        sources, scope_reduced = scope_product_sources(workspace, payload.question, history, sources)
+        if scope_reduced:
+            # Build the fallback from the same product scope as model context.
+            scoped_ids = {source.id for source in sources}
+            chunks = [chunk for chunk in chunks if chunk.source_id in scoped_ids]
+            extractions = [row for row in extractions if row.source_id in scoped_ids]
         with phase("retrieval"):
             retrieved = retriever.retrieve_conversation(workspace, query, chunks, sources, payload.source_types)
         with phase("extractive_synthesis"):
@@ -223,6 +230,8 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         selected_sources = [source]
     annotate(retrieved_passage_count=len(retrieved))
     answer = conversation_service.generate(workspace, payload.question, history, selected_sources, answer)
+    if scope_reduced:
+        answer.generation_note += " Combination-product labels were excluded from this single-ingredient summary."
     try:
         with phase("store"):
             saved = store.save_answer(answer)

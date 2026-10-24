@@ -26,6 +26,56 @@ def call():
     return cf.completion([{"role": "user", "content": "Private question"}], {"type": "object", "properties": {"answer": {"type": "string"}}})
 
 
+@pytest.mark.parametrize("duplicate", [None, {"answer": "Supported [S1]"}, '{ "answer": "Supported [S1]" }'])
+def test_completed_chat_choice_returns_only_final_json_and_settles_usage(monkeypatch, duplicate):
+    final = '{"answer":"Supported [S1]"}'
+    result = {"choices": [{"index": 0, "finish_reason": "stop", "message": {
+        "role": "assistant", "content": final, "reasoning_content": "Do not expose or log this field"}}],
+        "usage": {"prompt_tokens": 100, "completion_tokens": 20}}
+    if duplicate is not None:
+        result["response"] = duplicate
+    monkeypatch.setattr(cf.httpx, "post", lambda *a, **k: response(result))
+    assert call() == final
+    assert cf.quota_status()["pending_requests"] == 0
+
+
+@pytest.mark.parametrize("choice", [
+    {"index": 0, "finish_reason": "length", "message": {"role": "assistant", "content": '{"answer":"partial"}'}},
+    {"index": 0, "finish_reason": "stop", "message": {"role": "assistant", "content": None, "reasoning_content": "No final"}},
+    {"index": 0, "finish_reason": "stop", "message": {"role": "tool", "content": '{"answer":"not assistant"}'}},
+    {"index": 0, "finish_reason": "stop", "message": {"role": "assistant", "content": '{}', "refusal": "declined"}},
+    {"index": 0, "finish_reason": "stop", "message": {"role": "assistant", "content": '{}', "tool_calls": [{"id": "call"}]}},
+    {"index": 1, "finish_reason": "stop", "message": {"role": "assistant", "content": '{}'}},
+    {"index": False, "finish_reason": "stop", "message": {"role": "assistant", "content": '{}'}},
+])
+def test_chat_choice_rejects_incomplete_nonfinal_and_refused_outputs(monkeypatch, choice):
+    monkeypatch.setattr(cf.httpx, "post", lambda *a, **k: response({"choices": [choice], "usage": {"prompt_tokens": 100, "completion_tokens": 20}}))
+    with pytest.raises(cf.CloudflareUnavailable, match="invalidresponse"):
+        call()
+    assert cf.quota_status()["pending_requests"] == 1
+
+
+def test_chat_choice_rejects_ambiguous_multiple_outputs(monkeypatch):
+    choice = {"index": 0, "finish_reason": "stop", "message": {"role": "assistant", "content": '{}'}}
+    for result in ({"choices": [choice, choice]}, {"choices": [choice], "response": '{"different":true}'}):
+        monkeypatch.setattr(cf.httpx, "post", lambda *a, **k: response(result))
+        with pytest.raises(cf.CloudflareUnavailable, match="invalidresponse"):
+            call()
+
+
+def test_glm_conversation_profile_uses_named_schema_and_disables_reasoning(monkeypatch):
+    monkeypatch.setattr(cf, "MODEL", "@cf/zai-org/glm-4.7-flash")
+    def post(url, **kwargs):
+        assert kwargs["json"]["chat_template_kwargs"] == {"enable_thinking": False}
+        envelope = kwargs["json"]["response_format"]["json_schema"]
+        assert envelope["name"] == "triallens_answer" and envelope["strict"] is True
+        assert envelope["schema"]["type"] == "object"
+        assert kwargs["json"]["max_tokens"] == cf.MAX_OUTPUT_TOKENS
+        return response()
+    monkeypatch.setattr(cf.httpx, "post", post)
+    assert json.loads(call())["answer"] == "Supported [S1]"
+
+
 @pytest.mark.parametrize("answer", ['{"answer":"Supported [S1]"}', {"answer": "Supported [S1]"}])
 def test_success_payload_usage_and_no_content_in_ledger(monkeypatch, answer):
     captured = {}

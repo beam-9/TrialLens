@@ -101,12 +101,45 @@ def _reject_constant(value):
     raise ValueError("Non-finite JSON constant")
 
 
+def response_content(result: dict):
+    """Read only completed assistant output; never expose reasoning/tool fields."""
+    if "choices" not in result:
+        return result.get("response")
+    choices = result["choices"]
+    if not isinstance(choices, list) or len(choices) != 1:
+        raise ValueError("Ambiguous provider output")
+    choice = choices[0]
+    if (not isinstance(choice, dict) or choice.get("finish_reason") != "stop"
+            or type(choice.get("index")) is not int or choice["index"] != 0):
+        raise ValueError("Incomplete provider choice")
+    message = choice.get("message")
+    if (not isinstance(message, dict) or message.get("role") != "assistant"
+            or message.get("tool_calls") or message.get("function_call") or message.get("refusal")
+            or not isinstance(message.get("content"), str) or not message["content"].strip()):
+        raise ValueError("Not a final assistant answer")
+    # Some Cloudflare models return both a parsed response and its original
+    # chat-completion envelope. Accept redundant output only when the JSON is
+    # identical; conflicting answers remain an error.
+    legacy = result.get("response")
+    if legacy is not None:
+        primary = json.loads(message["content"], parse_constant=_reject_constant)
+        duplicate = json.loads(legacy, parse_constant=_reject_constant) if isinstance(legacy, str) else legacy
+        if not isinstance(primary, dict) or not isinstance(duplicate, dict) or primary != duplicate:
+            raise ValueError("Conflicting provider output")
+    return message["content"]
+
+
 def completion(messages: list[dict], schema: dict) -> str:
     if not configured():
         raise CloudflareUnavailable("auth")
     payload = {"messages": messages, "stream": False, "temperature": 0,
                "max_tokens": MAX_OUTPUT_TOKENS,
                "response_format": {"type": "json_schema", "json_schema": schema}}
+    if MODEL == "@cf/zai-org/glm-4.7-flash":
+        payload["response_format"]["json_schema"] = {"name": "triallens_answer", "strict": True, "schema": schema}
+        # Cloudflare's documented chat-template option keeps this conversational
+        # profile within its final-answer budget instead of emitting reasoning.
+        payload["chat_template_kwargs"] = {"enable_thinking": False}
     identifier = _reserve(payload)
     url = "https://api.cloudflare.com/client/v4/accounts/" + os.environ["CLOUDFLARE_ACCOUNT_ID"] + "/ai/run/" + MODEL
     try:
@@ -132,7 +165,7 @@ def completion(messages: list[dict], schema: dict) -> str:
         usage = result.get("usage")
         if isinstance(usage, dict) and type(usage.get("completion_tokens")) is int and usage["completion_tokens"] >= MAX_OUTPUT_TOKENS:
             raise ValueError()
-        answer = result.get("response")
+        answer = response_content(result)
         if isinstance(answer, dict):
             text = json.dumps(answer, ensure_ascii=False, allow_nan=False)
         elif isinstance(answer, str) and answer.strip():
