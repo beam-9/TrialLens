@@ -1,0 +1,730 @@
+[
+  {
+    "case_id": "real-broad",
+    "snapshot_id": "real-metformin",
+    "answer": {
+      "id": "a4d66719-f620-4234-afc1-c9f46796fd21",
+      "workspace_id": "m0-real-metformin",
+      "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+      "saved_to_brief": false,
+      "short_answer": "Metformin is used to improve blood sugar control in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nIn clinical trials, common side effects of metformin included diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nThe sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients, although one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health [ClinicalTrials.gov:NCT05689684].",
+      "direct_answer": "Metformin is used to improve blood sugar control in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nIn clinical trials, common side effects of metformin included diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nThe sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients, although one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health [ClinicalTrials.gov:NCT05689684].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 6 source records; the final answer uses 3 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT05689684 \u00b7 Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-3 \u00b7 FDA label: Metformin hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 PubMed:42377443 \u00b7 Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 PubMed:42374733 \u00b7 Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT00546325 \u00b7 REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "6 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "3 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The effect of metformin on gut health in type 2 diabetes patients is not established in the provided sources."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The effect of metformin on gut health in type 2 diabetes patients is not established in the provided sources.",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-3",
+        "openFDA label:FDA-LABEL-metformin-2",
+        "ClinicalTrials.gov:NCT05689684"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-real-chunk-008",
+          "source_id": "m0-real-source-06",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "text": "a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting",
+          "score": 0.6675,
+          "section": "chunk 2",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "url": "https://clinicaltrials.gov/study/NCT05689684",
+          "external_id": "NCT05689684",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "NA",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "these",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, these, type in a trial record."
+        },
+        {
+          "chunk_id": "m0-real-chunk-021",
+          "source_id": "m0-real-source-01",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "text": "trials of another drug and may not reflect the rates observed in practice. In placebo-controlled trials, 781 patients were administered metformin hydrochloride extended-release tablets. Adverse reactions reported in greater than 5% of the patients treated with metformin hydrochloride extended-release tablets and that were more common than in placebo-treated patients are listed in Table 1. Table 1: Adverse Reactions from Clinical Trials of Metformin Hydrochloride Extended-Release Tablets Occurring > 5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Adverse Reaction Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10%",
+          "score": 0.802,
+          "section": "chunk 3",
+          "title": "FDA label: Metformin hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-3",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-073",
+          "source_id": "m0-real-source-02",
+          "source_type": "pubmed",
+          "citation": "PubMed:42377443",
+          "text": "Intensive lifestyle change intervention (LCI) programs and metformin are recommended to prevent the progression of prediabetes to type 2 diabetes. While social drivers of health are known to influence access to preventive health care the impact of neighborhood socioeconomic disadvantage on the uptake of diabetes prevention interventions remains underexplored. Examine the relationship between the social deprivation index and the use of diabetes prevention interventions among people with prediabetes. We analyzed commercial and Medicaid claims data from the Maryland Medical Care Data Base (2017-2019) to identify claims for LCIs and metformin prescriptions and",
+          "score": 0.5779,
+          "section": "chunk 1",
+          "title": "Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42377443/",
+          "external_id": "42377443",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-019",
+          "source_id": "m0-real-source-07",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5%",
+          "score": 0.7932,
+          "section": "chunk 3",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-039",
+          "source_id": "m0-real-source-13",
+          "source_type": "pubmed",
+          "citation": "PubMed:42374733",
+          "text": "noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in",
+          "score": 0.5646,
+          "section": "chunk 2",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42374733/",
+          "external_id": "42374733",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-040",
+          "source_id": "m0-real-source-12",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00546325",
+          "text": "Primary: To assess the effects of rimonabant on HbA1c in patients with Type 2 diabetes who are overweight or obese (Body Mass Index (BMI) \\> 27 kg/m\u00b2 and BMI \\< 40 kg/m\u00b2), have uncontrolled HbA1c (7.0% - 9.0% inclusive) and are currently on maximal tolerated doses of two Oral Anti Diabetic medications - Metformin (Met) and Sulfonylurea (SU). Secondary: To assess the effects of rimonabant on Anthropometric measures, Glucose measures, Lipid measures, Other measures and changes in quality of life",
+          "score": 0.5468,
+          "section": "chunk 1",
+          "title": "REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents",
+          "url": "https://clinicaltrials.gov/study/NCT00546325",
+          "external_id": "NCT00546325",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a trial record."
+        },
+        {
+          "chunk_id": "m0-real-chunk-006",
+          "source_id": "m0-real-source-07",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning",
+          "score": 0.5433,
+          "section": "chunk 1",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-10-24T20:28:00.138231+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": {
+          "paragraphs": [
+            "The sources describe metformin as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "Common adverse reactions to metformin include diarrhea, nausea/vomiting, abdominal pain, and flatulence [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "The evidence does not establish the benefits of metformin in improving gut health or its potential to slow down clonal expansion of clonal hematopoiesis, although preclinical studies suggest this possibility [PubMed:42374733, ClinicalTrials.gov:NCT05689684]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-3",
+            "openFDA label:FDA-LABEL-metformin-2",
+            "PubMed:42374733",
+            "ClinicalTrials.gov:NCT05689684"
+          ],
+          "uncertainty": [
+            "The sources do not provide direct evidence of metformin's effect on gut health in type 2 diabetes patients.",
+            "The relationship between metformin and clonal hematopoiesis in type 2 diabetes patients is not fully understood and requires further research.",
+            "The clinical trials data on metformin's efficacy and safety in type 2 diabetes patients may not reflect real-world outcomes due to varying conditions and populations."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 5066,
+          "completion_tokens": 319,
+          "total_tokens": 5385,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 200.4313201904297
+        },
+        "generation_context_sha256": "a615f8cdab60ccf49d2de54a4d5207ab75a966d72a4b01ae0c307d616abbcf51"
+      },
+      {
+        "response": {
+          "paragraphs": [
+            "Metformin is used to improve blood sugar control in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "In clinical trials, common side effects of metformin included diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "The sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients, although one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health [ClinicalTrials.gov:NCT05689684]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-3",
+            "openFDA label:FDA-LABEL-metformin-2",
+            "ClinicalTrials.gov:NCT05689684"
+          ],
+          "uncertainty": [
+            "The effect of metformin on gut health in type 2 diabetes patients is not established in the provided sources."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 5696,
+          "completion_tokens": 251,
+          "total_tokens": 5947,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 203.30519104003906
+        },
+        "generation_context_sha256": "a615f8cdab60ccf49d2de54a4d5207ab75a966d72a4b01ae0c307d616abbcf51"
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "source_type": "clinical_trials",
+          "status": "COMPLETED",
+          "phase": "NA",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "The project aims to achieve significantly improved clinical care for type 2 diabetes. The current standard treatment metformin has low adherence due to its main side effect gut dysbiosis, which also results in more complications and high overall costs. Prebiotics have been suggested as a medical food and might be helpful as adjuvant management in type 2 diabetes and other metabolic diseases. Carbiotix AB has developed, a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting although numerous studies support its role in disease development. There is an urgent need to improve existing treatments with metformin to improve adherence to drug therapy and the management of the disease. Prebiotics are dietary fibers that stimulate the growth and activity of beneficial gut microbiota. Prebiotics has been suggested as a medical food and might be very useful as an effective adjuvant approach in the management of T2D and other metabolic diseases. Carbiotix AB, a biotech company based in Lund, has developed a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, a clinical trial will be performed to investigate whether the corn fiber extract can significantly increase metformin adherence with improved gut health and glucose metabolism in patients with T2D. To maximize the potential efficacy of the intervention, a \"Hybrid Product\" containing arabinogalactan (AG), xylan-oligosaccharides (XOS), and AXOS will be used, building on the XOS and AXOS naturally present in the corn fiber extract. One hundred subjects with T2D and treated with metformin will be recruited for this blind parallel randomized controlled intervention study. After a screening visit, the subjects will be randomized to test the Hybrid Product or placebo (maltodextrin) group. The duration of the intervention is 4 months, and the study subjects will be asked to consume the Hybrid Product or placebo daily (2x 5g). At the start, of week 8 and week 16, the study subjects will visit the study center for the measurement of body weight, waist circumference, and blood pressure. At these 3 visits, fasting blood samples are taken for analysis of glucose and insulin metabolism, blood lipids, and inflammation markers. Fecal samples are also collected to investigate the effect of the Hybrid Product on microbiota composition. At regular times during the study, the subjects must do a 7-point blood glucose monitoring and fill in questionnaires about gastrointestinal symptoms. During the whole study period, all subjects are contacted regularly to follow up on their health status. If the Hybrid Product shows the strong potential to improve adherence to metformin treatment, this will lead to improving diabetes care with reduced economic consequences. The promotion of a healthy gut by consumption of soluble fibers also helps to support immune function, blood sugar regulation, increased nutrient uptake (e.g. vitamin B12), and better body weight control. These health benefits will undoubtedly result in better well-being in private and working life and thus in a significantly improved quality of life for patients with T2D. Furthermore, effective treatment of T2D will also reduce the prevalence of cardiovascular risk factors, which are key targets in the current public health debate.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "title": "FDA label: Metformin hydrochloride",
+          "source_type": "fda_label",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions ( 5.1 ) ] Vitamin B 12 Deficiency [ see Warnings and Precautions ( 5.2 ) ] Hypoglycemia [ see Warnings and Precautions ( 5.3 ) ] Common adverse reactions are diarrhea, nausea/vomiting, abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Ajanta Pharma USA Inc. at 855-664-7744 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. In placebo-controlled trials, 781 patients were administered metformin hydrochloride extended-release tablets. Adverse reactions reported in greater than 5% of the patients treated with metformin hydrochloride extended-release tablets and that were more common than in placebo-treated patients are listed in Table 1. Table 1: Adverse Reactions from Clinical Trials of Metformin Hydrochloride Extended-Release Tablets Occurring > 5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Adverse Reaction Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10% 3% Nausea/Vomiting 7% 2% Diarrhea led to the discontinuation of metformin hydrochloride extended-release tablets in 0.6% of patients. Additionally, the following adverse reactions were reported in 1.0% to 5.0% of patients treated with metformin hydrochloride extended-release tablets and were more commonly reported than in placebo-treated patients: abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. Laboratory Tests Vitamin B 12 Concentrations In clinical trials of 29-week duration with metformin HCl tablets, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 2 presents clinically significant drug interactions with metformin hydrochloride extended-release tablets. Table 2: Clinically Significant Drug Interactions with Metformin hydrochloride extended-release tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride extended-release tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce Metformin hydrochloride extended-release tablets Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems invol",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42377443",
+          "title": "Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions.",
+          "source_type": "pubmed",
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "Intensive lifestyle change intervention (LCI) programs and metformin are recommended to prevent the progression of prediabetes to type 2 diabetes. While social drivers of health are known to influence access to preventive health care the impact of neighborhood socioeconomic disadvantage on the uptake of diabetes prevention interventions remains underexplored. Examine the relationship between the social deprivation index and the use of diabetes prevention interventions among people with prediabetes. We analyzed commercial and Medicaid claims data from the Maryland Medical Care Data Base (2017-2019) to identify claims for LCIs and metformin prescriptions and Social Deprivation Index (SDI) 2015 data to measure enrollees' neighborhood socioeconomic disadvantage and examine associations between one or more diabetes prevention interventions. An adjusted multinomial logistic regression model estimating relative risk ratios was used to compare the relationship between SDI quintiles and use of LCI only, LCI and metformin, and metformin only (reference). Among enrollees who used any intervention those living in neighborhoods with SDI scores in the fifth quintile had a significantly higher relative risk (RRR: 1.49; 95% CI: 1.12-1.99) of using LCI only versus metformin only compared with those living in neighborhoods with SDI scores in the first quintile. Enrollees with prediabetes living in neighborhoods with higher levels of socioeconomic disadvantage were more likely to use LCI and more likely to use LCI only compared with metformin only as a diabetes prevention intervention. These findings are relevant for states targeting diabetes prevention in communities of high need.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug in",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42374733",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "source_type": "pubmed",
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "Clonal hematopoiesis (CH) refers to an expanded clonal hematopoietic cell population due to acquired mutations conferring a selective growth advantage. Once considered a premalignant hematological state, CH has now been causally associated with cardiovascular diseases (CVDs) and several aging-related clinical conditions. Emerging evidence suggests that CH is at the intersection of aging and metabolic disorders. CH carriers exhibit a higher risk of Type 2 diabetes, potentially through the obesity-inflammation-insulin resistance axis. Moreover, CH confers a higher risk of CVD and is associated with a poorer prognosis in patients with diabetes compared to noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in future work.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT00546325",
+          "title": "REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents",
+          "source_type": "clinical_trials",
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "Primary: To assess the effects of rimonabant on HbA1c in patients with Type 2 diabetes who are overweight or obese (Body Mass Index (BMI) \\> 27 kg/m\u00b2 and BMI \\< 40 kg/m\u00b2), have uncontrolled HbA1c (7.0% - 9.0% inclusive) and are currently on maximal tolerated doses of two Oral Anti Diabetic medications - Metformin (Met) and Sulfonylurea (SU). Secondary: To assess the effects of rimonabant on Anthropometric measures, Glucose measures, Lipid measures, Other measures and changes in quality of life",
+          "matched_passages": []
+        }
+      ],
+      "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?"
+    },
+    "generation_context_sha256": "a615f8cdab60ccf49d2de54a4d5207ab75a966d72a4b01ae0c307d616abbcf51"
+  },
+  {
+    "case_id": "real-simplify",
+    "snapshot_id": "real-metformin",
+    "answer": {
+      "id": "f1fb1354-9a23-4284-94be-1cf466dd4c5a",
+      "workspace_id": "m0-real-metformin",
+      "question": "Can you explain that more simply, in everyday language?",
+      "previous_answer_id": "a4d66719-f620-4234-afc1-c9f46796fd21",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+      "saved_to_brief": false,
+      "short_answer": "Metformin is used to help control blood sugar levels in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nIn clinical trials, metformin has been compared to a placebo, with common side effects including diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. For example, in one trial, 53% of patients taking metformin hydrochloride tablets experienced diarrhea, compared to 12% of patients taking a placebo [openFDA label:FDA-LABEL-metformin-2].\n\nSome research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in patients with type 2 diabetes, although this is based on a limited study [ClinicalTrials.gov:NCT05689684].",
+      "direct_answer": "Metformin is used to help control blood sugar levels in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nIn clinical trials, metformin has been compared to a placebo, with common side effects including diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. For example, in one trial, 53% of patients taking metformin hydrochloride tablets experienced diarrhea, compared to 12% of patients taking a placebo [openFDA label:FDA-LABEL-metformin-2].\n\nSome research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in patients with type 2 diabetes, although this is based on a limited study [ClinicalTrials.gov:NCT05689684].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 6 source records; the final answer uses 3 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CONTEXT ONLY \u00b7 PubMed:42374733 \u00b7 Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-3 \u00b7 FDA label: Metformin hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT05689684 \u00b7 Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT00546325 \u00b7 REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT01664247 \u00b7 The Effect of Insulin Degludec in Combination With Liraglutide and Metformin in Subjects With Type 2 Diabetes Qualifying for Treatment Intensification \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "6 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "3 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The evidence for the potential benefits of adding prebiotics to metformin is limited to a single study."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The evidence for the potential benefits of adding prebiotics to metformin is limited to a single study.",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-3",
+        "openFDA label:FDA-LABEL-metformin-2",
+        "ClinicalTrials.gov:NCT05689684"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-real-chunk-039",
+          "source_id": "m0-real-source-13",
+          "source_type": "pubmed",
+          "citation": "PubMed:42374733",
+          "text": "noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in",
+          "score": 0.5154,
+          "section": "chunk 2",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42374733/",
+          "external_id": "42374733",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, that, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-021",
+          "source_id": "m0-real-source-01",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "text": "trials of another drug and may not reflect the rates observed in practice. In placebo-controlled trials, 781 patients were administered metformin hydrochloride extended-release tablets. Adverse reactions reported in greater than 5% of the patients treated with metformin hydrochloride extended-release tablets and that were more common than in placebo-treated patients are listed in Table 1. Table 1: Adverse Reactions from Clinical Trials of Metformin Hydrochloride Extended-Release Tablets Occurring > 5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Adverse Reaction Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10%",
+          "score": 0.8137,
+          "section": "chunk 3",
+          "title": "FDA label: Metformin hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-3",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, that, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-008",
+          "source_id": "m0-real-source-06",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "text": "a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting",
+          "score": 0.5147,
+          "section": "chunk 2",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "url": "https://clinicaltrials.gov/study/NCT05689684",
+          "external_id": "NCT05689684",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "NA",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "these",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, these, type in a trial record."
+        },
+        {
+          "chunk_id": "m0-real-chunk-019",
+          "source_id": "m0-real-source-07",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5%",
+          "score": 0.7935,
+          "section": "chunk 3",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, that, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-040",
+          "source_id": "m0-real-source-12",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00546325",
+          "text": "Primary: To assess the effects of rimonabant on HbA1c in patients with Type 2 diabetes who are overweight or obese (Body Mass Index (BMI) \\> 27 kg/m\u00b2 and BMI \\< 40 kg/m\u00b2), have uncontrolled HbA1c (7.0% - 9.0% inclusive) and are currently on maximal tolerated doses of two Oral Anti Diabetic medications - Metformin (Met) and Sulfonylurea (SU). Secondary: To assess the effects of rimonabant on Anthropometric measures, Glucose measures, Lipid measures, Other measures and changes in quality of life",
+          "score": 0.5827,
+          "section": "chunk 1",
+          "title": "REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents",
+          "url": "https://clinicaltrials.gov/study/NCT00546325",
+          "external_id": "NCT00546325",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a trial record."
+        },
+        {
+          "chunk_id": "m0-real-chunk-035",
+          "source_id": "m0-real-source-14",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT01664247",
+          "text": "This trial is conducted in Africa, Asia, Europe and North America. The purpose of the trial is to investigate the effect of insulin degludec (IDeg) in combination with liraglutide (Lira) and metformin (at least 1500 mg daily or maximum tolerated dose) in subjects with type 2 diabetes qualifying for treatment intensification.",
+          "score": 0.464,
+          "section": "chunk 1",
+          "title": "The Effect of Insulin Degludec in Combination With Liraglutide and Metformin in Subjects With Type 2 Diabetes Qualifying for Treatment Intensification",
+          "url": "https://clinicaltrials.gov/study/NCT01664247",
+          "external_id": "NCT01664247",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a trial record."
+        }
+      ],
+      "created_at": "2026-10-24T20:28:18.943348+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": {
+          "paragraphs": [
+            "Metformin is a medication used to help control blood sugar levels in people with type 2 diabetes. It's often prescribed along with a healthy diet and regular exercise. Common side effects of metformin include diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+            "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in people with type 2 diabetes [ClinicalTrials.gov:NCT05689684]. However, more research is needed to fully understand the potential benefits and limitations of this approach.",
+            "It's also important to note that metformin can have other effects on the body, such as decreasing vitamin B12 levels in some people [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-3",
+            "openFDA label:FDA-LABEL-metformin-2",
+            "ClinicalTrials.gov:NCT05689684"
+          ],
+          "uncertainty": [
+            "The sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients.",
+            "The evidence for the potential benefits of adding prebiotics to metformin is limited and more research is needed.",
+            "The long-term effects of metformin on vitamin B12 levels and other aspects of health are not fully understood."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 5175,
+          "completion_tokens": 328,
+          "total_tokens": 5503,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 205.18133544921875
+        },
+        "generation_context_sha256": "af958d873a837ca6e84b1f9f15bbe841d937d2ae43258a892e1225564cb21253"
+      },
+      {
+        "response": {
+          "paragraphs": [
+            "Metformin is used to help control blood sugar levels in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+            "In clinical trials, metformin has been compared to a placebo, with common side effects including diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. For example, in one trial, 53% of patients taking metformin hydrochloride tablets experienced diarrhea, compared to 12% of patients taking a placebo [openFDA label:FDA-LABEL-metformin-2].",
+            "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in patients with type 2 diabetes, although this is based on a limited study [ClinicalTrials.gov:NCT05689684]."
+          ],
+          "cited_sources": [
+            "openFDA label:FDA-LABEL-metformin-3",
+            "openFDA label:FDA-LABEL-metformin-2",
+            "ClinicalTrials.gov:NCT05689684"
+          ],
+          "uncertainty": [
+            "The evidence for the potential benefits of adding prebiotics to metformin is limited to a single study."
+          ]
+        },
+        "usage": {
+          "prompt_tokens": 5803,
+          "completion_tokens": 300,
+          "total_tokens": 6103,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 216.194091796875
+        },
+        "generation_context_sha256": "af958d873a837ca6e84b1f9f15bbe841d937d2ae43258a892e1225564cb21253"
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [
+        {
+          "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+          "answer": "Metformin is used to improve blood sugar control in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nIn clinical trials, common side effects of metformin included diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].\n\nThe sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients, although one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health [ClinicalTrials.gov:NCT05689684]."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "PubMed:42374733",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "source_type": "pubmed",
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "Clonal hematopoiesis (CH) refers to an expanded clonal hematopoietic cell population due to acquired mutations conferring a selective growth advantage. Once considered a premalignant hematological state, CH has now been causally associated with cardiovascular diseases (CVDs) and several aging-related clinical conditions. Emerging evidence suggests that CH is at the intersection of aging and metabolic disorders. CH carriers exhibit a higher risk of Type 2 diabetes, potentially through the obesity-inflammation-insulin resistance axis. Moreover, CH confers a higher risk of CVD and is associated with a poorer prognosis in patients with diabetes compared to noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in future work.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "title": "FDA label: Metformin hydrochloride",
+          "source_type": "fda_label",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions ( 5.1 ) ] Vitamin B 12 Deficiency [ see Warnings and Precautions ( 5.2 ) ] Hypoglycemia [ see Warnings and Precautions ( 5.3 ) ] Common adverse reactions are diarrhea, nausea/vomiting, abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Ajanta Pharma USA Inc. at 855-664-7744 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. In placebo-controlled trials, 781 patients were administered metformin hydrochloride extended-release tablets. Adverse reactions reported in greater than 5% of the patients treated with metformin hydrochloride extended-release tablets and that were more common than in placebo-treated patients are listed in Table 1. Table 1: Adverse Reactions from Clinical Trials of Metformin Hydrochloride Extended-Release Tablets Occurring > 5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Adverse Reaction Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10% 3% Nausea/Vomiting 7% 2% Diarrhea led to the discontinuation of metformin hydrochloride extended-release tablets in 0.6% of patients. Additionally, the following adverse reactions were reported in 1.0% to 5.0% of patients treated with metformin hydrochloride extended-release tablets and were more commonly reported than in placebo-treated patients: abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. Laboratory Tests Vitamin B 12 Concentrations In clinical trials of 29-week duration with metformin HCl tablets, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 2 presents clinically significant drug interactions with metformin hydrochloride extended-release tablets. Table 2: Clinically Significant Drug Interactions with Metformin hydrochloride extended-release tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride extended-release tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce Metformin hydrochloride extended-release tablets Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems invol",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "source_type": "clinical_trials",
+          "status": "COMPLETED",
+          "phase": "NA",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "The project aims to achieve significantly improved clinical care for type 2 diabetes. The current standard treatment metformin has low adherence due to its main side effect gut dysbiosis, which also results in more complications and high overall costs. Prebiotics have been suggested as a medical food and might be helpful as adjuvant management in type 2 diabetes and other metabolic diseases. Carbiotix AB has developed, a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting although numerous studies support its role in disease development. There is an urgent need to improve existing treatments with metformin to improve adherence to drug therapy and the management of the disease. Prebiotics are dietary fibers that stimulate the growth and activity of beneficial gut microbiota. Prebiotics has been suggested as a medical food and might be very useful as an effective adjuvant approach in the management of T2D and other metabolic diseases. Carbiotix AB, a biotech company based in Lund, has developed a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, a clinical trial will be performed to investigate whether the corn fiber extract can significantly increase metformin adherence with improved gut health and glucose metabolism in patients with T2D. To maximize the potential efficacy of the intervention, a \"Hybrid Product\" containing arabinogalactan (AG), xylan-oligosaccharides (XOS), and AXOS will be used, building on the XOS and AXOS naturally present in the corn fiber extract. One hundred subjects with T2D and treated with metformin will be recruited for this blind parallel randomized controlled intervention study. After a screening visit, the subjects will be randomized to test the Hybrid Product or placebo (maltodextrin) group. The duration of the intervention is 4 months, and the study subjects will be asked to consume the Hybrid Product or placebo daily (2x 5g). At the start, of week 8 and week 16, the study subjects will visit the study center for the measurement of body weight, waist circumference, and blood pressure. At these 3 visits, fasting blood samples are taken for analysis of glucose and insulin metabolism, blood lipids, and inflammation markers. Fecal samples are also collected to investigate the effect of the Hybrid Product on microbiota composition. At regular times during the study, the subjects must do a 7-point blood glucose monitoring and fill in questionnaires about gastrointestinal symptoms. During the whole study period, all subjects are contacted regularly to follow up on their health status. If the Hybrid Product shows the strong potential to improve adherence to metformin treatment, this will lead to improving diabetes care with reduced economic consequences. The promotion of a healthy gut by consumption of soluble fibers also helps to support immune function, blood sugar regulation, increased nutrient uptake (e.g. vitamin B12), and better body weight control. These health benefits will undoubtedly result in better well-being in private and working life and thus in a significantly improved quality of life for patients with T2D. Furthermore, effective treatment of T2D will also reduce the prevalence of cardiovascular risk factors, which are key targets in the current public health debate.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT00546325",
+          "title": "REASSURE: The Effect of Rimonabant on HbA1c in Overweight or Obese Patients With Type 2 Diabetes Not Adequately Controlled on 2 Oral Antidiabetic Agents",
+          "source_type": "clinical_trials",
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "Primary: To assess the effects of rimonabant on HbA1c in patients with Type 2 diabetes who are overweight or obese (Body Mass Index (BMI) \\> 27 kg/m\u00b2 and BMI \\< 40 kg/m\u00b2), have uncontrolled HbA1c (7.0% - 9.0% inclusive) and are currently on maximal tolerated doses of two Oral Anti Diabetic medications - Metformin (Met) and Sulfonylurea (SU). Secondary: To assess the effects of rimonabant on Anthropometric measures, Glucose measures, Lipid measures, Other measures and changes in quality of life",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT01664247",
+          "title": "The Effect of Insulin Degludec in Combination With Liraglutide and Metformin in Subjects With Type 2 Diabetes Qualifying for Treatment Intensification",
+          "source_type": "clinical_trials",
+          "status": "COMPLETED",
+          "phase": "PHASE3",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "content_truncated": false,
+          "demo": false,
+          "text": "This trial is conducted in Africa, Asia, Europe and North America. The purpose of the trial is to investigate the effect of insulin degludec (IDeg) in combination with liraglutide (Lira) and metformin (at least 1500 mg daily or maximum tolerated dose) in subjects with type 2 diabetes qualifying for treatment intensification.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Can you explain that more simply, in everyday language?"
+    },
+    "generation_context_sha256": "af958d873a837ca6e84b1f9f15bbe841d937d2ae43258a892e1225564cb21253"
+  }
+]

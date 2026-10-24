@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "686e5dc82812182b24168357d8ddc930ec9bede8157a6fbd219ed0061de70f39",
+  "code_sha256": "ede227c09903f82e9341f35f8ba3e4a33ba50ed49f79be873072b9c137bde721",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 82599.015291,
+      "trace": {
+        "trace_id": "0af9728f-bde1-42e2-a047-438f00a074f3",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 7,
+        "retrieved_passage_count": 8,
+        "context_char_count": 14800,
+        "phases_ms": {
+          "storage_read": 5.248292,
+          "retrieval": 11.775542,
+          "extractive_synthesis": 13.587375,
+          "context_build": 0.38575000000000004,
+          "draft": 82533.252208,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 24.846541
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 23717,
+            "message_count": 2,
+            "serialized_messages_char_count": 24130,
+            "wall_ms": 82533.252208,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 82595.67725,
+        "serialization_ms": 1.419417
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7732.659413,
+    "remaining_neurons": 1267.340587,
+    "pending_requests": 4,
+    "requests": 37
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true
+}

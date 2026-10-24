@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "purpose": "Independent conversational holdouts; same frozen evidence and support rubric; not clinical validation",
+  "cases": [
+    {
+      "id": "holdout-endpoint-baseline",
+      "snapshot_id": "numerical",
+      "question": "I'm trying to picture what happened over the study: did A bring people's HbA1c down, or did it just finish lower than placebo?",
+      "history_case_id": null,
+      "source_types": null,
+      "must_include": [
+        "Endpoint versus baseline; adults/placebo/12 weeks/0.5 percentage points; synthetic evidence"
+      ],
+      "must_not_claim": [
+        "Do not invent a rise/fall from baseline or placebo worsening"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "holdout-regimen-risk",
+      "snapshot_id": "combination-full",
+      "question": "Why does the ZITUVIMET label give different low-blood-sugar percentages in different places? Is there one overall risk number I should take away?",
+      "history_case_id": null,
+      "source_types": null,
+      "must_include": [
+        "Different background regimens and controls; no pooled risk; preserve24 weeks for insulin/glimepiride add-on"
+      ],
+      "must_not_claim": [
+        "Do not average independent trials or assign combination rates to monotherapy"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "holdout-plain-benefit-risk",
+      "snapshot_id": "standalone-label",
+      "question": "Give me a short explanation for someone who doesn't know medical terms: what is metformin meant to help with, who is it for, and what's the main downside in this label?",
+      "history_case_id": null,
+      "source_types": null,
+      "must_include": [
+        "Type2 diabetes; adults and children10+; diet/exercise; digestive risks; indication does not quantify benefit"
+      ],
+      "must_not_claim": [
+        "No fabricated effect size; no all-child eligibility; ifB12 statistic retain7% and29 weeks"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "holdout-durability-evidence-gap",
+      "snapshot_id": "add-on-control",
+      "question": "If the blood-sugar result looks promising, what can we actually say about whether the benefit lasts a year or helps people live longer?",
+      "history_case_id": null,
+      "source_types": null,
+      "must_include": [
+        "Synthetic add-on-to-metformin24-week evidence; mortality not measured; beyond24weeks not established"
+      ],
+      "must_not_claim": [
+        "No no-effect conclusion; no monotherapy or claimlong-term outcomesdefinitelyunmeasured; no unrelatedsafetypadding"
+      ],
+      "expected_route": "generated"
+    }
+  ]
+}

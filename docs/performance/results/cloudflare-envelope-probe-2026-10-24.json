@@ -1,0 +1,31 @@
+{
+  "purpose": "Provider envelope compatibility only; not answer-quality evidence",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "max_output_tokens": 64,
+  "success": true,
+  "observed": {
+    "has_response": true,
+    "has_choices": true,
+    "finish_reasons": [
+      "stop"
+    ],
+    "usage": {
+      "prompt_tokens": 46,
+      "completion_tokens": 6,
+      "total_tokens": 52,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "neurons": 2.455544948577881
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8597.036715,
+    "remaining_neurons": 402.963285,
+    "pending_requests": 5,
+    "requests": 43
+  },
+  "paid_provider_fallbacks": 0,
+  "local_model_calls": 0
+}

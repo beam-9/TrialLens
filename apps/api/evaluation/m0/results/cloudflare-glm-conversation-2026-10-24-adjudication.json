@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "review_kind": "Independent passage-backed engineering review; not clinical validation",
+  "artifact": "apps/api/evaluation/m0/results/cloudflare-glm-conversation-2026-10-24-answers.json",
+  "artifact_sha256": "880f95dd82d54f3e30e593e7f55c15b9f3d6897c06dc52f1f3a5f186f6a7eec2",
+  "rubric": "apps/api/evaluation/m0/rubric.json",
+  "inventory": "apps/api/evaluation/m0/inventory.json",
+  "review_date": "2026-10-24",
+  "method": "Reviewed only these two accepted GLM cases against exact captured generation_context (all text and matched passages) and frozen rubric. Parsed raw response JSON strings, assessed draft/final separately, considered delivered metadata and full uncertainty. Differentiated information on treatment uptake/use from evidence comparing treatment effects. No provider calls or other artifact edits.",
+  "aggregate": {
+    "draft": {
+      "case_count": 2,
+      "support_verdicts": {
+        "partially_supported": 2
+      },
+      "cases_with_critical_errors": 1,
+      "critical_error_count": 3,
+      "critical_error_categories": {
+        "incorrect_absence_scope": 3
+      },
+      "cases_failing_conversational_relevance_or_simplification": 2
+    },
+    "final": {
+      "case_count": 2,
+      "support_verdicts": {
+        "partially_supported": 2
+      },
+      "cases_with_critical_errors": 1,
+      "critical_error_count": 3,
+      "critical_error_categories": {
+        "incorrect_absence_scope": 3
+      },
+      "cases_failing_conversational_relevance_or_simplification": 2
+    }
+  },
+  "promotion": {
+    "eligible": false,
+    "reason": "Broad answer has three material false population-absence claims. Both cases dump/repeat evidence and fail conversational relevance; simplify preserves key facts but is not a successful simplification. Accepted schema/citations do not establish support or usability."
+  },
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "generation_context_sha256": "d007c0719abdfefe2f037a4c4e67306b36d847869ec5988f99549a4f4b9722aa",
+      "reviewer": "independent chat_holdout_review engineering agent",
+      "review_date": "2026-10-24",
+      "source_passages": [
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ].",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "PubMed:42374733",
+          "source_passage": "Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "PubMed:42377443",
+          "source_passage": "An adjusted multinomial logistic regression model estimating relative risk ratios was used to compare the relationship between SDI quintiles and use of LCI only, LCI and metformin, and metformin only (reference).",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "PubMed:42369057",
+          "source_passage": "She has maintained excellent metabolic control on metformin alone, with no diabetic complications after four years of follow-up.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-3",
+          "source_passage": "Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        }
+      ],
+      "stages": [
+        {
+          "stage": "draft",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources also do not provide information on the use of metformin in specific populations, such as those with prediabetes or those living in neighborhoods with high socioeconomic disadvantage.",
+              "source_id": "PubMed:42377443",
+              "source_passage": "An adjusted multinomial logistic regression model estimating relative risk ratios was used to compare the relationship between SDI quintiles and use of LCI only, LCI and metformin, and metformin only (reference).",
+              "rationale": "The supplied uptake study explicitly analyzes metformin use in prediabetes by neighborhood socioeconomic disadvantage. It is not comparative efficacy evidence, but it directly contradicts the broader no-information-on-use claim."
+            },
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources do not provide information on the use of metformin in pediatric patients.",
+              "source_id": "openFDA label:FDA-LABEL-metformin-2",
+              "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+              "rationale": "The supplied label explicitly gives pediatric use and age floor. The next sentence acknowledges that information, making this absence claim internally contradictory as well."
+            },
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources also do not provide information on the use of metformin in patients with maturity-onset diabetes of the young (MODY) type 5.",
+              "source_id": "PubMed:42369057",
+              "source_passage": "She has maintained excellent metabolic control on metformin alone, with no diabetic complications after four years of follow-up.",
+              "rationale": "The supplied case report explicitly describes metformin use in HNF1B-related MODY; absence of generalizable evidence is valid, absence of information on use is false."
+            }
+          ],
+          "paragraphs": [
+            "Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes [openFDA label:FDA-LABEL-metformin-2]. In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day, and adverse reactions reported in greater than 5% of treated patients and more common than placebo included diarrhea (53% vs 12%), nausea/vomiting (26% vs 8%), flatulence (12% vs 6%), asthenia (9% vs 6%), indigestion (7% vs 4%), abdominal discomfort (6% vs 5%), and headache (6% vs 5%) [openFDA label:FDA-LABEL-metformin-2]. In placebo-controlled trials of metformin hydrochloride extended-release tablets, 781 patients were administered the drug, and adverse reactions reported in greater than 5% of patients and more common than placebo included diarrhea (10% vs 3%) and nausea/vomiting (7% vs 2%) [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2]. Postmarketing reports have identified cholestatic, hepatocellular, and mixed hepatocellular liver injury, but these reactions are reported voluntarily from a population of uncertain size, making it difficult to reliably estimate their frequency or establish causality [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide information on the long-term effects of metformin on complications such as cardiovascular disease or microvascular complications. A review notes that clonal hematopoiesis is associated with a higher risk of type 2 diabetes and cardiovascular disease, and that metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]. The sources also do not provide information on the use of metformin in specific populations, such as those with prediabetes or those living in neighborhoods with high socioeconomic disadvantage. One study analyzed the relationship between neighborhood socioeconomic disadvantage and the use of diabetes prevention interventions, but it did not focus on metformin alone [PubMed:42377443].",
+            "The sources do not provide information on the use of metformin in pediatric patients. The FDA label indicates that metformin hydrochloride tablets are indicated for pediatric patients 10 years of age and older, but it does not provide details on the safety or efficacy of metformin in this population [openFDA label:FDA-LABEL-metformin-2]. The sources also do not provide information on the use of metformin in patients with maturity-onset diabetes of the young (MODY) type 5. One case report describes a patient with HNF1B-related MODY who maintained excellent metabolic control on metformin alone, but it does not provide generalizable evidence for the use of metformin in this population [PubMed:42369057]."
+          ],
+          "uncertainty": [
+            "The registry entries for the rimonabant and prebiotic studies do not report the results of the comparisons, so the sources do not provide efficacy data for metformin in those specific combinations [ClinicalTrials.gov:NCT00546325, ClinicalTrials.gov:NCT05689684].",
+            "The review on clonal hematopoiesis and type 2 diabetes reports preclinical findings that metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The sources do not provide information on the long-term effects of metformin on complications such as cardiovascular disease or microvascular complications, and the postmarketing reports of liver injury are not reliable for establishing frequency or causality [openFDA label:FDA-LABEL-metformin-3]."
+          ],
+          "coverage": "Indication, diet/exercise, age >=10, common digestive reactions, serious warnings, approximately 7% subnormal B12 at 29 weeks, registry plans versus results and preclinical CH scope are preserved. Postmarketing frequency and causal uncertainty are accurately retained. False population-absence claims remain material despite their immediately following qualifications.",
+          "attribution": "Correct adjacent sources for material affirmative claims; tablet and extended-release statistics are distinguished. Same-source markers do not validate separate absence claims.",
+          "issues": [],
+          "relevance": "Five very long paragraphs dump adverse-event tables, registry details and off-topic population cases; substantial repetition. Poor response to a broad benefits/main-limitations question despite stronger safety coverage.",
+          "followup_coherence": "Not a follow-up. Draft and revision are textually identical; revision does not remove the contradictory absence claims.",
+          "uncertainty_review": "All three uncertainty items checked against complete context. Supplied registry excerpts contain plans and no measured efficacy results; uptake study is not treatment-effect evidence, so no-direct-efficacy-comparison is valid. Preclinical CH limitation is supported. No established metformin effect on CVD/microvascular complications is supplied. Spontaneous liver reports cannot estimate frequency/causality, correctly preserved. The mixed third item cites the liver label for a broader all-source long-term gap; adjacency is weak but not an invented outcome."
+        },
+        {
+          "stage": "final",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources also do not provide information on the use of metformin in specific populations, such as those with prediabetes or those living in neighborhoods with high socioeconomic disadvantage.",
+              "source_id": "PubMed:42377443",
+              "source_passage": "An adjusted multinomial logistic regression model estimating relative risk ratios was used to compare the relationship between SDI quintiles and use of LCI only, LCI and metformin, and metformin only (reference).",
+              "rationale": "The supplied uptake study explicitly analyzes metformin use in prediabetes by neighborhood socioeconomic disadvantage. It is not comparative efficacy evidence, but it directly contradicts the broader no-information-on-use claim."
+            },
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources do not provide information on the use of metformin in pediatric patients.",
+              "source_id": "openFDA label:FDA-LABEL-metformin-2",
+              "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+              "rationale": "The supplied label explicitly gives pediatric use and age floor. The next sentence acknowledges that information, making this absence claim internally contradictory as well."
+            },
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "The sources also do not provide information on the use of metformin in patients with maturity-onset diabetes of the young (MODY) type 5.",
+              "source_id": "PubMed:42369057",
+              "source_passage": "She has maintained excellent metabolic control on metformin alone, with no diabetic complications after four years of follow-up.",
+              "rationale": "The supplied case report explicitly describes metformin use in HNF1B-related MODY; absence of generalizable evidence is valid, absence of information on use is false."
+            }
+          ],
+          "paragraphs": [
+            "Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes [openFDA label:FDA-LABEL-metformin-2]. In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day, and adverse reactions reported in greater than 5% of treated patients and more common than placebo included diarrhea (53% vs 12%), nausea/vomiting (26% vs 8%), flatulence (12% vs 6%), asthenia (9% vs 6%), indigestion (7% vs 4%), abdominal discomfort (6% vs 5%), and headache (6% vs 5%) [openFDA label:FDA-LABEL-metformin-2]. In placebo-controlled trials of metformin hydrochloride extended-release tablets, 781 patients were administered the drug, and adverse reactions reported in greater than 5% of patients and more common than placebo included diarrhea (10% vs 3%) and nausea/vomiting (7% vs 2%) [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2]. Postmarketing reports have identified cholestatic, hepatocellular, and mixed hepatocellular liver injury, but these reactions are reported voluntarily from a population of uncertain size, making it difficult to reliably estimate their frequency or establish causality [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide information on the long-term effects of metformin on complications such as cardiovascular disease or microvascular complications. A review notes that clonal hematopoiesis is associated with a higher risk of type 2 diabetes and cardiovascular disease, and that metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]. The sources also do not provide information on the use of metformin in specific populations, such as those with prediabetes or those living in neighborhoods with high socioeconomic disadvantage. One study analyzed the relationship between neighborhood socioeconomic disadvantage and the use of diabetes prevention interventions, but it did not focus on metformin alone [PubMed:42377443].",
+            "The sources do not provide information on the use of metformin in pediatric patients. The FDA label indicates that metformin hydrochloride tablets are indicated for pediatric patients 10 years of age and older, but it does not provide details on the safety or efficacy of metformin in this population [openFDA label:FDA-LABEL-metformin-2]. The sources also do not provide information on the use of metformin in patients with maturity-onset diabetes of the young (MODY) type 5. One case report describes a patient with HNF1B-related MODY who maintained excellent metabolic control on metformin alone, but it does not provide generalizable evidence for the use of metformin in this population [PubMed:42369057]."
+          ],
+          "uncertainty": [
+            "The registry entries for the rimonabant and prebiotic studies do not report the results of the comparisons, so the sources do not provide efficacy data for metformin in those specific combinations [ClinicalTrials.gov:NCT00546325, ClinicalTrials.gov:NCT05689684].",
+            "The review on clonal hematopoiesis and type 2 diabetes reports preclinical findings that metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The sources do not provide information on the long-term effects of metformin on complications such as cardiovascular disease or microvascular complications, and the postmarketing reports of liver injury are not reliable for establishing frequency or causality [openFDA label:FDA-LABEL-metformin-3]."
+          ],
+          "coverage": "Indication, diet/exercise, age >=10, common digestive reactions, serious warnings, approximately 7% subnormal B12 at 29 weeks, registry plans versus results and preclinical CH scope are preserved. Postmarketing frequency and causal uncertainty are accurately retained. False population-absence claims remain material despite their immediately following qualifications.",
+          "attribution": "Correct adjacent sources for material affirmative claims; tablet and extended-release statistics are distinguished. Same-source markers do not validate separate absence claims.",
+          "issues": [],
+          "relevance": "Five very long paragraphs dump adverse-event tables, registry details and off-topic population cases; substantial repetition. Poor response to a broad benefits/main-limitations question despite stronger safety coverage.",
+          "followup_coherence": "Not a follow-up. Draft and revision are textually identical; revision does not remove the contradictory absence claims.",
+          "uncertainty_review": "All three uncertainty items checked against complete context. Supplied registry excerpts contain plans and no measured efficacy results; uptake study is not treatment-effect evidence, so no-direct-efficacy-comparison is valid. Preclinical CH limitation is supported. No established metformin effect on CVD/microvascular complications is supplied. Spontaneous liver reports cannot estimate frequency/causality, correctly preserved. The mixed third item cites the liver label for a broader all-source long-term gap; adjacency is weak but not an invented outcome."
+        }
+      ],
+      "delivered_metadata": {
+        "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+        "safety_limitations": [
+          "Trial registration records may describe planned methods rather than measured results."
+        ]
+      },
+      "promotion_eligible": false
+    },
+    {
+      "case_id": "real-simplify",
+      "snapshot_id": "real-metformin",
+      "generation_context_sha256": "c272d91117c5fb7a3c6275e663571bef5bd2ce9ef0aa2b4fe13f58613bbcc5b2",
+      "reviewer": "independent chat_holdout_review engineering agent",
+      "review_date": "2026-10-24",
+      "source_passages": [
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ].",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "PubMed:42374733",
+          "source_passage": "Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        }
+      ],
+      "stages": [
+        {
+          "stage": "draft",
+          "support_verdict": "partially_supported",
+          "critical_errors": [],
+          "paragraphs": [
+            "Metformin is used to help control blood sugar in adults and children 10 years and older with type 2 diabetes when combined with diet and exercise [openFDA label:FDA-LABEL-metformin-2]. Common side effects include stomach issues like diarrhea, nausea, and gas, which are more frequent than with a placebo [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. The FDA label lists serious warnings for lactic acidosis, vitamin B12 deficiency, and low blood sugar [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The provided sources do not show how metformin compares to other diabetes treatments, and they do not report the results of several registered studies that were designed to test metformin in combination with other drugs [ClinicalTrials.gov:NCT00546325] [ClinicalTrials.gov:NCT05689684]. One review mentions that preclinical studies suggest metformin might slow the expansion of clonal hematopoiesis, but this has not been proven in people [PubMed:42374733].",
+            "The evidence does not establish that metformin improves gut health or adherence to treatment, as one study was only designed to test a prebiotic product added to metformin and did not report its results [ClinicalTrials.gov:NCT05689684]. The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]."
+          ],
+          "uncertainty": [
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]."
+          ],
+          "coverage": "Indication, diet/exercise, age >=10, common digestive reactions, serious warnings, approximately 7% subnormal B12 at 29 weeks, registry plans versus results and preclinical CH scope are preserved.",
+          "attribution": "Correct adjacent sources for material affirmative claims; tablet and extended-release statistics are distinguished. Same-source markers do not validate separate absence claims.",
+          "issues": [
+            {
+              "kind": "scope_qualification",
+              "claim": "this has not been proven in people",
+              "rationale": "The review supplies preclinical evidence rather than clinical evidence of metformin slowing CH. Prefer the excerpt-scoped formulation already used elsewhere rather than a global claim about all research."
+            },
+            {
+              "kind": "regimen_description",
+              "claim": "several registered studies ... metformin in combination with other drugs",
+              "rationale": "The cited AXOS record concerns a prebiotic product, not another drug. Both cited records describe add-on designs, so this imprecise grouping is not treated as a material treatment-result attribution error."
+            },
+            {
+              "kind": "uncertainty_repetition",
+              "rationale": "Uncertainty items 1 and 3 are exact duplicates; item 2 repeats safety facts instead of describing an evidence limitation."
+            }
+          ],
+          "relevance": "Fails simplification: five paragraphs repeatedly restate the same registries and CH caveat, followed by three long uncertainty items that repeat those paragraphs. The first paragraph alone is a useful everyday summary; later text overwhelms it.",
+          "followup_coherence": "Retains age >=10 and 7%/29-week B12 detail and corrects/removes prior broad population-absence errors. However, it is not meaningfully simpler, retains unexplained clonal hematopoiesis and serious-warning terminology, and repeats comparison limitations several times. Draft and revision are identical.",
+          "uncertainty_review": "All three uncertainty items checked. First and third are duplicates but supported: registry excerpts provide no measured comparison, and the CH finding is preclinical. Second repeats label warnings plus B12 7%/29-week result, supported but is additional clinical content rather than a concise limitation. No spontaneous-report frequency inferred."
+        },
+        {
+          "stage": "final",
+          "support_verdict": "partially_supported",
+          "critical_errors": [],
+          "paragraphs": [
+            "Metformin is used to help control blood sugar in adults and children 10 years and older with type 2 diabetes when combined with diet and exercise [openFDA label:FDA-LABEL-metformin-2]. Common side effects include stomach issues like diarrhea, nausea, and gas, which are more frequent than with a placebo [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. The FDA label lists serious warnings for lactic acidosis, vitamin B12 deficiency, and low blood sugar [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The provided sources do not show how metformin compares to other diabetes treatments, and they do not report the results of several registered studies that were designed to test metformin in combination with other drugs [ClinicalTrials.gov:NCT00546325] [ClinicalTrials.gov:NCT05689684]. One review mentions that preclinical studies suggest metformin might slow the expansion of clonal hematopoiesis, but this has not been proven in people [PubMed:42374733].",
+            "The evidence does not establish that metformin improves gut health or adherence to treatment, as one study was only designed to test a prebiotic product added to metformin and did not report its results [ClinicalTrials.gov:NCT05689684]. The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]."
+          ],
+          "uncertainty": [
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733].",
+            "The FDA label lists serious warnings for metformin, including lactic acidosis, vitamin B12 deficiency, and hypoglycemia [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]. In clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3].",
+            "The sources do not provide a direct comparison of metformin's efficacy against other treatments for type 2 diabetes. One registry entry describes a study of rimonabant added to metformin and a sulfonylurea, but it does not report the results of that comparison [ClinicalTrials.gov:NCT00546325]. Another registry entry describes a study of a prebiotic product added to metformin, but it does not report the results of that comparison [ClinicalTrials.gov:NCT05689684]. A review discusses clonal hematopoiesis and type 2 diabetes, noting that preclinical studies found metformin might slow clonal expansion, but it does not provide clinical evidence of this effect in people [PubMed:42374733]."
+          ],
+          "coverage": "Indication, diet/exercise, age >=10, common digestive reactions, serious warnings, approximately 7% subnormal B12 at 29 weeks, registry plans versus results and preclinical CH scope are preserved.",
+          "attribution": "Correct adjacent sources for material affirmative claims; tablet and extended-release statistics are distinguished. Same-source markers do not validate separate absence claims.",
+          "issues": [
+            {
+              "kind": "scope_qualification",
+              "claim": "this has not been proven in people",
+              "rationale": "The review supplies preclinical evidence rather than clinical evidence of metformin slowing CH. Prefer the excerpt-scoped formulation already used elsewhere rather than a global claim about all research."
+            },
+            {
+              "kind": "regimen_description",
+              "claim": "several registered studies ... metformin in combination with other drugs",
+              "rationale": "The cited AXOS record concerns a prebiotic product, not another drug. Both cited records describe add-on designs, so this imprecise grouping is not treated as a material treatment-result attribution error."
+            },
+            {
+              "kind": "uncertainty_repetition",
+              "rationale": "Uncertainty items 1 and 3 are exact duplicates; item 2 repeats safety facts instead of describing an evidence limitation."
+            }
+          ],
+          "relevance": "Fails simplification: five paragraphs repeatedly restate the same registries and CH caveat, followed by three long uncertainty items that repeat those paragraphs. The first paragraph alone is a useful everyday summary; later text overwhelms it.",
+          "followup_coherence": "Retains age >=10 and 7%/29-week B12 detail and corrects/removes prior broad population-absence errors. However, it is not meaningfully simpler, retains unexplained clonal hematopoiesis and serious-warning terminology, and repeats comparison limitations several times. Draft and revision are identical.",
+          "uncertainty_review": "All three uncertainty items checked. First and third are duplicates but supported: registry excerpts provide no measured comparison, and the CH finding is preclinical. Second repeats label warnings plus B12 7%/29-week result, supported but is additional clinical content rather than a concise limitation. No spontaneous-report frequency inferred."
+        }
+      ],
+      "delivered_metadata": {
+        "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+        "safety_limitations": [
+          "Trial registration records may describe planned methods rather than measured results."
+        ]
+      },
+      "promotion_eligible": false
+    }
+  ]
+}

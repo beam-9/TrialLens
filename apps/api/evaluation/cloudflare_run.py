@@ -26,6 +26,33 @@ sys.path.insert(0, str(API_ROOT))
 from m0 import benchmark
 from triallens import cloudflare, conversation
 
+# Evaluation-only allowlist. Rates are integer micro-neurons per token, from
+# https://developers.cloudflare.com/workers-ai/platform/pricing/ (2026-10-24).
+# All candidates share the existing daily ledger; no provider/paid fallback.
+MODEL_EXPERIMENTS = {
+    "@cf/qwen/qwen3-30b-a3b-fp8": (4625, 30475),
+    "@cf/openai/gpt-oss-120b": (31818, 68182),
+    "@cf/zai-org/glm-4.7-flash": (5500, 36400),
+}
+
+
+@contextmanager
+def candidate_model(name):
+    previous = cloudflare.MODEL, cloudflare.INPUT_RATE, cloudflare.OUTPUT_RATE, cloudflare.MAX_OUTPUT_TOKENS
+    try:
+        if name is not None:
+            if name not in MODEL_EXPERIMENTS:
+                raise ValueError("Model experiment is not allowlisted")
+            cloudflare.MODEL = name
+            cloudflare.INPUT_RATE, cloudflare.OUTPUT_RATE = MODEL_EXPERIMENTS[name]
+            # This model's output budget includes reasoning. Retain truncation
+            # rejection; reserve its larger bounded allowance before dispatch.
+            if name == "@cf/openai/gpt-oss-120b":
+                cloudflare.MAX_OUTPUT_TOKENS = 4096
+        yield
+    finally:
+        cloudflare.MODEL, cloudflare.INPUT_RATE, cloudflare.OUTPUT_RATE, cloudflare.MAX_OUTPUT_TOKENS = previous
+
 
 @contextmanager
 def candidate_instructions(path):
@@ -43,8 +70,24 @@ def candidate_instructions(path):
         conversation.INSTRUCTIONS, conversation.REVISION_INSTRUCTIONS = previous
 
 
-def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
+def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, cases_path=None):
     inventory = json.loads(benchmark.INVENTORY.read_text())
+    if cases_path is not None:
+        # New questions share the original hash-checked source snapshots. Never
+        # rewrite the frozen benchmark or replace evidence to fit a candidate.
+        extra = json.loads(cases_path.read_text())
+        cases = extra.get("cases") if isinstance(extra, dict) else None
+        snapshots = {item["id"] for item in inventory["snapshots"]}
+        if (not isinstance(cases, list) or not cases
+                or any(not isinstance(case, dict)
+                       or not isinstance(case.get("id"), str) or not case["id"].strip()
+                       or not isinstance(case.get("snapshot_id"), str)
+                       or case.get("snapshot_id") not in snapshots
+                       or not isinstance(case.get("question"), str) or not 3 <= len(case["question"].strip()) <= 500
+                       for case in cases)
+                or len({case["id"] for case in cases}) != len(cases)):
+            raise ValueError("Question inventory must use unique IDs and existing frozen snapshots")
+        inventory = {**inventory, "cases": cases}
     selected = [c for c in inventory["cases"] if not case_ids or c["id"] in case_ids]
     if not selected or (case_ids and (len(case_ids) != len(set(case_ids)) or len(selected) != len(case_ids))):
         raise ValueError("Unknown or duplicate case ID")
@@ -71,8 +114,13 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
     result = {"schema_version": 1, "provider": "cloudflare", "model": cloudflare.MODEL,
               "pipeline_variant": "two_pass", "status": "HOSTED CANDIDATE; not pilot verified", "complete": False,
               "fixture_inventory_sha256": benchmark.sha256(benchmark.INVENTORY),
+              "runner_sha256": benchmark.sha256(Path(__file__)),
+              "question_inventory_sha256": benchmark.sha256(cases_path) if cases_path else None,
               "candidate_prompt_sha256": benchmark.sha256(prompt_path) if prompt_path else None,
               "code_sha256": hashlib.sha256(b"".join((API_ROOT / "triallens" / name).read_bytes() for name in ("cloudflare.py", "conversation.py", "main.py", "performance.py", "rag.py", "store.py"))).hexdigest(),
+              "model_rates": {"input_micro_neurons_per_token": cloudflare.INPUT_RATE,
+                              "output_micro_neurons_per_token": cloudflare.OUTPUT_RATE,
+                              "max_output_tokens": cloudflare.MAX_OUTPUT_TOKENS},
               "method": {"boundary": "loopback HTTP Ask API including serialization; hosted inference",
                          "cold_warm": "provider cache/residency unknown; no cold/warm classification",
                          "paid_provider_fallbacks": 0, "local_model_calls": 0,
@@ -102,9 +150,19 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None):
         try:
             body = response.json()
             candidate = body.get("result", {}) if isinstance(body, dict) else {}
-            case_outputs.append({"response": candidate.get("response"), "usage": candidate.get("usage"),
-                                 "generation_context_sha256": context_digest})
-        except (ValueError, AttributeError):
+            try:
+                final_content = cloudflare.response_content(candidate)
+            except (ValueError, TypeError, AttributeError):
+                final_content = None
+            case_outputs.append({"response": final_content, "usage": candidate.get("usage"),
+                                 "generation_context_sha256": context_digest,
+                                 "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "chat_template_kwargs") if key in kwargs["json"]},
+                                 "response_shape": {"result_keys": sorted(candidate),
+                                                    "finish_reason": candidate.get("finish_reason"),
+                                                    "status": candidate.get("status"),
+                                                    "choice_finish_reasons": [c.get("finish_reason") for c in candidate.get("choices", []) if isinstance(c, dict)],
+                                                    "output_types": [c.get("type") for c in candidate.get("output", []) if isinstance(c, dict)]}})
+        except (ValueError, TypeError, AttributeError):
             case_outputs.append({"response": None, "usage": None})
         return response
     with candidate_instructions(prompt_path), tempfile.TemporaryDirectory(prefix="triallens-cloudflare-") as temporary:
@@ -170,9 +228,12 @@ def main():
     parser.add_argument("--quota-ledger", type=Path, default=API_ROOT / "data/evaluation-usage.sqlite3",
                         help="Persistent evaluation-only daily allowance shared across experiments")
     parser.add_argument("--prompt-file", type=Path, help="Evaluate a candidate without changing production instructions")
+    parser.add_argument("--cases-file", type=Path, help="Independent questions using the unchanged frozen source snapshots")
+    parser.add_argument("--model-experiment", choices=sorted(MODEL_EXPERIMENTS), help="Isolated Cloudflare model experiment; production default is unchanged")
     args = parser.parse_args()
     load_dotenv(API_ROOT / ".env", override=False)
-    result = run(args.output, args.answers, args.case, args.quota_ledger, args.prompt_file)
+    with candidate_model(args.model_experiment):
+        result = run(args.output, args.answers, args.case, args.quota_ledger, args.prompt_file, args.cases_file)
     return 0 if result["complete"] else 1
 
 

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "686e5dc82812182b24168357d8ddc930ec9bede8157a6fbd219ed0061de70f39",
+  "code_sha256": "6017c164b95ed4ce202aacf1922ad3da90da7d723d8caa05455523154806ef90",
+  "model_rates": {
+    "input_micro_neurons_per_token": 4625,
+    "output_micro_neurons_per_token": 30475
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 23122.557291,
+      "trace": {
+        "trace_id": "7d8ccc7e-97eb-43b3-a34f-e2ebd980e3bc",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 6,
+        "retrieved_passage_count": 8,
+        "context_char_count": 15078,
+        "phases_ms": {
+          "storage_read": 5.421125,
+          "retrieval": 19.129709,
+          "extractive_synthesis": 15.369917,
+          "context_build": 0.560165,
+          "draft": 7801.191625,
+          "revision": 15246.586167,
+          "validation": 0.0,
+          "store": 26.391834
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 23520,
+            "message_count": 2,
+            "serialized_messages_char_count": 23894,
+            "wall_ms": 7801.191625,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 5144,
+            "eval_count": 1205,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 27309,
+            "message_count": 4,
+            "serialized_messages_char_count": 27790,
+            "wall_ms": 15246.586167,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/qwen/qwen3-30b-a3b-fp8",
+        "http_status": 200,
+        "total_wall_ms": 23120.277208,
+        "serialization_ms": 1.067916
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 4204.147599,
+    "remaining_neurons": 4795.852401,
+    "pending_requests": 1,
+    "requests": 30
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true
+}

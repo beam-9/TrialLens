@@ -126,3 +126,71 @@ def test_candidate_instructions_are_isolated_even_on_failure(tmp_path):
         with runner.candidate_instructions(candidate):
             pass
     assert (conversation.INSTRUCTIONS, conversation.REVISION_INSTRUCTIONS) == previous
+
+
+def test_independent_questions_keep_frozen_sources_and_exact_context(configured, monkeypatch, tmp_path):
+    from triallens import conversation
+    original_inventory = runner.benchmark.INVENTORY.read_bytes()
+    questions = tmp_path / "questions.json"
+    question = "Did either group actually improve from its own starting point?"
+    questions.write_text(json.dumps({"cases": [{"id": "new-question", "snapshot_id": "numerical", "question": question}]}))
+    def post(url, **kwargs):
+        context = json.loads(kwargs["json"]["messages"][1]["content"])
+        assert context["question"] == question
+        assert "240 adults" in context["evidence"][0]["text"]
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {
+            "response": {"paragraphs": ["The excerpt does not provide baseline changes [PubMed:EVAL-NUMBERS]."],
+                         "cited_sources": ["PubMed:EVAL-NUMBERS"], "uncertainty": []},
+            "usage": {"prompt_tokens": 900, "completion_tokens": 100}}})
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    result = runner.run(tmp_path / "metrics", tmp_path / "answers", cases_path=questions)
+    assert result["complete"] and result["isolation_verified"]
+    assert result["question_inventory_sha256"] == hashlib.sha256(questions.read_bytes()).hexdigest()
+    assert result["fixture_inventory_sha256"] == hashlib.sha256(original_inventory).hexdigest()
+    assert runner.benchmark.INVENTORY.read_bytes() == original_inventory
+    assert json.loads((tmp_path / "answers").read_text())[0]["case_id"] == "new-question"
+
+
+@pytest.mark.parametrize("cases", [
+    [{"id": "x", "snapshot_id": "missing", "question": "What happened?"}],
+    [{"id": "x", "snapshot_id": "numerical", "question": "What happened?"}] * 2,
+    [{"id": "x", "snapshot_id": "numerical", "question": " "}],
+])
+def test_independent_question_inventory_rejects_invalid_cases_before_inference(configured, tmp_path, cases):
+    questions = tmp_path / "questions.json"
+    questions.write_text(json.dumps({"cases": cases}))
+    with pytest.raises(ValueError, match="Question inventory"):
+        runner.run(tmp_path / "metrics", tmp_path / "answers", cases_path=questions)
+    assert not (tmp_path / "metrics").exists()
+
+
+def test_model_experiment_restores_default_and_rates_on_failure():
+    previous = runner.cloudflare.MODEL, runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE, runner.cloudflare.MAX_OUTPUT_TOKENS
+    with pytest.raises(RuntimeError):
+        with runner.candidate_model("@cf/qwen/qwen3-30b-a3b-fp8"):
+            assert (runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE) == (4625, 30475)
+            raise RuntimeError("failed experiment")
+    assert (runner.cloudflare.MODEL, runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE, runner.cloudflare.MAX_OUTPUT_TOKENS) == previous
+    with pytest.raises(ValueError, match="allowlisted"):
+        with runner.candidate_model("https://another-provider.example"):
+            pass
+    assert (runner.cloudflare.MODEL, runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE, runner.cloudflare.MAX_OUTPUT_TOKENS) == previous
+    with runner.candidate_model("@cf/openai/gpt-oss-120b"):
+        assert runner.cloudflare.MAX_OUTPUT_TOKENS == 4096
+    assert runner.cloudflare.MAX_OUTPUT_TOKENS == previous[-1]
+
+
+def test_model_experiment_records_actual_endpoint_and_shared_quota(configured, monkeypatch, tmp_path):
+    from triallens import conversation
+    def post(url, **kwargs):
+        assert url.endswith("/ai/run/@cf/qwen/qwen3-30b-a3b-fp8")
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {
+            "response": {"paragraphs": ["The excerpt does not provide baseline changes [PubMed:EVAL-NUMBERS]."],
+                         "cited_sources": ["PubMed:EVAL-NUMBERS"], "uncertainty": []},
+            "usage": {"prompt_tokens": 1000, "completion_tokens": 100}}})
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    with runner.candidate_model("@cf/qwen/qwen3-30b-a3b-fp8"):
+        result = runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"], tmp_path / "shared.sqlite3")
+    assert result["model"] == "@cf/qwen/qwen3-30b-a3b-fp8"
+    assert result["quota"]["used_or_reserved_neurons"] == pytest.approx(2 * (1000 * 4625 + 100 * 30475) / 1e6)
+    assert result["method"]["paid_provider_fallbacks"] == result["method"]["local_model_calls"] == 0

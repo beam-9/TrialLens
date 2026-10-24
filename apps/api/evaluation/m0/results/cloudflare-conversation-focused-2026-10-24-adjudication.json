@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "review_kind": "Independent passage-backed engineering review; not clinical validation",
+  "artifact": "apps/api/evaluation/m0/results/cloudflare-conversation-focused-2026-10-24-answers.json",
+  "artifact_sha256": "fe6be09d6b1930f6331528ccb46e3793818b3bfc6dc13443294aca0705442c0d",
+  "rubric": "apps/api/evaluation/m0/rubric.json",
+  "inventory": "apps/api/evaluation/m0/inventory.json",
+  "review_date": "2026-10-24",
+  "method": "Independent review against frozen rubric and exact captured generation_context, draft/final paragraphs and all uncertainty fields. Delivered generation_note and safety_limitations considered. Registry rationale/plans are distinguished from measured findings; COMPLETED metadata does not establish posted results. No provider/model calls or changes to other artifacts.",
+  "aggregate": {
+    "draft": {
+      "case_count": 2,
+      "support_verdicts": {
+        "partially_supported": 2
+      },
+      "cases_with_critical_errors": 2,
+      "critical_error_count": 2,
+      "critical_error_categories": {
+        "wrong_population": 1,
+        "incorrect_absence_scope": 1
+      },
+      "cases_with_coverage_omissions": 2
+    },
+    "final": {
+      "case_count": 2,
+      "support_verdicts": {
+        "partially_supported": 2
+      },
+      "cases_with_critical_errors": 2,
+      "critical_error_count": 2,
+      "critical_error_categories": {
+        "incorrect_absence_scope": 2
+      },
+      "cases_with_coverage_omissions": 2
+    }
+  },
+  "promotion": {
+    "eligible": false,
+    "reason": "Both finals incompletely cover main safety warnings and present registry rationale/planned investigation as suggestive study evidence. Simplification remains repetitive and final removes draft B12 information. No clinical validation or model promotion."
+  },
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "generation_context_sha256": "a615f8cdab60ccf49d2de54a4d5207ab75a966d72a4b01ae0c307d616abbcf51",
+      "reviewer": "independent chat_holdout_review engineering agent",
+      "review_date": "2026-10-24",
+      "source_passages": [
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ].",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "One hundred subjects with T2D and treated with metformin will be recruited for this blind parallel randomized controlled intervention study.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "PubMed:42374733",
+          "source_passage": "Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        }
+      ],
+      "stages": [
+        {
+          "stage": "draft",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "wrong_population",
+              "claim": "adults and pediatric patients with type 2 diabetes mellitus",
+              "source_id": "openFDA label:FDA-LABEL-metformin-2",
+              "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+              "rationale": "Explicit pediatric indication omits the required minimum age 10. The frozen pediatric-floor requirement is conditional on mentioning children and is triggered here."
+            }
+          ],
+          "coverage": "Indication and diet/exercise retained, but explicit pediatric mention loses age floor; common symptoms covered. B12/lactic-acidosis main-warning coverage absent.",
+          "relevance": "The answer spends a full paragraph on exploratory gut-health research while main safety limitations remain incomplete.",
+          "attribution": "Labels support indication and symptoms. Extended-release label is adult-only; the separate tablets label supports age >=10. Citing both together does not make the pediatric indication apply to extended release.",
+          "followup_coherence": "Not a follow-up.",
+          "issues": [
+            {
+              "kind": "sentence_scope",
+              "claim": "although preclinical studies suggest this possibility",
+              "rationale": "The review supports preclinical CH findings. The wording spans both gut health and CH, but the registry does not establish that the gut-health statement is preclinical. Keep clauses/source attribution distinct."
+            }
+          ],
+          "paragraphs": [
+            "The sources describe metformin as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "Common adverse reactions to metformin include diarrhea, nausea/vomiting, abdominal pain, and flatulence [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "The evidence does not establish the benefits of metformin in improving gut health or its potential to slow down clonal expansion of clonal hematopoiesis, although preclinical studies suggest this possibility [PubMed:42374733, ClinicalTrials.gov:NCT05689684]."
+          ],
+          "uncertainty": [
+            "The sources do not provide direct evidence of metformin's effect on gut health in type 2 diabetes patients.",
+            "The relationship between metformin and clonal hematopoiesis in type 2 diabetes patients is not fully understood and requires further research.",
+            "The clinical trials data on metformin's efficacy and safety in type 2 diabetes patients may not reflect real-world outcomes due to varying conditions and populations."
+          ],
+          "uncertainty_review": "No established gut-health benefit is correctly distinguished from registry rationale/planned investigation. CH uncertainty is supported by the review; preclinical status is retained in the paragraph. Trial-to-practice caveat follows label warning, although applied broadly to efficacy as well as adverse reactions."
+        },
+        {
+          "stage": "final",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health",
+              "source_id": "ClinicalTrials.gov:NCT05689684",
+              "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+              "rationale": "The supplied registry text describes rationale and a future investigation, not measured comparative results. Calling this study-backed benefit evidence without preserving planned/hypothesis status elevates protocol rationale into findings. Registry COMPLETED metadata does not supply results; generation_context metadata explicitly warns against that inference."
+            }
+          ],
+          "coverage": "Supported indication, diet/exercise and common gastrointestinal symptoms, but serious lactic-acidosis warning is not explained. B12 warning is available in supplied text; final does not cover it. No fabricated adverse-event frequency.",
+          "relevance": "The answer spends a full paragraph on exploratory gut-health research while main safety limitations remain incomplete.",
+          "attribution": "Labels support indication and symptoms. Extended-release label is adult-only; the separate tablets label supports age >=10. Citing both together does not make the pediatric indication apply to extended release.",
+          "followup_coherence": "Not a follow-up.",
+          "issues": [],
+          "paragraphs": [
+            "Metformin is used to improve blood sugar control in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "In clinical trials, common side effects of metformin included diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3, openFDA label:FDA-LABEL-metformin-2].",
+            "The sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients, although one study suggests that adding a prebiotic to metformin may improve glucose metabolism and gut health [ClinicalTrials.gov:NCT05689684]."
+          ],
+          "uncertainty": [
+            "The effect of metformin on gut health in type 2 diabetes patients is not established in the provided sources."
+          ],
+          "uncertainty_review": "The supplied record supports an evidence gap for gut-health benefit, not a positive measured benefit. General caveats about limited evidence do not restore the required protocol/results distinction."
+        }
+      ],
+      "promotion_eligible": false,
+      "delivered_metadata": {
+        "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+        "safety_limitations": [
+          "Trial registration records may describe planned methods rather than measured results."
+        ]
+      },
+      "promotion_rationale": "No candidate promotion from this focused set; see aggregate."
+    },
+    {
+      "case_id": "real-simplify",
+      "snapshot_id": "real-metformin",
+      "generation_context_sha256": "af958d873a837ca6e84b1f9f15bbe841d937d2ae43258a892e1225564cb21253",
+      "reviewer": "independent chat_holdout_review engineering agent",
+      "review_date": "2026-10-24",
+      "source_passages": [
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ].",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-2",
+          "source_passage": "In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-3",
+          "source_passage": "Lactic Acidosis [ see Boxed Warning and Warnings and Precautions ( 5.1 ) ] Vitamin B 12 Deficiency [ see Warnings and Precautions ( 5.2 ) ]",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "openFDA label:FDA-LABEL-metformin-3",
+          "source_passage": "Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10% 3%",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": true
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "One hundred subjects with T2D and treated with metformin will be recruited for this blind parallel randomized controlled intervention study.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        },
+        {
+          "source_id": "PubMed:42374733",
+          "source_passage": "Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated.",
+          "source_location": "generation_context.evidence.text",
+          "content_truncated": false
+        }
+      ],
+      "stages": [
+        {
+          "stage": "draft",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in people with type 2 diabetes",
+              "source_id": "ClinicalTrials.gov:NCT05689684",
+              "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+              "rationale": "The supplied registry text describes rationale and a future investigation, not measured comparative results. Calling this study-backed benefit evidence without preserving planned/hypothesis status elevates protocol rationale into findings. Registry COMPLETED metadata does not supply results; generation_context metadata explicitly warns against that inference."
+            }
+          ],
+          "coverage": "Blood-sugar indication, diet/exercise, gastrointestinal symptoms and a qualitative B12 decrease are supported. No pediatric or numeric B12 qualifier is triggered in this raw draft. Lactic-acidosis warning absent.",
+          "relevance": "The answer spends a full paragraph on exploratory gut-health research while main safety limitations remain incomplete.",
+          "attribution": "Labels support indication and symptoms. Extended-release label is adult-only; the separate tablets label supports age >=10. Citing both together does not make the pediatric indication apply to extended release.",
+          "followup_coherence": "Continues the prior answer but is not materially simpler: three paragraphs remain, and final adds a diarrhea statistic while deleting draft B12 coverage. Final correctly retains age >=10.",
+          "issues": [
+            {
+              "kind": "global_uncertainty_overreach",
+              "claim": "The long-term effects of metformin on vitamin B12 levels and other aspects of health are not fully understood.",
+              "rationale": "The excerpt gives a 29-week observation and does not establish the global state of long-term knowledge. Do not turn excerpt scope into an assertion about all research."
+            }
+          ],
+          "paragraphs": [
+            "Metformin is a medication used to help control blood sugar levels in people with type 2 diabetes. It's often prescribed along with a healthy diet and regular exercise. Common side effects of metformin include diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+            "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in people with type 2 diabetes [ClinicalTrials.gov:NCT05689684]. However, more research is needed to fully understand the potential benefits and limitations of this approach.",
+            "It's also important to note that metformin can have other effects on the body, such as decreasing vitamin B12 levels in some people [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]."
+          ],
+          "uncertainty": [
+            "The sources do not provide a direct comparison of metformin's effects on gut health in type 2 diabetes patients.",
+            "The evidence for the potential benefits of adding prebiotics to metformin is limited and more research is needed.",
+            "The long-term effects of metformin on vitamin B12 levels and other aspects of health are not fully understood."
+          ],
+          "uncertainty_review": "The supplied record supports an evidence gap for gut-health benefit, not a positive measured benefit. General caveats about limited evidence do not restore the required protocol/results distinction. The statement that long-term B12/other health effects are not fully understood is not established globally by these excerpts; it should be limited to what the supplied excerpt does not establish."
+        },
+        {
+          "stage": "final",
+          "support_verdict": "partially_supported",
+          "critical_errors": [
+            {
+              "category": "incorrect_absence_scope",
+              "claim": "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in patients with type 2 diabetes, although this is based on a limited study",
+              "source_id": "ClinicalTrials.gov:NCT05689684",
+              "source_passage": "In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes.",
+              "rationale": "The supplied registry text describes rationale and a future investigation, not measured comparative results. Calling this study-backed benefit evidence without preserving planned/hypothesis status elevates protocol rationale into findings. Registry COMPLETED metadata does not supply results; generation_context metadata explicitly warns against that inference."
+            }
+          ],
+          "coverage": "Supported indication, diet/exercise and common gastrointestinal symptoms, but serious lactic-acidosis warning is not explained. B12 warning is available in supplied text; final does not cover it. No fabricated adverse-event frequency.",
+          "relevance": "The answer spends a full paragraph on exploratory gut-health research while main safety limitations remain incomplete.",
+          "attribution": "Labels support indication and symptoms. Extended-release label is adult-only; the separate tablets label supports age >=10. Citing both together does not make the pediatric indication apply to extended release.",
+          "followup_coherence": "Continues the prior answer but is not materially simpler: three paragraphs remain, and final adds a diarrhea statistic while deleting draft B12 coverage. Final correctly retains age >=10.",
+          "issues": [
+            {
+              "kind": "evidence_count_scope",
+              "claim": "limited to a single study",
+              "rationale": "Only one relevant registry record is supplied. That does not establish that only one study exists, or that this record contains benefit results."
+            }
+          ],
+          "paragraphs": [
+            "Metformin is used to help control blood sugar levels in adults and children 10 years and older with type 2 diabetes, as an addition to diet and exercise [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2].",
+            "In clinical trials, metformin has been compared to a placebo, with common side effects including diarrhea, nausea, and abdominal pain [openFDA label:FDA-LABEL-metformin-3] [openFDA label:FDA-LABEL-metformin-2]. For example, in one trial, 53% of patients taking metformin hydrochloride tablets experienced diarrhea, compared to 12% of patients taking a placebo [openFDA label:FDA-LABEL-metformin-2].",
+            "Some research suggests that adding certain prebiotics to metformin may help improve glucose metabolism and gut health in patients with type 2 diabetes, although this is based on a limited study [ClinicalTrials.gov:NCT05689684]."
+          ],
+          "uncertainty": [
+            "The evidence for the potential benefits of adding prebiotics to metformin is limited to a single study."
+          ],
+          "uncertainty_review": "The supplied record supports an evidence gap for gut-health benefit, not a positive measured benefit. General caveats about limited evidence do not restore the required protocol/results distinction. The claimed limit to a single study should say one indexed registry record: these sources do not establish the total number of studies in existence."
+        }
+      ],
+      "promotion_eligible": false,
+      "delivered_metadata": {
+        "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support. Combination-product labels were excluded from this single-ingredient summary.",
+        "safety_limitations": [
+          "Trial registration records may describe planned methods rather than measured results."
+        ]
+      },
+      "promotion_rationale": "No candidate promotion from this focused set; see aggregate."
+    }
+  ]
+}

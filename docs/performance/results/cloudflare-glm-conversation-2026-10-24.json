@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "686e5dc82812182b24168357d8ddc930ec9bede8157a6fbd219ed0061de70f39",
+  "code_sha256": "c8e843932db6b35d5358f1a06e0d80ce7095034d479b9d7d7a1fecdd4a8d4285",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 52225.6985,
+      "trace": {
+        "trace_id": "61baf13d-769f-4fc1-9b73-e65671013a01",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 7,
+        "retrieved_passage_count": 8,
+        "context_char_count": 14800,
+        "phases_ms": {
+          "storage_read": 5.393167,
+          "retrieval": 12.154,
+          "extractive_synthesis": 14.934166,
+          "context_build": 0.48104199999999997,
+          "draft": 32546.32025,
+          "revision": 19601.08775,
+          "validation": 15.717084,
+          "store": 18.218667
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 23717,
+            "message_count": 2,
+            "serialized_messages_char_count": 24130,
+            "wall_ms": 32546.32025,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 5175,
+            "eval_count": 1263,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 30645,
+            "message_count": 4,
+            "serialized_messages_char_count": 31181,
+            "wall_ms": 19601.08775,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6742,
+            "eval_count": 1263,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 52222.957875,
+        "serialization_ms": 0.930875
+      }
+    },
+    {
+      "case_id": "real-simplify",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 76122.89208299998,
+      "trace": {
+        "trace_id": "c3c2d623-ac10-419e-81ce-b377b16d7608",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 11222,
+        "phases_ms": {
+          "storage_read": 9.648917,
+          "retrieval": 15.769584,
+          "extractive_synthesis": 14.038542,
+          "context_build": 0.38362500000000005,
+          "draft": 34631.53325,
+          "revision": 41416.94375,
+          "validation": 10.297334,
+          "store": 19.643417
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 23240,
+            "message_count": 2,
+            "serialized_messages_char_count": 23704,
+            "wall_ms": 34631.53325,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 5249,
+            "eval_count": 1382,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 30334,
+            "message_count": 4,
+            "serialized_messages_char_count": 30921,
+            "wall_ms": 41416.94375,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6924,
+            "eval_count": 1382,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 76121.726875,
+        "serialization_ms": 0.577125
+      }
+    }
+  ],
+  "summary": {
+    "n": 2,
+    "model_answers": 2,
+    "model_answer_p50_ms": 52222.957875,
+    "model_answer_p95_ms": 76121.726875,
+    "result_counts": {
+      "model_answer": 2
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8057.710413,
+    "remaining_neurons": 942.289587,
+    "pending_requests": 4,
+    "requests": 41
+  },
+  "isolation_verified": true
+}

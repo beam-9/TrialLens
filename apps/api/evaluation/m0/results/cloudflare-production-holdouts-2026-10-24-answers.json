@@ -1,0 +1,198 @@
+[
+  {
+    "case_id": "holdout-endpoint-baseline",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "f3202144-3210-4b32-8a29-ed492c559a2a",
+      "workspace_id": "m0-numerical",
+      "question": "I'm trying to picture what happened over the study: did A bring people's HbA1c down, or did it just finish lower than placebo?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Cloudflare generation was unavailable or returned an incomplete answer. Showing source excerpts; no local model or paid fallback was called.",
+      "saved_to_brief": false,
+      "short_answer": "For intervention A evaluation condition, the extraction table does not contain enough direct evidence to answer this question directly.",
+      "direct_answer": "For intervention A evaluation condition, the extraction table does not contain enough direct evidence to answer this question directly.",
+      "evidence_map": [
+        "Workspace coverage: TrialLens considered 1 extracted source rows across 1 literature source.",
+        "Question fit: 0 rows matched the question strongly enough for direct synthesis; 0 are cited in the answer.",
+        "Safety coverage: 1 rows include safety, warning, label, or adverse-event context.",
+        "Known limitation: The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables"
+      ],
+      "reasoning_summary": [
+        "Question intent: treated as a benefit question about intervention A evaluation condition.",
+        "Selection basis: rows were scored for topic overlap, question-term overlap, intent fit, source type, confidence, and review status.",
+        "Question anchors: bring, did, down, finish, happened, hba1c, just, lower.",
+        "Synthesis scope: no extraction row met the direct-answer threshold, so TrialLens abstained rather than filling gaps.",
+        "Caution applied: answer still remains limited to indexed workspace sources and is not clinical guidance."
+      ],
+      "evidence_synthesis": [
+        "Whole-workspace read: 1 extracted rows were available across 1 literature source; this answer focused on 1 literature source.",
+        "Shared signal: no row was strong enough for direct synthesis, so TrialLens reports closest context rather than a firm answer.",
+        "Literature view: 1 PubMed rows provide abstract-level study or review context.",
+        "Answer gap: extracted rows did not directly match the requested evidence type strongly enough.",
+        "Detail gap: indexed summaries can omit full-text methods, subgroup results, and detailed outcome tables."
+      ],
+      "source_readouts": [
+        "CONTEXT \u00b7 PubMed:EVAL-NUMBERS \u00b7 literature source \u00b7 relevance 0: At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) Limit: The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables"
+      ],
+      "evidence_quality": [
+        "Directness: low. No extracted row met the direct-answer threshold for this question.",
+        "Source strength: low. No directly used rows were available for appraisal.",
+        "Review risk: no directly used row is currently marked low confidence.",
+        "Completeness caution: indexed summaries may omit full-text methods, subgroup analyses, and detailed outcome tables."
+      ],
+      "facet_coverage": [
+        "Benefit/outcome: partial context exists in 1 rows, but none met the direct-answer threshold."
+      ],
+      "answer_trace": [
+        {
+          "label": "Question read",
+          "value": "Benefit/outcome",
+          "detail": "TrialLens treated this as a benefit question about intervention A evaluation condition."
+        },
+        {
+          "label": "Question anchors",
+          "value": "bring, did, down, finish, happened, hba1c, just, lower",
+          "detail": "These terms were matched against source profiles, extracted fields, source passages, and limitations."
+        },
+        {
+          "label": "Workspace scan",
+          "value": "1 rows scanned",
+          "detail": "0 rows met the synthesis threshold; 1 stayed as context or were not relevant enough."
+        },
+        {
+          "label": "Cited rows",
+          "value": "0 rows cited",
+          "detail": "Main source mix: no cited rows."
+        },
+        {
+          "label": "Closest context",
+          "value": "PubMed:EVAL-NUMBERS",
+          "detail": "At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower)"
+        },
+        {
+          "label": "Caution",
+          "value": "Indexed evidence only",
+          "detail": "The answer does not use evidence outside the current workspace and is not clinical guidance."
+        }
+      ],
+      "evidence": [
+        "TrialLens is abstaining because the structured extraction rows do not directly support the requested answer.",
+        "Closest available row: Synthetic evaluation fixture: randomized trial (PubMed:EVAL-NUMBERS) has confidence 94%."
+      ],
+      "supporting_evidence": [
+        "TrialLens is abstaining because the structured extraction rows do not directly support the requested answer.",
+        "Closest available row: Synthetic evaluation fixture: randomized trial (PubMed:EVAL-NUMBERS) has confidence 94%."
+      ],
+      "safety_limitations": [],
+      "uncertainty": [
+        "Try changing the source filter, rebuilding with a more specific intervention, or inspecting sources manually.",
+        "TrialLens avoids filling gaps when extracted fields and retrieved passages do not support the question."
+      ],
+      "limitations": [
+        "TrialLens does not provide medical advice or patient-specific recommendations."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.4212,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention",
+            "lower",
+            "placebo",
+            "than"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention, lower, placebo in a literature source."
+        }
+      ],
+      "created_at": "2026-10-24T20:49:13.318323+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": null,
+        "usage": {
+          "prompt_tokens": 941,
+          "completion_tokens": 247,
+          "total_tokens": 1188,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 75.68119812011719
+        },
+        "generation_context_sha256": "1bd02e53d07ace2db98f19f9d7268b12f97d0ad82bd7ddb1c34ee5505288fe68",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "I'm trying to picture what happened over the study: did A bring people's HbA1c down, or did it just finish lower than placebo?"
+    },
+    "generation_context_sha256": "1bd02e53d07ace2db98f19f9d7268b12f97d0ad82bd7ddb1c34ee5505288fe68"
+  }
+]
