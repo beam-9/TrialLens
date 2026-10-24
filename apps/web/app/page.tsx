@@ -1,7 +1,9 @@
 "use client";
 
-import { CSSProperties, FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
-import { motion, MotionConfig } from "framer-motion";
+import { CSSProperties, FormEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { LayoutGroup, motion, MotionConfig, useReducedMotion } from "framer-motion";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import {
   Activity,
   ArrowLeftRight,
@@ -25,6 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,6 +37,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Answer, Brief, EvidenceExtraction, EvidenceSource, EvalReport, RetrievedChunk, SourceType, Workspace, Usage, api } from "@/lib/api";
 import { cn } from "@/lib/utils";
+
+gsap.registerPlugin(useGSAP);
 
 const sourceLabels: Record<SourceType, string> = {
   pubmed: "PubMed",
@@ -48,6 +53,8 @@ const navItems: { label: string; href: string; tab: WorkspaceTab }[] = [
   { label: "Workspace", href: "#workspace", tab: "table" },
   { label: "Ask", href: "#ask", tab: "ask" },
   { label: "Sources", href: "#sources", tab: "sources" },
+  { label: "Brief", href: "#brief", tab: "brief" },
+  { label: "Reliability", href: "#reliability", tab: "reliability" },
 ];
 
 const sourceFilterOptions: { label: string; value: SourceType | "all" }[] = [
@@ -71,6 +78,7 @@ const RECENT_WORKSPACES_KEY = "triallens.recentWorkspaces";
 type WorkflowStatus = "idle" | "retrieving sources" | "extracting fields" | "ready for synthesis" | "needs review" | "limited evidence";
 
 export default function Home() {
+  const reduceMotion = useReducedMotion();
   const [condition, setCondition] = useState("type 2 diabetes");
   const [intervention, setIntervention] = useState("metformin");
   const [question, setQuestion] = useState("What does the evidence say about benefits and safety limitations?");
@@ -86,6 +94,7 @@ export default function Home() {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [recentWorkspaces, setRecentWorkspaces] = useState<Workspace[]>([]);
+  const [openingWorkspaceId, setOpeningWorkspaceId] = useState<string | null>(null);
   const [workflowStatus, setWorkflowStatus] = useState<WorkflowStatus>("idle");
   const [sourceFilter, setSourceFilter] = useState<SourceType | "all">("all");
   const [reviewFilter, setReviewFilter] = useState<"all" | "reviewed" | "unreviewed" | "needs_review">("all");
@@ -147,6 +156,15 @@ export default function Home() {
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
+
+  useEffect(() => {
+    if (!compactWorkspace) return;
+    const rail = document.querySelector<HTMLElement>(".workspace-rail");
+    const selected = rail?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!rail || !selected) return;
+    const offset = selected.getBoundingClientRect().left - rail.getBoundingClientRect().left;
+    rail.scrollTo({ left: rail.scrollLeft + offset - (rail.clientWidth - selected.clientWidth) / 2, behavior: "auto" });
+  }, [activeTab, compactWorkspace]);
 
   useEffect(() => {
     if (!error) return;
@@ -215,16 +233,20 @@ export default function Home() {
   }
 
   async function reopenWorkspace(target: Workspace) {
-    if (busy) return;
+    if (busy || target.id === workspace?.id) return;
     setError(null);
+    setOpeningWorkspaceId(target.id);
     setBusy("Opening workspace");
     try {
-      let [indexed, extracted, generatedBrief, report] = await Promise.all([
+      const initial = await Promise.all([
         api.sources(target.id),
         api.extractions(target.id),
         api.brief(target.id),
         api.evals(),
+        api.answers(target.id),
       ]);
+      let [indexed, extracted, generatedBrief, report] = initial;
+      const savedAnswers = initial[4];
       if (indexed.length === 0) {
         setBusy("Retrieving sources");
         const ingested = await api.ingest(target.id);
@@ -249,20 +271,22 @@ export default function Home() {
       setBrief(generatedBrief);
       setEvals(report);
       setAnswer(null);
-      setConversation(await api.answers(target.id));
+      setConversation(savedAnswers);
       setSelectedRow(null);
       setShowAllRows(false);
       setShowAllSources(false);
       setWorkflowStatus(workflowStateFromCounts(indexed.length, extracted.length, extracted));
       setRecentWorkspaces((items) => {
-        const next = mergeRecentWorkspaces([target], items);
+        // Refresh metadata in place. Choosing a workspace must not move its row.
+        const next = items.map((item) => item.id === target.id ? target : item);
         writeCachedWorkspaces(next);
         return next;
       });
-      scrollToWorkspace();
+      if (!workspace && compactWorkspace) scrollToWorkspace();
     } catch (err) {
       setError(workspaceErrorMessage(err, "Could not reopen workspace."));
     } finally {
+      setOpeningWorkspaceId(null);
       setBusy(null);
     }
   }
@@ -346,67 +370,63 @@ export default function Home() {
 
   function selectWorkspaceTab(tab: WorkspaceTab) {
     setActiveTab(tab);
+    const anchor = navItems.find((item) => item.tab === tab)?.href ?? "#workspace";
+    window.history.replaceState(null, "", anchor);
     scrollToWorkspace();
   }
 
+  const launcher = <WorkspaceLauncher busy={busy} condition={condition} error={null} intervention={intervention} onBuildWorkspace={buildWorkspace} onConditionChange={setCondition} onInterventionChange={setIntervention} />;
   return (
     <MotionConfig reducedMotion="user">
     <main className="triallens-shell min-h-screen overflow-x-clip">
       <a className="skip-link" href="#workspace">Skip to workspace</a>
       <FixedInstrumentationHeader
-        activeTab={activeTab}
         busy={busy}
         extractionCount={extractions.length}
         needsReviewCount={needsReviewCount}
-        onNavigate={selectWorkspaceTab}
+        launcher={!compactWorkspace ? launcher : null}
         sourceCount={totalSources}
         workflowStatus={workflowStatus}
       />
 
-      <section id="home" className="evidence-intro relative overflow-hidden">
-        <HeroParallaxScene />
-        <div className="evidence-intro-grid relative z-10 mx-auto grid w-full max-w-[1480px] gap-8 px-5 md:px-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(420px,1.22fr)] lg:items-center lg:px-10">
-          <HeroCopy />
-          <WorkspaceLauncher
-            busy={busy}
-            condition={condition}
-            error={workspace ? null : error}
-            intervention={intervention}
-            recentWorkspaces={recentWorkspaces}
-            onBuildWorkspace={buildWorkspace}
-            onConditionChange={setCondition}
-            onInterventionChange={setIntervention}
-            onReopenWorkspace={reopenWorkspace}
-          />
-        </div>
-      </section>
-
-      <FieldBridge counts={counts} extractionCount={extractions.length} sourceCount={totalSources} />
-
-      <section id="workspace" className="workspace-section relative px-4 pb-16 sm:px-5 md:px-8 lg:px-10">
-        <motion.div
-          className="workspace-frame relative z-10 mx-auto max-w-[1480px]"
-          initial={{ opacity: 0.94, clipPath: "inset(0 0 8% 0 round 18px)" }}
-          whileInView={{ opacity: 1, clipPath: "inset(0 0 0% 0 round 18px)" }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
-        >
-        {workspace && <div className="workspace-context"><span>Research focus</span><h2>{workspace.condition}{workspace.intervention ? ` · ${workspace.intervention}` : ""}</h2><p>{totalSources} sources · {extractions.length} evidence rows</p></div>}
-        {workspace?.ingestion_warnings?.length ? <Alert className="workspace-issue"><CircleAlert aria-hidden="true" /><AlertTitle>Evidence coverage</AlertTitle><AlertDescription><ul>{workspace.ingestion_warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></AlertDescription></Alert> : null}
-        {error && workspace && <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="workspace-issue"><AlertTitle>Action could not be completed</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
-        <Tabs value={activeTab} onValueChange={(value) => selectWorkspaceTab(value as WorkspaceTab)} orientation={compactWorkspace ? "horizontal" : "vertical"} className="workspace-shell">
-          <TabsList className="workspace-rail" aria-label="Workspace views">
-            <TabsTrigger value="table" className="workspace-rail-item"><Filter aria-hidden="true" /> Evidence</TabsTrigger>
-            <TabsTrigger id="ask" value="ask" className="workspace-rail-item"><MessageSquareText aria-hidden="true" /> Ask</TabsTrigger>
-            <TabsTrigger id="sources" value="sources" className="workspace-rail-item"><BookOpen aria-hidden="true" /> Sources</TabsTrigger>
-            <TabsTrigger value="brief" className="workspace-rail-item"><FlaskConical aria-hidden="true" /> Brief</TabsTrigger>
-            <TabsTrigger value="reliability" className="workspace-rail-item"><Activity aria-hidden="true" /> Reliability</TabsTrigger>
-          </TabsList>
-
+      <Tabs value={activeTab} onValueChange={(value) => selectWorkspaceTab(value as WorkspaceTab)} orientation={compactWorkspace ? "horizontal" : "vertical"} className="workspace-shell dashboard-layout">
+        <aside className="dashboard-sidebar" aria-label="Research workspace navigation">
+          <LayoutGroup id="workspace-views">
+            <TabsList className="workspace-rail" aria-label="Workspace views">
+              {([{ value: "table", label: "Evidence", icon: Filter }, { value: "ask", label: "Ask", icon: MessageSquareText }, { value: "sources", label: "Sources", icon: BookOpen }, { value: "brief", label: "Brief", icon: FlaskConical }, { value: "reliability", label: "Reliability", icon: Activity }] as const).map(({ value, label, icon: Icon }) => (
+                <TabsTrigger key={value} id={value !== "table" ? value : undefined} value={value} className="workspace-rail-item">
+                  {activeTab === value && <motion.span className="view-selection" layoutId="view-selection" transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 440, damping: 38 }} />}
+                  <span className="workspace-view-label"><Icon aria-hidden="true" />{label}</span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </LayoutGroup>
+          {!compactWorkspace && <WorkspaceLibrary recentWorkspaces={recentWorkspaces} busy={busy} currentId={workspace?.id} openingId={openingWorkspaceId} onReopenWorkspace={reopenWorkspace} compact={false} />}
+          {activeTab !== "table" && <FieldBridge counts={counts} extractionCount={extractions.length} sourceCount={totalSources} />}
+          <p className="sidebar-scope">Evidence navigation only. Not medical advice or clinical decision support.</p>
+        </aside>
+        <div className="dashboard-main">
+          <section id="home" className="workspace-builder" data-loaded={Boolean(workspace)} aria-labelledby="dashboard-title">
+            <div className={workspace ? "sr-only" : undefined}><HeroCopy /></div>
+            {error && !workspace && <Alert id="workspace-issue" tabIndex={-1} variant="destructive"><AlertTitle>Workspace issue</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
+            {compactWorkspace && <>
+            <details className="workspace-creation" open={!workspace || !compactWorkspace}>
+              <summary>New workspace<ChevronDown aria-hidden="true" /></summary>
+              {launcher}
+            </details>
+            <WorkspaceLibrary recentWorkspaces={recentWorkspaces} busy={busy} currentId={workspace?.id} openingId={openingWorkspaceId} onReopenWorkspace={reopenWorkspace} compact />
+            </>}
+          </section>
+          <section id="workspace" className="workspace-section" aria-label="Current research workspace">
+            <motion.div className="workspace-frame" key={`${workspace?.id ?? "empty"}:${activeTab}`} aria-busy={Boolean(busy)} initial={reduceMotion ? false : { opacity: 0.94, y: 3 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}>
+              {workspace && <div className="workspace-context"><h2>{workspace.condition}{workspace.intervention ? ` · ${workspace.intervention}` : ""}</h2><p>{totalSources} {totalSources === 1 ? "source" : "sources"} · {extractions.length} evidence {extractions.length === 1 ? "row" : "rows"}</p></div>}
+              {workspace?.ingestion_warnings?.length ? <Alert className="workspace-issue"><CircleAlert aria-hidden="true" /><AlertTitle>Evidence coverage</AlertTitle><AlertDescription><ul>{workspace.ingestion_warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></AlertDescription></Alert> : null}
+              {error && workspace && <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="workspace-issue"><AlertTitle>Action could not be completed</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
           <TabsContent value="table" className="w-full">
+            <div className="evidence-layout">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
-              <CardHeader>
-                <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
+              <CardHeader className={workspace ? "evidence-heading-compact" : undefined}>
+                <CardTitle role="heading" aria-level={2} className="view-title">
                   <Filter aria-hidden="true" data-icon="inline-start" /> Evidence extraction table
                 </CardTitle>
                 <CardDescription className="text-ink/68">
@@ -415,6 +435,7 @@ export default function Home() {
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
                 <EvidenceFilters
+                  counts={counts}
                   sourceFilter={sourceFilter}
                   reviewFilter={reviewFilter}
                   quantOnly={quantOnly}
@@ -461,12 +482,14 @@ export default function Home() {
                 )}
               </CardContent>
             </Card>
+            <aside className="evidence-inventory" aria-label="Workspace source inventory"><FieldBridge counts={counts} extractionCount={extractions.length} sourceCount={totalSources} /></aside>
+            </div>
           </TabsContent>
 
           <TabsContent value="ask" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent text-ink">
               <CardHeader>
-                <CardTitle role="heading" aria-level={2} className="font-display text-4xl tracking-[-0.04em] md:text-5xl">Ask the evidence.</CardTitle>
+                <CardTitle role="heading" aria-level={2} className="view-title">Ask the evidence.</CardTitle>
                 <CardDescription className="max-w-3xl text-ink/68">
                   Explore a question, follow the reasoning, and check the sources. Save useful answers to your research brief.
                 </CardDescription>
@@ -478,16 +501,7 @@ export default function Home() {
                     <AlertDescription className="text-ink/68">Once extraction rows exist, this panel becomes a cited synthesis interface.</AlertDescription>
                   </Alert>
                 )}
-                {isReady && !answer && (
-                  <div className="flex flex-wrap gap-2" aria-label="Suggested questions">
-                    {suggestedQuestions.map((item) => (
-                      <Button key={item} type="button" size="sm" variant="outline" className="rounded-sm border-ink/15 bg-paper/70 text-ink hover:border-moss hover:bg-fog" onClick={() => setQuestion(item)}>
-                        {item}
-                      </Button>
-                    ))}
-                  </div>
-                )}
-                {usage && <div className="text-sm text-ink/68" role={usage.answer_alert || usage.budget_exhausted ? "alert" : "status"}>
+                {usage && <div className="answer-usage" role={usage.answer_alert || usage.budget_exhausted ? "alert" : "status"}>
                   <p>{usage.generated_answers} / {usage.answer_alert_at} generated answers · {usage.provider === "cloudflare" ? "Cloudflare Workers AI · Hosted inference" : usage.provider === "ollama" ? "Local model · No API credits used" : `US$${usage.used_or_reserved_usd.toFixed(4)} used or reserved of US$${usage.budget_usd.toFixed(2)}`}</p>
                   {usage.answer_alert && <p>You’ve reached {usage.answer_alert_at} generated answers. Review your usage before continuing.</p>}
                   {usage.provider === "cloudflare" && usage.cloudflare && (!usage.cloudflare.available || usage.cloudflare.remaining_neurons === 0) && <p>Cloudflare’s daily allowance or usage tracking is unavailable. Source excerpts remain available.</p>}
@@ -503,20 +517,6 @@ export default function Home() {
                   </label>
                   <Button variant="outline" size="sm" disabled={Boolean(busy) || !answer} onClick={() => { setAnswer(null); setQuestion(""); }}>New conversation</Button>
                 </div>}
-                {conversation.filter((item) => item.id !== answer?.id).map((item) => (
-                  <details className="conversation-turn" key={item.id}>
-                    <summary>{item.question}<ChevronDown aria-hidden="true" /></summary>
-                    <CitedAnswerText text={item.direct_answer || item.short_answer} citations={item.citations} extractions={extractions} retrievedChunks={item.retrieved_chunks} />
-                    <p className="text-sm text-ink/68">{item.generation_note}</p>
-                    <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => { setAskFilter(item.source_types?.[0] ?? "all"); setAnswer(item); setQuestion(""); }}>Continue conversation</Button>
-                    <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => saveToBrief(item, !item.saved_to_brief)}>{item.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button>
-                  </details>
-                ))}
-                {answer && <>
-                  <AnswerPanel answer={answer} extractions={extractions} onInspect={setSelectedRow} />
-                  <div><Button variant="outline" disabled={Boolean(busy)} onClick={() => saveToBrief(answer, !answer.saved_to_brief)}>{answer.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button></div>
-                </>}
-                {busy === "Preparing your answer" && <AnswerProgress local={usage?.provider === "ollama"} />}
                 <div className="ask-composer">
                   <label htmlFor="ask-question" className="flex flex-col gap-2 text-sm font-semibold text-ink">
                     {answer ? "Ask a follow-up" : "Research question"}
@@ -545,6 +545,34 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
+                {isReady && !answer && (
+                  <details className="question-suggestions">
+                    <summary>Suggested questions <ChevronDown aria-hidden="true" /></summary>
+                    <div className="suggestion-options" aria-label="Suggested questions">
+                      {suggestedQuestions.map((item) => (
+                        <Button key={item} type="button" size="sm" variant="outline" onClick={() => setQuestion(item)}>{item}</Button>
+                      ))}
+                    </div>
+                  </details>
+                )}
+                {answer && <>
+                  <AnswerPanel answer={answer} extractions={extractions} onInspect={setSelectedRow} saveAction={<Button variant="outline" disabled={Boolean(busy)} onClick={() => saveToBrief(answer, !answer.saved_to_brief)}>{answer.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button>} />
+                </>}
+                {busy === "Preparing your answer" && <AnswerProgress local={usage?.provider === "ollama"} />}
+                {conversation.some((item) => item.id !== answer?.id) && (
+                  <section className="conversation-history" aria-labelledby="conversation-history-title">
+                    <h3 id="conversation-history-title">Previous questions</h3>
+                {conversation.filter((item) => item.id !== answer?.id).map((item) => (
+                  <details className="conversation-turn" key={item.id}>
+                    <summary>{item.question}<ChevronDown aria-hidden="true" /></summary>
+                    <CitedAnswerText text={item.direct_answer || item.short_answer} citations={item.citations} extractions={extractions} retrievedChunks={item.retrieved_chunks} />
+                    <p className="text-sm text-ink/68">{item.generation_note}</p>
+                    <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => { setAskFilter(item.source_types?.[0] ?? "all"); setAnswer(item); setQuestion(""); }}>Continue conversation</Button>
+                    <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => saveToBrief(item, !item.saved_to_brief)}>{item.saved_to_brief ? "Remove from brief" : "Save to brief"}</Button>
+                  </details>
+                ))}
+                  </section>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -552,16 +580,16 @@ export default function Home() {
           <TabsContent value="sources" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
-                <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
+                <CardTitle role="heading" aria-level={2} className="view-title">
                   <BookOpen aria-hidden="true" data-icon="inline-start" /> Source explorer
                 </CardTitle>
                 <CardDescription className="text-ink/68">Inspect normalized source records and open original PubMed, ClinicalTrials.gov, or FDA pages.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                <div className="source-list">
                   {sources.length === 0 && <p className="text-ink/65">Build a workspace to inspect normalized biomedical sources.</p>}
                   {visibleSources.map((source) => (
-                    <article key={source.id} className="source-card p-4 transition hover:-translate-y-0.5">
+                    <article key={source.id} className="source-card">
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <Badge variant="secondary">{sourceLabels[source.source_type]}</Badge>
                         {source.external_id.toUpperCase().includes("DEMO") && <Badge variant="outline">Demo evidence</Badge>}
@@ -602,7 +630,7 @@ export default function Home() {
           <TabsContent value="brief" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
-                <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
+                <CardTitle role="heading" aria-level={2} className="view-title">
                   <FlaskConical aria-hidden="true" data-icon="inline-start" /> Evidence brief
                 </CardTitle>
                 <CardDescription className="text-ink/68">Collect the answers worth keeping, check outstanding evidence gaps, and export a research handoff.</CardDescription>
@@ -610,19 +638,10 @@ export default function Home() {
               <CardContent className="text-sm leading-6">
                 {brief ? (
                   <article className="brief-layout">
-                    <div><Button variant="outline" onClick={exportBrief} disabled={!brief.saved_answers?.length}>Export brief</Button></div>
-                    <section className="brief-overview" aria-labelledby="brief-overview-title">
-                      <h3 id="brief-overview-title">Overview</h3>
-                      <p>{brief.overview}</p>
-                      <dl className="brief-source-counts">
-                        {Object.entries(brief.source_summary).map(([source, count]) => (
-                          <div key={source}>
-                            <dt>{sourceLabels[source as SourceType] ?? source.replaceAll("_", " ")}</dt>
-                            <dd>{count}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                    </section>
+                    <div className="brief-toolbar">
+                      <p><strong>{brief.saved_answers?.length ?? 0}</strong> {(brief.saved_answers?.length ?? 0) === 1 ? "saved answer" : "saved answers"}</p>
+                      <Button variant="outline" onClick={exportBrief} disabled={!brief.saved_answers?.length}>Export brief</Button>
+                    </div>
                     <section className="brief-section" aria-labelledby="brief-findings-title">
                       <h3 id="brief-findings-title">Saved research answers</h3>
                       {brief.saved_answers?.length ? brief.saved_answers.map((item) => (
@@ -633,8 +652,23 @@ export default function Home() {
                           {item.uncertainty.length > 0 && <ul>{item.uncertainty.map((note) => <li key={note}>{note}</li>)}</ul>}
                           <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => saveToBrief(item, false)}>Remove from brief</Button>
                         </section>
-                      )) : <div className="brief-empty"><p>No answers saved yet. Use Ask to explore the evidence, then save answers that help your research question.</p><Button variant="outline" onClick={() => selectWorkspaceTab("ask")}>Ask a research question</Button></div>}
+                      )) : <Empty className="brief-empty">
+                        <EmptyHeader><EmptyTitle>Keep the answers that matter</EmptyTitle><EmptyDescription>No answers saved yet. Use Ask to explore the evidence, then save answers that help your research question.</EmptyDescription></EmptyHeader>
+                        <EmptyContent><Button variant="outline" onClick={() => selectWorkspaceTab("ask")}>Ask a research question <ArrowRight aria-hidden="true" /></Button></EmptyContent>
+                      </Empty>}
                     </section>
+                    <details className="brief-overview brief-context-disclosure">
+                      <summary>Workspace context <ChevronDown aria-hidden="true" /></summary>
+                      <p>{brief.overview}</p>
+                      <dl className="brief-source-counts">
+                        {Object.entries(brief.source_summary).map(([source, count]) => (
+                          <div key={source}>
+                            <dt>{sourceLabels[source as SourceType] ?? source.replaceAll("_", " ")}</dt>
+                            <dd>{count}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </details>
                     <section className="brief-section"><h3>Next steps</h3><ul>{brief.next_steps?.map((step) => <li key={step}>{step}</li>)}</ul></section>
                     <div className="brief-split">
                       <section className="brief-section" aria-labelledby="brief-gaps-title">
@@ -656,7 +690,7 @@ export default function Home() {
                     ) : null}
                   </article>
                 ) : (
-                  <p className="text-ink/65">A generated brief appears after ingestion.</p>
+                  <Empty><EmptyHeader><EmptyTitle>Start with a research workspace</EmptyTitle><EmptyDescription>Build a workspace, ask a question, and save useful cited answers here for your research handoff.</EmptyDescription></EmptyHeader><EmptyContent><Button variant="outline" onClick={() => selectWorkspaceTab("table")}>Open workspace <ArrowRight aria-hidden="true" /></Button></EmptyContent></Empty>
                 )}
               </CardContent>
             </Card>
@@ -665,7 +699,7 @@ export default function Home() {
           <TabsContent value="reliability" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
-                <CardTitle role="heading" aria-level={2} className="flex items-center gap-2 font-display text-4xl tracking-[-0.04em] md:text-5xl">
+                <CardTitle role="heading" aria-level={2} className="view-title">
                   <Activity aria-hidden="true" data-icon="inline-start" /> Reliability checks
                 </CardTitle>
                 <CardDescription className="text-ink/68">Human-readable checks for retrieval, extraction coverage, citation support, and abstention.</CardDescription>
@@ -718,9 +752,11 @@ export default function Home() {
               </CardContent>
             </Card>
           </TabsContent>
-        </Tabs>
-        </motion.div>
-      </section>
+            </motion.div>
+          </section>
+          <p className="mobile-scope">Evidence navigation only. Not medical advice or clinical decision support.</p>
+        </div>
+      </Tabs>
 
       <CitationSheet row={selectedRow} onOpenChange={(open) => !open && setSelectedRow(null)} onReview={markRow} />
     </main>
@@ -770,13 +806,10 @@ function scrollToWorkspace() {
   window.requestAnimationFrame(() => {
     const workspace = document.querySelector("#workspace");
     if (!workspace) return;
-    const top = workspace.getBoundingClientRect().top + window.scrollY - 88;
+    const header = document.querySelector<HTMLElement>(".field-header")?.offsetHeight ?? 64;
+    const rail = window.matchMedia("(max-width: 900px)").matches ? document.querySelector<HTMLElement>(".workspace-rail")?.offsetHeight ?? 0 : 0;
+    const top = workspace.getBoundingClientRect().top + window.scrollY - header - rail - 12;
     window.scrollTo({ top: Math.max(top, 0), behavior: preferredScrollBehavior() });
-    window.setTimeout(() => {
-      if (window.scrollY < 80) {
-        window.location.hash = "workspace";
-      }
-    }, 350);
   });
 }
 
@@ -785,24 +818,35 @@ function preferredScrollBehavior(): ScrollBehavior {
 }
 
 function FixedInstrumentationHeader({
-  activeTab,
   busy,
   extractionCount,
   needsReviewCount,
-  onNavigate,
+  launcher,
   sourceCount,
   workflowStatus,
 }: {
-  activeTab: WorkspaceTab;
   busy: string | null;
   extractionCount: number;
   needsReviewCount: number;
-  onNavigate: (tab: WorkspaceTab) => void;
+  launcher: ReactNode;
   sourceCount: number;
   workflowStatus: WorkflowStatus;
 }) {
+  const header = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const element = header.current;
+    if (!element) return;
+    const observer = new ResizeObserver(() => {
+      document.documentElement.style.setProperty("--header-offset", `${element.getBoundingClientRect().height}px`);
+    });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--header-offset");
+    };
+  }, []);
   return (
-    <header className="field-header">
+    <header className="field-header" ref={header}>
       <div className="field-header-inner">
         <a href="#home" className="field-brand" aria-label="TrialLens home">
           <span className="field-brand-mark" aria-hidden="true">
@@ -811,25 +855,13 @@ function FixedInstrumentationHeader({
           <span>TrialLens</span>
         </a>
 
-        <nav className="field-nav" aria-label="Primary">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              className="nav-link"
-              href={item.href}
-              aria-current={activeTab === item.tab ? "page" : undefined}
-              onClick={(event) => { event.preventDefault(); window.history.replaceState(null, "", item.href); onNavigate(item.tab); }}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        {launcher && <div className="header-launcher">{launcher}</div>}
 
         <div className="header-utilities">
-          <div className="workspace-readout" aria-live="polite">
+          <div className="workspace-readout sr-only" aria-live="polite">
             <span>{busy ?? workflowStatus}</span>
-            <span>{sourceCount} sources</span>
-            <span>{extractionCount} rows</span>
+            <span>{sourceCount} {sourceCount === 1 ? "source" : "sources"}</span>
+            <span>{extractionCount} {extractionCount === 1 ? "row" : "rows"}</span>
             {needsReviewCount > 0 ? <span>{needsReviewCount} to review</span> : null}
           </div>
           <ThemeToggle />
@@ -896,34 +928,38 @@ function AnswerProgress({ local }: { local: boolean }) {
   </div>;
 }
 
-function HeroParallaxScene() {
+function HeroCopy() {
   return (
-    <div className="evidence-flow-scene pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="flow-zone flow-zone-copy" />
-      <div className="flow-zone flow-zone-form" />
-      <div className="flow-zone flow-zone-workspace" />
-      <div className="source-streams">
-        {(Object.entries(sourceLabels) as [SourceType, string][]).map(([key, label], index) => (
-          <div key={key} className="source-stream" style={{ "--stream-index": index } as CSSProperties}>
-            <span>{label}</span>
-            <i />
-          </div>
-        ))}
-      </div>
-      <div className="evidence-spine" />
+    <div className="dashboard-intro">
+      <h1 id="dashboard-title">Research workspace</h1>
+      <p>Gather public evidence, inspect the findings, and keep useful answers connected to their sources.</p>
     </div>
   );
 }
 
-function HeroCopy() {
+function WorkspaceLibrary({ recentWorkspaces, busy, currentId, openingId, onReopenWorkspace, compact }: {
+  recentWorkspaces: Workspace[];
+  busy: string | null;
+  currentId?: string;
+  openingId: string | null;
+  onReopenWorkspace: (workspace: Workspace) => void;
+  compact: boolean;
+}) {
+  const reduceMotion = useReducedMotion();
+  if (!recentWorkspaces.length) return null;
   return (
-    <div className="hero-copy">
-      <h1 className="hero-title font-display">
-        Follow the <span>evidence.</span>
-      </h1>
-      <p className="hero-subtitle">Gather biomedical sources, explore what they mean, and keep every research answer connected to its evidence.</p>
-      <p className="scope-note">Evidence navigation only. Not medical advice or clinical decision support.</p>
-    </div>
+    <details className="workspace-library" open={!compact}>
+      <summary>Recent workspaces<ChevronDown aria-hidden="true" /></summary>
+      <LayoutGroup id={`workspace-library-${compact ? "mobile" : "desktop"}`}><div className="recent-workspace-list">
+        {recentWorkspaces.map((item) => (
+          <Button key={item.id} data-workspace-id={item.id} type="button" variant="ghost" className="recent-workspace-button" disabled={Boolean(busy)} aria-busy={item.id === openingId} aria-current={item.id === currentId ? "true" : undefined} onClick={() => onReopenWorkspace(item)}>
+            {item.id === currentId && <motion.span aria-hidden="true" className="workspace-selection" layoutId="workspace-selection" transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 440, damping: 38 }} />}
+            <span className="workspace-library-label"><strong>{item.condition}</strong>{item.intervention ? <span>{item.intervention}</span> : null}</span>
+            {item.id === openingId && <span className="workspace-opening" role="status"><Loader2 className="animate-spin" aria-hidden="true" /><span className="sr-only">Opening workspace</span></span>}
+          </Button>
+        ))}
+      </div></LayoutGroup>
+    </details>
   );
 }
 
@@ -932,28 +968,20 @@ function WorkspaceLauncher({
   condition,
   error,
   intervention,
-  recentWorkspaces,
   onBuildWorkspace,
   onConditionChange,
   onInterventionChange,
-  onReopenWorkspace,
 }: {
   busy: string | null;
   condition: string;
   error: string | null;
   intervention: string;
-  recentWorkspaces: Workspace[];
   onBuildWorkspace: (event?: FormEvent) => void;
   onConditionChange: (value: string) => void;
   onInterventionChange: (value: string) => void;
-  onReopenWorkspace: (workspace: Workspace) => void;
 }) {
   return (
-    <form onSubmit={onBuildWorkspace} className="hero-launcher">
-      <div className="launcher-heading">
-        <h2>Build a workspace</h2>
-        <p>Choose a condition and optional intervention. TrialLens gathers sources and extracts inspectable rows.</p>
-      </div>
+    <form onSubmit={onBuildWorkspace} className="hero-launcher" aria-label="Build a workspace">
       {error && (
         <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="mb-4">
           <AlertTitle>Workspace issue</AlertTitle>
@@ -996,60 +1024,29 @@ function WorkspaceLauncher({
           <ArrowRight aria-hidden="true" data-icon="inline-end" />
         </Button>
       </div>
-      {recentWorkspaces.length > 0 && (
-        <div className="recent-workspaces">
-          <h3>Recent workspaces</h3>
-          <div className="recent-workspace-list">
-            {recentWorkspaces.map((item) => (
-              <Button
-                key={item.id}
-                type="button"
-                variant="outline"
-                className="recent-workspace-button"
-                onClick={() => onReopenWorkspace(item)}
-              >
-                <span className="text-left">
-                  <span className="font-semibold">{item.condition}</span>
-                  {item.intervention ? <span> + {item.intervention}</span> : null}
-                </span>
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
     </form>
   );
 }
 
-function FieldBridge({
-  counts,
-  extractionCount,
-  sourceCount,
-}: {
-  counts: Record<string, number>;
-  extractionCount: number;
-  sourceCount: number;
+function FieldBridge({ counts, extractionCount, sourceCount }: {
+  counts: Record<string, number>; extractionCount: number; sourceCount: number;
 }) {
+  const inventory = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    if (!sourceCount) return;
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(".inventory-count", { y: 3, opacity: 0.65 }, { y: 0, opacity: 1, duration: 0.22, stagger: 0.025, ease: "power2.out", clearProps: "transform,opacity" });
+    });
+    return () => media.revert();
+  }, { scope: inventory, dependencies: [sourceCount, extractionCount], revertOnUpdate: true });
   return (
-    <section className="provenance-band" aria-labelledby="provenance-title">
-      <div className="provenance-inner">
-        <div className="provenance-heading">
-          <h2 id="provenance-title">Four source families. One inspectable path.</h2>
-          <p>Source records become structured rows before synthesis.</p>
-        </div>
-        <div className="provenance-sources" aria-label="Current evidence inventory">
-          {(Object.entries(sourceLabels) as [SourceType, string][]).map(([key, label]) => (
-            <div key={key} className="provenance-source">
-              <span>{label}</span>
-              <strong>{counts[key] ?? 0}</strong>
-            </div>
-          ))}
-        </div>
-        <div className="provenance-totals">
-          <span><strong>{sourceCount}</strong> sources</span>
-          <span><strong>{extractionCount}</strong> rows</span>
-        </div>
-      </div>
+    <section className="source-inventory" aria-labelledby="provenance-title" ref={inventory}>
+      <h2 id="provenance-title">Source inventory</h2>
+      <dl>{(Object.entries(sourceLabels) as [SourceType, string][]).map(([key, label]) => (
+        <div key={key}><dt>{label}</dt><dd className="inventory-count">{counts[key] ?? 0}</dd></div>
+      ))}</dl>
+      <p>{sourceCount} {sourceCount === 1 ? "source" : "sources"} · {extractionCount} extracted {extractionCount === 1 ? "row" : "rows"}</p>
     </section>
   );
 }
@@ -1062,6 +1059,7 @@ function workflowStateFromCounts(sourceCount: number, extractionCount: number, r
 }
 
 function EvidenceFilters({
+  counts,
   sourceFilter,
   reviewFilter,
   quantOnly,
@@ -1069,6 +1067,7 @@ function EvidenceFilters({
   setReviewFilter,
   setQuantOnly,
 }: {
+  counts: Record<string, number>;
   sourceFilter: SourceType | "all";
   reviewFilter: "all" | "reviewed" | "unreviewed" | "needs_review";
   quantOnly: boolean;
@@ -1077,7 +1076,7 @@ function EvidenceFilters({
   setQuantOnly: (value: boolean) => void;
 }) {
   return (
-    <div className="flex flex-col gap-3 rounded-sm border border-ink/10 bg-paper/60 p-3">
+    <div className="evidence-filters">
       <div>
         <h3 className="mb-2 text-xs font-semibold text-ink/68">Source type</h3>
         <div className="flex flex-wrap gap-1.5">
@@ -1089,12 +1088,13 @@ function EvidenceFilters({
             testId={`source-filter-${option.value}`}
             onClick={() => setSourceFilter(option.value)}
           >
-            {option.label}
+            {option.label}<span className="filter-count">{option.value === "all" ? Object.values(counts).reduce((sum, count) => sum + count, 0) : counts[option.value] ?? 0}</span>
           </FilterButton>
         ))}
         </div>
       </div>
-      <div>
+      <details className="review-filter-details">
+        <summary>Review and numerical filters<ChevronDown aria-hidden="true" /></summary>
         <h3 className="mb-1 text-xs font-semibold text-ink/68">Review state</h3>
         <p className="mb-2 text-xs leading-5 text-ink/62">
           Use &quot;Mark checked&quot; on a study row after you inspect it. Low confidence means TrialLens thinks the extraction needs human review.
@@ -1120,7 +1120,7 @@ function EvidenceFilters({
             Only rows with numbers
           </FilterButton>
         </div>
-      </div>
+      </details>
     </div>
   );
 }
@@ -1171,10 +1171,10 @@ function EvidenceTable({
     <Table className="min-w-full table-fixed">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[34%] text-ink/70">Source</TableHead>
-          <TableHead className="w-[38%] text-ink/70">Result snapshot</TableHead>
+          <TableHead className="w-[32%] text-ink/70">Source</TableHead>
+          <TableHead className="w-[36%] text-ink/70">Result snapshot</TableHead>
           <TableHead className="w-[14%] text-ink/70">Review</TableHead>
-          <TableHead className="w-[14%] text-ink/70">Actions</TableHead>
+          <TableHead className="w-[18%] text-ink/70">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -1195,7 +1195,7 @@ function EvidenceTable({
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/78">
               <p className="line-clamp-3 leading-6">{fieldValue(row.outcome_result, row.supporting_quote, row.supporting_quote)}</p>
-              {compactSafetyNote(row) ? <p className="mt-2 line-clamp-1 text-xs text-signal/80">Safety: {compactSafetyNote(row)}</p> : null}
+              {compactSafetyNote(row) ? <p className="mt-2 line-clamp-1 text-xs text-signal">Safety: {compactSafetyNote(row)}</p> : null}
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/72">
               <div className="flex flex-wrap items-center gap-1.5">
@@ -1245,11 +1245,14 @@ function AnswerPanel({
   answer,
   extractions,
   onInspect,
+  saveAction,
 }: {
   answer: Answer;
   extractions: EvidenceExtraction[];
   onInspect: (row: EvidenceExtraction) => void;
+  saveAction?: ReactNode;
 }) {
+  const reduceMotion = useReducedMotion();
   const facetCoverage = safeList(answer.facet_coverage);
   const evidenceMap = safeList(answer.evidence_map);
   const reasoningSummary = safeList(answer.reasoning_summary);
@@ -1265,6 +1268,7 @@ function AnswerPanel({
   const retrievedChunks = safeList(answer.retrieved_chunks);
   const caveats = answer.generation_mode === "conversational" ? uncertainty.slice(0, 1) : Array.from(new Set([...uncertainty, ...safetyLimitations])).slice(0, 1);
   const answerMethodCount = answerTrace.length + facetCoverage.length + evidenceQuality.length + evidenceMap.length + reasoningSummary.length;
+  const supportingNoteCount = (supportingEvidence.length ? supportingEvidence.length : evidence.length) + evidenceSynthesis.length + safetyLimitations.length + uncertainty.length;
 
   return (
     <motion.section
@@ -1272,9 +1276,9 @@ function AnswerPanel({
       tabIndex={-1}
       aria-labelledby="answer-result-title"
       className="answer-result"
-      initial={{ opacity: 0.82, clipPath: "inset(0 0 10% 0 round 14px)" }}
-      animate={{ opacity: 1, clipPath: "inset(0 0 0% 0 round 14px)" }}
-      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+      initial={reduceMotion ? false : { opacity: 0.88 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
     >
       <header className="answer-result-heading">
         <div>
@@ -1293,6 +1297,8 @@ function AnswerPanel({
         extractions={extractions}
         retrievedChunks={retrievedChunks}
       />
+
+      {saveAction && <div className="answer-save-action">{saveAction}</div>}
 
       <div className="answer-boundary">
         <section aria-labelledby="answer-boundary-title">
@@ -1332,7 +1338,7 @@ function AnswerPanel({
       ) : null}
 
       <div className="answer-details" aria-label="Detailed answer evidence">
-        <AnswerDisclosure title="Supporting evidence" meta={`${supportingEvidence.length + evidenceSynthesis.length + evidence.length} items`}>
+        <AnswerDisclosure title="Supporting evidence" meta={supportingNoteCount ? `${supportingNoteCount} notes` : "Evidence context"}>
           <AnswerList title="Cross-source synthesis" items={evidenceSynthesis} />
           <AnswerList title="Supporting evidence" items={supportingEvidence.length ? supportingEvidence : evidence} />
           <AnswerList title="Safety or limitations" items={safetyLimitations} />
@@ -1341,7 +1347,7 @@ function AnswerPanel({
         </AnswerDisclosure>
 
         {answerMethodCount ? (
-          <AnswerDisclosure title="How this answer was built" meta={`${answerMethodCount} checks`}>
+          <AnswerDisclosure title="How this answer was built" meta={`${answerMethodCount} notes`}>
             {answerTrace.length ? <AnswerTrace items={answerTrace} /> : null}
             <AnswerList title="Question coverage" items={facetCoverage} />
             <AnswerList title="Evidence quality" items={evidenceQuality} />
@@ -1357,7 +1363,7 @@ function AnswerPanel({
                 <article key={chunk.chunk_id}>
                   <div>
                     <span>{sourceLabels[chunk.source_type]}</span>
-                    <Badge variant="secondary">{Math.round(chunk.score * 100)}% match</Badge>
+                    <Badge variant="secondary">Relevance score {chunk.score.toFixed(2)}</Badge>
                   </div>
                   <h5>{chunk.title || chunk.citation}</h5>
                   <p className="passage-citation">{chunk.citation}</p>
@@ -1566,7 +1572,7 @@ function ListField({ label, items, empty, muted }: { label: string; items?: stri
   const visibleItems = listItems.length ? listItems : [empty];
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/68">{label}</p>
+      <p className="text-xs font-semibold text-ink/68">{label}</p>
       <div className={cn("rounded-sm border p-3", muted ? "border-ink/10 bg-slide/65 text-ink/66" : "border-moss/18 bg-fog/35 text-ink/78")}>
         <ul className="flex list-disc flex-col gap-2 pl-4 text-sm leading-6">
           {visibleItems.map((item) => (
@@ -1582,7 +1588,7 @@ function KeyValueField({ label, items, empty }: { label: string; items?: Record<
   const entries = Object.entries(items ?? {}).filter(([, value]) => value.trim().length > 0);
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/68">{label}</p>
+      <p className="text-xs font-semibold text-ink/68">{label}</p>
       <div className="rounded-sm border border-moss/18 bg-fog/35 p-3 text-ink/78">
         {entries.length ? (
           <dl className="flex flex-col gap-3 text-sm leading-6">
@@ -1619,7 +1625,7 @@ function extractionRowsNeedRefresh(rows: EvidenceExtraction[]) {
 function Field({ label, value, emphasis }: { label: string; value: string; emphasis?: boolean }) {
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/68">{label}</p>
+      <p className="text-xs font-semibold text-ink/68">{label}</p>
       <p className={cn("rounded-sm border p-3 text-sm leading-6", emphasis ? "border-moss/25 bg-fog/35 text-ink/82" : "border-ink/10 bg-slide/65 text-ink/72")}>
         {value}
       </p>

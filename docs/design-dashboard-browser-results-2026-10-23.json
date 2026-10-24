@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-23",
+  "scope": "Final minimal research dashboard redesign browser confirmation",
+  "environment": {
+    "frontend": "http://127.0.0.1:3002",
+    "api": "http://127.0.0.1:8002",
+    "data": "Temporary frozen fixture store",
+    "inference": "Deterministic fixture completion only; outbound inference blocked",
+    "production_mutations": false
+  },
+  "workflow_suite": {
+    "command": "TRIALLENS_FUNCTIONAL_TESTS=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3002 npm run test:e2e",
+    "passed": 13,
+    "failed": 0,
+    "duration_seconds": 12.3,
+    "coverage": [
+      "Workspace creation/reopen and validation",
+      "Source/review/numerical filters",
+      "Extraction inspection and persisted review",
+      "Scoped Ask and follow-ups",
+      "Treatment and ambiguous-reference guards",
+      "Brief save/remove/export and persistence",
+      "Theme persistence",
+      "Responsive tab keyboard direction",
+      "Mobile scrolling and touch target",
+      "Recoverable errors",
+      "Hosted provider and allowance disclosures"
+    ]
+  },
+  "manual": {
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "document_scroll_width": 1440
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "document_scroll_width": 390
+      },
+      {
+        "width": 320,
+        "height": 844,
+        "document_scroll_width": 320
+      }
+    ],
+    "mobile_theme_control": {
+      "width": 44,
+      "height": 44,
+      "right_at_320": 306
+    },
+    "text_enlargement": {
+      "method": "Doubled computed font sizes of rendered HTML elements after snapshot; stronger than changing root rem size for px-sized typography",
+      "factor": 2,
+      "viewport_width": 390,
+      "document_scroll_width": 390,
+      "header_y": 0,
+      "header_height": 65,
+      "theme_right": 376,
+      "status_font_px": 24,
+      "status_line_height_px": 40.8,
+      "controls": "Source select grows to47px; multiline input scrolls internally; no usage/disclosure overlap observed"
+    },
+    "reduced_motion": true,
+    "idle_running_animations": 0,
+    "keyboard_focus": {
+      "observed": "Ask tab after Tab key",
+      "outline": "1px solid rgb(86,207,193)",
+      "offset_px": 3
+    },
+    "console_errors": 0,
+    "console_warnings": 0,
+    "settled_capture_method": "After each tab selection wait650ms, blur active element, instant scrollTo0, wait650ms; viewport capture only. Each final normal capture recorded scrollY0/headerY0/headerHeight65."
+  },
+  "contrast": {
+    "method": "WCAG relative luminance using actual computed text and surface colors; alpha backgrounds composited over canvas",
+    "light": {
+      "body_canvas": 14.79,
+      "muted_canvas": 5.98,
+      "muted_card": 6.26,
+      "primary_button": 6.04,
+      "input_border_card": 3.43,
+      "source_faers_disclaimer": 12.7,
+      "evidence_row_safety": 6.01,
+      "brief_safety": 5.65
+    },
+    "dark": {
+      "body_canvas": 15.85,
+      "muted_canvas": 9.34,
+      "muted_card": 8.65,
+      "primary_button": 7.99,
+      "input_border_card": 4.81,
+      "source_faers_disclaimer": 13.43,
+      "evidence_row_safety": 8.49,
+      "brief_safety": 7.88
+    },
+    "settled_dark_usage_color": "#acbdc5"
+  },
+  "screenshots": [
+    "output/playwright/design-final-viewport-desktop-evidence.png",
+    "output/playwright/design-final-viewport-desktop-ask.png",
+    "output/playwright/design-final-viewport-desktop-brief.png",
+    "output/playwright/design-final-viewport-mobile-ask.png",
+    "output/playwright/design-final-viewport-mobile-dark-ask.png",
+    "output/playwright/design-final-viewport-mobile-text200.png"
+  ],
+  "limitations": [
+    "Deterministic browser responses verify plumbing and presentation, not model answer quality.",
+    "Source safety checks use the frozen m0-real-metformin workspace; browser workspace-list response narrowed to expose that fixture only, without changing underlying evidence.",
+    "Text-only enlargement is a browser stress test, not platform assistive-technology certification.",
+    "Early full-page screenshots contain sticky-header/scroll timing artifacts; final settled viewport screenshots are authoritative for visual review."
+  ]
+}

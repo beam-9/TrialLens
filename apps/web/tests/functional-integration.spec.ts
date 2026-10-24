@@ -47,6 +47,7 @@ test.describe("isolated UI to proxy to API functionality", () => {
     await expect(dialog).toContainText("Checked");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
+    await page.locator("summary").filter({ hasText: "Review and numerical filters" }).click();
     await page.getByRole("button", { name: "Review filter: Checked", exact: true }).click();
     await expect(page.getByRole("row")).toHaveCount(2);
     await page.getByRole("button", { name: "Review filter: Not checked", exact: true }).click();
@@ -80,7 +81,7 @@ test.describe("isolated UI to proxy to API functionality", () => {
     expect(follow.previous_answer_id).toBe(first.id);
     expect(follow.source_types).toEqual(["pubmed"]);
     await expect(page.locator("#answer-result")).toContainText("Explain that more simply");
-    await page.locator("#answer-result").locator("..").getByRole("button", { name: "Save to brief", exact: true }).click();
+    await page.locator("#answer-result").getByRole("button", { name: "Save to brief", exact: true }).click();
     await expect(page.getByRole("button", { name: "Remove from brief", exact: true })).toBeVisible();
     await page.getByRole("tab", { name: "Brief", exact: true }).click();
     await expect(page.locator(".brief-saved-answer")).toContainText("Explain that more simply");

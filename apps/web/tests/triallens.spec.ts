@@ -54,7 +54,7 @@ const answerFixture = {
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Follow the evidence." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Research workspace", exact: true })).toBeVisible();
 });
 
 test("persists the user's light and dark theme choice", async ({ page }) => {
@@ -72,6 +72,12 @@ test("persists the user's light and dark theme choice", async ({ page }) => {
   await page.reload();
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(page.getByRole("button", { name: "Switch to light mode" })).toBeVisible();
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const durations = await page.locator(".theme-toggle, .workspace-rail-item").evaluateAll(elements =>
+    elements.flatMap(element => getComputedStyle(element).transitionDuration.split(",").map(value => parseFloat(value))),
+  );
+  expect(durations.every(seconds => seconds <= 0.001)).toBe(true);
 });
 
 test("opens a real workspace and exposes every evidence view", async ({ page }) => {
@@ -79,9 +85,17 @@ test("opens a real workspace and exposes every evidence view", async ({ page }) 
   await expect(page.getByLabel("Drug or intervention")).toBeVisible();
   await expect(page.getByRole("button", { name: "Build workspace" })).toBeEnabled();
 
-  for (const [linkName, tabName] of [["Ask", "Ask"], ["Sources", "Sources"], ["Workspace", "Evidence"]] as const) {
-    await page.getByRole("link", { name: linkName, exact: true }).click();
+  for (const [tabName, anchor] of [["Ask", "ask"], ["Sources", "sources"], ["Brief", "brief"], ["Reliability", "reliability"], ["Evidence", "workspace"]] as const) {
+    await page.getByRole("tab", { name: tabName, exact: true }).click();
     await expect(page.getByRole("tab", { name: tabName, exact: true })).toHaveAttribute("aria-selected", "true");
+    await expect(page).toHaveURL(new RegExp(`#${anchor}$`));
+    // A completed scroll must not replace the user's view with Evidence.
+    await page.waitForTimeout(500);
+    await expect(page.getByRole("tab", { name: tabName, exact: true })).toHaveAttribute("aria-selected", "true");
+    await expect(page).toHaveURL(new RegExp(`#${anchor}$`));
+    await page.reload();
+    await expect(page.getByRole("tab", { name: tabName, exact: true })).toHaveAttribute("aria-selected", "true");
+    await expect(page).toHaveURL(new RegExp(`#${anchor}$`));
   }
 
   const recentWorkspace = page.locator(".recent-workspace-button").first();
@@ -108,6 +122,11 @@ test("opens a real workspace and exposes every evidence view", async ({ page }) 
     await tab.click();
     await expect(tab).toHaveAttribute("aria-selected", "true");
     await expect(page.getByRole("tabpanel", { name: tabName })).toContainText(heading);
+    if (tabName === "Ask") {
+      await page.waitForTimeout(500);
+      await expect(tab).toHaveAttribute("aria-selected", "true");
+      await expect(page).toHaveURL(/#ask$/);
+    }
   }
 
   await page.getByRole("tab", { name: "Brief", exact: true }).click();
@@ -117,12 +136,29 @@ test("opens a real workspace and exposes every evidence view", async ({ page }) 
   expect(await page.getByRole("progressbar").count()).toBeGreaterThan(0);
 });
 
+test("keeps recent workspaces in place while moving the current selection", async ({ page }) => {
+  const items = page.locator(".recent-workspace-button");
+  await expect.poll(() => items.count()).toBeGreaterThan(1);
+  const ids = await items.evaluateAll(elements => elements.map(element => element.getAttribute("data-workspace-id")));
+  expect(ids.every(Boolean)).toBe(true);
+
+  for (const id of [ids[1], ids[0]]) {
+    const selected = page.locator(`.recent-workspace-button[data-workspace-id="${id}"]`);
+    await selected.click();
+    await expect(page.locator(".workspace-context")).toBeVisible();
+    await expect(selected).toHaveAttribute("aria-current", "true");
+    await expect(page.locator(".recent-workspace-button[aria-current=true]")).toHaveCount(1);
+    await expect.poll(() => items.evaluateAll(elements => elements.map(element => element.getAttribute("data-workspace-id")))).toEqual(ids);
+  }
+});
+
 test("distills Ask results and keeps complete evidence behind disclosures", async ({ page }) => {
   await page.locator(".recent-workspace-button").first().click();
   await expect(page.getByRole("table")).toBeVisible({ timeout: 20_000 });
   await page.route("**/workspaces/*/ask", (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(answerFixture) }));
 
   await page.getByRole("tab", { name: "Ask", exact: true }).click();
+  await page.locator("summary").filter({ hasText: "Suggested questions" }).click();
   await page.getByRole("button", { name: "What are the main benefits?", exact: true }).click();
   await page.getByRole("button", { name: "Answer with citations", exact: true }).click();
 
@@ -163,6 +199,7 @@ test("keeps the mobile evidence workspace within the viewport", async ({ page })
   expect(toggleBox?.width).toBeGreaterThanOrEqual(44);
   expect(toggleBox?.height).toBeGreaterThanOrEqual(44);
 
+  await page.locator("summary").filter({ hasText: "Recent workspaces" }).click();
   await page.locator(".recent-workspace-button").first().click();
   await expect(page.getByRole("table")).toBeVisible({ timeout: 20_000 });
   const tableRegion = page.getByRole("region", { name: "Scrollable evidence table" });

@@ -2,7 +2,9 @@
 
 ## Decision
 
-The functional repairs below are suitable to retain. **Answer-quality promotion and design progression are not approved yet.** Hosted candidate prompts improved some coverage but introduced material comparison errors; production instructions remain byte-for-byte the preceding baseline. The goal remains active. No deployment or aesthetic changes were made.
+The functional repairs below are suitable to retain. **Answer-quality promotion remains blocked by the semantic findings below.** Hosted candidate prompts improved some coverage but introduced material comparison errors; production instructions remain byte-for-byte the preceding baseline. The goal remains active and deployment has not occurred.
+
+The user subsequently authorized design work while waiting for the free inference allowance to reset and approved **A — Registry**, a minimal evidence-first research dashboard. This supersedes the earlier decision to defer design. The redesign preserves the API workflows and answer safeguards; browser checks use isolated fixed answers and do not establish model-answer quality. See the design verification report for the completed design scope and remaining release risks.
 
 ## Functional repairs
 

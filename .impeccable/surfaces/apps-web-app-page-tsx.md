@@ -2,48 +2,53 @@
 version: 1
 slug: "apps-web-app-page-tsx"
 primary_target: "apps/web/app/page.tsx"
-related_targets: ["apps/web/app/layout.tsx","apps/web/app/globals.css"]
+related_targets: ["apps/web/app/layout.tsx", "apps/web/app/globals.css"]
 ---
 
 # TrialLens primary workspace
 
 ## Scope and mode
 
-- Target: `apps/web/app/page.tsx`
-- Mode: Operate
-- Surface: the single-page workspace launcher and research evidence workspace
+- Target: `apps/web/app/page.tsx`; related implementation: `apps/web/app/globals.css` and `apps/web/app/layout.tsx`.
+- Mode: Operate; user-authorized replacement visual world.
+- Surface: single-page research dashboard for biomedical researchers and evidence reviewers.
 
 ## Audience, job, action, and constraints
 
-- Biomedical researchers and evidence reviewers define a condition and intervention, retrieve public evidence, inspect extracted source rows, ask cited questions, and review source detail.
-- The primary action is `Build workspace`. Reopening a prior workspace is secondary.
-- Preserve every existing API workflow, route anchor, filter, review state, loading state, empty state, and error state.
-- Keep the medical-scope disclaimer and do not invent evidence or commercial claims.
-- Ship persistent light and dark modes with a keyboard-accessible switch in the top-right utility area.
+Create or reopen a condition/intervention workspace, inspect extracted evidence, ask scoped citation-grounded questions, inspect source passages, and collect selected answers in Brief. Build workspace is the creation action; existing workspaces remain accessible from the index or mobile recent-workspace disclosure.
+
+Preserve API contracts, route anchors, filters, review actions, loading/empty/error states, document inspection, conversations, usage limits, saved answers, and brief export. Sources include PubMed, ClinicalTrials.gov, FDA labels, and FDA adverse-event style records. Deterministic sample fallbacks remain distinguishable from live evidence. TrialLens is evidence navigation only, not medical advice or clinical decision support. Answer quality and deployment remain pending; visual completion does not establish either.
 
 ## Approved direction
 
-- Direction: Evidence Ribbon, composition C.
-- Approved comp: `.impeccable/mocks/evidence-ribbon-c.png`.
-- Memorable moment: one diagonal provenance current links the research focus, four source families, extraction workspace, and selected-source detail.
-- Carry forward from composition B: source streams visibly converge before synthesis.
+- Chosen world: **A — Registry / The Evidence Registry**; grounded direction 6, seed `7c7f8aa4`.
+- User language: minimal, clean, intuitive research dashboard; not cluttery.
+- Approved comp: `/Users/beam.t/.codex/generated_images/01a079a4-6b0c-7d33-a374-a82d0b7fa0a6/exec-cbf87a13-1352-46fd-8ea4-dd3c269e89e1.png` (A only).
+- Built direction contract: `apps/web/app/layout.tsx`.
+- Global visual authority: `DESIGN.md`; sidecar: `.impeccable/design.json`.
 
 ## Fidelity inventory
 
-| Ingredient | Commitment | Medium |
-| --- | --- | --- |
-| Navigation | 64-72px, single line, wordmark left, primary anchors centered/right, theme switch at far right | semantic HTML and Lucide icons |
-| Display type | compressed grotesk silhouette, high weight, maximum 6rem, no serif | local `Arial Narrow` style stack with system fallback |
-| Body type | neutral sans with clear dense-data legibility | existing local Geist font plus system fallback |
-| Evidence current | wide diagonal field with four thin provenance streams converging into one | responsive CSS geometry and motion-safe transforms |
-| Workspace launcher | crisp labels and inputs inside a softly irregular flow zone, not a floating generic card | semantic form and CSS mask/radius |
-| Application shell | narrow vertical tab rail on desktop, horizontal scrollable rail on mobile, broad content field | existing Base UI tabs and semantic content |
-| Selected source | right-side inspection sheet preserving focus and keyboard behavior | existing Base UI sheet |
-| Theme | cool near-white light mode and deep graphite dark mode; mineral teal remains the only accent | CSS semantic tokens and persisted class preference |
-| Corners and lines | 14-18px panels, small pills only for compact statuses, 1px rules | shared CSS tokens |
-| Elevation | soft offset depth without glow; borders and shadows are not stacked indiscriminately | shared CSS tokens |
-| Motion | one authored source-convergence entrance plus direct interaction feedback | Framer Motion and reduced-motion fallbacks |
+| Ingredient | Implemented expression |
+| --- | --- |
+| First viewport | 72px desktop header with compact builder, 216px persistent research index, dominant evidence table and right inventory; 64px mobile header |
+| Typography | Geist throughout; compact 25px introduction, 20px view headings, readable 15px answer text |
+| Palette | Cool near-white and gray surfaces, graphite text, restrained teal; semantic dark theme |
+| Working panels | Flat open sections, thin separators, regular small corners, no decorative hero |
+| Index | Five views with matching hash/reload state; stable workspace entries with a moving selection highlight; source counts beside Evidence and in the index for other views |
+| Evidence | Source-type filters, disclosed review filters, inspectable extraction table and source sheet |
+| Ask | Question composer, one readable cited answer, caveats, source links, optional supporting disclosures and expandable history |
+| Brief | Explicitly saved research answers, export/remove controls, disclosed workspace context |
+| Mobile | Sticky horizontal tab strip; loaded creation collapsed into New workspace; stacked fields, wrapped content, local table scrolling |
+| Theme | Accessible switch, localStorage and cookie persistence, server cookie initialization, system fallback |
+| Motion | Framer shared-layout selection spring 440/38; hover 2px/180ms; pane 240ms; answer reveal 180ms; GSAP inventory 220ms/25ms stagger; cleanup and reduced-motion support |
 
-## Unresolved decisions
+## Evidence and status
 
-- None blocking. The comp's numbered instructional labels will not be copied because the live workflow and controls already make the order explicit.
+Measured browser QA is recorded in `docs/design-dashboard-browser-results-2026-10-23.json`. Rendered evidence is recorded in `output/playwright/design-final-viewport-desktop-evidence.png`, `output/playwright/design-final-viewport-desktop-ask.png`, `output/playwright/design-final-viewport-desktop-brief.png`, `output/playwright/design-final-viewport-mobile-ask.png`, `output/playwright/design-final-viewport-mobile-dark-ask.png`, and `output/playwright/design-final-viewport-mobile-text200.png`.
+
+An independent fresh finish review passed all five areas with no material findings before this documentation pass. This records that review result without asserting biomedical answer quality or deployment readiness. Documentation was extracted from the implemented CSS, page, layout direction contract, PRODUCT.md, and shared controls; no new browser review was performed during documentation.
+
+## Latest interaction verification
+
+Opening a workspace updates metadata in place and retains entry order. Related evidence and conversation load before display changes. Current selection is a no-op. Existing desktop switches preserve scroll position. All five view hashes restore selection on reload. Workspace labels use unitless line spacing; the table uses 58em minimum width and scalable text/actions for enlarged type. See docs/design-compact-browser-results-2026-10-23.json for measured motion and confirmation evidence.

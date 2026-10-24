@@ -1,268 +1,200 @@
 ---
 name: TrialLens
-description: A cool-mineral evidence workspace where source provenance stays visible before synthesis.
+description: A minimal evidence registry for biomedical research.
 colors:
-  primary: "var(--primary)"
-  primary-foreground: "var(--primary-foreground)"
-  background: "var(--background)"
-  foreground: "var(--foreground)"
-  card: "var(--card)"
-  secondary: "var(--secondary)"
-  muted-foreground: "var(--muted-foreground)"
-  accent: "var(--accent)"
-  destructive: "var(--destructive)"
-  border: "var(--border)"
-  input: "var(--input)"
-  ring: "var(--ring)"
+  primary: "rgb(0 111 105)"
+  primary-foreground: "#fff"
+  background: "rgb(248 250 251)"
+  foreground: "rgb(26 38 43)"
+  card: "rgb(255 255 255)"
+  secondary: "rgb(240 244 245)"
+  accent: "rgb(229 242 239)"
+  muted-foreground: "#52636b"
+  destructive: "rgb(173 52 63)"
+  border: "#dbe3e6"
+  input: "#788e97"
+  dark-primary: "rgb(86 207 193)"
+  dark-primary-foreground: "#092b28"
+  dark-background: "rgb(16 23 27)"
+  dark-foreground: "rgb(234 241 244)"
+  dark-card: "rgb(21 31 36)"
+  dark-secondary: "rgb(27 39 45)"
+  dark-accent: "rgb(28 58 57)"
+  dark-muted-foreground: "#acbdc5"
+  dark-destructive: "rgb(250 149 158)"
+  dark-border: "#35464e"
+  dark-input: "#768d98"
 typography:
-  display:
-    fontFamily: 'var(--font-display), "Arial Narrow", sans-serif'
-    fontSize: "clamp(4.3rem, 8vw, 6rem)"
-    fontWeight: 500
-    lineHeight: 0.87
-    letterSpacing: "-0.025em"
   headline:
-    fontFamily: 'var(--font-display), "Arial Narrow", sans-serif'
-    fontSize: "3rem"
-    fontWeight: 500
-    lineHeight: 0.98
-    letterSpacing: "-0.04em"
+    fontFamily: 'var(--font-sans), ui-sans-serif, system-ui, sans-serif'
+    fontSize: "25px"
+    fontWeight: 650
+    lineHeight: 1.3
+    letterSpacing: "-0.03em"
   title:
-    fontFamily: 'var(--font-sans), "Helvetica Neue", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "clamp(1.4rem, 2.6vw, 2rem)"
-    fontWeight: 690
-    lineHeight: 1.08
-    letterSpacing: "-0.028em"
+    fontFamily: 'var(--font-sans), sans-serif'
+    fontSize: "20px"
+    fontWeight: 600
+    lineHeight: 1.4
+    letterSpacing: "-0.025em"
   body:
-    fontFamily: 'var(--font-sans), "Helvetica Neue", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "1rem"
+    fontFamily: 'var(--font-sans), ui-sans-serif, system-ui, sans-serif'
+    fontSize: "15px"
     fontWeight: 400
-    lineHeight: 1.55
-    letterSpacing: "normal"
+    lineHeight: 1.85
   label:
-    fontFamily: 'var(--font-sans), "Helvetica Neue", ui-sans-serif, system-ui, sans-serif'
-    fontSize: "0.75rem"
-    fontWeight: 640
-    lineHeight: 1.2
-    letterSpacing: "normal"
+    fontFamily: 'var(--font-sans), ui-sans-serif, system-ui, sans-serif'
+    fontSize: "12px"
+    fontWeight: 550
 rounded:
-  sm: "10px"
-  rail: "11px"
-  md: "12px"
-  lg: "14px"
-  xl: "16px"
-  panel: "18px"
-  flow: "20px 68px 24px 56px"
-  pill: "999px"
+  badge: "5px"
+  filter: "6px"
+  control: "7px"
+  quiet: "8px"
+  container: "9px"
+  composer: "10px"
 spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "12px"
-  lg: "16px"
-  xl: "24px"
-  2xl: "32px"
-  3xl: "40px"
+  compact: "8px"
+  control: "12px"
+  content: "16px"
+  composer: "18px"
+  section: "24px"
+  wide: "32px"
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-foreground}"
-    typography: "{typography.label}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.control}"
     padding: "0 16px"
-    height: "48px"
-  button-outline:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.label}"
-    rounded: "{rounded.sm}"
-    padding: "0 12px"
-    height: "36px"
+    height: "42px"
   input-workspace:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.body}"
-    rounded: "{rounded.md}"
-    padding: "0 14px"
-    height: "48px"
-  card-surface:
     backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.panel}"
-    padding: "24px"
-  tab-active:
+    rounded: "{rounded.control}"
+    padding: "0 12px"
+    height: "42px"
+  navigation-active:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.primary}"
-    typography: "{typography.label}"
-    rounded: "{rounded.rail}"
-    padding: "10px 12px"
-    height: "42px"
+    rounded: "{rounded.control}"
+    padding: "9px 12px"
+  answer-composer:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.composer}"
+    padding: "18px"
 ---
 
 # Design System: TrialLens
 
 ## Overview
 
-**Creative North Star: "The Evidence Ribbon"**
+**Creative North Star: "The Evidence Registry"**
 
-The Evidence Ribbon makes evidence provenance the composition. Cool mineral surfaces, graphite type, and one teal signal create a trustworthy, exact workspace that feels softly irregular rather than rigid; the visual world stays sober enough for biomedical review without becoming sterile.
+TrialLens is a minimal, clean, intuitive research dashboard. A persistent research index, compact creation controls, flat working panels, and readable source rows give the evidence the largest share of the canvas. The user chose Registry, composition A, as the replacement visual world.
 
-Four source families visibly converge into inspectable extraction rows before synthesis. Large flowing fields carry the path through the product, while the controls inside them remain compact, precise, and immediately legible. Atmospheric or cinematic research dashboards and generic equal-weight card grids are explicit anti-references.
+The voice is sober and source-aware. Hierarchy comes from type, spacing, thin separators, and a restrained teal signal. Supporting details remain inspectable through disclosures rather than occupying equal visual weight with the current research task.
 
 **Key Characteristics:**
 
-- Provenance remains visible from source families to extraction.
-- One mineral teal signal organizes action, focus, and evidence flow.
-- Cool paper and fog layers support graphite data typography in both themes.
-- Softly irregular fields frame the entry sequence; controls remain exact and compact.
-- Tonal layering carries hierarchy; shadows are reserved for floating or focal surfaces.
+- A persistent index anchors five research views.
+- Flat panels and thin rules organize evidence.
+- Geist carries headings, controls, and reading text.
+- Teal identifies actions, selection, citations, and focus.
+- Informative motion acknowledges new answers and changed inventory.
 
 ## Colors
 
-The palette uses one mineral teal signal against graphite ink, cool paper, mineral fog, and a semantic safety red; the same semantic roles invert deliberately in dark mode.
+One restrained teal accent sits against cool near-white surfaces and graphite text; the dark theme preserves the same semantic roles. The frontmatter records the actual light and dark values from `apps/web/app/globals.css`, without a synthesized color ramp.
 
 ### Primary
 
-- **Mineral Teal** (`primary`): Primary action, active navigation, focus, evidence streams, source convergence, and compact positive status.
-- **Primary Foreground** (`primary-foreground`): High-contrast text and icons placed on the mineral teal signal.
-
-### Secondary
-
-- **Mineral Slide** (`secondary`): Quiet rail backgrounds, grouped controls, and low-emphasis structured surfaces.
-- **Mineral Fog** (`accent`): Hover feedback, selected-area tint, and softly layered evidence fields.
+- **Registry Teal** (`primary`): Primary actions, selected navigation, citations, and inventory feedback.
+- **On Teal** (`primary-foreground`): Text and icons on the solid primary action.
 
 ### Neutral
 
-- **Cool Canvas** (`background`): The page ground and input fill; it becomes deep graphite in dark mode.
-- **Graphite Ink** (`foreground`): Primary text, icons, rules through alpha, and the occasional ink-led synthesis action.
-- **Cool Paper** (`card`): Cards, launcher, provenance band, workspace frame, and inspection surfaces.
-- **Muted Ink** (`muted-foreground`): Secondary copy and metadata that must remain readable but visually subordinate.
-- **Mineral Border** (`border`): Default 1px rules and component outlines.
-- **Mineral Input** (`input`): Stronger field and disabled-control outlines.
+- **Cool Canvas** (`background`): The working canvas.
+- **Graphite Ink** (`foreground`): Primary text and iconography.
+- **Paper** (`card`): Header, fields, tables, composer, and inspection surfaces.
+- **Cool Gray** (`secondary`): Sidebar, table headings, and quiet explanatory blocks.
+- **Teal Wash** (`accent`): Selected navigation and filters, plus citation hover.
+- **Muted Ink** (`muted-foreground`): Supporting copy, metadata, and labels.
+- **Separator** (`border`): Thin surface boundaries and row divisions.
+- **Field Stroke** (`input`): Stronger input boundaries.
+- **Review Red** (`destructive`): Error and review attention; pair with explicit text.
 
-### Semantic
-
-- **Safety Red** (`destructive`): Errors, safety limitations, and evidence states that require review; never general decoration.
-- **Focus Teal** (`ring`): The visible keyboard-focus system, kept semantically aligned with the primary signal.
-
-### Named Rules
-
-**The One Signal Rule.** Mineral teal is the only non-semantic accent; reserve safety red for risk, error, and uncertainty that needs attention.
-
-**The Theme Parity Rule.** Light and dark modes preserve role, hierarchy, and contrast; dark mode is a semantic remap, not a decorative alternate palette.
+**The Semantic Theme Rule.** Use the CSS semantic variables in components so light and dark roles change together. The focus token `--ring` aliases `--primary` in both themes.
 
 ## Typography
 
-**Display Font:** League Gothic (with Arial Narrow and sans-serif fallback)  
-**Body Font:** Geist (with Helvetica Neue, ui-sans-serif, system-ui, and sans-serif fallback)  
-**Label/Mono Font:** Geist; no separate mono face is used.
+Geist is loaded through `next/font/google` into `--font-sans`. Display and heading variables alias the same family; the implemented Registry has no separate display face. Use the frontmatter headline for the compact page introduction and title for view headings. At small widths the introduction becomes 23px and view headings 19px.
 
-**Character:** League Gothic gives the evidence path a compressed, declarative silhouette. Geist keeps controls, extraction rows, citations, and medical-scope language neutral and densely legible.
-
-### Hierarchy
-
-- **Display** (500, fluid 4.3–6rem, 0.87 line-height): Hero statements only; cap the line length near 7–9 characters to preserve the vertical silhouette.
-- **Headline** (500, fluid 2.2–3rem, 0.98 line-height): Major workspace view titles and large evidence landmarks.
-- **Title** (690, fluid 1.4–2rem, 1.08 line-height): Launcher, provenance, and section titles in the body family.
-- **Body** (400, 1rem, 1.55 line-height): Explanatory copy and primary reading text, generally constrained to 58ch or less near controls.
-- **Label** (640, 0.75rem, compact line-height): Field labels, rail labels, status readouts, and evidence metadata; uppercase with wide tracking only for very small category labels.
-
-### Named Rules
-
-**The Compression Rule.** Use League Gothic for large navigational or section landmarks only; keep evidence content in Geist so dense rows remain legible.
+The main answer uses the body role, constrained to 74ch. Answer questions use 20px/1.5 at weight 600, becoming 18px on small screens. Table cells use 13px/1.55, explanatory copy commonly uses 13px/1.65–1.8, and secondary metadata uses 11–12px. Source counts use tabular numerals. Preserve this reading hierarchy when adding research content.
 
 ## Layout
 
-The system uses a full-width canvas with centered working regions capped at 1480px. A sticky utility header is 72px tall on larger screens and 64px on small screens. The first viewport places the compressed headline to the left and the workspace launcher inside the central evidence flow; the provenance summary rises across the seam before the application shell.
+The desktop shell is capped at 1600px. A sticky 72px header contains the compact creation form, wordmark and theme switch. A 216px persistent left index contains the five research views, stable workspace entries and medical-scope note. Main padding is 28px 32px 48px. Loaded workspaces begin with their topic and evidence; the introduction becomes screen-reader-only. On Evidence, source inventory sits in a 180px right column with a 24px gap. Other views keep inventory in the index. There is no marketing hero or duplicate header navigation. A ResizeObserver tracks the actual header height so sticky navigation follows enlarged text.
 
-The desktop application shell pairs a 184px vertical tab rail with one broad content field. At 1180px, launcher controls wrap to two columns with the action spanning the row. At 900px, the hero becomes one column and the rail becomes a sticky, horizontally scrollable strip. At 680px, launcher fields stack, the primary action fills the width, the header simplifies, provenance counts become a two-column grid, and data tables retain horizontal scroll rather than collapsing evidence fields.
+Below 1250px, Evidence inventory stacks below the table. At 1150px the index narrows to 200px and main horizontal padding becomes 24px. At 900px the header becomes 64px and creation moves into the main area; the shell becomes one column and the index becomes a sticky horizontal tab strip below the header. Recent workspaces move into the main creation area. After a workspace loads, mobile creation collapses into the New workspace disclosure, leaving the current research view prominent. At 600px, main padding becomes 20px 16px 36px; builder fields stack, actions and key touch targets reach 44px, and split brief/reliability content becomes one column. At 1500px main horizontal padding becomes 40px.
 
-Spacing follows a compact 8–16px control rhythm and a broader 24–40px structural rhythm. Thin 1px rules organize dense evidence; open gaps separate workflow stages. Responsive changes preserve the provenance sequence instead of merely shrinking the desktop arrangement.
-
-### Named Rules
-
-**The Visible Path Rule.** Keep the launcher, four source families, extraction shell, and cited inspection context in one continuous spatial story.
+The evidence table keeps a 58em minimum width, scaling with enlarged table text, inside its own horizontally scrollable container, with a mobile scroll hint. Long titles, questions, citations, and source metadata wrap. Keep min-width: 0 on grid content so text enlargement and narrow screens retain access to content.
 
 ## Elevation & Depth
 
-Depth is primarily tonal. Cool canvas, paper, slide, and fog surfaces separate layers without constant shadow; flat research cards and data rows use 1px rules. Two restrained ambient shadows are reserved for overlap and focus: soft framing (`0 24px 70px rgb(28 55 50 / 0.1)` light; `0 26px 76px rgb(0 0 0 / 0.28)` dark) and floating focus (`0 16px 42px rgb(25 51 47 / 0.13)` light; `0 18px 48px rgb(0 0 0 / 0.34)` dark). Neither uses glow.
+Working panels are flat: the active view has transparent background, no border, no radius, and no shadow. Table rows and content sections use thin separators; quiet explanations use tonal fills. The selected recent workspace uses a teal-wash shared-layout highlight with a faint inset 1px border. Selection moves between entries; reopening does not reorder them. The source inspection sheet is the elevated exception, with `-12px 0 44px rgb(0 20 26 / .12)` shadow and a `rgb(8 20 24 / .25)` overlay without blur.
 
-### Shadow Vocabulary
-
-- **Ambient Soft** (`--shadow-soft`): Provenance and workspace frames that overlap or rise from the canvas.
-- **Ambient Float** (`--shadow-float`): The focal workspace launcher and similarly important floating surfaces.
-
-### Named Rules
-
-**The Ambient Lift Rule.** Resting panels rely on tone and 1px rules; apply ambient shadow only to floating, overlapping, or focal surfaces.
+**The Flat Workspace Rule.** Use open space, rules, and tonal grouping for normal research content; reserve floating depth for inspection overlays.
 
 ## Shapes
 
-The form language pairs flowing asymmetry with precise controls. Large evidence fields use softly irregular percentage radii, and the launcher uses an asymmetric `20px 68px 24px 56px` silhouette that tightens on mobile. Ordinary surfaces step through 14px source cards, 16px library cards, and 18px structural panels. Controls use 10–12px corners, the theme switch uses 14px, and true pills are reserved for compact statuses or the evidence spine. Borders remain 1px and low contrast.
-
-### Named Rules
-
-**The Flow-and-Precision Rule.** Soft irregularity belongs to large flow fields; controls and evidence containers use exact, modest radii.
+Small, regular corners define the Registry. Filters use the filter radius, navigation and creation controls use the control radius, quiet blocks and the theme switch use the quiet radius, table/alert containers use the container radius, and the composer uses the composer radius. Badges are compact labels with the badge radius rather than oversized pills. Structural research panels remain square and open.
 
 ## Components
 
-Components feel like precise research controls set against flowing asymmetric surfaces. Default states are quiet; hover, focus, active, review, and risk states become explicit without adding visual noise.
-
 ### Buttons
 
-- **Shape:** Compact library buttons use a 16px default radius, while task-specific research actions tighten to 10–12px. The primary launcher action is 48px tall with 16px horizontal padding.
-- **Primary:** Mineral teal background with primary-foreground text and a weight near 680; no resting shadow.
-- **Hover / Focus:** Hover darkens through `brightness(0.94)`; active presses by 1px. Keyboard focus uses a 3px mineral teal outline or ring with visible offset.
-- **Outline / Ghost / Destructive:** Outline controls use cool canvas or paper with a 1px mineral rule and fog hover. Ghost controls add tone only on hover. Destructive actions use a safety-red tint and matching focus treatment rather than a solid warning block by default.
-
-### Chips
-
-- **Style:** Compact source and review labels use slide or paper fills, short horizontal padding, small type, and pill or small control radii.
-- **State:** Selected or checked chips pair a teal fill or tint with explicit text. Needs-review states pair safety red with a written label; state never depends on color alone.
-
-### Cards / Containers
-
-- **Corner Style:** Source cards use 14px corners, library cards 16px, and major frames 18px.
-- **Background:** Paper carries primary content; canvas, slide, and fog alpha layers distinguish nested evidence without creating a grid of floating cards.
-- **Shadow Strategy:** Cards stay flat; only focal or overlapping frames use the ambient shadow vocabulary.
-- **Border:** A 1px low-contrast graphite or mineral rule is preferred for data-bearing containers.
-- **Internal Padding:** Compact cards use 12–16px; focal panels use 20–32px responsive padding.
+Creation uses a solid teal action, a compact label, and the primary button dimensions in frontmatter. Hover mixes 10% black into the primary color. Other shared variants include outline, secondary, ghost, destructive tint, and text link; choose the emphasis required by the action. Shared buttons transition background, text, and border color over 150ms. Disabled controls reduce opacity and prevent interaction. Shared button focus adds a 3px ring; the global keyboard outline is 2px with a 3px offset.
 
 ### Inputs / Fields
 
-- **Style:** Library fields are 32px high with a 16px radius; the primary workspace fields are 48px high with a 12px radius, 14px horizontal padding, a cool-canvas fill, and a 1px input border.
-- **Focus:** Border shifts to mineral teal with a 3px translucent teal halo.
-- **Error / Disabled:** Invalid fields use safety-red border and ring treatments. Disabled fields retain their structure, reduce opacity, and remove pointer interaction.
+Workspace fields use paper fill, field stroke and written labels. The desktop header variant uses 13px text, a 34px minimum height, automatic height and 6px block padding; mobile uses stacked 44px controls. The frontmatter records the base field geometry. Shared field focus uses the primary border and translucent 3px ring. The answer composer is a paper container around a vertically resizable textarea, with a minimum 80px text area and 15px/1.65 type. Its focus outline is 1px with a 5px offset. Preserve written labels, invalid states, and disabled feedback.
 
 ### Navigation
 
-The utility header is a single line with the wordmark left, restrained 14px links centered, a workspace readout near the right edge, and a 44px theme switch at the far right. Header links reveal a 1px teal underline on hover. The workspace rail uses 42px items with 11px corners; hover adds mineral fog, and the active view uses a teal tint plus teal text. Below 900px, the rail becomes a sticky horizontal scroller.
+The persistent index uses icons and 13px labels, a 40px minimum row, and a teal-wash active state with stronger weight. Hover uses a faint ink fill. At 900px it becomes horizontally scrollable with 42px minimum rows. Each view has a matching hash used by selection and hydration: #workspace, #ask, #sources, #brief and #reliability. Workspace labels use unitless 1.5 line spacing. Existing workspace switches retain list order and desktop scroll position; an opening indicator marks the pending entry.
 
-### Evidence Ribbon
+### Chips
 
-Four thin source streams converge into a single teal spine before the extraction workspace. The source lines reveal from left to right over 760ms with 90ms stagger; the spine follows over 900ms after a 380ms delay, using the same `cubic-bezier(0.16, 1, 0.3, 1)` easing. Reduced-motion mode resolves the streams immediately with no transform.
+Evidence filters pair visible pressed state with teal text, wash, and border. Additional review filters are behind a disclosure. Badges use 11px type, a 21px minimum height, and wrapping text; communicate review state in words as well as color.
 
-### Theme Toggle
+### Cards / Containers
 
-The theme toggle is a 44px square with a 14px radius, paper fill, 1px rule, and sun/moon icon transition. Hover introduces a fog fill and teal-tinted border; active scales to 0.97. The control remains keyboard accessible and persists the selected theme.
+View panels are open sections. The evidence table uses paper, a thin border, the container radius, shaded column headings, and row separators. Source titles, citations, review labels and row actions use scalable line heights; action heights grow with text. Horizontal overflow stays inside the table container. The answer composer is the principal bounded input region. Source lists and saved answers use separated rows rather than a grid of floating cards.
 
-### Named Rules
+### Answers and Brief
 
-**The Inspectable State Rule.** Every active, reviewed, risky, or selected state must pair color with visible text, structure, or iconography.
+Ask presents one readable answer with inline citation links, source links, generation notes, and a visible boundary or caveat when provided. Supporting evidence, method, and retrieved passages use disclosures. Conversation history uses compact expandable turns. Brief foregrounds explicitly saved research answers, with export and remove actions; workspace context is disclosed separately. Do not turn these affordances into claims about answer quality.
+
+Framer Motion shared-layout highlights use a spring with stiffness 440 and damping 38. Workspace hover moves 2px horizontally over 180ms. Incoming workspace/view content transitions opacity 0.94 to 1 and y 3 to 0 over 240ms; reduced motion removes travel. Workspace records, evidence and saved conversation commit together after loading. Framer Motion reveals a new answer from opacity 0.88 to 1 over 180ms with easeOut. Reduced motion removes the initial animation and sets duration to zero. GSAP acknowledges source inventory changes with y: 3 to 0, opacity 0.65 to 1, duration 220ms, 25ms stagger, and power2.out easing. Its scoped useGSAP context reverts on updates, matchMedia is reverted on cleanup, and transform/opacity are cleared after completion. The effect runs only for no-preference motion settings. Global reduced-motion CSS disables smooth scrolling and reduces animation/transition durations to 0.01ms.
+
+### Theme Toggle and Inspection
+
+The keyboard-accessible theme toggle is 36px square on desktop and 44px on small screens. It uses a quiet corner, paper fill, border, and sun/moon state. The chosen theme persists in localStorage and a one-year same-site cookie; the server reads the cookie for the initial root class. With no saved preference, the client uses the system preference. Source inspection uses the existing Base UI sheet with its focus and close behavior.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** keep provenance visible before any synthesis surface.
-- **Do** use mineral teal sparingly for action, focus, active state, and evidence flow.
-- **Do** use 14–18px radii for data surfaces and 10–12px radii for precise controls.
-- **Do** preserve semantic role and readable contrast across both light and dark themes.
-- **Do** retain the 3px visible focus treatment and reduced-motion fallback.
+- **Do** keep the current research view dominant beneath compact creation controls.
+- **Do** use Geist, thin separators, and regular compact corners.
+- **Do** preserve inspectable citations, source limits, and written review states.
+- **Do** use disclosures for supporting detail while keeping primary answers readable.
+- **Do** retain semantic themes, keyboard focus, mobile access, and reduced motion.
 
 ### Don't:
 
-- **Don't** turn the interface into an atmospheric or cinematic research dashboard.
-- **Don't** arrange the workflow as a generic equal-weight card grid.
-- **Don't** use safety red as a general accent or encode risk through color alone.
-- **Don't** stack a border and a heavy shadow on every surface.
-- **Don't** introduce serif display type or additional decorative font families.
+- **Don't** reintroduce a marketing hero, evidence ribbon, or separate condensed display face.
+- **Don't** fill the dashboard with equal-weight floating cards or decorative motion.
+- **Don't** use color alone to communicate review, error, or selected state.
+- **Don't** imply medical advice, validated answer quality, or completed deployment through visual copy.

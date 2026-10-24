@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-23",
+  "scope": "Compact research dashboard with stable recent workspaces and interaction motion",
+  "environment": {
+    "frontend": "http://127.0.0.1:3002",
+    "api": "http://127.0.0.1:8002",
+    "production_mutations": false,
+    "inference": "None: fixture completions deterministic and outbound inference blocked"
+  },
+  "tests": {
+    "initial_run": {
+      "passed": 10,
+      "failed": 4,
+      "cause": "Legacy350ms scroll fallback overwrote Ask hash with #workspace; removed by root"
+    },
+    "after_fix": {
+      "passed": 14,
+      "failed": 0,
+      "duration_seconds": 14.0
+    },
+    "new_regression_coverage": [
+      "Recent workspace IDs/order unchanged when selecting second then first entry; exactly one aria-current",
+      "Delayed500ms persistence of selected Ask view/hash after workspace loaded",
+      "Reduced-motion CSS transition durations <=1ms"
+    ],
+    "final_confirmation": {
+      "passed": 14,
+      "failed": 0,
+      "duration_seconds": 16.8,
+      "includes": "All five hashes survive reload, delayed selected-view persistence, stable workspace order and reduced-motion checks"
+    }
+  },
+  "motion": {
+    "method": "requestAnimationFrame samples while opening first then second recent workspace at1440px",
+    "normal": {
+      "samples": 61,
+      "distinct_highlight_y_positions": 29,
+      "start_y": 362,
+      "end_y": 430,
+      "hover_transform": "matrix(1, 0, 0, 1, 2, 0)",
+      "button_positions_before": [
+        {
+          "id": "m0-filtered-control",
+          "y": 361,
+          "height": 65
+        },
+        {
+          "id": "m0-real-metformin",
+          "y": 429,
+          "height": 65
+        }
+      ],
+      "button_positions_after": [
+        {
+          "id": "m0-filtered-control",
+          "y": 361,
+          "height": 65
+        },
+        {
+          "id": "m0-real-metformin",
+          "y": 429,
+          "height": 65
+        }
+      ]
+    },
+    "reduced": {
+      "samples": 31,
+      "highlight_y_positions": [
+        430,
+        362
+      ],
+      "intermediate_travel": false
+    },
+    "idle_running_animations": 0,
+    "measurement_note": "Frame samples precede the final label-line-height/table-text fixes; the motion implementation was unchanged. Final regression verifies stable order/selection and reduced-motion durations."
+  },
+  "layout": {
+    "desktop": {
+      "width": 1440,
+      "right_inventory": {
+        "left": 1228,
+        "right": 1408
+      },
+      "evidence": {
+        "left": 248,
+        "right": 1204
+      },
+      "column_gap": 24
+    },
+    "desktop_text200": {
+      "method": "Doubled computed font sizes on rendered HTML elements",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "headerY": 0,
+      "headerHeight": 99.984375,
+      "themeRight": 1416,
+      "observed_header_offset": "99.984375px"
+    },
+    "mobile320": {
+      "width": 320,
+      "scrollWidth": 320,
+      "headerY": 0,
+      "headerHeight": 65,
+      "themeRight": 306
+    },
+    "mobile_text200": {
+      "width": 390,
+      "scrollWidth": 390,
+      "headerY": 0,
+      "headerHeight": 65,
+      "themeRight": 376
+    }
+  },
+  "screenshots": [
+    "output/playwright/design-compact-final-desktop-evidence.png",
+    "output/playwright/design-compact-final-desktop-ask.png",
+    "output/playwright/design-compact-final-desktop-brief.png",
+    "output/playwright/design-compact-final-mobile-ask.png",
+    "output/playwright/design-compact-final-mobile-dark-ask.png",
+    "output/playwright/design-compact-final-desktop-text200.png",
+    "output/playwright/design-compact-final-mobile-text200.png",
+    "output/playwright/design-compact-confirm-desktop-evidence.png",
+    "output/playwright/design-compact-confirm-desktop-text200.png",
+    "output/playwright/design-compact-confirm-desktop-text200-actions.png"
+  ],
+  "pending_confirmation": [],
+  "limits": [
+    "Browser responses verify UI plumbing, not model quality.",
+    "QA-only workspace-list response exposes existing frozen fixtures; no underlying evidence edits.",
+    "Text enlargement is a stress check, not assistive-technology certification."
+  ],
+  "review_fixes": {
+    "view_hashes": "resolved: all five view/hash pairs pass reload assertions",
+    "workspace_labels": "resolved:24px font/36px line height,3px gap between title and intervention",
+    "table_text": "resolved:58em minimum width; enlarged table1624px scrolls inside container while document remains1440px; review labels43.2px and actions43.6\u201345.8px high"
+  },
+  "finish_review": "Original independent reviewer identified two P2 findings; final verdict and documentation completed in-thread after review agents hit usage limits. All identified findings resolved; no remaining material finding."
+}
