@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "status": "completed_source_backed_engineering_review_pending_independent_expert_review",
+  "assessment_type": "Independent passage-backed engineering adjudication against exact generation context, frozen inventory and rubric; not clinical validation",
+  "review_date": "2026-10-25 America/Vancouver",
+  "source_answers": "cloudflare-completed-status-2026-10-25-answers.json",
+  "source_answers_sha256": "0aba234bdc206365897bffdd7d13e01f90a3633fec90b883b9f68f0264fbff54",
+  "reviewed_cases": 3,
+  "verdict_counts": {
+    "supported": 1,
+    "partially_supported": 2,
+    "unsupported": 0
+  },
+  "critical_error_count": 1,
+  "draft_critical_error_count": 2,
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [
+          {
+            "category": "unsupported_claim",
+            "claim": "Metformin “may have benefits beyond glycemic control, such as potentially slowing down clonal expansion of clonal hematopoiesis,” without the preclinical qualifier in the main text.",
+            "source_external_id": "PubMed:42374733",
+            "source_passage": "“Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH.”",
+            "rationale": "The draft presents a preclinical possibility as a potential clinical benefit. Its uncertainty says further research is needed, but never preserves that the evidence is preclinical."
+          },
+          {
+            "category": "unsupported_claim",
+            "claim": "“Individual patient factors, such as socioeconomic disadvantage, may affect the efficacy and tolerability of metformin.”",
+            "source_external_id": "PubMed:42377443",
+            "source_passage": "Among people with prediabetes who used an intervention, high socioeconomic disadvantage was associated with greater uptake of lifestyle intervention only versus metformin only; the study analyzed use/uptake, not efficacy or tolerability.",
+            "rationale": "The draft turns an observational intervention-uptake association into an unsupported claim about treatment efficacy and tolerability."
+          }
+        ],
+        "rationale": "Draft correctly includes the single-ingredient adult label indication as adjunct to diet/exercise and common adverse reactions. It accurately says the completed CTG record is an investigation whose results are not in the supplied excerpt, rather than treating the protocol as findings. However, it adds ungrounded efficacy/tolerability inference from the uptake paper and presents a preclinical CH finding as a possible clinical benefit. It says sources are incomplete; that caution does not cure those main-text claims.",
+        "relevance": "Mostly addresses benefits/limitations but introduces CH and socioeconomic claims without useful clinical support.",
+        "coverage": "Provides a broad label summary. It does not state optional B12 7% statistic, so no 29-week error applies.",
+        "attribution": "Citations identify the sources, but the uptake paper does not support metformin efficacy/tolerability and the review specifically qualifies the metformin/CH finding as preclinical.",
+        "followup_coherence": "No history in this case."
+      },
+      "claim": "The final states the label indication for adults with type 2 diabetes as an adjunct to diet/exercise and common GI reactions; it also says the trial and review add context without establishing effects beyond the label.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3; ClinicalTrials.gov:NCT05689684; PubMed:42374733",
+      "source_passage": "Label 3: ER metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes; common adverse reactions include diarrhea, nausea/vomiting, abdominal pain and constipation. In the same supplied label text, lactic acidosis and vitamin B12 deficiency are listed warnings and a 29-week trial observation reports approximately 7% with a decrease to subnormal B12. CTG text is a registry description of a study planned to investigate an AXOS-containing product with metformin. The CH review describes preclinical metformin findings.",
+      "rationale": "The final accurately states the adult indication and adjunct-to-diet/exercise qualifier. It lists common GI reactions, but that sentence has no inline citation adjacent to it. It refers to the CTG record and narrative review as additional context and says they do not establish effects beyond the label; it does not claim the study is ongoing or that results do not exist. The footer only says the excerpts are not comprehensive and that registry records may describe planned methods. The answer omits further label safety context (lactic-acidosis/B12 warnings and the 29-week, approximately 7% B12 observation), a breadth limitation for a question about main limitations; omission of the statistic is not itself an error or critical misstatement. The main answer is concise and avoids the draft’s unsupported social-efficacy/tolerability and clinical CH assertions.",
+      "missing_qualifiers": [
+        "Inline citation adjacent to common adverse-reaction claim",
+        "Additional serious safety limitations in the supplied label are omitted; no B12 percentage is stated, so no observation-window error applies"
+      ],
+      "relevance": "Answers indication and limitations and responsibly bounds what the trial/review add.",
+      "coverage": "Includes indication and common GI limitations but omits lactic-acidosis/B12 warning context available in the supplied label. No safety incidence or postmarketing frequency is claimed.",
+      "attribution": "The indication is cited to label 3. The common GI-reaction sentence is uncited locally. The final uses CTG/review only to state they add context without establishing effects beyond the label.",
+      "followup_coherence": "No history."
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "incorrect_absence_scope",
+          "claim": "“A clinical trial and a review discuss metformin’s use in type 2 diabetes, but don’t provide additional information on its effects.”",
+          "source_external_id": "PubMed:42374733",
+          "source_passage": "“Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH.”",
+          "rationale": "This categorical absence statement overlooks the review’s explicit preclinical effect information. The answer may correctly say the sources do not establish additional clinical effects, but “don’t provide additional information on its effects” is broader and is false against the supplied context. This is a false-absence claim, not a mere omission of an optional statistic."
+        }
+      ],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [],
+        "rationale": "The draft keeps the adult label indication and common GI effects and says the supplied evidence does not quantify benefit size. It does not say results are not yet available. It summarizes the trial/review as not showing additional effects beyond the label; this is cautious if interpreted as no additional established clinical effect, though it omits the review’s preclinical CH observation and is overbroad without that qualifier. It introduces CH detail and runs longer than needed for a simple follow-up.",
+        "relevance": "Somewhat diluted by additional CH background.",
+        "coverage": "Retains previous adult population and GI safety information; no serious warning appeared in the preceding final answer. No numerical safety statistic is asserted.",
+        "attribution": "Cites the narrative review but does not identify its CH observation as preclinical; uncertainty says the excerpts do not establish additional effects beyond the label.",
+        "followup_coherence": "Responds to the prior answer but expands rather than simply simplifying."
+      },
+      "claim": "The final simplifies to adult type 2 diabetes, diet/exercise, and common GI side effects, then says the trial and review do not provide additional information on effects.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3; ClinicalTrials.gov:NCT05689684; PubMed:42374733",
+      "source_passage": "Label supports indication and common GI reactions. Registry status is COMPLETED; protocol summary describes a planned AXOS-plus-metformin investigation. The review says preclinical metformin may slow CH expansion.",
+      "rationale": "The main label explanation is plain and preserves the previous answer’s adult population and GI safety limitation. No serious safety caveat was present in the preceding final answer, so there is no failure to preserve one here. It does not say the trial is ongoing. However, the categorical statement that the trial and review provide no additional information on metformin effects is false because the review contains a preclinical effect finding. A narrower statement that the excerpts do not establish additional clinical effects would be accurate. This is a critical incorrect-absence-scope error. No optional numerical statistic is omitted in a way that creates an error.",
+      "missing_qualifiers": [
+        "Qualify the absence as no additional measured/clinical effect established, while acknowledging the review’s preclinical finding."
+      ],
+      "relevance": "The main text is a relevant simplification; the final sentence overstates absence of information.",
+      "coverage": "Preserves the prior common GI limitation and adult population. It omits the trial/review detail rather than presenting a false estimate; the false-absence wording is the material issue.",
+      "attribution": "The label citation supports the indication. The CTG and PubMed citations identify context, but the PubMed review does contain a preclinical metformin effect statement.",
+      "followup_coherence": "Plain-language wording is effective, but the final sentence incorrectly summarizes prior source evidence."
+    },
+    {
+      "case_id": "protocol-deaths",
+      "support_verdict": "supported",
+      "critical_errors": [],
+      "draft_review": {
+        "support_verdict": "supported",
+        "critical_errors": [],
+        "rationale": "Draft says evidence does not support mortality reduction, distinguishes protocol from measured results, correctly reports mortality is not listed and recruitment has not begun, and identifies demo status.",
+        "relevance": "Directly answers the question.",
+        "coverage": "No-result boundary is exact; no unrelated safety padding or invented numbers.",
+        "attribution": "Cites the exact demo protocol.",
+        "followup_coherence": "No history."
+      },
+      "claim": "The evidence does not establish mortality reduction; mortality is not listed and the trial has not begun, so there are no results to assess an effect.",
+      "source_id": "ClinicalTrials.gov:EVAL-PROTOCOL",
+      "source_passage": "Protocol plans 200 adults, symptom-score outcome at 16 weeks; recruitment has not begun; no results have been posted; mortality is not a listed outcome.",
+      "rationale": "The final directly states that mortality reduction is not established, does not infer no effect, notes mortality is not listed, and says no results are available to assess effects. These statements match the exact protocol context. The visible limitation/footer identifies the evidence as a demo protocol; no unrelated safety claims or invented numbers are added.",
+      "missing_qualifiers": [],
+      "relevance": "Direct, conversational answer to whether this proves reduced deaths.",
+      "coverage": "Satisfies the protocol-versus-results and mortality evidence-gap requirements.",
+      "attribution": "Both paragraphs cite the exact synthetic registry record; demo status is visible in the uncertainty/footer.",
+      "followup_coherence": "No history."
+    }
+  ]
+}

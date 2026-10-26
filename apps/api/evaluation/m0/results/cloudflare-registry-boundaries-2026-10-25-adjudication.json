@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "status": "completed_source_backed_engineering_review_pending_independent_expert_review",
+  "assessment_type": "Independent passage-backed engineering adjudication against exact generation context, frozen inventory and rubric; not clinical validation",
+  "review_date": "2026-10-25 America/Vancouver",
+  "source_answers": "cloudflare-registry-boundaries-2026-10-25-answers.json",
+  "source_answers_sha256": "18711f828c6e46699012b0a63e9a2d3ebd49232220326567f6f9531576f1bc14",
+  "reviewed_cases": 2,
+  "verdict_counts": {
+    "supported": 1,
+    "partially_supported": 1,
+    "unsupported": 0
+  },
+  "critical_error_count": 0,
+  "draft_critical_error_count": 1,
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [
+          {
+            "category": "wrong_number_comparator",
+            "claim": "“approximately 7% of patients” had a decrease to subnormal B12, with no observation period stated.",
+            "source_external_id": "FDA-LABEL-metformin-2",
+            "source_passage": "“In clinical trials of 29-week duration with metformin HCl tablets, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients.”",
+            "rationale": "The draft removes the explicit 29-week duration from a numerical safety observation, making the percentage appear unbounded in time. The final answer omits this statistic, so this error applies to the draft only."
+          },
+          {
+            "category": "unsupported_claim",
+            "claim": "The draft says metformin “might slow down clonal expansion of clonal hematopoiesis” as a potential benefit without stating that the supporting evidence is preclinical.",
+            "source_external_id": "PubMed:42374733",
+            "source_passage": "“Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH.”",
+            "rationale": "The main text drops the preclinical limitation while presenting metformin’s potential benefit to a general audience. The uncertainty footer later says this possibility is based on preclinical studies, but that footer does not repair the missing qualifier in the main claim."
+          }
+        ],
+        "rationale": "The draft correctly presents the FDA indication, describes the AXOS study as an investigation, and says its results are not reported in the supplied excerpt. It also labels the dysbiosis assertions as the registry trial’s rationale, rather than reporting them as study findings; the new context explicitly limits registry background claims. However, the draft still gives a causal rationale with high-confidence wording, omits the B12 observation window, and underqualifies the preclinical clonal-hematopoiesis claim.",
+        "relevance": "Broadly relevant but overlong and includes a preclinical hypothesis outside the central question.",
+        "coverage": "Includes diet/exercise and adult indication plus GI reactions. B12 is included without its 29-week period. Lactic acidosis and hypoglycemia warnings in the cited label context are omitted.",
+        "attribution": "Labels the AXOS text as trial rationale and says results are not reported in the excerpt. It cites the narrative review for CH but fails to retain preclinical status in the paragraph.",
+        "followup_coherence": "No history in this case."
+      },
+      "claim": "Final answer states the adult type 2 diabetes indication as an adjunct to diet/exercise, lists common GI effects, and characterizes the AXOS-plus-metformin trial as planned; it says benefits and limitations are not fully established by these sources.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3; ClinicalTrials.gov:NCT05689684",
+      "source_passage": "Label 3: extended-release metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes; common adverse reactions include diarrhea, nausea/vomiting, abdominal pain and constipation. Label context also lists lactic acidosis, vitamin B12 deficiency and hypoglycemia warnings. CTG text says the study “will investigate” an AXOS-containing hybrid product with metformin; it does not supply measured results in the provided text.",
+      "rationale": "The final label-3 indication and named GI reactions are supported, and it preserves the adult population and adjunct-to-diet/exercise qualifier without introducing a pediatric age claim. It correctly calls the AXOS study planned and does not attribute a measured benefit or harm to that study. The broad “benefits and limitations are not fully established by these sources” statement is a cautious evidence-scope summary, not a claim that metformin lacks benefit. The answer is nevertheless incomplete for “main limitations”: it omits other explicit warnings and the 29-week/approximately 7% B12 result available in the supplied label context. No postmarketing frequency is claimed, so there is no spontaneous-report frequency error.",
+      "missing_qualifiers": [
+        "Material safety context available in the label—particularly the B12 decrease (approximately 7% over 29 weeks) and listed lactic-acidosis/hypoglycemia warnings—is omitted; this is a coverage limitation, not a false claim."
+      ],
+      "relevance": "Directly answers the broad benefit/use and limitation question and avoids the earlier protocol-to-finding error.",
+      "coverage": "Accurate but narrow: indication plus common GI reactions and planned AXOS study. Omits B12 and other serious label warnings; no unsupported risk frequency is added.",
+      "attribution": "Label 3 citation supports adult indication and GI reactions. CTG citation supports that a combined AXOS/metformin investigation is planned; context explicitly cautions that protocol background is not observed effects. The final does not repeat the background dysbiosis claim.",
+      "followup_coherence": "No history in this case. Main answer is concise and readable; uncertainty repeats that the excerpts are not comprehensive."
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "supported",
+      "critical_errors": [],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [
+          {
+            "category": "unsupported_claim",
+            "claim": "People with clonal hematopoiesis “may benefit from taking metformin.”",
+            "source_external_id": "PubMed:42374733",
+            "source_passage": "“Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH.”",
+            "rationale": "The draft turns a preclinical possibility into a human-benefit statement. Its later uncertainty calls the source a narrative review but does not preserve the preclinical-only nature of the metformin finding."
+          }
+        ],
+        "rationale": "The draft is plain-language in parts and retains the diet/exercise adjunct. Its claim that the trial was completed is supported by the supplied registry status, but completion alone does not show that measured results are posted; the answer appropriately says results are not reported in the provided sources. The remaining material error is the statement that people with CH “may benefit from taking metformin,” which exceeds the source’s preclinical evidence. It also introduces the CH topic despite the follow-up requesting simplification.",
+        "relevance": "Some content is extraneous to a plain-language restatement; the CH claim is especially off-topic.",
+        "coverage": "Includes indication and GI reactions, but adds a preclinical hypothesis as clinical information; the trial completion status is correct and is not treated as a result.",
+        "attribution": "Citations name the relevant sources. The registry status supports completed status, while the record text does not include trial results; the CH citation does not support the human-benefit claim as phrased.",
+        "followup_coherence": "Uses prior answer history but expands into new CH claims rather than simplifying only the prior answer."
+      },
+      "claim": "Metformin helps control blood sugar in adults with type 2 diabetes and is used with diet and exercise; diarrhea, nausea and abdominal pain are possible side effects.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3",
+      "source_passage": "Label 3: adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus; common adverse reactions include diarrhea, nausea/vomiting and abdominal pain.",
+      "rationale": "The final gives an accessible paraphrase of the label’s indication and common GI effects. It preserves the adult population from the prior answer, introduces no age generalization or effect magnitude, and does not repeat the draft’s unsupported CH benefit or trial-completion assertion. The prior main answer’s safety point (GI reactions) remains. Omission of the protocol detail is acceptable for simplification; it does not claim the protocol result exists or does not exist. The visible uncertainty that the sources do not fully establish the complete benefit/limitation profile is cautious and source-scope appropriate.",
+      "missing_qualifiers": [],
+      "relevance": "Directly answers the request for a simpler everyday explanation.",
+      "coverage": "Retains the principal indication and GI limitation from the prior final answer; does not introduce unsupported risk-frequency claims.",
+      "attribution": "Main claims cite the standalone adult metformin label. No demo or synthetic disclosure applies.",
+      "followup_coherence": "Good simplification of the immediately preceding answer. The visible uncertainty stays broad and does not add unrelated clinical claims."
+    }
+  ]
+}

@@ -276,6 +276,9 @@ class ConversationService:
                     "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
                                        if source.source_type == SourceType.clinical_trials else "Stored source metadata; missing fields are unknown."),
                     "content_scope": document_content_scope(source),
+                    "indexed_section_names": [name[:120] for name, text in source.metadata.get("sections", {}).items()
+                                              if isinstance(name, str) and isinstance(text, str) and text.strip()][:20]
+                                             if isinstance(source.metadata.get("sections"), dict) else [],
                     "content_truncated": content_truncated,
                     "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
                     "text": prefix, "matched_passages": passages,

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "completed_source_backed_engineering_review_pending_independent_expert_review",
+  "assessment_type": "Independent passage-backed engineering adjudication against exact generation context, frozen inventory and rubric; not clinical validation",
+  "review_date": "2026-10-25 America/Vancouver",
+  "source_answers": "cloudflare-section-boundaries-2026-10-25-answers.json",
+  "source_answers_sha256": "b630201c0c025e8e108079dcc4407b3bac284253863700c5647b7f6d14ffd261",
+  "reviewed_cases": 2,
+  "verdict_counts": {
+    "supported": 0,
+    "partially_supported": 2,
+    "unsupported": 0
+  },
+  "critical_error_count": 1,
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "“The medication has limitations, such as low adherence due to gut dysbiosis” (final); draft additionally says dysbiosis causes more complications and high overall costs.",
+          "source_external_id": "NCT05689684",
+          "source_passage": "Registry description says the project will investigate whether an AXOS-containing hybrid product with metformin improves outcomes; the introduction presents low adherence/dysbiosis as background rationale. It contains planned methods and no measured result in the supplied context.",
+          "rationale": "The answer presents a registry protocol’s background rationale as an established causal limitation of metformin. The indexed ClinicalTrials.gov text describes a planned AXOS-plus-metformin study and does not establish that gut dysbiosis causes low adherence, complications, or high costs. This is material to the answer’s claimed “main limitations.” The result is a protocol-to-finding boundary error, not evidence that such results do not exist elsewhere."
+        }
+      ],
+      "claim": "The indication and common GI reactions are supported by the standalone metformin label; the dysbiosis/low-adherence limitation is not established by the supplied protocol record.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-2; ClinicalTrials.gov:NCT05689684; PubMed:42374733",
+      "source_passage": "FDA label: adjunct to diet and exercise; adults and pediatric patients 10 years and older with type 2 diabetes; common GI adverse reactions; approximately 7% B12 decrease over 29 weeks. CTG record: planned study of AXOS hybrid product with metformin; evaluates adherence/gut health. PubMed review: preclinical studies found metformin might slow clonal expansion.",
+      "rationale": "Final answer is partly grounded: indication and named common GI reactions are supported. It omits adjunct-to-diet/exercise and does not mention the 29-week timeframe if using the B12 statistic; the final omits B12 altogether. The draft gives approximately 7% B12 without preserving the 29-week observation window, and upgrades a preclinical hypothesis to a broad potential benefit without retaining “preclinical.” Both draft and final treat CTG background rationale about dysbiosis/low adherence as fact. Draft also says dysbiosis “results in more complications and high overall costs,” which is causal and not established by this protocol. Final visible uncertainty says long-term gut-health effects are not established; that footer does not cure the unsupported main-text low-adherence claim and itself overstates a broad evidence absence from the indexed excerpt.",
+      "missing_qualifiers": [
+        "Adjunct to diet and exercise",
+        "If reporting approximately 7% B12 decrease, preserve 29-week observation period",
+        "Preclinical qualifier for clonal hematopoiesis claim in draft"
+      ],
+      "relevance": "The label claims are relevant; the protocol background is used to answer the central question about metformin limitations without preserving its planned-study/background scope.",
+      "coverage": "Final is concise but omits a relevant quantified B12 limitation present in context and does not explain the protocol/result boundary. Draft includes more safety detail but loses the B12 timeframe and adds unsupported causal claims.",
+      "attribution": "Main answer cites the correct standalone metformin label for indication/GI effects and the CTG source for the dysbiosis assertion. Citation identity does not make the CTG background claim an observed result. The visible uncertainty footer says long-term effects are not established but does not retract the asserted low-adherence fact.",
+      "followup_coherence": "No follow-up history. Final is shorter than draft, but its simplification removes supported safety detail without correcting the unsupported CTG-derived limitation."
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "claim": "Metformin helps control blood sugar in type 2 diabetes and can cause diarrhea, nausea, and abdominal discomfort.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-2",
+      "source_passage": "Standalone metformin label indicates glycemic control in type 2 diabetes as adjunct to diet and exercise; common adverse reactions include diarrhea, nausea/vomiting, and abdominal discomfort.",
+      "rationale": "The main answer is plain and concise and preserves a relevant supported GI safety limitation from the prior answer. It does not state an incorrect pediatric age or efficacy magnitude. It drops the earlier low-adherence/gut-dysbiosis claim; given that claim came from protocol background rather than measured results, not repeating it avoids perpetuating it, though the answer does not explicitly correct the earlier assertion. The uncertainty footer introduces an unrelated mechanism limitation (“does not fully explain how metformin works beyond controlling blood sugar”) unsupported by the supplied context and not needed for simplification. It also fails to retain adjunct-to-diet/exercise indication context. No B12 statistic is stated, so no 29-week qualifier is required in this answer.",
+      "missing_qualifiers": [
+        "Adjunct to diet and exercise",
+        "Clarify or correct the prior protocol-background claim rather than leaving it unaddressed"
+      ],
+      "relevance": "Main text responds to the request for everyday wording. The mechanism uncertainty footer is not responsive to the requested simplification.",
+      "coverage": "Retains common GI effects but omits diet/exercise qualification and the previous answer’s explanation of limitations. It does not mention children, so no age-floor error is present.",
+      "attribution": "Main claims cite the standalone label. The mechanism statement is in visible uncertainty and has no source citation; it is not supported by the provided evidence context.",
+      "followup_coherence": "Uses prior answer history. Main text simplifies, but the uncertainty changes the topic and the previous unsupported protocol claim is not explicitly corrected."
+    }
+  ]
+}

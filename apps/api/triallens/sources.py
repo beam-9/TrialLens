@@ -122,6 +122,14 @@ class ClinicalTrialsClient(SourceClient):
                             status=status.get("overallStatus"),
                             phase=", ".join(design.get("phases", [])) if design.get("phases") else None,
                             metadata={
+                                # Describe this fetched payload and what we indexed,
+                                # never whether results exist elsewhere or later.
+                                "indexed_content": "protocol_descriptions",
+                                "api_results_section_state": (
+                                    "absent" if "resultsSection" not in study else
+                                    "present" if isinstance(study["resultsSection"], dict) and study["resultsSection"] else
+                                    "empty" if study["resultsSection"] == {} else "unrecognized"
+                                ),
                                 "sections": {
                                     "Brief summary": normalize(description.get("briefSummary", "")),
                                     "Detailed description": normalize(description.get("detailedDescription", "")),

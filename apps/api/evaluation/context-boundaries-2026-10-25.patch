@@ -1,0 +1,24 @@
+--- a/apps/api/triallens/conversation.py
++++ b/apps/api/triallens/conversation.py
+@@ -272,10 +272,21 @@
+                     "citation": citation_for(source), "title": source.title[:500],
+                     "source_type": source.source_type.value,
+                     "status": source.status, "phase": source.phase,
++                    "registry_status_note": (
++                        "Study completed according to stored registry status. Future tense in protocol text "
++                        "describes registration-time plans; do not describe this study as currently ongoing. "
++                        "Completed status alone does not establish outcomes or posted-result availability."
++                        if source.source_type == SourceType.clinical_trials and source.status == "COMPLETED" else None),
+                     "publication_date": source.publication_date,
+                     "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
+                                        if source.source_type == SourceType.clinical_trials else "Stored source metadata; missing fields are unknown."),
+                     "content_scope": document_content_scope(source),
++                    "interpretation_boundary": (
++                        "Goals, hypotheses, expected benefits and background rationale in a registry description "
++                        "are not observed treatment effects. Describe them as the study's rationale or plans, unless "
++                        "explicit measured results support a finding. Registry background assertions alone do not "
++                        "establish general benefits or harms."
++                        if source.source_type == SourceType.clinical_trials else None),
+                     "indexed_section_names": [name[:120] for name, text in source.metadata.get("sections", {}).items()
+                                               if isinstance(name, str) and isinstance(text, str) and text.strip()][:20]
+                                              if isinstance(source.metadata.get("sections"), dict) else [],

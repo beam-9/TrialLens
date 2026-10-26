@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "status": "completed_source_backed_engineering_review_pending_independent_expert_review",
+  "assessment_type": "Independent passage-backed engineering adjudication against exact generation context, frozen inventory and rubric; not clinical validation",
+  "review_date": "2026-10-25 America/Vancouver",
+  "source_answers": "cloudflare-explicit-boundaries-2026-10-25-answers.json",
+  "source_answers_sha256": "2c3bb840b489f1965705c97056f65499a3044c5a41b9fe85ce43b333fbaaf71b",
+  "reviewed_cases": 3,
+  "verdict_counts": {
+    "supported": 1,
+    "partially_supported": 2,
+    "unsupported": 0
+  },
+  "critical_error_count": 2,
+  "draft_critical_error_count": 5,
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "“A clinical trial ... is investigating whether adding [AXOS] to metformin can improve glucose metabolism and gut health” (final).",
+          "source_external_id": "NCT05689684",
+          "source_passage": "Generation context says registry status “COMPLETED”; indexed text describes what “will be investigated” and identifies a planned hybrid AXOS-containing product. It contains no measured result tables.",
+          "rationale": "The main answer’s present-progressive “is investigating” conflicts with the supplied completed status; its own uncertainty footer says the trial is completed. Phrase this as a completed registry record describing a study planned to investigate the combination. The answer correctly avoids claiming a measured benefit and correctly limits the result gap to the supplied excerpt."
+        }
+      ],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [
+          {
+            "category": "incorrect_absence_scope",
+            "claim": "“The clinical trial ... is still ongoing” and “results are not yet available.”",
+            "source_external_id": "NCT05689684",
+            "source_passage": "Status in exact context: COMPLETED; source text is protocol description, and the excerpt does not provide measured outcomes.",
+            "rationale": "The draft directly contradicts the indexed completed status and asserts global result unavailability beyond the supplied excerpt. It should say the study is completed and measured results are not included in the supplied excerpt."
+          },
+          {
+            "category": "unsupported_claim",
+            "claim": "Metformin may slow clonal expansion of clonal hematopoiesis, presented as a potential clinical benefit without the preclinical qualifier.",
+            "source_external_id": "PubMed:42374733",
+            "source_passage": "“Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH.”",
+            "rationale": "The main text drops the fact that this is preclinical. The uncertainty mentions emerging evidence but does not restore the missing limitation in the claim."
+          },
+          {
+            "category": "unsupported_claim",
+            "claim": "Metformin “may not be suitable for all patients, such as those with kidney disease or liver enzyme elevations.”",
+            "source_external_id": "PubMed:42369057",
+            "source_passage": "Two case descriptions: one patient with mild CKD/liver enzyme elevations maintained control on metformin alone; a second with CKD and liver enzyme elevation used a multi-drug regimen.",
+            "rationale": "These case reports do not establish a general unsuitability or safety recommendation for people with kidney disease or liver enzyme elevations; one described patient used metformin alone."
+          }
+        ],
+        "rationale": "The initial output accurately states the single-ingredient label indication with diet/exercise and the age floor and lists relevant GI effects. It also identifies the AXOS trial as a planned investigation, but incorrectly calls it still ongoing despite COMPLETED status and claims results are not yet available rather than absent from this excerpt. It drops the explicitly preclinical qualification on CH and infers broad unsuitability from two case reports.",
+        "relevance": "Broadly addresses benefits and limitations but adds speculative CH and individual case-based safety claims.",
+        "coverage": "Includes diet/exercise and pediatric age floor. B12 is not quantified in this draft; omission is not itself an error. Safety conclusions about CKD/liver are unsupported.",
+        "attribution": "Citations identify sources but do not support the generalized clinical CH benefit or blanket unsuitability claim. Footer uncertainty does not fix main-text overstatements.",
+        "followup_coherence": "No history in this case."
+      },
+      "claim": "The final accurately paraphrases the adult ER label indication and lists common GI reactions; it also notes lactic acidosis and B12 deficiency and describes AXOS as a planned research question.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3; ClinicalTrials.gov:NCT05689684",
+      "source_passage": "Label 3 says ER metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes and lists common GI reactions plus lactic acidosis and B12 warnings. CTG status is COMPLETED; description says the study will investigate an AXOS-containing product added with metformin.",
+      "rationale": "Main answer is otherwise supported and carefully avoids claiming AXOS trial results or asserting that no results exist outside the supplied excerpt. It omits the required diet/exercise qualifier from the indication and has a tense/status contradiction: “is investigating” implies current activity while the supplied status and footer say COMPLETED. The label citations support the stated GI effects and warnings. The answer does not give an adverse-event percentage, so no 29-week qualifier is required; omission of the optional 7% B12 statistic is not an error. The broad uncertainty that sources are not comprehensive is reasonable.",
+      "missing_qualifiers": [
+        "Indication is as an adjunct to diet and exercise",
+        "Describe the CTG record as completed and the text as a planned study, rather than saying it is currently investigating"
+      ],
+      "relevance": "Directly addresses indication, limitations and the related AXOS study, but the present-tense protocol description is inconsistent with the registry status.",
+      "coverage": "Covers common GI reactions and two serious label warnings. Does not report B12 frequency, which was optional; no false frequency or absence claim appears.",
+      "attribution": "The label-3 citation supports indication and safety claims. The CTG citation supports that the record describes an investigation, not that it is active or that measured results support a benefit. Footer correctly says the record is completed and results are absent from the excerpt.",
+      "followup_coherence": "No history in this case. Concise, though the sentence and footer contradict on trial status."
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "“A clinical trial is investigating whether adding a fiber supplement to metformin...” (final).",
+          "source_external_id": "NCT05689684",
+          "source_passage": "The exact context reports overallStatus COMPLETED and protocol text describing what “will be investigated.”",
+          "rationale": "The present-tense “is investigating” conflicts with the source’s completed status. The prior answer correctly says the trial is completed; the simplified answer should preserve that status and say the record describes a planned study."
+        }
+      ],
+      "draft_review": {
+        "support_verdict": "partially_supported",
+        "critical_errors": [
+          {
+            "category": "incorrect_absence_scope",
+            "claim": "“The clinical trial results are not yet available.”",
+            "source_external_id": "NCT05689684",
+            "source_passage": "The study is marked COMPLETED; the provided description contains no measured outcomes.",
+            "rationale": "The draft turns absence from this provided record into global unavailability. The source supports “results are not reported in the supplied excerpt,” not “not yet available.”"
+          },
+          {
+            "category": "unsupported_claim",
+            "claim": "Metformin might slow CH expansion, without the source’s preclinical qualifier.",
+            "source_external_id": "PubMed:42374733",
+            "source_passage": "“Preclinical studies found ... metformin might slow down clonal expansion of CH.”",
+            "rationale": "The draft omits that the reported finding is preclinical and presents it as a potential general effect of metformin."
+          }
+        ],
+        "rationale": "Draft is understandable but expands the prior answer into CH and loses the preclinical scope. It says results are “not yet available,” exceeding the excerpt’s evidence boundary.",
+        "relevance": "The CH addition is unnecessary to a simple restatement.",
+        "coverage": "Retains adult population and GI effects; no optional adverse-event statistic is claimed.",
+        "attribution": "Citations identify the sources but do not support the global result-availability assertion or clinical generalization from preclinical CH findings.",
+        "followup_coherence": "Uses the broad answer history but adds detail rather than simply simplifying."
+      },
+      "claim": "The final restates the adult type 2 diabetes indication and GI adverse reactions in simple language and summarizes the AXOS study as a research question.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-3; ClinicalTrials.gov:NCT05689684",
+      "source_passage": "Label 3 supports improved glycemic control in adults with type 2 diabetes, adjunct to diet/exercise, and GI adverse reactions. CTG status is COMPLETED; protocol description plans an AXOS-plus-metformin investigation.",
+      "rationale": "The main label explanation is accurate and understandable; it introduces no effect size or claim of no benefit. However, it says the trial “is investigating” despite the completed status, and visible uncertainty says only that glucose effects are not fully established “in all studies,” a broad generalization not supported by this bounded context. The prior final mentioned lactic acidosis and B12 deficiency; the simplified answer drops those safety limitations, so coverage is incomplete under the holdout. This omission is not itself a critical error and it does not misstate an optional B12 statistic. The CTG result boundary remains a gap in the main text, though the safety footer states trial registrations may describe plans.",
+      "missing_qualifiers": [
+        "Preserve completed registry status and characterize protocol as planned study",
+        "Retain the serious safety limitations from the prior answer (lactic acidosis and B12 deficiency) when simplifying"
+      ],
+      "relevance": "Mostly responsive and plain-language; the trial sentence is relevant but misstates its current status.",
+      "coverage": "Retains GI effects but loses prior serious warnings. No pediatric population is mentioned, so no age-floor problem; no quantitative safety claim is made.",
+      "attribution": "Label citation supports the indication and GI effects. CTG source supports planned study methods, not that it is currently active. Uncertainty phrase about effects in “all studies” is not grounded in the supplied passages.",
+      "followup_coherence": "Simplifies much of the prior answer but changes completed status to present activity and drops previously supplied safety limitations."
+    },
+    {
+      "case_id": "protocol-deaths",
+      "support_verdict": "supported",
+      "critical_errors": [],
+      "draft_review": {
+        "support_verdict": "supported",
+        "critical_errors": [],
+        "rationale": "The draft directly says evidence does not support mortality reduction, distinguishes protocol from results, accurately notes mortality is not listed, labels the record as demo, and does not infer no effect. Source says no results have been posted and recruitment has not begun.",
+        "relevance": "Directly answers the mortality question.",
+        "coverage": "Covers no mortality outcome/result and the needed evidence boundary without unrelated safety claims.",
+        "attribution": "Claims cite the protocol fixture; demo disclosure is in main text and uncertainty.",
+        "followup_coherence": "No history."
+      },
+      "claim": "The protocol does not establish that intervention A reduces mortality; mortality is not listed and no results are posted; the demo record cannot support or rule out an effect.",
+      "source_id": "ClinicalTrials.gov:EVAL-PROTOCOL",
+      "source_passage": "“This synthetic trial protocol plans to enroll 200 adults... The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.”",
+      "rationale": "Each claim tracks the supplied protocol. It says mortality reduction is not established, rather than asserting no effect; it notes the outcome is not listed and results have not been posted; it explicitly identifies demo status. This satisfies the frozen inventory and adds no unrelated safety claims or numbers.",
+      "missing_qualifiers": [],
+      "relevance": "Direct and concise answer to whether this proves mortality reduction.",
+      "coverage": "Distinguishes plans from completed results, states mortality is not listed, and avoids absence-of-effect inference.",
+      "attribution": "Cites the exact synthetic protocol; demo status is explicitly visible in the main answer and footer.",
+      "followup_coherence": "No history."
+    }
+  ]
+}

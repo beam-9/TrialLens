@@ -58,3 +58,45 @@ def test_registry_status_reaches_both_passes_without_inventing_results(monkeypat
         assert record["status"] == status and record["phase"] == phase and record["publication_date"] == date
         assert record["text"] == source.abstract
         assert "not whether measured results are posted" in record["metadata_scope"]
+
+
+@pytest.mark.parametrize("metadata,expected_scope", [
+    ({"indexed_content": "protocol_descriptions", "api_results_section_state": "present"}, "structured results tables were not indexed"),
+    ({"sections": {"Brief summary": "Will measure outcomes", "Detailed description": "Expected benefit"}}, "benefits are protocol claims, not observed effects"),
+    ({"sections": {"Brief summary": "Study design", "Results": "Measured outcome"}}, "posted structured results may be incomplete unless indexed"),
+    ({}, "posted structured results may be incomplete unless indexed"),
+])
+def test_registry_content_scope_uses_indexed_sections_not_status(metadata, expected_scope):
+    from triallens.rag import document_content_scope
+    source = EvidenceSource(workspace_id="scope", source_type=SourceType.clinical_trials,
+                            external_id="NCT-SCOPE", title="Completed study", status="COMPLETED",
+                            abstract="The trial will measure outcomes.", metadata=metadata)
+    scope = document_content_scope(source)
+    assert expected_scope in scope
+    assert "no results exist" not in scope
+    assert "still ongoing" not in scope
+
+
+def test_context_exposes_section_names_without_treating_them_as_results(monkeypatch, tmp_path):
+    monkeypatch.setenv("TRIALLENS_CHAT_PROVIDER", "cloudflare")
+    monkeypatch.setenv("TRIALLENS_USAGE_PATH", str(tmp_path / "usage.sqlite3"))
+    monkeypatch.setattr("triallens.conversation.chat_configured", lambda: True)
+    workspace = Workspace(condition="condition", source_types=[SourceType.clinical_trials])
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.clinical_trials,
+        external_id="NCT-SECTIONS", title="Protocol", status="COMPLETED", abstract="The study will measure outcomes.",
+        metadata={"sections": {"Brief summary": "The study will measure outcomes.", "Detailed description": "", "Malformed": 42}})
+    captured = []
+    def completion(messages, schema):
+        captured.append(json.loads(messages[1]["content"])["evidence"][0])
+        return json.dumps({"paragraphs": ["The supplied description gives planned outcomes [ClinicalTrials.gov:NCT-SECTIONS]."],
+                           "cited_sources": ["ClinicalTrials.gov:NCT-SECTIONS"], "uncertainty": []})
+    monkeypatch.setattr("triallens.conversation.cloudflare.completion", completion)
+    fallback = Answer(workspace_id=workspace.id, question="What did it find?", short_answer="Excerpt",
+                      evidence=[], limitations=[], citations=[], retrieved_chunks=[])
+    ConversationService().generate(workspace, fallback.question, [], [source], fallback)
+    assert len(captured) == 2
+    for record in captured:
+        assert record["indexed_section_names"] == ["Brief summary"]
+        assert "benefits are protocol claims, not observed effects" in record["content_scope"]
+        assert record["status"] == "COMPLETED"
+        assert record["text"] == source.abstract

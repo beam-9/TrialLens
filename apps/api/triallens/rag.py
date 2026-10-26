@@ -1118,6 +1118,15 @@ def document_content_scope(source: EvidenceSource) -> str:
     if source.source_type == SourceType.pubmed:
         return "PubMed abstract content stored in TrialLens, not necessarily the full article."
     if source.source_type == SourceType.clinical_trials:
+        if source.metadata.get("indexed_content") == "protocol_descriptions":
+            return ("Only protocol brief summary/detailed description were indexed from this fetched record; "
+                    "structured results tables were not indexed. Results may exist elsewhere.")
+        sections = source.metadata.get("sections")
+        if isinstance(sections, dict):
+            names = {name for name, text in sections.items() if isinstance(text, str) and text.strip()}
+            if names and names <= {"Brief summary", "Detailed description"}:
+                return ("Stored sections are registry brief summary/detailed description. Goals and expected "
+                        "benefits are protocol claims, not observed effects. Posted structured results availability is unknown.")
         return "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed."
     if source.source_type == SourceType.fda_label:
         return "Stored FDA label sections available in TrialLens."

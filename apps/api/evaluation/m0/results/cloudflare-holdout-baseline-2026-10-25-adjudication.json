@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "completed_source_backed_engineering_review_pending_independent_expert_review",
+  "assessment_type": "Independent passage-backed engineering adjudication against holdout context and frozen rubric; not clinical validation",
+  "review_date": "2026-10-25 America/Vancouver",
+  "source_answers": "cloudflare-holdout-baseline-2026-10-25-answers.json",
+  "source_answers_sha256": "1b7db63c0e7f8810eb0a643082d8c311d07cd91f277fb862e35b36e589e88aae",
+  "reviewed_cases": 4,
+  "verdict_counts": {
+    "supported": 0,
+    "partially_supported": 4,
+    "unsupported": 0
+  },
+  "critical_error_count": 0,
+  "cases": [
+    {
+      "case_id": "holdout-endpoint-baseline",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "claim": "At 12 weeks HbA1c was 0.5 percentage points lower with intervention A than placebo; this does not establish within-group decline from baseline.",
+      "source_id": "PubMed:EVAL-NUMBERS",
+      "source_passage": "240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo. This was a between-group difference. The trial does not establish effects beyond 12 weeks.",
+      "rationale": "Both final claims preserve the between-group endpoint and avoid inferring a baseline rise or fall. The answer omits the 240-adult population required by the holdout. The visible uncertainty/limitations identify the record as demo evidence and do not imply real-world support.",
+      "missing_qualifiers": [
+        "240 adults"
+      ],
+      "relevance": "Directly answers whether the result is a within-group decrease or a between-group endpoint difference.",
+      "coverage": "Good coverage of the central question; required population qualifier is missing.",
+      "attribution": "Both claims cite the synthetic PubMed fixture. Demo disclosure appears in visible uncertainty/limitations, not in the main answer.",
+      "followup_coherence": "No follow-up history; concise and coherent."
+    },
+    {
+      "case_id": "holdout-regimen-risk",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "claim": "The label reports different hypoglycemia percentages in different studies/populations and supplies no single overall risk number applicable to all ZITUVIMET users.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-1",
+      "source_passage": "Label says adverse-reaction rates from clinical trials conducted under widely varying conditions cannot be directly compared. Separate table entries give add-on to glimepiride plus metformin (24 weeks) and add-on to insulin plus metformin (24 weeks), each with its own treatment and placebo groups.",
+      "rationale": "The no-pooled-number conclusion is cautious and consistent with separate trial-specific rates. However, the response does not explain the different background regimens and controls, nor preserve the required 24-week glimepiride/insulin add-on context. “No single overall risk number ... applies to all patients” is broader than the explicit source statement; safer wording is that the label reports separate regimen-specific trial rates and does not give a pooled rate.",
+      "missing_qualifiers": [
+        "24-week add-on to glimepiride plus metformin versus placebo control",
+        "24-week add-on to insulin plus metformin versus placebo control",
+        "Rates are trial-specific and are not directly comparable"
+      ],
+      "relevance": "Answers whether there is one summary number but only partly answers why the label has different figures.",
+      "coverage": "Short and on topic, but does not state the regimen/control differences requested by the rubric.",
+      "attribution": "Cites the ZITUVIMET combination label; no rates are invented or assigned to metformin monotherapy.",
+      "followup_coherence": "No follow-up history. Visible uncertainty repeats the no-single-number limitation without adding useful regimen context."
+    },
+    {
+      "case_id": "holdout-plain-benefit-risk",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "claim": "Metformin is used to improve glycemic control in adults and children 10 years and older with type 2 diabetes; digestive adverse reactions and lactic acidosis warning are stated.",
+      "source_id": "openFDA label:FDA-LABEL-metformin-2",
+      "source_passage": "Metformin tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes. Common adverse reactions include diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache; lactic acidosis appears as a warning.",
+      "rationale": "The plain-language answer preserves the age floor, type 2 diabetes population, digestive effects, and serious lactic-acidosis warning; it avoids fabricated efficacy magnitude. It omits the required adjunct-to-diet-and-exercise qualifier. Its visible uncertainty correctly says the label does not quantify benefit size.",
+      "missing_qualifiers": [
+        "Used as an adjunct to diet and exercise"
+      ],
+      "relevance": "Directly answers what metformin is for, who the indication covers, and downside in accessible language.",
+      "coverage": "Good concise benefit/risk coverage; diet/exercise use qualifier omitted.",
+      "attribution": "Claims cite the standalone metformin label. No demo disclosure applies to this real label excerpt.",
+      "followup_coherence": "No follow-up history; concise and understandable."
+    },
+    {
+      "case_id": "holdout-durability-evidence-gap",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "claim": "Intervention A as add-on to metformin produced a greater HbA1c and fasting glucose reduction versus placebo after 24 weeks; beyond-24-week benefit and mortality effect are not established.",
+      "source_id": "PubMed:EVAL-ADDON",
+      "source_passage": "Synthetic randomized trial in 180 adults with type 2 diabetes on stable metformin; intervention A or placebo was added for 24 weeks. Mortality was not measured. Effects beyond 24 weeks were not established.",
+      "rationale": "The answer preserves add-on status and 24-week duration and does not claim monotherapy, no effect, or unrelated safety findings. It says mortality effect is not established rather than stating the source-specific fact that mortality was not measured, a required qualifier for the question. The visible uncertainty/limitations disclose demo status.",
+      "missing_qualifiers": [
+        "Mortality was not measured (rather than only saying effect is not established)"
+      ],
+      "relevance": "Addresses both durability and survival questions without unrelated padding.",
+      "coverage": "Correct boundary language, but it omits the explicit mortality measurement status required by the holdout.",
+      "attribution": "Cites the synthetic PubMed source. Demo disclosure appears in visible uncertainty/limitations, not the main answer.",
+      "followup_coherence": "No follow-up history; concise and relevant."
+    }
+  ]
+}

@@ -53,6 +53,61 @@ def test_pubmed_preserves_inline_abstract_text(monkeypatch):
     assert result.abstract == "Improved by 0.5 percentage points."
 
 
+def test_clinical_trials_results_section_metadata_is_payload_scoped(monkeypatch):
+    """Report what this API payload contains without treating results as indexed evidence."""
+    import httpx
+    import pytest
+
+    results_cases = [
+        ("absent", None, "absent"),
+        ("nonempty", {"outcomeMeasuresModule": {"outcomeMeasures": [
+            {"title": "HbA1c", "groups": [{"title": "Intervention", "denoms": [{"counts": [{"value": "42"}]}]}]}
+        ]}}, "present"),
+        ("empty", {}, "empty"),
+        ("null", None, "unrecognized"),
+        ("list", [{"outcome": "HbA1c", "value": "42"}], "unrecognized"),
+    ]
+    client_type = httpx.AsyncClient
+
+    for case, results_section, expected_state in results_cases:
+        study = {
+            "protocolSection": {
+                "identificationModule": {"nctId": f"NCT-{case}", "briefTitle": "Protocol title"},
+                "statusModule": {"overallStatus": "COMPLETED"},
+                "designModule": {"phases": ["PHASE2"]},
+                "descriptionModule": {
+                    "briefSummary": "Protocol summary says the study will evaluate HbA1c.",
+                    "detailedDescription": "Protocol details specify planned visits.",
+                },
+            }
+        }
+        if case != "absent":
+            study["resultsSection"] = results_section
+
+        def handler(request):
+            return httpx.Response(200, json={"studies": [study]})
+
+        monkeypatch.setattr(
+            httpx, "AsyncClient",
+            lambda **kwargs: client_type(transport=httpx.MockTransport(handler), **kwargs),
+        )
+        workspace = Workspace(condition="condition", source_types=[SourceType.clinical_trials])
+        source = asyncio.run(ClinicalTrialsClient().fetch(workspace))[0]
+
+        assert source.status == "COMPLETED"
+        assert source.abstract == "Protocol summary says the study will evaluate HbA1c. Protocol details specify planned visits."
+        assert source.metadata["indexed_content"] == "protocol_descriptions"
+        assert source.metadata["api_results_section_state"] == expected_state
+        assert source.metadata["sections"] == {
+            "Brief summary": "Protocol summary says the study will evaluate HbA1c.",
+            "Detailed description": "Protocol details specify planned visits.",
+        }
+        # Even when the raw payload includes numeric results, this connector indexes
+        # only protocol descriptions; it must not silently surface result values as findings.
+        assert "42" not in source.abstract
+        assert all("42" not in section for section in source.metadata["sections"].values())
+
+
 def test_source_diagnostics_distinguish_unavailable_from_no_matches(monkeypatch):
     import httpx
     def handler(request):
