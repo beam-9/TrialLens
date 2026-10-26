@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-26",
+  "target": "http://127.0.0.1:3001/",
+  "batch": "round1",
+  "workspace": "asthma / inhaled corticosteroids (10 sources, 10 rows)",
+  "browser": {
+    "viewport": "Expect Chromium",
+    "screenshot_capture": "Playwright page.screenshot; hid only observed Expect injected element #__expect_agent_overlay__ with screenshot style `#__expect_agent_overlay__ { display:none !important; }`",
+    "console_errors": "none captured",
+    "browser_left_open": true
+  },
+  "checks": {
+    "recent_workspace_order": ["asthma / inhaled corticosteroids", "type 2 diabetes / metformin", "acne / azelaic acid", "migraine / sumatriptan"],
+    "filter": "Literature selected with 5; All reset selected with 10",
+    "inspect": "opens existing source details and closes; no review action taken",
+    "ask_empty_question": "Answer with citations disabled after clearing the question; not submitted",
+    "navigation": "Evidence and Ask use #workspace and #ask hashes respectively",
+    "desktop_page_overflow": "none at 1440px; body/document width 1440px",
+    "mobile_page_overflow": "none at 390px; evidence table contained at 330px wide with 812px scroll width",
+    "keyboard_focus": "first Tab shows 3px solid white focus outline on Skip to workspace",
+    "dark_mode": "dark mode applied; body background rgb(19, 24, 21)",
+    "reduced_motion": "prefers-reduced-motion: reduce matched",
+    "text_200_percent": {
+      "method": "captured computed font sizes for all body elements first, then doubled each element's inline font-size from that snapshot",
+      "inspect_sheet": "heading box y=16..64; source description begins y=72, so their boxes do not overlap; heading wraps its trailing identifier character onto a short second line beside the close control",
+      "evidence_rows": "multiple extracted paragraphs remain height-clamped at 200% (e.g. 60px client height / 81px scroll height and 20px / 60px); row text is visibly cut off",
+      "mobile_launcher": "390px viewport has no document overflow; input font is 28px with computed 24px line-height and 42px client height (input scrollHeight also 42px)"
+    }
+  },
+  "defects": [
+    {
+      "id": "R1-01",
+      "area": "200% text / evidence rows",
+      "impact": "Extracted evidence paragraphs are clipped by fixed-height/overflow constraints when text is doubled; only part of row text is visible.",
+      "evidence": "At 1440x1000, several paragraph elements had scrollHeight greater than clientHeight (including 60/81px and 20/60px). See soft-registry-round1-text200.png.",
+      "severity": "moderate"
+    },
+    {
+      "id": "R1-02",
+      "area": "200% text / Inspect header",
+      "impact": "The source identifier wraps its final character onto a short second line beside the close control. The title and description boxes themselves do not overlap.",
+      "evidence": "At 200%, title box is 48px high and description starts 8px below it; screenshot shows the isolated trailing character. See soft-registry-round1-text200.png.",
+      "severity": "low"
+    },
+    {
+      "id": "R1-03",
+      "area": "200% text / mobile launcher",
+      "impact": "At 390px, launcher inputs use 28px text with a fixed 24px line-height inside 42px controls, leaving limited vertical clearance; no input scroll-height overflow or page-level horizontal overflow was measured.",
+      "evidence": "Measured font-size 28px, line-height 24px, input clientHeight/scrollHeight 42px; document width remains 390px.",
+      "severity": "low"
+    }
+  ],
+  "screenshots": [
+    "output/playwright/soft-registry-round1-desktop-evidence.png",
+    "output/playwright/soft-registry-round1-desktop-ask.png",
+    "output/playwright/soft-registry-round1-mobile-evidence.png",
+    "output/playwright/soft-registry-round1-mobile-ask.png",
+    "output/playwright/soft-registry-round1-dark-ask.png",
+    "output/playwright/soft-registry-round1-text200.png"
+  ]
+}

@@ -380,6 +380,7 @@ export default function Home() {
     <MotionConfig reducedMotion="user">
     <main className="triallens-shell min-h-screen overflow-x-clip">
       <a className="skip-link" href="#workspace">Skip to workspace</a>
+      <div className="research-window">
       <FixedInstrumentationHeader
         busy={busy}
         extractionCount={extractions.length}
@@ -757,6 +758,7 @@ export default function Home() {
           <p className="mobile-scope">Evidence navigation only. Not medical advice or clinical decision support.</p>
         </div>
       </Tabs>
+      </div>
 
       <CitationSheet row={selectedRow} onOpenChange={(open) => !open && setSelectedRow(null)} onReview={markRow} />
     </main>
@@ -808,7 +810,8 @@ function scrollToWorkspace() {
     if (!workspace) return;
     const header = document.querySelector<HTMLElement>(".field-header")?.offsetHeight ?? 64;
     const rail = window.matchMedia("(max-width: 900px)").matches ? document.querySelector<HTMLElement>(".workspace-rail")?.offsetHeight ?? 0 : 0;
-    const top = workspace.getBoundingClientRect().top + window.scrollY - header - rail - 12;
+    const inset = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--shell-inset")) || 0;
+    const top = workspace.getBoundingClientRect().top + window.scrollY - header - rail - inset - 12;
     window.scrollTo({ top: Math.max(top, 0), behavior: preferredScrollBehavior() });
   });
 }
@@ -1187,15 +1190,15 @@ function EvidenceTable({
                   {row.external_id.toUpperCase().includes("DEMO") && <Badge variant="outline">Demo evidence</Badge>}
                   {row.status && <Badge variant="outline">{row.status}</Badge>}
                   {row.phase && <Badge variant="outline">{row.phase}</Badge>}
-                  {row.has_quantitative_result && <Badge>quant</Badge>}
+                  {row.has_quantitative_result && <Badge variant="secondary">Numbers</Badge>}
                 </div>
-                <span className="line-clamp-2 font-semibold leading-5">{row.title}</span>
+                <span className="font-semibold leading-snug">{row.title}</span>
                 <span className="break-words text-xs text-ink/68">{row.citation}</span>
               </div>
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/78">
-              <p className="line-clamp-3 leading-6">{fieldValue(row.outcome_result, row.supporting_quote, row.supporting_quote)}</p>
-              {compactSafetyNote(row) ? <p className="mt-2 line-clamp-1 text-xs text-signal">Safety: {compactSafetyNote(row)}</p> : null}
+              <p className="leading-relaxed">{fieldValue(row.outcome_result, row.supporting_quote, row.supporting_quote)}</p>
+              {compactSafetyNote(row) ? <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Safety: {compactSafetyNote(row)}</p> : null}
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/72">
               <div className="flex flex-wrap items-center gap-1.5">
@@ -1514,7 +1517,7 @@ function CitationSheet({
         {row && (
           <>
             <SheetHeader className="shrink-0 gap-2 border-b border-ink/10 bg-paper/95 pr-14">
-              <SheetTitle className="break-words text-xl font-semibold leading-6 text-ink">{row.citation}</SheetTitle>
+              <SheetTitle className="break-words pr-8 text-xl font-semibold leading-snug text-ink">{row.citation}</SheetTitle>
               <SheetDescription className="line-clamp-3 text-sm leading-5 text-ink/62">{row.title}</SheetDescription>
               {row.source_url ? (
                 <a

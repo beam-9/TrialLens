@@ -2,28 +2,28 @@
 name: TrialLens
 description: A minimal evidence registry for biomedical research.
 colors:
-  primary: "rgb(0 111 105)"
+  primary: "rgb(48 85 78)"
   primary-foreground: "#fff"
-  background: "rgb(248 250 251)"
-  foreground: "rgb(26 38 43)"
-  card: "rgb(255 255 255)"
-  secondary: "rgb(240 244 245)"
-  accent: "rgb(229 242 239)"
-  muted-foreground: "#52636b"
+  background: "rgb(236 237 232)"
+  foreground: "rgb(45 49 45)"
+  card: "rgb(253 253 250)"
+  secondary: "rgb(244 245 240)"
+  accent: "rgb(229 237 231)"
+  muted-foreground: "#62695f"
   destructive: "rgb(173 52 63)"
-  border: "#dbe3e6"
-  input: "#788e97"
-  dark-primary: "rgb(86 207 193)"
-  dark-primary-foreground: "#092b28"
-  dark-background: "rgb(16 23 27)"
-  dark-foreground: "rgb(234 241 244)"
-  dark-card: "rgb(21 31 36)"
-  dark-secondary: "rgb(27 39 45)"
-  dark-accent: "rgb(28 58 57)"
-  dark-muted-foreground: "#acbdc5"
+  border: "#dce0d7"
+  input: "#858e80"
+  dark-primary: "rgb(158 197 181)"
+  dark-primary-foreground: "#162b24"
+  dark-background: "rgb(19 24 21)"
+  dark-foreground: "rgb(235 239 231)"
+  dark-card: "rgb(28 35 30)"
+  dark-secondary: "rgb(23 30 25)"
+  dark-accent: "rgb(42 58 48)"
+  dark-muted-foreground: "#b4bfb0"
   dark-destructive: "rgb(250 149 158)"
-  dark-border: "#35464e"
-  dark-input: "#768d98"
+  dark-border: "#3d493f"
+  dark-input: "#81937f"
 typography:
   headline:
     fontFamily: 'var(--font-sans), ui-sans-serif, system-ui, sans-serif'
@@ -48,11 +48,14 @@ typography:
     fontWeight: 550
 rounded:
   badge: "5px"
-  filter: "6px"
-  control: "7px"
+  filter: "999px"
+  control: "10px"
+  navigation: "12px"
   quiet: "8px"
-  container: "9px"
+  container: "16px"
   composer: "10px"
+  shell: "22px"
+  pill: "999px"
 spacing:
   compact: "8px"
   control: "12px"
@@ -64,20 +67,21 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-foreground}"
-    rounded: "{rounded.control}"
+    rounded: "{rounded.pill}"
     padding: "0 16px"
     height: "42px"
   input-workspace:
     backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
     rounded: "{rounded.control}"
-    padding: "0 12px"
-    height: "42px"
+    padding: "8px 12px"
+    minHeight: "42px"
+    height: "auto"
   navigation-active:
-    backgroundColor: "{colors.accent}"
+    backgroundColor: "{colors.card}"
     textColor: "{colors.primary}"
-    rounded: "{rounded.control}"
-    padding: "9px 12px"
+    rounded: "{rounded.navigation}"
+    padding: "10px 14px"
   answer-composer:
     backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
@@ -91,21 +95,21 @@ components:
 
 **Creative North Star: "The Evidence Registry"**
 
-TrialLens is a minimal, clean, intuitive research dashboard. A persistent research index, compact creation controls, flat working panels, and readable source rows give the evidence the largest share of the canvas. The user chose Registry, composition A, as the replacement visual world.
+TrialLens is a minimal, clean, intuitive research dashboard. The chosen visual direction combines quiet desktop panels, a warm cream canvas and ink, and rounded selection. A persistent research index, compact creation controls, soft paper panels, and readable source rows give evidence the largest share of the canvas. Registry remains the organizing structure.
 
-The voice is sober and source-aware. Hierarchy comes from type, spacing, thin separators, and a restrained teal signal. Supporting details remain inspectable through disclosures rather than occupying equal visual weight with the current research task.
+The voice is sober and source-aware. Hierarchy comes from type, spacing, thin separators, and muted deep teal. Supporting details remain inspectable through disclosures rather than occupying equal visual weight with the current research task.
 
 **Key Characteristics:**
 
 - A persistent index anchors five research views.
-- Flat panels and thin rules organize evidence.
+- Soft paper panels and thin rules organize evidence within an inset desktop window.
 - Geist carries headings, controls, and reading text.
-- Teal identifies actions, selection, citations, and focus.
+- Muted deep teal identifies actions, citations, and focus; paper-white surfaces mark selection.
 - Informative motion acknowledges new answers and changed inventory.
 
 ## Colors
 
-One restrained teal accent sits against cool near-white surfaces and graphite text; the dark theme preserves the same semantic roles. The frontmatter records the actual light and dark values from `apps/web/app/globals.css`, without a synthesized color ramp.
+Muted deep teal sits against a warm cream canvas, paper white, soft gray-green secondary surfaces, and dark ink. The dark theme preserves semantic roles with deep green-gray surfaces and pale sage teal. The frontmatter records the actual light and dark values from `apps/web/app/globals.css`, without a synthesized color ramp. Measured contrast ratios are 12.97:1 for light body text, 5.56:1 on paper and 5.17:1 on sidebar for secondary text, and 8.28:1 for the primary button. Dark theme ratios are 13.78:1 for body text, 8.42:1 for secondary text, and 7.9:1 for the primary button.
 
 ### Primary
 
@@ -134,21 +138,21 @@ The main answer uses the body role, constrained to 74ch. Answer questions use 20
 
 ## Layout
 
-The desktop shell is capped at 1600px. A sticky 72px header contains the compact creation form, wordmark and theme switch. A 216px persistent left index contains the five research views, stable workspace entries and medical-scope note. Main padding is 28px 32px 48px. Loaded workspaces begin with their topic and evidence; the introduction becomes screen-reader-only. On Evidence, source inventory sits in a 180px right column with a 24px gap. Other views keep inventory in the index. There is no marketing hero or duplicate header navigation. A ResizeObserver tracks the actual header height so sticky navigation follows enlarged text.
+The desktop shell sits within an 18px inset and is capped at 1560px. Its research window has a 22px radius and a soft secondary-surface frame. A sticky 72px header contains the compact creation form, wordmark and theme switch. A 224px persistent left index contains the five research views, stable workspace entries and medical-scope note. The quiet sidebar shares the warm secondary surface; the 12px rounded selection rests on paper white. Loaded workspaces begin with their topic and evidence; the introduction becomes screen-reader-only. On Evidence, source inventory sits in a 200px right column with an 18px gap. Other views keep inventory in the index. There is no marketing hero or duplicate header navigation. A ResizeObserver tracks the actual header height so sticky navigation follows enlarged text.
 
-Below 1250px, Evidence inventory stacks below the table. At 1150px the index narrows to 200px and main horizontal padding becomes 24px. At 900px the header becomes 64px and creation moves into the main area; the shell becomes one column and the index becomes a sticky horizontal tab strip below the header. Recent workspaces move into the main creation area. After a workspace loads, mobile creation collapses into the New workspace disclosure, leaving the current research view prominent. At 600px, main padding becomes 20px 16px 36px; builder fields stack, actions and key touch targets reach 44px, and split brief/reliability content becomes one column. At 1500px main horizontal padding becomes 40px.
+Below 1360px, Evidence inventory stacks below the table. At 1150px the index narrows to 200px and main horizontal padding becomes 24px. At 900px the header becomes 64px and creation moves into the main area; the shell becomes one column and the index becomes a sticky horizontal tab strip below the header. Recent workspaces move into the main creation area. After a workspace loads, mobile creation collapses into the New workspace disclosure, leaving the current research view prominent. At 600px, main padding becomes 20px 14px 32px; builder fields stack, actions and key touch targets reach 44px, and split brief/reliability content becomes one column. At 1500px main right padding becomes 32px.
 
 The evidence table keeps a 58em minimum width, scaling with enlarged table text, inside its own horizontally scrollable container, with a mobile scroll hint. Long titles, questions, citations, and source metadata wrap. Keep min-width: 0 on grid content so text enlargement and narrow screens retain access to content.
 
 ## Elevation & Depth
 
-Working panels are flat: the active view has transparent background, no border, no radius, and no shadow. Table rows and content sections use thin separators; quiet explanations use tonal fills. The selected recent workspace uses a teal-wash shared-layout highlight with a faint inset 1px border. Selection moves between entries; reopening does not reorder them. The source inspection sheet is the elevated exception, with `-12px 0 44px rgb(0 20 26 / .12)` shadow and a `rgb(8 20 24 / .25)` overlay without blur.
+The desktop research window has a gentle frame, while working surfaces use paper-white fills, 16px corners, and no shadows. Table rows and content sections use thin separators; quiet explanations use tonal fills. The selected view and recent workspace use a rounded paper-white shared-layout highlight; the workspace highlight has a faint inset 1px border. Selection moves between entries; reopening does not reorder them. The source inspection sheet is the elevated exception, with `-12px 0 44px rgb(0 20 26 / .12)` shadow and a `rgb(8 20 24 / .25)` overlay without blur.
 
 **The Flat Workspace Rule.** Use open space, rules, and tonal grouping for normal research content; reserve floating depth for inspection overlays.
 
 ## Shapes
 
-Small, regular corners define the Registry. Filters use the filter radius, navigation and creation controls use the control radius, quiet blocks and the theme switch use the quiet radius, table/alert containers use the container radius, and the composer uses the composer radius. Badges are compact labels with the badge radius rather than oversized pills. Structural research panels remain square and open.
+Soft, regular corners define the Registry. The research window uses 22px; paper panels and evidence inventory use 16px. Navigation and selection use 12px; ordinary controls, launcher fields, and the composer use 10px. Source filters and the primary build action are pill-shaped (999px). Quiet blocks use 8px and badges use 5px. Separators and tonal grouping keep rounded surfaces calm rather than card-heavy.
 
 ## Components
 
@@ -158,11 +162,11 @@ Creation uses a solid teal action, a compact label, and the primary button dimen
 
 ### Inputs / Fields
 
-Workspace fields use paper fill, field stroke and written labels. The desktop header variant uses 13px text, a 34px minimum height, automatic height and 6px block padding; mobile uses stacked 44px controls. The frontmatter records the base field geometry. Shared field focus uses the primary border and translucent 3px ring. The answer composer is a paper container around a vertically resizable textarea, with a minimum 80px text area and 15px/1.65 type. Its focus outline is 1px with a 5px offset. Preserve written labels, invalid states, and disabled feedback.
+Workspace fields use paper fill, field stroke and written labels. The desktop header variant uses 13px text, a 34px minimum height, automatic height and 6px block padding; mobile uses stacked controls with a 44px minimum height and unitless line spacing. The frontmatter records the base field geometry. Shared field focus uses the primary border and translucent 3px ring. The answer composer is a paper container around a vertically resizable textarea, with a minimum 80px text area and 15px/1.65 type. Its focus outline is 1px with a 5px offset. Preserve written labels, invalid states, and disabled feedback.
 
 ### Navigation
 
-The persistent index uses icons and 13px labels, a 40px minimum row, and a teal-wash active state with stronger weight. Hover uses a faint ink fill. At 900px it becomes horizontally scrollable with 42px minimum rows. Each view has a matching hash used by selection and hydration: #workspace, #ask, #sources, #brief and #reliability. Workspace labels use unitless 1.5 line spacing. Existing workspace switches retain list order and desktop scroll position; an opening indicator marks the pending entry.
+The persistent index uses icons and 13px labels, a 44px minimum row, and a paper-white active state with stronger weight. Hover uses a faint ink fill. At 900px it becomes horizontally scrollable with 42px minimum rows. Each view has a matching hash used by selection and hydration: #workspace, #ask, #sources, #brief and #reliability. Workspace labels use unitless 1.5 line spacing. Existing workspace switches retain list order and desktop scroll position; an opening indicator marks the pending entry.
 
 ### Chips
 
@@ -187,7 +191,7 @@ The keyboard-accessible theme toggle is 36px square on desktop and 44px on small
 ### Do:
 
 - **Do** keep the current research view dominant beneath compact creation controls.
-- **Do** use Geist, thin separators, and regular compact corners.
+- **Do** use Geist, thin separators, warm cream surfaces, ink, and quiet rounded panels.
 - **Do** preserve inspectable citations, source limits, and written review states.
 - **Do** use disclosures for supporting detail while keeping primary answers readable.
 - **Do** retain semantic themes, keyboard focus, mobile access, and reduced motion.

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "target": "http://127.0.0.1:3001/",
+  "batch": "round2",
+  "build": "Production webpack; new asset verification: Numbers badge, primary border radius 999px, canvas rgb(236, 237, 232)",
+  "execution": "Root completed final confirmation after delegated composite browser call stalled; reused Expect session and reloaded final assets. No inference submitted.",
+  "checks": {
+    "literature_visible_rows": 5,
+    "empty_ask_disabled": true,
+    "desktop_page_overflow": false,
+    "mobile": {
+      "viewport": 390,
+      "document_width": 390,
+      "table_client": 330,
+      "table_scroll": 812
+    },
+    "text_200": {
+      "evidence_paragraphs_checked": 9,
+      "all_client_heights_equal_scroll_heights": true,
+      "paragraph_line_height": "40.3px",
+      "sheet_title_font": "40px",
+      "sheet_title_line_height": "55px",
+      "sheet_title_height": 110,
+      "mobile_inputs": {
+        "font": "28px",
+        "line_height": "39.2px",
+        "client_height": 55,
+        "scroll_height": 55
+      },
+      "mobile_document_width": 390
+    },
+    "inspect_open_and_escape_close": true,
+    "reduced_motion_matches": true,
+    "keyboard_focus_outline": "solid visible outline after Tab",
+    "console_errors": "No console messages captured"
+  },
+  "remaining_visual_limitations": [
+    "Long source identifiers can wrap onto a short second line at 200% text; no title/description overlap remains."
+  ],
+  "screenshots": [
+    "output/playwright/soft-registry-round2-desktop-evidence.png",
+    "output/playwright/soft-registry-round2-desktop-ask.png",
+    "output/playwright/soft-registry-round2-mobile-evidence.png",
+    "output/playwright/soft-registry-round2-mobile-ask.png",
+    "output/playwright/soft-registry-round2-dark-ask.png",
+    "output/playwright/soft-registry-round2-text200.png"
+  ]
+}

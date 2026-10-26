@@ -6,23 +6,23 @@
     "colorMeta": {
       "primary": {
         "role": "primary",
-        "displayName": "Registry Teal"
+        "displayName": "Muted Deep Teal"
       },
       "background": {
         "role": "neutral",
-        "displayName": "Cool Canvas"
+        "displayName": "Warm Cream Canvas"
       },
       "foreground": {
         "role": "neutral",
-        "displayName": "Graphite Ink"
+        "displayName": "Dark Ink"
       },
       "secondary": {
         "role": "neutral",
-        "displayName": "Cool Gray"
+        "displayName": "Soft Gray-Green"
       },
       "accent": {
         "role": "neutral",
-        "displayName": "Teal Wash"
+        "displayName": "Sage Selection Wash"
       }
     },
     "typographyMeta": {
@@ -103,16 +103,16 @@
       "name": "Build workspace",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Compact creation action: desktop header min34px with automatic height; mobile44px.",
+      "description": "Compact creation action with a pill silhouette: desktop min34px with automatic height; mobile44px.",
       "html": "<button class=\"ds-build\">Build workspace</button>",
-      "css": ".ds-build{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:34px;height:auto;padding:6px 16px;border:1px solid transparent;border-radius:7px;background:var(--primary);color:var(--primary-foreground);font-size:13px;font-weight:600;line-height:1.4;transition:background-color .15s,color .15s,border-color .15s}.ds-build:hover{background:color-mix(in srgb,var(--primary),black 10%)}.ds-build:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
+      "css": ".ds-build{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:34px;height:auto;padding:6px 16px;border:1px solid transparent;border-radius:999px;background:var(--primary);color:var(--primary-foreground);font-size:13px;font-weight:600;line-height:1.4;transition:background-color .15s,color .15s,border-color .15s}.ds-build:hover{background:color-mix(in srgb,var(--primary),black 10%)}.ds-build:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
     },
     {
       "name": "Outline action",
       "kind": "button",
       "description": "Secondary research action using the shared outline variant.",
       "html": "<button class=\"ds-outline\">Inspect</button>",
-      "css": ".ds-outline{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:36px;padding:7px 12px;border:1px solid var(--border);border-radius:7px;background:var(--background);color:var(--foreground);font-size:13px;font-weight:500;transition:background-color .15s,color .15s,border-color .15s}.ds-outline:hover{background:var(--secondary)}.ds-outline:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
+      "css": ".ds-outline{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:36px;padding:7px 12px;border:1px solid var(--border);border-radius:10px;background:var(--background);color:var(--foreground);font-size:13px;font-weight:500;transition:background-color .15s,color .15s,border-color .15s}.ds-outline:hover{background:var(--secondary)}.ds-outline:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
     },
     {
       "name": "Workspace field",
@@ -120,28 +120,28 @@
       "refersTo": "input-workspace",
       "description": "Labeled creation field.",
       "html": "<label class=\"ds-field\"><span>Condition</span><input placeholder=\"Enter a condition\" /></label>",
-      "css": ".ds-field{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;display:grid;gap:7px;color:var(--foreground);font-size:12px;font-weight:550}.ds-field input{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;height:42px;padding:0 12px;border:1px solid var(--input);border-radius:7px;background:var(--card);color:var(--foreground);font-size:14px}.ds-field input::placeholder{color:var(--muted-foreground);opacity:1}.ds-field input:hover{border-color:var(--foreground)}.ds-field input:focus-visible{border-color:var(--primary);outline:2px solid var(--ring);outline-offset:3px;box-shadow:0 0 0 3px rgb(var(--teal-rgb) / .5)}"
+      "css": ".ds-field{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;display:grid;gap:7px;color:var(--foreground);font-size:12px;font-weight:550}.ds-field input{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:42px;height:auto;line-height:1.4;padding:8px 12px;border:1px solid var(--input);border-radius:10px;background:var(--card);color:var(--foreground);font-size:14px}.ds-field input::placeholder{color:var(--muted-foreground);opacity:1}.ds-field input:hover{border-color:var(--foreground)}.ds-field input:focus-visible{border-color:var(--primary);outline:2px solid var(--ring);outline-offset:3px;box-shadow:0 0 0 3px rgb(var(--teal-rgb) / .5)}"
     },
     {
       "name": "Research index",
       "kind": "nav",
       "refersTo": "navigation-active",
-      "description": "Selected research view in the persistent index.",
+      "description": "Selected research view in the quiet, persistent index with a rounded paper selection.",
       "html": "<nav class=\"ds-index\" aria-label=\"Research views\"><button aria-current=\"page\">Evidence</button><button>Ask</button></nav>",
-      "css": ".ds-index{display:grid;gap:4px}.ds-index button{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:40px;padding:9px 12px;border:0;border-radius:7px;background:transparent;color:var(--muted-foreground);font-size:13px;font-weight:550;text-align:left}.ds-index button:hover{background:rgb(var(--ink-rgb) / .045);color:var(--foreground)}.ds-index button[aria-current]{background:var(--accent);color:var(--primary);font-weight:650}.ds-index button:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
+      "css": ".ds-index{display:grid;gap:4px}.ds-index button{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:44px;padding:10px 14px;border:0;border-radius:12px;background:transparent;color:var(--muted-foreground);font-size:13px;font-weight:550;text-align:left}.ds-index button:hover{background:rgb(var(--ink-rgb) / .045);color:var(--foreground)}.ds-index button[aria-current]{background:var(--card);color:var(--primary);font-weight:650}.ds-index button:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
     },
     {
       "name": "Source filter",
       "kind": "chip",
-      "description": "Written pressed-state filtering.",
+      "description": "Pill-shaped source filter with a written pressed state.",
       "html": "<button class=\"ds-filter\" aria-pressed=\"true\">PubMed</button>",
-      "css": ".ds-filter{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:32px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--foreground);font-size:12px;line-height:1.4}.ds-filter:hover{background:var(--secondary)}.ds-filter[aria-pressed=true]{background:var(--accent);color:var(--primary);border-color:rgb(var(--teal-rgb) / .5)}.ds-filter:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
+      "css": ".ds-filter{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:36px;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--foreground);font-size:12px;line-height:1.4}.ds-filter:hover{background:var(--secondary)}.ds-filter[aria-pressed=true]{background:var(--accent);color:var(--primary);border-color:rgb(var(--teal-rgb) / .5)}.ds-filter:focus-visible{outline:2px solid var(--ring);outline-offset:3px}"
     },
     {
       "name": "Answer composer",
       "kind": "card",
       "refersTo": "answer-composer",
-      "description": "The bounded input region within an open research panel.",
+      "description": "The bounded input region within an open research panel, using the same quiet paper surface.",
       "html": "<section class=\"ds-composer\"><label for=\"ds-question\">Research question</label><textarea id=\"ds-question\" placeholder=\"Ask about this evidence\"></textarea></section>",
       "css": ".ds-composer{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;display:grid;gap:12px;padding:18px;border:1px solid var(--input);border-radius:10px;background:var(--card);color:var(--foreground)}.ds-composer label{font-size:12px;font-weight:550}.ds-composer textarea{font-family:var(--font-sans),ui-sans-serif,system-ui,sans-serif;min-height:80px;padding:0;border:0;border-radius:0;background:transparent;color:var(--foreground);font-size:15px;line-height:1.65;resize:vertical}.ds-composer textarea::placeholder{color:var(--muted-foreground)}.ds-composer textarea:focus-visible{outline:1px solid var(--ring);outline-offset:5px}"
     },
@@ -155,12 +155,12 @@
   ],
   "narrative": {
     "northStar": "The Evidence Registry",
-    "overview": "TrialLens is a minimal, clean, intuitive research dashboard. A persistent research index, compact creation controls, flat working panels, and readable source rows give the evidence the largest share of the canvas. The user chose Registry, composition A, as the replacement visual world.\n\nThe voice is sober and source-aware. Hierarchy comes from type, spacing, thin separators, and a restrained teal signal. Supporting details remain inspectable through disclosures rather than occupying equal visual weight with the current research task.",
+    "overview": "TrialLens is a minimal, clean, intuitive research dashboard. The user-pinned references guide the visual refinement: quiet desktop panels and sidebar, warm cream with ink, and 12px rounded selection. The Registry structure stays in place. Hierarchy comes from typography, spacing, thin separators, and muted deep teal.\n\nLight-theme measured contrast: body 12.97:1; secondary text 5.56:1 on paper and 5.17:1 on sidebar; primary button 8.28:1. Dark-theme measured contrast: body 13.78:1; secondary text 8.42:1; primary button 7.9:1.",
     "keyCharacteristics": [
       "A persistent index anchors five research views.",
-      "Flat panels and thin rules organize evidence.",
+      "Warm cream, paper-white panels, and a quiet gray-green sidebar organize evidence.",
       "Geist carries headings, controls, and reading text.",
-      "Teal identifies actions, selection, citations, and focus.",
+      "Muted deep teal identifies actions, selection, citations, and focus.",
       "Informative motion acknowledges new answers and changed inventory."
     ],
     "rules": [
@@ -171,7 +171,7 @@
       },
       {
         "name": "The Flat Workspace Rule",
-        "body": "Use open space, rules, and tonal grouping for normal research content; reserve floating depth for inspection overlays.",
+        "body": "Use quiet rounded paper panels, open space, rules, and tonal grouping for normal research content; reserve floating depth for inspection overlays.",
         "section": "elevation"
       },
       {
@@ -181,7 +181,7 @@
       },
       {
         "name": "Compact Evidence Registry",
-        "body": "Desktop builder in72px header; loaded evidence begins immediately with a right inventory above1250px. Mobile header64px and disclosed builder. Table58em minimum width scales with text.",
+        "body": "Desktop builder in72px header and 224px index; 18px shell inset, 22px window radius, paper panels16px; mobile header64px and disclosed builder. Table58em minimum width scales with text.",
         "section": "layout"
       }
     ],
