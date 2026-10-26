@@ -271,6 +271,9 @@ class ConversationService:
                 records.append({
                     "citation": citation_for(source), "title": source.title[:500],
                     "source_type": source.source_type.value,
+                    "publication_types": [value[:120] for value in source.metadata.get("publication_types", [])
+                                          if isinstance(value, str) and value.strip()][:12]
+                                         if isinstance(source.metadata.get("publication_types"), list) else [],
                     "status": source.status, "phase": source.phase,
                     "publication_date": source.publication_date,
                     "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
@@ -353,9 +356,22 @@ class ConversationService:
                 limitation_markers = set(re.findall(r"\[([^\]]+)\]", " ".join(generated.uncertainty)))
                 if not direct or len(direct) > 9000 or not cited.issubset(allowed) or markers != cited or not limitation_markers.issubset(cited):
                     raise ValueError("Invalid citation provenance")
+                # A citation in one paragraph cannot attribute a different one.
+                # Split rendered paragraphs too, including breaks inside one
+                # schema item. This checks attribution, not claim entailment.
+                if cited and any(not set(re.findall(r"\[([^\]]+)\]", paragraph)).intersection(cited)
+                                 for paragraph in re.split(r"\n\s*\n", direct) if paragraph.strip()):
+                    raise ValueError("Uncited evidence paragraph")
                 # Unsupported answers can abstain without citations, but cannot claim evidence.
                 if not cited and not re.search(r"cannot|can['’]t|does not|doesn['’]t|don['’]t|not enough|isn['’]t|missing|unclear|not (?:reported|provided|available)|no (?:information|evidence)", direct, re.I):
                     raise ValueError("Uncited answer")
+                if not cited:
+                    # A negative phrase does not validate the rest of uncited
+                    # model prose or its uncertainty fields. Report only the
+                    # verification outcome, never a clinical absence claim.
+                    direct = ("I couldn't verify a sourced answer to that question from these excerpts. "
+                              "Try narrowing it to a specific outcome, population, or study.")
+                    generated.uncertainty = []
                 # Catch excerpt-dumping; short technical phrases and numerical results are allowed.
                 normalized = re.sub(r"\W+", " ", re.sub(r"\[[^\]]+\]", "", direct).lower()).split()
                 source_text = [re.sub(r"\W+", " ", text.lower()) for r in records

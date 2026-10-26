@@ -1,0 +1,120 @@
+{
+  "query": "type 2 diabetes metformin",
+  "method": "Read-only ESearch+EFetch; 5 results per order; no inference or workspace mutations",
+  "comparisons": [
+    {
+      "sort": "unspecified",
+      "search_ids": [
+        "42927270",
+        "42927233",
+        "42925073",
+        "42920943",
+        "42919732"
+      ],
+      "articles": [
+        {
+          "pmid": "42927270",
+          "title": "Metformin Use Is Associated With Reduced Rates of Primary Nerve Decompression Surgery and Revision in Type 2 Diabetes: A Retrospective Cohort Study.",
+          "publication_types": [
+            "Journal Article"
+          ],
+          "abstract_characters": 2406
+        },
+        {
+          "pmid": "42927233",
+          "title": "Metabolite Profiling, Modulation of Glucose Metabolism and Antioxidant Activity Reveals the Protective Effect of Sulfated Polysaccharides From Gracilaria gracilis in Hepatic Tissues of Type 2 Diabetic Rats.",
+          "publication_types": [
+            "Journal Article"
+          ],
+          "abstract_characters": 1899
+        },
+        {
+          "pmid": "42925073",
+          "title": "Genetic polymorphisms of GLUT1 (rs841853) and MATE1 (rs2289669) are associated with metformin response in type 2 diabetes mellitus.",
+          "publication_types": [
+            "Journal Article"
+          ],
+          "abstract_characters": 1461
+        },
+        {
+          "pmid": "42920943",
+          "title": "The antidiabetic effects of hesperidin and piperine in streptozotocin-induced diabetic rats.",
+          "publication_types": [
+            "Journal Article"
+          ],
+          "abstract_characters": 1410
+        },
+        {
+          "pmid": "42919732",
+          "title": "Metabolic dysfunctions in pancreatic ductal adenocarcinoma: Pathogenic mechanisms and therapeutic implications.",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "abstract_characters": 2085
+        }
+      ],
+      "wall_seconds": 1.253
+    },
+    {
+      "sort": "relevance",
+      "search_ids": [
+        "36967777",
+        "28770321",
+        "38661224",
+        "37397787",
+        "38763510"
+      ],
+      "articles": [
+        {
+          "pmid": "36967777",
+          "title": "Pharmacological approaches to the prevention of type 2 diabetes mellitus.",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "abstract_characters": 792
+        },
+        {
+          "pmid": "28770321",
+          "title": "Metformin: clinical use in type 2 diabetes.",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "abstract_characters": 1249
+        },
+        {
+          "pmid": "38661224",
+          "title": "Metformin for Type 2 diabetes mellitus.",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "abstract_characters": 0
+        },
+        {
+          "pmid": "37397787",
+          "title": "Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes.",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "abstract_characters": 1459
+        },
+        {
+          "pmid": "38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "abstract_characters": 2033
+        }
+      ],
+      "wall_seconds": 1.045
+    }
+  ]
+}

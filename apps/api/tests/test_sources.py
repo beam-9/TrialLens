@@ -131,3 +131,27 @@ def test_fda_not_found_is_no_matches_not_an_outage(monkeypatch):
     diagnostics = {}
     assert asyncio.run(fetch_sources(workspace, diagnostics)) == []
     assert diagnostics == {"fda_label": "no_matches", "fda_adverse_event": "no_matches"}
+
+
+def test_pubmed_requests_relevance_preserves_rank_and_publication_types(monkeypatch):
+    import httpx
+    def handler(request):
+        if "esearch" in request.url.path:
+            assert request.url.params["sort"] == "relevance"
+            assert request.url.params["retmax"] == "5"
+            assert request.url.params["term"] == "type 2 diabetes metformin"
+            return httpx.Response(200, json={"esearchresult": {"idlist": ["222", "111"]}})
+        assert request.url.params["id"] == "222,111"
+        return httpx.Response(200, text='''<PubmedArticleSet>
+          <PubmedArticle><PMID>111</PMID><ArticleTitle>Later ranked review</ArticleTitle>
+            <AbstractText>Stored review abstract.</AbstractText><PublicationTypeList><PublicationType>Review</PublicationType></PublicationTypeList></PubmedArticle>
+          <PubmedArticle><PMID>222</PMID><ArticleTitle>First ranked trial</ArticleTitle>
+            <AbstractText>Stored randomized trial abstract.</AbstractText><PublicationTypeList><PublicationType>Randomized Controlled Trial</PublicationType><PublicationType>Journal Article</PublicationType></PublicationTypeList></PubmedArticle>
+        </PubmedArticleSet>''')
+    client_type = httpx.AsyncClient
+    monkeypatch.setattr(httpx, "AsyncClient", lambda **kwargs: client_type(transport=httpx.MockTransport(handler), **kwargs))
+    workspace = Workspace(condition="type 2 diabetes", intervention="metformin", source_types=[SourceType.pubmed])
+    sources = asyncio.run(PubMedClient().fetch(workspace))
+    assert [s.external_id for s in sources] == ["222", "111"]
+    assert sources[0].metadata["publication_types"] == ["Randomized Controlled Trial", "Journal Article"]
+    assert sources[1].metadata["publication_types"] == ["Review"]

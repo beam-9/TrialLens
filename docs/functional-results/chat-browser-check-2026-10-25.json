@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-25",
+  "url": "http://127.0.0.1:3001/",
+  "checks": {
+    "page_rendered": true,
+    "initial_view": "Evidence",
+    "ask_navigation": {
+      "passed": true,
+      "url": "http://127.0.0.1:3001/#ask",
+      "panel_rendered": true
+    },
+    "empty_composer_submission": {
+      "passed": true,
+      "composer_cleared": true,
+      "answer_button_disabled": true,
+      "question_submitted": false
+    },
+    "evidence_ask_selection": {
+      "passed": true,
+      "evidence_selected_when_open": true,
+      "ask_selected_when_open": true,
+      "final_view": "Ask"
+    },
+    "inference_or_mutation": {
+      "inference_invoked": false,
+      "workspace_created_or_deleted": false,
+      "production_data_modified": false,
+      "external_api_called": false
+    },
+    "console_errors": [],
+    "local_requests": [
+      {"method": "GET", "path": "/api/usage", "status": 200},
+      {"method": "GET", "path": "/api/workspaces", "status": 200},
+      {"method": "GET", "path": "/icon.svg?icon.17gi03q28jbu-.svg", "status": 200, "observation": "Repeated successful icon GETs were flagged as duplicate requests."}
+    ],
+    "request_issues": {
+      "failed_requests": [],
+      "mixed_content": [],
+      "minor_observation": "Repeated successful local icon GETs were flagged as a duplicate-request issue."
+    }
+  }
+}

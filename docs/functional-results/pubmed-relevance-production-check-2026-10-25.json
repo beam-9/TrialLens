@@ -1,0 +1,45 @@
+{
+  "method": "Production PubMedClient.fetch on an in-memory workspace only; no store/inference calls",
+  "wall_seconds": 0.83,
+  "source_count": 4,
+  "same_ids_and_order_as_relevance_audit": false,
+  "sources": [
+    {
+      "pmid": "36967777",
+      "title": "Pharmacological approaches to the prevention of type 2 diabetes mellitus.",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract_characters": 792
+    },
+    {
+      "pmid": "28770321",
+      "title": "Metformin: clinical use in type 2 diabetes.",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract_characters": 1249
+    },
+    {
+      "pmid": "37397787",
+      "title": "Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes.",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "abstract_characters": 1459
+    },
+    {
+      "pmid": "35965421",
+      "title": "Anti-hyperglycemic effects of propolis or metformin in type 2 diabetes mellitus.",
+      "publication_types": [
+        "Randomized Controlled Trial",
+        "Journal Article"
+      ],
+      "abstract_characters": 1731
+    }
+  ],
+  "errors": {}
+}

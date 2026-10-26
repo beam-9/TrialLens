@@ -25,7 +25,7 @@ class PubMedClient(SourceClient):
             async with httpx.AsyncClient(timeout=8.0) as client:
                 search = await client.get(
                     "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
-                    params={"db": "pubmed", "term": query, "retmode": "json", "retmax": 5},
+                    params={"db": "pubmed", "term": query, "retmode": "json", "retmax": 5, "sort": "relevance"},
                 )
                 search.raise_for_status()
                 ids = search.json()["esearchresult"].get("idlist", [])
@@ -74,10 +74,15 @@ class PubMedClient(SourceClient):
                             metadata={
                                 "sections": {key: html.unescape(value) for key, value in abstract_sections.items()},
                                 "authors": authors,
+                                "publication_types": list(dict.fromkeys(
+                                    normalize(node.text or "") for node in article.findall(".//PublicationType")
+                                    if normalize(node.text or ""))),
                             },
                         )
                     )
-            return records
+            # EFetch response order need not become an accidental second rank.
+            ranks = {identifier: index for index, identifier in enumerate(ids)}
+            return sorted(records, key=lambda source: ranks.get(source.external_id, len(ids)))
         except Exception:
             self.errors[SourceType.pubmed] = "unavailable"
             return []

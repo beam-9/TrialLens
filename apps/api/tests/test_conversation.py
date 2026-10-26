@@ -88,6 +88,8 @@ def test_boundary_responses_clear_source_based_fallback_metadata(monkeypatch, co
     ({"paragraphs": ["It works [PubMed:999]."], "cited_sources": ["PubMed:999"], "uncertainty": []}, "completed"),
     ({"paragraphs": ["It works."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "completed"),
     ({"paragraphs": ["It works."], "cited_sources": [], "uncertainty": []}, "completed"),
+    ({"paragraphs": ["The trial reports a result [PubMed:123].", "It is safe for everyone."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "completed"),
+    ({"paragraphs": ["The trial reports a result [PubMed:123].\n\nIt is safe for everyone."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "completed"),
     ({"paragraphs": ["It works [PubMed:123]."], "cited_sources": ["PubMed:123"], "uncertainty": []}, "incomplete"),
     ({"paragraphs": ["   "], "cited_sources": [], "uncertainty": []}, "completed"),
 ])
@@ -400,3 +402,27 @@ def test_combination_brand_alias_keeps_product_when_title_lists_multiple_brands(
     ConversationService().generate(workspace, "What does ZITUVIMET's label say?", [], [combination, source], fallback)
     records = json.loads(captured[0]["input"])["evidence"]
     assert any(r["citation"] == "openFDA label:combo" for r in records)
+
+
+def test_each_evidence_paragraph_can_repeat_its_source(monkeypatch, context):
+    workspace, source, fallback = context
+    mock_generation(monkeypatch, {"paragraphs": [
+        "The endpoint was lower than placebo at 12 weeks [PubMed:123].",
+        "The excerpt does not establish an effect beyond that period [PubMed:123]."],
+        "cited_sources": ["PubMed:123"], "uncertainty": []})
+    result = ConversationService().generate(workspace, "What changed?", [], [source], fallback)
+    assert result.generation_mode == "conversational"
+    assert result.direct_answer.count("[PubMed:123]") == 2
+
+
+def test_uncited_abstention_cannot_smuggle_clinical_claims(monkeypatch, context):
+    workspace, source, fallback = context
+    mock_generation(monkeypatch, {"paragraphs": [
+        "I can't assess the study fully, but this treatment is safe for everyone."],
+        "cited_sources": [], "uncertainty": ["It has no serious adverse effects."]})
+    result = ConversationService().generate(workspace, "What does the evidence say about safety?", [], [source], fallback)
+    assert result.generation_mode == "conversational"
+    assert "safe for everyone" not in result.direct_answer
+    assert "no serious adverse effects" not in result.model_dump_json()
+    assert result.citations == [] and result.uncertainty == []
+    assert "verify" in result.direct_answer
