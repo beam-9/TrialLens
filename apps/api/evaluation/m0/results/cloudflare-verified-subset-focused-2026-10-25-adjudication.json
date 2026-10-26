@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "reviewer": "primary agent; source-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-verified-subset-focused-2026-10-25-answers.json",
+  "source_answers_sha256": "05ddda2e257a9dc923d83a8de351b29331c94198f873a7ae0766fd3dc03bc5ba",
+  "decision": "Reject; no production strategy change.",
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "Metformin has low adherence due to its main side effect of gut dysbiosis, causing complications/costs.",
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "The matching sentence is background rationale in a protocol describing a planned AXOS study.",
+          "rationale": "Text membership does not turn registry rationale into an established general harm."
+        },
+        {
+          "category": "wrong_population",
+          "claim": "Metformin can be effective in maintaining excellent metabolic control, supported by a four-year case.",
+          "source_id": "PubMed:42369057",
+          "source_passage": "Two HNF1B-MODY (MODY-5) case reports, a rare monogenic diabetes population.",
+          "rationale": "The answer uses this case as benefit support for a type 2 diabetes question without retaining the distinct MODY population."
+        }
+      ],
+      "coverage": "Correct type2 indication, age10+, diet/exercise; common GI effects. Omits major label warnings; the broad answer is not a sufficient main-limitations summary.",
+      "relevance": "Tangential MODY case generalized into benefit; protocol rationale treated as fact.",
+      "rationale": "Selection contains exact quotations but factual interpretation remains unsafe."
+    },
+    {
+      "case_id": "real-simplify",
+      "support_verdict": "partially_supported",
+      "critical_errors": [
+        {
+          "category": "unsupported_claim",
+          "claim": "Metformin can cause gut dysbiosis leading to low adherence and complications.",
+          "source_id": "ClinicalTrials.gov:NCT05689684",
+          "source_passage": "Quoted background rationale from a protocol.",
+          "rationale": "Repeated promotion of registry background into established causal harm."
+        }
+      ],
+      "coverage": "Includes age floor/adjunct conditions and label GI risks. Serious warnings are present but lack adjacent supporting label attribution; technical glycemic/pediatric wording remains.",
+      "relevance": "Partly responsive but repetitive and less plain than requested.",
+      "rationale": "The generalized long-term-study absence caveat is poorly scoped; a four-year MODY case does not establish long-term type2 effects either, so do not count that case alone as proof the type2 absence assertion is false."
+    }
+  ]
+}

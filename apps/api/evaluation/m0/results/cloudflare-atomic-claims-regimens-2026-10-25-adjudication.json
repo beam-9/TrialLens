@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-atomic-claims-regimens-2026-10-25-answers.json",
+  "source_answers_sha256": "46105745eb0294101c52a6fb2086f3eae6a7314ebf39faa31a8fb852a1976053",
+  "decision": "Reject: accepted range is not supported by its quote and omits larger rates in context.",
+  "cases": [
+    {
+      "case_id": "holdout-regimen-risk",
+      "support_verdict": "unsupported",
+      "critical_errors": [
+        {
+          "category": "wrong_number_comparator",
+          "claim": "Hypoglycemia rates range from 0.6% to 3.9%.",
+          "source_id": "openFDA label:FDA-LABEL-metformin-1",
+          "source_passage": "Exact context includes 16.4% and 15.3% in separate add-on regimens, as well as 0% control values. The approved quote contains 0.6% and 1.6%, not 3.9%.",
+          "rationale": "A subset of independent trial values is presented as the label range; the quoted evidence does not include its upper bound."
+        }
+      ],
+      "coverage": "Does not explain independent controls, background regimens or 24-week timeframe; does not answer whether a pooled risk is appropriate."
+    }
+  ]
+}

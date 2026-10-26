@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-qwen38-competence-2026-10-25-answers.json",
+  "source_answers_sha256": "9bf257bc6373506ca0256613f6673ec4a53d66af03b271ca4258bbf4928d0517",
+  "decision": "Reject: no completed final answer; second response length-terminated at 1800 tokens.",
+  "cases": [
+    {
+      "case_id": "holdout-plain-benefit-risk",
+      "support_verdict": "not_generated",
+      "critical_errors": [],
+      "draft_notes": [
+        "Uses literal [citation] placeholders instead of IDs.",
+        "Adds rare lactic-acidosis frequency/mechanism absent from the supplied excerpt."
+      ],
+      "latency_seconds": 97.53
+    }
+  ]
+}

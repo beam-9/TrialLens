@@ -1,0 +1,426 @@
+[
+  {
+    "case_id": "relevance-broad",
+    "snapshot_id": "relevance-probe",
+    "answer": {
+      "id": "f315f64f-975e-4d61-b780-1fe6b6948f1f",
+      "workspace_id": "relevance-probe",
+      "question": "Based on these abstracts, explain in plain language what metformin is used for, its main limitations, and what these sources do and do not show.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "short_answer": "Metformin is used to treat type 2 diabetes [PubMed:28770321]. It is considered a first-line treatment due to its efficacy and good safety profile. The sources do not establish its main limitations, but mention controversy regarding its precise mechanism of action [PubMed:28770321].\n\nThese sources show metformin is effective in lowering blood sugar [PubMed:28770321] and has potential benefits in other areas [PubMed:37397787]. They do not establish long-term effects compared to newer treatments [PubMed:28770321].",
+      "direct_answer": "Metformin is used to treat type 2 diabetes [PubMed:28770321]. It is considered a first-line treatment due to its efficacy and good safety profile. The sources do not establish its main limitations, but mention controversy regarding its precise mechanism of action [PubMed:28770321].\n\nThese sources show metformin is effective in lowering blood sugar [PubMed:28770321] and has potential benefits in other areas [PubMed:37397787]. They do not establish long-term effects compared to newer treatments [PubMed:28770321].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 4 source records; the final answer uses 2 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CONTEXT ONLY \u00b7 PubMed:38763510 \u00b7 Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 PubMed:28770321 \u00b7 Metformin: clinical use in type 2 diabetes. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 PubMed:37397787 \u00b7 Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CONTEXT ONLY \u00b7 PubMed:36967777 \u00b7 Pharmacological approaches to the prevention of type 2 diabetes mellitus. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "4 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "2 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The sources do not discuss metformin's main limitations in detail.",
+        "Long-term effects of metformin compared to newer treatments are not established."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The sources do not discuss metformin's main limitations in detail.",
+        "Long-term effects of metformin compared to newer treatments are not established."
+      ],
+      "citations": [
+        "PubMed:28770321",
+        "PubMed:37397787"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "c54cc92d-b432-41f4-b105-85640cabaf35",
+          "source_id": "8e79d185-0840-4071-a15a-56d3061bdabf",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "score": 0.587,
+          "section": "CONCLUSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, its, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "26b9dfd6-669c-4d84-82b7-4e4ae7082a7f",
+          "source_id": "8e79d185-0840-4071-a15a-56d3061bdabf",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia.",
+          "score": 0.5788,
+          "section": "BACKGRUOUND",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "used"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, used in a literature source."
+        },
+        {
+          "chunk_id": "5acbae02-a5b9-4738-aa48-02537b940f40",
+          "source_id": "cf970895-3a75-470e-b983-90b2a9681bac",
+          "source_type": "pubmed",
+          "citation": "PubMed:28770321",
+          "text": "markers, and a reduction in cardiovascular events, apparently independent from the drug's glucose-lowering effect. Data have emerged questioning the previous reluctance to use this agent in those with mild to moderate chronic kidney disease. Regulations guiding its use in patients with stable, modest renal dysfunction have, as a result, become more lenient in recent years. With no long-term studies comparing it against newer glucose-lowering drugs, some of which have more robust evidence for cardioprotection, metformin's established role as 'foundation therapy' in type 2 diabetes may justifiably be challenged.",
+          "score": 0.5729,
+          "section": "Abstract 1 2",
+          "title": "Metformin: clinical use in type 2 diabetes.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28770321/",
+          "external_id": "28770321",
+          "publication_date": "2017",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, its, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "e45d1232-11dd-49ce-bb53-fe09057b3407",
+          "source_id": "180fe169-d2a7-4b23-9fca-55563fc671b3",
+          "source_type": "pubmed",
+          "citation": "PubMed:37397787",
+          "text": "Metformin has been designated as one of the most crucial first-line therapeutic agents in the management of type 2 diabetes mellitus. Primarily being an antihyperglycemic agent, metformin also has a plethora of pleiotropic effects on various systems and processes. It acts majorly by activating AMPK (Adenosine Monophosphate-Activated Protein Kinase) in the cells and reducing glucose output from the liver. It also decreases advanced glycation end products and reactive oxygen species production in the endothelium apart from regulating the glucose and lipid metabolism in the cardiomyocytes, hence minimizing the cardiovascular risks. Its anticancer,",
+          "score": 0.5616,
+          "section": "Abstract 1 1",
+          "title": "Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37397787/",
+          "external_id": "37397787",
+          "publication_date": "2023",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, its, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "2bf66490-9464-4e54-a763-1b393b5729b6",
+          "source_id": "cf970895-3a75-470e-b983-90b2a9681bac",
+          "source_type": "pubmed",
+          "citation": "PubMed:28770321",
+          "text": "Metformin is one of the most popular oral glucose-lowering medications, widely considered to be the optimal initial therapy for patients with type 2 diabetes mellitus. Interestingly, there still remains controversy regarding the drug's precise mechanism of action, which is thought to involve a reduction in hepatic glucose production. It is now recommended as first-line treatment in various guidelines, including that of the EASD and ADA. Its favoured status lies in its efficacy, low cost, weight neutrality and good safety profile. Other benefits have also been described, including improvements in certain lipids, inflammatory",
+          "score": 0.5131,
+          "section": "Abstract 1 1",
+          "title": "Metformin: clinical use in type 2 diabetes.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28770321/",
+          "external_id": "28770321",
+          "publication_date": "2017",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, its, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "2605a6e5-cef7-44ca-aa6d-2d9be295fb88",
+          "source_id": "8e79d185-0840-4071-a15a-56d3061bdabf",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events.",
+          "score": 0.4829,
+          "section": "RESULTS",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "6ee3be55-2ede-45e2-b489-e1d33e581960",
+          "source_id": "180fe169-d2a7-4b23-9fca-55563fc671b3",
+          "source_type": "pubmed",
+          "citation": "PubMed:37397787",
+          "text": "antiproliferative and apoptosis-inducing effects on malignant cells might prove instrumental in the malignancy of organs like the breast, kidney, brain, ovary, lung, and endometrium. Preclinical studies have also shown some evidence of metformin's neuroprotective role in Parkinson's disease, Alzheimer's disease, multiple sclerosis and Huntington's disease. Metformin exerts its pleiotropic effects through varied pathways of intracellular signalling and exact mechanism in the majority of them remains yet to be clearly defined. This article has extensively reviewed the therapeutic benefits of metformin and the details of its mechanism for a molecule of boon in",
+          "score": 0.4606,
+          "section": "Abstract 1 2",
+          "title": "Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37397787/",
+          "external_id": "37397787",
+          "publication_date": "2023",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "metformin"
+          ],
+          "relevance_note": "Matched diabetes, its, metformin in a literature source."
+        },
+        {
+          "chunk_id": "35a9f7f0-e5f3-4b3e-aedb-e242f05ec222",
+          "source_id": "d7c31e36-e73f-4e7d-9d34-de9fcad5c660",
+          "source_type": "pubmed",
+          "citation": "PubMed:36967777",
+          "text": "About 1 in 10 adults worldwide are estimated to have diabetes mellitus. They are at risk of developing life-threatening complications resulting in reduced quality of life, increased mortality and higher healthcare costs. The ability to prevent or delay type 2 diabetes mellitus (T2DM) by modifying some of its risk factors has been hypothesized for decades. The long and often gradual time-course of increasing dysglycemia prior to diabetes diagnosis suggests that interventions during that period could be effective in preventing T2DM. In addition to lifestyle modifications, certain drugs prevent or slow development of",
+          "score": 0.4375,
+          "section": "Abstract 1 1",
+          "title": "Pharmacological approaches to the prevention of type 2 diabetes mellitus.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36967777/",
+          "external_id": "36967777",
+          "publication_date": "2023",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "its",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, its, type in a literature source."
+        }
+      ],
+      "created_at": "2026-10-26T05:54:32.498240+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"Metformin is a medication used to treat type 2 diabetes [PubMed:28770321]. It is considered a first-line treatment and is widely used due to its efficacy, low cost, weight neutrality, and good safety profile. Metformin works by reducing hepatic glucose production and has been shown to have benefits beyond just lowering blood sugar, including improvements in certain lipids, inflammatory markers, and a reduction in cardiovascular events [PubMed:28770321].\", \"The main limitations of metformin are not fully discussed in these abstracts, but it is mentioned that there is controversy regarding its precise mechanism of action [PubMed:28770321]. Additionally, metformin's role as a foundation therapy in type 2 diabetes may be challenged by newer glucose-lowering drugs with more robust evidence for cardioprotection [PubMed:28770321].\", \"These sources show that metformin is effective in lowering blood sugar and has potential benefits beyond just diabetes treatment, including anticancer and neuroprotective effects [PubMed:37397787]. However, they do not provide a comprehensive discussion of metformin's limitations or a detailed comparison of its effectiveness to other treatments. They also do not provide long-term studies comparing metformin to newer glucose-lowering drugs [PubMed:28770321].\"], \"cited_sources\": [\"PubMed:28770321\", \"PubMed:37397787\"], \"uncertainty\": [\"The abstracts do not provide a comprehensive discussion of metformin's limitations.\", \"The abstracts do not provide long-term studies comparing metformin to newer glucose-lowering drugs.\", \"The mechanisms of metformin's pleiotropic effects are not fully understood.\"]}",
+        "usage": {
+          "prompt_tokens": 2510,
+          "completion_tokens": 349,
+          "total_tokens": 2859,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 138.41290283203125
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "3d80fdd39aacc931c58c61472aa748cf1101c7c774d1eb8049d3dfbc39dab1dd",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"Metformin is used to treat type 2 diabetes [PubMed:28770321]. It is considered a first-line treatment due to its efficacy and good safety profile. The sources do not establish its main limitations, but mention controversy regarding its precise mechanism of action [PubMed:28770321].\", \"These sources show metformin is effective in lowering blood sugar [PubMed:28770321] and has potential benefits in other areas [PubMed:37397787]. They do not establish long-term effects compared to newer treatments [PubMed:28770321].\"], \"cited_sources\": [\"PubMed:28770321\", \"PubMed:37397787\"], \"uncertainty\": [\"The sources do not discuss metformin's main limitations in detail.\", \"Long-term effects of metformin compared to newer treatments are not established.\"]}",
+        "usage": {
+          "prompt_tokens": 3290,
+          "completion_tokens": 174,
+          "total_tokens": 3464,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 123.37275695800781
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "3d80fdd39aacc931c58c61472aa748cf1101c7c774d1eb8049d3dfbc39dab1dd",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2024",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "BACKGRUOUND",
+            "CONCLUSION",
+            "METHODS",
+            "RESULTS"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia. This randomized, double-blind, placebo-controlled, parallel-group and phase III multicenter study included adults with glycosylated hemoglobin (HbA1c) levels >7.0% and <10.0%, low-density lipoprotein cholesterol (LDL-C) >100 and <250 mg/dL. One hundred eighty-five eligible subjects were randomized to the combination group (metformin+atorvastatin), metformin group (metformin+atorvastatin placebo), and atorvastatin group (atorvastatin+metformin placebo). The primary efficacy endpoints were the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment. After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events. The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:28770321",
+          "title": "Metformin: clinical use in type 2 diabetes.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2017",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Metformin is one of the most popular oral glucose-lowering medications, widely considered to be the optimal initial therapy for patients with type 2 diabetes mellitus. Interestingly, there still remains controversy regarding the drug's precise mechanism of action, which is thought to involve a reduction in hepatic glucose production. It is now recommended as first-line treatment in various guidelines, including that of the EASD and ADA. Its favoured status lies in its efficacy, low cost, weight neutrality and good safety profile. Other benefits have also been described, including improvements in certain lipids, inflammatory markers, and a reduction in cardiovascular events, apparently independent from the drug's glucose-lowering effect. Data have emerged questioning the previous reluctance to use this agent in those with mild to moderate chronic kidney disease. Regulations guiding its use in patients with stable, modest renal dysfunction have, as a result, become more lenient in recent years. With no long-term studies comparing it against newer glucose-lowering drugs, some of which have more robust evidence for cardioprotection, metformin's established role as 'foundation therapy' in type 2 diabetes may justifiably be challenged.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:37397787",
+          "title": "Metformin: A Review of Potential Mechanism and Therapeutic Utility Beyond Diabetes.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2023",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Metformin has been designated as one of the most crucial first-line therapeutic agents in the management of type 2 diabetes mellitus. Primarily being an antihyperglycemic agent, metformin also has a plethora of pleiotropic effects on various systems and processes. It acts majorly by activating AMPK (Adenosine Monophosphate-Activated Protein Kinase) in the cells and reducing glucose output from the liver. It also decreases advanced glycation end products and reactive oxygen species production in the endothelium apart from regulating the glucose and lipid metabolism in the cardiomyocytes, hence minimizing the cardiovascular risks. Its anticancer, antiproliferative and apoptosis-inducing effects on malignant cells might prove instrumental in the malignancy of organs like the breast, kidney, brain, ovary, lung, and endometrium. Preclinical studies have also shown some evidence of metformin's neuroprotective role in Parkinson's disease, Alzheimer's disease, multiple sclerosis and Huntington's disease. Metformin exerts its pleiotropic effects through varied pathways of intracellular signalling and exact mechanism in the majority of them remains yet to be clearly defined. This article has extensively reviewed the therapeutic benefits of metformin and the details of its mechanism for a molecule of boon in various conditions like diabetes, prediabetes, obesity, polycystic ovarian disease, metabolic derangement in HIV, various cancers and aging.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:36967777",
+          "title": "Pharmacological approaches to the prevention of type 2 diabetes mellitus.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2023",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "About 1 in 10 adults worldwide are estimated to have diabetes mellitus. They are at risk of developing life-threatening complications resulting in reduced quality of life, increased mortality and higher healthcare costs. The ability to prevent or delay type 2 diabetes mellitus (T2DM) by modifying some of its risk factors has been hypothesized for decades. The long and often gradual time-course of increasing dysglycemia prior to diabetes diagnosis suggests that interventions during that period could be effective in preventing T2DM. In addition to lifestyle modifications, certain drugs prevent or slow development of hyperglycemia. Recently, drugs used for obesity management were shown to prevent T2DM. In this review, we discuss various pharmacotherapeutic options for preventing T2DM.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Based on these abstracts, explain in plain language what metformin is used for, its main limitations, and what these sources do and do not show."
+    },
+    "generation_context_sha256": "3d80fdd39aacc931c58c61472aa748cf1101c7c774d1eb8049d3dfbc39dab1dd"
+  }
+]

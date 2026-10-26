@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reviewer": "primary agent; source-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-quote-plan-focused-2026-10-25-answers.json",
+  "source_answers_sha256": "7aa8ce1ec6a2f20e4aef9170deb10da2e5edb63a09635d4f333ee85ca9c0af02",
+  "decision": "Reject strict-plan run; retained failure is selection integrity, not semantic generation evidence.",
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "not_generated",
+      "critical_errors": [],
+      "rationale": "Stopped after selection: the NCT00546325 quote is not an exact substring of its submitted record. Seven other quotes match. No final answer was produced; follow-up not executed."
+    }
+  ]
+}

@@ -194,3 +194,70 @@ def test_model_experiment_records_actual_endpoint_and_shared_quota(configured, m
     assert result["model"] == "@cf/qwen/qwen3-30b-a3b-fp8"
     assert result["quota"]["used_or_reserved_neurons"] == pytest.approx(2 * (1000 * 4625 + 100 * 30475) / 1e6)
     assert result["method"]["paid_provider_fallbacks"] == result["method"]["local_model_calls"] == 0
+
+
+@pytest.mark.parametrize("final_kind", ["grounded", "bad_citation", "copied"])
+def test_quote_strategy_retains_http_isolation_and_final_guards(configured, monkeypatch, tmp_path, final_kind):
+    from triallens import conversation
+    original_completion = runner.cloudflare.completion
+    calls = []
+    def post(url, **kwargs):
+        request = kwargs["json"]
+        calls.append(request)
+        context = json.loads(request["messages"][1]["content"])
+        source = context["evidence"][0]
+        if len(calls) == 1:
+            assert "quotes" in request["response_format"]["json_schema"]["properties"]
+            content = {"quotes": [{"citation": source["citation"], "quote": source["text"], "use": "finding"}]}
+        else:
+            assert calls[0]["messages"][1] == request["messages"][1]
+            assert json.loads(request["messages"][2]["content"])["quotes"][0]["quote"] == source["text"]
+            citation = "PubMed:unknown" if final_kind == "bad_citation" else source["citation"]
+            prose = source["text"] if final_kind == "copied" else "In this demo trial, adults had a 0.5-point lower HbA1c than placebo at 12 weeks."
+            content = {"paragraphs": [prose + " [" + citation + "]."], "cited_sources": [citation], "uncertainty": []}
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {
+            "response": content, "usage": {"prompt_tokens": 900, "completion_tokens": 150}}})
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    result = runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"], strategy="verified-quotes")
+    assert result["strategy_experiment"] == "verified-quotes"
+    assert result["strategy_sha256"]
+    assert result["isolation_verified"]
+    assert len(calls) == 2
+    assert runner.cloudflare.completion is original_completion
+    expected = "model_answer" if final_kind == "grounded" else "validation_rejection"
+    trace = result["requests"][0]["trace"]
+    assert (trace["result_kind"] if final_kind == "grounded" else trace["fallback_reason"]) == expected
+    saved = json.loads((tmp_path / "answers").read_text())[0]
+    assert saved["generation_context"] == json.loads(calls[0]["messages"][1]["content"])
+    assert "quotes" not in saved["answer"]["direct_answer"]
+
+
+@pytest.mark.parametrize("kind", ["grounded", "not_approved", "copied"])
+def test_claim_review_strategy_keeps_existing_final_validation(configured, monkeypatch, tmp_path, kind):
+    from triallens import conversation
+    calls = []
+    original_completion = runner.cloudflare.completion
+    def post(url, **kwargs):
+        calls.append(kwargs["json"])
+        context = json.loads(kwargs["json"]["messages"][1]["content"])
+        source = context["evidence"][0]
+        if len(calls) == 1:
+            sentence = source["text"] if kind == "copied" else "In this demo trial, adults had a lower HbA1c endpoint than placebo at 12 weeks."
+            content = {"claims": [{"text": sentence, "citation": source["citation"], "paragraph": 0}]}
+        else:
+            assert calls[0]["messages"][1] == calls[1]["messages"][1]
+            assert "claims" in json.loads(calls[1]["messages"][2]["content"])
+            content = {"reviews": [{"index": 0, "verdict": "unsupported" if kind == "not_approved" else "supported",
+                                    "quote": "" if kind == "not_approved" else source["text"]}]}
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": {
+            "response": content, "usage": {"prompt_tokens": 900, "completion_tokens": 150}}})
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    result = runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"], strategy="reviewed-claims")
+    assert len(calls) == 2 and result["isolation_verified"]
+    assert runner.cloudflare.completion is original_completion
+    trace = result["requests"][0]["trace"]
+    assert (trace["result_kind"] == "model_answer") is (kind == "grounded")
+    if kind != "grounded":
+        assert trace["fallback_reason"] == "validation_rejection"
+    saved = json.loads((tmp_path / "answers").read_text())[0]["answer"]
+    assert "reviews" not in saved["direct_answer"]

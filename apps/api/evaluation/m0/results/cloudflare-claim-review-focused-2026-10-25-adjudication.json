@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-claim-review-focused-2026-10-25-answers.json",
+  "source_answers_sha256": "c827e5dabcc86c6d99c2a06b62b533906aa5dc8706d80cf0efbc1f1d57a0a360",
+  "decision": "Reject: draft citation IDs contain extra delimiter text; no review/writing result exposed.",
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "support_verdict": "not_generated",
+      "critical_errors": [],
+      "rationale": "One provider call only. Claims JSON parses, but citation strings do not name allowed source IDs."
+    }
+  ]
+}

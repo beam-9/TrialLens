@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "purpose": "Fresh relevance-sorted PubMed diagnostic; not the frozen M0 cohort or a clinical validation set",
+  "snapshots": [
+    {
+      "id": "relevance-probe",
+      "path": "snapshot.json",
+      "sha256": "83ac338a5610a550d31634f6f3c8468a4ca10ddfb6fb55ca6492a6b3d8cea79f"
+    }
+  ],
+  "cases": [
+    {
+      "id": "relevance-broad",
+      "snapshot_id": "relevance-probe",
+      "question": "Based on these abstracts, explain in plain language what metformin is used for, its main limitations, and what these sources do and do not show.",
+      "history_case_id": null,
+      "source_types": null,
+      "expected_route": "generated"
+    }
+  ]
+}

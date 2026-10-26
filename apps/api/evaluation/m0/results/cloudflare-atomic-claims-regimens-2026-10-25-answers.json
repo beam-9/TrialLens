@@ -1,0 +1,351 @@
+[
+  {
+    "case_id": "holdout-regimen-risk",
+    "snapshot_id": "combination-full",
+    "answer": {
+      "id": "4c843368-739b-4c4a-a7cc-49ff78e72220",
+      "workspace_id": "m0-combination-full",
+      "question": "Why does the ZITUVIMET label give different low-blood-sugar percentages in different places? Is there one overall risk number I should take away?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "short_answer": "The label provides various incidence rates of hypoglycemia, ranging from 0.6% to 3.9%, depending on the study and treatment regimen. [openFDA label:FDA-LABEL-metformin-1]",
+      "direct_answer": "The label provides various incidence rates of hypoglycemia, ranging from 0.6% to 3.9%, depending on the study and treatment regimen. [openFDA label:FDA-LABEL-metformin-1]",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-1 \u00b7 FDA label: ZITUVIMET \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt"
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-1"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-combination-full-chunk-16",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "patients with type 2 diabetes mellitus inadequately controlled on metformin alone, the overall incidence of adverse reactions of hypoglycemia was 1.3% in patients given add-on sitagliptin and 2.1% in patients given add-on placebo. In the trial of sitagliptin and add-on combination therapy with metformin and rosiglitazone, the overall incidence of hypoglycemia was 2.2% in patients given add-on sitagliptin and 0% in patients given add-on placebo through Week 18. Through Week 54, the overall incidence of hypoglycemia was 3.9% in patients given add-on sitagliptin and 1% in patients given add-on placebo. In an",
+          "score": 0.7177,
+          "section": "summary 16",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "overall",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, overall, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-15",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "Add-On to Insulin + Metformin (24 weeks) Sitagliptin 100 mg + Metformin + Insulin Placebo + Metformin + Insulin N = 229 N = 233 Overall (%) 35 (15.3) 19 (8.2) Rate (episodes/patient-year) 0.98 0.61 Severe (%) 1 (0.4) 1 (0.4) The overall incidence of reported adverse reactions of hypoglycemia in patients with type 2 diabetes mellitus inadequately controlled on diet and exercise was 0.6% in patients given placebo, 0.6% in patients given sitagliptin alone, 0.8% in patients given metformin alone, and 1.6% in patients given sitagliptin in combination with metformin. In",
+          "score": 0.6951,
+          "section": "summary 15",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "overall",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, overall, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-8",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "See Table 2. Table 2: Pre-selected Gastrointestinal Adverse Reactions Reported in Patients with Type 2 Diabetes Mellitus Receiving Sitagliptin and Metformin Number of Patients (%) Trial of Sitagliptin and Metformin in Patients Inadequately Controlled on Diet and Exercise Trial of Sitagliptin Add-on in Patients Inadequately Controlled on Metformin Alone Placebo Sitagliptin 100 mg once daily Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily Data pooled for the patients given the lower and higher doses of metformin. Sitagliptin 50 mg twice daily + Metformin HCl 500 mg/ Metformin HCl 1,000 mg",
+          "score": 0.6314,
+          "section": "summary 8",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "number",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, number, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-17",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "additional, 30-week placebo-controlled, trial of patients with type 2 diabetes mellitus inadequately controlled with metformin comparing the maintenance of sitagliptin 100 mg versus withdrawal of sitagliptin when initiating basal insulin therapy, the event rate and incidence of documented symptomatic hypoglycemia (blood glucose measurement \u226470 mg/dL) did not differ between the sitagliptin and placebo groups. Vital Signs and Electrocardiograms With the combination of sitagliptin and metformin, no clinically meaningful changes in vital signs or in ECG (including in QTc interval) were observed. Pancreatitis In a pooled analysis of 19 double-blind clinical trials that",
+          "score": 0.6281,
+          "section": "summary 17",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-6",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "daily Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily Data pooled for the patients given the lower and higher doses of metformin. Sitagliptin 50 mg twice daily + Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily N = 176 N = 179 N = 364 N = 372 Diarrhea 7 (4) 5 (2.8) 28 (7.7) 28 (7.5) Upper Respiratory Tract Infection 9 (5.1) 8 (4.5) 19 (5.2) 23 (6.2) Headache 5 (2.8) 2 (1.1) 14 (3.8) 22 (5.9) Sitagliptin Add-on Therapy in Patients with Type 2 Diabetes Mellitus",
+          "score": 0.6179,
+          "section": "summary 6",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-10",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "of initial therapy. 4 (2.3) 6 (3.4) 14 (3.8) 11 (3) 9 (3.8) 10 (2.2) Sitagliptin in Combination with Metformin and Glimepiride In a 24-week placebo-controlled trial of sitagliptin 100 mg as add-on therapy in patients with type 2 diabetes mellitus inadequately controlled on metformin and glimepiride (sitagliptin, N=116; placebo, N=113), the adverse reactions reported in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo were: hypoglycemia ( see Table 3) and headache (6.9%, 2.7%). Sitagliptin in Combination with Metformin and Rosiglitazone In a placebo-controlled trial",
+          "score": 0.6123,
+          "section": "summary 10",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-12",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "nasopharyngitis (11%, 9.3%), peripheral edema (8.3%, 5.2%), and headache (5.5%, 4.1%). Sitagliptin in Combination with Metformin and Insulin In a 24-week placebo-controlled trial of sitagliptin 100 mg as add-on therapy in patients with type 2 diabetes mellitus inadequately controlled on metformin and insulin (sitagliptin, N=229; placebo, N=233), the only adverse reaction reported in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo was hypoglycemia (Table 3). Hypoglycemia In the above trials (N=5), adverse reactions of hypoglycemia were based on all reports of symptomatic hypoglycemia; a concurrent",
+          "score": 0.6021,
+          "section": "summary 12",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, zituvimet in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-combination-full-chunk-4",
+          "source_id": "m0-combination-full-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "patients treated with placebo were diarrhea, upper respiratory tract infection, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Zydus Pharmaceuticals (USA) Inc. at 1-877-993-8779 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Trials Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Common Adverse Reactions Sitagliptin and Metformin Coadministration in Patients with Type 2 Diabetes",
+          "score": 0.6005,
+          "section": "summary 4",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type, zituvimet in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-10-26T05:40:03.027548+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"claims\": [{\"text\": \"The ZITUVIMET label reports different low-blood-sugar percentages in various sections, reflecting different study populations and durations.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}, {\"text\": \"In patients with type 2 diabetes mellitus inadequately controlled on diet and exercise, the overall incidence of reported adverse reactions of hypoglycemia was 1.6% in patients given sitagliptin in combination with metformin.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}, {\"text\": \"When the combination of sitagliptin and metformin was coadministered with a sulfonylurea or with insulin, the percentage of patients reporting at least one adverse reaction of hypoglycemia was higher than that observed with placebo and metformin coadministered with a sulfonylurea or with insulin.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}, {\"text\": \"There is no single overall risk number for low-blood-sugar events that applies to all patients taking ZITUVIMET, as the risk varies depending on the specific treatment regimen and population.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}, {\"text\": \"The label provides various incidence rates of hypoglycemia, ranging from 0.6% to 3.9%, depending on the study and treatment regimen.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}, {\"text\": \"The different low-blood-sugar percentages in the ZITUVIMET label are due to the varying study designs, populations, and treatment regimens, and should not be considered as conflicting or contradictory information.\", \"citation\": \"openFDA label:FDA-LABEL-metformin-1\", \"paragraph\": 0}]}",
+        "usage": {
+          "prompt_tokens": 3481,
+          "completion_tokens": 433,
+          "total_tokens": 3914,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 181.5108642578125
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "4a469bcd2fe3899c7d182d487b18e7985ed43e1bfc1581def938fcd67a748ede",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"reviews\": [{\"index\": 0, \"verdict\": \"unsupported\", \"quote\": \"\"}, {\"index\": 1, \"verdict\": \"supported\", \"quote\": \"In patients with type 2 diabetes mellitus inadequately controlled on diet and exercise, the overall incidence of reported adverse reactions of hypoglycemia was 1.6% in patients given sitagliptin in combination with metformin.\"}, {\"index\": 2, \"verdict\": \"supported\", \"quote\": \"When the combination of sitagliptin and metformin was coadministered with a sulfonylurea or with insulin, the percentage of patients reporting at least one adverse reaction of hypoglycemia was higher than that observed with placebo and metformin coadministered with a sulfonylurea or with insulin.\"}, {\"index\": 3, \"verdict\": \"unsupported\", \"quote\": \"\"}, {\"index\": 4, \"verdict\": \"supported\", \"quote\": \"The overall incidence of reported adverse reactions of hypoglycemia in patients with type 2 diabetes mellitus inadequately controlled on diet and exercise was 0.6% in patients given placebo, 0.6% in patients given sitagliptin alone, 0.8% in patients given metformin alone, and 1.6% in patients given sitagliptin in combination with metformin.\"}, {\"index\": 5, \"verdict\": \"unsupported\", \"quote\": \"\"}]}",
+        "usage": {
+          "prompt_tokens": 3869,
+          "completion_tokens": 322,
+          "total_tokens": 4191,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 169.12454223632812
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "4a469bcd2fe3899c7d182d487b18e7985ed43e1bfc1581def938fcd67a748ede",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "title": "FDA label: ZITUVIMET",
+          "source_type": "fda_label",
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE ZITUVIMET is a combination of sitagliptin, a dipeptidyl peptidase-4 (DPP-4) inhibitor, and metformin hydrochloride (HCl), a biguanide, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) Limitations of Use: ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ( 1 ) ZITUVIMET has not been studied in patients with a history of pancreatitis. ( 1 ) ZITUVIMET is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Limitations of Use ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET. [see Warnings and Precautions ( 5.2 )]. 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the prescribing information: Lactic Acidosis [see Warnings and Precautions ( 5.1 )] Pancreatitis [see Warnings and Precautions ( 5.2 )] Heart Failure [see Warnings and Precautions ( 5.3 )] Acute Renal Failure [see Warnings and Precautions ( 5.4 )] Vitamin B12 Deficiency [see Warnings and Precautions ( 5.5 )] Hypoglycemia with Concomitant Use with Insulin or Insulin Secretagogues [see Warnings and Precautions ( 5.6 )] Hypersensitivity Reactions [see Warnings and Precautions ( 5.7 )] Severe and Disabling Arthralgia [see Warnings and Precautions ( 5.8 )] Bullous Pemphigoid [see Warnings and Precautions ( 5.9 )] Most common adverse reactions (incidence \u22655% of patients simultaneously started on sitagliptin and metformin and more commonly than in patients treated with placebo were diarrhea, upper respiratory tract infection, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Zydus Pharmaceuticals (USA) Inc. at 1-877-993-8779 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Trials Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Common Adverse Reactions Sitagliptin and Metformin Coadministration in Patients with Type 2 Diabetes Mellitus Inadequately Controlled on Diet and Exercise Table 1 summarizes the most common (\u22655% of patients) adverse reactions reported in a 24-week placebo-controlled factorial trial in which sitagliptin and metformin were coadministered to patients with type 2 diabetes mellitus inadequately controlled on diet and exercise. Table 1: Sitagliptin and Metformin Coadministered to Patients with Type 2 Diabetes Mellitus Inadequately Controlled on Diet and Exercise: Adverse Reactions Reported in \u22655% of Patients Receiving Combination Therapy (and Greater than in Patients Receiving Placebo) Intent-to-treat population. Number of Patients (%) Placebo Sitagliptin 100 mg once daily Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily Data pooled for the patients given the lower and higher doses of metformin. Sitagliptin 50 mg twice daily + Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily N = 176 N = 179 N = 364 N = 372 Diarrhea 7 (4) 5 (2.8) 28 (7.7) 28 (7.5) Upper Respiratory Tract Infection 9 (5.1) 8 (4.5) 19 (5.2) 23 (6.2) Headache 5 (2.8) 2 (1.1) 14 (3.8) 22 (5.9) Sitagliptin Add-on Therapy in Patients with Type 2 Diabetes Mellitus Inadequately Controlled on Metformin Alone In a 24-week placebo-controlled trial of sitagliptin 100 mg administered once daily added to a twice daily metformin regimen, there were no adverse reactions in \u22655% of patients and more commonly than in patients given placebo. Discontinuation of therapy due to clinical adverse reactions was similar to the placebo treatment group (sitagliptin and metformin, 1.9%; placebo and metformin, 2.5%). Gastrointestinal Adverse Reactions The incidences of pre-selected gastrointestinal adverse experiences in patients treated with sitagliptin and metformin were similar to those reported for patients treated with metformin alone. See Table 2. Table 2: Pre-selected Gastrointestinal Adverse Reactions Reported in Patients with Type 2 Diabetes Mellitus Receiving Sitagliptin and Metformin Number of Patients (%) Trial of Sitagliptin and Metformin in Patients Inadequately Controlled on Diet and Exercise Trial of Sitagliptin Add-on in Patients Inadequately Controlled on Metformin Alone Placebo Sitagliptin 100 mg once daily Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily Data pooled for the patients given the lower and higher doses of metformin. Sitagliptin 50 mg twice daily + Metformin HCl 500 mg/ Metformin HCl 1,000 mg twice daily Placebo and Metformin HCl \u22651,500 mg daily Sitagliptin 100 mg once daily and Metformin HCl \u22651,500 mg daily N = 176 N = 179 N = 364 N = 372 N = 237 N = 464 Diarrhea 7 (4) 5 (2.8) 28 (7.7) 28 (7.5) 6 (2.5) 11 (2.4) Nausea 2 (1.1) 2 (1.1) 20 (5.5) 18 (4.8) 2 (0.8) 6 (1.3) Vomiting 1 (0.6) 0 (0) 2 (0.5) 8 (2.2) 2 (0.8) 5 (1.1) Abdominal Pain Abdominal discomfort was included in the analysis of abdominal pain in the trial of initial therapy. 4 (2.3) 6 (3.4) 14 (3.8) 11 (3) 9 (3.8) 10 (2.2) Sitagliptin in Combination with Metformin and Glimepiride In a 24-week placebo-controlled trial of sitagliptin 100 mg as add-on therapy in patients with type 2 diabetes mellitus inadequately controlled on metformin and glimepiride (sitagliptin, N=116; placebo, N=113), the adverse reactions reported in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo were: hypoglycemia ( see Table 3) and headache (6.9%, 2.7%). Sitagliptin in Combination with Metformin and Rosiglitazone In a placebo-controlled trial of sitagliptin 100 mg as add-on therapy in patients with type 2 diabetes mellitus inadequately controlled on metformin and rosiglitazone (sitagliptin, N=181; placebo, N=97), the adverse reactions reported through Week 18 in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo were: upper respiratory tract infection (sitagliptin, 5.5%; placebo, 5.2%) and nasopharyngitis (6.1%, 4.1%). Through Week 54, the adverse reactions reported in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo were: upper respiratory tract infection (sitagliptin, 15.5%; placebo, 6.2%), nasopharyngitis (11%, 9.3%), peripheral edema (8.3%, 5.2%), and headache (5.5%, 4.1%). Sitagliptin in Combination with Metformin and Insulin In a 24-week placebo-controlled trial of sitagliptin 100 mg as add-on therapy in patients with type 2 diabetes mellitus inadequately controlled on metformin and insulin (sitagliptin, N=229; placebo, N=233), the only adverse reaction reported in \u22655% of patients treated with sitagliptin and more commonly than in patients treated with placebo was hypoglycemia (Table 3). Hypoglycemia In the above trials (N=5), adverse reactions of hypoglycemia were based on all reports of symptomatic hypoglycemia; a concurrent glucose measurement was not required although most (77%) reports of hypoglycemia were accompanied by a blood glucose measurement \u226470 mg/dL. When the combination of sitagliptin and metformin was coadministered with a sulfonylurea or with insulin, the percentage of patients reporting at least one adverse reaction of hypoglycemia was higher than that observed with placebo and metformin coadministered with a sulfonylurea or with insulin (Table 3). Table 3: Incidence and Rate of Hypoglycemia Adverse reactions of hypoglycemia were based on all reports of symptomatic hypoglycemia; a concurrent glucose measurement was not required: Intent-to-treat population. in Placebo-Controlled Clinical Trials of Sitagliptin in Combination with Metformin Coadministered with Glimepiride or Insulin Add-On to Glimepiride + Metformin (24 weeks) Sitagliptin 100 mg + Metformin + Glimepiride Placebo + Metformin + Glimepiride N = 116 N = 113 Overall (%) 19 (16.4) 1 (0.9) Rate (episodes/patient-year) Based on total number of events (i.e., a single patient may have had multiple events). 0.82 0.02 Severe (%) Severe events of hypoglycemia were defined as those events requiring medical assistance or exhibiting depressed level/loss of consciousness or seizure. 0 (0) 0 (0) Add-On to Insulin + Metformin (24 weeks) Sitagliptin 100 mg + Metformin + Insulin Placebo + Metformin + Insulin N = 229 N = 233 Overall (%) 35 (15.3) 19 (8.2) Rate (episodes/patient-year) 0.98 0.61 Severe (%) 1 (0.4) 1 (0.4) The overall incidence of reported adverse reactions of hypoglycemia in patients with type 2 diabetes mellitus inadequately controlled on diet and exercise was 0.6% in patients given placebo, 0.6% in patients given sitagliptin alone, 0.8% in patients given metformin alone, and 1.6% in patients given sitagliptin in combination with metformin. In patients with type 2 diabetes mellitus inadequately controlled on metformin alone, the overall incidence of adverse reactions of hypoglycemia was 1.3% in patients given add-on sitagliptin and 2.1% in patients given add-on placebo. In the trial of sitagliptin and add-on combination therapy with metformin and rosiglitazone, the overall incidence of hypoglycemia was 2.2% in patients given add-on sitagliptin and 0% in patients given add-on placebo through Week 18. Through Week 54, the overall incidence of hypoglycemia was 3.9% in patients given add-on sitagliptin and 1% in patients given add-on placebo. In an additional, 30-week placebo-controlled, trial of patients with type 2 diabetes mellitus inadequately controlled with metformin comparing the maintenance of sitagliptin 100 mg versus withdrawal of sitagliptin when initiating basal insulin therapy, the event rate and incidence of documented symptomatic hypoglycemia (blood glucose measurement \u226470 mg/dL) did not di",
+          "matched_passages": [
+            "additional, 30-week placebo-controlled, trial of patients with type 2 diabetes mellitus inadequately controlled with metformin comparing the maintenance of sitagliptin 100 mg versus withdrawal of sitagliptin when initiating basal insulin therapy, the event rate and incidence of documented symptomatic hypoglycemia (blood glucose measurement \u226470 mg/dL) did not differ between the sitagliptin and placebo groups. Vital Signs and Electrocardiograms With the combination of sitagliptin and metformin, no clinically meaningful changes in vital signs or in ECG (including in QTc interval) were observed. Pancreatitis In a pooled analysis of 19 double-blind clinical trials that"
+          ]
+        }
+      ],
+      "question": "Why does the ZITUVIMET label give different low-blood-sugar percentages in different places? Is there one overall risk number I should take away?"
+    },
+    "generation_context_sha256": "4a469bcd2fe3899c7d182d487b18e7985ed43e1bfc1581def938fcd67a748ede"
+  }
+]

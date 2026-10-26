@@ -201,3 +201,16 @@ def test_actual_usage_reported_without_fake_provider_durations(monkeypatch):
     monkeypatch.setattr(cf.httpx, "post", lambda *a, **k: response())
     call()
     assert observed == [{"prompt_eval_count": 100, "eval_count": 20}]
+
+
+def test_qwen38_evaluation_profile_uses_named_schema_and_bounded_reasoning(monkeypatch):
+    monkeypatch.setattr(cf, "MODEL", "@cf/qwen/qwen3.8-27b")
+    def post(url, **kwargs):
+        payload = kwargs["json"]
+        assert payload["reasoning_effort"] == "low"
+        assert payload["response_format"]["json_schema"]["schema"]["type"] == "object"
+        assert payload["response_format"]["json_schema"]["strict"] is True
+        assert payload["max_tokens"] == 1800
+        return response()
+    monkeypatch.setattr(cf.httpx, "post", post)
+    assert json.loads(call())["answer"] == "Supported [S1]"

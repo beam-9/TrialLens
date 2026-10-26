@@ -1,0 +1,11 @@
+{
+  "UTC_day": "2026-10-26",
+  "requests": 46,
+  "used_or_reserved_neurons": 8109.398693,
+  "remaining_neurons": 890.601307,
+  "pending_reservations": 1,
+  "representative_broad_draft_reservation_neurons": 1023.855092,
+  "can_reserve_representative_broad_draft": false,
+  "method": "Pure calculation using original Llama instructions/schema, captured frozen broad evidence plus new empty publication_types fields, UTF8 byte bound +1024 and1800 output-token limit; not a provider request or real-token estimate",
+  "limitations": "Local evaluation ledger only; other applications/account usage unknown. Failed reservation retained, no refund/reset/cap increase."
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/qwen/qwen3.8-27b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "427ad6b1de3f46971ba5cec5592b278566d012a77d0548308f18d5eeb759397f",
+  "question_inventory_sha256": "6de7ed3c953734eafcf5b85b3b3012dc58e85ad30bdd38be0f9e67b6898e7d05",
+  "candidate_prompt_sha256": null,
+  "code_sha256": "3a06244e860fdac7f5ddc7369f34c0bf29379d91a01c979ca621936bea5595e5",
+  "model_rates": {
+    "input_micro_neurons_per_token": 40909,
+    "output_micro_neurons_per_token": 290909,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "holdout-plain-benefit-risk",
+      "snapshot_id": "standalone-label",
+      "client_wall_ms": 97532.581875,
+      "trace": {
+        "trace_id": "24a32be9-0f48-4dcf-bc19-5a5265ff3ddf",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 6294,
+        "phases_ms": {
+          "storage_read": 5.048458,
+          "retrieval": 1.703708,
+          "extractive_synthesis": 2.366375,
+          "context_build": 0.384457,
+          "draft": 13555.458167,
+          "revision": 83933.366625,
+          "validation": 0.0,
+          "store": 25.966083
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 10525,
+            "message_count": 2,
+            "serialized_messages_char_count": 10707,
+            "wall_ms": 13555.458167,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2381,
+            "eval_count": 520,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 14163,
+            "message_count": 4,
+            "serialized_messages_char_count": 14458,
+            "wall_ms": 83933.366625,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/qwen/qwen3.8-27b",
+        "http_status": 200,
+        "total_wall_ms": 97530.083875,
+        "serialization_ms": 1.037542
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 6723.665899,
+    "remaining_neurons": 2276.334101,
+    "pending_requests": 1,
+    "requests": 35
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true
+}

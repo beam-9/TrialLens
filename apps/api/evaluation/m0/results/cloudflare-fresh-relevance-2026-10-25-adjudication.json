@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-fresh-relevance-2026-10-25-answers.json",
+  "source_answers_sha256": "3b5d6c61c12883dfb44799bd49941b00c6dc5c71578f882d753511f35198996d",
+  "decision": "Retain source acquisition change; one diagnostic answer is not a quality gate pass.",
+  "cases": [
+    {
+      "case_id": "relevance-broad",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "coverage": "Correct broad indication and source-relative comparative long-term gap. Vague on potential other benefits and main limitations; does not use the supplied 16-week trial to give a concrete example.",
+      "attribution": "The first-line/good-safety statement comes from a 2017 review and should be presented with that dated source context, rather than implying a current guideline check.",
+      "rationale": "More topic-relevant source set; final is concise/coherent but too generic and repetitive about evidence gaps. Different cohort from M0, so no direct accuracy-improvement comparison.",
+      "draft_notes": [
+        "Drops preclinical qualification on neuroprotective effects; revision removes that assertion.",
+        "Mechanism wording is firmer than the 2017 review's thought-to-involve wording; removed by revision."
+      ]
+    }
+  ]
+}

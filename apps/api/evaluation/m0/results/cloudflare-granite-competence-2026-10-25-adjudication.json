@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-granite-competence-2026-10-25-answers.json",
+  "source_answers_sha256": "9120235e92ab144a119de1a1a7741079115111c6b0a5ad225b61d07e7d4427bf",
+  "decision": "Reject: no inline citation markers in final answer; validation rejects it.",
+  "cases": [
+    {
+      "case_id": "holdout-plain-benefit-risk",
+      "support_verdict": "not_generated",
+      "critical_errors": [],
+      "draft_notes": [
+        "Adds kidney/alcohol caution, nerve-health and general-safety claims beyond the excerpt.",
+        "Calls B12 decrease rare, despite a supplied approximate 7%/29-week observation.",
+        "Final removes the requested downside and has only cited_sources IDs, no inline citations."
+      ],
+      "latency_seconds": 15.43
+    }
+  ]
+}

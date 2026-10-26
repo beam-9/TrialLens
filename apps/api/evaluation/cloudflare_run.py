@@ -25,14 +25,17 @@ REPO_ROOT = API_ROOT.parents[1]
 sys.path.insert(0, str(API_ROOT))
 from m0 import benchmark
 from triallens import cloudflare, conversation
+from evidence_plan import candidate_strategy
 
 # Evaluation-only allowlist. Rates are integer micro-neurons per token, from
-# https://developers.cloudflare.com/workers-ai/platform/pricing/ (2026-10-24).
+# https://developers.cloudflare.com/workers-ai/platform/pricing/ (2026-10-24; new options verified 2026-10-25).
 # All candidates share the existing daily ledger; no provider/paid fallback.
 MODEL_EXPERIMENTS = {
     "@cf/qwen/qwen3-30b-a3b-fp8": (4625, 30475),
     "@cf/openai/gpt-oss-120b": (31818, 68182),
     "@cf/zai-org/glm-4.7-flash": (5500, 36400),
+    "@cf/qwen/qwen3.8-27b": (40909, 290909),
+    "@cf/ibm-granite/granite-4.0-h-micro": (1542, 10158),
 }
 
 
@@ -70,7 +73,7 @@ def candidate_instructions(path):
         conversation.INSTRUCTIONS, conversation.REVISION_INSTRUCTIONS = previous
 
 
-def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, cases_path=None):
+def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, cases_path=None, strategy=None):
     inventory = json.loads(benchmark.INVENTORY.read_text())
     if cases_path is not None:
         # New questions share the original hash-checked source snapshots. Never
@@ -113,6 +116,8 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
     records, answers, history = [], [], {}
     result = {"schema_version": 1, "provider": "cloudflare", "model": cloudflare.MODEL,
               "pipeline_variant": "two_pass", "status": "HOSTED CANDIDATE; not pilot verified", "complete": False,
+              "strategy_experiment": strategy,
+              "strategy_sha256": benchmark.sha256(Path(__file__).with_name("evidence_plan.py")) if strategy else None,
               "fixture_inventory_sha256": benchmark.sha256(benchmark.INVENTORY),
               "runner_sha256": benchmark.sha256(Path(__file__)),
               "question_inventory_sha256": benchmark.sha256(cases_path) if cases_path else None,
@@ -122,6 +127,8 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                               "output_micro_neurons_per_token": cloudflare.OUTPUT_RATE,
                               "max_output_tokens": cloudflare.MAX_OUTPUT_TOKENS},
               "method": {"boundary": "loopback HTTP Ask API including serialization; hosted inference",
+                         "phase_labels": ("draft/revision timers represent selection/writing" if strategy == "verified-quotes" else
+                                          "draft/revision timers represent drafting/claim review" if strategy == "reviewed-claims" else "draft/revision"),
                          "cold_warm": "provider cache/residency unknown; no cold/warm classification",
                          "paid_provider_fallbacks": 0, "local_model_calls": 0,
                          "tokens": "provider reported only; distinct tokenizer from native baseline",
@@ -155,8 +162,10 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
             except (ValueError, TypeError, AttributeError):
                 final_content = None
             case_outputs.append({"response": final_content, "usage": candidate.get("usage"),
+                                 "verified_selection": json.loads(kwargs["json"]["messages"][2]["content"])
+                                                       if strategy == "verified-quotes" and len(kwargs["json"]["messages"]) == 4 else None,
                                  "generation_context_sha256": context_digest,
-                                 "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "chat_template_kwargs") if key in kwargs["json"]},
+                                 "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "chat_template_kwargs", "reasoning_effort") if key in kwargs["json"]},
                                  "response_shape": {"result_keys": sorted(candidate),
                                                     "finish_reason": candidate.get("finish_reason"),
                                                     "status": candidate.get("status"),
@@ -165,7 +174,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
         except (ValueError, TypeError, AttributeError):
             case_outputs.append({"response": None, "usage": None})
         return response
-    with candidate_instructions(prompt_path), tempfile.TemporaryDirectory(prefix="triallens-cloudflare-") as temporary:
+    with candidate_instructions(prompt_path), candidate_strategy(strategy), tempfile.TemporaryDirectory(prefix="triallens-cloudflare-") as temporary:
         # Reuse the proven frozen HTTP/store isolation seam, never its native
         # model metadata or cold-start controls. Override provider BEFORE Ask.
         with benchmark.isolated_server(Path(temporary), inventory, "") as (base, ids, handler):
@@ -210,7 +219,8 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                     print(json.dumps({"case_id": case["id"], "wall_s": round(client_ms / 1000, 2), "result_kind": trace["result_kind"], "fallback_reason": trace["fallback_reason"]}), flush=True)
                     # Do not spend the rest of the allowance repeating setup/provider
                     # failures. Keep the failed output and report before retrying.
-                    if str(trace.get("fallback_reason", "")).startswith("cloudflare_"):
+                    if (str(trace.get("fallback_reason", "")).startswith("cloudflare_")
+                            or strategy and trace.get("fallback_reason") == "validation_rejection"):
                         result["stop_reason"] = trace["fallback_reason"]
                         break
                 else:
@@ -230,10 +240,11 @@ def main():
     parser.add_argument("--prompt-file", type=Path, help="Evaluate a candidate without changing production instructions")
     parser.add_argument("--cases-file", type=Path, help="Independent questions using the unchanged frozen source snapshots")
     parser.add_argument("--model-experiment", choices=sorted(MODEL_EXPERIMENTS), help="Isolated Cloudflare model experiment; production default is unchanged")
+    parser.add_argument("--strategy-experiment", choices=["verified-quotes", "reviewed-claims"], help="Evaluation-only two-call evidence strategy; final answer guards unchanged")
     args = parser.parse_args()
     load_dotenv(API_ROOT / ".env", override=False)
     with candidate_model(args.model_experiment):
-        result = run(args.output, args.answers, args.case, args.quota_ledger, args.prompt_file, args.cases_file)
+        result = run(args.output, args.answers, args.case, args.quota_ledger, args.prompt_file, args.cases_file, args.strategy_experiment)
     return 0 if result["complete"] else 1
 
 

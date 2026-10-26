@@ -1,0 +1,43 @@
+{
+  "method": "Offline filtering of captured draft/review pairs; no fresh generation, no final API validation, no clinical entailment proof",
+  "provider_calls": 0,
+  "strategy_sha256": "86a84d7d53bf5ddfe53e26864be1746c5be6337bb0a6e8bad2fd30a17fec81e8",
+  "observations": [
+    {
+      "source_answers": "cloudflare-claim-review-enum-2026-10-25-answers.json",
+      "source_answers_sha256": "4a5dca5b1236710afc0b261c5aa74bdd0f53570799e3e521ffd6e9a24d7f8358",
+      "case_id": "real-broad",
+      "post_filter_answer": {
+        "paragraphs": [
+          "Metformin is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-3]"
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-3"
+        ],
+        "uncertainty": []
+      },
+      "result": "filtered_claims_only_not_API_acceptance"
+    },
+    {
+      "source_answers": "cloudflare-scoped-claims-holdout-2026-10-25-answers.json",
+      "source_answers_sha256": "da20d6965dd9bd43594ef2fb86f143b3ad6fe983ecd088e2c0354922850d7438",
+      "case_id": "holdout-plain-benefit-risk",
+      "post_filter_answer": {
+        "paragraphs": [
+          "Metformin is meant to help improve blood sugar control in people with type 2 diabetes. [openFDA label:FDA-LABEL-metformin-2] It is for adults and children 10 years and older with type 2 diabetes, to be used along with diet and exercise. [openFDA label:FDA-LABEL-metformin-2]"
+        ],
+        "cited_sources": [
+          "openFDA label:FDA-LABEL-metformin-2"
+        ],
+        "uncertainty": []
+      },
+      "result": "filtered_claims_only_not_API_acceptance"
+    },
+    {
+      "source_answers": "cloudflare-atomic-claims-regimens-2026-10-25-answers.json",
+      "source_answers_sha256": "46105745eb0294101c52a6fb2086f3eae6a7314ebf39faa31a8fb852a1976053",
+      "case_id": "holdout-regimen-risk",
+      "result": "no_claims_passed"
+    }
+  ]
+}

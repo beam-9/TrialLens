@@ -1,0 +1,371 @@
+[
+  {
+    "case_id": "holdout-plain-benefit-risk",
+    "snapshot_id": "standalone-label",
+    "answer": {
+      "id": "99ae6f8a-eac9-49c5-91d8-199a68d108fd",
+      "workspace_id": "m0-standalone-label",
+      "question": "Give me a short explanation for someone who doesn't know medical terms: what is metformin meant to help with, who is it for, and what's the main downside in this label?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "short_answer": "Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2]. This answer is limited to the directly supporting evidence currently indexed in the workspace.",
+      "direct_answer": "Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2]. This answer is limited to the directly supporting evidence currently indexed in the workspace.",
+      "evidence_map": [
+        "Workspace coverage: TrialLens considered 1 extracted source rows across 1 FDA label passage.",
+        "Question fit: 1 rows matched the question strongly enough for direct synthesis; 1 are cited in the answer.",
+        "Safety coverage: 1 rows include safety, warning, label, or adverse-event context.",
+        "Known limitation: FDA label language is regulatory context and should not be read as a head-to-head effectiveness estimate",
+        "Known limitation: Long record was compressed into source-level fields; inspect the original source for full context"
+      ],
+      "reasoning_summary": [
+        "Question intent: treated as a label question about metformin type 2 diabetes.",
+        "Selection basis: rows were scored for topic overlap, question-term overlap, intent fit, source type, confidence, and review status.",
+        "Question anchors: doesn, downside, explanation, give, help, know, meant, metformin.",
+        "Strongest row: openFDA label:FDA-LABEL-metformin-2 scored 79 on the internal relevance scale and contributed ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis.",
+        "Synthesis scope: answer cites 1 rows from 1 FDA label passage; 1 rows met the direct-answer threshold.",
+        "Caution applied: answer still remains limited to indexed workspace sources and is not clinical guidance."
+      ],
+      "evidence_synthesis": [
+        "Whole-workspace read: 1 extracted rows were available across 1 FDA label passage; this answer focused on 1 FDA label passage.",
+        "Shared signal: the directly matched rows repeatedly mention clearance, warnings, improve, adverse, indicated.",
+        "Regulatory view: 1 FDA label rows add approved-use, warning, dosage, or adverse-reaction context."
+      ],
+      "source_readouts": [
+        "CITED \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label passage \u00b7 relevance 79: ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis Limit: FDA label language is regulatory context and should not be read as a head-to-head effectiveness estimate"
+      ],
+      "evidence_quality": [
+        "Directness: moderate. 1 rows directly supported the answer.",
+        "Source strength: low. Directly used rows came from 1 FDA label passage.",
+        "Review risk: no directly used row is currently marked low confidence."
+      ],
+      "facet_coverage": [
+        "FDA label context: covered by 1 directly matched rows; strongest source is openFDA label:FDA-LABEL-metformin-2."
+      ],
+      "answer_trace": [
+        {
+          "label": "Question read",
+          "value": "FDA label context",
+          "detail": "TrialLens treated this as a label question about metformin type 2 diabetes."
+        },
+        {
+          "label": "Question anchors",
+          "value": "doesn, downside, explanation, give, help, know, meant, metformin",
+          "detail": "These terms were matched against source profiles, extracted fields, source passages, and limitations."
+        },
+        {
+          "label": "Workspace scan",
+          "value": "1 rows scanned",
+          "detail": "1 rows met the synthesis threshold; 0 stayed as context or were not relevant enough."
+        },
+        {
+          "label": "Cited rows",
+          "value": "1 rows cited",
+          "detail": "Main source mix: 1 FDA label passage."
+        },
+        {
+          "label": "Closest context",
+          "value": "openFDA label:FDA-LABEL-metformin-2",
+          "detail": "( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis"
+        },
+        {
+          "label": "Caution",
+          "value": "Indexed evidence only",
+          "detail": "The answer does not use evidence outside the current workspace and is not clinical guidance."
+        }
+      ],
+      "evidence": [
+        "FDA label record \u201cFDA label: Metformin Hydrochloride\u201d: Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus (openFDA, FDA-LABEL-metformin-2). Design/context: FDA drug label record; label text may include indications, dosage, warnings, contraindications, and adverse reactions rather than trial Limits"
+      ],
+      "supporting_evidence": [
+        "FDA label record \u201cFDA label: Metformin Hydrochloride\u201d: Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus (openFDA, FDA-LABEL-metformin-2). Design/context: FDA drug label record; label text may include indications, dosage, warnings, contraindications, and adverse reactions rather than trial Limits"
+      ],
+      "safety_limitations": [
+        "FDA label record \u201cFDA label: Metformin Hydrochloride\u201d: ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis  (openFDA, FDA-LABEL-metformin-2)."
+      ],
+      "uncertainty": [
+        "Extraction rows are generated from indexed abstracts, trial summaries, labels, and adverse-event summaries; full-text details may be missing.",
+        "Retrieved passages remain available for audit, but the answer prioritizes the structured extraction table."
+      ],
+      "limitations": [
+        "This answer is synthesized from structured extraction rows and retrieved workspace passages.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-2"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-standalone-label-chunk-1",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning",
+          "score": 0.6359,
+          "section": "summary 1",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-4",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased,",
+          "score": 0.5544,
+          "section": "summary 4",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-3",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5%",
+          "score": 0.5476,
+          "section": "summary 3",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-6",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may",
+          "score": 0.4994,
+          "section": "summary 6",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-5",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population",
+          "score": 0.4577,
+          "section": "summary 5",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-7",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride",
+          "score": 0.4367,
+          "section": "summary 7",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-9",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "to loss of glycemic control. Intervention: When such drugs are administered to a patient receiving metformin hydrochloride tablets, observe the patient closely for loss of blood glucose control. When such drugs are withdrawn from a patient receiving metformin hydrochloride tablets, observe the patient closely for hypoglycemia. Examples: Thiazides and other diuretics, corticosteroids, phenothiazines, thyroid products, estrogens, oral contraceptives, phenytoin, nicotinic acid, sympathomimetics, calcium channel blockers, and isoniazid. Carbonic anhydrase inhibitors may increase risk of lactic acidosis. Consider more frequent monitoring ( 7 ) Drugs that reduce metformin clearance (such as ranolazine, vandetanib,",
+          "score": 0.435,
+          "section": "summary 9",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-8",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead",
+          "score": 0.4055,
+          "section": "summary 8",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-10-26T05:51:07.952849+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\n  \"paragraphs\": [\n    \"Metformin is a medication used to help control blood sugar levels in people with type 2 diabetes. It works as an 'adjunct' to diet and exercise, meaning it's meant to be taken along with a healthy eating plan and regular physical activity to improve glycemic control, or how well the body manages glucose in the blood. Metformin is approved for use in adults and children aged 10 and older who have been diagnosed with type 2 diabetes.\",\n    \"The main downside highlighted in the FDA label is the risk of lactic acidosis, a serious and potentially life-threatening condition. This warning is boxed in the label and emphasizes that metformin should be used with caution, especially in patients with kidney problems or those who consume excessive alcohol. Other common side effects include diarrhea, nausea or vomiting, gas, mild stomach discomfort, and headache. In rare cases, metformin can also lower vitamin B12 levels over time, which might affect nerve health.\",\n    \"It's important to note that the label does not say metformin cures diabetes; it only improves glycemic control when used as part of a broader treatment plan. The label also mentions possible drug interactions, such as with certain other medications that can increase the risk of lactic acidosis or affect how well metformin works. Overall, metformin is a widely used and generally safe option for managing type 2 diabetes, but it requires careful monitoring, especially in patients with kidney issues or those who drink alcohol heavily.\"\n  ],\n  \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\"],\n  \"uncertainty\": [\n    \"The label does not provide detailed information on long-term safety or effectiveness beyond the 29-week clinical trial period mentioned.\",\n    \"Postmarketing reports of rare liver injuries are noted but not quantified in the excerpt.\"\n  ]\n}",
+        "usage": {
+          "prompt_tokens": 2315,
+          "completion_tokens": 390,
+          "total_tokens": 2705,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 7.530691600000001
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "da70210b9e6587c4fbd710e8a68a0b1fb00f6efa1d025411231e185d7ee7c6e1",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "id",
+            "kv_transfer_params",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_token_ids",
+            "service_tier",
+            "system_fingerprint",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\n  \"paragraphs\": [\n    \"Metformin is a medication used to help control blood sugar levels in people with type 2 diabetes. It is taken along with diet and exercise to improve how the body manages glucose in the blood. The FDA label indicates it is approved for adults and children aged 10 and older with type 2 diabetes mellitus.\"\n  ],\n  \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\"],\n  \"uncertainty\": [\n    \"The label does not provide long-term safety or effectiveness data beyond the 29-week clinical trial period.\"\n  ]\n}",
+        "usage": {
+          "prompt_tokens": 3143,
+          "completion_tokens": 128,
+          "total_tokens": 3271,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 6.14570362
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "da70210b9e6587c4fbd710e8a68a0b1fb00f6efa1d025411231e185d7ee7c6e1",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "id",
+            "kv_transfer_params",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_token_ids",
+            "service_tier",
+            "system_fingerprint",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead to loss of glycemic control. Intervention: When such drugs are administered to a patient receiving metformin hydrochloride tablets, observe the patient closely for loss of blood glucose control. When such drugs are withdrawn from a patient receiving metformin hydrochloride tablets, observe the patient closely for hypoglycemia. Examples: Thiazides and other diuretics, corticosteroids, phenothiazines, thyroid products, estrogens, oral contraceptives, phenytoin, nicotinic acid, sympathomimetics, calcium channel blockers, and isoniazid. Carbonic anhydrase inhibitors may increase risk of lactic acidosis. Consider more frequent monitoring ( 7 ) Drugs that reduce metformin clearance (such as ranolazine, vandetanib, dolutegravir, and cimetidine) may increase the accumulation of metformin. Consider the benefits and risks of concomitant use ( 7 ) Alcohol can potentiate the effect of metformin on lactate metabolism. Warn patients against excessive alcohol intake ( 7 )",
+          "matched_passages": []
+        }
+      ],
+      "question": "Give me a short explanation for someone who doesn't know medical terms: what is metformin meant to help with, who is it for, and what's the main downside in this label?"
+    },
+    "generation_context_sha256": "da70210b9e6587c4fbd710e8a68a0b1fb00f6efa1d025411231e185d7ee7c6e1"
+  }
+]

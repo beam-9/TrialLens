@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reviewer": "Primary agent; passage-backed engineering review, not clinical validation",
+  "source_answers": "cloudflare-scoped-claims-holdout-2026-10-25-answers.json",
+  "source_answers_sha256": "da20d6965dd9bd43594ef2fb86f143b3ad6fe983ecd088e2c0354922850d7438",
+  "decision": "Reject: accurate retained indication, incomplete answer to the user question.",
+  "cases": [
+    {
+      "case_id": "holdout-plain-benefit-risk",
+      "support_verdict": "partially_supported",
+      "critical_errors": [],
+      "coverage": "Preserves blood-sugar purpose, adults/children 10+, diet/exercise. Entire main-downside claim is dropped, leaving that requested question unanswered.",
+      "rationale": "Draft bundles supported warnings/symptoms with an unsupported mechanism; review approves a nonmatching quote, so server drops the whole claim. No invented mechanism reaches the final answer."
+    }
+  ]
+}

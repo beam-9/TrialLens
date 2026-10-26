@@ -140,6 +140,10 @@ def completion(messages: list[dict], schema: dict) -> str:
         # Cloudflare's documented chat-template option keeps this conversational
         # profile within its final-answer budget instead of emitting reasoning.
         payload["chat_template_kwargs"] = {"enable_thinking": False}
+    if MODEL == "@cf/qwen/qwen3.8-27b":
+        # Inactive unless selected by the isolated evaluation allowlist.
+        payload["response_format"]["json_schema"] = {"name": "triallens_answer", "strict": True, "schema": schema}
+        payload["reasoning_effort"] = "low"
     identifier = _reserve(payload)
     url = "https://api.cloudflare.com/client/v4/accounts/" + os.environ["CLOUDFLARE_ACCOUNT_ID"] + "/ai/run/" + MODEL
     try:
