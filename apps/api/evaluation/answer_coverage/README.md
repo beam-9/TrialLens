@@ -25,3 +25,9 @@ The corrected baseline passes the original first eight eligible input sources th
 - Holdout: baseline included 8/10 required passages; ranked helper included 10/10. The difference came from `later_relevant_source`, whose required source is ninth in input order. Both approaches had 0 unindexed required passages; baseline omitted 2 from selected context and helper omitted 0.
 
 This measures source/context availability only. It does not measure whether a model notices, correctly explains, or cites those passages, and it does not establish general performance outside these authored fixtures.
+
+## Inactive answering and results-ingestion experiments
+
+`../prompts/answer-completeness.json` and `answer-completeness-v2.json` are isolated evaluation candidates, not production instructions. Hosted outputs use the unchanged frozen M0 evidence via `hosted-cases.json`; generated answers were not stored in production workspaces. Technical acceptance is not a semantic pass.
+
+`trial_results_candidate.py` is an inactive conservative formatter, tested with synthetic API-shaped records. It retains outcome, unit, timeframe, group identity, denominators and measurement/analysis context without calculation. Entire oversized or invalid outcomes are omitted and disclosed. A public NCT01563029 payload probe omitted all eight outcomes at the 1,200-character complete-outcome limit, so this prototype is deliberately **not integrated** into source ingestion. The next parser experiment must package complete numerical records without losing their group/denominator context; raising a limit alone is insufficient because ordinary chunking/context budgets can split the records again.

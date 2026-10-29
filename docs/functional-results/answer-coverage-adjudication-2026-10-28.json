@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "title": "Hosted answer coverage prompt comparison",
+  "review_date": "2026-10-28",
+  "assessment_type": "Independent engineering judgment from saved provider outputs and supplied source contexts; not clinical validation or independent expert review.",
+  "source_artifacts": {
+    "hosted_cases": {
+      "path": "apps/api/evaluation/answer_coverage/hosted-cases.json",
+      "sha256": "df7c0b7f42db0c97b0e1b05aafb803777919d728a4f8983c0dbf153a27789608"
+    },
+    "hosted_baseline": {
+      "path": "apps/api/evaluation/answer_coverage/results/hosted-baseline-2026-10-28.json",
+      "sha256": "0beab186e6107b6f1167861095b0d664553b1cd53ebadf6a5fd67b80fd284e91"
+    },
+    "hosted_candidate": {
+      "path": "apps/api/evaluation/answer_coverage/results/hosted-candidate-2026-10-28.json",
+      "sha256": "6832828871e45ed92070c035434b0bbbca7a316ba662b8d192eb4d5c675ece49"
+    },
+    "m0_rubric_reference": {
+      "path": "apps/api/evaluation/m0/inventory.json",
+      "sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738"
+    }
+  },
+  "method": {
+    "unit": "three saved hosted cases; provider_outputs[0] is the draft and provider_outputs[1] is the revision",
+    "displayed_answer": "The saved answer field is assessed separately from the raw provider revision. A generation_note indicating validation failure means the raw provider response was rejected and the displayed answer is the excerpt fallback.",
+    "validation_replay": "Replayed the production citation normalization, paragraph citation checks, and 28-token contiguous source-copy check against each saved generation_context. No model/provider calls were made.",
+    "rubric": "Used the hosted-cases criteria and checked them against the matching M0 must_include / must_not_claim constraints. This is a rubric reference only; historical M0 answer text is not compared here.",
+    "scope": "Qualitative coverage, source-scope/provenance, explainability, repetition, and synthetic-evidence qualifier. No independent evaluation of clinical accuracy."
+  },
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "generation_context_sha256": "8a07b4f2e2c5710e11efab844149cce5c09ba5d35509f115740b399041cc2933",
+      "baseline": {
+        "raw_revision": "Accepted after revision. Kept pediatric age 10+, named common reactions and B12, and mentioned low adherence due to gut dysbiosis. The latter comes from ClinicalTrials.gov registry description/rationale, not reported measured results, but the answer states it as an established limitation. It omitted diet/exercise and the trial percentages / 7% at 29 weeks. It avoided a postmarketing-frequency assertion.",
+        "displayed_answer": "Same as accepted revision; conversational answer displayed.",
+        "coverage": "Partial: age floor and basic benefits/limitations retained; numerical safety detail was omitted.",
+        "explainability_repetition": "Concise and easy to read.",
+        "demo_qualifier": "Not applicable; real sources.",
+        "material_issues": ["Registry rationale about low adherence / gut dysbiosis is phrased as an established limitation.", "Uncertainty says the evidence does not establish long-term effects sourcewide; the supplied context is only a set of indexed excerpts and does not support that broad absence claim."],
+        "critical_errors": [],
+        "validation": {
+          "draft": "Rejected: 28 consecutive normalized words copied from the supplied FDA indication text, beginning 'indicated as an adjunct to diet and exercise…'.",
+          "revision": "Passed the replayed checks."
+        }
+      },
+      "candidate": {
+        "raw_revision": "Rejected by production validation. It had richer label numbers (53% diarrhea, 26% nausea/vomiting; about 7% B12 over 29 weeks) and retained the age floor, but added broad claims about adherence/complications and a case report/clonal hematopoiesis beyond the core question. It states registry description/rationale about low adherence as an established limitation rather than clearly separating it from measured trial evidence.",
+        "displayed_answer": "Excerpt fallback, not the raw revision: a table-like label excerpt about adverse reactions followed by a generic caveat. It does not answer the benefits part, is excerpt-heavy, and is less useful than the baseline generated answer.",
+        "coverage": "Raw revision covers more requested safety detail; actual displayed response fails the combined benefits-and-limitations question.",
+        "explainability_repetition": "Raw revision is overlong and repeats glycemic-control benefit / caveats; displayed fallback reproduces table text rather than explaining it.",
+        "demo_qualifier": "Not applicable; real sources.",
+        "material_issues": ["Registry rationale about low adherence / gut dysbiosis is phrased as an established limitation.", "Raw revision's uncertainty says the evidence does not establish long-term effects sourcewide; the indexed excerpts do not support that broad absence claim.", "Displayed fallback omits the question's benefits component."],
+        "critical_errors": [],
+        "validation": {
+          "draft": "Rejected: uncited paragraph plus a 28-token verbatim source-copy span.",
+          "revision": "Rejected: 28-token verbatim source-copy span beginning 'indicated as an adjunct to diet and exercise…'. The combined citation markers normalize to the declared cited_sources, and the remaining replayed checks pass."
+        }
+      }
+    },
+    {
+      "case_id": "statistics-explicit",
+      "generation_context_sha256": "e7c15191d57a5858160aaa7df272e1c78347ad72919960dc9d6c1ad514b76a17",
+      "baseline": {
+        "raw_revision": "Accepted after revision. Correctly stated the effect, comparator, adults, CI, and 12-week timeframe. It did not explain the effect size beyond repeating the between-group statement and did not mention mortality or demo status in the direct answer; saved uncertainty/limitations disclosed demo and beyond-12-week limits.",
+        "displayed_answer": "Same as accepted revision; conversational answer displayed.",
+        "coverage": "Partial for an explicit statistics question: the requested values are present, but little explanation and no in-answer demo qualifier.",
+        "explainability_repetition": "Short, but mostly repeats timeframe rather than explaining the statistic.",
+        "demo_qualifier": "Present in saved uncertainty / safety limitations, absent from direct answer.",
+        "critical_errors": [],
+        "validation": {
+          "draft": "Rejected: second paragraph has no inline citation.",
+          "revision": "Passed the replayed checks."
+        }
+      },
+      "candidate": {
+        "raw_revision": "Accepted. Preserved 240 adults, placebo, 0.5 percentage points, 95% CI 0.2–0.8, 12 weeks, and explicitly described a between-group difference. It does not interpret the CI as a probability or claim baseline change. It says the effect size is the between-group difference and says effects beyond 12 weeks are not established.",
+        "displayed_answer": "Same as accepted revision; conversational answer displayed.",
+        "coverage": "Strong on the requested numerical fields and statistical framing; it makes no assertion that other safety outcomes were unmeasured.",
+        "explainability_repetition": "Understandable, but repeats effect, comparison, timeframe, and sample size across two paragraphs; less concise than necessary.",
+        "demo_qualifier": "Explicitly says this is a demo record; saved safety limitation also discloses it.",
+        "critical_errors": [],
+        "validation": {
+          "draft": "Passed the replayed checks.",
+          "revision": "Passed the replayed checks."
+        }
+      }
+    },
+    {
+      "case_id": "statistics-followup",
+      "generation_context_sha256": "c7213da69ffbb454e59dbb7f578224eaeb8bb6ae92199825932aa6cd20a97ed7",
+      "baseline": {
+        "raw_revision": "Accepted after revision. Retained adults, placebo, effect size, CI, and 12 weeks; it used a straightforward comparison and did not make a probability claim about the CI. It omitted explicit mortality-not-measured and beyond-12-weeks-not-established detail from the direct answer.",
+        "displayed_answer": "Same as accepted revision; conversational answer displayed.",
+        "coverage": "Core numeric facts retained. It did not repeat mortality or beyond-12-weeks qualifiers; those details were not added as unrelated padding to the simpler follow-up.",
+        "explainability_repetition": "Very concise and simpler than the original answer.",
+        "demo_qualifier": "Present in saved uncertainty / safety limitations, absent from direct answer.",
+        "critical_errors": [],
+        "validation": {
+          "draft": "Rejected: second paragraph has no inline citation.",
+          "revision": "Passed the replayed checks."
+        }
+      },
+      "candidate": {
+        "raw_revision": "Accepted. Retained adults, placebo, 0.5 percentage points, CI, and 12 weeks; did not infer within-group change or explain the CI probabilistically. It did not assert mortality or other safety outcomes were unmeasured, nor did it say longer-term effects were unmeasured.",
+        "displayed_answer": "Same as accepted revision; conversational answer displayed.",
+        "coverage": "Core numerical content and demo qualifier are retained. Relative to the hosted follow-up rubric, the answer does not repeat the beyond-12-weeks-not-established qualifier; it makes no contrary claim. Mortality-not-measured is omitted and is not treated as a scientific error here because the simpler question does not ask about mortality.",
+        "explainability_repetition": "Not simpler: it repeats the full prior answer, repeats the 0.5-point comparison and timeframe, then redefines the effect size. The output is longer than the baseline hosted follow-up and repeats itself.",
+        "demo_qualifier": "Explicitly says it is a demo record; saved safety limitation also discloses it.",
+        "material_issues": ["The answer is not simpler and repeats the prior answer. It omits the beyond-12-weeks qualifier requested by the hosted rubric, without making a false claim about that horizon."],
+        "critical_errors": [],
+        "validation": {
+          "draft": "Passed the replayed checks.",
+          "revision": "Passed the replayed checks."
+        }
+      }
+    }
+  ],
+  "overall_judgment": {
+    "summary": "Candidate explicit-statistics answer adds a useful explanation and preserves the numerical and between-group framing; both current baseline and candidate numeric revisions avoid a CI-probability interpretation. Candidate real-broad is rejected and falls back to an answer that omits benefits. Candidate follow-up passes validation but is longer and more repetitive than baseline, with a rubric-specific omission of the beyond-12-weeks qualifier.",
+    "interpretation_limit": "These three saved cases and deterministic validation replay do not establish general prompt performance. Claims about real metformin sources are limited to the supplied generation context; no independent clinical-source verification was performed."
+  }
+}

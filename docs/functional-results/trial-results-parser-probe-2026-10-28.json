@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-28",
+  "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01563029",
+  "raw_payload_sha256": "d656239a6a48c91f9f4c4a4561b75f50f939d996a051a862fc2c1cd42207f837",
+  "raw_outcome_count": 8,
+  "parser_max_section_chars": 1200,
+  "parsed_outcome_count": 0,
+  "omissions": {
+    "section_limit": 8
+  },
+  "decision": "NOT INTEGRATED: all eight outcomes in the public probe exceed the conservative complete-outcome budget. Need an atomic representation that repeats outcome, arms, denominators and timeframe before rollout.",
+  "inference_calls": 0,
+  "workspace_mutations": 0,
+  "frozen_payload_path": "apps/api/evaluation/answer_coverage/fixtures/ctgov-NCT01563029-2026-10-28.json",
+  "parser_candidate_path": "apps/api/evaluation/answer_coverage/trial_results_candidate.py",
+  "parser_candidate_sha256": "54665533fb21c59dbf3b4d83bab29712c6431ad0a74a6b9a94a2eabc965064b8"
+}

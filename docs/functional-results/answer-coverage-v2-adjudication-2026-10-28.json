@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "title": "Hosted answer coverage candidate v2 adjudication",
+  "review_date": "2026-10-28",
+  "assessment_type": "Source-context semantic review of saved provider outputs; engineering judgment, not clinical validation or independent expert review.",
+  "source_artifacts": {
+    "candidate_v2": {
+      "path": "apps/api/evaluation/answer_coverage/results/hosted-candidate-v2-2026-10-28.json",
+      "sha256": "9b3cec1207ecb88d6907572a39e6dd147814e0652893e913c2486f788ccad064"
+    },
+    "hosted_case_rubric": {
+      "path": "apps/api/evaluation/answer_coverage/hosted-cases.json",
+      "sha256": "df7c0b7f42db0c97b0e1b05aafb803777919d728a4f8983c0dbf153a27789608"
+    }
+  },
+  "method": {
+    "scope": "Reviewed the saved final answers and their exact generation_context source text, plus drafts where relevant. No provider calls, evaluation runs, or historical-answer comparison.",
+    "clinical_claim_standard": "A source mentioning a claim in registry background or rationale is not treated as a measured result. Unsupported frequency/causal language is flagged against the supplied context.",
+    "disposition": "Not promotable while the real-broad final includes unsupported clinical/evidentiary claims."
+  },
+  "cases": [
+    {
+      "case_id": "real-broad",
+      "generation_context_sha256": "8a07b4f2e2c5710e11efab844149cce5c09ba5d35509f115740b399041cc2933",
+      "coverage": "The final answer distinguishes an indication from an unquantified benefit, includes common adverse reactions, and acknowledges that the indexed registry excerpt does not report results. It keeps the adult indication tied to the adult extended-release label. A separate supplied tablet label states pediatric use starting at age 10; the answer makes no claim that metformin is only for adults or that all children are eligible, so no pediatric-scope error is found.",
+      "product_scope_note": "The final says 'metformin' while citing text specific to extended-release tablets. It does not explicitly claim that pediatric use is excluded, but naming the extended-release formulation would avoid broadening a formulation-specific indication; the separate tablet-label source supplies the age-10 pediatric indication.",
+      "unsupported_or_misframed_claims": [
+        {
+          "claim": "Lactic acidosis is a 'rare but serious complication.'",
+          "source_context": "The supplied FDA label excerpts identify lactic acidosis as a boxed warning/adverse reaction, but none of the supplied text characterizes its frequency as rare.",
+          "issue": "Unsupported frequency claim; this alone blocks promotion under the requested disposition."
+        },
+        {
+          "claim": "Metformin has low adherence due to gut dysbiosis, which can result in more complications and high overall costs.",
+          "source_context": "The ClinicalTrials.gov description presents this as background/rationale for a study of an added prebiotic. The same record describes the planned study and intervention; it does not provide measured results establishing this causal chain.",
+          "issue": "Protocol/background rationale is repeated as an established limitation rather than identified as an unverified rationale."
+        }
+      ],
+      "study_status_wording": "The answer says the trial aims to investigate the add-on and that results are not reported in the supplied excerpt. This is close to the registry description; the record's stored status is COMPLETED, so wording should avoid implying that the trial is currently ongoing. The answer does not explicitly say it is ongoing.",
+      "explainability_repetition": "The revision is fairly concise and separates benefit from limitations. It could explain that the registry statement is rationale rather than result.",
+      "demo_qualifier": "Not applicable; the sources are real indexed records.",
+      "critical_errors": ["unsupported_lactic_acidosis_frequency", "registry_rationale_laundered_as_measured_limitation"],
+      "promotion": "Do not promote."
+    },
+    {
+      "case_id": "statistics-explicit",
+      "generation_context_sha256": "e7c15191d57a5858160aaa7df272e1c78347ad72919960dc9d6c1ad514b76a17",
+      "coverage": "The final revision preserves 240 adults, intervention A versus placebo, 0.5 percentage points, the 95% CI of 0.2–0.8 percentage points lower, 12 weeks, and the between-group interpretation. It explicitly labels the record as synthetic/demo and says effects beyond 12 weeks are not established. Mortality-not-measured appears in uncertainty and does not expand to other outcomes.",
+      "draft_issue": "The draft says the true difference is likely between 0.2 and 0.8. That probability-like CI interpretation is inconsistent with the rubric; the saved revision removes it.",
+      "explainability_repetition": "The final explains the between-group meaning, but repeats the effect and CI in a second paragraph. This is verbosity, not a factual error.",
+      "demo_qualifier": "Explicit in the answer and uncertainty.",
+      "critical_errors": [],
+      "promotion": "No material clinical-claim issue found in the final for this case."
+    },
+    {
+      "case_id": "statistics-followup",
+      "generation_context_sha256": "58a21393a02770b345ec24eb68b08dcb9a76981284e64bdbe0ce35b5fa543987",
+      "coverage": "The final is concise and simpler than the explicit answer. It preserves adults, placebo, 0.5 percentage points, the confidence interval, and 12 weeks. Uncertainty retains the synthetic/demo and beyond-12-weeks-not-established qualifiers; mortality-not-measured also appears there.",
+      "explainability_repetition": "One short comparison sentence followed by a plain-language interpretation; no material repetition.",
+      "demo_qualifier": "Present in uncertainty and the answer generation note.",
+      "critical_errors": [],
+      "promotion": "No material clinical-claim issue found in the final for this case."
+    }
+  ],
+  "overall_judgment": {
+    "summary": "The two numerical final answers are materially sound against their supplied synthetic source context; the explicit draft's CI-probability wording is corrected in revision. The real-broad final contains an unsupported 'rare' frequency claim and presents registry background rationale as an established limitation, so candidate v2 is not promotable as a whole.",
+    "limitations": "Three saved cases only. This review checks claims against the saved generation context, not the full primary literature or clinical standards."
+  }
+}
