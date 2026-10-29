@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "title": "Answer coverage diagnostic benchmark",
+  "provenance": "All passages and study details below are fabricated synthetic engineering controls, authored for deterministic evaluation. They are not real studies, medicines, people, or clinical evidence.",
+  "cases": [
+    {
+      "id": "effect_size_complete", "category": "numbers_population_comparator_time_ci",
+      "question": "What was the effect, and how precise was the estimate?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic randomized study A","text":"Synthetic engineering control: 320 adults with condition Q were randomized to Example A or placebo. At week 16, the mean symptom score was 4.2 points lower with Example A than placebo (95% confidence interval, 2.1 to 6.3 points lower). This is a between-group difference; lower scores indicate fewer symptoms."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [
+        {"fact":"320 adults with condition Q were randomized","source_id":"S1","passage":"320 adults with condition Q were randomized to Example A or placebo"},
+        {"fact":"At week 16, the between-group difference was 4.2 points lower, CI 2.1 to 6.3 lower","source_id":"S1","passage":"At week 16, the mean symptom score was 4.2 points lower with Example A than placebo (95% confidence interval, 2.1 to 6.3 points lower). This is a between-group difference"},
+        {"fact":"Lower scores indicate fewer symptoms","source_id":"S1","passage":"lower scores indicate fewer symptoms"}],
+      "forbidden_interpretations": ["Change the points to a percent or relative risk","Describe the CI as the probability that the true effect lies within it","Infer within-group change from the between-group difference"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Include population, comparator, week, estimate, units and CI; explain direction only as supported","relevance":"Answer both effect and precision"}
+    },
+    {
+      "id": "planned_enrollment_trap", "category": "planned_vs_observed",
+      "question": "Did the study enroll 500 people and show a benefit?",
+      "sources": [{"id":"S1","type":"synthetic_registry","title":"Synthetic registry record","text":"Synthetic engineering control: this registry record describes a planned study of Example B versus usual care. The target enrollment was 500 participants. Recruitment has not started. No participants have been enrolled and no results are posted."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"500 is the target enrollment, not actual enrollment","source_id":"S1","passage":"The target enrollment was 500 participants. Recruitment has not started."},{"fact":"No participants enrolled and no results posted","source_id":"S1","passage":"No participants have been enrolled and no results are posted."}],
+      "forbidden_interpretations": ["Claim 500 people enrolled","Claim the study observed benefit or harm","Treat planned enrollment as an outcome"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Explicitly distinguish target from actual enrollment and state there are no results","relevance":"Answer both enrollment and benefit"}
+    },
+    {
+      "id": "later_relevant_source", "category": "late_context_source",
+      "question": "What did the follow-up report say about function at one year?",
+      "sources": [
+        {"id":"S1","type":"synthetic_review","title":"Synthetic overview","text":"Synthetic engineering control: the intervention has been discussed in several small studies. This overview does not report one-year functional outcomes."},
+        {"id":"S2","type":"synthetic_trial","title":"Synthetic short study","text":"Synthetic engineering control: at 12 weeks, 80 participants had a mean function score 2 points higher with Example C than control. The report does not include later follow-up."},
+        {"id":"S3","type":"synthetic_review","title":"Synthetic related-study overview","text":"Synthetic engineering control: this overview discusses function scores in condition V but reports no one-year results for Example C."},
+        {"id":"S4","type":"synthetic_trial","title":"Synthetic six-month study","text":"Synthetic engineering control: a separate Example C study reported function scores at 6 months in 45 participants; it did not report one-year follow-up."},
+        {"id":"S5","type":"synthetic_review","title":"Synthetic methods review","text":"Synthetic engineering control: prior studies used several function scales. This review gives no one-year estimate for Example C."},
+        {"id":"S6","type":"synthetic_trial","title":"Synthetic short follow-up","text":"Synthetic engineering control: Example C was associated with a 1-point higher function score at 4 weeks. No later measurement is given."},
+        {"id":"S7","type":"synthetic_review","title":"Synthetic condition overview","text":"Synthetic engineering control: function can be measured in different ways. This overview contains no one-year Example C follow-up result."},
+        {"id":"S8","type":"synthetic_trial","title":"Synthetic unrelated comparator study","text":"Synthetic engineering control: a study compared Example C with another program for 10 weeks and did not report one-year outcomes."},
+        {"id":"S9","type":"synthetic_followup","title":"Synthetic one-year follow-up","text":"Synthetic engineering control: in a prespecified follow-up of the randomized Example C study, 68 of the original 80 participants completed one year. Mean function score was 3 points higher with Example C than control (95% CI 0.5 to 5.5 points higher). This follow-up was exploratory."}],
+      "retrieval_relevant_source_ids": ["S9"],
+      "required_facts": [{"fact":"68 of original 80 completed one year","source_id":"S9","passage":"68 of the original 80 participants completed one year"},{"fact":"Exploratory one-year difference was 3 points higher, CI 0.5 to 5.5","source_id":"S9","passage":"Mean function score was 3 points higher with Example C than control (95% CI 0.5 to 5.5 points higher). This follow-up was exploratory."}],
+      "forbidden_interpretations": ["Answer only with the 12-week result","Call the exploratory follow-up confirmatory","Claim all original participants completed follow-up"],
+      "rubric": {"retrieval":"Retrieve S3 even though it appears after two plausible records","semantic":"Report the one-year result and exploratory qualifier","relevance":"Answer specifically about one year"}
+    },
+    {
+      "id": "benefits_and_risks", "category": "broad_benefits_risks",
+      "question": "Give me a balanced summary of the benefits and downsides reported.",
+      "sources": [
+        {"id":"S1","type":"synthetic_trial","title":"Synthetic efficacy study","text":"Synthetic engineering control: among 200 adults with condition R, Example D plus usual care improved the target score by 5 points more than usual care alone at 10 weeks (95% CI 2 to 8 points)."},
+        {"id":"S2","type":"synthetic_safety_report","title":"Synthetic safety summary","text":"Synthetic engineering control: nausea was reported by 18 of 100 participants receiving Example D and 9 of 100 receiving usual care. Serious events occurred in 2 and 1 participants, respectively. The summary does not establish that treatment caused these events."}],
+      "retrieval_relevant_source_ids": ["S1","S2"],
+      "required_facts": [{"fact":"Add-on improved target score by 5 points vs usual care at 10 weeks, CI 2 to 8","source_id":"S1","passage":"Example D plus usual care improved the target score by 5 points more than usual care alone at 10 weeks (95% CI 2 to 8 points)."},{"fact":"Nausea counts 18/100 vs 9/100","source_id":"S2","passage":"nausea was reported by 18 of 100 participants receiving Example D and 9 of 100 receiving usual care."},{"fact":"Serious events occurred in 2 vs 1, causality not established","source_id":"S2","passage":"Serious events occurred in 2 and 1 participants, respectively. The summary does not establish that treatment caused these events."}],
+      "forbidden_interpretations": ["Omit the downsides while calling the answer balanced","Assert adverse event causation","Call the add-on comparison monotherapy"],
+      "rubric": {"retrieval":"Retrieve S1 and S2","semantic":"Cover benefit and both reported safety counts with correct arms and causality caveat","relevance":"Balanced concise synthesis"}
+    },
+    {
+      "id": "simplify_followup", "category": "followup_simplification",
+      "question": "What did the study find?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic study","text":"Synthetic engineering control: in 140 adults, Example E lowered the average fatigue scale score by 1.6 points versus placebo at 8 weeks (95% CI 0.4 to 2.8 points lower). The scale ranges from 0 to 10, with lower scores indicating less fatigue."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"1.6 points lower vs placebo at 8 weeks, CI 0.4 to 2.8 lower","source_id":"S1","passage":"Example E lowered the average fatigue scale score by 1.6 points versus placebo at 8 weeks (95% CI 0.4 to 2.8 points lower)."},{"fact":"140 adults and lower score means less fatigue","source_id":"S1","passage":"in 140 adults"}],
+      "forbidden_interpretations": ["Convert points to percent","Claim fatigue was eliminated"],
+      "follow_up": {"question":"Can you say that more simply without changing the result?","requires_prior_context":true},
+      "rubric": {"retrieval":"Retrieve S1 for both turns","semantic":"Follow-up restates same effect, comparator, time and units in plain language","relevance":"No new study or changed number"}
+    },
+    {
+      "id": "explain_ci", "category": "explanation",
+      "question": "What does the confidence interval tell me here?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic study","text":"Synthetic engineering control: the estimated difference in task time was 6 minutes faster with Example F than control (95% confidence interval, 1 to 11 minutes faster), measured after 4 weeks in 90 adults."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"Estimate is 6 minutes faster; interval ranges from 1 to 11 minutes faster","source_id":"S1","passage":"6 minutes faster with Example F than control (95% confidence interval, 1 to 11 minutes faster)"}],
+      "forbidden_interpretations": ["Say there is a 95% probability the true effect is in this specific interval","Call the interval a range of individual responses","Ignore the outcome units"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Explain interval as uncertainty around the estimated group difference in plain language without overstating probability","relevance":"Explain the requested concept using this result"}
+    },
+    {
+      "id": "distinct_studies", "category": "comparison_distinct_studies",
+      "question": "Why do these studies look different?",
+      "sources": [
+        {"id":"S1","type":"synthetic_trial","title":"Synthetic trial in population A","text":"Synthetic engineering control: Study A randomized 70 adults with condition S to Example G or placebo for 6 weeks. The symptom score difference was 4 points lower (95% CI 1 to 7 lower)."},
+        {"id":"S2","type":"synthetic_trial","title":"Synthetic trial in population B","text":"Synthetic engineering control: a separate Study B randomized 210 adults with condition T to Example G or usual care for 24 weeks. The symptom score difference was 1 point lower (95% CI 1 higher to 3 lower); no statistically clear difference was found."}],
+      "retrieval_relevant_source_ids": ["S1","S2"],
+      "required_facts": [{"fact":"Study A had condition S, placebo, 6 weeks, estimate 4 lower with CI 1 to 7 lower","source_id":"S1","passage":"70 adults with condition S to Example G or placebo for 6 weeks. The symptom score difference was 4 points lower (95% CI 1 to 7 lower)."},{"fact":"Study B had condition T, usual care, 24 weeks, estimate 1 lower with CI spanning both directions","source_id":"S2","passage":"condition T to Example G or usual care for 24 weeks. The symptom score difference was 1 point lower (95% CI 1 higher to 3 lower); no statistically clear difference was found."}],
+      "forbidden_interpretations": ["Pool the results without an analysis","Claim statistical significance alone proves incompatible effects","Conflate populations, comparators or follow-up windows"],
+      "rubric": {"retrieval":"Retrieve both studies","semantic":"Compare differences in population, comparator and duration; preserve uncertainty and study identity","relevance":"Explain plausible contextual differences without causal overclaim"}
+    },
+    {
+      "id": "unsupported_outcome", "category": "unsupported_outcome",
+      "question": "Did Example H reduce hospital admissions?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic outcome report","text":"Synthetic engineering control: a 16-week study of Example H reported sleep scores in 100 adults. Hospital admissions were not reported in this excerpt."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"This excerpt reports sleep scores, not admissions","source_id":"S1","passage":"reported sleep scores in 100 adults. Hospital admissions were not reported in this excerpt."}],
+      "forbidden_interpretations": ["Claim admissions fell or did not fall","Claim admissions were never measured in the full study","Generalize excerpt omission to all evidence"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"State that this excerpt does not answer the admissions question; distinguish not reported here from no effect","relevance":"Directly answer the specific outcome question"}
+    },
+    {
+      "id": "qualitative_report", "category": "qualitative_no_required_numbers",
+      "question": "What did participants say about using the program?",
+      "sources": [{"id":"S1","type":"synthetic_interview_study","title":"Synthetic interview report","text":"Synthetic engineering control: in interviews with 22 participants, many described the weekly reminders as helpful for remembering exercises. Several participants said reminders felt intrusive during work. The report provides themes, not prevalence estimates."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"Participants described reminders as helpful for remembering exercises","source_id":"S1","passage":"many described the weekly reminders as helpful for remembering exercises."},{"fact":"Some found them intrusive at work","source_id":"S1","passage":"Several participants said reminders felt intrusive during work."},{"fact":"Themes do not provide prevalence estimates","source_id":"S1","passage":"The report provides themes, not prevalence estimates."}],
+      "forbidden_interpretations": ["Invent a percentage or say most/all participants","Treat interviews as a controlled efficacy estimate"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Represent both positive and negative themes without requiring unprovided numeric prevalence","relevance":"Answer what participants said"}
+    },
+    {
+      "id": "comparator_guard", "category": "comparator_and_direction",
+      "question": "Was the intervention better than standard care?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic comparative study","text":"Synthetic engineering control: after 12 weeks, the average activity score was 2 points higher with Example J than standard care among 160 adults. Higher scores indicate more activity (95% CI 0.5 to 3.5 points higher)."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"Score was 2 points higher than standard care at 12 weeks, CI 0.5 to 3.5 higher","source_id":"S1","passage":"after 12 weeks, the average activity score was 2 points higher with Example J than standard care among 160 adults. Higher scores indicate more activity (95% CI 0.5 to 3.5 points higher)."},{"fact":"Higher means more activity","source_id":"S1","passage":"Higher scores indicate more activity"}],
+      "forbidden_interpretations": ["Reverse direction","Say clinically meaningful without a threshold","Omit comparator"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Preserve direction, comparator, timeframe, unit and outcome interpretation","relevance":"Answer whether it was better on the measured score"}
+    },
+    {
+      "id": "subgroup_limit", "category": "population_qualifier",
+      "question": "Does this show the same effect for everyone with condition U?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic subgroup analysis","text":"Synthetic engineering control: the trial enrolled 150 adults with condition U who had moderate baseline symptoms. In this prespecified subgroup, Example K was associated with a 2-point lower symptom score than control at 8 weeks. The report gives no results for people with mild symptoms."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"Study population had moderate baseline symptoms","source_id":"S1","passage":"150 adults with condition U who had moderate baseline symptoms."},{"fact":"The subgroup result was a 2-point lower symptom score at 8 weeks","source_id":"S1","passage":"In this prespecified subgroup, Example K was associated with a 2-point lower symptom score than control at 8 weeks."},{"fact":"Mild-symptom results are not given in this report","source_id":"S1","passage":"The report gives no results for people with mild symptoms."}],
+      "forbidden_interpretations": ["Generalize subgroup to everyone","Claim no effect in mild symptoms"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Bound finding to the studied subgroup and say evidence here does not answer for mild symptoms","relevance":"Answer generalizability directly"}
+    },
+    {
+      "id": "risk_frequency_boundary", "category": "risk_frequency_and_scope",
+      "question": "Is dizziness a common side effect?",
+      "sources": [{"id":"S1","type":"synthetic_safety_notice","title":"Synthetic safety notice","text":"Synthetic engineering control: dizziness appears among reports received after Example L use. The notice supplies no denominator, comparison group, or frequency estimate and cannot determine whether Example L caused the reports."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"Dizziness appears in reports but frequency and causality cannot be determined","source_id":"S1","passage":"dizziness appears among reports received after Example L use. The notice supplies no denominator, comparison group, or frequency estimate and cannot determine whether Example L caused the reports."}],
+      "forbidden_interpretations": ["Call dizziness common or rare","Treat reports as incidence or proof of causation"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Explain that reports alone cannot establish frequency or causality","relevance":"Answer the commonness question with the available evidence boundary"}
+    },
+    {
+      "id": "multi_source_benefit_harm", "category": "multi_source_synthesis",
+      "question": "Summarize the measured benefit and the main limitation.",
+      "sources": [
+        {"id":"S1","type":"synthetic_trial","title":"Synthetic outcome paper","text":"Synthetic engineering control: 96 adults received Example M or placebo for 6 weeks. The average pain score was 1.2 points lower with Example M (95% CI 0.2 to 2.2 lower)."},
+        {"id":"S2","type":"synthetic_methods_note","title":"Synthetic methods note","text":"Synthetic engineering control: the study had 96 participants and lasted 6 weeks. It was not designed to assess outcomes beyond this period."}],
+      "retrieval_relevant_source_ids": ["S1","S2"],
+      "required_facts": [{"fact":"Pain score difference was 1.2 lower, CI 0.2 to 2.2 lower","source_id":"S1","passage":"The average pain score was 1.2 points lower with Example M (95% CI 0.2 to 2.2 lower)."},{"fact":"Study does not establish outcomes beyond 6 weeks","source_id":"S2","passage":"It was not designed to assess outcomes beyond this period."}],
+      "forbidden_interpretations": ["Call the benefit durable","Treat limited follow-up as proof benefit stopped"],
+      "rubric": {"retrieval":"Retrieve both S1 and S2","semantic":"Include the estimate and duration limitation","relevance":"Cover both requested benefit and limitation"}
+    },
+    {
+      "id": "safety_denominator", "category": "complete_numeric_context",
+      "question": "How often was rash reported in each group?",
+      "sources": [{"id":"S1","type":"synthetic_trial","title":"Synthetic adverse-event table","text":"Synthetic engineering control: rash was reported by 12 of 240 people assigned to Example N and 6 of 238 assigned to placebo during 12 weeks. The table records reports and does not establish causation for an individual event."}],
+      "retrieval_relevant_source_ids": ["S1"],
+      "required_facts": [{"fact":"12/240 Example N vs 6/238 placebo over 12 weeks","source_id":"S1","passage":"rash was reported by 12 of 240 people assigned to Example N and 6 of 238 assigned to placebo during 12 weeks."},{"fact":"Table counts reports, not individual causality","source_id":"S1","passage":"The table records reports and does not establish causation for an individual event."}],
+      "forbidden_interpretations": ["Give counts without denominators or arms","Call every rash caused by the assigned treatment"],
+      "rubric": {"retrieval":"Retrieve S1","semantic":"Preserve both numerators, denominators, groups and duration; retain reporting caveat","relevance":"Answer frequency by group"}
+    }
+  ]
+}

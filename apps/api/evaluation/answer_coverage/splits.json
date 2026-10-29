@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "provenance": "Authored before running the context comparison; case inputs are frozen independently in inventory.json.",
+  "development": ["effect_size_complete", "planned_enrollment_trap", "benefits_and_risks", "simplify_followup", "explain_ci", "unsupported_outcome", "qualitative_report", "comparator_guard", "multi_source_benefit_harm"],
+  "holdout": ["later_relevant_source", "distinct_studies", "subgroup_limit", "risk_frequency_boundary", "safety_denominator"]
+}

@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "benchmark": "answer_coverage",
+  "provider_calls": 0,
+  "semantic_answer_scoring": "not performed; manual rubric required",
+  "comparison_method": {
+    "baseline": "first eight input sources passed through the same production evidence-record builder, preserving its source budgets, matched passages, and truncation behavior",
+    "candidate": "all eligible input sources passed through the production evidence-record builder with ranked retrieved chunks",
+    "passage_indexing": "exact required passage membership in chunks for that exact source ID",
+    "context_membership": "exact required passage membership in that source record text or matched_passages"
+  },
+  "cases": [
+    {
+      "case_id": "later_relevant_source",
+      "retrieved_source_ids": [
+        "S9",
+        "S2",
+        "S4",
+        "S8",
+        "S6",
+        "S7",
+        "S3",
+        "S5"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 0,
+        "not_indexed": 0,
+        "missing_from_selected_context": 2,
+        "facts": [
+          {
+            "source_id": "S9",
+            "fact": "68 of original 80 completed one year",
+            "indexed": true,
+            "in_context": false,
+            "status": "missing_from_selected_context"
+          },
+          {
+            "source_id": "S9",
+            "fact": "Exploratory one-year difference was 3 points higher, CI 0.5 to 5.5",
+            "indexed": true,
+            "in_context": false,
+            "status": "missing_from_selected_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S9",
+            "fact": "68 of original 80 completed one year",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S9",
+            "fact": "Exploratory one-year difference was 3 points higher, CI 0.5 to 5.5",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 2
+    },
+    {
+      "case_id": "distinct_studies",
+      "retrieved_source_ids": [
+        "S2",
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Study A had condition S, placebo, 6 weeks, estimate 4 lower with CI 1 to 7 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Study B had condition T, usual care, 24 weeks, estimate 1 lower with CI spanning both directions",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Study A had condition S, placebo, 6 weeks, estimate 4 lower with CI 1 to 7 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Study B had condition T, usual care, 24 weeks, estimate 1 lower with CI spanning both directions",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "subgroup_limit",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Study population had moderate baseline symptoms",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "The subgroup result was a 2-point lower symptom score at 8 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Mild-symptom results are not given in this report",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Study population had moderate baseline symptoms",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "The subgroup result was a 2-point lower symptom score at 8 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Mild-symptom results are not given in this report",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "risk_frequency_boundary",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Dizziness appears in reports but frequency and causality cannot be determined",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Dizziness appears in reports but frequency and causality cannot be determined",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "safety_denominator",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "12/240 Example N vs 6/238 placebo over 12 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Table counts reports, not individual causality",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "12/240 Example N vs 6/238 placebo over 12 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Table counts reports, not individual causality",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    }
+  ],
+  "summary": {
+    "case_count": 5,
+    "baseline_covered_passages": 8,
+    "helper_covered_passages": 10,
+    "baseline_not_indexed": 0,
+    "helper_not_indexed": 0,
+    "baseline_missing_from_selected_context": 2,
+    "helper_missing_from_selected_context": 0
+  },
+  "split": "holdout"
+}

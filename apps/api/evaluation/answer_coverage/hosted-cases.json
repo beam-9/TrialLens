@@ -1,0 +1,104 @@
+{
+  "description": "New questions on unchanged M0 source snapshots; not a replacement for frozen inventory. Existing real-broad retained as control.",
+  "cases": [
+    {
+      "id": "real-broad",
+      "snapshot_id": "real-metformin",
+      "question": "What do these sources tell us about the benefits and main limitations of metformin for type 2 diabetes?",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "real_workspace",
+        "summary_source_diversity",
+        "metformin_vs_zituvimet",
+        "pediatric_age_floor",
+        "postmarketing_frequency_unknown"
+      ],
+      "must_include": [
+        "Single-ingredient scope; label indication with diet/exercise",
+        "If pediatric indication mentioned, retain age 10 years and older",
+        "If safety incidence discussed, distinguish trial percentages from unknown postmarketing frequency",
+        "Cover benefits and limitations using relevant distinct sources when available"
+      ],
+      "must_not_claim": [
+        "ZITUVIMET pancreatitis-history limitation attributed to metformin alone",
+        "Rare/common frequency for spontaneous reports without support",
+        "Children of all ages eligible"
+      ],
+      "critical_error_categories": [
+        "wrong_product",
+        "wrong_population",
+        "invented_adverse_event_frequency"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/workspace-browser-results.json",
+        "index": 2
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "statistics-explicit",
+      "snapshot_id": "numerical",
+      "question": "Give the numerical results, including the effect size, uncertainty, sample size and timeframe, and explain what the statistics mean.",
+      "history_case_id": null,
+      "source_types": null,
+      "categories": [
+        "numerical_hba1c",
+        "comparator_group_difference",
+        "time_windows"
+      ],
+      "must_include": [
+        "Preserves 0.5 percentage points, not 0.5 percent relative change",
+        "Keeps placebo comparator, 12-week timeframe and adult population",
+        "Does not infer mortality or longer-term benefits",
+        "Follow-up is simpler, consistent, and acknowledges synthetic evidence",
+        "Does not invent a within-group rise or fall from an endpoint difference",
+        "Does not interpret a confidence interval as certainty or probability of the true effect",
+        "Does not claim additional safety outcomes were unmeasured when the excerpt only states mortality was not measured"
+      ],
+      "must_not_claim": [
+        "Within-group baseline change inferred from endpoint difference",
+        "Relative percent substituted for percentage points",
+        "CI is probability true effect lies inside"
+      ],
+      "critical_error_categories": [
+        "wrong_number_comparator",
+        "incorrect_absence_scope"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 1
+      },
+      "expected_route": "generated"
+    },
+    {
+      "id": "statistics-followup",
+      "snapshot_id": "numerical",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "history_case_id": "statistics-explicit",
+      "source_types": null,
+      "categories": [
+        "follow_up",
+        "not_established_vs_not_measured"
+      ],
+      "must_include": [
+        "Preserve adults, placebo, 0.5 percentage points, 12 weeks",
+        "Mortality explicitly not measured; beyond 12 weeks not established",
+        "Synthetic evidence disclosed"
+      ],
+      "must_not_claim": [
+        "Long-term effects not established becomes outcomes not measured",
+        "Additional safety outcomes claimed unmeasured"
+      ],
+      "critical_error_categories": [
+        "incorrect_absence_scope",
+        "wrong_number_comparator"
+      ],
+      "seed": {
+        "artifact": "apps/api/evaluation/final-results.json",
+        "index": 2
+      },
+      "expected_route": "generated"
+    }
+  ]
+}

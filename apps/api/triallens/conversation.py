@@ -10,7 +10,7 @@ import threading
 import httpx
 from pydantic import BaseModel, ConfigDict, Field
 
-from triallens.models import Answer, AnswerTraceItem, EvidenceSource, SourceType, Workspace
+from triallens.models import Answer, AnswerTraceItem, EvidenceSource, RetrievedChunk, SourceType, Workspace
 from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope
 from triallens.performance import annotate, phase, provider_usage
@@ -193,6 +193,63 @@ def reconcile_conversational_provenance(answer: Answer, records: list[dict], *, 
         answer.answer_trace = [AnswerTraceItem(label="Response method", value="No model generation", detail="No source-based answer or citation-support judgment was made.")]
 
 
+def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list[RetrievedChunk]) -> list[dict]:
+    """Keep ranked retrieved sources in the bounded model context, then fill spare slots.
+
+    Callers apply product and source-type scope first. A dangling or mismatched
+    retrieved citation cannot admit an ineligible source or attach its passages.
+    """
+    lookup = {source.id: source for source in sources}
+    ranked_ids = dict.fromkeys(chunk.source_id for chunk in retrieved_chunks
+                              if chunk.source_id in lookup
+                              and chunk.citation == citation_for(lookup[chunk.source_id]))
+    selected_ids = list(dict.fromkeys([*ranked_ids, *(source.id for source in sources)]))[:8]
+    selected_sources = [lookup[source_id] for source_id in selected_ids]
+    if not selected_sources:
+        return []
+    records = []
+    per_source_budget = 28000 // len(selected_sources)
+    for source in selected_sources:
+        # Keep retrieved passages first, including findings beyond the opening
+        # abstract/label excerpt. Share a total budget across sources rather
+        # than silently overflowing the local model's context window.
+        matches = list(dict.fromkeys(chunk.text for chunk in retrieved_chunks
+                                    if chunk.source_id == source.id
+                                        and chunk.citation == citation_for(source)))[:4]
+        passages = []
+        remaining = per_source_budget
+        for match in matches:
+            if not remaining:
+                break
+            passage = match[:remaining]
+            passages.append(passage)
+            remaining -= len(passage)
+        prefix = source.abstract[:min(10000, remaining)]
+        content_truncated = len(prefix) < len(source.abstract) or passages != matches
+        # Avoid sending a passage twice when the allocated prefix contains it.
+        # Deduplication does not lose evidence already present in the prefix.
+        passages = [passage for passage in passages if " ".join(passage.split()) not in " ".join(prefix.split())]
+        records.append({
+            "citation": citation_for(source), "title": source.title[:500],
+            "source_type": source.source_type.value,
+            "publication_types": [value[:120] for value in source.metadata.get("publication_types", [])
+                                  if isinstance(value, str) and value.strip()][:12]
+                                 if isinstance(source.metadata.get("publication_types"), list) else [],
+            "status": source.status, "phase": source.phase,
+            "publication_date": source.publication_date,
+            "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
+                               if source.source_type == SourceType.clinical_trials else "Stored source metadata; missing fields are unknown."),
+            "content_scope": document_content_scope(source),
+            "indexed_section_names": [name[:120] for name, text in source.metadata.get("sections", {}).items()
+                                      if isinstance(name, str) and isinstance(text, str) and text.strip()][:20]
+                                     if isinstance(source.metadata.get("sections"), dict) else [],
+            "content_truncated": content_truncated,
+            "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
+            "text": prefix, "matched_passages": passages,
+        })
+    return records
+
+
 class ConversationService:
     @staticmethod
     def _local_completion(messages: list[dict[str, str]]) -> str:
@@ -246,46 +303,7 @@ class ConversationService:
             return fallback
         with phase("context_build"):
             scoped_sources, scope_reduced = scope_product_sources(workspace, question, history, sources)
-            records = []
-            selected_sources = scoped_sources[:8]
-            per_source_budget = 28000 // len(selected_sources)
-            for source in selected_sources:
-                # Keep retrieved passages first, including findings beyond the opening
-                # abstract/label excerpt. Share a total budget across sources rather
-                # than silently overflowing the local model's context window.
-                matches = list(dict.fromkeys(chunk.text for chunk in fallback.retrieved_chunks
-                                            if chunk.source_id == source.id))[:4]
-                passages = []
-                remaining = per_source_budget
-                for match in matches:
-                    if not remaining:
-                        break
-                    passage = match[:remaining]
-                    passages.append(passage)
-                    remaining -= len(passage)
-                prefix = source.abstract[:min(10000, remaining)]
-                content_truncated = len(prefix) < len(source.abstract) or passages != matches
-                # Avoid sending a passage twice when the allocated prefix contains it.
-                # Deduplication does not lose evidence already present in the prefix.
-                passages = [passage for passage in passages if " ".join(passage.split()) not in " ".join(prefix.split())]
-                records.append({
-                    "citation": citation_for(source), "title": source.title[:500],
-                    "source_type": source.source_type.value,
-                    "publication_types": [value[:120] for value in source.metadata.get("publication_types", [])
-                                          if isinstance(value, str) and value.strip()][:12]
-                                         if isinstance(source.metadata.get("publication_types"), list) else [],
-                    "status": source.status, "phase": source.phase,
-                    "publication_date": source.publication_date,
-                    "metadata_scope": ("Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing."
-                                       if source.source_type == SourceType.clinical_trials else "Stored source metadata; missing fields are unknown."),
-                    "content_scope": document_content_scope(source),
-                    "indexed_section_names": [name[:120] for name, text in source.metadata.get("sections", {}).items()
-                                              if isinstance(name, str) and isinstance(text, str) and text.strip()][:20]
-                                             if isinstance(source.metadata.get("sections"), dict) else [],
-                    "content_truncated": content_truncated,
-                    "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
-                    "text": prefix, "matched_passages": passages,
-                })
+            records = build_evidence_records(scoped_sources, fallback.retrieved_chunks)
             allowed = {record["citation"] for record in records}
             payload = {
                 "topic": {"condition": workspace.condition, "intervention": workspace.intervention},

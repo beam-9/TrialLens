@@ -1,0 +1,499 @@
+{
+  "schema_version": 1,
+  "benchmark": "answer_coverage",
+  "provider_calls": 0,
+  "semantic_answer_scoring": "not performed; manual rubric required",
+  "comparison_method": {
+    "baseline": "first eight input sources passed through the same production evidence-record builder, preserving its source budgets, matched passages, and truncation behavior",
+    "candidate": "all eligible input sources passed through the production evidence-record builder with ranked retrieved chunks",
+    "passage_indexing": "exact required passage membership in chunks for that exact source ID",
+    "context_membership": "exact required passage membership in that source record text or matched_passages"
+  },
+  "cases": [
+    {
+      "case_id": "effect_size_complete",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "320 adults with condition Q were randomized",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "At week 16, the between-group difference was 4.2 points lower, CI 2.1 to 6.3 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Lower scores indicate fewer symptoms",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "320 adults with condition Q were randomized",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "At week 16, the between-group difference was 4.2 points lower, CI 2.1 to 6.3 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Lower scores indicate fewer symptoms",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "planned_enrollment_trap",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "500 is the target enrollment, not actual enrollment",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "No participants enrolled and no results posted",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "500 is the target enrollment, not actual enrollment",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "No participants enrolled and no results posted",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "benefits_and_risks",
+      "retrieved_source_ids": [
+        "S2",
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Add-on improved target score by 5 points vs usual care at 10 weeks, CI 2 to 8",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Nausea counts 18/100 vs 9/100",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Serious events occurred in 2 vs 1, causality not established",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Add-on improved target score by 5 points vs usual care at 10 weeks, CI 2 to 8",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Nausea counts 18/100 vs 9/100",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Serious events occurred in 2 vs 1, causality not established",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "simplify_followup",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "1.6 points lower vs placebo at 8 weeks, CI 0.4 to 2.8 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "140 adults and lower score means less fatigue",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "1.6 points lower vs placebo at 8 weeks, CI 0.4 to 2.8 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "140 adults and lower score means less fatigue",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "explain_ci",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Estimate is 6 minutes faster; interval ranges from 1 to 11 minutes faster",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Estimate is 6 minutes faster; interval ranges from 1 to 11 minutes faster",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "unsupported_outcome",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "This excerpt reports sleep scores, not admissions",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 1,
+        "covered_passages": 1,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "This excerpt reports sleep scores, not admissions",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "qualitative_report",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Participants described reminders as helpful for remembering exercises",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Some found them intrusive at work",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Themes do not provide prevalence estimates",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 3,
+        "covered_passages": 3,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Participants described reminders as helpful for remembering exercises",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Some found them intrusive at work",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Themes do not provide prevalence estimates",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "comparator_guard",
+      "retrieved_source_ids": [
+        "S1"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Score was 2 points higher than standard care at 12 weeks, CI 0.5 to 3.5 higher",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Higher means more activity",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Score was 2 points higher than standard care at 12 weeks, CI 0.5 to 3.5 higher",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S1",
+            "fact": "Higher means more activity",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    },
+    {
+      "case_id": "multi_source_benefit_harm",
+      "retrieved_source_ids": [
+        "S1",
+        "S2"
+      ],
+      "baseline_first8": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Pain score difference was 1.2 lower, CI 0.2 to 2.2 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Study does not establish outcomes beyond 6 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "ranked_helper": {
+        "required_passages": 2,
+        "covered_passages": 2,
+        "not_indexed": 0,
+        "missing_from_selected_context": 0,
+        "facts": [
+          {
+            "source_id": "S1",
+            "fact": "Pain score difference was 1.2 lower, CI 0.2 to 2.2 lower",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          },
+          {
+            "source_id": "S2",
+            "fact": "Study does not establish outcomes beyond 6 weeks",
+            "indexed": true,
+            "in_context": true,
+            "status": "covered_by_context"
+          }
+        ]
+      },
+      "delta_covered_passages": 0
+    }
+  ],
+  "summary": {
+    "case_count": 9,
+    "baseline_covered_passages": 19,
+    "helper_covered_passages": 19,
+    "baseline_not_indexed": 0,
+    "helper_not_indexed": 0,
+    "baseline_missing_from_selected_context": 0,
+    "helper_missing_from_selected_context": 0
+  },
+  "split": "development"
+}
