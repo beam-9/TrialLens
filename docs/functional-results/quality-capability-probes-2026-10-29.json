@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "title": "Broad answer source-role and model capability probe adjudication",
+  "review_date": "2026-10-29",
+  "assessment_type": "Read-only review of saved probe artifacts against their exact generation context. Engineering judgment only; not clinical validation.",
+  "source_artifacts": {
+    "source_role_coverage": {
+      "path": "apps/api/evaluation/answer_coverage/results/source-role-coverage-2026-10-29.json",
+      "sha256": "24a00be0c4a37c94dd28c79086bb357e58b875650621cb59380412023c2dfcb3",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa"
+    },
+    "quality_model_competence": {
+      "path": "apps/api/evaluation/answer_coverage/results/quality-model-competence-2026-10-29.json",
+      "sha256": "17be4cb454e071a8863f37ef43068dabf49877a8d76c0ae20e067efe682e0722",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa"
+    },
+    "quality_glm_role_competence": {
+      "path": "apps/api/evaluation/answer_coverage/results/quality-glm-role-competence-2026-10-29.json",
+      "sha256": "fe24c548ba788f1737e57c3b2f15f09416eb9ddcd39f141254879e0c849483ce",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa"
+    }
+  },
+  "method_and_scope": {
+    "reviewed": "Compared saved final answers and captured provider outputs to the common 8-record generation context. For GLM, replayed the deterministic citation/prose-copy validation predicates against the saved raw response and context; no model call or production behavior was invoked.",
+    "not_reviewed": "The fresh PubMed authored holdout case was not executed and receives no quality claim here.",
+    "validation_interpretation": "A valid provider response or a technical generation status is not a semantic pass. Extractive fallback text is not treated as the model's answer."
+  },
+  "probes": [
+    {
+      "artifact": "source-role-coverage-2026-10-29.json",
+      "model_output_status": "Conversational final saved; two provider outputs captured.",
+      "final_answer_verdict": "Coverage remains incomplete for the combined question despite the expanded context.",
+      "findings": [
+        "The final answer uses the metformin tablet indication and lists common adverse reactions, but omits the supplied extended-release label's adult-only indication and does not distinguish that formulation from the separate tablet label's age-10-and-older indication.",
+        "It omits the supplied ZITUVIMET limitations (not recommended for type 1 diabetes; not studied with pancreatitis history), even though the question explicitly asks for limitations and to keep combination-product claims scoped.",
+        "It does not discuss the AXOS registry entry at all, although the new 8-record context includes it. The raw first provider draft did mention it as background/rationale and stated it was not a result; the saved final omits that source role and the ZITUVIMET limitations. Do not credit the earlier draft as the displayed answer.",
+        "The final labels common adverse reactions broadly as applying to metformin hydrochloride and cites the immediate-release tablet source, while the context separately supplies an extended-release label with a distinct common-reaction list. This wording does not preserve formulation-specific source scope."
+      ],
+      "critical_factual_error": "No direct invented outcome or asserted AXOS efficacy appears in the saved final. The main issue is material omissions and source/formulation scope, not a false claim that the registry rationale was measured."
+    },
+    {
+      "artifact": "quality-model-competence-2026-10-29.json",
+      "model_output_status": "No usable provider answer: captured provider response is null and the choice finish reason is length at max_tokens=4096.",
+      "final_answer_verdict": "Not semantically adjudicable as a model answer. The displayed extractive fallback is a concatenation of unrelated trial-summary and label rows, with incomplete unrelated rimonabant text; it is not a completed conversational response to the question.",
+      "validation_reason": "The saved artifact establishes truncation/incomplete generation (finish reason length), not a clinical-content rejection. No inference about model capability should be drawn from the fallback."
+    },
+    {
+      "artifact": "quality-glm-role-competence-2026-10-29.json",
+      "model_output_status": "Two captured provider outputs are well-formed JSON with five paragraphs, but the saved answer is extractive fallback with generation note 'Conversational generation was unavailable or failed validation. Showing source excerpts; try again.'",
+      "raw_provider_content": "The raw drafts separate the immediate-release and extended-release labels, include the ZITUVIMET product limitations, and describe AXOS as registry background/planned rationale rather than demonstrated metformin effects. They are long and repetitive, and are not the displayed answer.",
+      "reproduced_validation_rejection": {
+        "reason": "Answer copies long source passages",
+        "predicate": "The server's deterministic check rejects any 28-token normalized answer window found verbatim in supplied source text.",
+        "evidence": "Both saved GLM provider outputs contain a 28-word exact normalized span from the metformin label: 'indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus'. Replaying the stored citation and copy checks against the exact context reproduces the copy-guard failure; citations otherwise normalize to the allowed set and cover the cited_sources set, with cited evidence in each paragraph.",
+        "interpretation": "The raw draft's content is not accepted or displayed as a conversational answer. The extractive fallback is not suitable as a substitute."
+      }
+    }
+  ],
+  "overall_judgment": {
+    "summary": "The expanded source-role context did not produce a complete displayed broad answer. One provider's answer remains materially incomplete; the second provider's otherwise role-aware long drafts are rejected by the reproducible 28-word copy guard, leaving a raw excerpt dump. A third probe is truncated at the output limit and cannot support a semantic capability judgment.",
+    "distinction_from_result_packets": "The separate posted-statistics result-packet answer previously met its bounded numerical-coverage rubric. That limited success does not establish broad-answer source-role competence or rescue the failures in these probes.",
+    "promotion_assessment": "These outputs do not support promoting a broad-answer writing profile. The conclusion is limited to the saved probes and their common context; it is not a claim about the unexecuted fresh PubMed holdout or all possible questions.",
+    "clinical_validation": "Not performed."
+  }
+}

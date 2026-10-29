@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "title": "General answer quality holdout adjudication",
+  "review_date": "2026-10-29",
+  "assessment_type": "Source-context semantic comparison of five saved baseline and feedback answers against the frozen M0 quality holdout. Engineering judgment only; not clinical validation or expert review.",
+  "source_artifacts": {
+    "baseline": {
+      "path": "apps/api/evaluation/answer_coverage/results/general-quality-baseline-2026-10-29.json",
+      "sha256": "9bc7842a48033eb4cf67593377e2b1beffcde7e1779ff2fc5e5b584ea71cb455"
+    },
+    "feedback": {
+      "path": "apps/api/evaluation/answer_coverage/results/general-quality-feedback-2026-10-29.json",
+      "sha256": "e60cff6005add2ce9aa6b27e3be98ca9f645268bdd34b5b141a458a2b1ef2e85"
+    },
+    "frozen_holdout_rubric": {
+      "path": "apps/api/evaluation/answer_coverage/quality-holdout-2026-10-29.json",
+      "sha256": "a074c5b328e6b0836dc9fbac47990d4a3c361a0ed043304ac14f4f4be56de46a"
+    },
+    "frozen_m0_snapshots": [
+      {"id": "real-metformin", "path": "apps/api/evaluation/m0/snapshots/real-metformin.json", "sha256": "228ecc09969376a894cba23dffbf5b1114520e22da61b49e38602dc7ff572b6e"},
+      {"id": "standalone-label", "path": "apps/api/evaluation/m0/snapshots/standalone-label.json", "sha256": "e13fa520e6578fea919f982122d2bc5629f0952f3bcbf67955cfd23455960b77"},
+      {"id": "numerical", "path": "apps/api/evaluation/m0/snapshots/numerical.json", "sha256": "922bf371d6cd6f140bc6bdfc9ff9f31ebee8350680c262714dde40932bda704f"},
+      {"id": "planned-trial", "path": "apps/api/evaluation/m0/snapshots/planned-trial.json", "sha256": "26e7b1dd25bc5306c137d657250db291f9a72acd088a2b4ac6362d4fc1ae8ec1"}
+    ]
+  },
+  "method_and_limits": {
+    "scope": "Compared final answer text and uncertainty/limitations with each artifact's exact generation_context and the five matching M0 case rubrics. No provider calls, production edits, or external clinical lookups.",
+    "context_hashes": "Hashes below are the per-case generation_context_sha256 values recorded in the saved artifacts. Feedback used the same contexts for four cases; the simplified follow-up has a distinct context hash because its conversation history differs.",
+    "excluded": "The fresh PubMed relevance case is a separate inventory/cohort and is not represented in these two five-case artifacts. The new broad source-role recheck is also outside these saved outputs. AXOS claims are not assessed as model omissions where AXOS material was absent from the exact combined-case generation context.",
+    "interpretation": "Generation in conversational mode is a technical generation status, not a semantic pass. Missing rubric details are categorized as completeness gaps unless the answer asserts an unsupported or contradictory fact. Optional mortality is not required outside the protocol case, and the numeric comparison rubric explicitly makes mortality optional."
+  },
+  "cases": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "generation_context_sha256": "3898078b626b97ad244c2026db21f265b0799a55b4d5288c5deb2a4787cf03c2",
+      "baseline": {
+        "summary": "Correctly gives the metformin tablet indication and keeps ZITUVIMET's type 1 diabetes and pancreatitis-history language attached to that combination product. It does not quantify benefit. It is concise but does not mention common tablet adverse reactions despite those being available in the supplied label context.",
+        "errors": [],
+        "completeness": "Partial: omits relevant label safety information, but the rubric permits prioritizing a concise subset and no wrong product-scope or age claim is made."
+      },
+      "feedback": {
+        "summary": "Preserves the label indication and combination-product scope, and adds the common metformin tablet adverse-reaction list supported in the exact context. It does not add unsupported effect magnitude or convert the AXOS rationale into a result.",
+        "errors": [],
+        "completeness": "Improved label safety coverage. The added adverse-reaction list is qualitative; no rates were requested in this case."
+      },
+      "context_constraint": "The rubric's AXOS registry item cannot be evaluated as an answer omission here: neither saved generation context contains the AXOS record. The context also does not include the separate extended-release source required to fully assess the rubric's adult-only extended-release wording; the supplied metformin tablet label does support the answer's stated age-10-and-older indication."
+    },
+    {
+      "case_id": "m0-safety-frequency",
+      "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+      "baseline": {
+        "summary": "Correctly identifies the requested trial percentages for diarrhea and nausea/vomiting and correctly says postmarketing liver-injury frequency is unavailable. The phrase 'and other reactions' fails to provide the additional numerical reactions requested by the prompt/rubric.",
+        "errors": [],
+        "completeness": "Material numeric completeness gap: omits flatulence, asthenia, indigestion, abdominal discomfort, headache and their comparator percentages. Also omits trial group sizes and explicit T2D population."
+      },
+      "feedback": {
+        "summary": "Correctly supplies all seven reaction percentages with placebo comparisons and gives the diarrhea discontinuation and approximately 7% B12 facts present in context. It says postmarketing liver injury frequency is not provided.",
+        "errors": [],
+        "completeness": "Improves the numeric table coverage. Still omits the trial population detail (patients with T2D), n=141 versus n=145, and the label's explicit limitation that voluntary reports from a population of uncertain size cannot reliably estimate frequency or establish causality. Thus the postmarketing answer is directionally correct but does not fully answer both limits asked by the rubric."
+      },
+      "critical_error": false
+    },
+    {
+      "case_id": "m0-numeric-comparison",
+      "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+      "baseline": {
+        "summary": "Correctly states 0.5 percentage points lower, the 0.2–0.8 percentage-point 95% CI, placebo comparison, 240 adults, 12 weeks, between-group interpretation, and lack of evidence beyond 12 weeks. It describes the fixture as a demo trial.",
+        "errors": [],
+        "completeness": "Meets core rubric. Mortality is optional and properly omitted."
+      },
+      "feedback": {
+        "summary": "Same core facts as baseline, with more explanation of population and CI. Does not treat the CI as a probability or certainty and preserves the 12-week limit and demo context.",
+        "errors": [],
+        "completeness": "Meets core rubric; the extra explanatory sentences repeat information already conveyed, so feedback did not improve concision. Mortality remains optional."
+      },
+      "critical_error": false
+    },
+    {
+      "case_id": "m0-protocol-versus-results",
+      "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+      "baseline": {
+        "summary": "Correctly distinguishes a planned protocol from measured results, states no results are posted/recruitment has not begun, identifies the planned placebo comparison and 16-week symptom primary outcome, and says mortality is not listed. It does not assert an effect.",
+        "errors": [],
+        "completeness": "Omission of planned enrollment (200 adults) is a minor rubric completeness gap; mortality is answered directly."
+      },
+      "feedback": {
+        "summary": "Same source-faithful distinction and mortality answer. It remains clear and does not invent a treatment effect.",
+        "errors": [],
+        "completeness": "Same minor omission of planned enrollment (200 adults); no meaningful improvement over baseline on this case."
+      },
+      "critical_error": false
+    },
+    {
+      "case_id": "m0-simplify-numeric-followup",
+      "baseline_generation_context_sha256": "1da46456dce97426a61e4db308134db4bc25339d0f74251928eda29f360e0136",
+      "feedback_generation_context_sha256": "b745f0142227ce93b3218cd8bc3285e55890f7e4ec0329856e10a7811433a9af",
+      "baseline": {
+        "summary": "Shortens the answer and preserves the 12-week comparison, numbers, units, and CI. The wording 'compared to placebo' communicates the contrast, but it does not explicitly call it between-group. It omits adults/240 and the concise synthetic/demo qualifier required by this follow-up rubric.",
+        "errors": [],
+        "completeness": "Material follow-up completeness gap against the explicit retention rubric: adult population, between-group framing, and demo qualifier are missing. No numerical contradiction."
+      },
+      "feedback": {
+        "summary": "Preserves the numerical result and CI and remains concise. It does not state adults/240, does not explicitly say between-group, and lacks a synthetic/demo qualifier.",
+        "errors": [],
+        "completeness": "Same retention gaps as baseline; feedback did not repair them. The context differs because the prior answer in the conversational history differs, so this is not a strict identical-input comparison."
+      },
+      "critical_error": false
+    }
+  ],
+  "overall_judgment": {
+    "summary": "Feedback materially improves safety-frequency numeric coverage by listing all seven trial comparisons, and adds useful label adverse-reaction coverage to the combined answer. It does not resolve the safety answer's sample-size/population and postmarketing-causality qualifiers, nor the simplified follow-up's omitted adults/demo qualifier. Other answers are mostly source-faithful; protocol enrollment is a minor omission. No critical scientific error was identified in these five saved answers.",
+    "promotion_assessment": "This five-case comparison alone does not establish that the writer profile plus feedback is promotable: important explicit completeness requirements remain unmet, and the feedback follow-up has a different conversation-history context. This is not a judgment on the separate new broad source-role recheck or on any outputs generated with later retrieval changes.",
+    "clinical_validation": "Not performed. These synthetic and label-based answer checks do not validate treatment claims, clinical recommendations, or real-world outcomes."
+  }
+}

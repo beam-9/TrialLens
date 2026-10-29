@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "513521b00b3ac4c87b874b37c27d03607a3ec00b7b47ccd1e1a20433d8618968",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": "20970e8d2567e7ce92a7cbf4c3b9561547024e05d9cae9c90c6a2896464d4828",
+  "code_sha256": "553ab770c00101cc368e9bf75c626852d762369862d8f5df0ee83e0db9c5793d",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 71223.924291,
+      "trace": {
+        "trace_id": "9a841d73-049a-4402-8242-b969e0534ad8",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 5.463,
+          "retrieval": 9.738667,
+          "extractive_synthesis": 21.780875,
+          "context_build": 0.554875,
+          "draft": 12223.182083,
+          "revision": 58933.159125,
+          "validation": 2.150583,
+          "store": 20.353792
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 30220,
+            "message_count": 2,
+            "serialized_messages_char_count": 30711,
+            "wall_ms": 12223.182083,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6764,
+            "eval_count": 856,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 37159,
+            "message_count": 4,
+            "serialized_messages_char_count": 37784,
+            "wall_ms": 58933.159125,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 8308,
+            "eval_count": 870,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 71221.190167,
+        "serialization_ms": 0.713292
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8492.779212,
+    "remaining_neurons": 507.220788,
+    "pending_requests": 1,
+    "requests": 51
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": true,
+    "model_experiment": "@cf/zai-org/glm-4.7-flash",
+    "wrapper_sha256": "5235f07f2fec61c09c79a96188f192de3ebac44ad0440b81a9ccda77adf7b3b0",
+    "feedback_sha256": "def4f2342bf3d542e2e346500f2e49caefbbd08b682f2f429b7b8d5067fe2576",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

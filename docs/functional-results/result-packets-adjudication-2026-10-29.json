@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "title": "ClinicalTrials.gov result-packet answer adjudication",
+  "review_date": "2026-10-29",
+  "assessment_type": "Source-context semantic review of four saved generated answers; engineering judgment, not clinical validation or independent expert review.",
+  "source_artifacts": {
+    "generated_answers": {
+      "path": "apps/api/evaluation/answer_coverage/results/result-packets-2026-10-29.json",
+      "sha256": "82ae9b23b03a241bf4a99ce52bd71daf6b7f5281609928ad47cb681f7fc14627"
+    },
+    "packet_cohort_inventory": {
+      "path": "apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/inventory.json",
+      "sha256": "953988435ad3b91485535296dedfef99ec9d49f5c16a16e2463c0bbab83b8eca"
+    },
+    "protocol_snapshot": {
+      "path": "apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/protocol.json",
+      "sha256": "5db2801ae6ec64df0dd5ba26f9c24f2ae10e45c86076a0c6281be17d9df1dc35"
+    },
+    "posted_results_snapshot": {
+      "path": "apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/posted-results.json",
+      "sha256": "ff0dd3dc8105bb3e86c5fa4d67711fd811d906f2a277b5375c3f9b023834789f"
+    }
+  },
+  "method": {
+    "scope": "Compared each saved final answer with its exact generation_context and its case rubric. Provider-output drafts were checked only where they clarify final revisions. No model calls, clinical-source lookup, or production edits.",
+    "status_interpretation": "A conversational generation mode indicates that a generated answer was saved; it is not a semantic validation pass.",
+    "clinical_claim_standard": "Statements are assessed only against the supplied packet and protocol excerpts. Missing outcome fields are described as not established by the supplied context, not as proof that the outcome was never measured."
+  },
+  "cross_snapshot_source_note": {
+    "finding": "The protocol snapshot's Brief summary calls the primary endpoint pre-dose PM PEF. The posted-results snapshot labels outcome 001, which reports the FF 50 versus placebo measurements, as primary daily pre-dose morning AM PEF.",
+    "interpretation": "This is a source-description discrepancy across the two snapshots for the same ClinicalTrials.gov record. The protocol-only answer faithfully reports PM from its supplied excerpt; the posted-results answer faithfully uses AM from the posted outcome packet. The discrepancy should remain visible when both packets are in scope, rather than silently treating the descriptions as identical."
+  },
+  "cases": [
+    {
+      "case_id": "protocol-statistics",
+      "generation_context_sha256": "fdf9d3aeed52928be7360e88797de58c02e31ca57d44a4ff951affccaf17fbd0",
+      "technical_generation": "Saved in conversational mode; this is not a semantic pass.",
+      "verdict": "Source-faithful scoped abstention, with a useful PM detail that exposes the prompt/source discrepancy.",
+      "coverage": "Correctly says the requested AM result, group changes, analyzed sizes, estimate, and CI are not present in this protocol-only excerpt. It identifies that the protocol description instead names a change-from-baseline pre-dose PM PEF endpoint. It does not turn planned enrollment into a result or claim the full trial has no results.",
+      "material_note": "The answer could state explicitly that the question says morning/AM while this protocol excerpt says evening/PM. It already names PM, so the source discrepancy is visible; no invented AM values or source-wide absence claim is present.",
+      "clinical_semantic_errors": [],
+      "rubric_status": "Meets the scoped-gap requirement; requested numerical answer is correctly withheld for this source."
+    },
+    {
+      "case_id": "posted-statistics",
+      "generation_context_sha256": "b684de841098facfe292b1c629e55aba8c25be095dda2c5fb8b9bfed6daf6a06",
+      "technical_generation": "Saved in conversational mode; this is not a semantic pass.",
+      "verdict": "Strong numerical coverage from the posted packet, with one source-context discrepancy left unstated.",
+      "coverage": "Preserves FF 50 micrograms once daily versus placebo, children with asthma, primary morning PEF over 12 weeks, group changes of 22.8 and 3.3 L/min, analyzed n=118 and n=119, the 19.5 L/min between-group difference, and the 95% CI of 12.1 to 26.9 L/min. It does not conflate the 19.5 group contrast with either group's change, pool the 50/100 microgram analysis, infer class-wide efficacy, or claim a CI probability or clinical importance.",
+      "material_note": "The answer says the posted primary outcome is morning PEF, consistent with outcome 001. The same generation context also contains the registry Brief summary calling the primary endpoint PM PEF. The answer does not acknowledge this AM/PM description conflict. This is an omission of a source discrepancy, not a wrong reading of the posted packet's FF50 values.",
+      "ci_and_statistical_wording": "The final reports the 95% CI without calling it a probability or certainty. 'Clear difference' is somewhat evaluative; it does not assert clinical significance. The packet's FF50 analysis also carries an estimate comment describing gatekeeper dependence; the answer omits that analysis qualifier, so avoid treating the phrase as an unconditional or clinical-significance claim.",
+      "followup_scope": "Saved uncertainty says effects beyond 12 weeks are not established. That is appropriately limited to the outcome/time horizon and does not claim unrelated outcomes were unmeasured.",
+      "clinical_semantic_errors": [],
+      "rubric_status": "Meets the requested numerical items; source-description discrepancy should be surfaced when the protocol text and posted packet are jointly used."
+    },
+    {
+      "case_id": "posted-simplify",
+      "generation_context_sha256": "fcf5a08a2cb762c0ad31539ef89f3b26fc4029b808735be50add7b6945369f9c",
+      "technical_generation": "Saved in conversational mode; this is not a semantic pass.",
+      "verdict": "Concise follow-up with accurate scoped limitation; preserves the main comparison.",
+      "coverage": "Retains FF 50 versus placebo, children with asthma, morning PEF, 19.5 L/min, 95% CI 12.1–26.9 L/min, and the 12-week horizon. It says effects beyond 12 weeks are not established and does not claim death or other outcomes were not measured. Dropping the 22.8/3.3 group means and n=118/119 is acceptable for this simplification rubric, which asks for the key numerical comparison rather than every prior detail.",
+      "material_note": "It follows the posted AM outcome and does not mention that the context's protocol Brief summary says PM. The same cross-snapshot discrepancy noted above remains unstated.",
+      "ci_and_statistical_wording": "The final states the CI endpoints without a probability interpretation.",
+      "clinical_semantic_errors": [],
+      "rubric_status": "Meets the simplification rubric; no unrelated mortality caveat is required."
+    },
+    {
+      "case_id": "posted-unreported",
+      "generation_context_sha256": "e21d9f22e355f3176623ada3dcfa3e855a68cfa6fc8a845150696500e8cc43bc",
+      "technical_generation": "Saved in conversational mode; this is not a semantic pass.",
+      "verdict": "Correct, source-scoped abstention.",
+      "coverage": "Says the supplied excerpt does not establish that FF50 reduces risk of death. It does not claim mortality was never measured in the whole trial, does not infer benefit, and does not add unrelated prescribing advice.",
+      "clinical_semantic_errors": [],
+      "rubric_status": "Meets the supplied-context scope requirement."
+    }
+  ],
+  "overall_judgment": {
+    "summary": "The protocol-only response keeps its absence claim excerpt-scoped. The posted-results answer and simplification preserve the requested FF50-versus-placebo values and 12-week outcome; the mortality answer also remains carefully scoped. One real source issue remains visible across the protocol and posted-results packets: the protocol summary says PM PEF is primary, while posted outcome 001 is labeled AM PEF. The generated answers use each packet's own statement but do not call out the conflict in posted-context answers.",
+    "limitations": "Four saved answer cases against one trial packet cohort. This is a source-grounded answer review, not clinical validation, proof of efficacy, or a general performance estimate."
+  }
+}
