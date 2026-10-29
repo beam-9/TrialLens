@@ -837,7 +837,7 @@ class AnswerService:
         if any(chunk.section.startswith("Results outcome ") for chunk in retrieved):
             # Structured outcomes are kept whole, not interpreted by sentence
             # extraction. Generation may replace this safe excerpt-mode response.
-            message = ("Posted numerical trial outcomes are indexed for this question. "
+            message = ("Posted trial outcome records are indexed for this question. "
                        "This source-excerpt view does not interpret those statistics; inspect the supporting "
                        "outcome passages, or try again for a cited conversational explanation.")
             return Answer(workspace_id=workspace.id, question=question,
@@ -898,6 +898,8 @@ class AnswerService:
         intent = question_intent(question)
         citation = citation_for(source)
         source_chunks = chunks_for_document_context(workspace, source, chunks, retrieved)
+        if any(is_outcome_packet(source, chunk.section) for chunk in source_chunks):
+            return self.answer(workspace, question, source_chunks, extractions)
         support_chunks = [
             chunk
             for chunk in source_chunks

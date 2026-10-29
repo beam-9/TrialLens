@@ -47,7 +47,7 @@ def test_real_posted_outcomes_survive_index_retrieve_context(monkeypatch):
     assert "not the full results record" in document_content_scope(source)
     assert sum(len(r["text"]) + sum(map(len, r["matched_passages"])) for r in records) <= 28000
     fallback = AnswerService().answer(workspace, question, retrieved, [])
-    assert "Posted numerical trial outcomes" in fallback.direct_answer
+    assert "Posted trial outcome records" in fallback.direct_answer
     assert "numerical results were not extracted" not in fallback.direct_answer
 
 
@@ -114,3 +114,28 @@ def test_statistics_gap_does_not_claim_index_wide_absence():
     assert "Other indexed passages" in answer.direct_answer
     assert "indexed sources mention" not in answer.direct_answer
     assert "not establish" in answer.limitations[0]
+
+
+def test_document_mode_keeps_whole_posted_packets_and_honest_fallback(monkeypatch):
+    workspace, source = load_source(monkeypatch)
+    chunks = build_chunks([source])
+    question = "Give the primary morning PEF numerical results and confidence interval"
+    retrieved = Retriever().retrieve(workspace, question, chunks, [source])
+    fallback = AnswerService().answer_document(workspace, source, question, chunks, retrieved, [])
+    assert "Posted trial outcome records" in fallback.direct_answer
+    packet_chunks = [c for c in fallback.retrieved_chunks if c.section.startswith("Results outcome ")]
+    assert packet_chunks
+    for chunk in packet_chunks:
+        assert chunk.text == normalize(source.metadata["sections"][chunk.section])
+
+
+def test_results_only_record_is_not_dropped_when_protocol_description_missing(monkeypatch):
+    study = json.loads(FIXTURE.read_text())
+    study['protocolSection']['descriptionModule'] = {}
+    original = httpx.AsyncClient
+    monkeypatch.setattr(httpx, 'AsyncClient', lambda **kwargs: original(
+        transport=httpx.MockTransport(lambda request: httpx.Response(200, json={'studies': [study]})), **kwargs))
+    workspace = Workspace(condition='asthma', source_types=[SourceType.clinical_trials])
+    source = asyncio.run(ClinicalTrialsClient().fetch(workspace))[0]
+    assert source.abstract == ''
+    assert sum(c.section.startswith('Results outcome ') for c in build_chunks([source])) == 8
