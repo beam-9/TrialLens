@@ -31,6 +31,7 @@ _SCOPED_GAP = re.compile(
 )
 _QUANTITATIVE_ASK = re.compile(
     r"\b(?:how much|how many|what (?:was|is) (?:the )?(?:number|amount|percentage|percent|rate|effect size|estimate|confidence interval)|"
+    r"(?:give|show|report|provide) (?:me )?(?:the )?statistics|what statistics|numerical results|"
     r"(?:give|report|show|state|include|compare) (?:the )?(?:number|amount|percentage|percent|rate|effect size|estimate|confidence interval)|"
     r"(?:by how much|what percentage|what proportion|confidence interval|effect size|numerical estimate|exact number))\b",
     re.I,
@@ -116,7 +117,8 @@ def feedback_notes(messages: list[dict]) -> list[dict[str, str]]:
     notes: list[dict[str, str]] = []
     records = _source_evidence(payload)
     allowed = set(records)
-    paragraphs = [paragraph.strip() for rendered in draft.paragraphs
+    from triallens.conversation import normalize_citations
+    paragraphs = [normalize_citations(paragraph.strip(), allowed) for rendered in draft.paragraphs
                   for paragraph in re.split(r"\n\s*\n", rendered) if paragraph.strip()]
     marker_citations = {citation for paragraph in paragraphs for citation in _CITATION.findall(paragraph)}
     listed_citations = set(draft.cited_sources)

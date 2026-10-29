@@ -135,3 +135,15 @@ def test_cited_source_must_be_inline_and_rarity_compares_exact_term():
     near_match = messages("Is it rare?", ["The reaction is rare [PubMed:123]."], ["PubMed:123"],
                           "The event occurred frequently in this synthetic source.")
     assert "rarity_word_not_in_cited_context" in codes(near_match)
+
+
+def test_feedback_normalizes_compound_citations_before_unknown_id_check():
+    call = messages("Summarize the findings", ["The result is described in both sources [PubMed:123, PubMed:999]."],
+                    ["PubMed:123", "PubMed:999"])
+    assert "unknown_citation" not in codes(call)
+    assert "paragraph_without_citation" not in codes(call)
+
+
+def test_explicit_give_statistics_question_requests_numbers():
+    call = messages("Please give statistics on the measured score.", ["The measured score improved [PubMed:123]."], ["PubMed:123"])
+    assert "requested_statistic_missing" in codes(call)
