@@ -6,6 +6,8 @@ from urllib.parse import urlencode
 
 import httpx
 
+from triallens.trial_results import parse_outcome_measures
+
 from triallens.models import EvidenceSource, SourceType, Workspace
 from triallens.text import normalize
 
@@ -115,7 +117,8 @@ class ClinicalTrialsClient(SourceClient):
                         ]
                     )
                 )
-                if abstract:
+                result_sections, result_indexing = parse_outcome_measures(study.get("resultsSection"))
+                if abstract or result_sections:
                     records.append(
                         EvidenceSource(
                             workspace_id=workspace.id,
@@ -129,7 +132,9 @@ class ClinicalTrialsClient(SourceClient):
                             metadata={
                                 # Describe this fetched payload and what we indexed,
                                 # never whether results exist elsewhere or later.
-                                "indexed_content": "protocol_descriptions",
+                                "indexed_content": "protocol_and_outcome_measurements" if result_sections else "protocol_descriptions",
+                                "outcome_packet_version": 1 if result_sections else None,
+                                "results_indexing": result_indexing,
                                 "api_results_section_state": (
                                     "absent" if "resultsSection" not in study else
                                     "present" if isinstance(study["resultsSection"], dict) and study["resultsSection"] else
@@ -138,6 +143,7 @@ class ClinicalTrialsClient(SourceClient):
                                 "sections": {
                                     "Brief summary": normalize(description.get("briefSummary", "")),
                                     "Detailed description": normalize(description.get("detailedDescription", "")),
+                                    **result_sections,
                                 }
                             },
                         )

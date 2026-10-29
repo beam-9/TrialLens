@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "purpose": "Frozen public posted-results packet diagnostic, not clinical validation",
+  "public_payload_sha256": "d656239a6a48c91f9f4c4a4561b75f50f939d996a051a862fc2c1cd42207f837",
+  "snapshots": [
+    {
+      "id": "protocol",
+      "path": "protocol.json",
+      "sha256": "5db2801ae6ec64df0dd5ba26f9c24f2ae10e45c86076a0c6281be17d9df1dc35"
+    },
+    {
+      "id": "posted-results",
+      "path": "posted-results.json",
+      "sha256": "ff0dd3dc8105bb3e86c5fa4d67711fd811d906f2a277b5375c3f9b023834789f"
+    }
+  ],
+  "cases": [
+    {
+      "id": "protocol-statistics",
+      "snapshot_id": "protocol",
+      "question": "For FF 50 micrograms once daily versus placebo in this trial, give the primary morning PEF result over 12 weeks, including each group's change, analyzed group sizes and the reported between-group estimate and confidence interval. Explain what the comparison means.",
+      "must_include": [
+        "Scoped gap: protocol description alone does not supply measured primary-outcome results"
+      ],
+      "must_not_claim": [
+        "Planned enrolment is an outcome result",
+        "invented values"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "posted-statistics",
+      "snapshot_id": "posted-results",
+      "question": "For FF 50 micrograms once daily versus placebo in this trial, give the primary morning PEF result over 12 weeks, including each group's change, analyzed group sizes and the reported between-group estimate and confidence interval. Explain what the comparison means.",
+      "must_include": [
+        "FF50 once daily change22.8 vs placebo3.3 L/min",
+        "analyzed n118 vs119",
+        "reported contrast19.5 L/min CI12.1to26.9 at95%",
+        "12-week primary AMPEF outcome",
+        "No class-wide efficacy or superiority to other doses inferred"
+      ],
+      "must_not_claim": [
+        "19.5 is within-group change",
+        "Pooled FF50/100 analysis used for FF50 alone",
+        "CI excludeszero means certainty or probability",
+        "clinical significance invented"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "posted-simplify",
+      "snapshot_id": "posted-results",
+      "history_case_id": "posted-statistics",
+      "question": "Explain that more simply, keeping the key numerical comparison and what it does and does not tell us.",
+      "must_include": [
+        "Same FF50/placebo primary outcome, units and12weeks",
+        "19.5 L/min groupdifference",
+        "Retain relevant uncertainty without claiming other outcomes notmeasured"
+      ],
+      "must_not_claim": [
+        "Universal asthma improvement",
+        "new endpoint",
+        "CI as probability"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "posted-unreported",
+      "snapshot_id": "posted-results",
+      "question": "Do these indexed outcome measurements establish that FF50 reduces the risk of death?",
+      "must_include": [
+        "Not established by supplied outcome measurements",
+        "Source/excerpt scope only"
+      ],
+      "must_not_claim": [
+        "Mortality definitely not measured in entire trial",
+        "Proves mortalitybenefit",
+        "Unrelated prescribing advice"
+      ],
+      "expected_route": "generated"
+    }
+  ]
+}

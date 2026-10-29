@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from triallens.models import Answer, AnswerTraceItem, EvidenceSource, RetrievedChunk, SourceType, Workspace
 from triallens.usage import BudgetUnavailable, UsageLedger
-from triallens.rag import citation_for, document_content_scope
+from triallens.rag import citation_for, document_content_scope, is_outcome_packet
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
 
@@ -208,27 +208,66 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
     if not selected_sources:
         return []
     records = []
-    per_source_budget = 28000 // len(selected_sources)
-    for source in selected_sources:
-        # Keep retrieved passages first, including findings beyond the opening
-        # abstract/label excerpt. Share a total budget across sources rather
-        # than silently overflowing the local model's context window.
-        matches = list(dict.fromkeys(chunk.text for chunk in retrieved_chunks
-                                    if chunk.source_id == source.id
-                                        and chunk.citation == citation_for(source)))[:4]
+    total_remaining = 28000
+    for source_index, source in enumerate(selected_sources):
+        matched = [chunk for chunk in retrieved_chunks
+                   if chunk.source_id == source.id and chunk.citation == citation_for(source)]
+        matches = []
+        atomic = set()
+        omitted_packets = 0
+        for chunk in matched:
+            if is_outcome_packet(source, chunk.section):
+                full_packet = " ".join(source.metadata["sections"][chunk.section].split())
+                from triallens.trial_results import MAX_PACKET_CHARS
+                # Do not send legacy fragments or altered group/value records as
+                # if they were complete submitted result packets.
+                if " ".join(chunk.text.split()) != full_packet or len(chunk.text) > MAX_PACKET_CHARS:
+                    omitted_packets += 1
+                    continue
+                atomic.add(chunk.text)
+            if chunk.text not in matches:
+                matches.append(chunk.text)
+        # Complete outcome packets outrank ordinary excerpts from that record.
+        matches = ([text for text in matches if text in atomic]
+                   + [text for text in matches if text not in atomic])[:4]
+        atomic.intersection_update(matches)
+        remaining_sources = len(selected_sources) - source_index
+        source_budget = total_remaining // remaining_sources
+        # Give a ranked complete outcome room to fit, then share the remaining
+        # global source-text allowance fairly among the other selected sources.
+        if atomic:
+            source_budget = min(total_remaining, max(source_budget, max(map(len, atomic))))
         passages = []
-        remaining = per_source_budget
+        remaining = source_budget
         for match in matches:
-            if not remaining:
-                break
-            passage = match[:remaining]
+            if match in atomic:
+                if len(match) > remaining:
+                    omitted_packets += 1
+                    continue
+                passage = match
+            else:
+                if not remaining:
+                    break
+                passage = match[:remaining]
             passages.append(passage)
             remaining -= len(passage)
         prefix = source.abstract[:min(10000, remaining)]
-        content_truncated = len(prefix) < len(source.abstract) or passages != matches
-        # Avoid sending a passage twice when the allocated prefix contains it.
-        # Deduplication does not lose evidence already present in the prefix.
-        passages = [passage for passage in passages if " ".join(passage.split()) not in " ".join(prefix.split())]
+        # Reclaim duplicate passage space before charging the global budget;
+        # the extended prefix can retain later context rather than wasting room.
+        retained = [passage for passage in passages
+                    if " ".join(passage.split()) not in " ".join(prefix.split())]
+        reclaimed = sum(map(len, passages)) - sum(map(len, retained))
+        prefix = source.abstract[:min(10000, remaining + reclaimed)]
+        passages = retained
+        total_remaining -= sum(map(len, passages)) + len(prefix)
+        normalized_prefix = " ".join(prefix.split())
+        content_truncated = (len(prefix) < len(source.abstract) or bool(omitted_packets)
+                             or any(match not in passages and " ".join(match.split()) not in normalized_prefix
+                                    for match in matches))
+        if source.metadata.get("outcome_packet_version") == 1:
+            packet_count = sum(is_outcome_packet(source, name) for name in source.metadata.get("sections", {}))
+            content_truncated |= packet_count > sum(text in atomic for text in passages)
+            content_truncated |= bool(source.metadata.get("results_indexing", {}).get("truncated"))
         records.append({
             "citation": citation_for(source), "title": source.title[:500],
             "source_type": source.source_type.value,

@@ -210,7 +210,13 @@ def build_chunks(sources: list[EvidenceSource]) -> list[EvidenceChunk]:
         citation = citation_for(source)
         chunk_idx = 1
         for section_label, section_text in section_items:
-            source_chunks = chunk_text(section_text)
+            # Keep submitted outcomes with their arms, denominators and methods.
+            # A partial statistical packet is not a usable independent passage.
+            if is_outcome_packet(source, section_label):
+                from triallens.trial_results import MAX_PACKET_CHARS
+                source_chunks = [section_text] if len(section_text) <= MAX_PACKET_CHARS else []
+            else:
+                source_chunks = chunk_text(section_text)
             for text in source_chunks:
                 section = section_label if len(source_chunks) == 1 else f"{section_label} {chunk_idx}"
                 chunks.append(
@@ -328,6 +334,14 @@ def extract_source_evidence(source: EvidenceSource, workspace: Workspace) -> Evi
         status=source.status,
         phase=source.phase,
     )
+
+
+def is_outcome_packet(source: EvidenceSource, section: str) -> bool:
+    return (source.source_type == SourceType.clinical_trials
+            and source.metadata.get("outcome_packet_version") == 1
+            and section.startswith("Results outcome ")
+            and isinstance(source.metadata.get("sections"), dict)
+            and section in source.metadata["sections"])
 
 
 def source_section_items(source: EvidenceSource) -> list[tuple[str, str]]:
@@ -796,6 +810,17 @@ class AnswerService:
         retrieved: list[RetrievedChunk],
         extractions: list[EvidenceExtraction] | None = None,
     ) -> Answer:
+        if any(chunk.section.startswith("Results outcome ") for chunk in retrieved):
+            # Structured outcomes are kept whole, not interpreted by sentence
+            # extraction. Generation may replace this safe excerpt-mode response.
+            message = ("Posted numerical trial outcomes are indexed for this question. "
+                       "This source-excerpt view does not interpret those statistics; inspect the supporting "
+                       "outcome passages, or try again for a cited conversational explanation.")
+            return Answer(workspace_id=workspace.id, question=question,
+                          short_answer=message, direct_answer=message, evidence=[],
+                          limitations=["No statistical interpretation was generated in this source-excerpt response."],
+                          citations=list(dict.fromkeys(chunk.citation for chunk in retrieved)),
+                          retrieved_chunks=retrieved)
         extraction_answer = answer_from_extractions(workspace, question, extractions or [], retrieved)
         if extraction_answer:
             return extraction_answer
@@ -1118,6 +1143,11 @@ def document_content_scope(source: EvidenceSource) -> str:
     if source.source_type == SourceType.pubmed:
         return "PubMed abstract content stored in TrialLens, not necessarily the full article."
     if source.source_type == SourceType.clinical_trials:
+        if source.metadata.get("outcome_packet_version") == 1:
+            return ("Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. "
+                    "Protocol descriptions are stored separately. This is not the full results record: "
+                    "participant flow, baseline characteristics and adverse-event tables are not indexed; "
+                    "outcome packets may also be omitted from this context because of size or retrieval limits.")
         if source.metadata.get("indexed_content") == "protocol_descriptions":
             return ("Only protocol brief summary/detailed description were indexed from this fetched record; "
                     "structured results tables were not indexed. Results may exist elsewhere.")
@@ -2350,8 +2380,8 @@ def statistics_abstention_answer(
 ) -> Answer:
     topic = topic_text(workspace)
     direct = (
-        f"I did not find quantitative effectiveness statistics for {topic} in the retrieved passages. "
-        "The indexed sources mention relevance, study design, or safety context, but they do not provide usable numerical outcome results for this question."
+        f"I could not identify a usable numerical result for {topic} in the passages selected for this question. "
+        "Other indexed passages or the original sources may contain relevant statistics; this is a gap in the current excerpt response."
     )
     return Answer(
         workspace_id=workspace.id,
@@ -2359,17 +2389,16 @@ def statistics_abstention_answer(
         short_answer=direct,
         direct_answer=direct,
         evidence=[
-            "No retrieved passage contained a usable effectiveness statistic such as a percentage improvement, lesion-count change, response rate, p-value, confidence interval, or comparator result.",
+            "A relevant numerical outcome and its comparison were not identified by this excerpt synthesis.",
             "Try filtering to Literature or Trials, or rebuild the workspace with more result-focused sources if you need numerical efficacy estimates.",
         ],
         supporting_evidence=[],
         safety_limitations=synthesize_safety_limitations("statistics", safety_chunks, retrieved),
         uncertainty=[
-            "ClinicalTrials.gov records often describe planned outcomes without posting numerical results.",
-            "PubMed abstracts may omit detailed statistics that appear only in full text.",
+            "The selected excerpts may omit statistics available elsewhere in the workspace or original sources.",
         ],
         limitations=[
-            "TrialLens does not invent statistics when indexed sources do not contain them.",
+            "This response does not establish that numerical evidence is absent from the workspace or full sources.",
             "It is not medical advice, diagnosis, or treatment guidance.",
         ],
         citations=citations,

@@ -100,8 +100,9 @@ def test_statistics_question_does_not_invent_numbers_from_topical_sources():
         [source],
     )
     answer = AnswerService().answer(workspace, "What statistics back up the effectiveness of azelaic acid on acne?", retrieved)
-    assert "did not find quantitative effectiveness statistics" in answer.direct_answer
-    assert "does not invent statistics" in answer.limitations[0]
+    assert "could not identify a usable numerical result" in answer.direct_answer
+    assert "Other indexed passages" in answer.direct_answer
+    assert "does not establish that numerical evidence is absent" in answer.limitations[0]
 
 
 def test_statistics_question_surfaces_numeric_outcome_passages():
