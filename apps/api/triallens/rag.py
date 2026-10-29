@@ -708,6 +708,30 @@ class Retriever:
         sources: list[EvidenceSource], source_types: list[SourceType] | None = None,
     ) -> list[RetrievedChunk]:
         """Give both sides of benefit/risk questions space in the evidence context."""
+        # Explicit comparisons of evidence roles need each requested role in
+        # context, rather than repeated chunks from a single long source.
+        requested_types = [kind for kind, pattern in (
+            (SourceType.fda_label, r"\b(?:labels?|indications?|contraindications?)\b"),
+            (SourceType.clinical_trials, r"\b(?:registry|registries|protocols?|registered trial|planned (?:work|stud(?:y|ies)))\b|clinicaltrials\.gov"),
+            (SourceType.pubmed, r"\b(?:pubmed|abstracts?|papers?|publications?|published|reviews?)\b"),
+            (SourceType.fda_adverse_event, r"\bfaers\b|adverse[- ]event reports"),
+        ) if re.search(pattern, question, re.I)]
+        if len(requested_types) >= 2:
+            ranked = self.retrieve(workspace, question, chunks, sources, source_types, limit=len(chunks))
+            selected = []
+            seen_sources = set()
+            for kind in requested_types:
+                match = next((chunk for chunk in ranked if chunk.source_type == kind), None)
+                if match is not None:
+                    selected.append(match)
+                    seen_sources.add(match.source_id)
+            for chunk in ranked:
+                if chunk.source_id not in seen_sources:
+                    selected.append(chunk)
+                    seen_sources.add(chunk.source_id)
+                if len(selected) == 8:
+                    break
+            return selected
         benefits = re.search(r"\b(benefits?|effectiveness|efficacy)\b", question, re.I)
         # Broad questions commonly say "benefits and limitations" rather than
         # "benefits and safety". Give both intents space before a long label
