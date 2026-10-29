@@ -26,16 +26,18 @@ def main():
     parser.add_argument('--answers', type=Path, required=True)
     parser.add_argument('--prompt-file', type=Path)
     parser.add_argument('--revision-feedback', action='store_true')
+    parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     args = parser.parse_args()
     load_dotenv(API_ROOT / '.env', override=False)
     experiment = revision_feedback_experiment() if args.revision_feedback else nullcontext()
     # Wrapping restores both the inventory and provider seam even on failures.
-    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment:
+    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment):
         result = cloudflare_run.run(args.output, args.answers, args.case,
             quota_path=API_ROOT / 'data/evaluation-usage.sqlite3',
             prompt_path=args.prompt_file, cases_path=args.cases_file)
     result['quality_experiment'] = {
         'revision_feedback': args.revision_feedback,
+        'model_experiment': args.model_experiment,
         'wrapper_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'feedback_sha256': hashlib.sha256((ROOT / 'revision_feedback.py').read_bytes()).hexdigest(),
         'inventory_path': str(args.inventory),
