@@ -1,0 +1,151 @@
+{
+  "cases": [
+    {
+      "id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "history_case_id": null,
+      "question": "What do these sources directly establish about metformin's intended use and main limitations? Separate label indications and safety information from registry background or planned work, and keep ZITUVIMET claims scoped to that combination product.",
+      "must_include": [
+        "The extended-release label indicates use with diet and exercise to improve glycemic control in adults with type 2 diabetes; it does not quantify the size of benefit.",
+        "If discussing the other tablet label's pediatric indication, preserve age 10 years and older and keep it distinct from the extended-release label.",
+        "The AXOS registry description gives background/rationale and describes a planned add-on study; it is not evidence that the add-on improved outcomes or that the stated rationale was measured in that study.",
+        "The pancreatitis-history statement belongs to the sitagliptin/metformin combination ZITUVIMET, not metformin alone."
+      ],
+      "must_not_claim": [
+        "A quantified glycemic benefit not stated in the label excerpt.",
+        "The AXOS protocol or its background rationale demonstrates that metformin causes gut dysbiosis, low adherence, or downstream complications.",
+        "ZITUVIMET's pancreatitis-history limitation is a metformin-alone contraindication or established metformin risk.",
+        "A population age range broader than the cited label supports."
+      ],
+      "source_role_checks": [
+        {
+          "source_id": "m0-real-source-01",
+          "role": "adult extended-release tablet label"
+        },
+        {
+          "source_id": "m0-real-source-07",
+          "role": "tablet label with pediatric indication from age 10"
+        },
+        {
+          "source_id": "m0-real-source-06",
+          "role": "registry description/background and planned intervention"
+        },
+        {
+          "source_id": "m0-real-source-08",
+          "role": "combination-product label"
+        }
+      ],
+      "critical_error_categories": [
+        "wrong_product_scope",
+        "wrong_population",
+        "protocol_rationale_as_result",
+        "unsupported_benefit_magnitude"
+      ],
+      "rubric": "A concise answer can prioritize the label indication and common limitations. It need not list every source. Score source-role and product-scope accuracy over source count."
+    },
+    {
+      "id": "m0-safety-frequency",
+      "snapshot_id": "standalone-label",
+      "history_case_id": null,
+      "question": "What numerical adverse-reaction information does this label report, and can its postmarketing reports tell us how often liver injury occurs?",
+      "must_include": [
+        "For metformin hydrochloride tablets in the described clinical trial, diarrhea was 53% versus 12% with placebo and nausea/vomiting was 26% versus 8%; the table gives n=141 and n=145, respectively.",
+        "Those percentages belong to the described clinical-trial comparison and should not be generalized as incidence among all users.",
+        "The label says postmarketing reports are voluntary and from a population of uncertain size, so frequency cannot be reliably estimated and causality cannot be established from those reports."
+      ],
+      "must_not_claim": [
+        "A numerical frequency, or a rare/common classification, for postmarketing liver injury.",
+        "That the spontaneous reports establish that metformin caused the reported injury.",
+        "That the 53%/26% tablet-trial percentages apply to every formulation, population, or user."
+      ],
+      "source_role_checks": [
+        {
+          "source_id": "m0-standalone-label-source-1",
+          "role": "standalone tablet label; trial table and postmarketing section are distinct evidence types"
+        }
+      ],
+      "critical_error_categories": [
+        "invented_adverse_event_frequency",
+        "spontaneous_report_causality",
+        "wrong_formulation_or_population"
+      ],
+      "rubric": "Preserve exact comparators, population/formulation, and trial context. Explain the postmarketing frequency limit plainly without padding with unrelated risks."
+    },
+    {
+      "id": "m0-numeric-comparison",
+      "snapshot_id": "numerical",
+      "history_case_id": null,
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+      "must_include": [
+        "240 adults were randomized to intervention A or placebo.",
+        "At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo; the 95% CI was 0.2 to 0.8 percentage points lower.",
+        "The source identifies this as a between-group difference, not a within-group change from baseline.",
+        "The record is a synthetic evaluation fixture and cannot support real-world conclusions."
+      ],
+      "must_not_claim": [
+        "0.5 percent relative change instead of 0.5 percentage points.",
+        "A within-group rise or fall from the between-group endpoint difference.",
+        "That the CI is the probability that the true effect lies in the interval or certainty that benefit is real.",
+        "Effects beyond 12 weeks are established."
+      ],
+      "optional_facts": [
+        "Mortality was not measured."
+      ],
+      "critical_error_categories": [
+        "wrong_number_or_unit",
+        "wrong_comparator_or_timeframe",
+        "baseline_change_inference",
+        "ci_probability_or_certainty"
+      ],
+      "rubric": "Keep the quantitative result in one coherent sentence or pair of sentences. Mortality is optional because the question is about the HbA1c comparison."
+    },
+    {
+      "id": "m0-protocol-versus-results",
+      "snapshot_id": "planned-trial",
+      "history_case_id": null,
+      "question": "What can this registered trial currently tell us about intervention A and mortality? Distinguish the planned comparison and outcome from measured results.",
+      "must_include": [
+        "The synthetic protocol plans to enroll 200 adults and compare intervention A with placebo.",
+        "The planned primary outcome is symptom score at 16 weeks.",
+        "Recruitment has not begun and no results have been posted in this fixture.",
+        "Mortality is not a listed outcome."
+      ],
+      "must_not_claim": [
+        "That intervention A improved, worsened, or had no effect on symptoms or mortality.",
+        "That mortality was measured or is a planned outcome.",
+        "That the protocol proves efficacy or safety."
+      ],
+      "critical_error_categories": [
+        "protocol_as_result",
+        "wrong_outcome_or_status"
+      ],
+      "rubric": "Answer the mortality question directly, then identify the planned symptom outcome and the absence of results. Do not imply an effect estimate exists."
+    },
+    {
+      "id": "m0-simplify-numeric-followup",
+      "snapshot_id": "numerical",
+      "history_case_id": "m0-numeric-comparison",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "must_include": [
+        "Retain adults, placebo, 0.5 percentage points, the 0.2\u20130.8 percentage-point CI, and 12 weeks.",
+        "Keep the meaning as a between-group comparison.",
+        "Keep a concise synthetic/demo qualifier."
+      ],
+      "must_not_claim": [
+        "A within-group baseline change.",
+        "A probability interpretation of the confidence interval.",
+        "That long-term effects were measured or established."
+      ],
+      "optional_facts": [
+        "Mortality was not measured."
+      ],
+      "critical_error_categories": [
+        "wrong_number_or_unit",
+        "followup_contradiction",
+        "ci_probability_or_certainty"
+      ],
+      "rubric": "The follow-up should be shorter and easier to understand than the initial answer while preserving the requested numbers. Do not require an unrelated safety caveat."
+    }
+  ],
+  "source_rubric": "quality-holdout-2026-10-29.json"
+}

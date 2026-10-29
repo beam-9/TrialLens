@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "id": "fresh-trial-versus-review",
+      "snapshot_id": "relevance-probe",
+      "history_case_id": null,
+      "question": "What did the 2024 ATOMIC study compare, and what numerical changes did its abstract report at 16 weeks? Distinguish its combination-treatment results from metformin alone, and keep those trial findings separate from the claims in the older reviews. If the abstract's numerical HbA1c results and its narrative conclusion do not align, state what each says rather than reconciling them by inference.",
+      "must_include": [
+        "The ATOMIC abstract describes 185 adults with type 2 diabetes and dyslipidemia randomized to combination metformin+atorvastatin, metformin alone, or atorvastatin alone.",
+        "Endpoints were percent changes in HbA1c and LDL-C from baseline at the end of treatment; treatment lasted 16 weeks.",
+        "For HbA1c, the abstract reports 0.35% in the combination group versus -0.58% in the atorvastatin group, a reported 0.94% difference with P<0.0001; it also reports increased HbA1c in 62% versus 15%, respectively.",
+        "For LDL-C, the combination group change was -55.20% versus -7.69% with metformin alone, P<0.001. The combination includes atorvastatin, so this comparison does not isolate a metformin-alone effect.",
+        "The abstract's narrative says the combination improved HbA1c versus monotherapies; its reported HbA1c values above do not straightforwardly support that direction, so preserve the mismatch instead of silently resolving it.",
+        "The 2017 review is a review source, not a current guideline check; its long-term comparison statement is specifically about comparisons with newer glucose-lowering drugs."
+      ],
+      "must_not_claim": [
+        "That the combination-group LDL-C change is an effect of metformin alone.",
+        "That the abstract's HbA1c figures show a favorable combination effect by smoothing away the reported values.",
+        "That claims from the 2017 or 2023 reviews are results from the 2024 trial.",
+        "That a 2017 review establishes current treatment recommendations."
+      ],
+      "source_role_checks": [
+        {
+          "source_id": "8e79d185-0840-4071-a15a-56d3061bdabf",
+          "citation": "PubMed:38763510",
+          "role": "2024 randomized combination-therapy trial"
+        },
+        {
+          "source_id": "cf970895-3a75-470e-b983-90b2a9681bac",
+          "citation": "PubMed:28770321",
+          "role": "2017 clinical-use review"
+        },
+        {
+          "source_id": "180fe169-d2a7-4b23-9fca-55563fc671b3",
+          "citation": "PubMed:37397787",
+          "role": "2023 review including preclinical and potential mechanisms"
+        }
+      ],
+      "critical_error_categories": [
+        "combination_as_monotherapy",
+        "wrong_numeric_direction_or_unit",
+        "source_role_conflation",
+        "review_as_current_guideline"
+      ],
+      "rubric": "Prioritize exact trial arms, values, and source-role separation over broad disease-management advice. Do not use general knowledge to settle the abstract's internal tension."
+    }
+  ],
+  "source_rubric": "quality-holdout-2026-10-29.json"
+}
