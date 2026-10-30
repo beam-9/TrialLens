@@ -1235,6 +1235,13 @@ class BriefService:
         current_citations = {citation_for(source) for source in sources}
         if any(citation not in current_citations for answer in saved for citation in answer.citations):
             gaps.append("Some saved answers refer to an earlier source collection; check them before sharing.")
+        from triallens.provenance import source_revision
+        revisions = {citation_for(source): source_revision(source) for source in sources}
+        if any(citation in revisions and digest != revisions[citation]
+               for answer in saved for citation, digest in answer.source_revisions.items()):
+            gaps.append("Some saved answers cite source versions that have since changed; recheck the current sources before sharing.")
+        if any(answer.citations and not answer.source_revisions for answer in saved):
+            gaps.append("Source versions were not tracked for some older saved answers; recheck them against the current evidence.")
         if not saved:
             next_steps.append("Ask a research question, inspect its citations, then save useful answers to this brief.")
         gaps.append("Coverage is limited to stored records; full papers and unpublished evidence may be missing.")

@@ -21,7 +21,9 @@ from triallens.models import (
 )
 from triallens.rag import AnswerService, BriefService, Retriever, build_chunks, build_extractions
 from triallens.sources import fetch_sources
+from triallens.rag import citation_for
 from triallens.store import JsonStore
+from triallens.provenance import source_revision
 from triallens.usage import UsageLedger
 from triallens.performance import AskPerformanceMiddleware, annotate, phase, route_finished
 
@@ -90,10 +92,12 @@ async def ingest_workspace(workspace_id: str) -> dict:
     previous_sources = {(item.source_type, item.external_id): item for item in store.list_sources(workspace_id)}
     previous_rows = {item.source_id: item for item in store.list_extractions(workspace_id)}
     # A transient failure for one provider must not delete its already indexed
-    # evidence while other providers successfully refresh.
+    # evidence while other providers successfully refresh. A reachable
+    # provider returning no matches is also insufficient reason to erase its
+    # prior cohort: other providers may still return records for this refresh.
     retained_kinds = {
         kind for kind in workspace.source_types
-        if diagnostics.get(kind.value) == "unavailable"
+        if diagnostics.get(kind.value) in {"unavailable", "no_matches"}
         and any(source.source_type == kind for source in previous_sources.values())
     }
     sources.extend(source for source in previous_sources.values() if source.source_type in retained_kinds)
@@ -113,10 +117,24 @@ async def ingest_workspace(workspace_id: str) -> dict:
         previous = previous_rows.get(row.source_id)
         if previous and row.source_id in unchanged_ids:
             extractions[index] = previous
+        elif previous and previous.review_status in {"reviewed", "needs_review"}:
+            # Keep reviewer work in the store's archived prior source version,
+            # but never apply corrections made against changed source text to
+            # the newly generated extraction.
+            row.review_status = "needs_review"
+            row.evidence_limitations = list(dict.fromkeys([
+                *row.evidence_limitations,
+                "Prior reviewer annotations were archived with the previous source version and were not applied to this refreshed extraction; recheck them against the current source.",
+            ]))
     store.replace_workspace_evidence(workspace.id, sources, chunks, extractions)
     labels = {"pubmed": "PubMed", "clinical_trials": "ClinicalTrials.gov", "fda_label": "FDA labels", "fda_adverse_event": "FDA adverse-event reports"}
-    workspace.ingestion_warnings = [f"{labels[kind]} could not be retrieved. The indexed evidence is incomplete; try again later." for kind, state in diagnostics.items() if state == "unavailable"]
+    workspace.ingestion_warnings = [
+        f"{labels[kind]} could not be retrieved. The indexed evidence is incomplete; try again later."
+        for kind, state in diagnostics.items() if state == "unavailable"
+    ]
     workspace.ingestion_warnings.extend(
+        f"{labels[kind.value]}: no matching records were returned; previously indexed evidence was kept and may be outdated."
+        if diagnostics.get(kind.value) == "no_matches" else
         f"{labels[kind.value]}: previously indexed evidence was kept and may be outdated because this provider could not be refreshed."
         for kind in workspace.source_types if kind in retained_kinds
     )
@@ -230,6 +248,8 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         selected_sources = [source]
     annotate(retrieved_passage_count=len(retrieved))
     answer = conversation_service.generate(workspace, payload.question, history, selected_sources, answer)
+    answer.source_revisions = {citation_for(item): source_revision(item) for item in selected_sources
+                               if citation_for(item) in answer.citations}
     if scope_reduced:
         answer.generation_note += " Combination-product labels were excluded from this single-ingredient summary."
     try:

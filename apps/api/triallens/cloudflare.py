@@ -101,8 +101,57 @@ def _reject_constant(value):
     raise ValueError("Non-finite JSON constant")
 
 
+def _responses_content(result: dict) -> str:
+    """Accept a single completed final message, excluding all reasoning text."""
+    if (result.get("status") != "completed" or result.get("error")
+            or result.get("incomplete_details") or "choices" in result or "response" in result
+            or "output_text" in result or result.get("object") not in (None, "response")):
+        raise ValueError("Incomplete or ambiguous Responses output")
+    output = result.get("output")
+    if not isinstance(output, list) or not output:
+        raise ValueError("Missing Responses output")
+    messages = []
+    for item in output:
+        if not isinstance(item, dict):
+            raise ValueError("Invalid Responses item")
+        if any(item.get(key) for key in ("error", "refusal", "tool_calls", "function_call", "incomplete_details")):
+            raise ValueError("Not a completed answer")
+        if item.get("type") == "reasoning":
+            if item.get("status") not in (None, "completed"):
+                raise ValueError("Incomplete reasoning item")
+            continue  # Never return, concatenate, log or store reasoning content.
+        if (item.get("type") != "message" or item.get("role") != "assistant"
+                or item.get("status") != "completed"):
+            raise ValueError("Not a completed assistant message")
+        content = item.get("content")
+        if (not isinstance(content, list) or len(content) != 1
+                or not isinstance(content[0], dict) or content[0].get("type") != "output_text"
+                or content[0].get("refusal") or content[0].get("error")
+                or not isinstance(content[0].get("text"), str) or not content[0]["text"].strip()):
+            raise ValueError("Missing final output text")
+        messages.append(content[0]["text"])
+    if len(messages) != 1:
+        raise ValueError("Ambiguous final output")
+    return messages[0]
+
+
+def _responses_usage(usage):
+    if not isinstance(usage, dict):
+        return None
+    normalized = {"prompt_tokens": usage.get("input_tokens"), "completion_tokens": usage.get("output_tokens")}
+    if not _valid_usage(normalized):
+        return None
+    # Conflicting token protocols must not silently reduce the reservation.
+    for key in ("prompt_tokens", "completion_tokens"):
+        if key in usage and (type(usage[key]) is not int or usage[key] != normalized[key]):
+            raise ValueError("Conflicting usage protocols")
+    return normalized
+
+
 def response_content(result: dict):
     """Read only completed assistant output; never expose reasoning/tool fields."""
+    if "output" in result or result.get("object") == "response":
+        return _responses_content(result)
     if "choices" not in result:
         return result.get("response")
     choices = result["choices"]
@@ -144,6 +193,19 @@ def completion(messages: list[dict], schema: dict) -> str:
         # Inactive unless selected by the isolated evaluation allowlist.
         payload["response_format"]["json_schema"] = {"name": "triallens_answer", "strict": True, "schema": schema}
         payload["reasoning_effort"] = "low"
+    if MODEL == "@cf/openai/gpt-oss-120b":
+        # Native /ai/run uses Responses for this gated evaluation candidate.
+        # Keep system instructions separate and preserve ordered conversation turns.
+        if any(not isinstance(item, dict) or item.get("role") not in {"system", "user", "assistant"}
+               or not isinstance(item.get("content"), str) for item in messages):
+            raise CloudflareUnavailable("configuration")
+        payload = {"instructions": "\n\n".join(item["content"] for item in messages if item["role"] == "system"),
+                   "input": [{"role": item["role"], "content": item["content"]}
+                             for item in messages if item["role"] != "system"],
+                   "stream": False, "temperature": 0, "max_output_tokens": MAX_OUTPUT_TOKENS,
+                   "reasoning": {"effort": "low"},
+                   "text": {"format": {"type": "json_schema", "name": "triallens_answer",
+                                       "strict": True, "schema": schema}}}
     identifier = _reserve(payload)
     url = "https://api.cloudflare.com/client/v4/accounts/" + os.environ["CLOUDFLARE_ACCOUNT_ID"] + "/ai/run/" + MODEL
     try:
@@ -167,6 +229,13 @@ def completion(messages: list[dict], schema: dict) -> str:
         if result.get("finish_reason") not in (None, "stop") or result.get("status") in {"incomplete", "failed", "cancelled"}:
             raise ValueError()
         usage = result.get("usage")
+        if MODEL == "@cf/openai/gpt-oss-120b":
+            if "output" not in result:
+                raise ValueError("Expected native Responses output")
+            if (isinstance(usage, dict) and type(usage.get("output_tokens")) is int
+                    and usage["output_tokens"] >= MAX_OUTPUT_TOKENS):
+                raise ValueError("Output cap reached")
+            usage = _responses_usage(usage)
         if isinstance(usage, dict) and type(usage.get("completion_tokens")) is int and usage["completion_tokens"] >= MAX_OUTPUT_TOKENS:
             raise ValueError()
         answer = response_content(result)

@@ -7,9 +7,11 @@ import tempfile
 from functools import wraps
 import re
 from pathlib import Path
+from uuid import uuid4
 
 from triallens.models import Answer, EvidenceBrief, EvidenceChunk, EvidenceExtraction, EvidenceSource, Workspace, utc_now
 from triallens.answer_views import answer_read_view
+from triallens.provenance import source_revision
 
 
 def serialized_write(method):
@@ -84,6 +86,19 @@ class JsonStore:
         extractions: list[EvidenceExtraction] | None = None
     ) -> None:
         data = self._read()
+        old_sources = {sid: item for sid, item in data["sources"].items() if item["workspace_id"] == workspace_id}
+        old_rows = {eid: item for eid, item in data["extractions"].items() if item["workspace_id"] == workspace_id}
+        before = {sid: source_revision(EvidenceSource(**item)) for sid, item in old_sources.items()}
+        after = {source.id: source_revision(source) for source in sources}
+        new_rows = {row.id: row.model_dump(mode="json") for row in extractions or []}
+        if (old_sources or old_rows) and (before != after or old_rows != new_rows):
+            # Archive source text and reviewer-edited rows in the same atomic
+            # transaction as replacement. Saved answer excerpts remain intact.
+            data.setdefault("evidence_revisions", {})[str(uuid4())] = {
+                "workspace_id": workspace_id, "archived_at": utc_now(),
+                "sources": old_sources, "extractions": old_rows,
+                "reason": "Evidence refresh; annotations belong to the archived source version.",
+            }
         data["sources"] = {
             sid: source
             for sid, source in data["sources"].items()
@@ -106,6 +121,10 @@ class JsonStore:
         for extraction in extractions or []:
             data["extractions"][extraction.id] = extraction.model_dump(mode="json")
         self._write(data)
+
+    def list_evidence_revisions(self, workspace_id: str) -> list[dict]:
+        return [item for item in self._read().get("evidence_revisions", {}).values()
+                if item["workspace_id"] == workspace_id]
 
     def list_sources(self, workspace_id: str) -> list[EvidenceSource]:
         return [

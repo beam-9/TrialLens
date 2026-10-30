@@ -122,7 +122,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
               "runner_sha256": benchmark.sha256(Path(__file__)),
               "question_inventory_sha256": benchmark.sha256(cases_path) if cases_path else None,
               "candidate_prompt_sha256": benchmark.sha256(prompt_path) if prompt_path else None,
-              "code_sha256": hashlib.sha256(b"".join((API_ROOT / "triallens" / name).read_bytes() for name in ("cloudflare.py", "conversation.py", "main.py", "performance.py", "rag.py", "store.py", "sources.py", "text.py", "trial_results.py"))).hexdigest(),
+              "code_sha256": hashlib.sha256(b"".join((API_ROOT / "triallens" / name).read_bytes() for name in ("cloudflare.py", "conversation.py", "main.py", "performance.py", "rag.py", "store.py", "sources.py", "text.py", "trial_results.py", "provenance.py", "models.py"))).hexdigest(),
               "model_rates": {"input_micro_neurons_per_token": cloudflare.INPUT_RATE,
                               "output_micro_neurons_per_token": cloudflare.OUTPUT_RATE,
                               "max_output_tokens": cloudflare.MAX_OUTPUT_TOKENS},
@@ -145,7 +145,13 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
             raise RuntimeError("Evaluation blocked unexpected provider destination")
         # This seam runs only with a hash-checked public frozen store. Capture
         # the exact evidence/history object sent, never URL/auth/header values.
-        context_text = kwargs["json"]["messages"][1]["content"]
+        request_messages = kwargs["json"].get("messages", kwargs["json"].get("input"))
+        if not isinstance(request_messages, list):
+            raise RuntimeError("Evaluation expected ordered message input")
+        source_message = next((item for item in request_messages if item.get("role") == "user"), None)
+        if source_message is None or not isinstance(source_message.get("content"), str):
+            raise RuntimeError("Evaluation expected a source-context user message")
+        context_text = source_message["content"]
         context_digest = hashlib.sha256(context_text.encode("utf-8")).hexdigest()
         if not case_context:
             case_context.update(value=json.loads(context_text), sha256=context_digest)
@@ -165,7 +171,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                                  "verified_selection": json.loads(kwargs["json"]["messages"][2]["content"])
                                                        if strategy == "verified-quotes" and len(kwargs["json"]["messages"]) == 4 else None,
                                  "generation_context_sha256": context_digest,
-                                 "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "chat_template_kwargs", "reasoning_effort") if key in kwargs["json"]},
+                                 "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "max_output_tokens", "chat_template_kwargs", "reasoning_effort", "reasoning") if key in kwargs["json"]},
                                  "response_shape": {"result_keys": sorted(candidate),
                                                     "finish_reason": candidate.get("finish_reason"),
                                                     "status": candidate.get("status"),

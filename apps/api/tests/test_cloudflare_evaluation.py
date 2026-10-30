@@ -261,3 +261,31 @@ def test_claim_review_strategy_keeps_existing_final_validation(configured, monke
         assert trace["fallback_reason"] == "validation_rejection"
     saved = json.loads((tmp_path / "answers").read_text())[0]["answer"]
     assert "reviews" not in saved["direct_answer"]
+
+
+def test_native_responses_evaluation_captures_same_source_context_without_reasoning(configured, monkeypatch, tmp_path):
+    from triallens import conversation
+    calls = []
+    def post(url, **kwargs):
+        payload = kwargs['json']
+        calls.append(payload)
+        assert 'input' in payload and 'messages' not in payload
+        assert payload['reasoning'] == {'effort': 'low'}
+        final = {'paragraphs': ['In this demo trial, the adult groups differed by 0.5 percentage points at 12 weeks [PubMed:EVAL-NUMBERS].'],
+                 'cited_sources': ['PubMed:EVAL-NUMBERS'], 'uncertainty': []}
+        return httpx.Response(200, request=httpx.Request('POST', url), json={'success': True, 'result': {
+            'object': 'response', 'status': 'completed', 'output': [
+                {'type': 'reasoning', 'summary': [{'text': 'INTERNAL_REASONING_DO_NOT_EXPOSE'}]},
+                {'type': 'message', 'role': 'assistant', 'status': 'completed',
+                 'content': [{'type': 'output_text', 'text': json.dumps(final)}]}],
+            'usage': {'input_tokens': 900, 'output_tokens': 100}}})
+    monkeypatch.setattr(conversation.httpx, 'post', post)
+    with runner.candidate_model('@cf/openai/gpt-oss-120b'):
+        result = runner.run(tmp_path / 'metrics', tmp_path / 'answers', ['numerical-hba1c'])
+    assert result['complete'] and result['summary']['model_answers'] == 1
+    assert len(calls) == 2
+    output = (tmp_path / 'answers').read_text()
+    assert 'INTERNAL_REASONING_DO_NOT_EXPOSE' not in output
+    answer = json.loads(output)[0]
+    assert answer['generation_context']['evidence'][0]['citation'] == 'PubMed:EVAL-NUMBERS'
+    assert answer['provider_outputs'][1]['request_options']['reasoning'] == {'effort': 'low'}

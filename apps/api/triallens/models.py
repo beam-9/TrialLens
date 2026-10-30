@@ -170,6 +170,7 @@ class Answer(BaseModel):
     generation_mode: Literal["extractive", "conversational"] = "extractive"
     generation_note: str = ""
     saved_to_brief: bool = False
+    source_revisions: dict[str, str] = Field(default_factory=dict)
     short_answer: str
     direct_answer: str = ""
     evidence_map: list[str] = Field(default_factory=list)
