@@ -114,7 +114,11 @@ def feedback_notes(messages: list[dict]) -> list[dict[str, str]]:
     if not isinstance(payload, dict):
         return [_compact_note("invalid_revision_context", "The evidence payload was not a JSON object; use only supplied evidence.")]
 
+    from triallens.answer_checks import confidence_interval_issue
     notes: list[dict[str, str]] = []
+    issue = confidence_interval_issue(" ".join([*draft.paragraphs, *draft.uncertainty]))
+    if issue:
+        notes.append(_compact_note("confidence_interval_misinterpretation", issue))
     records = _source_evidence(payload)
     allowed = set(records)
     from triallens.conversation import normalize_citations

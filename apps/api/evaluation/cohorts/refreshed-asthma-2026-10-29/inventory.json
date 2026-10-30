@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "purpose": "Public refreshed-source diagnostic, separate from frozen M0; not clinical validation",
+  "snapshots": [
+    {
+      "id": "refreshed-asthma-public",
+      "path": "snapshot.json",
+      "sha256": "1ac7eb096fecd700138af59e04da79011be0a66cd0df7601d7defed37de076e5"
+    }
+  ],
+  "cases": [
+    {
+      "id": "asthma-broad",
+      "snapshot_id": "refreshed-asthma-public",
+      "question": "What do these sources show about the benefits and limitations of inhaled corticosteroids for asthma? Include useful reported numbers where relevant.",
+      "must_include": [
+        "Distinguish relevant ICS evidence from add-on montelukast findings",
+        "Explain relevant reported benefits and limitations with source scopes"
+      ],
+      "must_not_claim": [
+        "Montelukast before-after result proves an ICS effect",
+        "Older abstract is verified current guideline"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "asthma-trial-statistics",
+      "snapshot_id": "refreshed-asthma-public",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "source_types": [
+        "clinical_trials"
+      ],
+      "must_include": [
+        "Singulair/montelukast studied, not isolated randomized ICS comparison",
+        "Baseline uncontrolled 312 of 313, controlled 0, one missing",
+        "Week 8 uncontrolled 72 and controlled 229, each out of 301",
+        "Denominators differ; before-after does not establish causal attribution"
+      ],
+      "must_not_claim": [
+        "Change caused by inhaled corticosteroids",
+        "Calculated percentages presented as reported"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "asthma-trial-followup",
+      "snapshot_id": "refreshed-asthma-public",
+      "history_case_id": "asthma-trial-statistics",
+      "question": "Explain that more simply. Keep the key numbers and the main limitation.",
+      "source_types": [
+        "clinical_trials"
+      ],
+      "must_include": [
+        "Retain treatment attribution and baseline/week8 counts with denominators",
+        "Retain before-after causal limitation"
+      ],
+      "must_not_claim": [
+        "Randomized placebo benefit for ICS",
+        "Baseline and week8 denominators treated as identical"
+      ],
+      "expected_route": "generated"
+    }
+  ]
+}

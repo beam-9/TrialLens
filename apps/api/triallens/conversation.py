@@ -15,6 +15,7 @@ from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope, is_outcome_packet
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
+from triallens.answer_checks import confidence_interval_issue
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
 Answer the latest question directly in natural, plain English. Usually use 2–4 short
@@ -429,6 +430,10 @@ class ConversationService:
                     direct = ("I couldn't verify a sourced answer to that question from these excerpts. "
                               "Try narrowing it to a specific outcome, population, or study.")
                     generated.uncertainty = []
+                # Reject a known high-risk statistical misinterpretation even
+                # when its citation and JSON shape are otherwise valid.
+                if confidence_interval_issue(direct + " " + " ".join(generated.uncertainty)):
+                    raise ValueError("Invalid confidence-interval interpretation")
                 # Catch excerpt-dumping; short technical phrases and numerical results are allowed.
                 normalized = re.sub(r"\W+", " ", re.sub(r"\[[^\]]+\]", "", direct).lower()).split()
                 source_text = [re.sub(r"\W+", " ", text.lower()) for r in records

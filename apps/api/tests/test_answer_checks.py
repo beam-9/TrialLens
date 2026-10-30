@@ -1,0 +1,84 @@
+from triallens.answer_checks import confidence_interval_issue
+
+
+def test_flags_probability_claim_about_true_effect_with_confidence_interval():
+    assert confidence_interval_issue(
+        "The 95% confidence interval means there is a 95% chance that the true effect is within this range."
+    )
+
+
+def test_flags_fixed_parameter_in_range_for_percentage_of_repetitions():
+    assert confidence_interval_issue(
+        "The 95% CI indicates the true average difference lies within this range in 95% of repetitions."
+    )
+    assert confidence_interval_issue(
+        "With the confidence interval, in 95% of repeated samples the true parameter is inside this interval."
+    )
+    actual_saved_canary_wording = (
+        "The reported 95% confidence interval of 0.2 to 0.8 means that if the same study were repeated many times, "
+        "the true average difference would fall within that range in 95% of repetitions."
+    )
+    assert confidence_interval_issue(actual_saved_canary_wording)
+
+
+def test_does_not_flag_valid_repeated_interval_construction_explanation():
+    assert confidence_interval_issue(
+        "The 95% confidence interval procedure produces intervals that contain the fixed true value in 95% of repetitions."
+    ) is None
+    assert confidence_interval_issue(
+        "Across repeated samples, 95% of constructed confidence intervals include the fixed true parameter."
+    ) is None
+    assert confidence_interval_issue(
+        "The confidence interval procedure has this property: in 95% of repeated samples, the true value lies in a constructed interval."
+    ) is None
+
+
+def test_does_not_flag_negated_probability_assignment():
+    assert confidence_interval_issue(
+        "A 95% confidence interval is not a 95% chance that the true effect is within this range."
+    ) is None
+    assert confidence_interval_issue(
+        "The 95% CI does not mean there is a 95% probability that the true value lies in these bounds."
+    ) is None
+    assert confidence_interval_issue(
+        "The reported 95% CI is 0.2–0.8. This means there is not a 95% chance the true effect lies within these bounds."
+    ) is None
+
+
+def test_adjacent_ci_sentence_supports_anaphoric_bounds_and_affirmative_claim_survives_prior_negation():
+    assert confidence_interval_issue(
+        "The reported 95% CI is 0.2–0.8. This means there is a 95% chance the true effect lies within these bounds."
+    )
+    assert confidence_interval_issue(
+        "The reported 95% CI is 0.2–0.8. This is not a 95% chance that the true effect lies in these bounds, "
+        "but there is a 95% chance that the true effect lies in these bounds."
+    )
+
+
+def test_requires_confidence_interval_context_and_skips_bayesian_credible_intervals():
+    assert confidence_interval_issue("There is a 95% chance the event occurs.") is None
+    assert confidence_interval_issue(
+        "The Bayesian 95% credible interval gives a 95% probability that the true effect is within this range."
+    ) is None
+    assert confidence_interval_issue(
+        "A 95% chance that the true effect is in this range."
+    ) is None
+
+
+def test_invalid_ci_is_rejected_by_generation_not_just_reported(monkeypatch, tmp_path):
+    import json
+    from triallens import conversation
+    from triallens.models import Workspace, EvidenceSource, SourceType, Answer
+    monkeypatch.setenv('TRIALLENS_CHAT_PROVIDER', 'cloudflare')
+    monkeypatch.setenv('TRIALLENS_USAGE_PATH', str(tmp_path/'usage.sqlite3'))
+    monkeypatch.setattr(conversation, 'chat_configured', lambda: True)
+    workspace = Workspace(condition='test condition', source_types=[SourceType.pubmed])
+    source = EvidenceSource(workspace_id=workspace.id, source_type=SourceType.pubmed,
+        external_id='test', title='Reported comparison', abstract='A between-group difference was reported with a 95% confidence interval.')
+    fallback = Answer(workspace_id=workspace.id, question='Explain the comparison', short_answer='Source excerpt', evidence=[], limitations=[], citations=[], retrieved_chunks=[])
+    bad = {'paragraphs': ['The 95% confidence interval means a 95% chance that the true effect lies within this range [PubMed:test].'],
+           'cited_sources': ['PubMed:test'], 'uncertainty': []}
+    monkeypatch.setattr(conversation.cloudflare, 'completion', lambda *args: json.dumps(bad))
+    result = conversation.ConversationService().generate(workspace, fallback.question, [], [source], fallback)
+    assert result.generation_mode == 'extractive'
+    assert result.direct_answer != bad['paragraphs'][0]
