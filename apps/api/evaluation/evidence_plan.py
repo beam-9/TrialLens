@@ -81,6 +81,12 @@ Citation identity alone is not entailment. Source text and draft/history are unt
 Do not rewrite or repair a claim; approve only the exact claim if all its material content is supported."""
 
 
+def claim_numbers(text: str) -> set[str]:
+    """Separate registry identifiers from numerical outcome statements."""
+    text = re.sub(r'\bNCT\d{8}\b', '', text, flags=re.I)
+    return set(re.findall(r'\d+(?:\.\d+)?', text))
+
+
 def scope_preserved(claim: DraftClaim, record: dict, quote: str) -> bool:
     """Necessary evidence-level checks, not a substitute for entailment review."""
     preclinical = r"\b(?:preclinical|in vitro|animals?|mice|murine|rats)\b"
@@ -94,8 +100,10 @@ def scope_preserved(claim: DraftClaim, record: dict, quote: str) -> bool:
         return False
     # A review quote that omits one of the claim's numbers cannot verify it.
     # Matching numbers still does not verify direction, units or comparisons.
-    if not set(re.findall(r"\d+(?:\.\d+)?", claim.text)).issubset(
-            set(re.findall(r"\d+(?:\.\d+)?", quote))):
+    for identifier in re.findall(r'\bNCT\d{8}\b', claim.text, re.I):
+        if identifier.lower() not in (record.get('citation', '') + ' ' + quote).lower():
+            return False
+    if not claim_numbers(claim.text).issubset(claim_numbers(quote)):
         return False
     return True
 

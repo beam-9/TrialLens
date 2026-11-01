@@ -303,3 +303,25 @@ def test_strategy_restores_completion_after_provider_exception(monkeypatch):
         with claim_review.repaired_claims_experiment():
             claim_review.cloudflare.completion(request_messages(), {})
     assert claim_review.cloudflare.completion is original
+
+
+def test_registry_identity_is_separate_from_outcome_numbers():
+    context = {'evidence': [{'citation': 'ClinicalTrials.gov:NCT00545844',
+        'text': 'At baseline 313 participants were assessed and 301 completed week 8 asthma control assessments.',
+        'matched_passages': []}]}
+    sentence = 'In NCT00545844, 313 participants were assessed at baseline and 301 completed week 8.'
+    original = draft(claim(sentence, citation='ClinicalTrials.gov:NCT00545844'))
+    content = review(item(text=sentence, quotes=[context['evidence'][0]['text']]))
+    assert claim_review.render_repaired(original, content, context)['paragraphs']
+    wrong = sentence.replace('NCT00545844', 'NCT99999999')
+    with pytest.raises(ValueError):
+        claim_review.render_repaired(original, review(item(text=wrong, quotes=[context['evidence'][0]['text']])), context)
+
+
+def test_feedback_identifies_unreported_percentages_without_treating_id_as_statistic():
+    context = {'evidence': [{'citation': 'ClinicalTrials.gov:NCT00545844',
+        'text': 'At baseline, 312 of 313 participants were uncontrolled and at week 8, 72 of 301 were uncontrolled.',
+        'matched_passages': []}]}
+    original = draft(claim('In NCT00545844, 312 of 313 participants (99.7%) were uncontrolled.', citation='ClinicalTrials.gov:NCT00545844'))
+    notes = claim_review.draft_feedback(original, context)
+    assert notes[0]['numbers_not_present_in_source'] == ['99.7']
