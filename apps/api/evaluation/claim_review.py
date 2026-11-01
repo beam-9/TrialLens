@@ -13,6 +13,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 from triallens import cloudflare
+from triallens.trial_design import render_registry_design
 from evidence_plan import ClaimDraft, claim_numbers, scope_preserved
 
 
@@ -128,7 +129,8 @@ def passage_index(draft: ClaimDraft, payload: dict) -> dict[str, dict]:
         def score(quote):
             shared = terms.intersection(re.findall(r'\w+(?:\.\d+)?', quote.lower()))
             return sum(3 if term[0].isdigit() else 1 for term in shared)
-        candidates = list(dict.fromkeys(quote for text in [record['text'], *record.get('matched_passages', [])]
+        candidates = list(dict.fromkeys(quote for text in [record['text'], *record.get('matched_passages', []),
+                                                          render_registry_design(record.get('registry_design'))]
                                         for quote in _windows(text)))
         for field in ('status', 'phase'):
             if isinstance(record.get(field), str) and record[field]:
@@ -164,7 +166,7 @@ def draft_feedback(draft: ClaimDraft, payload: dict) -> list[dict]:
         record = records.get(claim.citation)
         if record is None:
             continue
-        text = '\n'.join([record['text'], *record.get('matched_passages', [])])
+        text = '\n'.join([record['text'], *record.get('matched_passages', []), render_registry_design(record.get('registry_design'))])
         missing = sorted(claim_numbers(claim.text) - claim_numbers(text))
         units_conflict = _unit_conflict(claim.text, text)
         if missing or units_conflict:
@@ -210,7 +212,7 @@ def render_repaired(draft: ClaimDraft, content: str, payload: dict) -> dict:
             continue
         if any(not isinstance(quote, str) or not quote.strip() or len(quote) > 900 for quote in item.quotes):
             continue
-        texts = [record['text'], *record.get('matched_passages', [])]
+        texts = [record['text'], *record.get('matched_passages', []), render_registry_design(record.get('registry_design'))]
         if not all((len(quote) >= 30 and any(quote in source for source in texts))
                    or quote in [record.get('status'), record.get('phase')] for quote in item.quotes):
             continue

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "purpose": "Paired design availability diagnostic; not clinical validation or M0 replacement",
+  "public_payload_sha256": "8cb7b3d3c682018993c553730398d3fe23ad0e142dcff99f21334c4bdfeec5c4",
+  "snapshots": [
+    {
+      "id": "without-design",
+      "path": "without-design.json",
+      "sha256": "c1f22a732ded7b11bdd95dcef93e8b3f61a3ad880734a1de1b194a0722e93f28"
+    },
+    {
+      "id": "with-design",
+      "path": "with-design.json",
+      "sha256": "fd599a9c0502739eb62a1e88eff2b84ac3f5adfef8bb6b0b7b11f8fe82612486"
+    }
+  ],
+  "cases": [
+    {
+      "id": "without-design-statistics",
+      "snapshot_id": "without-design",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "must_include": [
+        "Baseline uncontrolled312/313, controlled0, missing1; week8 uncontrolled72/301, controlled229, missing0",
+        "Montelukast add-on, not an isolated ICS effect",
+        "Different denominators and visit comparison; design claims require explicit design evidence"
+      ],
+      "must_not_claim": [
+        "ACQ pvalue applies to categorical counts",
+        "Calculated percentages are reported values",
+        "Source-wide control absence without explicit design"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "without-design-followup",
+      "snapshot_id": "without-design",
+      "history_case_id": "without-design-statistics",
+      "question": "Explain that more simply. Keep the key numbers and the main limitation.",
+      "must_include": [
+        "Same counts/denominators",
+        "Treatment and comparison limitation",
+        "Simpler than prior answer"
+      ],
+      "must_not_claim": [
+        "Invented percentages",
+        "Causal proof",
+        "Drop key numbers or limitation"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "with-design-statistics",
+      "snapshot_id": "with-design",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "must_include": [
+        "Baseline uncontrolled312/313, controlled0, missing1; week8 uncontrolled72/301, controlled229, missing0",
+        "Montelukast add-on, not an isolated ICS effect",
+        "Different denominators and visit comparison; design claims require explicit design evidence"
+      ],
+      "must_not_claim": [
+        "ACQ pvalue applies to categorical counts",
+        "Calculated percentages are reported values",
+        "Source-wide control absence without explicit design"
+      ],
+      "expected_route": "generated"
+    },
+    {
+      "id": "with-design-followup",
+      "snapshot_id": "with-design",
+      "history_case_id": "with-design-statistics",
+      "question": "Explain that more simply. Keep the key numbers and the main limitation.",
+      "must_include": [
+        "Same counts/denominators",
+        "Treatment and comparison limitation",
+        "Simpler than prior answer"
+      ],
+      "must_not_claim": [
+        "Invented percentages",
+        "Causal proof",
+        "Drop key numbers or limitation"
+      ],
+      "expected_route": "generated"
+    }
+  ]
+}

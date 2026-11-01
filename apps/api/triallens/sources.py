@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import httpx
 
 from triallens.trial_results import parse_outcome_measures
+from triallens.trial_design import parse_registry_design, render_registry_design
 
 from triallens.models import EvidenceSource, SourceType, Workspace
 from triallens.text import normalize
@@ -118,6 +119,8 @@ class ClinicalTrialsClient(SourceClient):
                     )
                 )
                 result_sections, result_indexing = parse_outcome_measures(study.get("resultsSection"))
+                registry_design = parse_registry_design(design)
+                rendered_design = render_registry_design(registry_design)
                 if abstract or result_sections:
                     records.append(
                         EvidenceSource(
@@ -140,9 +143,11 @@ class ClinicalTrialsClient(SourceClient):
                                     "present" if isinstance(study["resultsSection"], dict) and study["resultsSection"] else
                                     "empty" if study["resultsSection"] == {} else "unrecognized"
                                 ),
+                                "registry_design": registry_design,
                                 "sections": {
                                     "Brief summary": normalize(description.get("briefSummary", "")),
                                     "Detailed description": normalize(description.get("detailedDescription", "")),
+                                    **({"Study design": rendered_design} if rendered_design else {}),
                                     **result_sections,
                                 }
                             },

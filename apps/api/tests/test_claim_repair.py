@@ -325,3 +325,15 @@ def test_feedback_identifies_unreported_percentages_without_treating_id_as_stati
     original = draft(claim('In NCT00545844, 312 of 313 participants (99.7%) were uncontrolled.', citation='ClinicalTrials.gov:NCT00545844'))
     notes = claim_review.draft_feedback(original, context)
     assert notes[0]['numbers_not_present_in_source'] == ['99.7']
+
+
+def test_explicit_registry_design_is_indexed_as_same_source_support():
+    context = {'question': 'What design was used?', 'evidence': [{
+        'citation': 'ClinicalTrials.gov:NCT00545844', 'text': 'Effectiveness of adding treatment in adults.',
+        'matched_passages': [], 'registry_design': {'allocation': 'NON_RANDOMIZED', 'intervention_model': 'SINGLE_GROUP'}}]}
+    sentence = 'The registry reports NON_RANDOMIZED allocation and a SINGLE_GROUP intervention model.'
+    original = draft(claim(sentence, citation='ClinicalTrials.gov:NCT00545844'))
+    index = claim_review.passage_index(original, context)
+    key = next(key for key,value in index.items() if 'Allocation:' in value['text'])
+    expanded = claim_review.expand_review(review(item(text=sentence, quotes=[key])), original, index)
+    assert claim_review.render_repaired(original, expanded, context)['paragraphs']

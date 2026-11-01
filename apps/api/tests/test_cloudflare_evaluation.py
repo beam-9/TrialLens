@@ -329,3 +329,25 @@ def test_claim_repair_http_path_preserves_guards_and_isolation(configured, monke
         assert '999' not in saved['answer']['direct_answer'] and '0.5' in saved['answer']['direct_answer']
     else:
         assert trace['fallback_reason'] == 'validation_rejection'
+
+
+def test_native_claim_repair_captures_support_index(configured, monkeypatch, tmp_path):
+    from triallens import conversation
+    calls = []
+    def post(url, **kwargs):
+        request = kwargs['json']
+        calls.append(request)
+        source = json.loads(request['input'][0]['content'])['evidence'][0]
+        text = 'In this synthetic trial of 240 adults, HbA1c was 0.5 percentage points lower with intervention A than placebo after 12 weeks.'
+        content = ({'claims': [{'text': text, 'citation': source['citation'], 'paragraph': 0}]} if len(calls) == 1 else
+                   {'reviews': [{'index': 0, 'verdict': 'supported', 'text': text, 'quotes': ['S0P0']}]})
+        return httpx.Response(200, request=httpx.Request('POST', url), json={'success': True, 'result': {
+            'object': 'response', 'status': 'completed', 'output': [{'type': 'message', 'role': 'assistant', 'status': 'completed',
+                'content': [{'type': 'output_text', 'text': json.dumps(content)}]}], 'usage': {'input_tokens': 900, 'output_tokens': 100}}})
+    monkeypatch.setattr(conversation.httpx, 'post', post)
+    with runner.candidate_model('@cf/openai/gpt-oss-120b'):
+        result = runner.run(tmp_path/'metrics', tmp_path/'answers', ['numerical-hba1c'], strategy='repaired-claims')
+    assert result['isolation_verified'] and result['summary']['model_answers'] == 1
+    saved = json.loads((tmp_path/'answers').read_text())[0]
+    assert saved['provider_outputs'][1]['claim_support_index']['S0P0']['text'] == saved['generation_context']['evidence'][0]['text']
+    assert len(calls) == 2

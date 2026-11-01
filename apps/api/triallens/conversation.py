@@ -16,6 +16,7 @@ from triallens.rag import citation_for, document_content_scope, is_outcome_packe
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
 from triallens.answer_checks import confidence_interval_issue
+from triallens.trial_design import sanitize_design_fields
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
 Answer the latest question directly in natural, plain English. Usually use 2–4 short
@@ -271,6 +272,9 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
             content_truncated |= bool(source.metadata.get("results_indexing", {}).get("truncated"))
         records.append({
             "citation": citation_for(source), "title": source.title[:500],
+            **({"registry_design": sanitize_design_fields(source.metadata.get("registry_design")),
+                "registry_design_scope": "Reported registry design metadata, not measured results. Registered enrollment is not necessarily an outcome's analyzed denominator."}
+               if source.source_type == SourceType.clinical_trials and sanitize_design_fields(source.metadata.get("registry_design")) else {}),
             "source_type": source.source_type.value,
             "publication_types": [value[:120] for value in source.metadata.get("publication_types", [])
                                   if isinstance(value, str) and value.strip()][:12]

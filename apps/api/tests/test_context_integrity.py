@@ -103,3 +103,21 @@ def test_context_exposes_section_names_without_treating_them_as_results(monkeypa
         assert "benefits are protocol claims, not observed effects" in record["content_scope"]
         assert record["status"] == "COMPLETED"
         assert record["text"] == source.abstract
+
+
+def test_registry_design_is_available_without_a_matched_design_chunk():
+    from triallens.conversation import build_evidence_records
+    source = EvidenceSource(workspace_id='design-context', source_type=SourceType.clinical_trials,
+        external_id='NCT00545844', title='Trial', abstract='Effectiveness of add-on treatment.',
+        metadata={'registry_design': {'study_type': 'INTERVENTIONAL', 'allocation': 'NON_RANDOMIZED',
+            'intervention_model': 'SINGLE_GROUP', 'enrollment_count': 313, 'enrollment_type': 'ACTUAL',
+            'invented': 'must not reach model'}})
+    record = build_evidence_records([source], [])[0]
+    assert record['citation'] == 'ClinicalTrials.gov:NCT00545844'
+    assert record['registry_design']['allocation'] == 'NON_RANDOMIZED'
+    assert record['registry_design']['intervention_model'] == 'SINGLE_GROUP'
+    assert record['registry_design']['enrollment_count'] == 313
+    assert 'invented' not in record['registry_design']
+    assert 'not necessarily' in record['registry_design_scope']
+    assert record['matched_passages'] == []
+    assert record['text'] == source.abstract
