@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": "repaired-claims",
+  "strategy_sha256": "a234c35fc724ca05f8f5785353a6fba4b38e5d195f1e2a931b7b7de5c6d463f5",
+  "claim_repair_sha256": "21ce712d16d02eac6b9f1bef87cb73e28c09a1f0bd31f39a917e41a168c5b1db",
+  "fixture_inventory_sha256": "d5f3b36c439a0efbd2c6b9f404472fb8f613aa84e66e27a4b751254ff4de7c1a",
+  "runner_sha256": "ae6d77622b3dd776a9511f0b08bfbb2f25015dac63dbb69504d5247e7c1ac9f4",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "459874a06000282204a0a211e7562ff44028ebb3e5f7f3c588027028a9185492",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent drafting/claim review",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "asthma-trial-statistics",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 13069.459166999999,
+      "trace": {
+        "trace_id": "b5ea6c7e-d444-4911-981e-763c47f71218",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 9245,
+        "phases_ms": {
+          "storage_read": 2.530375,
+          "retrieval": 15.470333,
+          "extractive_synthesis": 0.075042,
+          "context_build": 0.32225,
+          "draft": 7497.519958,
+          "revision": 5536.493875,
+          "validation": 1.071791,
+          "store": 5.328167
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 14902,
+            "message_count": 2,
+            "serialized_messages_char_count": 15160,
+            "wall_ms": 7497.519958,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3156,
+            "eval_count": 186,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 17893,
+            "message_count": 4,
+            "serialized_messages_char_count": 18275,
+            "wall_ms": 5536.493875,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7163,
+            "eval_count": 203,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 13066.56875,
+        "serialization_ms": 0.693084
+      }
+    },
+    {
+      "case_id": "asthma-trial-followup",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 11992.46975,
+      "trace": {
+        "trace_id": "9969d611-576b-4704-a908-a230a4c6b88a",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 8829,
+        "phases_ms": {
+          "storage_read": 4.4545,
+          "retrieval": 12.468834,
+          "extractive_synthesis": 0.064875,
+          "context_build": 0.366417,
+          "draft": 5276.65325,
+          "revision": 6687.267458,
+          "validation": 0.627208,
+          "store": 6.536292
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 15283,
+            "message_count": 2,
+            "serialized_messages_char_count": 15557,
+            "wall_ms": 5276.65325,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3236,
+            "eval_count": 181,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 18140,
+            "message_count": 4,
+            "serialized_messages_char_count": 18538,
+            "wall_ms": 6687.267458,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6741,
+            "eval_count": 198,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 11991.414833,
+        "serialization_ms": 0.620583
+      }
+    }
+  ],
+  "summary": {
+    "n": 2,
+    "model_answers": 2,
+    "model_answer_p50_ms": 11991.414833,
+    "model_answer_p95_ms": 13066.56875,
+    "result_counts": {
+      "model_answer": 2
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 1644.340178,
+    "remaining_neurons": 7355.659822,
+    "pending_requests": 1,
+    "requests": 25
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "strategy_experiment": "repaired-claims",
+    "model_experiment": "@cf/zai-org/glm-4.7-flash",
+    "reasoning_effort": null,
+    "wrapper_sha256": "3c2e19fb34d0b68f6ffc0700695c2f856240fa248bacc011d1f9996e5941a152",
+    "feedback_sha256": "71eb1deba185e579fda8209ad589c13c8204e53854e235ec4bcb522999bcc0c6",
+    "inventory_path": "evaluation/cohorts/refreshed-asthma-2026-10-29/inventory.json"
+  }
+}

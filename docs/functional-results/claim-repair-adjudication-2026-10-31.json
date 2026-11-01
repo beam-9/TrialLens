@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "method": "Engineering review of final direct_answer and exact generation_context, with raw draft/review and same-source support index where captured. Not clinical validation or a calibrated general accuracy score. Displayed fallbacks are not credited as quality answers.",
+  "runs": [
+    {
+      "name": "claim-repair-canary",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-canary-2026-10-31.json",
+      "answers_sha256": "ac28274d87643c80884f61f06ff3821e24da690b3f74a3fd98c7d51aacb9037d",
+      "metrics_path": "docs/performance/results/claim-repair-canary-2026-10-31.json",
+      "metrics_sha256": "58a8c4842639ae8243c1d84059f1a82efc3e4163be67975c6f3168140b77aa00",
+      "isolation_verified": true,
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "median_wall_s": 19.293,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "display_mode": "extractive",
+          "finding": "Fallback: source quotes were too short or did not contain the numbers in approved sentences. No repaired claims survived."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-anchored-canary",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-anchored-canary-2026-10-31.json",
+      "answers_sha256": "04e470bdbb88b7549caafd9b16aa3a61f7ef3f98b6c05c7c659c1f81c0f28970",
+      "metrics_path": "docs/performance/results/claim-repair-anchored-canary-2026-10-31.json",
+      "metrics_sha256": "ae71c256bbefdac8301072e1f6cd50d606298fb9e994c71cd0e6cbad3069ce8d",
+      "isolation_verified": true,
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "median_wall_s": 11.294,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "display_mode": "conversational",
+          "finding": "Partial: exact passages resolve copy/number coverage, but direct answer omits synthetic label and sample size, repeats the point estimate and leaves CI direction implicit."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-anchored-asthma",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-anchored-asthma-2026-10-31.json",
+      "answers_sha256": "376800c9e2f4219e076eaf9f844b8374b11b74d714ab7636e7bc84ca716a4c59",
+      "metrics_path": "docs/performance/results/claim-repair-anchored-asthma-2026-10-31.json",
+      "metrics_sha256": "4e0eab9ae1f997c759ef38219e89b5a5725f9d81d317d906a5c00862082598b5",
+      "isolation_verified": true,
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "median_wall_s": 35.468,
+      "cases": [
+        {
+          "case_id": "asthma-broad",
+          "context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07",
+          "display_mode": "extractive",
+          "finding": "Fallback: six draft claims received only five indexed reviews; indices/source passages drifted. Full-coverage check rejected this."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-glm-canary",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-glm-canary-2026-10-31.json",
+      "answers_sha256": "a7d902954b3e73359f2c4f0fb2f7ccc45885440dcfa07243a29823240b8704fe",
+      "metrics_path": "docs/performance/results/claim-repair-glm-canary-2026-10-31.json",
+      "metrics_sha256": "0a9444619ef672a24179c73dadb362440ead8079977e94ce0fe4e777df072629",
+      "isolation_verified": true,
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "median_wall_s": 7.826,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "display_mode": "extractive",
+          "finding": "Fallback: two draft claims received one review. No displayed conversational success."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-indexed-glm-canary",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-indexed-glm-canary-2026-10-31.json",
+      "answers_sha256": "179f3da64e77b5f3723a4a77971a508b15240f7f2f42a818430563fc19122b04",
+      "metrics_path": "docs/performance/results/claim-repair-indexed-glm-canary-2026-10-31.json",
+      "metrics_sha256": "2b493ac2767c79c79b24e58bb9834f8ae37a078e574b85338d5ab51b6bdf499e",
+      "isolation_verified": true,
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "median_wall_s": 16.852,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "display_mode": "conversational",
+          "finding": "Partial: synthetic label and 240 adults retained; core figures correct. CI unit/direction and between-group interpretation should be clearer."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-indexed-glm-asthma-stats",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-indexed-glm-asthma-stats-2026-10-31.json",
+      "answers_sha256": "7878e34d53aed6945544464d4ece14bb8e80d4a1d4a7abaabe2ce4c7f25ba7f7",
+      "metrics_path": "docs/performance/results/claim-repair-indexed-glm-asthma-stats-2026-10-31.json",
+      "metrics_sha256": "401b06cc81d7d85dccf2a95febaeadc1732dc739ade26c4695f1098f97a269cb",
+      "isolation_verified": true,
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "median_wall_s": 12.531,
+      "cases": [
+        {
+          "case_id": "asthma-trial-statistics",
+          "context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+          "display_mode": "conversational",
+          "finding": "Fail: correct displayed counts but asymmetric categories; primary categorical comparison called statistically significant although p<.001 belongs to secondary ACQ. Before/after caveat improved."
+        },
+        {
+          "case_id": "asthma-trial-followup",
+          "context_sha256": "e25c5c2fa3614e67497cfc41f87faa522e789b941c7afb77a249a3dafaabf37f",
+          "display_mode": "conversational",
+          "finding": "Fail: retains some numbers but drops the requested main design limitation; adds secondary ACQ rather than simplifying."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-indexed-glm-general",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-indexed-glm-general-2026-10-31.json",
+      "answers_sha256": "80307a3caced50e6fd26cbce89b455bf3ad9366fc03178a2fa022ea5b04e96b8",
+      "metrics_path": "docs/performance/results/claim-repair-indexed-glm-general-2026-10-31.json",
+      "metrics_sha256": "e9c7518c75e7f6df22dd2395e2a21522324d46ecd357a12dde7287f31b943cb7",
+      "isolation_verified": true,
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "median_wall_s": 26.864,
+      "cases": [
+        {
+          "case_id": "m0-combined-benefits-risks",
+          "context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+          "display_mode": "extractive",
+          "finding": "Fallback: copy guard rejects label prose; raw review also turns an unstudied pancreatitis-history population into a not-recommended population. Only first of five selected cases executed."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-indexed-oss-asthma-stats",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-indexed-oss-asthma-stats-2026-10-31.json",
+      "answers_sha256": "bbf3a1f707f907021d469fed7352742576ff003f1889bbc40fde53d4b74df18d",
+      "metrics_path": "docs/performance/results/claim-repair-indexed-oss-asthma-stats-2026-10-31.json",
+      "metrics_sha256": "4c69524cc44e647fb5d37f895d296f9ae56e8bd9a33c189420736cea24535518",
+      "isolation_verified": true,
+      "model": "@cf/openai/gpt-oss-120b",
+      "median_wall_s": 15.03,
+      "cases": [
+        {
+          "case_id": "asthma-trial-statistics",
+          "context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+          "display_mode": "conversational",
+          "finding": "Partial: correct category counts, but denominator sentence falsely discarded because NCT identifier digits were checked as outcome numbers. Whole-study design assertions not explicit in supplied metadata."
+        },
+        {
+          "case_id": "asthma-trial-followup",
+          "context_sha256": "7d75f9c3869471149868bdb4bafdd81922845c6800ba5df0f8d073098bdac08e",
+          "display_mode": "conversational",
+          "finding": "Fail: unreported calculated percentages cause numerical sentence rejection; displayed answer loses key counts and limitation."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-feedback-oss-asthma-stats",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-feedback-oss-asthma-stats-2026-10-31.json",
+      "answers_sha256": "8012d4d378747fc8cc0b26d6c4f34a8e9c7d50229bac310664e971fb119176a9",
+      "metrics_path": "docs/performance/results/claim-repair-feedback-oss-asthma-stats-2026-10-31.json",
+      "metrics_sha256": "6c0f63ce92969bd44fe8facdef727213524269d77a09a486c4d2bb637ae40fbd",
+      "isolation_verified": true,
+      "model": "@cf/openai/gpt-oss-120b",
+      "median_wall_s": 14.409,
+      "cases": [
+        {
+          "case_id": "asthma-trial-statistics",
+          "context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+          "display_mode": "conversational",
+          "finding": "Improved but incomplete: all counts, missingness and denominators retained after identifier fix. No fabricated percentages. Indexed visit comparison is present, but whole-study control assertions lacked explicit design metadata."
+        },
+        {
+          "case_id": "asthma-trial-followup",
+          "context_sha256": "3c96e17c5e44e3e7fe20296d45eb8f3e03f61ba8222cc124fba5b7c094a21c04",
+          "display_mode": "conversational",
+          "finding": "Improved but incomplete: counts/denominators survive and invented rates are removed. Longer than predecessor and whole-study control assertion lacked explicit design metadata."
+        }
+      ]
+    },
+    {
+      "name": "claim-repair-paired-design",
+      "answers_path": "apps/api/evaluation/answer_coverage/results/claim-repair-paired-design-2026-10-31.json",
+      "answers_sha256": "35045b5fdb86c12f8f216cb7f20e10de7009a5072f62110f3e72287931665572",
+      "metrics_path": "docs/performance/results/claim-repair-paired-design-2026-10-31.json",
+      "metrics_sha256": "cff0f28b328ff1652a0fc8ea15308799531490c4478b649235e7bb878d551731",
+      "isolation_verified": true,
+      "model": "@cf/openai/gpt-oss-120b",
+      "median_wall_s": 7.768,
+      "cases": [
+        {
+          "case_id": "without-design-statistics",
+          "context_sha256": "d3d5f75083f9b65320dd12860eed58f647da29c8ff2de26ebe28cc4e38c29de9",
+          "display_mode": "conversational",
+          "finding": "Partial: correct counts/missingness/denominators. Report-scoped before/after boundary is useful; paired individual transitions are not supplied."
+        },
+        {
+          "case_id": "without-design-followup",
+          "context_sha256": "ad55a83217d6267957f75af3dec5e7281fa854754f2eae1ed2e79faba137ee85",
+          "display_mode": "conversational",
+          "finding": "Partial: key numbers retained, but unqualified whole-study control absence is not explicitly available in this control context."
+        },
+        {
+          "case_id": "with-design-statistics",
+          "context_sha256": "bce8eb79b747b4ca25d5622d36f51cada45b562d42213096a6eb98ee9dfcfd5b",
+          "display_mode": "conversational",
+          "finding": "Partial: core counts/denominators and treatment correct; omits missing baseline assessment and causal limitation despite explicit metadata."
+        },
+        {
+          "case_id": "with-design-followup",
+          "context_sha256": "0a8101ae32052232d140cf4c992f33ed3dc9249ea92e7caf54df9a688f731a26",
+          "display_mode": "conversational",
+          "finding": "Improved source grounding: correct key counts plus causal limitation supported by NON_RANDOMIZED/SINGLE_GROUP metadata; baseline missing assessment and explicit explanation of denominator change omitted; simplification still imperfect."
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Membership and matching-number checks do not establish entailment, comparison identity, direction or completeness.",
+    "Native support-index capture was absent in earlier native runs; their exact source contexts and raw review IDs remain recorded and the deterministic index can be rebuilt at the recorded commit. Capture fixed and tested before paired-design run.",
+    "Only one case of the attempted general five-case run executed before a validation fallback stopped the runner.",
+    "Paired source cohorts differ from earlier multi-source cohorts. Do not interpret cross-cohort latency as a speedup."
+  ],
+  "decision": "Retain explicit registry design ingestion/context, keep repaired-claims and alternate models evaluation-only. Broad conversational quality gate remains open."
+}

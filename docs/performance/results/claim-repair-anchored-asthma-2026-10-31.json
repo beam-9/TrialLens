@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": "repaired-claims",
+  "strategy_sha256": "a234c35fc724ca05f8f5785353a6fba4b38e5d195f1e2a931b7b7de5c6d463f5",
+  "claim_repair_sha256": "46b6858e025434090fdb55bf18a58f926f8317d018407a6b07f630c8f9663adc",
+  "fixture_inventory_sha256": "d5f3b36c439a0efbd2c6b9f404472fb8f613aa84e66e27a4b751254ff4de7c1a",
+  "runner_sha256": "ae6d77622b3dd776a9511f0b08bfbb2f25015dac63dbb69504d5247e7c1ac9f4",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "459874a06000282204a0a211e7562ff44028ebb3e5f7f3c588027028a9185492",
+  "model_rates": {
+    "input_micro_neurons_per_token": 26668,
+    "output_micro_neurons_per_token": 204805,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent drafting/claim review",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "asthma-broad",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 35467.842124999996,
+      "trace": {
+        "trace_id": "2bc38f35-ac6d-4110-a89e-27605fd75bd2",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 12863,
+        "phases_ms": {
+          "storage_read": 2.418709,
+          "retrieval": 40.309166,
+          "extractive_synthesis": 0.064917,
+          "context_build": 0.428334,
+          "draft": 18947.891125,
+          "revision": 16461.947458,
+          "validation": 0.0,
+          "store": 5.64125
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 22464,
+            "message_count": 2,
+            "serialized_messages_char_count": 23034,
+            "wall_ms": 18947.891125,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 4585,
+            "eval_count": 490,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 26701,
+            "message_count": 4,
+            "serialized_messages_char_count": 27425,
+            "wall_ms": 16461.947458,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7980,
+            "eval_count": 407,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "http_status": 200,
+        "total_wall_ms": 35464.833625,
+        "serialization_ms": 0.562584
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 1470.000778,
+    "remaining_neurons": 7529.999222,
+    "pending_requests": 1,
+    "requests": 17
+  },
+  "stop_reason": "validation_rejection",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "strategy_experiment": "repaired-claims",
+    "model_experiment": null,
+    "reasoning_effort": null,
+    "wrapper_sha256": "3c2e19fb34d0b68f6ffc0700695c2f856240fa248bacc011d1f9996e5941a152",
+    "feedback_sha256": "71eb1deba185e579fda8209ad589c13c8204e53854e235ec4bcb522999bcc0c6",
+    "inventory_path": "evaluation/cohorts/refreshed-asthma-2026-10-29/inventory.json"
+  }
+}

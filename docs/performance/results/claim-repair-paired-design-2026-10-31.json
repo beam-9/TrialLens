@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/openai/gpt-oss-120b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": "repaired-claims",
+  "strategy_sha256": "49df485985a8b282a0f1aec66f0a5f846061e8b3997b153adc6c4beafc8b79e0",
+  "claim_repair_sha256": "942166455b492e64c7485baa2abc6436e12506b3f9d91e51d2f57f060f49434d",
+  "fixture_inventory_sha256": "92bae1a1d11650ff3ac9d42815a6f4f7e2778dd5f92bceb09bcae915586b5804",
+  "runner_sha256": "6625c9347387f1b63305c0bb6904f3879dcb1e03bfac3a221d4813762a3cdb40",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "43bec93a9fe763b7b0dda693d4df34db944a44621b5194d3e1af181373492b31",
+  "model_rates": {
+    "input_micro_neurons_per_token": 31818,
+    "output_micro_neurons_per_token": 68182,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent drafting/claim review",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "without-design-statistics",
+      "snapshot_id": "without-design",
+      "client_wall_ms": 12377.985666,
+      "trace": {
+        "trace_id": "d1f53954-fb80-46bb-ba3e-6386ba6dd047",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 7,
+        "context_char_count": 8788,
+        "phases_ms": {
+          "storage_read": 1.277667,
+          "retrieval": 11.936166,
+          "extractive_synthesis": 0.046375,
+          "context_build": 0.270374,
+          "draft": 4709.799375,
+          "revision": 7633.00675,
+          "validation": 3.232834,
+          "store": 5.757125
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 13690,
+            "message_count": 2,
+            "serialized_messages_char_count": 13902,
+            "wall_ms": 4709.799375,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2921,
+            "eval_count": 329,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 16981,
+            "message_count": 4,
+            "serialized_messages_char_count": 17362,
+            "wall_ms": 7633.00675,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7143,
+            "eval_count": 816,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 12374.955042,
+        "serialization_ms": 1.122459
+      }
+    },
+    {
+      "case_id": "without-design-followup",
+      "snapshot_id": "without-design",
+      "client_wall_ms": 7142.967916999998,
+      "trace": {
+        "trace_id": "10e24ba1-c5a9-4a93-8095-036ed819a30c",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 7,
+        "context_char_count": 7173,
+        "phases_ms": {
+          "storage_read": 2.961583,
+          "retrieval": 15.957417,
+          "extractive_synthesis": 0.098709,
+          "context_build": 0.398584,
+          "draft": 3898.928833,
+          "revision": 3208.7765,
+          "validation": 2.060083,
+          "store": 6.809916
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 13105,
+            "message_count": 2,
+            "serialized_messages_char_count": 13336,
+            "wall_ms": 3898.928833,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2770,
+            "eval_count": 250,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 16049,
+            "message_count": 4,
+            "serialized_messages_char_count": 16409,
+            "wall_ms": 3208.7765,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6412,
+            "eval_count": 321,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 7140.959334,
+        "serialization_ms": 1.012667
+      }
+    },
+    {
+      "case_id": "with-design-statistics",
+      "snapshot_id": "with-design",
+      "client_wall_ms": 8393.563167,
+      "trace": {
+        "trace_id": "aae3b783-6b43-4056-bcc0-03509cef9c0d",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 8788,
+        "phases_ms": {
+          "storage_read": 2.639792,
+          "retrieval": 16.621875,
+          "extractive_synthesis": 0.106042,
+          "context_build": 0.438084,
+          "draft": 3564.181125,
+          "revision": 4801.539416,
+          "validation": 0.580625,
+          "store": 3.502459
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 14095,
+            "message_count": 2,
+            "serialized_messages_char_count": 14341,
+            "wall_ms": 3564.181125,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3016,
+            "eval_count": 274,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 17188,
+            "message_count": 4,
+            "serialized_messages_char_count": 17578,
+            "wall_ms": 4801.539416,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7127,
+            "eval_count": 501,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 8392.227583,
+        "serialization_ms": 0.605
+      }
+    },
+    {
+      "case_id": "with-design-followup",
+      "snapshot_id": "with-design",
+      "client_wall_ms": 5945.1548330000005,
+      "trace": {
+        "trace_id": "cbba5a0d-7fdf-4493-8f49-d514ebfa5fe5",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 7173,
+        "phases_ms": {
+          "storage_read": 2.385542,
+          "retrieval": 10.789042,
+          "extractive_synthesis": 0.044458,
+          "context_build": 0.302625,
+          "draft": 3413.069291,
+          "revision": 2503.424542,
+          "validation": 1.012167,
+          "store": 7.966167
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 12984,
+            "message_count": 2,
+            "serialized_messages_char_count": 13240,
+            "wall_ms": 3413.069291,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2736,
+            "eval_count": 227,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 15836,
+            "message_count": 4,
+            "serialized_messages_char_count": 16226,
+            "wall_ms": 2503.424542,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6267,
+            "eval_count": 217,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 5943.474,
+        "serialization_ms": 0.895084
+      }
+    }
+  ],
+  "summary": {
+    "n": 4,
+    "model_answers": 4,
+    "model_answer_p50_ms": 7140.959334,
+    "model_answer_p95_ms": 12374.955042,
+    "result_counts": {
+      "model_answer": 4
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 4704.66843,
+    "remaining_neurons": 4295.33157,
+    "pending_requests": 1,
+    "requests": 43
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "strategy_experiment": "repaired-claims",
+    "model_experiment": "@cf/openai/gpt-oss-120b",
+    "reasoning_effort": "low",
+    "wrapper_sha256": "3c2e19fb34d0b68f6ffc0700695c2f856240fa248bacc011d1f9996e5941a152",
+    "feedback_sha256": "71eb1deba185e579fda8209ad589c13c8204e53854e235ec4bcb522999bcc0c6",
+    "inventory_path": "evaluation/answer_coverage/design-cohort-2026-10-31/inventory.json"
+  }
+}

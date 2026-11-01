@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/openai/gpt-oss-120b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": "repaired-claims",
+  "strategy_sha256": "a234c35fc724ca05f8f5785353a6fba4b38e5d195f1e2a931b7b7de5c6d463f5",
+  "claim_repair_sha256": "21ce712d16d02eac6b9f1bef87cb73e28c09a1f0bd31f39a917e41a168c5b1db",
+  "fixture_inventory_sha256": "d5f3b36c439a0efbd2c6b9f404472fb8f613aa84e66e27a4b751254ff4de7c1a",
+  "runner_sha256": "ae6d77622b3dd776a9511f0b08bfbb2f25015dac63dbb69504d5247e7c1ac9f4",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "459874a06000282204a0a211e7562ff44028ebb3e5f7f3c588027028a9185492",
+  "model_rates": {
+    "input_micro_neurons_per_token": 31818,
+    "output_micro_neurons_per_token": 68182,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent drafting/claim review",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "asthma-trial-statistics",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 17337.827666,
+      "trace": {
+        "trace_id": "1e1af116-7f85-47e4-bc93-d2206cd0e540",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 9245,
+        "phases_ms": {
+          "storage_read": 2.445625,
+          "retrieval": 13.702792,
+          "extractive_synthesis": 0.09325,
+          "context_build": 0.331,
+          "draft": 7875.049375,
+          "revision": 9429.84125,
+          "validation": 0.843459,
+          "store": 5.259041
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 14902,
+            "message_count": 2,
+            "serialized_messages_char_count": 15160,
+            "wall_ms": 7875.049375,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3165,
+            "eval_count": 358,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 18301,
+            "message_count": 4,
+            "serialized_messages_char_count": 18723,
+            "wall_ms": 9429.84125,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7365,
+            "eval_count": 527,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 17335.125833,
+        "serialization_ms": 0.659291
+      }
+    },
+    {
+      "case_id": "asthma-trial-followup",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 12721.606417,
+      "trace": {
+        "trace_id": "aef5c402-4dd3-48d5-8dd9-3fedbcfac45b",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 2,
+        "retrieved_passage_count": 8,
+        "context_char_count": 8829,
+        "phases_ms": {
+          "storage_read": 4.322833,
+          "retrieval": 12.615084,
+          "extractive_synthesis": 0.064959,
+          "context_build": 0.335459,
+          "draft": 6283.962,
+          "revision": 6411.790375,
+          "validation": 0.2985,
+          "store": 5.048041
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 15196,
+            "message_count": 2,
+            "serialized_messages_char_count": 15473,
+            "wall_ms": 6283.962,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3217,
+            "eval_count": 292,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 18278,
+            "message_count": 4,
+            "serialized_messages_char_count": 18694,
+            "wall_ms": 6411.790375,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6730,
+            "eval_count": 363,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 12720.566459,
+        "serialization_ms": 0.479584
+      }
+    }
+  ],
+  "summary": {
+    "n": 2,
+    "model_answers": 2,
+    "model_answer_p50_ms": 12720.566459,
+    "model_answer_p95_ms": 17335.125833,
+    "result_counts": {
+      "model_answer": 2
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 2512.219244,
+    "remaining_neurons": 6487.780756,
+    "pending_requests": 1,
+    "requests": 31
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "strategy_experiment": "repaired-claims",
+    "model_experiment": "@cf/openai/gpt-oss-120b",
+    "reasoning_effort": "low",
+    "wrapper_sha256": "3c2e19fb34d0b68f6ffc0700695c2f856240fa248bacc011d1f9996e5941a152",
+    "feedback_sha256": "71eb1deba185e579fda8209ad589c13c8204e53854e235ec4bcb522999bcc0c6",
+    "inventory_path": "evaluation/cohorts/refreshed-asthma-2026-10-29/inventory.json"
+  }
+}
