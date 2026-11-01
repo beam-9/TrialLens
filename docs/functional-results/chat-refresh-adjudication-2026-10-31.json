@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-31",
+  "assessment": "Engineering comparison with exact generation_context, not only retrieved_chunks. Small authored diagnostics, not clinical validation or a general accuracy estimate. Technical model_answer does not imply semantic pass.",
+  "runs": [
+    {
+      "name": "responses-low-canary-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/responses-low-canary-2026-10-29.json",
+        "sha256": "3bcfb0cc7b168ff75dab98ff0bcf8c06f8ff6f1b3ba3d91482fbf16a9200e666"
+      },
+      "metrics": {
+        "path": "docs/performance/results/responses-low-canary-2026-10-29.json",
+        "sha256": "b8bf2305db3c024777cf15e9edce147945f28b06c9e94977778e252e405cae37"
+      },
+      "model": "@cf/openai/gpt-oss-120b",
+      "isolated": true,
+      "median_client_wall_s": 11.692,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "generation_mode": "extractive",
+          "engineering_grade": "fallback",
+          "finding": "Final paragraph lacks citation; draft/final also add unsupported effect-size and outcome-absence interpretation.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "responses-v3-canary-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/responses-v3-canary-2026-10-29.json",
+        "sha256": "9a2d9f23f08c641497725c3866598ad035c6a263588ef02c48572b6b17d213c5"
+      },
+      "metrics": {
+        "path": "docs/performance/results/responses-v3-canary-2026-10-29.json",
+        "sha256": "f3fd503195ff4e7ace4c57a09efe77a15819dbf17bcc57bc8c98765c7ab2d923"
+      },
+      "model": "@cf/openai/gpt-oss-120b",
+      "isolated": true,
+      "median_client_wall_s": 13.303,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Incorrect fixed true parameter/repetition interpretation of CI and blanket unmeasured-outcome claim.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "responses-v4-canary-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/responses-v4-canary-2026-10-29.json",
+        "sha256": "014df9a1671657ea55d5ff3131b4096b4493ec8b8199211445e5aeea418952ca"
+      },
+      "metrics": {
+        "path": "docs/performance/results/responses-v4-canary-2026-10-29.json",
+        "sha256": "0c351b4dc5e2cc6f38dc86722c0828ed1533760a733bfd61bb5de00d3d3bc77d"
+      },
+      "model": "@cf/openai/gpt-oss-120b",
+      "isolated": true,
+      "median_client_wall_s": 10.628,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Correct core quantities but extends explicitly unmeasured mortality to all other clinical outcomes; extra statistical inference not reported in source.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "responses-v4-medium-canary-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/responses-v4-medium-canary-2026-10-29.json",
+        "sha256": "b99e4c981152ea3e88e377e86121b515b7a8ea221905064545946d512429c8bb"
+      },
+      "metrics": {
+        "path": "docs/performance/results/responses-v4-medium-canary-2026-10-29.json",
+        "sha256": "3e0aa3f0b326f7024e086cb555460c82ae713a05535e44b9b5ce8f38bae57d14"
+      },
+      "model": "@cf/openai/gpt-oss-120b",
+      "isolated": true,
+      "median_client_wall_s": 19.211,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Overstates which outcomes were measured, introduces percentage-unit ambiguity and unsupported statistical explanation; does not resolve low-effort failures.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "refreshed-asthma-current-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/refreshed-asthma-current-2026-10-29.json",
+        "sha256": "fdd0ba744f25f882c54ae970647878693db9582bcf5e677fc68b254d4dd63d54"
+      },
+      "metrics": {
+        "path": "docs/performance/results/refreshed-asthma-current-2026-10-29.json",
+        "sha256": "61ad557c3756c19e9184e4d938af71dc48c1c3b87ddd5cc415324b28e75425bf"
+      },
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "isolated": true,
+      "median_client_wall_s": 13.854,
+      "cases": [
+        {
+          "case_id": "asthma-broad",
+          "context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07",
+          "generation_mode": "conversational",
+          "engineering_grade": "incomplete",
+          "finding": "Correct displayed numeric values, but omits the small low-certainty growth comparison context and before-after attribution boundary; generic long-term limitation is too broad.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "asthma-trial-statistics",
+          "context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+          "generation_mode": "conversational",
+          "engineering_grade": "incomplete",
+          "finding": "Correct uncontrolled counts and denominators, but missing controlled/missing categories and the changed-denominator/before-after causal limitation.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "asthma-trial-followup",
+          "context_sha256": "aad4468bdb13fe67140df46e9e84512c89cc4bbf7a1e24fe6486f5102256f9cb",
+          "generation_mode": "conversational",
+          "engineering_grade": "incomplete",
+          "finding": "Repeats correct uncontrolled counts; truncation caveat does not explain the central before-after causal limitation. Still had can imply same-person persistence across unequal denominators.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "refreshed-asthma-writer-v4-2026-10-29",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/refreshed-asthma-writer-v4-2026-10-29.json",
+        "sha256": "2f4a6ce70da6da5b4c5e28891146f5da40ec703da109a7ee97345b175606dc5d"
+      },
+      "metrics": {
+        "path": "docs/performance/results/refreshed-asthma-writer-v4-2026-10-29.json",
+        "sha256": "0deae9db038912eb0344948d72008282ce61b38ca4fbf20b59a68fae21f78dbd"
+      },
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "isolated": true,
+      "median_client_wall_s": 28.683,
+      "cases": [
+        {
+          "case_id": "asthma-broad",
+          "context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Attributes an ICS efficacy opening to the montelukast add-on registry; reports 0.97 cm/year where the review reports change in height 0.97 cm, with estimate-specific n=359 across two trials, rather than review-wide n=1199. Broad long-term claims are insufficiently scoped.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "asthma-trial-statistics",
+          "context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Adds controlled counts but converts a before-after pattern into treatment effectiveness; does not explain changed denominators or preserve ICS/LABA background scope.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "asthma-trial-followup",
+          "context_sha256": "91cabdeae50407a5a393dce2c0dc7b9a03b967dec37dde83a61b235c9ff0fc6a",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Turns add-on before-after observations into a causal benefit, adds unrelated AZD8630 source, and loses the key causal limitation.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    },
+    {
+      "name": "general-glm-writer-v5-2026-10-31",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/general-glm-writer-v5-2026-10-31.json",
+        "sha256": "733198b41b5b0e5cafa6e98d6c47e6c8466599471ccf9c0166a5652d6cd34f5c"
+      },
+      "metrics": {
+        "path": "docs/performance/results/general-glm-writer-v5-2026-10-31.json",
+        "sha256": "a96de6ef28738237c5b18081e27639a41c35d061257f3adf42282011f62b003e"
+      },
+      "model": "@cf/zai-org/glm-4.7-flash",
+      "isolated": true,
+      "median_client_wall_s": 12.319,
+      "cases": [
+        {
+          "case_id": "m0-combined-benefits-risks",
+          "context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+          "generation_mode": "extractive",
+          "engineering_grade": "fallback",
+          "finding": "Copy guard rejects generated answer. Raw final also merges pediatric tablet and adult-only extended-release indications and claims the label lists no contraindications from an incomplete excerpt. Fallback is not a successful conversational answer.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "m0-safety-frequency",
+          "context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+          "generation_mode": "conversational",
+          "engineering_grade": "pass",
+          "finding": "Reported adverse-reaction values, trial group sizes, population and spontaneous-report frequency/causality boundary match supplied context. One engineering source-consistency pass, not clinical validation.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "m0-numeric-comparison",
+          "context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Correct main figures but CI describes true effect likely within observed bounds; not established beyond 12 weeks becomes not applicable beyond 12 weeks.",
+          "current_ci_wording_guard_flags_saved_final": true
+        },
+        {
+          "case_id": "m0-protocol-versus-results",
+          "context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Core planned protocol facts correct; uncertainty overstates not a listed outcome as an absolute inability to provide mortality data even if completed. Repetition weakens explanation.",
+          "current_ci_wording_guard_flags_saved_final": false
+        },
+        {
+          "case_id": "m0-simplify-numeric-followup",
+          "context_sha256": "0e68abc78e65a81005e0f7b155176604242a17388a40de21f489c875c6c72783",
+          "generation_mode": "conversational",
+          "engineering_grade": "fail",
+          "finding": "Repeats preceding answer instead of simplifying and retains the CI probability-style interpretation.",
+          "current_ci_wording_guard_flags_saved_final": true
+        }
+      ]
+    },
+    {
+      "name": "responses-v5-high-canary-2026-10-31",
+      "answers": {
+        "path": "apps/api/evaluation/answer_coverage/results/responses-v5-high-canary-2026-10-31.json",
+        "sha256": "838bec11d3fc94ae94784167b27eea4a6fe604d67d0692458aad4d5a35bb8f20"
+      },
+      "metrics": {
+        "path": "docs/performance/results/responses-v5-high-canary-2026-10-31.json",
+        "sha256": "b3eb52a3675c90566bcdb2b8026b105a72098cc55cd85c45b1e8c8e5b465f9a0"
+      },
+      "model": "@cf/openai/gpt-oss-120b",
+      "isolated": true,
+      "median_client_wall_s": 36.117,
+      "cases": [
+        {
+          "case_id": "numerical-hba1c",
+          "context_sha256": "23c1ca8ba6a27c00f081ca2f167ab49930f85c8094c246721b49fddaf50aa8c7",
+          "generation_mode": "extractive",
+          "engineering_grade": "fallback",
+          "finding": "Provider status incomplete at 4096 output tokens. Existing incomplete-response guard rejects it; no complete final to adjudicate.",
+          "current_ci_wording_guard_flags_saved_final": false
+        }
+      ]
+    }
+  ]
+}

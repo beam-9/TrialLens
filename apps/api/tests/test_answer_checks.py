@@ -7,6 +7,21 @@ def test_flags_probability_claim_about_true_effect_with_confidence_interval():
     )
 
 
+def test_flags_likely_fixed_effect_explanation_without_explicit_probability_number():
+    wording = ('The 95% confidence interval (CI) was 0.2 to 0.8 percentage points lower, '
+               'indicating that the true effect is likely to fall within this range.')
+    assert confidence_interval_issue(wording)
+    assert confidence_interval_issue(
+        'The 95% CI does not mean that the true effect is likely to fall within this range.'
+    ) is None
+    assert confidence_interval_issue(
+        'The trial reports a confidence interval. The true effect is likely to fall within this range.'
+    )
+    assert confidence_interval_issue(
+        'A Bayesian credible interval means the true effect is likely to fall within this range.'
+    ) is None
+
+
 def test_flags_fixed_parameter_in_range_for_percentage_of_repetitions():
     assert confidence_interval_issue(
         "The 95% CI indicates the true average difference lies within this range in 95% of repetitions."

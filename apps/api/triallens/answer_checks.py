@@ -49,6 +49,16 @@ _NEGATED_PROBABILITY = re.compile(
     r"(?:chance|probability|likelihood)[^.!?;]{0,15}\d{1,3}\s*%)",
     re.I,
 )
+_LIKELY_FIXED_EFFECT = re.compile(
+    _TRUE_TARGET
+    + r"\s+(?:is\s+(?:likely|probably)\s+(?:to\s+)?(?:be|lie|fall)|"
+    r"(?:likely|probably)\s+(?:lies|falls|is))\s+(?:within|inside|in)\s+"
+    + _RANGE,
+    re.I,
+)
+_NEGATED_INTERPRETATION = re.compile(
+    r"\b(?:does\s+not|doesn't|cannot|can't)\s+(?:mean|imply|show)\b[^.!?;]{0,35}$", re.I,
+)
 
 CONFIDENCE_INTERVAL_ERROR = (
     "Do not describe a confidence interval as the probability that the true effect lies within the observed bounds, "
@@ -74,14 +84,17 @@ def confidence_interval_issue(text: str) -> str | None:
         anaphoric_prior = prior_has_ci and bool(_ANAPHORIC_RANGE.search(sentence))
         if not current_has_ci and not anaphoric_prior:
             continue
-        for match in _PROBABILITY_TRUE_PARAMETER.finditer(sentence):
+        matches = sorted([*_PROBABILITY_TRUE_PARAMETER.finditer(sentence),
+                          *_LIKELY_FIXED_EFFECT.finditer(sentence)], key=lambda match: match.start())
+        for match in matches:
             # Evaluate negation for this claim only; a nearby negated explanation
             # must not suppress a separate affirmative misinterpretation.
             prefix = sentence[:match.start()]
             boundaries = list(re.finditer(r";|\b(?:but|however|although|yet)\b", prefix, re.I))
             if boundaries:
                 prefix = prefix[boundaries[-1].end():]
-            if _NEGATED_PROBABILITY.search(prefix + match.group(0)):
+            if (_NEGATED_PROBABILITY.search(prefix + match.group(0))
+                    or _NEGATED_INTERPRETATION.search(prefix)):
                 continue
             return CONFIDENCE_INTERVAL_ERROR
     return None

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/openai/gpt-oss-120b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "b1b6f3238baefc5962ce93e298420c30eb10d7a39ee62230c57f67add196e6a3",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "4dcd6571aa7ffc650663ff000864c3d53aec675171b17f2671cda0d9ce9012cc",
+  "code_sha256": "fff3fdbc09be945f7bf4f0b87f5a7732c647043e8cfd1aab786662f3f9754127",
+  "model_rates": {
+    "input_micro_neurons_per_token": 31818,
+    "output_micro_neurons_per_token": 68182,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "numerical-hba1c",
+      "snapshot_id": "numerical",
+      "client_wall_ms": 13303.107708000001,
+      "trace": {
+        "trace_id": "e1e077f1-1982-4920-a8c7-d390ef0e1fb1",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 5.122583,
+          "retrieval": 1.958125,
+          "extractive_synthesis": 1.486584,
+          "context_build": 0.065167,
+          "draft": 4638.656959,
+          "revision": 8625.842542,
+          "validation": 0.774,
+          "store": 19.588333
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 5721,
+            "message_count": 2,
+            "serialized_messages_char_count": 5861,
+            "wall_ms": 4638.656959,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1125,
+            "eval_count": 396,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 9025,
+            "message_count": 4,
+            "serialized_messages_char_count": 9304,
+            "wall_ms": 8625.842542,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1797,
+            "eval_count": 430,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 13300.539292,
+        "serialization_ms": 0.864875
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 1,
+    "model_answer_p50_ms": 13300.539292,
+    "model_answer_p95_ms": 13300.539292,
+    "result_counts": {
+      "model_answer": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 268.70834,
+    "remaining_neurons": 8731.29166,
+    "pending_requests": 0,
+    "requests": 4
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": true,
+    "model_experiment": "@cf/openai/gpt-oss-120b",
+    "wrapper_sha256": "5235f07f2fec61c09c79a96188f192de3ebac44ad0440b81a9ccda77adf7b3b0",
+    "feedback_sha256": "def4f2342bf3d542e2e346500f2e49caefbbd08b682f2f429b7b8d5067fe2576",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

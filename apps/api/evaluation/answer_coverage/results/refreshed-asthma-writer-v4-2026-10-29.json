@@ -1,0 +1,1336 @@
+[
+  {
+    "case_id": "asthma-broad",
+    "snapshot_id": "refreshed-asthma-public",
+    "answer": {
+      "id": "be866f94-d64a-4064-8e6f-c213837dd6cb",
+      "workspace_id": "refreshed-asthma-public",
+      "question": "What do these sources show about the benefits and limitations of inhaled corticosteroids for asthma? Include useful reported numbers where relevant.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "8d41ece8789accb1dd5dacee4cf8b65c9c02a8d56794200d6213bd361a2a163d",
+        "PubMed:31194879": "2478afd21dfdef7d7d90230c8d62eff4d17f3e612644b2771675b80074462a4b",
+        "PubMed:10711858": "b356cbd59d7c90fdc939decd88b1b95ca22ddb3c9746a4cdf64b6fe05821cf53",
+        "PubMed:19125898": "b25663f1a77a4b7ddd4ccd223917128d21df19e266fc767a2c56881d4913b3be",
+        "PubMed:41733139": "ee5dc9aab5df002c9a12ac756f233722634c60316a68f281754bc69953353044"
+      },
+      "short_answer": "The sources show that inhaled corticosteroids are effective in improving asthma control and symptoms [ClinicalTrials.gov:NCT00545844]. For example, one study found that the mean Asthma Control Questionnaire score decreased from 2.03 to 0.92 over 8 weeks in patients with uncontrolled asthma and allergic rhinitis who received montelukast in combination with inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The study had 313 patients in the intent-to-treat analysis and 300 patients completed the Asthma Control Questionnaire at week 8 [ClinicalTrials.gov:NCT00545844].\n\nA meta-analysis found that fluticasone had a less suppressive effect on growth compared to budesonide in children with persistent asthma [PubMed:31194879]. The meta-analysis included 6 randomized trials with 1199 children and found that fluticasone given at an equivalent dose had a mean difference in linear growth velocity of 0.97 cm/year compared to budesonide [PubMed:31194879].\n\nThe sources also discuss the importance of considering individual patient factors and the potential for adverse effects when prescribing inhaled corticosteroids [PubMed:19125898]. For example, one review notes that ciclesonide and beclomethasone dipropionate are administered as prodrugs that are activated by enzymes in the lungs, which may reduce the risk of oropharyngeal adverse effects [PubMed:19125898].\n\nAdditionally, the sources highlight the need for further research and consideration of different treatment strategies, such as the use of as-needed inhaled corticosteroids [PubMed:41733139]. A review of the role of as-needed inhaled corticosteroids in adult asthma notes that this approach has been endorsed by the Global Initiative for Asthma [PubMed:41733139].\n\nThe evidence does not establish the long-term safety and efficacy of inhaled corticosteroids, and the sources note that further research is needed to fully understand their benefits and limitations [ClinicalTrials.gov:NCT00545844] [PubMed:31194879] [PubMed:10711858] [PubMed:19125898] [PubMed:41733139].",
+      "direct_answer": "The sources show that inhaled corticosteroids are effective in improving asthma control and symptoms [ClinicalTrials.gov:NCT00545844]. For example, one study found that the mean Asthma Control Questionnaire score decreased from 2.03 to 0.92 over 8 weeks in patients with uncontrolled asthma and allergic rhinitis who received montelukast in combination with inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The study had 313 patients in the intent-to-treat analysis and 300 patients completed the Asthma Control Questionnaire at week 8 [ClinicalTrials.gov:NCT00545844].\n\nA meta-analysis found that fluticasone had a less suppressive effect on growth compared to budesonide in children with persistent asthma [PubMed:31194879]. The meta-analysis included 6 randomized trials with 1199 children and found that fluticasone given at an equivalent dose had a mean difference in linear growth velocity of 0.97 cm/year compared to budesonide [PubMed:31194879].\n\nThe sources also discuss the importance of considering individual patient factors and the potential for adverse effects when prescribing inhaled corticosteroids [PubMed:19125898]. For example, one review notes that ciclesonide and beclomethasone dipropionate are administered as prodrugs that are activated by enzymes in the lungs, which may reduce the risk of oropharyngeal adverse effects [PubMed:19125898].\n\nAdditionally, the sources highlight the need for further research and consideration of different treatment strategies, such as the use of as-needed inhaled corticosteroids [PubMed:41733139]. A review of the role of as-needed inhaled corticosteroids in adult asthma notes that this approach has been endorsed by the Global Initiative for Asthma [PubMed:41733139].\n\nThe evidence does not establish the long-term safety and efficacy of inhaled corticosteroids, and the sources note that further research is needed to fully understand their benefits and limitations [ClinicalTrials.gov:NCT00545844] [PubMed:31194879] [PubMed:10711858] [PubMed:19125898] [PubMed:41733139].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 8 source records; the final answer uses 5 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT00545844 \u00b7 Singulair(R) In Asthma And Allergic Rhinitis (0476-383) \u00b7 Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits. \u00b7 partial excerpt",
+        "CITED IN ANSWER \u00b7 PubMed:31194879 \u00b7 Inhaled corticosteroids in children with persistent asthma: effects of different drugs and delivery devices on growth. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article. \u00b7 partial excerpt",
+        "CITED IN ANSWER \u00b7 PubMed:10711858 \u00b7 Once-daily inhaled corticosteroids in children with asthma: nebulisation. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 PubMed:19125898 \u00b7 Inhaled corticosteroids for asthma: are they all the same? \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 PubMed:41733139 \u00b7 As-needed inhaled corticosteroids in asthma: from evidence to implementation. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT05110976 \u00b7 A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists \u00b7 Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+        "CONTEXT ONLY \u00b7 PubMed:34024646 \u00b7 [Strategies for prescription of inhaled corticosteroids in mild-to-moderate asthma]. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT00967590 \u00b7 A Study of RO5036505 in Patients With Moderate to Severe Asthma \u00b7 Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "8 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "5 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The sources do not provide a comprehensive comparison of the benefits and limitations of different inhaled corticosteroids",
+        "The sources do not provide long-term data on the safety and efficacy of inhaled corticosteroids",
+        "The evidence is based on a limited number of studies and may not be generalizable to all patients with asthma"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The sources do not provide a comprehensive comparison of the benefits and limitations of different inhaled corticosteroids",
+        "The sources do not provide long-term data on the safety and efficacy of inhaled corticosteroids",
+        "The evidence is based on a limited number of studies and may not be generalizable to all patients with asthma",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844",
+        "PubMed:31194879",
+        "PubMed:10711858",
+        "PubMed:19125898",
+        "PubMed:41733139"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "public-chunk-015",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 1.0403,
+          "section": "Results outcome 003",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, these in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-005",
+          "source_id": "public-source-02",
+          "source_type": "pubmed",
+          "citation": "PubMed:31194879",
+          "text": "At least two review authors independently selected studies and assessed risk of bias in included studies. The data were extracted by one author and checked by another. The primary outcome was linear growth velocity. We conducted meta-analyses using Review Manager 5.3 software. We used mean differences (MDs) and 95% confidence intervals (CIs ) as the metrics for treatment effects, and the random-effects model for meta-analyses. We did not perform planned subgroup analyses due to there being too few included trials.",
+          "score": 0.8581,
+          "section": "DATA COLLECTION AND ANALYSIS",
+          "title": "Inhaled corticosteroids in children with persistent asthma: effects of different drugs and delivery devices on growth.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31194879/",
+          "external_id": "31194879",
+          "publication_date": "2019",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-025",
+          "source_id": "public-source-05",
+          "source_type": "pubmed",
+          "citation": "PubMed:10711858",
+          "text": "or 0.5 mg, indicating that once-daily therapy is an effective option that can be considered in many patients. In view of the time-consuming nature of nebuliser administration, reduction of the frequency of corticosteroid administration from twice to once daily may be useful in simplifying the treatment programme and improving compliance with it. This may be beneficial in reducing under-utilisation of inhaled corticosteroids in children with asthma and improving long term control of the disease.",
+          "score": 0.7976,
+          "section": "Abstract 1 3",
+          "title": "Once-daily inhaled corticosteroids in children with asthma: nebulisation.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10711858/",
+          "external_id": "10711858",
+          "publication_date": "1999",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "useful"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, useful in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-031",
+          "source_id": "public-source-07",
+          "source_type": "pubmed",
+          "citation": "PubMed:19125898",
+          "text": "PubMed was searched for relevant reviews and original articles. Information from these studies was synthesized and critically assessed.",
+          "score": 0.5991,
+          "section": "METHODS",
+          "title": "Inhaled corticosteroids for asthma: are they all the same?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19125898/",
+          "external_id": "19125898",
+          "publication_date": "2009",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "relevant",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, relevant, these in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-027",
+          "source_id": "public-source-06",
+          "source_type": "pubmed",
+          "citation": "PubMed:41733139",
+          "text": "In 2019, the Global Initiative for Asthma (GINA) recommended against the use of short-acting beta agonist (SABA) monotherapy and officially endorsed the use of as-needed inhaled corticosteroid with a fast-acting bronchodilator [anti-inflammatory reliever (AIR)] as the preferred strategy across all treatment steps. In 2020, the US NHLBI asthma guidelines recommended ICS+SABA at step 2, and ICS/formoterol to be used as maintenance and reliever therapy (MART) at treatment steps 3 and 4. Despite these strong recommendations, uptake of this strategy in the United States has been slow. Barriers to MART implementation are explained,",
+          "score": 0.5687,
+          "section": "RECENT FINDINGS 2",
+          "title": "As-needed inhaled corticosteroids in asthma: from evidence to implementation.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41733139/",
+          "external_id": "41733139",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, these in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-020",
+          "source_id": "public-source-04",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "text": "The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose",
+          "score": 0.5454,
+          "section": "Detailed description 2",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "url": "https://clinicaltrials.gov/study/NCT05110976",
+          "external_id": "NCT05110976",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-035",
+          "source_id": "public-source-08",
+          "source_type": "pubmed",
+          "citation": "PubMed:34024646",
+          "text": "Asthma is a common respiratory condition characterized by chronic inflammation of the airways. Most asthmatics have a mild-to-moderate form of the disease, but are still at risk of severe exacerbations and significantly impaired quality of life. This article reviews the strategies for prescription of inhaled corticosteroids in patients with mild-to-moderate asthma. The definition of asthma severity, the goals of asthma management and the adjustment of therapeutics are successively addressed. The major changes proposed by the GINA group in 2019 are also discussed.",
+          "score": 0.5385,
+          "section": "Abstract 1",
+          "title": "[Strategies for prescription of inhaled corticosteroids in mild-to-moderate asthma].",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34024646/",
+          "external_id": "34024646",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-036",
+          "source_id": "public-source-09",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "score": 0.4884,
+          "section": "Brief summary",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "url": "https://clinicaltrials.gov/study/NCT00967590",
+          "external_id": "NCT00967590",
+          "publication_date": null,
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "asthma",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, inhaled in a trial record."
+        }
+      ],
+      "created_at": "2026-10-30T00:32:03.235130+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The sources show that inhaled corticosteroids are effective in improving asthma control and symptoms [ClinicalTrials.gov:NCT00545844]. For example, one study found that the mean Asthma Control Questionnaire score decreased from 2.03 to 0.92 over 8 weeks in patients with uncontrolled asthma and allergic rhinitis who received montelukast in combination with inhaled corticosteroids [ClinicalTrials.gov:NCT00545844].\", \"However, the sources also highlight potential limitations and differences between various inhaled corticosteroids. A meta-analysis found that fluticasone had a less suppressive effect on growth compared to budesonide in children with persistent asthma, with a mean difference in linear growth velocity of 0.97 cm/year [PubMed:31194879]. Another study found that once-daily nebulised budesonide was as effective as twice-daily administration in maintaining control of asthma symptoms in children [PubMed:10711858].\", \"The sources also discuss the importance of considering individual patient factors and the potential for adverse effects when prescribing inhaled corticosteroids. For example, one review notes that ciclesonide and beclomethasone dipropionate are administered as prodrugs that are activated by enzymes in the lungs, which may reduce the risk of oropharyngeal adverse effects [PubMed:19125898].\", \"Additionally, the sources highlight the need for further research and consideration of different treatment strategies, such as the use of as-needed inhaled corticosteroids [PubMed:41733139]. A review of the role of as-needed inhaled corticosteroids in adult asthma notes that this approach has been endorsed by the Global Initiative for Asthma, but that barriers to implementation remain [PubMed:41733139].\", \"Overall, the sources suggest that inhaled corticosteroids are a effective treatment for asthma, but that careful consideration of individual patient factors, potential adverse effects, and different treatment strategies is necessary to optimize benefits and minimize limitations.\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\", \"PubMed:31194879\", \"PubMed:10711858\", \"PubMed:19125898\", \"PubMed:41733139\"], \"uncertainty\": [\"The sources do not provide a comprehensive comparison of the benefits and limitations of different inhaled corticosteroids\", \"The sources do not provide long-term data on the safety and efficacy of inhaled corticosteroids\", \"The sources do not provide data on the use of inhaled corticosteroids in specific patient populations, such as the elderly or those with comorbidities\"]}",
+        "usage": {
+          "prompt_tokens": 5212,
+          "completion_tokens": 554,
+          "total_tokens": 5766,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 252.45404052734375
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The sources show that inhaled corticosteroids are effective in improving asthma control and symptoms [ClinicalTrials.gov:NCT00545844]. For example, one study found that the mean Asthma Control Questionnaire score decreased from 2.03 to 0.92 over 8 weeks in patients with uncontrolled asthma and allergic rhinitis who received montelukast in combination with inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The study had 313 patients in the intent-to-treat analysis and 300 patients completed the Asthma Control Questionnaire at week 8 [ClinicalTrials.gov:NCT00545844].\", \"A meta-analysis found that fluticasone had a less suppressive effect on growth compared to budesonide in children with persistent asthma [PubMed:31194879]. The meta-analysis included 6 randomized trials with 1199 children and found that fluticasone given at an equivalent dose had a mean difference in linear growth velocity of 0.97 cm/year compared to budesonide [PubMed:31194879].\", \"The sources also discuss the importance of considering individual patient factors and the potential for adverse effects when prescribing inhaled corticosteroids [PubMed:19125898]. For example, one review notes that ciclesonide and beclomethasone dipropionate are administered as prodrugs that are activated by enzymes in the lungs, which may reduce the risk of oropharyngeal adverse effects [PubMed:19125898].\", \"Additionally, the sources highlight the need for further research and consideration of different treatment strategies, such as the use of as-needed inhaled corticosteroids [PubMed:41733139]. A review of the role of as-needed inhaled corticosteroids in adult asthma notes that this approach has been endorsed by the Global Initiative for Asthma [PubMed:41733139].\", \"The evidence does not establish the long-term safety and efficacy of inhaled corticosteroids, and the sources note that further research is needed to fully understand their benefits and limitations [ClinicalTrials.gov:NCT00545844, PubMed:31194879, PubMed:10711858, PubMed:19125898, PubMed:41733139].\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\", \"PubMed:31194879\", \"PubMed:10711858\", \"PubMed:19125898\", \"PubMed:41733139\"], \"uncertainty\": [\"The sources do not provide a comprehensive comparison of the benefits and limitations of different inhaled corticosteroids\", \"The sources do not provide long-term data on the safety and efficacy of inhaled corticosteroids\", \"The evidence is based on a limited number of studies and may not be generalizable to all patients with asthma\"]}",
+        "usage": {
+          "prompt_tokens": 6293,
+          "completion_tokens": 587,
+          "total_tokens": 6880,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 288.0403747558594
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "inhaled corticosteroids"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Results outcome 001",
+            "Results outcome 002",
+            "Results outcome 003",
+            "Results outcome 004",
+            "Results outcome 005",
+            "Results outcome 006"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "matched_passages": [
+            "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001"
+          ]
+        },
+        {
+          "citation": "PubMed:31194879",
+          "title": "Inhaled corticosteroids in children with persistent asthma: effects of different drugs and delivery devices on growth.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Meta-Analysis",
+            "Research Support, Non-U.S. Gov't",
+            "Systematic Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2019",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "AUTHORS' CONCLUSIONS",
+            "BACKGROUND",
+            "DATA COLLECTION AND ANALYSIS",
+            "MAIN RESULTS",
+            "OBJECTIVES",
+            "SEARCH METHODS",
+            "SELECTION CRITERIA"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Inhaled corticosteroids (ICS) are the most effective treatment for children with persistent asthma. Although treatment with ICS is generally considered to be safe in children, the potential adverse effects of these drugs on growth remains a matter of concern for parents and physicians. To assess the impact of different inhaled corticosteroid drugs and delivery devices on the linear growth of children with persistent asthma. We searched the Cochrane Airways Trials Register, which is derived from systematic searches of bibliographic databases including CENTRAL, MEDLINE, Embase, CINAHL, AMED and PsycINFO. We handsearched respiratory journals and meeting abstracts. We also conducted a search of ClinicalTrials.gov and manufacturers' clinical trial databases, or contacted the manufacturer, to search for potential relevant unpublished studies. The literature search was initially conducted in September 2014, and updated in November 2015, September 2018, and April 2019. We selected parallel-group randomized controlled trials of at least three months' duration. To be included, trials had to compare linear growth between different inhaled corticosteroid molecules at equivalent doses, delivered by the same type of device, or between different devices used to deliver the same inhaled corticosteroid molecule at the same dose, in children up to 18 years of age with persistent asthma. At least two review authors independently selected studies and assessed risk of bias in included studies. The data were extracted by one author and checked by another. The primary outcome was linear growth velocity. We conducted meta-analyses using Review Manager 5.3 software. We used mean differences (MDs) and 95% confidence intervals (CIs ) as the metrics for treatment effects, and the random-effects model for meta-analyses. We did not perform planned subgroup analyses due to there being too few included trials. We included six randomized trials involving 1199 children aged from 4 to 12 years (per-protocol population: 1008), with mild-to-moderate persistent asthma. Two trials were from single hospitals, and the remaining four trials were multicentre studies. The duration of trials varied from six to 20 months.One trial with 23 participants compared fluticasone with beclomethasone, and showed that fluticasone given at an equivalent dose was associated with a significant greater linear growth velocity (MD 0.81 cm/year, 95% CI 0.46 to 1.16, low certainty evidence). Three trials compared fluticasone with budesonide. Fluticasone given at an equivalent dose had a less suppressive effect than budesonide on growth, as measured by change in height over a period from 20 weeks to 12 months (MD 0.97 cm, 95% CI 0.62 to 1.32; 2 trials, 359 participants; moderate certainty evidence). However, we observed no significant difference in linear growth velocity between fluticasone and budesonide at equivalent doses (MD 0.39 cm/year, 95% CI -0.94 to 1.73; 2 trials, 236 participants; very low certainty evidence).Two trials compared inhalation devices. One trial with 212 participants revealed a comparable linear growth velocity between beclomethasone administered via hydrofluoroalkane-metered dose inhaler (HFA-MDI) and beclomethasone administered via chlorofluorocarbon-metered dose inhaler (CFC-MDI) at an equivalent dose (MD -0.44 cm/year, 95% CI -1.00 to 0.12; low certainty evidence). Another trial with 229 participants showed a small but statistically significant greater increase in height over a period of six months in favour of budesonide via Easyhaler, compared to budesonide given at the same dose via Turbuhaler (MD 0.37 cm, 95% CI 0.12 to 0.62; low certainty evidence). This review suggests that the drug molecule and deliver",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:10711858",
+          "title": "Once-daily inhaled corticosteroids in children with asthma: nebulisation.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "1999",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Current guidelines on the management of childhood asthma have emphasised the important preventive role of inhaled corticosteroids, which should be used at the lowest possible doses that are compatible with good disease control. However, some children do not respond to inhaled corticosteroids, the most common reasons for which are inability to use conventional hand-held inhalers (plus spacers and face masks) effectively or lack of cooperation with them, particularly among infants and young children. In these patients, nebulisers have proved effective in administering corticosteroids, and this form of delivery is often preferred by both the children and their parents, despite their longer administration times (commonly around 10 minutes). Compliance with these devices may therefore be better than with a conventional pressurised metered-dose inhaler plus spacer and face mask. Recent studies with nebulised budesonide have demonstrated that once-daily administration is as effective in maintaining control of asthma symptoms in children as the usual twice-daily administration. In children with moderately severe persistent asthma, the improvement provided by once-daily nebulised doses of 1.0 mg budesonide has been found to be equivalent to that with twice-daily doses of 0.25 or 0.5 mg, indicating that once-daily therapy is an effective option that can be considered in many patients. In view of the time-consuming nature of nebuliser administration, reduction of the frequency of corticosteroid administration from twice to once daily may be useful in simplifying the treatment programme and improving compliance with it. This may be beneficial in reducing under-utilisation of inhaled corticosteroids in children with asthma and improving long term control of the disease.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:19125898",
+          "title": "Inhaled corticosteroids for asthma: are they all the same?",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Comparative Study",
+            "Journal Article",
+            "Research Support, N.I.H., Extramural",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2009",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "CONCLUSIONS",
+            "METHODS",
+            "OBJECTIVES",
+            "RESULTS"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "To assess similarities and differences among currently available inhaled corticosteroids (ICS) for treatment of asthma, with special emphasis on factors that may affect the relative safety of these medications. PubMed was searched for relevant reviews and original articles. Information from these studies was synthesized and critically assessed. Differences in corticosteroid formulations and delivery systems can create variations in therapeutic efficacy. Chemical properties of the various corticosteroids may also affect their relative safety. Ciclesonide and beclomethasone dipropionate are administered as prodrugs activated by enzymes present in the lungs but not the oropharynx. Corticosteroid-specific adverse effects in the oropharynx are thus avoided, although formulation-specific effects may remain. Other adverse effects require systemic availability, either via the gastrointestinal tract or the lung. Once they enter the systemic circulation, all ICS are rapidly metabolized by the liver. Oral bioavailability of ICS such as fluticasone, ciclesonide and mometasone is minimal, as a result of their essentially complete first-pass metabolism in the liver. Ciclesonide also undergoes extrahepatic metabolism that eliminates it even more rapidly. Additionally, ciclesonide and mometasone exhibit very high levels of binding to serum proteins that reduces their ability to stimulate glucocorticoid receptors outside the lung. Despite acting by similar mechanisms, currently available ICS and their delivery systems differ in ways that can potentially affect both safety and therapeutic effectiveness for individual patients.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:41733139",
+          "title": "As-needed inhaled corticosteroids in asthma: from evidence to implementation.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "PURPOSE OF REVIEW",
+            "RECENT FINDINGS",
+            "SUMMARY"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This review aims to clarify the role of as-needed ICS through the severity spectrum of adult asthma and explores the challenges associated with implementation. This review is timely following the recent US Food and Drug Administration (FDA) approval of an ICS/SABA combination inhaler. In 2019, the Global Initiative for Asthma (GINA) recommended against the use of short-acting beta agonist (SABA) monotherapy and officially endorsed the use of as-needed inhaled corticosteroid with a fast-acting bronchodilator [anti-inflammatory reliever (AIR)] as the preferred strategy across all treatment steps. In 2020, the US NHLBI asthma guidelines recommended ICS+SABA at step 2, and ICS/formoterol to be used as maintenance and reliever therapy (MART) at treatment steps 3 and 4. Despite these strong recommendations, uptake of this strategy in the United States has been slow. Barriers to MART implementation are explained, and implementation strategies are reviewed. Transition to a single ICS/formoterol inhaler as MART from traditional multiinhaler regimens offers the opportunity for multidomain benefits. The role of novel ICS/SABA combination inhalers remains to be determined across the continuum of asthma.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Detailed description"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This is a first in human (FIH) clinical study to evaluate the safety, tolerability, pharmacokinetics and pharmacodynamics of AZD8630 in healthy adults (Part A) and adult asthma patients on medium to high dose inhaled corticosteroids / Long-acting beta-agonists (Part B) The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose levels. Part A: This part will consist 4 sub-parts and will include healthy participants and healthy participants of Chinese and Japanese ethnicity. These participants will randomized to receive AZD8630 and to receive placebo. * Sub-Part A1, SAD in healthy participants (one cohort in Sub-Part A1 will receive IV AZD8630 \\[IV formulation\\]) * Sub-Part A2, SAD in healthy participants of Chinese and Japanese ethnicity * Sub-Part A3, MAD in healthy participants * Sub-Part A4, MAD in healthy participants of Chinese and Japanese ethnicity Part B: Adult asthma patients will be randomized to one of 3 inhaled dose levels of AZD8630 or placebo. The expected duration of study participation for each participants in the part A is up to 87 days, and each patients in the Part B is up to 70 days.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:34024646",
+          "title": "[Strategies for prescription of inhaled corticosteroids in mild-to-moderate asthma].",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Asthma is a common respiratory condition characterized by chronic inflammation of the airways. Most asthmatics have a mild-to-moderate form of the disease, but are still at risk of severe exacerbations and significantly impaired quality of life. This article reviews the strategies for prescription of inhaled corticosteroids in patients with mild-to-moderate asthma. The definition of asthma severity, the goals of asthma management and the adjustment of therapeutics are successively addressed. The major changes proposed by the GINA group in 2019 are also discussed.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "matched_passages": []
+        }
+      ],
+      "question": "What do these sources show about the benefits and limitations of inhaled corticosteroids for asthma? Include useful reported numbers where relevant."
+    },
+    "generation_context_sha256": "bfd5db7795043bc932e7580a1a1bc527f82c83ff495c66c2642c100e7e3e5f07"
+  },
+  {
+    "case_id": "asthma-trial-statistics",
+    "snapshot_id": "refreshed-asthma-public",
+    "answer": {
+      "id": "21517469-a03b-42ad-b8df-054f5a0eb673",
+      "workspace_id": "refreshed-asthma-public",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": [
+        "clinical_trials"
+      ],
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "8d41ece8789accb1dd5dacee4cf8b65c9c02a8d56794200d6213bd361a2a163d"
+      },
+      "short_answer": "The ClinicalTrials.gov study NCT00545844 [ClinicalTrials.gov:NCT00545844] assessed asthma control in adult subjects with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled.\n\nThe study evaluated the effectiveness of adding montelukast to inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The treatment combination was studied in patients with uncontrolled asthma and allergic rhinitis.\n\nThe comparison between baseline and week 8 can tell us about the change in asthma control over time in patients receiving this treatment combination [ClinicalTrials.gov:NCT00545844]. The study found a significant improvement in asthma control, with the number of uncontrolled patients decreasing from 312 to 72.\n\nThe study also reported the number of controlled patients at baseline and week 8, which were 0 and 229, respectively [ClinicalTrials.gov:NCT00545844]. This further supports the finding that the treatment combination is effective in improving asthma control.\n\nThe uncertainty of this result is that it is based on a single study with a limited duration of 8 weeks [ClinicalTrials.gov:NCT00545844]. The long-term effects of the treatment combination are not known, and the results may not be generalizable to other populations.",
+      "direct_answer": "The ClinicalTrials.gov study NCT00545844 [ClinicalTrials.gov:NCT00545844] assessed asthma control in adult subjects with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled.\n\nThe study evaluated the effectiveness of adding montelukast to inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The treatment combination was studied in patients with uncontrolled asthma and allergic rhinitis.\n\nThe comparison between baseline and week 8 can tell us about the change in asthma control over time in patients receiving this treatment combination [ClinicalTrials.gov:NCT00545844]. The study found a significant improvement in asthma control, with the number of uncontrolled patients decreasing from 312 to 72.\n\nThe study also reported the number of controlled patients at baseline and week 8, which were 0 and 229, respectively [ClinicalTrials.gov:NCT00545844]. This further supports the finding that the treatment combination is effective in improving asthma control.\n\nThe uncertainty of this result is that it is based on a single study with a limited duration of 8 weeks [ClinicalTrials.gov:NCT00545844]. The long-term effects of the treatment combination are not known, and the results may not be generalizable to other populations.",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 2 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT00545844 \u00b7 Singulair(R) In Asthma And Allergic Rhinitis (0476-383) \u00b7 Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 ClinicalTrials.gov:NCT00967590 \u00b7 A Study of RO5036505 in Patients With Moderate to Severe Asthma \u00b7 Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "2 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The study was limited to an 8-week duration",
+        "The results may not be generalizable to other populations"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The study was limited to an 8-week duration",
+        "The results may not be generalizable to other populations",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "public-chunk-015",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 1.0457,
+          "section": "Results outcome 003",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "corticosteroids",
+            "inhaled",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, corticosteroids, inhaled, week in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-013",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+          "score": 0.8426,
+          "section": "Results outcome 001",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "results",
+            "was",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, results, was, week in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-018",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7752,
+          "section": "Results outcome 006",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-017",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7654,
+          "section": "Results outcome 005",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-016",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete a single question describing how satisfied they were regarding their asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=24 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=136 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=77 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=36 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=97 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=16 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=2 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7639,
+          "section": "Results outcome 004",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-014",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: The Mean Change in Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) Overall Score Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) consists of 14 questions to assess patient's overall quality of life related to allergic rhinitis on a scale of 0 (least impairment) to 6 (greatest impairment). The score is the mean of the 14 questions, ranging from 0 to 6. Change is computed as Week 8 score - Week 0 score Population: Based on ITT population; there were 286 patients with available data regarding the mean change in MiniRQLQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 8 | id=OG000 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=286 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=-1.45; spread=1.35",
+          "score": 0.7387,
+          "section": "Results outcome 002",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-012",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "score": 0.6294,
+          "section": "Brief summary",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-036",
+          "source_id": "public-source-09",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "score": 0.5044,
+          "section": "Brief summary",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "url": "https://clinicaltrials.gov/study/NCT00967590",
+          "external_id": "NCT00967590",
+          "publication_date": null,
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "asthma",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, inhaled in a trial record."
+        }
+      ],
+      "created_at": "2026-10-30T00:32:45.471167+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The ClinicalTrials.gov study NCT00545844 [ClinicalTrials.gov:NCT00545844] assessed asthma control in adult subjects with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled. The study evaluated the effectiveness of adding montelukast to inhaled corticosteroids. \", \"The comparison between baseline and week 8 can tell us about the change in asthma control over time in patients receiving this treatment combination. The study found a significant improvement in asthma control, with the number of uncontrolled patients decreasing from 312 to 72. \", \"The treatment studied was the addition of montelukast to inhaled corticosteroids, and the comparison between baseline and week 8 allows us to evaluate the effectiveness of this treatment combination in improving asthma control. The results suggest that this combination is effective in reducing the number of uncontrolled patients. \", \"It's worth noting that the study also reported the number of controlled patients at baseline and week 8, which were 0 and 229, respectively. This further supports the finding that the treatment combination is effective in improving asthma control. \", \"The study's results are based on the intent-to-treat analysis, which included 313 patients at baseline and 301 patients at week 8. The comparison between baseline and week 8 is a within-group comparison, and it can tell us about the change in asthma control over time in patients receiving this treatment combination.\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\"], \"uncertainty\": [\"The study only reported results for the intent-to-treat population, and the results may not be generalizable to other populations.\", \"The study did not provide a direct comparison with a control group, so the results should be interpreted with caution.\", \"The study was limited to an 8-week duration, and the long-term effects of the treatment combination are not known.\"]}",
+        "usage": {
+          "prompt_tokens": 3784,
+          "completion_tokens": 422,
+          "total_tokens": 4206,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 187.33831787109375
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The ClinicalTrials.gov study NCT00545844 [ClinicalTrials.gov:NCT00545844] assessed asthma control in adult subjects with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled. \", \"The study evaluated the effectiveness of adding montelukast to inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The treatment combination was studied in patients with uncontrolled asthma and allergic rhinitis. \", \"The comparison between baseline and week 8 can tell us about the change in asthma control over time in patients receiving this treatment combination [ClinicalTrials.gov:NCT00545844]. The study found a significant improvement in asthma control, with the number of uncontrolled patients decreasing from 312 to 72. \", \"The study also reported the number of controlled patients at baseline and week 8, which were 0 and 229, respectively [ClinicalTrials.gov:NCT00545844]. This further supports the finding that the treatment combination is effective in improving asthma control. \", \"The uncertainty of this result is that it is based on a single study with a limited duration of 8 weeks [ClinicalTrials.gov:NCT00545844]. The long-term effects of the treatment combination are not known, and the results may not be generalizable to other populations.\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\"], \"uncertainty\": [\"The study was limited to an 8-week duration\", \"The results may not be generalizable to other populations\"]}",
+        "usage": {
+          "prompt_tokens": 4755,
+          "completion_tokens": 346,
+          "total_tokens": 5101,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 197.66741943359375
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "inhaled corticosteroids"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Results outcome 001",
+            "Results outcome 002",
+            "Results outcome 003",
+            "Results outcome 004",
+            "Results outcome 005",
+            "Results outcome 006"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "matched_passages": [
+            "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+            "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001"
+          ]
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "matched_passages": []
+        }
+      ],
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us."
+    },
+    "generation_context_sha256": "e18bd500732ff04ee43598efa6841a307d8e3db35ac9407b93261f612227ce18"
+  },
+  {
+    "case_id": "asthma-trial-followup",
+    "snapshot_id": "refreshed-asthma-public",
+    "answer": {
+      "id": "17b99c07-8dbb-4ee0-8787-d19958186087",
+      "workspace_id": "refreshed-asthma-public",
+      "question": "Explain that more simply. Keep the key numbers and the main limitation.",
+      "previous_answer_id": "21517469-a03b-42ad-b8df-054f5a0eb673",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": [
+        "clinical_trials"
+      ],
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "8d41ece8789accb1dd5dacee4cf8b65c9c02a8d56794200d6213bd361a2a163d",
+        "ClinicalTrials.gov:NCT05110976": "0a7d0e5c79a1732f623f8bd133740b949b042793cbb54ce29f236c4f2aa2e8cc"
+      },
+      "short_answer": "A study [ClinicalTrials.gov:NCT00545844] looked at how well adding montelukast to inhaled corticosteroids controlled asthma in adults with uncontrolled asthma and allergic rhinitis. At the start, 312 out of 313 patients had uncontrolled asthma, but after 8 weeks, this number decreased to 72 out of 301 patients.\n\nThe study also measured asthma control using a questionnaire, and the average score improved from 2.03 at the start to 0.92 after 8 weeks [ClinicalTrials.gov:NCT00545844]. This shows that adding montelukast to inhaled corticosteroids can help improve asthma control.\n\nThe main limitation of this study is that it only lasted 8 weeks [ClinicalTrials.gov:NCT00545844]. We don't know what would happen if patients took this treatment combination for a longer time.\n\nAnother study, NCT05110976 [ClinicalTrials.gov:NCT05110976], is about a different medication, AZD8630, and its safety and effects in healthy people and asthma patients. However, the results of this study are not available in the provided information [ClinicalTrials.gov:NCT05110976].",
+      "direct_answer": "A study [ClinicalTrials.gov:NCT00545844] looked at how well adding montelukast to inhaled corticosteroids controlled asthma in adults with uncontrolled asthma and allergic rhinitis. At the start, 312 out of 313 patients had uncontrolled asthma, but after 8 weeks, this number decreased to 72 out of 301 patients.\n\nThe study also measured asthma control using a questionnaire, and the average score improved from 2.03 at the start to 0.92 after 8 weeks [ClinicalTrials.gov:NCT00545844]. This shows that adding montelukast to inhaled corticosteroids can help improve asthma control.\n\nThe main limitation of this study is that it only lasted 8 weeks [ClinicalTrials.gov:NCT00545844]. We don't know what would happen if patients took this treatment combination for a longer time.\n\nAnother study, NCT05110976 [ClinicalTrials.gov:NCT05110976], is about a different medication, AZD8630, and its safety and effects in healthy people and asthma patients. However, the results of this study are not available in the provided information [ClinicalTrials.gov:NCT05110976].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 2 source records; the final answer uses 2 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT00545844 \u00b7 Singulair(R) In Asthma And Allergic Rhinitis (0476-383) \u00b7 Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits. \u00b7 partial excerpt",
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT05110976 \u00b7 A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists \u00b7 Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "2 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "2 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The study only lasted 8 weeks, so we don't know the long-term effects of the treatment combination",
+        "The results may not apply to all people with asthma"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The study only lasted 8 weeks, so we don't know the long-term effects of the treatment combination",
+        "The results may not apply to all people with asthma",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844",
+        "ClinicalTrials.gov:NCT05110976"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "public-chunk-015",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 1.0189,
+          "section": "Results outcome 003",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "corticosteroids",
+            "inhaled",
+            "questions",
+            "that",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, corticosteroids, inhaled, questions in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-013",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+          "score": 0.7848,
+          "section": "Results outcome 001",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "results",
+            "was",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, results, was, week in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-014",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: The Mean Change in Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) Overall Score Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) consists of 14 questions to assess patient's overall quality of life related to allergic rhinitis on a scale of 0 (least impairment) to 6 (greatest impairment). The score is the mean of the 14 questions, ranging from 0 to 6. Change is computed as Week 8 score - Week 0 score Population: Based on ITT population; there were 286 patients with available data regarding the mean change in MiniRQLQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 8 | id=OG000 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=286 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=-1.45; spread=1.35",
+          "score": 0.7329,
+          "section": "Results outcome 002",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "questions",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, questions, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-018",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7329,
+          "section": "Results outcome 006",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-017",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7193,
+          "section": "Results outcome 005",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-016",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete a single question describing how satisfied they were regarding their asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=24 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=136 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=77 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=36 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=97 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=16 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=2 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7181,
+          "section": "Results outcome 004",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-012",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "score": 0.6013,
+          "section": "Brief summary",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-020",
+          "source_id": "public-source-04",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "text": "The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose",
+          "score": 0.5071,
+          "section": "Detailed description 2",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "url": "https://clinicaltrials.gov/study/NCT05110976",
+          "external_id": "NCT05110976",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        }
+      ],
+      "created_at": "2026-10-30T00:33:14.155762+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The study NCT00545844 [ClinicalTrials.gov:NCT00545844] found that adding montelukast to inhaled corticosteroids improved asthma control in adult patients with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled.\", \"The mean Asthma Control Questionnaire score improved from 2.03 at baseline to 0.92 at week 8 [ClinicalTrials.gov:NCT00545844]. This suggests that the treatment combination is effective in improving asthma control. However, the study only lasted 8 weeks, and the long-term effects of the treatment combination are not known [ClinicalTrials.gov:NCT00545844].\", \"Another study, NCT05110976 [ClinicalTrials.gov:NCT05110976], investigated the safety and effects of a different medication, AZD8630, in healthy subjects and asthma patients on inhaled corticosteroids and long-acting beta-agonists. However, the results of this study are not available in the provided text [ClinicalTrials.gov:NCT05110976].\", \"The main limitation of the available results is that they are based on a single study with a limited duration [ClinicalTrials.gov:NCT00545844]. The results may not be generalizable to other populations or to longer treatment periods.\", \"In summary, the study NCT00545844 [ClinicalTrials.gov:NCT00545844] found that adding montelukast to inhaled corticosteroids improved asthma control in adult patients with uncontrolled asthma and allergic rhinitis, but the long-term effects are not known.\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\", \"ClinicalTrials.gov:NCT05110976\"], \"uncertainty\": [\"The long-term effects of the treatment combination are not known\", \"The results may not be generalizable to other populations\", \"The study only lasted 8 weeks\"]}",
+        "usage": {
+          "prompt_tokens": 4019,
+          "completion_tokens": 429,
+          "total_tokens": 4448,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 195.03884887695312
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "91cabdeae50407a5a393dce2c0dc7b9a03b967dec37dde83a61b235c9ff0fc6a",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"A study [ClinicalTrials.gov:NCT00545844] looked at how well adding montelukast to inhaled corticosteroids controlled asthma in adults with uncontrolled asthma and allergic rhinitis. At the start, 312 out of 313 patients had uncontrolled asthma, but after 8 weeks, this number decreased to 72 out of 301 patients.\", \"The study also measured asthma control using a questionnaire, and the average score improved from 2.03 at the start to 0.92 after 8 weeks [ClinicalTrials.gov:NCT00545844]. This shows that adding montelukast to inhaled corticosteroids can help improve asthma control.\", \"The main limitation of this study is that it only lasted 8 weeks [ClinicalTrials.gov:NCT00545844]. We don't know what would happen if patients took this treatment combination for a longer time.\", \"Another study, NCT05110976 [ClinicalTrials.gov:NCT05110976], is about a different medication, AZD8630, and its safety and effects in healthy people and asthma patients. However, the results of this study are not available in the provided information [ClinicalTrials.gov:NCT05110976].\"], \"cited_sources\": [\"ClinicalTrials.gov:NCT00545844\", \"ClinicalTrials.gov:NCT05110976\"], \"uncertainty\": [\"The study only lasted 8 weeks, so we don't know the long-term effects of the treatment combination\", \"The results may not apply to all people with asthma\"]}",
+        "usage": {
+          "prompt_tokens": 4894,
+          "completion_tokens": 327,
+          "total_tokens": 5221,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 197.48292541503906
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "91cabdeae50407a5a393dce2c0dc7b9a03b967dec37dde83a61b235c9ff0fc6a",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "inhaled corticosteroids"
+      },
+      "history": [
+        {
+          "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+          "answer": "The ClinicalTrials.gov study NCT00545844 [ClinicalTrials.gov:NCT00545844] assessed asthma control in adult subjects with uncontrolled asthma and allergic rhinitis. At baseline, 312 out of 313 patients were considered uncontrolled, while at week 8, 72 out of 301 patients were considered uncontrolled.\n\nThe study evaluated the effectiveness of adding montelukast to inhaled corticosteroids [ClinicalTrials.gov:NCT00545844]. The treatment combination was studied in patients with uncontrolled asthma and allergic rhinitis.\n\nThe comparison between baseline and week 8 can tell us about the change in asthma control over time in patients receiving this treatment combination [ClinicalTrials.gov:NCT00545844]. The study found a significant improvement in asthma control, with the number of uncontrolled patients decreasing from 312 to 72.\n\nThe study also reported the number of controlled patients at baseline and week 8, which were 0 and 229, respectively [ClinicalTrials.gov:NCT00545844]. This further supports the finding that the treatment combination is effective in improving asthma control.\n\nThe uncertainty of this result is that it is based on a single study with a limited duration of 8 weeks [ClinicalTrials.gov:NCT00545844]. The long-term effects of the treatment combination are not known, and the results may not be generalizable to other populations."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Results outcome 001",
+            "Results outcome 002",
+            "Results outcome 003",
+            "Results outcome 004",
+            "Results outcome 005",
+            "Results outcome 006"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "matched_passages": [
+            "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+            "Outcome: The Mean Change in Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) Overall Score Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) consists of 14 questions to assess patient's overall quality of life related to allergic rhinitis on a scale of 0 (least impairment) to 6 (greatest impairment). The score is the mean of the 14 questions, ranging from 0 to 6. Change is computed as Week 8 score - Week 0 score Population: Based on ITT population; there were 286 patients with available data regarding the mean change in MiniRQLQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 8 | id=OG000 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=286 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=-1.45; spread=1.35",
+            "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001"
+          ]
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Detailed description"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This is a first in human (FIH) clinical study to evaluate the safety, tolerability, pharmacokinetics and pharmacodynamics of AZD8630 in healthy adults (Part A) and adult asthma patients on medium to high dose inhaled corticosteroids / Long-acting beta-agonists (Part B) The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose levels. Part A: This part will consist 4 sub-parts and will include healthy participants and healthy participants of Chinese and Japanese ethnicity. These participants will randomized to receive AZD8630 and to receive placebo. * Sub-Part A1, SAD in healthy participants (one cohort in Sub-Part A1 will receive IV AZD8630 \\[IV formulation\\]) * Sub-Part A2, SAD in healthy participants of Chinese and Japanese ethnicity * Sub-Part A3, MAD in healthy participants * Sub-Part A4, MAD in healthy participants of Chinese and Japanese ethnicity Part B: Adult asthma patients will be randomized to one of 3 inhaled dose levels of AZD8630 or placebo. The expected duration of study participation for each participants in the part A is up to 87 days, and each patients in the Part B is up to 70 days.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Explain that more simply. Keep the key numbers and the main limitation."
+    },
+    "generation_context_sha256": "91cabdeae50407a5a393dce2c0dc7b9a03b967dec37dde83a61b235c9ff0fc6a"
+  }
+]
