@@ -118,6 +118,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
               "pipeline_variant": "two_pass", "status": "HOSTED CANDIDATE; not pilot verified", "complete": False,
               "strategy_experiment": strategy,
               "strategy_sha256": benchmark.sha256(Path(__file__).with_name("evidence_plan.py")) if strategy else None,
+              "claim_repair_sha256": benchmark.sha256(Path(__file__).with_name("claim_review.py")) if strategy == "repaired-claims" else None,
               "fixture_inventory_sha256": benchmark.sha256(benchmark.INVENTORY),
               "runner_sha256": benchmark.sha256(Path(__file__)),
               "question_inventory_sha256": benchmark.sha256(cases_path) if cases_path else None,
@@ -128,7 +129,7 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                               "max_output_tokens": cloudflare.MAX_OUTPUT_TOKENS},
               "method": {"boundary": "loopback HTTP Ask API including serialization; hosted inference",
                          "phase_labels": ("draft/revision timers represent selection/writing" if strategy == "verified-quotes" else
-                                          "draft/revision timers represent drafting/claim review" if strategy == "reviewed-claims" else "draft/revision"),
+                                          "draft/revision timers represent drafting/claim review" if strategy in {"reviewed-claims", "repaired-claims"} else "draft/revision"),
                          "cold_warm": "provider cache/residency unknown; no cold/warm classification",
                          "paid_provider_fallbacks": 0, "local_model_calls": 0,
                          "tokens": "provider reported only; distinct tokenizer from native baseline",
@@ -246,7 +247,7 @@ def main():
     parser.add_argument("--prompt-file", type=Path, help="Evaluate a candidate without changing production instructions")
     parser.add_argument("--cases-file", type=Path, help="Independent questions using the unchanged frozen source snapshots")
     parser.add_argument("--model-experiment", choices=sorted(MODEL_EXPERIMENTS), help="Isolated Cloudflare model experiment; production default is unchanged")
-    parser.add_argument("--strategy-experiment", choices=["verified-quotes", "reviewed-claims"], help="Evaluation-only two-call evidence strategy; final answer guards unchanged")
+    parser.add_argument("--strategy-experiment", choices=["verified-quotes", "reviewed-claims", "repaired-claims"], help="Evaluation-only two-call evidence strategy; final answer guards unchanged")
     args = parser.parse_args()
     load_dotenv(API_ROOT / ".env", override=False)
     with candidate_model(args.model_experiment):

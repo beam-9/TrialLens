@@ -289,3 +289,43 @@ def test_native_responses_evaluation_captures_same_source_context_without_reason
     answer = json.loads(output)[0]
     assert answer['generation_context']['evidence'][0]['citation'] == 'PubMed:EVAL-NUMBERS'
     assert answer['provider_outputs'][1]['request_options']['reasoning'] == {'effort': 'low'}
+
+
+@pytest.mark.parametrize('kind', ['repaired', 'copied', 'bad_ci', 'foreign_quote'])
+def test_claim_repair_http_path_preserves_guards_and_isolation(configured, monkeypatch, tmp_path, kind):
+    from triallens import conversation
+    calls = []
+    original = runner.cloudflare.completion
+    def post(url, **kwargs):
+        request = kwargs['json']
+        calls.append(request)
+        source = json.loads(request['messages'][1]['content'])['evidence'][0]
+        if len(calls) == 1:
+            content = {'claims': [{'text': 'This synthetic trial proved a 999 percentage-point benefit.',
+                                  'citation': source['citation'], 'paragraph': 0}]}
+        else:
+            assert calls[0]['messages'][1] == request['messages'][1]
+            corrected = ('In this synthetic trial of 240 adults, intervention A had an HbA1c endpoint '
+                         '0.5 percentage points below placebo after 12 weeks; the reported 95% CI was '
+                         '0.2 to 0.8 percentage points lower.')
+            if kind == 'copied':
+                corrected = source['text']
+            if kind == 'bad_ci':
+                corrected = 'The 95% confidence interval means a 95% chance that the true effect lies within this range.'
+            quote = 'A foreign source says the result was wholly different and is not in this record.' if kind == 'foreign_quote' else source['text']
+            content = {'reviews': [{'index': 0, 'verdict': 'revised', 'text': corrected, 'quotes': [quote]}]}
+        return httpx.Response(200, request=httpx.Request('POST', url), json={'success': True, 'result': {
+            'response': content, 'usage': {'prompt_tokens': 900, 'completion_tokens': 180}}})
+    monkeypatch.setattr(conversation.httpx, 'post', post)
+    result = runner.run(tmp_path/'metrics', tmp_path/'answers', ['numerical-hba1c'], strategy='repaired-claims')
+    assert len(calls) == 2 and result['isolation_verified'] and result['claim_repair_sha256']
+    assert runner.cloudflare.completion is original
+    saved = json.loads((tmp_path/'answers').read_text())[0]
+    assert saved['generation_context'] == json.loads(calls[0]['messages'][1]['content'])
+    assert 'reviews' not in saved['answer']['direct_answer']
+    trace = result['requests'][0]['trace']
+    assert (trace['result_kind'] == 'model_answer') is (kind == 'repaired')
+    if kind == 'repaired':
+        assert '999' not in saved['answer']['direct_answer'] and '0.5' in saved['answer']['direct_answer']
+    else:
+        assert trace['fallback_reason'] == 'validation_rejection'

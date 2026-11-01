@@ -191,6 +191,11 @@ def verified_subset(content: str, payload: dict) -> dict:
 
 @contextmanager
 def candidate_strategy(name):
+    if name == "repaired-claims":
+        from claim_review import repaired_claims_experiment
+        with repaired_claims_experiment():
+            yield
+        return
     if name not in (None, "verified-quotes", "reviewed-claims"):
         raise ValueError("Unknown evidence strategy")
     original = cloudflare.completion

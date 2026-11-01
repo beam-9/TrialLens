@@ -62,6 +62,7 @@ def main():
     parser.add_argument('--revision-feedback', action='store_true')
     parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     parser.add_argument('--reasoning-effort', choices=('low', 'medium', 'high'))
+    parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims'))
     args = parser.parse_args()
     load_dotenv(API_ROOT / '.env', override=False)
     experiment = revision_feedback_experiment() if args.revision_feedback else nullcontext()
@@ -69,9 +70,10 @@ def main():
     with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort):
         result = cloudflare_run.run(args.output, args.answers, args.case,
             quota_path=API_ROOT / 'data/evaluation-usage.sqlite3',
-            prompt_path=args.prompt_file, cases_path=args.cases_file)
+            prompt_path=args.prompt_file, cases_path=args.cases_file, strategy=args.strategy_experiment)
     result['quality_experiment'] = {
         'revision_feedback': args.revision_feedback,
+        'strategy_experiment': args.strategy_experiment,
         'model_experiment': args.model_experiment,
         'reasoning_effort': args.reasoning_effort,
         'wrapper_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
