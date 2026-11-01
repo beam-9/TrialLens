@@ -158,6 +158,10 @@ def test_strategy_makes_exactly_two_calls_and_preserves_original_context(monkeyp
     expected_review_schema = claim_review.RepairedReview.model_json_schema()
     expected_review_schema["$defs"]["RepairedClaim"]["properties"]["quotes"]["items"]["enum"] = sorted(
         claim_review.passage_index(parsed_draft, payload()))
+    expected_review_schema["$defs"]["RepairedClaim"]["properties"]["index"]["enum"] = [0]
+    expected_review_schema["properties"]["reviews"]["minItems"] = 1
+    expected_review_schema["properties"]["reviews"]["maxItems"] = 1
+    assert json.loads(calls[1][0][-1]["content"])["indexed_claims"] == [{"index": 0, **claim()}]
     assert calls[1][1] == expected_review_schema
     assert json.loads(final)["paragraphs"] == [claim()["text"] + " [PubMed:one]"]
     assert claim_review.cloudflare.completion is original

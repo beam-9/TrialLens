@@ -242,8 +242,12 @@ def repaired_claims_experiment():
             raise ValueError('No source passages available for review')
         review_schema = RepairedReview.model_json_schema()
         review_schema['$defs']['RepairedClaim']['properties']['quotes']['items']['enum'] = sorted(index)
+        review_schema['$defs']['RepairedClaim']['properties']['index']['enum'] = list(range(len(draft.claims)))
+        review_schema['properties']['reviews']['minItems'] = len(draft.claims)
+        review_schema['properties']['reviews']['maxItems'] = len(draft.claims)
         review = original([{'role': 'system', 'content': ANCHORED_REVIEW}, *messages[1:3],
                            {'role': 'user', 'content': json.dumps({'task': 'Correct each indexed draft sentence using its own source. Return review JSON with passage IDs in quotes.',
+                                                                  'indexed_claims': [{'index': i, **claim.model_dump()} for i, claim in enumerate(draft.claims)],
                                                                   'passage_index': index})}], review_schema)
         return json.dumps(render_repaired(draft, expand_review(review, draft, index), payload))
 
