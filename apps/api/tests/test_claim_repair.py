@@ -127,13 +127,16 @@ def request_messages(context=None):
 def test_strategy_makes_exactly_two_calls_and_preserves_original_context(monkeypatch):
     calls = []
     encoded_draft = json.dumps({"claims": [claim()]})
-    review_json = review(item())
+    parsed_draft = evidence_plan.ClaimDraft.model_validate_json(encoded_draft)
+    passage_ids = [key for key, value in claim_review.passage_index(parsed_draft, payload()).items()
+                   if value["citation"] == "PubMed:one"]
+    review_json = review(item(quotes=[passage_ids[0]]))
 
     def fake_completion(messages, schema):
         calls.append((messages, schema))
         if messages[0]["content"] == claim_review.DRAFT:
             return encoded_draft
-        assert messages[0]["content"] == claim_review.REVIEW
+        assert messages[0]["content"] == claim_review.ANCHORED_REVIEW
         return review_json
 
     monkeypatch.setattr(claim_review.cloudflare, "completion", fake_completion)
@@ -152,7 +155,10 @@ def test_strategy_makes_exactly_two_calls_and_preserves_original_context(monkeyp
     assert calls[0][1]["$defs"]["DraftClaim"]["properties"]["citation"]["enum"] == ["PubMed:one", "PubMed:two"]
     assert calls[1][0][1]["content"] == context
     assert json.loads(calls[1][0][2]["content"]) == json.loads(encoded_draft)
-    assert calls[1][1] == claim_review.RepairedReview.model_json_schema()
+    expected_review_schema = claim_review.RepairedReview.model_json_schema()
+    expected_review_schema["$defs"]["RepairedClaim"]["properties"]["quotes"]["items"]["enum"] = sorted(
+        claim_review.passage_index(parsed_draft, payload()))
+    assert calls[1][1] == expected_review_schema
     assert json.loads(final)["paragraphs"] == [claim()["text"] + " [PubMed:one]"]
     assert claim_review.cloudflare.completion is original
 
@@ -176,6 +182,54 @@ def test_strategy_rejects_context_mismatch_without_second_call(monkeypatch):
     assert claim_review.cloudflare.completion is original
 
 
+def test_passage_index_uses_exact_bounded_source_windows():
+    long_text = "Adults in the treatment group completed the study at week 12. " * 500
+    source_payload = {"question": "What happened at week 12?", "evidence": [{
+        "citation": "PubMed:long", "text": long_text, "matched_passages": []}]}
+    source_draft = draft(claim("The treatment group completed the study at week 12.", citation="PubMed:long"))
+    indexed = claim_review.passage_index(source_draft, source_payload)
+    passages = [entry["text"] for entry in indexed.values()]
+    assert indexed
+    assert sum(map(len, passages)) <= claim_review.PASSAGE_BUDGET
+    assert all(30 <= len(text) <= 900 and text in long_text for text in passages)
+
+
+def test_expand_review_discards_foreign_and_unknown_passage_ids():
+    source_draft = draft(claim())
+    index = {
+        "S0P0": {"citation": "PubMed:one", "text": payload()["evidence"][0]["text"]},
+        "S1P0": {"citation": "PubMed:two", "text": payload()["evidence"][1]["text"]},
+    }
+    foreign = claim_review.expand_review(review(item(quotes=["S1P0"])), source_draft, index)
+    unknown = claim_review.expand_review(review(item(quotes=["S0P999"])), source_draft, index)
+    assert json.loads(foreign)["reviews"][0]["quotes"] == []
+    assert json.loads(unknown)["reviews"][0]["quotes"] == []
+
+
+def test_passage_index_returns_empty_for_too_short_source():
+    short_payload = {"question": "status?", "evidence": [{
+        "citation": "PubMed:short", "text": "Too short.", "matched_passages": []}]}
+    short_draft = draft(claim("The source is too short to quote.", citation="PubMed:short"))
+    assert claim_review.passage_index(short_draft, short_payload) == {}
+
+
+def test_strategy_refuses_repeated_draft_call_while_review_is_pending(monkeypatch):
+    calls = []
+
+    def fake_completion(messages, schema):
+        calls.append(messages)
+        return json.dumps({"claims": [claim()]})
+
+    monkeypatch.setattr(claim_review.cloudflare, "completion", fake_completion)
+    original = claim_review.cloudflare.completion
+    with claim_review.repaired_claims_experiment():
+        with pytest.raises(ValueError, match="already has a pending draft"):
+            claim_review.cloudflare.completion(request_messages(), {})
+            claim_review.cloudflare.completion(request_messages(), {})
+    assert len(calls) == 1
+    assert claim_review.cloudflare.completion is original
+
+
 def test_strategy_rejects_invalid_draft_citation_without_review_call(monkeypatch):
     calls = []
 
@@ -193,8 +247,8 @@ def test_strategy_rejects_invalid_draft_citation_without_review_call(monkeypatch
 
 
 @pytest.mark.parametrize("bad_review", [
-    '{"reviews":[{"index":0,"verdict":"revised","text":"The treatment reduced the measured value by 2.4 cm.","quotes":["The study enrolled 120 adults and reported a mean reduction of 2.4 cm after treatment."],"extra":"injected"}]}',
-    '{"reviews":[{"index":0,"verdict":"revised","text":"The treatment reduced the measured value by 2.4 cm. [PubMed:two]","quotes":["The study enrolled 120 adults and reported a mean reduction of 2.4 cm after treatment."]}]}',
+    '{"reviews":[{"index":0,"verdict":"revised","text":"The treatment reduced the measured value by 2.4 cm.","quotes":["S0P0"],"extra":"injected"}]}',
+    '{"reviews":[{"index":0,"verdict":"revised","text":"The treatment reduced the measured value by 2.4 cm. [PubMed:two]","quotes":["S0P0"]}]}',
 ])
 def test_strategy_rejects_malformed_review_or_citation_injection_without_retry(monkeypatch, bad_review):
     calls = []
@@ -222,7 +276,7 @@ def test_strategy_does_not_retry_when_every_claim_fails_source_checks(monkeypatc
     def fake_completion(messages, schema):
         calls.append(messages)
         return json.dumps({"claims": [claim()]}) if len(calls) == 1 else review(
-            item(text="The treatment reduced the measured value by 999 cm.", quotes=[payload()["evidence"][0]["text"]]))
+            item(text="The treatment reduced the measured value by 999 cm.", quotes=["S0P0"]))
 
     monkeypatch.setattr(claim_review.cloudflare, "completion", fake_completion)
     original = claim_review.cloudflare.completion

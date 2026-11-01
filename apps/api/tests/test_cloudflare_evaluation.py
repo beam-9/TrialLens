@@ -313,7 +313,7 @@ def test_claim_repair_http_path_preserves_guards_and_isolation(configured, monke
             if kind == 'bad_ci':
                 corrected = 'The 95% confidence interval means a 95% chance that the true effect lies within this range.'
             quote = 'A foreign source says the result was wholly different and is not in this record.' if kind == 'foreign_quote' else source['text']
-            content = {'reviews': [{'index': 0, 'verdict': 'revised', 'text': corrected, 'quotes': [quote]}]}
+            content = {'reviews': [{'index': 0, 'verdict': 'revised', 'text': corrected, 'quotes': [quote] if kind == 'foreign_quote' else ['S0P0']}]}
         return httpx.Response(200, request=httpx.Request('POST', url), json={'success': True, 'result': {
             'response': content, 'usage': {'prompt_tokens': 900, 'completion_tokens': 180}}})
     monkeypatch.setattr(conversation.httpx, 'post', post)

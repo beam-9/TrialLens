@@ -169,6 +169,8 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
             except (ValueError, TypeError, AttributeError):
                 final_content = None
             case_outputs.append({"response": final_content, "usage": candidate.get("usage"),
+                                 "claim_support_index": json.loads(request_messages[-1]["content"])["passage_index"]
+                                                        if strategy == "repaired-claims" and len(request_messages) == 4 else None,
                                  "verified_selection": json.loads(kwargs["json"]["messages"][2]["content"])
                                                        if strategy == "verified-quotes" and len(kwargs["json"]["messages"]) == 4 else None,
                                  "generation_context_sha256": context_digest,
