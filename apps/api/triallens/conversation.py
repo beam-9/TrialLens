@@ -130,6 +130,10 @@ def scope_product_sources(workspace: Workspace, question: str, history: list[Ans
 
 def normalize_citations(text: str, allowed: set[str]) -> str:
     """Repair presentation only when every marker maps exactly to a supplied ID."""
+    # Providers sometimes wrap otherwise exact source IDs in Unicode citation
+    # brackets. Canonicalize only the delimiters; IDs remain case-sensitive and
+    # are still checked against the exact allowlist below.
+    text = text.translate(str.maketrans({"【": "[", "】": "]", "［": "[", "］": "]"}))
     def replace(match: re.Match) -> str:
         parts = [re.sub(r"^citation:\s*", "", part.strip(), flags=re.I)
                  for part in match.group(1).split(",")]
@@ -266,6 +270,29 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
         content_truncated = (len(prefix) < len(source.abstract) or bool(omitted_packets)
                              or any(match not in passages and " ".join(match.split()) not in normalized_prefix
                                     for match in matches))
+        outcome_links = []
+        sections = source.metadata.get("sections")
+        if isinstance(sections, dict):
+            for passage_index, passage in enumerate(passages):
+                if passage not in atomic:
+                    continue
+                normalized_passage = " ".join(passage.split())
+                for section, raw_packet in sections.items():
+                    if (not isinstance(section, str) or not isinstance(raw_packet, str)
+                            or not is_outcome_packet(source, section)
+                            or " ".join(raw_packet.split()) != normalized_passage):
+                        continue
+                    lines = raw_packet.splitlines()
+                    title = next((line[len("Outcome: "):] for line in lines
+                                  if line.startswith("Outcome: ")), "")
+                    if not title.strip():
+                        continue
+                    outcome_links.append({
+                        "id": section,
+                        "matched_passage_index": passage_index,
+                        "title": title[:500],
+                        "has_reported_analysis": any(line.startswith("Analysis: ") for line in lines),
+                    })
         if source.metadata.get("outcome_packet_version") == 1:
             packet_count = sum(is_outcome_packet(source, name) for name in source.metadata.get("sections", {}))
             content_truncated |= packet_count > sum(text in atomic for text in passages)
@@ -290,6 +317,7 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
             "content_truncated": content_truncated,
             "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
             "text": prefix, "matched_passages": passages,
+            **({"outcome_links": outcome_links} if outcome_links else {}),
         })
     return records
 

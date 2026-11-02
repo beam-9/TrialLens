@@ -236,7 +236,7 @@ def render_repaired(draft: ClaimDraft, content: str, payload: dict) -> dict:
 
 
 @contextmanager
-def repaired_claims_experiment():
+def repaired_claims_experiment(*, strict_outcomes: bool = False):
     original = cloudflare.completion
     pending = None
 
@@ -262,6 +262,11 @@ def repaired_claims_experiment():
         payload = json.loads(messages[1]['content'])
         draft = ClaimDraft.model_validate_json(messages[2]['content'])
         index = passage_index(draft, payload)
+        requirements = {}
+        if strict_outcomes:
+            from outcome_checks import tag_outcome_support, answer_requirements
+            index = tag_outcome_support(index, payload)
+            requirements = answer_requirements(payload)
         if not index:
             raise ValueError('No source passages available for review')
         review_schema = RepairedReview.model_json_schema()
@@ -269,12 +274,34 @@ def repaired_claims_experiment():
         review_schema['$defs']['RepairedClaim']['properties']['index']['enum'] = list(range(len(draft.claims)))
         review_schema['properties']['reviews']['minItems'] = len(draft.claims)
         review_schema['properties']['reviews']['maxItems'] = len(draft.claims)
-        review = original([{'role': 'system', 'content': ANCHORED_REVIEW}, *messages[1:3],
+        instructions = ANCHORED_REVIEW
+        if strict_outcomes:
+            instructions += ('\nKeep each factual sentence tied to one outcome_id. Do not combine one outcome\'s measurements '
+                             'with another outcome\'s p-value. A packet without a reported analysis does not support a statistical-significance claim. '
+                             'Satisfy answer_requirements by repairing claims, even when the draft omitted a requested category, denominator or limitation.')
+        review = original([{'role': 'system', 'content': instructions}, *messages[1:3],
                            {'role': 'user', 'content': json.dumps({'task': 'Correct each indexed draft sentence using its own source. Return review JSON with passage IDs in quotes.',
                                                                   'indexed_claims': [{'index': i, **claim.model_dump()} for i, claim in enumerate(draft.claims)],
                                                                   'mechanical_warnings_not_entailment': draft_feedback(draft, payload),
+                                                                  'answer_requirements': requirements,
                                                                   'passage_index': index})}], review_schema)
-        return json.dumps(render_repaired(draft, expand_review(review, draft, index), payload))
+        if strict_outcomes:
+            from outcome_checks import review_issues, coverage_issues
+            from numeric_checks import unsupported_numbers
+            reviewed = RepairedReview.model_validate_json(review)
+            problems = review_issues(reviewed, draft, index)
+            for item in reviewed.reviews:
+                if item.index < len(draft.claims):
+                    citation = draft.claims[item.index].citation
+                    if unsupported_numbers({'paragraphs': [item.text+' ['+citation+']'], 'cited_sources': [citation]}, payload):
+                        problems[item.index] = 'Unreported numerical value'
+                if item.index in problems:
+                    item.verdict, item.text, item.quotes = 'unsupported', '', []
+            review = reviewed.model_dump_json()
+        answer = render_repaired(draft, expand_review(review, draft, index), payload)
+        if strict_outcomes and coverage_issues(answer, requirements):
+            raise ValueError('Outcome answer lost required facts or comparison limitation')
+        return json.dumps(answer)
 
     cloudflare.completion = complete
     try:

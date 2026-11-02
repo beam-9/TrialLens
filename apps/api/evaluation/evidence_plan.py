@@ -199,9 +199,9 @@ def verified_subset(content: str, payload: dict) -> dict:
 
 @contextmanager
 def candidate_strategy(name):
-    if name == "repaired-claims":
+    if name in {"repaired-claims", "outcome-claims"}:
         from claim_review import repaired_claims_experiment
-        with repaired_claims_experiment():
+        with repaired_claims_experiment(strict_outcomes=name == "outcome-claims"):
             yield
         return
     if name not in (None, "verified-quotes", "reviewed-claims"):

@@ -101,7 +101,7 @@ def _rarity_notes(paragraphs: list[str], records: dict[str, dict[str, str]]) -> 
     return notes
 
 
-def feedback_notes(messages: list[dict]) -> list[dict[str, str]]:
+def feedback_notes(messages: list[dict], *, numeric_guard: bool = False) -> list[dict[str, str]]:
     """Return bounded mechanical revision notes; never judge scientific entailment."""
     if len(messages) != 4:
         return [_compact_note("invalid_revision_context", "Expected the existing two-pass four-message revision context.")]
@@ -119,6 +119,10 @@ def feedback_notes(messages: list[dict]) -> list[dict[str, str]]:
     issue = confidence_interval_issue(" ".join([*draft.paragraphs, *draft.uncertainty]))
     if issue:
         notes.append(_compact_note("confidence_interval_misinterpretation", issue))
+    if numeric_guard:
+        from numeric_checks import unsupported_numbers
+        notes.extend(_compact_note('unreported_number', note + ' Preserve reported numbers; remove unsupported values.')
+                     for note in unsupported_numbers(draft.model_dump(), payload))
     records = _source_evidence(payload)
     allowed = set(records)
     from triallens.conversation import normalize_citations
@@ -172,21 +176,27 @@ def _feedback_block(notes: list[dict[str, str]]) -> str:
 
 
 @contextmanager
-def revision_feedback_experiment():
+def revision_feedback_experiment(*, numeric_guard: bool = False):
     """Append feedback only for the second call; provider call count stays two."""
     from triallens import conversation
 
     original = conversation.cloudflare.completion
 
     def wrapped(messages: list[dict], schema: dict) -> str:
+        submitted = messages
         if len(messages) == 4 and messages[-1].get("role") == "user":
-            notes = feedback_notes(messages)
+            notes = feedback_notes(messages, numeric_guard=numeric_guard)
             if notes:
                 # Copy containers so the caller's actual revision context is not mutated.
                 copied = [dict(message) for message in messages]
                 copied[-1]["content"] = str(copied[-1].get("content", "")) + _feedback_block(notes)
-                return original(copied, schema)
-        return original(messages, schema)
+                submitted = copied
+        content = original(submitted, schema)
+        if numeric_guard and len(messages) == 4:
+            from numeric_checks import unsupported_numbers
+            if unsupported_numbers(json.loads(content), json.loads(messages[1]['content'])):
+                raise ValueError('Final answer contains unreported numeric values')
+        return content
 
     conversation.cloudflare.completion = wrapped
     try:
