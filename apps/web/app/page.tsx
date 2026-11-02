@@ -1,7 +1,7 @@
 "use client";
 
-import { CSSProperties, FormEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { LayoutGroup, motion, MotionConfig, useReducedMotion } from "framer-motion";
+import { ComponentProps, CSSProperties, FormEvent, ReactNode, useEffect, useId, useMemo, useRef, useState } from "react";
+import { AnimatePresence, LayoutGroup, motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
@@ -21,6 +21,7 @@ import {
   Moon,
   Search,
   Sun,
+  X,
 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -96,6 +97,7 @@ export default function Home() {
   const [recentWorkspaces, setRecentWorkspaces] = useState<Workspace[]>([]);
   const [openingWorkspaceId, setOpeningWorkspaceId] = useState<string | null>(null);
   const [workflowStatus, setWorkflowStatus] = useState<WorkflowStatus>("idle");
+  const [evidenceQuery, setEvidenceQuery] = useState("");
   const [sourceFilter, setSourceFilter] = useState<SourceType | "all">("all");
   const [reviewFilter, setReviewFilter] = useState<"all" | "reviewed" | "unreviewed" | "needs_review">("all");
   const [quantOnly, setQuantOnly] = useState(false);
@@ -113,13 +115,15 @@ export default function Home() {
   }, [sources]);
 
   const filteredExtractions = useMemo(() => {
+    const query = evidenceQuery.trim().toLocaleLowerCase();
     return extractions.filter((row) => {
+      if (query && ![row.title, row.citation, row.outcome_result, row.supporting_quote, row.safety_note].join(" ").toLocaleLowerCase().includes(query)) return false;
       if (sourceFilter !== "all" && row.source_type !== sourceFilter) return false;
       if (reviewFilter !== "all" && row.review_status !== reviewFilter) return false;
       if (quantOnly && !row.has_quantitative_result) return false;
       return true;
     });
-  }, [extractions, quantOnly, reviewFilter, sourceFilter]);
+  }, [extractions, quantOnly, reviewFilter, sourceFilter, evidenceQuery]);
 
   const sourceTypesForAsk = askFilter === "all" ? null : [askFilter];
   const totalSources = sources.length;
@@ -196,6 +200,7 @@ export default function Home() {
     setExtractions([]);
     setSelectedRow(null);
     setShowAllRows(false);
+    setEvidenceQuery("");
     setShowAllSources(false);
     setBusy("Creating workspace");
     setWorkflowStatus("retrieving sources");
@@ -274,6 +279,7 @@ export default function Home() {
       setConversation(savedAnswers);
       setSelectedRow(null);
       setShowAllRows(false);
+      setEvidenceQuery("");
       setShowAllSources(false);
       setWorkflowStatus(workflowStateFromCounts(indexed.length, extracted.length, extracted));
       setRecentWorkspaces((items) => {
@@ -363,6 +369,7 @@ export default function Home() {
   }
 
   function clearEvidenceFilters() {
+    setEvidenceQuery("");
     setSourceFilter("all");
     setReviewFilter("all");
     setQuantOnly(false);
@@ -419,11 +426,11 @@ export default function Home() {
             </>}
           </section>
           <section id="workspace" className="workspace-section" aria-label="Current research workspace">
-            <motion.div className="workspace-frame" key={`${workspace?.id ?? "empty"}:${activeTab}`} aria-busy={Boolean(busy)} initial={reduceMotion ? false : { opacity: 0.94, y: 3 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}>
+            <div className="workspace-frame" aria-busy={Boolean(busy)}>
               {workspace && <div className="workspace-context"><h2>{workspace.condition}{workspace.intervention ? ` · ${workspace.intervention}` : ""}</h2><p>{totalSources} {totalSources === 1 ? "source" : "sources"} · {extractions.length} evidence {extractions.length === 1 ? "row" : "rows"}</p></div>}
               {workspace?.ingestion_warnings?.length ? <Alert className="workspace-issue"><CircleAlert aria-hidden="true" /><AlertTitle>Evidence coverage</AlertTitle><AlertDescription><ul>{workspace.ingestion_warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></AlertDescription></Alert> : null}
               {error && workspace && <Alert id="workspace-issue" tabIndex={-1} variant="destructive" className="workspace-issue"><AlertTitle>Action could not be completed</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
-          <TabsContent value="table" className="w-full">
+          <WorkspacePanel value="table" className="w-full">
             <div className="evidence-layout">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader className={workspace ? "evidence-heading-compact" : undefined}>
@@ -444,6 +451,17 @@ export default function Home() {
                   setReviewFilter={setReviewFilter}
                   setQuantOnly={setQuantOnly}
                 />
+                {extractions.length > 0 && <div className="evidence-search-toolbar">
+                  <div className="evidence-search-field">
+                    <Search aria-hidden="true" />
+                    <label className="sr-only" htmlFor="evidence-search">Search evidence</label>
+                    <Input id="evidence-search" type="search" value={evidenceQuery} placeholder="Search titles, findings or source IDs…" onChange={(event) => { setEvidenceQuery(event.target.value); setShowAllRows(false); }} />
+                    <AnimatePresence initial={false}>
+                      {evidenceQuery && <motion.button key="clear-search" type="button" aria-label="Clear evidence search" className="evidence-search-clear" onClick={() => { setEvidenceQuery(""); document.getElementById("evidence-search")?.focus(); }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.12 }}><X aria-hidden="true" /></motion.button>}
+                    </AnimatePresence>
+                  </div>
+                  <p role="status" aria-live="polite">{filteredExtractions.length} of {extractions.length} rows</p>
+                </div>}
                 {busy && !extractions.length ? (
                   <LoadingRows />
                 ) : !extractions.length ? (
@@ -457,7 +475,7 @@ export default function Home() {
                     <Filter aria-hidden="true" data-icon="inline-start" />
                     <AlertTitle>No rows match these filters</AlertTitle>
                     <AlertDescription className="flex flex-col gap-3 text-ink/68">
-                      <span>Try a broader source type, include all review states, or turn off the quantitative-result filter.</span>
+                      <span>Try another search, a broader source type, or fewer review and numerical filters.</span>
                       <Button type="button" variant="outline" size="sm" className="w-fit rounded-sm" onClick={clearEvidenceFilters}>
                         Clear filters
                       </Button>
@@ -485,9 +503,9 @@ export default function Home() {
             </Card>
             <aside className="evidence-inventory" aria-label="Workspace source inventory"><FieldBridge counts={counts} extractionCount={extractions.length} sourceCount={totalSources} /></aside>
             </div>
-          </TabsContent>
+          </WorkspacePanel>
 
-          <TabsContent value="ask" className="w-full">
+          <WorkspacePanel value="ask" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent text-ink">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="view-title">Ask the evidence.</CardTitle>
@@ -576,9 +594,9 @@ export default function Home() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </WorkspacePanel>
 
-          <TabsContent value="sources" className="w-full">
+          <WorkspacePanel value="sources" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="view-title">
@@ -626,9 +644,9 @@ export default function Home() {
                 ) : null}
               </CardContent>
             </Card>
-          </TabsContent>
+          </WorkspacePanel>
 
-          <TabsContent value="brief" className="w-full">
+          <WorkspacePanel value="brief" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="view-title">
@@ -695,9 +713,9 @@ export default function Home() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </WorkspacePanel>
 
-          <TabsContent value="reliability" className="w-full">
+          <WorkspacePanel value="reliability" className="w-full">
             <Card className="paper-panel rounded-sm border-0 bg-transparent">
               <CardHeader>
                 <CardTitle role="heading" aria-level={2} className="view-title">
@@ -752,8 +770,8 @@ export default function Home() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
-            </motion.div>
+          </WorkspacePanel>
+            </div>
           </section>
           <p className="mobile-scope">Evidence navigation only. Not medical advice or clinical decision support.</p>
         </div>
@@ -764,6 +782,31 @@ export default function Home() {
     </main>
     </MotionConfig>
   );
+}
+
+function WorkspacePanel({ children, ...props }: ComponentProps<typeof TabsContent>) {
+  const reduceMotion = useReducedMotion();
+  return <TabsContent {...props} render={<motion.div initial={reduceMotion ? false : { opacity: 0.8, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }} />}>
+    {children}
+  </TabsContent>;
+}
+
+function EvidenceResultPreview({ row }: { row: EvidenceExtraction }) {
+  const contentId = useId();
+  const [expanded, setExpanded] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const result = fieldValue(row.outcome_result, row.supporting_quote, row.supporting_quote);
+  const safety = compactSafetyNote(row);
+  return <div className="evidence-result-preview">
+    <div id={contentId}><p className={expanded ? undefined : "result-preview-collapsed"}>{result}</p>
+    <AnimatePresence initial={false}>
+      {expanded && safety && <motion.p key="safety" className="result-safety-note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.12 }}>Safety: {safety}</motion.p>}
+    </AnimatePresence>
+    </div>
+    <button type="button" className="result-disclosure" aria-expanded={expanded} aria-controls={contentId} aria-label={`${expanded ? "Collapse result" : safety ? "Expand result & safety note" : "Expand result"}: ${row.title}`} onClick={() => setExpanded((value) => !value)}>
+      {expanded ? "Collapse result" : "Expand result"}{safety && !expanded ? " & safety note" : ""}<ChevronDown aria-hidden="true" />
+    </button>
+  </div>;
 }
 
 function readCachedWorkspaces(): Workspace[] {
@@ -1175,7 +1218,7 @@ function EvidenceTable({
       <TableHeader>
         <TableRow>
           <TableHead className="w-[32%] text-ink/70">Source</TableHead>
-          <TableHead className="w-[36%] text-ink/70">Result snapshot</TableHead>
+          <TableHead className="w-[36%] text-ink/70">Result preview</TableHead>
           <TableHead className="w-[14%] text-ink/70">Review</TableHead>
           <TableHead className="w-[18%] text-ink/70">Actions</TableHead>
         </TableRow>
@@ -1197,8 +1240,7 @@ function EvidenceTable({
               </div>
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/78">
-              <p className="leading-relaxed">{fieldValue(row.outcome_result, row.supporting_quote, row.supporting_quote)}</p>
-              {compactSafetyNote(row) ? <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Safety: {compactSafetyNote(row)}</p> : null}
+              <EvidenceResultPreview row={row} />
             </TableCell>
             <TableCell className="whitespace-normal align-top text-ink/72">
               <div className="flex flex-wrap items-center gap-1.5">
