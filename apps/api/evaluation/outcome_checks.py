@@ -120,6 +120,7 @@ def coverage_issues(answer: dict, requirement: dict) -> list[str]:
         normalized = re.sub(r'[‐‑–—−-]', ' ', text.lower())
         design = re.search(r'non\s*random|not\s+random|single\s+group|one\s+(?:treatment\s+)?group|pre\s*post|before\s+and\s+after', normalized)
         boundary = re.search(r'\b(?:cannot|can not|can.t|does not|doesn.t|not|no)\b.{0,90}\b(?:isolat\w*|attribut\w*|establish\w*|prov\w*|proof|caus\w*|determin\w*|tell\w*)',normalized)
+        boundary = boundary or re.search(r'\brather than\s+(?:a\s+)?randomized\s+(?:contrast|comparison)', normalized)
         if not design or not boundary:
             issues.append('Requested nonrandomized single-group comparison limitation is missing.')
     return issues

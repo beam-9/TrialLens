@@ -199,6 +199,11 @@ def verified_subset(content: str, payload: dict) -> dict:
 
 @contextmanager
 def candidate_strategy(name):
+    if name == 'outcome-records':
+        from outcome_review import candidate_outcome_review
+        with candidate_outcome_review():
+            yield
+        return
     if name in {"repaired-claims", "outcome-claims"}:
         from claim_review import repaired_claims_experiment
         with repaired_claims_experiment(strict_outcomes=name == "outcome-claims"):

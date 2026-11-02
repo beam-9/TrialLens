@@ -15,6 +15,7 @@ sys.path.insert(0, str(API_ROOT))
 from dotenv import load_dotenv
 import cloudflare_run
 from revision_feedback import revision_feedback_experiment
+from thinking_profile import disabled_thinking
 
 
 
@@ -61,22 +62,27 @@ def main():
     parser.add_argument('--prompt-file', type=Path)
     parser.add_argument('--revision-feedback', action='store_true')
     parser.add_argument('--numeric-checks', action='store_true')
+    parser.add_argument('--disable-thinking', action='store_true')
     parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     parser.add_argument('--reasoning-effort', choices=('low', 'medium', 'high'))
-    parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims', 'outcome-claims'))
+    parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims', 'outcome-claims', 'outcome-records'))
     args = parser.parse_args()
     if args.numeric_checks and args.strategy_experiment:
         parser.error('--numeric-checks applies to the prose writer, not a claim-review schema')
+    if args.disable_thinking and args.model_experiment != '@cf/qwen/qwen3.8-27b':
+        parser.error('--disable-thinking requires the Qwen 3.8 experiment')
     load_dotenv(API_ROOT / '.env', override=False)
     experiment = revision_feedback_experiment(numeric_guard=args.numeric_checks) if args.revision_feedback or args.numeric_checks else nullcontext()
     # Wrapping restores both the inventory and provider seam even on failures.
-    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort):
+    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort), disabled_thinking(args.disable_thinking):
         result = cloudflare_run.run(args.output, args.answers, args.case,
             quota_path=API_ROOT / 'data/evaluation-usage.sqlite3',
             prompt_path=args.prompt_file, cases_path=args.cases_file, strategy=args.strategy_experiment)
     result['quality_experiment'] = {
         'revision_feedback': args.revision_feedback,
         'numeric_checks': args.numeric_checks,
+        'disable_thinking': args.disable_thinking,
+        'thinking_profile_sha256': hashlib.sha256((API_ROOT / 'evaluation/thinking_profile.py').read_bytes()).hexdigest() if args.disable_thinking else None,
         'numeric_checks_sha256': hashlib.sha256((API_ROOT / 'evaluation/numeric_checks.py').read_bytes()).hexdigest() if args.numeric_checks else None,
         'strategy_experiment': args.strategy_experiment,
         'model_experiment': args.model_experiment,
