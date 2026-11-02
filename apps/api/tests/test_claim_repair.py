@@ -337,3 +337,13 @@ def test_explicit_registry_design_is_indexed_as_same_source_support():
     key = next(key for key,value in index.items() if 'Allocation:' in value['text'])
     expanded = claim_review.expand_review(review(item(text=sentence, quotes=[key])), original, index)
     assert claim_review.render_repaired(original, expanded, context)['paragraphs']
+
+
+def test_strict_index_reserves_explicit_design_despite_dense_outcomes():
+    context = payload()
+    context['evidence'][0]['matched_passages'] = [('measurement number value=312 group=baseline ' * 250) + str(i) for i in range(4)]
+    context['evidence'][0]['registry_design'] = {'allocation': 'NON_RANDOMIZED', 'intervention_model': 'SINGLE_GROUP'}
+    original = draft(claim('Baseline measurement number was 312 in this source.'))
+    index = claim_review.passage_index(original, context, include_design=True)
+    assert any('Allocation: NON_RANDOMIZED' in item['text'] for item in index.values())
+    assert sum(len(item['text']) for item in index.values()) <= claim_review.PASSAGE_BUDGET

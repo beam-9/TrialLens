@@ -166,10 +166,17 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
         try:
             body = response.json()
             candidate = body.get("result", {}) if isinstance(body, dict) else {}
+            parse_error = None
             try:
                 final_content = cloudflare.response_content(candidate)
-            except (ValueError, TypeError, AttributeError):
+            except (ValueError, TypeError, AttributeError) as error:
                 final_content = None
+                safe_errors = {'Incomplete or ambiguous Responses output', 'Missing Responses output',
+                               'Invalid Responses item', 'Not a completed answer', 'Incomplete reasoning item',
+                               'Not a completed assistant message', 'Missing final output text', 'Ambiguous final output'}
+                parse_error = str(error) if str(error) in safe_errors else type(error).__name__
+            def state(value):
+                return value if value is None or isinstance(value, str) and value in {'message','reasoning','assistant','completed','incomplete','in_progress','final','analysis','output_text','refusal'} else 'other'
             case_outputs.append({"response": final_content, "usage": candidate.get("usage"),
                                  "claim_support_index": json.loads(request_messages[-1]["content"])["passage_index"]
                                                         if strategy in {"repaired-claims", "outcome-claims"} and len(request_messages) in (3, 4) else None,
@@ -178,6 +185,10 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                                  "generation_context_sha256": context_digest,
                                  "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "max_output_tokens", "chat_template_kwargs", "reasoning_effort", "reasoning") if key in kwargs["json"]},
                                  "response_shape": {"result_keys": sorted(candidate),
+                                                    "parse_error": parse_error,
+                                                    "output_states": [{'type':state(item.get('type')), 'role':state(item.get('role')), 'status':state(item.get('status')), 'phase':state(item.get('phase')),
+                                                                       'content_types':[state(part.get('type')) for part in item.get('content',[]) if isinstance(part,dict)] if isinstance(item.get('content'),list) else []}
+                                                                      for item in candidate.get('output',[]) if isinstance(item,dict)] if isinstance(candidate.get('output'),list) else [],
                                                     "finish_reason": candidate.get("finish_reason"),
                                                     "status": candidate.get("status"),
                                                     "choice_finish_reasons": [c.get("finish_reason") for c in candidate.get("choices", []) if isinstance(c, dict)],

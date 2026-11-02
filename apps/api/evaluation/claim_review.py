@@ -114,7 +114,7 @@ def _windows(text: str) -> list[str]:
     return windows
 
 
-def passage_index(draft: ClaimDraft, payload: dict) -> dict[str, dict]:
+def passage_index(draft: ClaimDraft, payload: dict, *, include_design: bool = False) -> dict[str, dict]:
     """Rank bounded source passages; selection is not scientific verification."""
     used = list(dict.fromkeys(claim.citation for claim in draft.claims))
     records = {record['citation']: record for record in payload['evidence']}
@@ -135,8 +135,13 @@ def passage_index(draft: ClaimDraft, payload: dict) -> dict[str, dict]:
         for field in ('status', 'phase'):
             if isinstance(record.get(field), str) and record[field]:
                 candidates.append(record[field])
+        priority = []
+        if include_design:
+            priority.extend(_windows(render_registry_design(record.get('registry_design'))))
+            priority.extend(_windows(record['text'])[:1])
+        ordered = list(dict.fromkeys([*priority, *sorted(candidates, key=score, reverse=True)]))
         remaining = per_source
-        for quote in sorted(candidates, key=score, reverse=True):
+        for quote in ordered:
             if len(quote) > remaining:
                 continue
             identifier = f'S{source_number}P{sum(item["citation"] == citation for item in index.values())}'
@@ -261,7 +266,7 @@ def repaired_claims_experiment(*, strict_outcomes: bool = False):
             raise ValueError('Claim repair call sequence/context mismatch')
         payload = json.loads(messages[1]['content'])
         draft = ClaimDraft.model_validate_json(messages[2]['content'])
-        index = passage_index(draft, payload)
+        index = passage_index(draft, payload, include_design=strict_outcomes)
         requirements = {}
         if strict_outcomes:
             from outcome_checks import tag_outcome_support, answer_requirements

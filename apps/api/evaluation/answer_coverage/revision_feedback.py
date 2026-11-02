@@ -16,6 +16,12 @@ MAX_NOTE_CHARS = 220
 MAX_FEEDBACK_CHARS = 1800
 _CITATION = re.compile(r"\[([^\]]+)\]")
 _DIGIT = re.compile(r"\d")
+
+
+def missing_demo_label(answer: dict, payload: dict) -> bool:
+    cited = set(answer.get('cited_sources', []))
+    uses_demo = any(record.get('citation') in cited and record.get('demo') is True for record in payload.get('evidence', []))
+    return uses_demo and not re.search(r'\b(?:synthetic|demo|demonstration)\b', ' '.join(answer.get('paragraphs', [])), re.I)
 _RARITY = re.compile(r"\b(rare|uncommon|frequent|frequently|rarely)\b", re.I)
 _NEGATED_RARITY = re.compile(
     r"\b(?:not|never|no|cannot|can't|doesn't|does not|isn't|is not|unknown whether|not known to be)\s+(?:\w+\s+){0,2}(?:rare|uncommon|frequent|frequently|rarely)\b",
@@ -119,6 +125,8 @@ def feedback_notes(messages: list[dict], *, numeric_guard: bool = False) -> list
     issue = confidence_interval_issue(" ".join([*draft.paragraphs, *draft.uncertainty]))
     if issue:
         notes.append(_compact_note("confidence_interval_misinterpretation", issue))
+    if missing_demo_label(draft.model_dump(), payload):
+        notes.append(_compact_note('demo_label_missing', 'Identify synthetic/demo evidence explicitly in the direct answer. Preserve that label when simplifying.'))
     if numeric_guard:
         from numeric_checks import unsupported_numbers
         notes.extend(_compact_note('unreported_number', note + ' Preserve reported numbers; remove unsupported values.')
@@ -194,7 +202,10 @@ def revision_feedback_experiment(*, numeric_guard: bool = False):
         content = original(submitted, schema)
         if numeric_guard and len(messages) == 4:
             from numeric_checks import unsupported_numbers
-            if unsupported_numbers(json.loads(content), json.loads(messages[1]['content'])):
+            final, payload = json.loads(content), json.loads(messages[1]['content'])
+            if missing_demo_label(final, payload):
+                raise ValueError('Final answer lost synthetic/demo label')
+            if unsupported_numbers(final, payload):
                 raise ValueError('Final answer contains unreported numeric values')
         return content
 

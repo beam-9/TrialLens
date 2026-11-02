@@ -8,6 +8,7 @@ from copy import deepcopy
 from decimal import Decimal
 import re
 from numeric_checks import numeric_values
+from triallens.trial_design import render_registry_design
 
 
 def _outcomes(payload):
@@ -27,11 +28,13 @@ def _outcomes(payload):
 def tag_outcome_support(index: dict, payload: dict) -> dict:
     tagged = deepcopy(index)
     outcomes = _outcomes(payload)
+    designs = {record['citation']: render_registry_design(record.get('registry_design')) for record in payload.get('evidence', [])}
     for value in tagged.values():
         owners = [packet for packet in outcomes if packet['citation'] == value['citation'] and value['text'] in packet['text']]
         value['outcome_ids'] = sorted({packet['id'] for packet in owners})
         value['outcome_titles'] = list(dict.fromkeys(packet['title'] for packet in owners))
         value['has_reported_analysis'] = any(packet['has_reported_analysis'] for packet in owners)
+        value['support_role'] = ('outcome' if owners else 'registry_design' if value['text'] in designs.get(value['citation'], '') else 'source_context')
     return tagged
 
 
@@ -93,6 +96,8 @@ def answer_requirements(payload: dict) -> dict:
     return {'citation': packet['citation'], 'outcome_id': packet['id'], 'outcome_title': packet['title'],
             'required_reported_values': sorted(values, key=Decimal),
             'require_comparison_limit': design.get('allocation') == 'NON_RANDOMIZED' and design.get('intervention_model') == 'SINGLE_GROUP',
+            'reported_design': {key: design[key] for key in ('allocation', 'intervention_model') if key in design},
+            'comparison_instruction': 'Use the explicit design metadata to explain the limit on causal attribution. Different visit denominators do not establish paired individual transitions.',
             'instruction': 'Retain these reported counts, missingness and each visit denominator, not calculated percentages. Explain the comparison boundary when asked. Different visit denominators do not supply per-person transition counts.'}
 
 
@@ -113,8 +118,8 @@ def coverage_issues(answer: dict, requirement: dict) -> list[str]:
         issues.append('Requested outcome source was not cited.')
     if requirement['require_comparison_limit']:
         normalized = re.sub(r'[‐‑–—−-]', ' ', text.lower())
-        design = re.search(r'non\s*random|single\s+group|pre\s*post|before\s+and\s+after', normalized)
-        boundary = re.search(r'\b(?:cannot|can not|can.t|does not|doesn.t|not)\b.{0,90}\b(?:isolat\w*|attribut\w*|establish\w*|prov\w*|caus\w*)',normalized)
+        design = re.search(r'non\s*random|not\s+random|single\s+group|one\s+(?:treatment\s+)?group|pre\s*post|before\s+and\s+after', normalized)
+        boundary = re.search(r'\b(?:cannot|can not|can.t|does not|doesn.t|not|no)\b.{0,90}\b(?:isolat\w*|attribut\w*|establish\w*|prov\w*|proof|caus\w*|determin\w*|tell\w*)',normalized)
         if not design or not boundary:
             issues.append('Requested nonrandomized single-group comparison limitation is missing.')
     return issues

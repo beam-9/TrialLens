@@ -147,3 +147,11 @@ def test_feedback_normalizes_compound_citations_before_unknown_id_check():
 def test_explicit_give_statistics_question_requests_numbers():
     call = messages("Please give statistics on the measured score.", ["The measured score improved [PubMed:123]."], ["PubMed:123"])
     assert "requested_statistic_missing" in codes(call)
+
+
+def test_demo_label_requirement_is_source_scoped():
+    from revision_feedback import missing_demo_label
+    context = {'evidence': [{'citation':'PubMed:demo','demo':True},{'citation':'PubMed:real','demo':False}]}
+    assert missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:demo']},context)
+    assert not missing_demo_label({'paragraphs':['In this synthetic example, an effect was reported.'],'cited_sources':['PubMed:demo']},context)
+    assert not missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:real']},context)
