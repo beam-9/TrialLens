@@ -12,9 +12,10 @@ _API = Path(__file__).resolve().parents[1]
 _EVALUATION = _API / "evaluation"
 sys.path.insert(0, str(_EVALUATION))
 _FEEDBACK_SPEC = importlib.util.spec_from_file_location(
-    "revision_feedback_numeric_test", _EVALUATION / "answer_coverage/revision_feedback.py"
+    "revision_feedback", _EVALUATION / "answer_coverage/revision_feedback.py"
 )
 feedback = importlib.util.module_from_spec(_FEEDBACK_SPEC)
+sys.modules["revision_feedback"] = feedback
 _FEEDBACK_SPEC.loader.exec_module(feedback)
 
 
@@ -132,4 +133,91 @@ def test_numeric_guard_rejects_unreported_number_in_final_answer_and_restores_pr
         with feedback.revision_feedback_experiment(numeric_guard=True):
             conversation.cloudflare.completion([{"role": "user", "content": "initial"}], {})
             conversation.cloudflare.completion(draft, {})
+    assert conversation.cloudflare.completion is installed
+
+
+def test_repair_once_uses_two_calls_when_second_answer_has_no_mechanical_failures(monkeypatch):
+    from triallens import conversation
+
+    messages = _revision_messages("The rate was 1.0% [PubMed:1].")
+    result = json.dumps({"paragraphs": ["The rate was 1.0% [PubMed:1]."],
+                         "cited_sources": ["PubMed:1"], "uncertainty": []})
+    calls = []
+    monkeypatch.setattr(conversation.cloudflare, "completion", lambda items, schema: calls.append(items) or result)
+    with feedback.revision_feedback_experiment(repair_once=True):
+        conversation.cloudflare.completion([{"role": "user", "content": "initial"}], {})
+        actual = conversation.cloudflare.completion(messages, {})
+    assert len(calls) == 2
+    assert actual == result
+
+
+def test_repair_once_makes_third_call_for_source_copy_using_exact_final_context(monkeypatch):
+    from triallens import conversation
+
+    source = "The study measured a clinically important outcome among participants receiving treatment over a carefully monitored period with consistent follow up and complete reporting of every prespecified result for the full analysis population."
+    payload = {"question": "Summarize", "evidence": [
+        {"citation": "PubMed:1", "text": source, "matched_passages": []}
+    ]}
+    copied = source + " [PubMed:1]"
+    draft = [{"role": "system", "content": "exact-system"},
+             {"role": "user", "content": json.dumps(payload)},
+             {"role": "assistant", "content": json.dumps({"paragraphs": [copied], "cited_sources": ["PubMed:1"], "uncertainty": []})},
+             {"role": "user", "content": "revise"}]
+    second = json.dumps({"paragraphs": [copied], "cited_sources": ["PubMed:1"], "uncertainty": []})
+    third = json.dumps({"paragraphs": ["The trial tracked a key outcome during treatment, with follow up and reporting across the enrolled group [PubMed:1]."],
+                        "cited_sources": ["PubMed:1"], "uncertainty": []})
+    calls = []
+
+    def provider(items, schema):
+        calls.append(items)
+        return second if len(calls) <= 2 else third
+
+    monkeypatch.setattr(conversation.cloudflare, "completion", provider)
+    installed = conversation.cloudflare.completion
+    with feedback.revision_feedback_experiment(repair_once=True):
+        conversation.cloudflare.completion([{"role": "user", "content": "initial"}], {})
+        result = conversation.cloudflare.completion(draft, {})
+    assert len(calls) == 3
+    repair = calls[2]
+    assert repair[0] == draft[0]
+    assert repair[1] == draft[1]
+    assert repair[2]["content"] == second
+    assert "mechanical_feedback" in repair[3]["content"]
+    assert "Copied source windows to rephrase" in repair[3]["content"]
+    assert result == third
+    assert conversation.cloudflare.completion is installed
+
+
+def test_repair_once_corrects_numeric_failure_and_rejects_bad_third_answer_without_fourth_call(monkeypatch):
+    from triallens import conversation
+
+    draft = _revision_messages("The rate was 1.0% [PubMed:1].")
+    bad = json.dumps({"paragraphs": ["The rate was 45% [PubMed:1]."],
+                      "cited_sources": ["PubMed:1"], "uncertainty": []})
+    good = json.dumps({"paragraphs": ["The rate was 1.0% [PubMed:1]."],
+                       "cited_sources": ["PubMed:1"], "uncertainty": []})
+    calls = []
+
+    def provider(items, schema):
+        calls.append(items)
+        return good if len(calls) in {1, 3} else bad
+
+    monkeypatch.setattr(conversation.cloudflare, "completion", provider)
+    with feedback.revision_feedback_experiment(numeric_guard=True, repair_once=True):
+        conversation.cloudflare.completion([{"role": "user", "content": "initial"}], {})
+        assert conversation.cloudflare.completion(draft, {}) == good
+    assert len(calls) == 3
+
+    calls.clear()
+    def always_bad(items, schema):
+        calls.append(items)
+        return good if len(calls) == 1 else bad
+
+    monkeypatch.setattr(conversation.cloudflare, "completion", always_bad)
+    installed = conversation.cloudflare.completion
+    with pytest.raises(ValueError, match="unreported numeric values"):
+        with feedback.revision_feedback_experiment(numeric_guard=True, repair_once=True):
+            conversation.cloudflare.completion([{"role": "user", "content": "initial"}], {})
+            conversation.cloudflare.completion(draft, {})
+    assert len(calls) == 3
     assert conversation.cloudflare.completion is installed

@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/openai/gpt-oss-120b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": "outcome-records",
+  "strategy_sha256": "e09cf6168673ecf756f6d1f8e30464379ccde0a31c89af6fc9527bb1c7f64cf7",
+  "whole_outcome_review_sha256": "68f69a77a10a71880ade278e456f6bdea3aa7585cca6269a137065dd1dff001c",
+  "outcome_checks_sha256": "fa2b544b155f74d89f6161be032c490c855553eef5625653bb1ccef06fb3c9ee",
+  "numeric_checks_sha256": "a721630d4cec4edeeb6b80da97010b06bbd1e5d5fd99bb2db0f303b7b6293ab2",
+  "claim_repair_sha256": "9c9892a073ad9d0113209ed24a9cbf26d298c52399bdad47e4825ba514d838f1",
+  "fixture_inventory_sha256": "92bae1a1d11650ff3ac9d42815a6f4f7e2778dd5f92bceb09bcae915586b5804",
+  "runner_sha256": "f19752559650771e71df4b33ea7617c234f9624498e184c2e01d50d4985b4cb7",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "4a9446a60e8531d452b565afb310b381b2bbdcd30d63d85989f6616b4375c4ac",
+  "model_rates": {
+    "input_micro_neurons_per_token": 31818,
+    "output_micro_neurons_per_token": 68182,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent drafting/claim review",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "with-design-statistics",
+      "snapshot_id": "with-design",
+      "client_wall_ms": 11424.554875,
+      "trace": {
+        "trace_id": "669c6126-4c68-4050-9bd9-3a78f3272390",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 8788,
+        "phases_ms": {
+          "storage_read": 1.043,
+          "retrieval": 11.641125,
+          "extractive_synthesis": 0.0295,
+          "context_build": 0.558459,
+          "draft": 3775.7005,
+          "revision": 7621.995375,
+          "validation": 0.0,
+          "store": 6.4105
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 14844,
+            "message_count": 2,
+            "serialized_messages_char_count": 15140,
+            "wall_ms": 3775.7005,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 3034,
+            "eval_count": 346,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 18091,
+            "message_count": 4,
+            "serialized_messages_char_count": 18546,
+            "wall_ms": 7621.995375,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 4038,
+            "eval_count": 344,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 11422.394792,
+        "serialization_ms": 0.935167
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7008.932636,
+    "remaining_neurons": 1991.067364,
+    "pending_requests": 3,
+    "requests": 23
+  },
+  "stop_reason": "validation_rejection",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "disable_thinking": false,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": "outcome-records",
+    "model_experiment": "@cf/openai/gpt-oss-120b",
+    "reasoning_effort": "low",
+    "wrapper_sha256": "0c4d623d20493268140c3705096491ffd538cee005638827aba393391d891839",
+    "feedback_sha256": "af6b9920dae72edacf36db5465c6547e629054d82daeac29fc023b03dbb562ff",
+    "inventory_path": "evaluation/answer_coverage/design-cohort-2026-10-31/inventory.json"
+  }
+}

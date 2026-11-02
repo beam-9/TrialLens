@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/qwen/qwen3.8-27b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "ac0c7be3d4a38b6be6d709e51482653cda7dec7377db5656a4f38ea68dbd2198",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": "3c196bc7a4594cb6c91188dbb97238f7a206aaa74aae85fd599a3a407b26c3a3",
+  "code_sha256": "37b6ec051266efe7f63ac08e3eaafe93950aa290381bc3e634419f5f1011d30c",
+  "model_rates": {
+    "input_micro_neurons_per_token": 40909,
+    "output_micro_neurons_per_token": 290909,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 41483.782917,
+      "trace": {
+        "trace_id": "703a8d85-df39-477b-8266-530fcd14104a",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "cloudflare_quota",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_quota",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 5.098208,
+          "retrieval": 9.20875,
+          "extractive_synthesis": 21.714958,
+          "context_build": 0.556125,
+          "draft": 41419.718958,
+          "revision": 6.709208,
+          "validation": 0.0,
+          "store": 12.969833
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 28922,
+            "message_count": 2,
+            "serialized_messages_char_count": 29363,
+            "wall_ms": 41419.718958,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6643,
+            "eval_count": 843,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 33889,
+            "message_count": 4,
+            "serialized_messages_char_count": 34454,
+            "wall_ms": 6.709208,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/qwen/qwen3.8-27b",
+        "http_status": 200,
+        "total_wall_ms": 41481.105959,
+        "serialization_ms": 0.904
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7403.525076,
+    "remaining_neurons": 1596.474924,
+    "pending_requests": 2,
+    "requests": 27
+  },
+  "stop_reason": "cloudflare_quota",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": true,
+    "disable_thinking": true,
+    "repair_once": true,
+    "max_provider_calls_per_question": 3,
+    "thinking_profile_sha256": "888ba0dde76f7a1415ac5a0065b62b160a79abd9c1f15ace213333b0a36bc396",
+    "numeric_checks_sha256": "a721630d4cec4edeeb6b80da97010b06bbd1e5d5fd99bb2db0f303b7b6293ab2",
+    "strategy_experiment": null,
+    "model_experiment": "@cf/qwen/qwen3.8-27b",
+    "reasoning_effort": null,
+    "wrapper_sha256": "33a0c052983ddb7ef16da5e38c3e110e5546bd4790dc04684f5d29c70d4a5020",
+    "feedback_sha256": "0f93884aed3868575e28cff926a50d5a5a62b2728b92e6d5bfb042ad77490fc2",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

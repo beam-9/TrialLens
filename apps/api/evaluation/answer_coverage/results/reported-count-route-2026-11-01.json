@@ -1,0 +1,182 @@
+[
+  {
+    "case_id": "with-design-statistics",
+    "snapshot_id": "with-design",
+    "answer": {
+      "id": "e7f82fcf-d11e-4604-a62d-ff65345cf7fe",
+      "workspace_id": "design-with-design",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Reported trial statistics, formatted from indexed outcome data. No AI inference was used.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "27ac1c7fa24b26149c29ae147c50e85f1a0c931b045968815c109b904aa02b02"
+      },
+      "short_answer": "ClinicalTrials.gov reports Asthma Control (8 weeks (from Week 0 to Week 8)) for Singulair(R) In Asthma And Allergic Rhinitis (0476-383): Week 0: Uncontrolled: 312, Controlled: 0, Missing: 1; denominator 313 participants; Week 8: Uncontrolled: 72, Controlled: 229, Missing: 0; denominator 301 participants. The registry describes the study as: Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis. [ClinicalTrials.gov:NCT00545844]\n\nThis was a single-group, nonrandomized study, so the results do not establish that the treatment caused any change. Different visit denominators do not show which individual participants changed categories. [ClinicalTrials.gov:NCT00545844]",
+      "direct_answer": "ClinicalTrials.gov reports Asthma Control (8 weeks (from Week 0 to Week 8)) for Singulair(R) In Asthma And Allergic Rhinitis (0476-383): Week 0: Uncontrolled: 312, Controlled: 0, Missing: 1; denominator 313 participants; Week 8: Uncontrolled: 72, Controlled: 229, Missing: 0; denominator 301 participants. The registry describes the study as: Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis. [ClinicalTrials.gov:NCT00545844]\n\nThis was a single-group, nonrandomized study, so the results do not establish that the treatment caused any change. Different visit denominators do not show which individual participants changed categories. [ClinicalTrials.gov:NCT00545844]",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Reported counts and denominators were preserved from a complete indexed outcome table; no rates or effect sizes were calculated."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "REPORTED OUTCOME \u00b7 ClinicalTrials.gov:NCT00545844 \u00b7 Singulair(R) In Asthma And Allergic Rhinitis (0476-383) \u00b7 Results outcome 001"
+      ],
+      "evidence_quality": [
+        "Reported values are source-attributed; formatting does not independently validate the study."
+      ],
+      "facet_coverage": [
+        "Reported counts, missingness and visit denominators included.",
+        "Nonrandomized single-group comparison limitation included."
+      ],
+      "answer_trace": [
+        {
+          "label": "Answer method",
+          "value": "Reported statistics",
+          "detail": "Source values rendered directly, without a model call."
+        },
+        {
+          "label": "Source outcome",
+          "value": "Results outcome 001",
+          "detail": "ClinicalTrials.gov:NCT00545844"
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "Registry-reported participant counts; different visit denominators do not identify individual transitions."
+      ],
+      "limitations": [
+        "This answer covers the selected registry outcome, not the entire study record."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "with-design-chunk-2",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+          "score": 0.8426,
+          "section": "Results outcome 001",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "results",
+            "was",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, results, was, week in a trial record."
+        }
+      ],
+      "created_at": "2026-11-02T02:09:40.230112+00:00"
+    },
+    "provider_outputs": [],
+    "generation_context": null,
+    "generation_context_sha256": null
+  },
+  {
+    "case_id": "with-design-followup",
+    "snapshot_id": "with-design",
+    "answer": {
+      "id": "e168aad2-23c4-43c0-a812-ff9489d882b5",
+      "workspace_id": "design-with-design",
+      "question": "Explain that more simply. Keep the key numbers and the main limitation.",
+      "previous_answer_id": "e7f82fcf-d11e-4604-a62d-ff65345cf7fe",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Reported trial statistics, formatted from indexed outcome data. No AI inference was used.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "27ac1c7fa24b26149c29ae147c50e85f1a0c931b045968815c109b904aa02b02"
+      },
+      "short_answer": "The registry reports these participant counts for Asthma Control (8 weeks (from Week 0 to Week 8)): Week 0: Uncontrolled: 312, Controlled: 0, Missing: 1; denominator 313 participants; Week 8: Uncontrolled: 72, Controlled: 229, Missing: 0; denominator 301 participants. [ClinicalTrials.gov:NCT00545844]\n\nThis was a single-group, nonrandomized study, so the results do not establish that the treatment caused any change. Different visit denominators do not show which individual participants changed categories. [ClinicalTrials.gov:NCT00545844]",
+      "direct_answer": "The registry reports these participant counts for Asthma Control (8 weeks (from Week 0 to Week 8)): Week 0: Uncontrolled: 312, Controlled: 0, Missing: 1; denominator 313 participants; Week 8: Uncontrolled: 72, Controlled: 229, Missing: 0; denominator 301 participants. [ClinicalTrials.gov:NCT00545844]\n\nThis was a single-group, nonrandomized study, so the results do not establish that the treatment caused any change. Different visit denominators do not show which individual participants changed categories. [ClinicalTrials.gov:NCT00545844]",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Reported counts and denominators were preserved from a complete indexed outcome table; no rates or effect sizes were calculated."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "REPORTED OUTCOME \u00b7 ClinicalTrials.gov:NCT00545844 \u00b7 Singulair(R) In Asthma And Allergic Rhinitis (0476-383) \u00b7 Results outcome 001"
+      ],
+      "evidence_quality": [
+        "Reported values are source-attributed; formatting does not independently validate the study."
+      ],
+      "facet_coverage": [
+        "Reported counts, missingness and visit denominators included.",
+        "Nonrandomized single-group comparison limitation included."
+      ],
+      "answer_trace": [
+        {
+          "label": "Answer method",
+          "value": "Reported statistics",
+          "detail": "Source values rendered directly, without a model call."
+        },
+        {
+          "label": "Source outcome",
+          "value": "Results outcome 001",
+          "detail": "ClinicalTrials.gov:NCT00545844"
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "Registry-reported participant counts; different visit denominators do not identify individual transitions."
+      ],
+      "limitations": [
+        "This answer covers the selected registry outcome, not the entire study record."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "with-design-chunk-2",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+          "score": 0.7848,
+          "section": "Results outcome 001",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "results",
+            "was",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, results, was, week in a trial record."
+        }
+      ],
+      "created_at": "2026-11-02T02:09:40.249728+00:00"
+    },
+    "provider_outputs": [],
+    "generation_context": null,
+    "generation_context_sha256": null
+  }
+]

@@ -1,0 +1,665 @@
+[
+  {
+    "case_id": "with-design-statistics",
+    "snapshot_id": "with-design",
+    "answer": {
+      "id": "3c596b46-3f4c-4382-951a-b03330df8015",
+      "workspace_id": "design-with-design",
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "27ac1c7fa24b26149c29ae147c50e85f1a0c931b045968815c109b904aa02b02"
+      },
+      "short_answer": "Posted trial outcome records are indexed for this question. This source-excerpt view does not interpret those statistics; inspect the supporting outcome passages, or try again for a cited conversational explanation.",
+      "direct_answer": "Posted trial outcome records are indexed for this question. This source-excerpt view does not interpret those statistics; inspect the supporting outcome passages, or try again for a cited conversational explanation.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [],
+      "limitations": [
+        "No statistical interpretation was generated in this source-excerpt response."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "with-design-chunk-4",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 1.0457,
+          "section": "Results outcome 003",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "corticosteroids",
+            "inhaled",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, corticosteroids, inhaled, week in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-2",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+          "score": 0.8426,
+          "section": "Results outcome 001",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "control",
+            "results",
+            "was",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, control, results, was, week in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-7",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7752,
+          "section": "Results outcome 006",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-6",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7654,
+          "section": "Results outcome 005",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-5",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Patient Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete a single question describing how satisfied they were regarding their asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=24 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=136 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=77 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=36 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=97 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=16 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=2 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 0.7639,
+          "section": "Results outcome 004",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "comparison",
+            "results",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, comparison, results, week, were in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-3",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: The Mean Change in Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) Overall Score Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Mini Rhinoconjunctivitis Quality of Life Questionnaire (MiniRQLQ) consists of 14 questions to assess patient's overall quality of life related to allergic rhinitis on a scale of 0 (least impairment) to 6 (greatest impairment). The score is the mean of the 14 questions, ranging from 0 to 6. Change is computed as Week 8 score - Week 0 score Population: Based on ITT population; there were 286 patients with available data regarding the mean change in MiniRQLQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 8 | id=OG000 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=286 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG000); value=-1.45; spread=1.35",
+          "score": 0.7387,
+          "section": "Results outcome 002",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "week",
+            "were"
+          ],
+          "relevance_note": "Matched asthma, week, were in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-0",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "score": 0.6294,
+          "section": "Brief summary",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        },
+        {
+          "chunk_id": "with-design-chunk-1",
+          "source_id": "source-with-design",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Study type: INTERVENTIONAL Allocation: NON_RANDOMIZED Intervention model: SINGLE_GROUP Primary purpose: TREATMENT Masking: NONE Registered enrollment: 313 ACTUAL (registered count, not necessarily an outcome denominator).",
+          "score": 0.4401,
+          "section": "Study design",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma"
+          ],
+          "relevance_note": "Matched asthma in a trial record."
+        }
+      ],
+      "created_at": "2026-11-02T01:21:35.801787+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\n  \"claims\": [\n    {\n      \"text\": \"The study evaluated the effect of adding montelukast to inhaled corticosteroids in adults with uncontrolled asthma and allergic rhinitis.\",\n      \"citation\": \"ClinicalTrials.gov:NCT00545844\"\n    ,\n      \"paragraph\": 0\n    },\n    {\n      \"text\": \"At baseline (week\u202f0), 313 participants were assessed, of whom 312 were classified as uncontrolled and 0 as controlled (1 missing).\",\n      \"citation\": \"ClinicalTrials.gov:NCT00545844\"\n    ,\n      \"paragraph\": 0\n    },\n    {\n      \"text\": \"At week\u202f8, 301 participants completed the assessment, with 72 remaining uncontrolled and 229 achieving control (0 missing).\",\n      \"citation\": \"ClinicalTrials.gov:NCT00545844\"\n    ,\n      \"paragraph\": 0\n    },\n    {\n      \"text\": \"Because the design was a single\u2011group, pre\u2011post study, the comparison reflects change over time within the same patients rather than a randomized contrast between treatments.\",\n      \"citation\": \"ClinicalTrials.gov:NCT00545844\"\n    ,\n      \"paragraph\": 1\n    }\n  ]\n}",
+        "usage": {
+          "input_tokens": 3216,
+          "output_tokens": 308,
+          "total_tokens": 3524,
+          "neurons": 122.81758880615234
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "c5d393e4465693bcedaaee47fcc9ea1b5da71e466ae36f1b07a305e3d060979e",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "low"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": null,
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "completed",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      },
+      {
+        "response": "{\n  \"reviews\": [\n    {\n      \"index\": 0,\n      \"verdict\": \"supported\",\n      \"text\": \"The study evaluated the effect of adding montelukast to inhaled corticosteroids in adults with uncontrolled asthma and allergic rhinitis.\",\n      \"quotes\": [\"S0P1\", \"S0P0\"]\n    },\n    {\n      \"index\": 1,\n      \"verdict\": \"supported\",\n      \"text\": \"At baseline (week\u202f0), 313 participants were assessed, of whom 312 were classified as uncontrolled, 0 as controlled, and 1 was missing.\",\n      \"quotes\": [\"S0P3\", \"S0P4\"]\n    },\n    {\n      \"index\": 2,\n      \"verdict\": \"supported\",\n      \"text\": \"At week\u202f8, 301 participants completed the assessment, with 72 remaining uncontrolled, 229 achieving control, and no participants missing.\",\n      \"quotes\": [\"S0P3\", \"S0P4\"]\n    },\n    {\n      \"index\": 3,\n      \"verdict\": \"supported\",\n      \"text\": \"Because the design was a non\u2011randomized, single\u2011group study, the comparison reflects change over time within the same cohort rather than a randomized contrast between treatments; the baseline and week\u20118 denominators differ, so individual patient transitions cannot be directly inferred.\",\n      \"quotes\": [\"S0P0\", \"S0P3\"]\n    }\n  ]\n}",
+        "usage": {
+          "input_tokens": 8388,
+          "output_tokens": 537,
+          "total_tokens": 8925,
+          "neurons": 302.993896484375
+        },
+        "claim_support_index": {
+          "S0P0": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Study type: INTERVENTIONAL\nAllocation: NON_RANDOMIZED\nIntervention model: SINGLE_GROUP\nPrimary purpose: TREATMENT\nMasking: NONE\nRegistered enrollment: 313 ACTUAL (registered count, not necessarily an outcome denominator).",
+            "outcome_ids": [],
+            "outcome_titles": [],
+            "has_reported_analysis": false,
+            "support_role": "registry_design"
+          },
+          "S0P1": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+            "outcome_ids": [],
+            "outcome_titles": [],
+            "has_reported_analysis": false,
+            "support_role": "source_context"
+          },
+          "S0P2": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8",
+            "outcome_ids": [
+              "Results outcome 001"
+            ],
+            "outcome_titles": [
+              "Asthma Control"
+            ],
+            "has_reported_analysis": false,
+            "support_role": "outcome"
+          },
+          "S0P3": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase",
+            "outcome_ids": [
+              "Results outcome 001"
+            ],
+            "outcome_titles": [
+              "Asthma Control"
+            ],
+            "has_reported_analysis": false,
+            "support_role": "outcome"
+          },
+          "S0P4": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment",
+            "outcome_ids": [
+              "Results outcome 003"
+            ],
+            "outcome_titles": [
+              "Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ)"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P5": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301",
+            "outcome_ids": [
+              "Results outcome 006"
+            ],
+            "outcome_titles": [
+              "Patient Global Allergic Rhinitis Symptoms Assessment"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P6": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001);",
+            "outcome_ids": [
+              "Results outcome 005"
+            ],
+            "outcome_titles": [
+              "Physician Global Satisfaction"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P7": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis:",
+            "outcome_ids": [
+              "Results outcome 003"
+            ],
+            "outcome_titles": [
+              "Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ)"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P8": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase",
+            "outcome_ids": [
+              "Results outcome 006"
+            ],
+            "outcome_titles": [
+              "Patient Global Allergic Rhinitis Symptoms Assessment"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P9": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "[Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical",
+            "outcome_ids": [
+              "Results outcome 006"
+            ],
+            "outcome_titles": [
+              "Patient Global Allergic Rhinitis Symptoms Assessment"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P10": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "(Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+            "outcome_ids": [
+              "Results outcome 001"
+            ],
+            "outcome_titles": [
+              "Asthma Control"
+            ],
+            "has_reported_analysis": false,
+            "support_role": "outcome"
+          },
+          "S0P11": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "(Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority",
+            "outcome_ids": [
+              "Results outcome 005"
+            ],
+            "outcome_titles": [
+              "Physician Global Satisfaction"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P12": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "| id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or",
+            "outcome_ids": [
+              "Results outcome 005"
+            ],
+            "outcome_titles": [
+              "Physician Global Satisfaction"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P13": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit",
+            "outcome_ids": [
+              "Results outcome 006"
+            ],
+            "outcome_titles": [
+              "Patient Global Allergic Rhinitis Symptoms Assessment"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P14": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants):",
+            "outcome_ids": [
+              "Results outcome 005"
+            ],
+            "outcome_titles": [
+              "Physician Global Satisfaction"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P15": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "outcome_ids": [
+              "Results outcome 003"
+            ],
+            "outcome_titles": [
+              "Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ)"
+            ],
+            "has_reported_analysis": true,
+            "support_role": "outcome"
+          },
+          "S0P16": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "COMPLETED",
+            "outcome_ids": [],
+            "outcome_titles": [],
+            "has_reported_analysis": false,
+            "support_role": "source_context"
+          },
+          "S0P17": {
+            "citation": "ClinicalTrials.gov:NCT00545844",
+            "text": "PHASE4",
+            "outcome_ids": [],
+            "outcome_titles": [],
+            "has_reported_analysis": false,
+            "support_role": "source_context"
+          }
+        },
+        "verified_selection": null,
+        "generation_context_sha256": "c5d393e4465693bcedaaee47fcc9ea1b5da71e466ae36f1b07a305e3d060979e",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "low"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": null,
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "completed",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "inhaled corticosteroids"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "registry_design": {
+            "study_type": "INTERVENTIONAL",
+            "allocation": "NON_RANDOMIZED",
+            "intervention_model": "SINGLE_GROUP",
+            "primary_purpose": "TREATMENT",
+            "masking": "NONE",
+            "enrollment_type": "ACTUAL",
+            "enrollment_count": 313
+          },
+          "registry_design_scope": "Reported registry design metadata, not measured results. Registered enrollment is not necessarily an outcome's analyzed denominator.",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Results outcome 001",
+            "Results outcome 002",
+            "Results outcome 003",
+            "Results outcome 004",
+            "Results outcome 005",
+            "Results outcome 006",
+            "Study design"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "matched_passages": [
+            "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "Outcome: Asthma Control Type: PRIMARY Time frame: 8 weeks (from Week 0 to Week 8) Description: Asthma control was assessed by the Canadian Asthma Consensus Guidelines at week 0 and week 8. Patients were considered uncontrolled if they answered \"yes\" to at least 2 of the 8 asthma control parameters. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=312 Measurement [Uncontrolled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=72 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=0 Measurement [Controlled] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=229 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0",
+            "Outcome: Patient Global Allergic Rhinitis Symptoms Assessment Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, patients were asked to complete one question describing their perception of their allergic rhinitis symptoms. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=11 Measurement [A non-issue as I do not have these symptoms] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=41 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=35 Measurement [Not really bothersome] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=129 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=73 Measurement [Bothersome a little of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=77 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=91 Measurement [Bothersome some of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=40 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=94 Measurement [Bothersome a good bit of the time] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=13 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=9 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+            "Outcome: Physician Global Satisfaction Type: OTHER_PRE_SPECIFIED Time frame: 8 weeks (from Week 0 to Week 8) Description: At week 0 and week 8, physicians were asked to complete a single question describing how satisfied they were regarding their patient's asthma controller medication. Population: 319 patients advanced to the treatment phase and 313 patients qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit. The following results are based on the 301 patients who completed week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Participants Measure parameter type: NUMBER Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=301 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=7 Measurement [Very satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=135 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=54 Measurement [Satisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=110 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=104 Measurement [Neither satisfied or dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=30 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=142 Measurement [Dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=25 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=4 Measurement [Very dissatisfied] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=1 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2 Measurement [Missing] (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: comparison=McNemar-Bowker test is McNemar chi-squared statistic for binary matched pairs, with Bowker chi-squared fit test of symmetry model (tests all rows of data) (cf. Agresti, 2007); statistical method=McNemar-Bowker; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001"
+          ],
+          "outcome_links": [
+            {
+              "id": "Results outcome 003",
+              "matched_passage_index": 0,
+              "title": "Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ)",
+              "has_reported_analysis": true
+            },
+            {
+              "id": "Results outcome 001",
+              "matched_passage_index": 1,
+              "title": "Asthma Control",
+              "has_reported_analysis": false
+            },
+            {
+              "id": "Results outcome 006",
+              "matched_passage_index": 2,
+              "title": "Patient Global Allergic Rhinitis Symptoms Assessment",
+              "has_reported_analysis": true
+            },
+            {
+              "id": "Results outcome 005",
+              "matched_passage_index": 3,
+              "title": "Physician Global Satisfaction",
+              "has_reported_analysis": true
+            }
+          ]
+        }
+      ],
+      "question": "For NCT00545844, what were the asthma control results at baseline and week 8? Give the counts and denominators, explain which treatment was studied and what the comparison can tell us."
+    },
+    "generation_context_sha256": "c5d393e4465693bcedaaee47fcc9ea1b5da71e466ae36f1b07a305e3d060979e"
+  }
+]

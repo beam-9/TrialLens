@@ -183,9 +183,36 @@ def _feedback_block(notes: list[dict[str, str]]) -> str:
     return ""
 
 
+def _copy_examples(answer: dict[str, Any], payload: dict[str, Any]) -> list[str]:
+    """Return at most two short 28-word copied windows for a corrective pass."""
+    answer_words = " ".join(_normalized_words(" ".join(answer.get("paragraphs", []))))
+    cited = set()
+    for paragraph in answer.get("paragraphs", []):
+        cited.update(_CITATION.findall(paragraph))
+    examples = []
+    for record in payload.get("evidence", []):
+        if not isinstance(record, dict) or record.get("citation") not in cited:
+            continue
+        source_texts = [record.get("text", ""), *record.get("matched_passages", [])]
+        for source in source_texts:
+            if not isinstance(source, str):
+                continue
+            words = _normalized_words(source)
+            for index in range(max(0, len(words) - 27)):
+                window = words[index:index + 28]
+                if len(window) == 28 and " ".join(window) in answer_words:
+                    example = " ".join(window)
+                    if example not in examples:
+                        examples.append(example)
+                    break
+            if len(examples) >= 2:
+                return examples
+    return examples
+
+
 @contextmanager
-def revision_feedback_experiment(*, numeric_guard: bool = False):
-    """Append feedback only for the second call; provider call count stays two."""
+def revision_feedback_experiment(*, numeric_guard: bool = False, repair_once: bool = False):
+    """Append mechanical feedback and optionally make one bounded repair call."""
     from triallens import conversation
 
     original = conversation.cloudflare.completion
@@ -200,6 +227,35 @@ def revision_feedback_experiment(*, numeric_guard: bool = False):
                 copied[-1]["content"] = str(copied[-1].get("content", "")) + _feedback_block(notes)
                 submitted = copied
         content = original(submitted, schema)
+        if repair_once and len(messages) == 4:
+            payload = None
+            try:
+                payload = json.loads(messages[1]["content"])
+                generated = json.loads(content)
+                from triallens.conversation import GeneratedAnswer
+                answer = GeneratedAnswer.model_validate(generated).model_dump()
+            except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+                # A missing or malformed response is not a repair opportunity.
+                answer = None
+            if isinstance(payload, dict) and answer is not None:
+                repair_messages = [
+                    dict(messages[0]),
+                    dict(messages[1]),
+                    {"role": "assistant", "content": content},
+                    {"role": "user", "content": (
+                        "Repair only the specific mechanical failures, preserving already-correct facts, numbers, "
+                        "formulations, and populations. Do not replace correct original phrasing with verbatim "
+                        "source. Make no new claims; return JSON."
+                    )},
+                ]
+                notes = feedback_notes(repair_messages, numeric_guard=numeric_guard)
+                if notes:
+                    repair_messages[-1]["content"] += _feedback_block(notes)
+                    if any(note.get("code") == "long_source_copy" for note in notes):
+                        examples = _copy_examples(answer, payload)
+                        if examples:
+                            repair_messages[-1]["content"] += "\nCopied source windows to rephrase: " + json.dumps(examples, ensure_ascii=False)
+                    content = original(repair_messages, schema)
         if numeric_guard and len(messages) == 4:
             from numeric_checks import unsupported_numbers
             final, payload = json.loads(content), json.loads(messages[1]['content'])

@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "92bae1a1d11650ff3ac9d42815a6f4f7e2778dd5f92bceb09bcae915586b5804",
+  "runner_sha256": "ac0c7be3d4a38b6be6d709e51482653cda7dec7377db5656a4f38ea68dbd2198",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "37b6ec051266efe7f63ac08e3eaafe93950aa290381bc3e634419f5f1011d30c",
+  "model_rates": {
+    "input_micro_neurons_per_token": 26668,
+    "output_micro_neurons_per_token": 204805,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "with-design-statistics",
+      "snapshot_id": "with-design",
+      "client_wall_ms": 21.957416999999978,
+      "trace": {
+        "trace_id": "efde0cb0-bbe0-4b1c-bd21-ff2a5c8d5b45",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "reported_statistics",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 0,
+        "phases_ms": {
+          "storage_read": 1.036208,
+          "retrieval": 11.659875,
+          "extractive_synthesis": 0.029333,
+          "context_build": 0.0,
+          "draft": 0.0,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 1.969208
+        },
+        "model_calls": [],
+        "model_name": null,
+        "http_status": 200,
+        "total_wall_ms": 20.152833,
+        "serialization_ms": 0.233917
+      }
+    },
+    {
+      "case_id": "with-design-followup",
+      "snapshot_id": "with-design",
+      "client_wall_ms": 16.32699999999998,
+      "trace": {
+        "trace_id": "4c8fff10-6210-4b27-b4ff-1f49b9fd4aba",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "reported_statistics",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 0,
+        "phases_ms": {
+          "storage_read": 1.55,
+          "retrieval": 10.477167,
+          "extractive_synthesis": 0.040708,
+          "context_build": 0.0,
+          "draft": 0.0,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 2.326625
+        },
+        "model_calls": [],
+        "model_name": null,
+        "http_status": 200,
+        "total_wall_ms": 15.637833,
+        "serialization_ms": 0.307875
+      }
+    }
+  ],
+  "summary": {
+    "n": 2,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "reported_statistics": 2
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7509.886275,
+    "remaining_neurons": 1490.113725,
+    "pending_requests": 3,
+    "requests": 25
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "disable_thinking": false,
+    "repair_once": false,
+    "max_provider_calls_per_question": 2,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": null,
+    "reasoning_effort": null,
+    "wrapper_sha256": "33a0c052983ddb7ef16da5e38c3e110e5546bd4790dc04684f5d29c70d4a5020",
+    "feedback_sha256": "0f93884aed3868575e28cff926a50d5a5a62b2728b92e6d5bfb042ad77490fc2",
+    "inventory_path": "evaluation/answer_coverage/design-cohort-2026-10-31/inventory.json"
+  }
+}

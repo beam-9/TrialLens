@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/qwen/qwen3.8-27b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "f19752559650771e71df4b33ea7617c234f9624498e184c2e01d50d4985b4cb7",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": "3c196bc7a4594cb6c91188dbb97238f7a206aaa74aae85fd599a3a407b26c3a3",
+  "code_sha256": "4a9446a60e8531d452b565afb310b381b2bbdcd30d63d85989f6616b4375c4ac",
+  "model_rates": {
+    "input_micro_neurons_per_token": 40909,
+    "output_micro_neurons_per_token": 290909,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 39725.537166,
+      "trace": {
+        "trace_id": "f6926329-3504-4fb0-9544-dd63c3f4d84e",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 5.263958,
+          "retrieval": 9.533708,
+          "extractive_synthesis": 21.820708,
+          "context_build": 0.564875,
+          "draft": 19381.660666,
+          "revision": 20277.305166,
+          "validation": 3.031083,
+          "store": 20.09525
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 28922,
+            "message_count": 2,
+            "serialized_messages_char_count": 29363,
+            "wall_ms": 19381.660666,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6643,
+            "eval_count": 836,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 33904,
+            "message_count": 4,
+            "serialized_messages_char_count": 34471,
+            "wall_ms": 20277.305166,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7830,
+            "eval_count": 919,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/qwen/qwen3.8-27b",
+        "http_status": 200,
+        "total_wall_ms": 39723.725958,
+        "serialization_ms": 0.625708
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 6315.115971,
+    "remaining_neurons": 2684.884029,
+    "pending_requests": 2,
+    "requests": 24
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": true,
+    "numeric_checks": true,
+    "disable_thinking": true,
+    "thinking_profile_sha256": "888ba0dde76f7a1415ac5a0065b62b160a79abd9c1f15ace213333b0a36bc396",
+    "numeric_checks_sha256": "a721630d4cec4edeeb6b80da97010b06bbd1e5d5fd99bb2db0f303b7b6293ab2",
+    "strategy_experiment": null,
+    "model_experiment": "@cf/qwen/qwen3.8-27b",
+    "reasoning_effort": null,
+    "wrapper_sha256": "0c4d623d20493268140c3705096491ffd538cee005638827aba393391d891839",
+    "feedback_sha256": "af6b9920dae72edacf36db5465c6547e629054d82daeac29fc023b03dbb562ff",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

@@ -146,6 +146,19 @@ def normalize_citations(text: str, allowed: set[str]) -> str:
 _LOCAL_GENERATION_LOCK = threading.Lock()
 
 
+def simple_count_followup(question: str, history: list[Answer]) -> bool:
+    if re.search(r'\bNCT\d{8}\b', question, re.I):
+        return False
+    if not history or not any(item.label == 'Answer method' and item.value == 'Reported statistics' for item in history[-1].answer_trace):
+        return False
+    if not re.search(r'\bsimpl\w*\b|plain (?:language|english)|easier', question, re.I):
+        return False
+    generic = set('can could would you please explain that those these this it the more simply simpler simplify keeping keep key numbers counts and main limitation limitations in plain english language make easier to understand read without changing unchanged same results study trial s'.split())
+    previous_words = set(re.findall(r'[a-z]+', history[-1].question.lower()))
+    current = re.sub(r'\bNCT\d{8}\b', '', question, flags=re.I)
+    return set(re.findall(r'[a-z]+', current.lower())).issubset(generic | previous_words)
+
+
 def reconcile_conversational_provenance(answer: Answer, records: list[dict], *, generated: bool = True) -> None:
     """Replace excerpt-answer judgments after a different final answer is accepted.
 
@@ -344,11 +357,6 @@ class ConversationService:
         annotate(model_name=chat_model(), result_kind="excerpt_fallback")
         if chat_provider() == "cloudflare":
             annotate(model_digest_or_version=None)
-        if not chat_configured():
-            annotate(fallback_reason="not_configured")
-            fallback.generation_note = ("Cloudflare setup is incomplete. Add the server credentials and confirm the Workers Free plan. Showing source excerpts; no local model or paid provider was called."
-                                        if chat_provider() == "cloudflare" else "Source excerpts mode: conversational generation is not connected yet.")
-            return fallback
         treatment_subject = re.search(r"\b(treatment|drug|medication|medicine|dose|intervention)\b", question, re.I) or (
             workspace.intervention and workspace.intervention.lower() in question.lower())
         if treatment_subject and re.search(r"\bshould I (?:start|stop|take|use|change|switch|increase|decrease|reduce|continue|discontinue)\b", question, re.I):
@@ -368,6 +376,43 @@ class ConversationService:
             fallback.generation_mode = "conversational"
             fallback.generation_note = "Clarification needed; no model generation or API credits used."
             reconcile_conversational_provenance(fallback, [], generated=False)
+            return fallback
+        # Complete count tables can answer a narrow request directly. Keep
+        # personal-decision guards above this path and do not infer missing data.
+        simple = simple_count_followup(question, history)
+        count_request = all(re.search(pattern, question, re.I) for pattern in (r'\bNCT\d{8}\b', r'\bbaseline\b', r'\bweek\s*\d+\b', r'\b(?:counts?|numbers?|how many|participants)\b'))
+        extra_scope = re.search(r'\b(?:safety|side effects?|adverse|mortality|death|contraindications?|dose|dosing|versus|vs|subgroups?|children|pediatric|pregnan\w*|older|younger|adolescen\w*|renal|kidney|adults?|women|men|female|male)\b', question, re.I)
+        if (simple or count_request) and not extra_scope:
+            from triallens.reported_counts import reported_counts
+            count_question = question
+            if simple:
+                count_question = next((a.question for a in reversed(history) if re.search(r'\bNCT\d{8}\b', a.question, re.I)
+                    and any(item.label == 'Answer method' and item.value == 'Reported statistics' for item in a.answer_trace)), '')
+            reported = reported_counts(count_question, sources, fallback.retrieved_chunks, simple=simple)
+            if reported:
+                source = next(item for item in sources if item.id == reported['source_id'])
+                fallback.direct_answer = fallback.short_answer = reported['direct_answer']
+                fallback.generation_mode = 'extractive'
+                fallback.generation_note = 'Reported trial statistics, formatted from indexed outcome data. No AI inference was used.'
+                fallback.citations = [reported['citation']]
+                fallback.retrieved_chunks = [chunk for chunk in fallback.retrieved_chunks if chunk.source_id == source.id and chunk.section == reported['section']]
+                fallback.evidence = fallback.supporting_evidence = fallback.evidence_synthesis = fallback.evidence_map = []
+                fallback.reasoning_summary = ['Reported counts and denominators were preserved from a complete indexed outcome table; no rates or effect sizes were calculated.']
+                fallback.uncertainty = [reported['uncertainty']]
+                fallback.limitations = ['This answer covers the selected registry outcome, not the entire study record.']
+                fallback.safety_limitations = ['Demo evidence cannot support real-world conclusions.'] if source.metadata.get('demo') or 'DEMO' in source.external_id.upper() else []
+                fallback.source_readouts = [f"REPORTED OUTCOME · {reported['citation']} · {source.title} · {reported['section']}"]
+                fallback.evidence_quality = ['Reported values are source-attributed; formatting does not independently validate the study.']
+                fallback.facet_coverage = ['Reported counts, missingness and visit denominators included.', 'Nonrandomized single-group comparison limitation included.']
+                fallback.answer_trace = [AnswerTraceItem(label='Answer method', value='Reported statistics', detail='Source values rendered directly, without a model call.'),
+                                         AnswerTraceItem(label='Source outcome', value=reported['section'], detail=reported['citation'])]
+                annotate(model_name=None, result_kind='reported_statistics', fallback_reason=None, source_count_selected=1,
+                         context_char_count=0, revision_ran=False)
+                return fallback
+        if not chat_configured():
+            annotate(fallback_reason="not_configured")
+            fallback.generation_note = ("Cloudflare setup is incomplete. Add the server credentials and confirm the Workers Free plan. Showing source excerpts; no local model or paid provider was called."
+                                        if chat_provider() == "cloudflare" else "Source excerpts mode: conversational generation is not connected yet.")
             return fallback
         if not sources:
             annotate(fallback_reason="no_sources")
