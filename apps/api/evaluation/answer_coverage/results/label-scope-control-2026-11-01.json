@@ -1,0 +1,321 @@
+[
+  {
+    "case_id": "label-formulation-population",
+    "snapshot_id": "indications",
+    "answer": {
+      "id": "b1deb294-02dd-4b87-a523-4fc2e0e4fd6c",
+      "workspace_id": "label-scope-indications",
+      "question": "What intended uses do these labels establish? Explain the formulation and population differences clearly, including any pediatric age boundary. Keep the sitagliptin/metformin combination distinct, and explain what these indications do not tell us about the size of benefit.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "openFDA label:FDA-LABEL-metformin-2": "d190c853b18c1711f6438d41bf17f49d1e91a059395c303730184ed5929385ed",
+        "openFDA label:FDA-LABEL-metformin-1": "9c91cb046e058f075d624269c6e83ede26c3e2e123da6e036a6c42c311387acf",
+        "openFDA label:FDA-LABEL-metformin-3": "0a274c5249e42c78d1cba0b3cca68dbfbc1578d21c353582d7519eeab6a53b59"
+      },
+      "short_answer": "The FDA labels indicate that metformin hydrochloride tablets are approved for use in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus, to improve glycemic control as an adjunct to diet and exercise [openFDA label:FDA-LABEL-metformin-2].\n\nIn contrast, metformin hydrochloride extended-release tablets are approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3]. A combination product, ZITUVIMET, which includes sitagliptin and metformin hydrochloride, is also approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-1].\n\nThese labels establish the intended uses and populations for each formulation, but do not provide information on the size of the benefit for type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-1] [openFDA label:FDA-LABEL-metformin-3].",
+      "direct_answer": "The FDA labels indicate that metformin hydrochloride tablets are approved for use in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus, to improve glycemic control as an adjunct to diet and exercise [openFDA label:FDA-LABEL-metformin-2].\n\nIn contrast, metformin hydrochloride extended-release tablets are approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3]. A combination product, ZITUVIMET, which includes sitagliptin and metformin hydrochloride, is also approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-1].\n\nThese labels establish the intended uses and populations for each formulation, but do not provide information on the size of the benefit for type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-1] [openFDA label:FDA-LABEL-metformin-3].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 3 source records; the final answer uses 3 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-1 \u00b7 FDA label: ZITUVIMET \u00b7 Stored FDA label sections available in TrialLens.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-3 \u00b7 FDA label: Metformin hydrochloride \u00b7 Stored FDA label sections available in TrialLens."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "3 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "3 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The size of the benefit of metformin for type 2 diabetes mellitus is not established by these labels.",
+        "The risk of pancreatitis in patients using ZITUVIMET with a history of pancreatitis is unknown."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The size of the benefit of metformin for type 2 diabetes mellitus is not established by these labels.",
+        "The risk of pancreatitis in patients using ZITUVIMET with a history of pancreatitis is unknown."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-2",
+        "openFDA label:FDA-LABEL-metformin-1",
+        "openFDA label:FDA-LABEL-metformin-3"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "922b7bb2-5974-4696-8dbb-91c34be25a8f",
+          "source_id": "m0-real-source-07",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 )",
+          "score": 0.4051,
+          "section": "Indications and usage",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "age",
+            "diabetes",
+            "indications",
+            "metformin",
+            "pediatric",
+            "type"
+          ],
+          "relevance_note": "Matched age, diabetes, indications, metformin, pediatric in a FDA label passage."
+        },
+        {
+          "chunk_id": "2e36e5c0-7064-41a4-a5c9-c028f5b02c9b",
+          "source_id": "m0-real-source-08",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "1 INDICATIONS AND USAGE ZITUVIMET is a combination of sitagliptin, a dipeptidyl peptidase-4 (DPP-4) inhibitor, and metformin hydrochloride (HCl), a biguanide, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) Limitations of Use: ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ( 1 ) ZITUVIMET has not been studied in patients with a history of pancreatitis. ( 1 ) ZITUVIMET is indicated as an adjunct to diet and exercise to improve glycemic control in adults with",
+          "score": 0.3197,
+          "section": "Indications and usage 1",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "indications",
+            "metformin",
+            "sitagliptin",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, indications, metformin, sitagliptin in a FDA label passage."
+        },
+        {
+          "chunk_id": "3fc4f2a7-ac18-415c-94e1-9de0d551ea42",
+          "source_id": "m0-real-source-01",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 )",
+          "score": 0.2796,
+          "section": "Indications and usage",
+          "title": "FDA label: Metformin hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-3",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "indications",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, indications, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "be7c4dbf-5f8d-4e9c-843c-0c113ded7141",
+          "source_id": "m0-real-source-08",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "type 2 diabetes mellitus. Limitations of Use ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET. .",
+          "score": 0.209,
+          "section": "Indications and usage 2",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, type in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-11-02T05:17:53.220548+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The FDA labels establish metformin hydrochloride as an intended treatment for type 2 diabetes mellitus in adults and pediatric patients 10 years of age and older [openFDA label:FDA-LABEL-metformin-2]. This indication is for metformin hydrochloride tablets, which are a biguanide. In contrast, the label for metformin hydrochloride extended-release tablets, USP also indicates its use for improving glycemic control in adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3].\", \"A combination product, ZITUVIMET, which includes sitagliptin and metformin hydrochloride, is indicated for use in adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-1]. This combination is not recommended for patients with type 1 diabetes mellitus and has not been studied in patients with a history of pancreatitis. The indications for these formulations highlight differences in intended populations, with metformin hydrochloride tablets approved for pediatric patients 10 years and older, while the extended-release tablets and the combination product ZITUVIMET are approved for adults only.\", \"These indications do not provide information on the size of the benefit of metformin or the combination product ZITUVIMET for type 2 diabetes mellitus. They only establish the approved use and target population for each formulation, without detailing the efficacy or comparative effectiveness [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-1, openFDA label:FDA-LABEL-metformin-3].\"], \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\", \"openFDA label:FDA-LABEL-metformin-1\", \"openFDA label:FDA-LABEL-metformin-3\"], \"uncertainty\": [\"The size of the benefit of metformin for type 2 diabetes mellitus is not established by these labels.\", \"The efficacy of metformin in pediatric patients under 10 years old is not addressed.\", \"The risk of pancreatitis in patients using ZITUVIMET with a history of pancreatitis is unknown.\"]}",
+        "usage": {
+          "prompt_tokens": 1505,
+          "completion_tokens": 474,
+          "total_tokens": 1979,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 137.2125701904297
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "8d7f2323ef61380f20ac5b311a2fe2c738980f579a66f51c756034ef018d4b60",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The FDA labels indicate that metformin hydrochloride tablets are approved for use in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus, to improve glycemic control as an adjunct to diet and exercise [openFDA label:FDA-LABEL-metformin-2].\", \"In contrast, metformin hydrochloride extended-release tablets are approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-3]. A combination product, ZITUVIMET, which includes sitagliptin and metformin hydrochloride, is also approved for adults with type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-1].\", \"These labels establish the intended uses and populations for each formulation, but do not provide information on the size of the benefit for type 2 diabetes mellitus [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-1, openFDA label:FDA-LABEL-metformin-3].\"], \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\", \"openFDA label:FDA-LABEL-metformin-1\", \"openFDA label:FDA-LABEL-metformin-3\"], \"uncertainty\": [\"The size of the benefit of metformin for type 2 diabetes mellitus is not established by these labels.\", \"The risk of pancreatitis in patients using ZITUVIMET with a history of pancreatitis is unknown.\"]}",
+        "usage": {
+          "prompt_tokens": 2323,
+          "completion_tokens": 338,
+          "total_tokens": 2661,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 131.17320251464844
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "8d7f2323ef61380f20ac5b311a2fe2c738980f579a66f51c756034ef018d4b60",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [
+            "Indications and usage"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 )",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "title": "FDA label: ZITUVIMET",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [
+            "Indications and usage"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE ZITUVIMET is a combination of sitagliptin, a dipeptidyl peptidase-4 (DPP-4) inhibitor, and metformin hydrochloride (HCl), a biguanide, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) Limitations of Use: ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ( 1 ) ZITUVIMET has not been studied in patients with a history of pancreatitis. ( 1 ) ZITUVIMET is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Limitations of Use ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET. [see Warnings and Precautions ( 5.2 )].",
+          "matched_passages": [
+            "type 2 diabetes mellitus. Limitations of Use ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET. ."
+          ]
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "title": "FDA label: Metformin hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [
+            "Indications and usage"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 )",
+          "matched_passages": []
+        }
+      ],
+      "question": "What intended uses do these labels establish? Explain the formulation and population differences clearly, including any pediatric age boundary. Keep the sitagliptin/metformin combination distinct, and explain what these indications do not tell us about the size of benefit."
+    },
+    "generation_context_sha256": "8d7f2323ef61380f20ac5b311a2fe2c738980f579a66f51c756034ef018d4b60"
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "purpose": "Compact source-role diagnostic, three verbatim public-label indication sections. This does not substitute for full-context holdouts or assess safety synthesis.",
+  "derived_from": "evaluation/m0/snapshots/real-metformin.json",
+  "original_snapshot_sha256": "228ecc09969376a894cba23dffbf5b1114520e22da61b49e38602dc7ff572b6e",
+  "excerpt_spans": [
+    {
+      "external_id": "FDA-LABEL-metformin-3",
+      "start": 0,
+      "end": 385,
+      "original_abstract_sha256": "a1eed06d5e1fe4c1dc46003e28d43214d72beb955081bd18a8c4c633af2882d6"
+    },
+    {
+      "external_id": "FDA-LABEL-metformin-2",
+      "start": 0,
+      "end": 435,
+      "original_abstract_sha256": "344c61ff1ebea781770890d61538bb13c8803f359534afe9439bd23df78646f7"
+    },
+    {
+      "external_id": "FDA-LABEL-metformin-1",
+      "start": 0,
+      "end": 933,
+      "original_abstract_sha256": "288ec3002b7879b6acce93a518bdaf94a164e5531a49024ad143c339bcc079d9"
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "indications",
+      "path": "indications.json",
+      "sha256": "764ff4d1df0a7c12668ca78333504ea1aaac6d8f3327ded6173f6d333f4f7a88"
+    }
+  ],
+  "cases": [
+    {
+      "id": "label-formulation-population",
+      "snapshot_id": "indications",
+      "question": "What intended uses do these labels establish? Explain the formulation and population differences clearly, including any pediatric age boundary. Keep the sitagliptin/metformin combination distinct, and explain what these indications do not tell us about the size of benefit.",
+      "must_include": [
+        "Unqualified tablet label: adults and pediatric patients age 10 and older with type 2 diabetes, alongside diet and exercise.",
+        "Extended-release tablet label: adults with type 2 diabetes; do not infer a pediatric contraindication.",
+        "ZITUVIMET is a sitagliptin/metformin combination with adult indication.",
+        "Indications do not quantify benefit magnitude."
+      ],
+      "must_not_claim": [
+        "All formulations/products indicated for all children.",
+        "An adult-only indication establishes pediatric contraindication.",
+        "An unqualified tablet is explicitly immediate-release."
+      ],
+      "critical_error_categories": [
+        "wrong_product_scope",
+        "wrong_population",
+        "invented_formulation",
+        "indication_as_effect_size"
+      ]
+    }
+  ]
+}
