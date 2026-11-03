@@ -1,0 +1,423 @@
+[
+  {
+    "case_id": "m0-numeric-comparison",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "bd9f86d5-fa74-4d24-ac8f-efce24906f7f",
+      "workspace_id": "m0-numerical",
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This result is from a synthetic evaluation trial, meaning it's a demo or simulated study. The comparison was made between two groups of 240 adults: those who received intervention A and those who received a placebo.\n\nThe main limitation of this finding is that it only establishes the effect of intervention A compared to placebo at 12 weeks [PubMed:EVAL-NUMBERS].",
+      "direct_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This result is from a synthetic evaluation trial, meaning it's a demo or simulated study. The comparison was made between two groups of 240 adults: those who received intervention A and those who received a placebo.\n\nThe main limitation of this finding is that it only establishes the effect of intervention A compared to placebo at 12 weeks [PubMed:EVAL-NUMBERS].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The 95% confidence interval for the HbA1c difference is 0.2 to 0.8 percentage points lower",
+        "This is a synthetic evaluation trial, which may not reflect real-world outcomes",
+        "The trial does not establish effects beyond 12 weeks"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The 95% confidence interval for the HbA1c difference is 0.2 to 0.8 percentage points lower",
+        "This is a synthetic evaluation trial, which may not reflect real-world outcomes",
+        "The trial does not establish effects beyond 12 weeks",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.7907,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-03T22:15:49.336748+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo [EVAL-NUMBERS]. This comparison was made between two groups of adults: those who received intervention A and those who received a placebo. The result is a between-group difference, meaning it describes the difference in HbA1c levels between the intervention A group and the placebo group, rather than a change within one group. The 95% confidence interval for this difference was 0.2 to 0.8 percentage points lower, indicating the range of possible true differences. The population in this study consisted of 240 adults who were randomized to either intervention A or placebo.\", \"The main limitation of this finding is that it only establishes the effect of intervention A compared to placebo at 12 weeks, as the trial does not provide information on effects beyond this timeframe [EVAL-NUMBERS]. Additionally, the study did not measure mortality, so no conclusions can be drawn about the impact of intervention A on mortality.\"], \"cited_sources\": [\"EVAL-NUMBERS\"], \"uncertainty\": [\"The study only establishes effects up to 12 weeks\", \"Mortality was not measured\", \"This is a synthetic evaluation trial, which may not reflect real-world outcomes\"]}",
+        "usage": {
+          "prompt_tokens": 799,
+          "completion_tokens": 271,
+          "total_tokens": 1070,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 76.80970764160156
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This result is from a synthetic evaluation trial, meaning it's a demo or simulated study. The comparison was made between two groups of 240 adults: those who received intervention A and those who received a placebo.\", \"The main limitation of this finding is that it only establishes the effect of intervention A compared to placebo at 12 weeks [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The 95% confidence interval for the HbA1c difference is 0.2 to 0.8 percentage points lower\", \"This is a synthetic evaluation trial, which may not reflect real-world outcomes\", \"The trial does not establish effects beyond 12 weeks\"]}",
+        "usage": {
+          "prompt_tokens": 1492,
+          "completion_tokens": 207,
+          "total_tokens": 1699,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 82.182861328125
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty."
+    },
+    "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0"
+  },
+  {
+    "case_id": "m0-simplify-numeric-followup",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "17d8f796-6f1b-4108-8979-686792321808",
+      "workspace_id": "m0-numerical",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "previous_answer_id": "bd9f86d5-fa74-4d24-ac8f-efce24906f7f",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "The trial found that after 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than with a placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This was a comparison between two groups of 240 adults each, and it's from a synthetic evaluation trial, meaning it's a demo or simulated study. The main limitation is that this result only shows the effect of intervention A compared to a placebo at 12 weeks.",
+      "direct_answer": "The trial found that after 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than with a placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This was a comparison between two groups of 240 adults each, and it's from a synthetic evaluation trial, meaning it's a demo or simulated study. The main limitation is that this result only shows the effect of intervention A compared to a placebo at 12 weeks.",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The 95% confidence interval is 0.2 to 0.8 percentage points lower",
+        "This was a synthetic evaluation trial, which may not reflect real-world results"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The 95% confidence interval is 0.2 to 0.8 percentage points lower",
+        "This was a synthetic evaluation trial, which may not reflect real-world results",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.7367,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-03T22:16:04.574840+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial found that after 12 weeks, people who got intervention A had an HbA1c level that was 0.5 percentage points lower than those who got a placebo. This difference was between 0.2 and 0.8 percentage points lower [PubMed:EVAL-NUMBERS]. The trial compared two groups of 240 adults each. One group received intervention A, and the other got a placebo. The main limitation is that this only shows how intervention A worked compared to a placebo for 12 weeks.\", \"It's also important to note that this was a synthetic evaluation trial, which means it was a demo or simulated study [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The trial does not establish effects beyond 12 weeks\", \"Mortality was not measured\", \"This was a synthetic evaluation trial, meaning it's a demo or simulated study\"]}",
+        "usage": {
+          "prompt_tokens": 946,
+          "completion_tokens": 199,
+          "total_tokens": 1145,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 65.98387145996094
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "3d446dad93095c3099da19478d29e50a85046c12d07c4415730f6c31b825f31f",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial found that after 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than with a placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This was a comparison between two groups of 240 adults each, and it's from a synthetic evaluation trial, meaning it's a demo or simulated study. The main limitation is that this result only shows the effect of intervention A compared to a placebo at 12 weeks.\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The 95% confidence interval is 0.2 to 0.8 percentage points lower\", \"This was a synthetic evaluation trial, which may not reflect real-world results\"]}",
+        "usage": {
+          "prompt_tokens": 1499,
+          "completion_tokens": 169,
+          "total_tokens": 1668,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 74.58694458007812
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "3d446dad93095c3099da19478d29e50a85046c12d07c4415730f6c31b825f31f",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [
+        {
+          "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+          "answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) [PubMed:EVAL-NUMBERS]. This result is from a synthetic evaluation trial, meaning it's a demo or simulated study. The comparison was made between two groups of 240 adults: those who received intervention A and those who received a placebo.\n\nThe main limitation of this finding is that it only establishes the effect of intervention A compared to placebo at 12 weeks [PubMed:EVAL-NUMBERS]."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Can you explain that more simply without changing the numbers?"
+    },
+    "generation_context_sha256": "3d446dad93095c3099da19478d29e50a85046c12d07c4415730f6c31b825f31f"
+  }
+]
