@@ -1,0 +1,972 @@
+[
+  {
+    "case_id": "m0-safety-frequency",
+    "snapshot_id": "standalone-label",
+    "answer": {
+      "id": "930d19cd-b4d0-405b-a423-21fc97ee7274",
+      "workspace_id": "m0-standalone-label",
+      "question": "What numerical adverse-reaction information does this label report, and can its postmarketing reports tell us how often liver injury occurs?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "openFDA label:FDA-LABEL-metformin-2": "f7f14c19ab1dc3238977df5d582b1f83d47f0e74b9a8a0bc4470d27c4063444e"
+      },
+      "short_answer": "The label reports that in a clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients (n=141) and that were more common than in placebo-treated patients (n=145) were: diarrhea (53% vs 12% for placebo), nausea/vomiting (26% vs 8% for placebo), flatulence (12% vs 6% for placebo), asthenia (9% vs 6% for placebo), indigestion (7% vs 4% for placebo), abdominal discomfort (6% vs 5% for placebo), and headache (6% vs 5% for placebo) [openFDA label:FDA-LABEL-metformin-2].\n\nThe postmarketing reports of liver injury, including cholestatic, hepatocellular, and mixed hepatocellular liver injury, do not provide information on the frequency of these events, as they are reported voluntarily from a population of uncertain size, and it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure [openFDA label:FDA-LABEL-metformin-2].",
+      "direct_answer": "The label reports that in a clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients (n=141) and that were more common than in placebo-treated patients (n=145) were: diarrhea (53% vs 12% for placebo), nausea/vomiting (26% vs 8% for placebo), flatulence (12% vs 6% for placebo), asthenia (9% vs 6% for placebo), indigestion (7% vs 4% for placebo), abdominal discomfort (6% vs 5% for placebo), and headache (6% vs 5% for placebo) [openFDA label:FDA-LABEL-metformin-2].\n\nThe postmarketing reports of liver injury, including cholestatic, hepatocellular, and mixed hepatocellular liver injury, do not provide information on the frequency of these events, as they are reported voluntarily from a population of uncertain size, and it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure [openFDA label:FDA-LABEL-metformin-2].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The frequency of liver injury cannot be reliably estimated from the postmarketing reports."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The frequency of liver injury cannot be reliably estimated from the postmarketing reports."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-2"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-standalone-label-chunk-1",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning",
+          "score": 0.4078,
+          "section": "summary 1",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-7",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride",
+          "score": 0.3871,
+          "section": "summary 7",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-4",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased,",
+          "score": 0.3629,
+          "section": "summary 4",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-3",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5%",
+          "score": 0.3615,
+          "section": "summary 3",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-6",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may",
+          "score": 0.3487,
+          "section": "summary 6",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "injury",
+            "liver",
+            "metformin",
+            "postmarketing"
+          ],
+          "relevance_note": "Matched injury, liver, metformin, postmarketing in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-5",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population",
+          "score": 0.3393,
+          "section": "summary 5",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "postmarketing",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, postmarketing, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-8",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead",
+          "score": 0.3087,
+          "section": "summary 8",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-10",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "dolutegravir, and cimetidine) may increase the accumulation of metformin. Consider the benefits and risks of concomitant use ( 7 ) Alcohol can potentiate the effect of metformin on lactate metabolism. Warn patients against excessive alcohol intake ( 7 )",
+          "score": 0.303,
+          "section": "summary 10",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-11-04T23:22:36.817651+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The label reports that in a clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients were: diarrhea (53% vs 12% for placebo), nausea/vomiting (26% vs 8% for placebo), flatulence (12% vs 6% for placebo), asthenia (9% vs 6% for placebo), indigestion (7% vs 4% for placebo), abdominal discomfort (6% vs 5% for placebo), and headache (6% vs 5% for placebo) [openFDA label:FDA-LABEL-metformin-2].\", \"Additionally, the label states that diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients [openFDA label:FDA-LABEL-metformin-2].\", \"The label also mentions that in metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients [openFDA label:FDA-LABEL-metformin-2].\", \"The postmarketing reports of liver injury, including cholestatic, hepatocellular, and mixed hepatocellular liver injury, do not provide information on the frequency of these events, as they are reported voluntarily from a population of uncertain size [openFDA label:FDA-LABEL-metformin-2].\"], \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\"], \"uncertainty\": [\"The frequency of liver injury cannot be reliably estimated from the postmarketing reports due to the voluntary nature of the reporting and the uncertain size of the population.\"]}",
+        "usage": {
+          "prompt_tokens": 2321,
+          "completion_tokens": 390,
+          "total_tokens": 2711,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 141.76974487304688
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The label reports that in a clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients (n=141) and that were more common than in placebo-treated patients (n=145) were: diarrhea (53% vs 12% for placebo), nausea/vomiting (26% vs 8% for placebo), flatulence (12% vs 6% for placebo), asthenia (9% vs 6% for placebo), indigestion (7% vs 4% for placebo), abdominal discomfort (6% vs 5% for placebo), and headache (6% vs 5% for placebo) [openFDA label:FDA-LABEL-metformin-2].\", \"The postmarketing reports of liver injury, including cholestatic, hepatocellular, and mixed hepatocellular liver injury, do not provide information on the frequency of these events, as they are reported voluntarily from a population of uncertain size, and it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure [openFDA label:FDA-LABEL-metformin-2].\"], \"cited_sources\": [\"openFDA label:FDA-LABEL-metformin-2\"], \"uncertainty\": [\"The frequency of liver injury cannot be reliably estimated from the postmarketing reports.\"]}",
+        "usage": {
+          "prompt_tokens": 3196,
+          "completion_tokens": 301,
+          "total_tokens": 3497,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 146.87628173828125
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead to loss of glycemic control. Intervention: When such drugs are administered to a patient receiving metformin hydrochloride tablets, observe the patient closely for loss of blood glucose control. When such drugs are withdrawn from a patient receiving metformin hydrochloride tablets, observe the patient closely for hypoglycemia. Examples: Thiazides and other diuretics, corticosteroids, phenothiazines, thyroid products, estrogens, oral contraceptives, phenytoin, nicotinic acid, sympathomimetics, calcium channel blockers, and isoniazid. Carbonic anhydrase inhibitors may increase risk of lactic acidosis. Consider more frequent monitoring ( 7 ) Drugs that reduce metformin clearance (such as ranolazine, vandetanib, dolutegravir, and cimetidine) may increase the accumulation of metformin. Consider the benefits and risks of concomitant use ( 7 ) Alcohol can potentiate the effect of metformin on lactate metabolism. Warn patients against excessive alcohol intake ( 7 )",
+          "matched_passages": []
+        }
+      ],
+      "question": "What numerical adverse-reaction information does this label report, and can its postmarketing reports tell us how often liver injury occurs?"
+    },
+    "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187"
+  },
+  {
+    "case_id": "m0-numeric-comparison",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "760f5f10-e65a-4295-a153-a48fb3f2dbce",
+      "workspace_id": "m0-numerical",
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis comparison is a between-group difference in 240 adults, with placebo as the comparator, and the study does not establish effects beyond 12 weeks [PubMed:EVAL-NUMBERS].",
+      "direct_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis comparison is a between-group difference in 240 adults, with placebo as the comparator, and the study does not establish effects beyond 12 weeks [PubMed:EVAL-NUMBERS].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The study is a synthetic evaluation fixture and demo record."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The study is a synthetic evaluation fixture and demo record.",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.7907,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-04T23:22:57.008268+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo [PubMed:EVAL-NUMBERS].\", \"This comparison is a between-group difference, meaning it shows the difference in HbA1c levels between the intervention A group and the placebo group at the 12-week mark, rather than the change from baseline within each group.\", \"The population in this study consisted of 240 adults, and the comparator was a placebo [PubMed:EVAL-NUMBERS].\", \"The timeframe for this measurement was 12 weeks, and the uncertainty is represented by a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The study only establishes effects up to 12 weeks, with no data on longer-term effects.\", \"The confidence interval, while indicating a statistically significant difference, does not provide certainty about the true effect size.\", \"As a synthetic evaluation fixture and demo record, the study's results may not reflect real-world outcomes.\"]}",
+        "usage": {
+          "prompt_tokens": 948,
+          "completion_tokens": 242,
+          "total_tokens": 1190,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 74.84384155273438
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\", \"This comparison is a between-group difference in 240 adults, with placebo as the comparator, and the study does not establish effects beyond 12 weeks [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The study is a synthetic evaluation fixture and demo record.\"]}",
+        "usage": {
+          "prompt_tokens": 1678,
+          "completion_tokens": 132,
+          "total_tokens": 1810,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 71.78265380859375
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty."
+    },
+    "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0"
+  },
+  {
+    "case_id": "m0-protocol-versus-results",
+    "snapshot_id": "planned-trial",
+    "answer": {
+      "id": "10daca77-d59b-4beb-815b-ab84cf8c1373",
+      "workspace_id": "m0-planned-trial",
+      "question": "What can this registered trial currently tell us about intervention A and mortality? Distinguish the planned comparison and outcome from measured results.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:EVAL-PROTOCOL": "82b7f68d958db6a1239430418548c3c0afe93a20723881e55c5afe8cc38e00c6"
+      },
+      "short_answer": "The registered trial protocol for EVAL-PROTOCOL, a synthetic evaluation fixture, does not provide information about the effect of intervention A on mortality, as mortality is not a listed outcome [ClinicalTrials.gov:EVAL-PROTOCOL].\n\nNo results have been posted, so the effect of intervention A on mortality is not established [ClinicalTrials.gov:EVAL-PROTOCOL].",
+      "direct_answer": "The registered trial protocol for EVAL-PROTOCOL, a synthetic evaluation fixture, does not provide information about the effect of intervention A on mortality, as mortality is not a listed outcome [ClinicalTrials.gov:EVAL-PROTOCOL].\n\nNo results have been posted, so the effect of intervention A on mortality is not established [ClinicalTrials.gov:EVAL-PROTOCOL].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:EVAL-PROTOCOL \u00b7 Synthetic evaluation fixture: planned trial \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions.",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The trial protocol is a demo record and no results have been posted."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The trial protocol is a demo record and no results have been posted.",
+        "Demo evidence cannot support real-world conclusions.",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:EVAL-PROTOCOL"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-planned-trial-chunk-1",
+          "source_id": "m0-planned-trial-source-1",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+          "text": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+          "score": 0.6887,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: planned trial",
+          "url": null,
+          "external_id": "EVAL-PROTOCOL",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "intervention",
+            "mortality",
+            "outcome",
+            "planned",
+            "results"
+          ],
+          "relevance_note": "Matched evaluation, intervention, mortality, outcome, planned in a trial record."
+        }
+      ],
+      "created_at": "2026-11-04T23:23:15.023702+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The registered trial protocol for EVAL-PROTOCOL, a synthetic evaluation fixture, currently provides no information about the effect of intervention A on mortality [ClinicalTrials.gov:EVAL-PROTOCOL].\", \"This is because mortality is not a listed outcome in the trial protocol, and no results have been posted yet [ClinicalTrials.gov:EVAL-PROTOCOL].\", \"The planned primary outcome is symptom score at 16 weeks, which will be compared between intervention A and placebo, but this does not provide any insight into the potential impact of intervention A on mortality [ClinicalTrials.gov:EVAL-PROTOCOL].\"], \"cited_sources\": [\"ClinicalTrials.gov:EVAL-PROTOCOL\"], \"uncertainty\": [\"The trial protocol is a demo record and may not reflect a real-world study.\", \"No results have been posted, so no conclusions can be drawn about the effect of intervention A on any outcome.\", \"The protocol does not provide information on mortality as an outcome.\"]}",
+        "usage": {
+          "prompt_tokens": 941,
+          "completion_tokens": 204,
+          "total_tokens": 1145,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 66.87456512451172
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The registered trial protocol for EVAL-PROTOCOL, a synthetic evaluation fixture, does not provide information about the effect of intervention A on mortality, as mortality is not a listed outcome [ClinicalTrials.gov:EVAL-PROTOCOL].\", \"No results have been posted, so the effect of intervention A on mortality is not established [ClinicalTrials.gov:EVAL-PROTOCOL].\"], \"cited_sources\": [\"ClinicalTrials.gov:EVAL-PROTOCOL\"], \"uncertainty\": [\"The trial protocol is a demo record and no results have been posted.\"]}",
+        "usage": {
+          "prompt_tokens": 1630,
+          "completion_tokens": 119,
+          "total_tokens": 1749,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 67.84013366699219
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+          "title": "Synthetic evaluation fixture: planned trial",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+          "matched_passages": []
+        }
+      ],
+      "question": "What can this registered trial currently tell us about intervention A and mortality? Distinguish the planned comparison and outcome from measured results."
+    },
+    "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004"
+  },
+  {
+    "case_id": "m0-simplify-numeric-followup",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "f6c87373-7f45-450d-b533-0d3eee3252d5",
+      "workspace_id": "m0-numerical",
+      "question": "Can you explain that more simply without changing the numbers?",
+      "previous_answer_id": "760f5f10-e65a-4295-a153-a48fb3f2dbce",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis was a between-group difference in 240 adults, with the trial not establishing effects beyond 12 weeks [PubMed:EVAL-NUMBERS].",
+      "direct_answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis was a between-group difference in 240 adults, with the trial not establishing effects beyond 12 weeks [PubMed:EVAL-NUMBERS].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The evidence is from a demo record."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The evidence is from a demo record.",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.7367,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-04T23:23:27.676420+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial found that after 12 weeks, people who got intervention A had HbA1c levels 0.5 percentage points lower than those who got a placebo [PubMed:EVAL-NUMBERS].\", \"This means that in a group of 240 adults, intervention A was compared to a placebo, and the difference in HbA1c levels was measured over 12 weeks [PubMed:EVAL-NUMBERS].\", \"It's also important to note that we don't know what happened after 12 weeks, because the trial didn't look at that [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The trial only lasted 12 weeks, so we don't know what might happen in the long term.\", \"The study was a synthetic evaluation fixture, which might not reflect real-world results.\", \"The evidence is from a demo record, which cannot support real-world conclusions.\"]}",
+        "usage": {
+          "prompt_tokens": 1064,
+          "completion_tokens": 203,
+          "total_tokens": 1267,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 69.94988250732422
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "4932b1d4542cfeb94a235643574db3567f4e542500429ae003d3c30d9714c2f9",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\", \"This was a between-group difference in 240 adults, with the trial not establishing effects beyond 12 weeks [PubMed:EVAL-NUMBERS].\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The evidence is from a demo record.\"]}",
+        "usage": {
+          "prompt_tokens": 1738,
+          "completion_tokens": 121,
+          "total_tokens": 1859,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 71.12985229492188
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "4932b1d4542cfeb94a235643574db3567f4e542500429ae003d3c30d9714c2f9",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [
+        {
+          "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+          "answer": "The trial found that at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo, with a 95% confidence interval of 0.2 to 0.8 percentage points lower [PubMed:EVAL-NUMBERS].\n\nThis comparison is a between-group difference in 240 adults, with placebo as the comparator, and the study does not establish effects beyond 12 weeks [PubMed:EVAL-NUMBERS]."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Can you explain that more simply without changing the numbers?"
+    },
+    "generation_context_sha256": "4932b1d4542cfeb94a235643574db3567f4e542500429ae003d3c30d9714c2f9"
+  }
+]

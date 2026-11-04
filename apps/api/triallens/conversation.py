@@ -128,15 +128,30 @@ def scope_product_sources(workspace: Workspace, question: str, history: list[Ans
     return scoped_sources, scope_reduced
 
 
-def normalize_citations(text: str, allowed: set[str]) -> str:
+def citation_aliases(allowed: set[str]) -> dict[str, str]:
+    """Recognize an exact, unique external ID with its source prefix omitted."""
+    candidates: dict[str, list[str]] = {}
+    for citation in allowed:
+        _, separator, external_id = citation.partition(":")
+        # Bare numbers can be reference ordinals rather than source IDs.
+        if separator and re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{4,}", external_id):
+            candidates.setdefault(external_id, []).append(citation)
+    return {alias: matches[0] for alias, matches in candidates.items()
+            if len(matches) == 1 and alias not in allowed}
+
+
+def normalize_citations(text: str, allowed: set[str], aliases: dict[str, str] | None = None) -> str:
     """Repair presentation only when every marker maps exactly to a supplied ID."""
     # Providers sometimes wrap otherwise exact source IDs in Unicode citation
     # brackets. Canonicalize only the delimiters; IDs remain case-sensitive and
     # are still checked against the exact allowlist below.
     text = text.translate(str.maketrans({"【": "[", "】": "]", "［": "[", "］": "]"}))
+    aliases = aliases or {}
+
     def replace(match: re.Match) -> str:
         parts = [re.sub(r"^citation:\s*", "", part.strip(), flags=re.I)
                  for part in match.group(1).split(",")]
+        parts = [aliases.get(part, part) for part in parts]
         if parts and all(part in allowed for part in parts):
             return " ".join(f"[{part}]" for part in parts)
         return match.group(0)
@@ -451,7 +466,17 @@ class ConversationService:
                 with phase("context_build"):
                     messages.extend([{"role": "assistant", "content": content},
                                      {"role": "user", "content": REVISION_INSTRUCTIONS + "\nLatest research question: " + question
-                                      + "\nAnswer this latest question. If asked to simplify, use everyday language instead of repeating the earlier answer."}])
+                                      + "\nAnswer this latest question. For a simpler follow-up, use fewer sentences "
+                                      "than the prior answer where possible. Explain the result once, keeping the "
+                                      "relevant figures, comparison, design and main limitation. When explaining a "
+                                      "numerical trial comparison, keep explicitly reported random assignment with "
+                                      "the total participant count. Give per-group counts only when reported. When "
+                                      "asked to distinguish a protocol from measured results, name the planned "
+                                      "comparison, primary outcome and timeframe where supplied, then say what "
+                                      "results are available. If asked for numerical adverse reactions, pair the "
+                                      "relevant rates with their group denominators where reported. For voluntary "
+                                      "postmarketing reports, explain the limits on frequency and causal inference "
+                                      "when the source supports them."}])
                 annotate(revision_ran=True, revision_reason="baseline_always")
                 with phase("revision", messages):
                     content = completion(messages)
@@ -484,8 +509,12 @@ class ConversationService:
                                   if part.get("type") == "output_text")
             with phase("validation"):
                 generated = GeneratedAnswer.model_validate_json(content)
-                direct = normalize_citations("\n\n".join(p.strip() for p in generated.paragraphs if p.strip()), allowed)
-                generated.uncertainty = [normalize_citations(item, allowed) for item in generated.uncertainty]
+                aliases = citation_aliases(allowed)
+                direct = normalize_citations(
+                    "\n\n".join(p.strip() for p in generated.paragraphs if p.strip()), allowed, aliases
+                )
+                generated.uncertainty = [normalize_citations(item, allowed, aliases) for item in generated.uncertainty]
+                generated.cited_sources = [aliases.get(item, item) for item in generated.cited_sources]
                 cited = set(generated.cited_sources)
                 markers = set(re.findall(r"\[([^\]]+)\]", direct))
                 limitation_markers = set(re.findall(r"\[([^\]]+)\]", " ".join(generated.uncertainty)))

@@ -43,3 +43,15 @@ The opt-in `--ci-coverage` experiment now asks revision to retain the cited rand
 The frozen four-case run used the default hosted model, the v6 candidate prompt and numeric checks. Compared with the November 3 numerical pair, both answers now retain the random assignment of 240 adults across the two groups. Both keep the reported 12-week comparison, confidence interval and synthetic-data label. The simpler follow-up repeats the finding and is longer than the first answer. The safety answer omits the trial denominators, the nausea/vomiting comparison and the limit on causal inference from postmarketing reports. The protocol case falls back after the model abbreviates its citation ID. The experiment stays opt-in.
 
 The recorded numerical answers were replayed against the narrower participant-count matcher after the hosted run. It found the same count in both inputs and accepted both recorded answers. The single-arm rejection is covered by a regression test. See [captured answers and inputs](results/ci-design-coverage-2026-11-04.json) and [timing and usage](../../../../docs/performance/results/ci-design-coverage-2026-11-04.json).
+
+## 4 November: default chat citation and revision changes
+
+The default validator restores an omitted source prefix only for an exact, unique, nonnumeric external ID in the supplied context. The inline markers and citation list still have to agree after normalization. The captured protocol answers already used full IDs. The repair itself is verified separately with mocked responses and ambiguous ID checks.
+
+Two four-case runs used the default chat prompts without experiment flags. The second revision added specific guidance for randomized counts and protocol details. All four final responses passed the production validator. Against the frozen sources:
+
+- The numerical answers retained the comparison, interval and 240 adults randomized. The follow-up was 48 words versus 58 for the first direct answer. Demo attribution was in the uncertainty field and answer note.
+- The protocol answer supplied the planned placebo comparison, 200 adults and symptom score at 16 weeks. It separated those plans from recruitment and result status and noted mortality was outside the listed outcomes.
+- The safety answer supplied both denominators and both requested event comparisons. It explained the frequency limitation for voluntary postmarketing reports. The first run also explained the causal limitation, which the second run omitted. The second answer could distinguish observed trial rates from rates among all users more explicitly.
+
+These are sampled cases. See [first run](results/chat-scope-2026-11-04.json) and [second run](results/chat-scope-v2-2026-11-04.json).

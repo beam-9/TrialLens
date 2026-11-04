@@ -82,3 +82,28 @@ def test_conversation_rejects_unknown_unicode_marker_even_with_valid_ascii_marke
 
     assert answer.generation_mode != "conversational"
     assert answer.citations == []
+
+
+def test_conversation_restores_unique_exact_external_id(monkeypatch, conversation_context):
+    workspace, sources, fallback = conversation_context
+    _mock_completion(monkeypatch, {
+        "paragraphs": ["The label describes dosing [drug-1]."],
+        "cited_sources": ["drug-1"],
+        "uncertainty": [],
+    })
+    answer = ConversationService().generate(workspace, fallback.question, [], sources, fallback)
+    assert answer.generation_mode == "conversational"
+    assert answer.citations == ["openFDA label:drug-1"]
+    assert "[openFDA label:drug-1]" in answer.direct_answer
+
+
+def test_short_ids_cannot_resolve_collisions_or_ordinals():
+    from triallens.conversation import citation_aliases
+
+    allowed = {"PubMed:example", "ClinicalTrials.gov:example", "PubMed:12345", "PubMed:known-id"}
+    aliases = citation_aliases(allowed)
+    assert aliases == {"known-id": "PubMed:known-id"}
+    text = "[example] [12345] [KNOWN-ID] [known-id]"
+    assert normalize_citations(text, allowed, aliases) == (
+        "[example] [12345] [KNOWN-ID] [PubMed:known-id]"
+    )
