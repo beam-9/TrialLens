@@ -35,3 +35,11 @@ This measures source/context availability only. It does not measure whether a mo
 ## 29 October: retained complete outcome packets
 
 The inactive 1,200-character prototype remains frozen for the failed experiment. Production now uses `triallens/trial_results.py` with bounded complete 8,000-character outcome packets preserved through chunking and context allocation. The frozen public payload yields eight complete packets; the four-case `packet-cohort-2026-10-29` comparison distinguishes protocol-only content from measured results. Existing workspaces are not migrated. See `docs/chat-quality-2026-10-29.md` for measured findings, current limitations, rejected writer/model profiles, and accounting. The new source-role HTTP tests are separate from the earlier helper-only source-order control. The fresh-PubMed contradiction holdout remains unexecuted.
+
+## 4 November: randomization coverage
+
+The opt-in `--ci-coverage` experiment now asks revision to retain the cited randomized participant count when one source supplies a single interval and explicitly describes the assignment. The checker abstains when counts conflict or a passage describes assignment to a single arm. These pattern checks verify selected details and require source adjudication for overall answer quality.
+
+The frozen four-case run used the default hosted model, the v6 candidate prompt and numeric checks. Compared with the November 3 numerical pair, both answers now retain the random assignment of 240 adults across the two groups. Both keep the reported 12-week comparison, confidence interval and synthetic-data label. The simpler follow-up repeats the finding and is longer than the first answer. The safety answer omits the trial denominators, the nausea/vomiting comparison and the limit on causal inference from postmarketing reports. The protocol case falls back after the model abbreviates its citation ID. The experiment stays opt-in.
+
+The recorded numerical answers were replayed against the narrower participant-count matcher after the hosted run. It found the same count in both inputs and accepted both recorded answers. The single-arm rejection is covered by a regression test. See [captured answers and inputs](results/ci-design-coverage-2026-11-04.json) and [timing and usage](../../../../docs/performance/results/ci-design-coverage-2026-11-04.json).

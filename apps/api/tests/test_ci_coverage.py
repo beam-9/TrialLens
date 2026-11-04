@@ -35,3 +35,43 @@ def test_followup_preserves_requested_interval_when_keeping_numbers():
     }
     assert requirement(payload) is not None
     assert requirement({**payload, "question": "What about mortality?"}) is None
+
+
+def test_randomized_total_coverage_catches_omission_in_prior_answer():
+    from evaluation.ci_coverage import includes_randomized_total, reported_randomized_total
+
+    path = Path(__file__).parents[1] / "evaluation/answer_coverage/results/ci-coverage-v4-2026-11-03.json"
+    run = json.loads(path.read_text())[0]
+    record = run["generation_context"]["evidence"][0]
+    total = reported_randomized_total(record)
+    assert total == 240
+    assert not includes_randomized_total(
+        {"paragraphs": [run["answer"]["direct_answer"]]}, record["citation"], total
+    )
+    assert includes_randomized_total(
+        {"paragraphs": [f"240 adults were randomly assigned to either group [{record['citation']}]."]},
+        record["citation"],
+        total,
+    )
+
+
+def test_randomized_total_requires_explicit_assignment_and_unique_total():
+    from evaluation.ci_coverage import reported_randomized_total
+
+    record = {"text": "240 adults were enrolled.", "matched_passages": []}
+    assert reported_randomized_total(record) is None
+    record["text"] = "240 adults were randomized to treatment or placebo."
+    record["matched_passages"] = ["120 patients were randomly assigned to either group."]
+    assert reported_randomized_total(record) is None
+
+
+def test_single_arm_assignment_cannot_be_used_as_trial_total():
+    from evaluation.ci_coverage import includes_randomized_total, reported_randomized_total
+
+    record = {"text": "120 adults were randomized to treatment.", "matched_passages": []}
+    assert reported_randomized_total(record) is None
+    assert not includes_randomized_total(
+        {"paragraphs": ["The trial randomized 240 adults per arm [PubMed:1]."]},
+        "PubMed:1",
+        240,
+    )

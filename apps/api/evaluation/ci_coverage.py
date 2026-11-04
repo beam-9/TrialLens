@@ -18,6 +18,43 @@ def intervals(text):
     }
 
 
+_RANDOM_ASSIGNMENT = r"(?:randomi[sz]ed|randomly assigned)"
+_PARTICIPANT_COUNT = r"([1-9]\d{0,2}(?:,\d{3})+|[1-9]\d*)"
+_RANDOMIZED_TOTAL = re.compile(
+    rf"\b{_PARTICIPANT_COUNT}\s+(?:adults|participants|patients)\s+"
+    rf"were\s+{_RANDOM_ASSIGNMENT}\s+to\s+"
+    r"(?:either\b|[^.!?;]{1,160}\bor\s+(?:a\s+)?(?:placebo|usual care|standard care|control)\b)",
+    re.I,
+)
+
+
+def reported_randomized_total(record):
+    """Recognize a source's explicit participant total at random assignment."""
+    passages = [record["text"], *record["matched_passages"]]
+    totals = {
+        int(match.group(1).replace(",", ""))
+        for passage in passages
+        for match in _RANDOMIZED_TOTAL.finditer(passage)
+    }
+    return next(iter(totals)) if len(totals) == 1 else None
+
+
+def includes_randomized_total(answer, citation, total):
+    count = rf"(?<![\d,])(?:{total}|{total:,})(?![\d,])"
+    people = (
+        rf"{count}\s+(?:adults|participants|patients)\b"
+        r"(?!\s+(?:each\b|per\s+(?:arm|group)\b|(?:in|to)\s+each\b))"
+    )
+    assignment = (
+        rf"(?:{people}\s+(?:(?:in )?total\s+)?were\s+{_RANDOM_ASSIGNMENT}"
+        rf"|{_RANDOM_ASSIGNMENT}\s+{people})"
+    )
+    return any(
+        f"[{citation}]" in paragraph and re.search(assignment, paragraph, re.I)
+        for paragraph in answer["paragraphs"]
+    )
+
+
 def requirement(payload):
     question = payload.get("question", "")
     history = payload.get("history", [])
@@ -53,7 +90,8 @@ def ci_coverage_experiment(enabled):
     original = conversation.cloudflare.completion
 
     def completion(messages, schema):
-        required = requirement(json.loads(messages[1]["content"]))
+        payload = json.loads(messages[1]["content"])
+        required = requirement(payload)
         if required is None or len(messages) != 4:
             return original(messages, schema)
         citation, (level, lower, upper) = required
@@ -68,10 +106,21 @@ def ci_coverage_experiment(enabled):
             "Check the population against the source. State any total enrollment "
             "as the total across groups. Give per-group counts only if the source reports them."
         )
+        total = reported_randomized_total(payload["evidence"][0])
+        if total is not None:
+            note += (
+                f" The same source explicitly reports random assignment of {total} "
+                "participants in total. Retain the design with the count and comparison "
+                f"in a paragraph cited [{citation}]. For example, say that {total} "
+                "participants were randomly assigned, then name the groups from the source."
+            )
         submitted = [*messages[:-1], {**messages[-1], "content": messages[-1]["content"] + note}]
         result = original(submitted, schema)
-        if not includes_requirement(json.loads(result), required):
+        answer = json.loads(result)
+        if not includes_requirement(answer, required):
             raise ValueError("Final answer omitted the requested cited confidence interval")
+        if total is not None and not includes_randomized_total(answer, citation, total):
+            raise ValueError("Final answer omitted the cited randomized participant total")
         return result
 
     conversation.cloudflare.completion = completion
