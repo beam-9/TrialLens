@@ -97,3 +97,25 @@ def test_invalid_ci_is_rejected_by_generation_not_just_reported(monkeypatch, tmp
     result = conversation.ConversationService().generate(workspace, fallback.question, [], [source], fallback)
     assert result.generation_mode == 'extractive'
     assert result.direct_answer != bad['paragraphs'][0]
+
+
+def test_rejects_reversed_percentage_pairs_in_observed_discrepancy_answers():
+    import json
+    from pathlib import Path
+    from triallens.answer_checks import requested_comparison_order_issue
+
+    root = Path(__file__).parents[1] / 'evaluation/answer_coverage/results'
+    for name in ('broad-pubmed', 'broad-pubmed-recheck'):
+        run = json.loads((root / f'{name}-2026-11-06.json').read_text())[0]
+        assert requested_comparison_order_issue(
+            run['answer']['question'], run['answer']['direct_answer'], run['generation_context']['evidence']
+        )
+
+
+def test_comparison_order_guard_is_scoped_to_question_and_cited_source():
+    from triallens.answer_checks import requested_comparison_order_issue
+    records = [{'citation': 'PubMed:1', 'text': 'Reported 0.35% vs. -0.58%, respectively.', 'matched_passages': []}]
+    question = 'Explain the discrepancy.'
+    assert requested_comparison_order_issue(question, 'Reported 0.35% versus −0.58% [PubMed:1].', records) is None
+    assert requested_comparison_order_issue(question, 'Reported -0.58% versus 0.35% [PubMed:2].', records) is None
+    assert requested_comparison_order_issue('Summarize the study.', 'Reported -0.58% versus 0.35% [PubMed:1].', records) is None

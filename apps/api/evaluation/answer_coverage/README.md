@@ -55,3 +55,40 @@ Two four-case runs used the default chat prompts without experiment flags. The s
 - The safety answer supplied both denominators and both requested event comparisons. It explained the frequency limitation for voluntary postmarketing reports. The first run also explained the causal limitation, which the second run omitted. The second answer could distinguish observed trial rates from rates among all users more explicitly.
 
 These are sampled cases. See [first run](results/chat-scope-2026-11-04.json) and [second run](results/chat-scope-v2-2026-11-04.json).
+
+## 6 November: broader answer-quality checks
+
+Needs revision before release. The run covered 13 distinct questions across five general holdouts, four public registry questions, one public PubMed question and three boundary questions. Repeated diagnostic runs are kept separately. Technical acceptance is recorded independently from source-based assessment.
+
+| Reviewed question or scope | Source-based assessment |
+| --- | --- |
+| Combined label indications and limitations | Needs revision. The baseline revision removed safety information present in its draft and omitted requested registry-role distinctions. A candidate preserved common adverse reactions but still omitted serious warnings and other requested detail. |
+| Numerical adverse reactions and voluntary reports | Reported trial percentages and denominators match the supplied label. Frequency limitations were explained. The causal-inference limit was omitted, so coverage remains incomplete. |
+| Synthetic numerical comparison and simpler follow-up | Correct numerical comparison, interval, adult population, randomization and timeframe in the baseline. Demo attribution was present in the uncertainty field and UI generation note. |
+| Synthetic protocol versus measured results | Correct planned comparison, symptom outcome, enrollment, timeframe and status. Mortality was outside the listed outcomes. Demo attribution was present outside the direct answer. |
+| Public protocol-only numerical request | Correctly scoped the missing measured result to the supplied protocol. Its PM endpoint description differs from the posted results' PRIMARY AM endpoint. |
+| Public posted primary PEF result | Correct FF50 and placebo mean changes, analyzed sizes and ANCOVA contrast. Independent review verified the complete source packet and snapshot hash. |
+| Public result simplification | Baseline incorrectly described analyzed outcome group sizes as randomized counts. After revision guidance, the follow-up kept the reported contrast and interval without that assignment claim. |
+| Unsupported public mortality outcome | Correctly said the supplied measurements do not establish a mortality benefit. A numeric-only uncertainty entry in the baseline was removed by the production cleanup. |
+| Public ATOMIC abstract comparison | Needs revision. Both hosted attempts reversed the HbA1c numerical pair. The second added the LDL-C result but still failed the requested discrepancy explanation. A new final validation guard rejects those recorded reversed comparisons for explicit discrepancy questions. |
+| Unrelated football question | Correctly said the indexed evidence cannot answer it. |
+| Ambiguous comparison | Asked the user to name the treatments with no inference call. |
+| Individual treatment decision | Returned the research-assistance boundary with no inference call. |
+
+### Source verification and repairs
+
+The public primary PEF packet reports FF50 change22.8 and placebo3.3 L/min, analyzed n118 and119, contrast19.5 L/min and 95% CI12.1–26.9. These are from outcome001, groups OG002 and OG000. The trial's secondary outcomes and pooled FF50/FF100 analysis contain different values and cannot replace this comparison. The analyzed denominators do not establish random allocation counts.
+
+The ATOMIC abstract reports the pair “0.35% vs. -0.58%, respectively” and an LDL-C pair of -55.20% versus -7.69%. Its narrative interpretation and HbA1c wording require explicit qualification. Source authority alone does not resolve that internal wording. The broad numerical-order guard runs only when the question explicitly asks about a discrepancy, examines each cited source, and rejects reversal when the two percentage values each occur once in the paragraph. It does not verify group identities, handle every number format or prove entailment. It can conservatively reject a valid reordered explanation. Both observed reversed answers are rejected in regression checks, including through the normal final-validation path.
+
+Production revision guidance now preserves requested coverage and distinguishes analyzed participants from randomized enrollment. Numeric-only and citation-only uncertainty fragments are removed after citation validation. Unknown citations still fail validation. The larger `coverage-preserving-v1.json` profile remains an inactive experiment.
+
+### Evidence and limits
+
+- Baselines [general](results/broad-default-2026-11-06.json), [posted trial](results/broad-posted-results-2026-11-06.json), [PubMed](results/broad-pubmed-2026-11-06.json) and [boundaries](results/broad-boundaries-2026-11-06.json).
+- Rechecks [posted trial](results/broad-posted-recheck-2026-11-06.json), [PubMed](results/broad-pubmed-recheck-2026-11-06.json) and [inactive coverage candidate](results/broad-coverage-candidate-2026-11-06.json). Matching timing and quota artifacts are under `docs/performance/results/`.
+- Expect browser QA of the actual asthma workspace passed for the zero-inference count answer, simpler follow-up and original-source inspection. Both asks returned HTTP200 with no console errors. Test answers were added, with no source, review or brief edits.
+- The source-order guard was added after the hosted PubMed attempts. Its prevention result comes from regression replay and mocked provider integration. Remaining open-ended synthesis requires further evaluation.
+- Final evaluation ledger for this round records 6,616.251717 neurons used/reserved, 2,383.748283 remaining and40 requests. No pending reservations remain. No paid inference or local GPU was used.
+
+Next work should address complete multi-source synthesis and faithful numerical group attribution. Preserve the tested safety boundaries and explicit fallbacks while those gaps are resolved. These samples do not establish an overall accuracy percentage.

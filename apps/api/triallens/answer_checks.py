@@ -98,3 +98,38 @@ def confidence_interval_issue(text: str) -> str | None:
                 continue
             return CONFIDENCE_INTERVAL_ERROR
     return None
+
+
+_PERCENT_VALUE = re.compile(r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%")
+_PERCENT_PAIR = re.compile(
+    r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%\s*(?:vs\.?|versus)\s*"
+    r"([+−-]?\d+(?:\.\d+)?)\s*%", re.I
+)
+
+
+def requested_comparison_order_issue(question: str, answer: str, records: list[dict]) -> str | None:
+    """Check reported pair order when the user explicitly asks about a discrepancy.
+
+    A narrow necessary check, not a check of group identity or scientific meaning.
+    Repeated values and comparisons without percentage units are left unresolved.
+    """
+    if not re.search(r"discrepan\w*|conflict\w*|contradict\w*|mismatch\w*|do not align", question, re.I):
+        return None
+    from decimal import Decimal
+
+    def value(raw):
+        return Decimal(raw.replace("−", "-"))
+
+    for record in records:
+        texts = [record["text"], *record["matched_passages"]]
+        pairs = {(value(match[1]), value(match[2])) for text in texts
+                 for match in _PERCENT_PAIR.finditer(text)}
+        for paragraph in re.split(r"\n\s*\n", answer):
+            if f"[{record['citation']}]" not in paragraph:
+                continue
+            numbers = [value(match[1]) for match in _PERCENT_VALUE.finditer(paragraph)]
+            for first, second in pairs:
+                if first != second and numbers.count(first) == numbers.count(second) == 1:
+                    if numbers.index(first) > numbers.index(second):
+                        return "Requested source comparison is presented in reversed numerical order"
+    return None

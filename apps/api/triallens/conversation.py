@@ -15,7 +15,7 @@ from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope, is_outcome_packet
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
-from triallens.answer_checks import confidence_interval_issue
+from triallens.answer_checks import confidence_interval_issue, requested_comparison_order_issue
 from triallens.trial_design import sanitize_design_fields
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
@@ -53,6 +53,11 @@ in the supplied excerpt" unless the source explicitly says it was not measured.
 For an unsupported outcome question, stop after explaining the gap; do not pad the
 answer with unrelated safety claims. A paper citation cannot support a label claim.
 Put each citation beside the specific claim that its own source actually supports.
+If reported numbers and a source's narrative conclusion disagree, state both and identify
+that discrepancy. Preserve each reported value with its group and unit. When group ordering
+is ambiguous, quote the reported numerical pair and explain the ambiguity instead of
+assigning a favorable direction or silently repairing the source. A question asking for
+multiple numerical outcomes needs each relevant reported outcome or an explicit scoped gap.
 Return JSON with paragraphs (plain text including citations), cited_sources (exact
 citation strings used), and uncertainty (0–3 concise evidence-specific limitations).
 The cited_sources list must contain exactly the citations appearing in paragraphs,
@@ -61,7 +66,7 @@ Do not put markdown headings, URLs, or bullet formatting into paragraphs.
 """
 
 
-REVISION_INSTRUCTIONS = """Check the draft against the evidence and return a concise corrected answer in the same JSON schema. Remove unsupported claims and speculation from both paragraphs and uncertainty. An outcome missing from an excerpt is not necessarily unmeasured: do not assert that outcomes were not assessed unless the evidence explicitly says so. An unreported population characteristic does not mean those people were excluded; never infer pregnancy or kidney-disease exclusions from missing descriptions. "Does not establish effects beyond 12 weeks" does not mean those effects were never measured: retain "not established". Different statistical significance across studies does not itself prove conflicting treatment effects; describe positive and inconclusive findings as mixed evidence without claiming statistical incompatibility. In particular: a between-group endpoint difference does not show whether either group rose or fell from baseline; do not describe confidence intervals as the probability that the true effect is in a range, or as certainty of benefit. A non-significant result is inconclusive, not proof of no effect; correct wording such as "finds none" accordingly. Keep product identity, populations, comparisons, units, and study status exact. Preserve demo labels. Do not add findings. Prefer 1 or 2 short paragraphs and 100–180 words for broad questions, removing repeated caveats and unrelated outcomes. Explain the main findings rather than listing every adverse reaction or statistic; include detailed numbers when the question asks for them. Every paragraph describing evidence MUST contain its exact inline [citation] marker, even when the same citation is repeated; listing IDs only in cited_sources is invalid. Each citation must support its adjacent claim. When a comparison is statistically inconclusive, never paraphrase it as "no effect", "shows no effect", "no benefit", or "finds none"; state that it did not establish a clear difference. Return only the corrected final JSON."""
+REVISION_INSTRUCTIONS = """Check the draft against the evidence and return a concise corrected answer in the same JSON schema. Remove unsupported claims and speculation from both paragraphs and uncertainty. An outcome missing from an excerpt is not necessarily unmeasured: do not assert that outcomes were not assessed unless the evidence explicitly says so. An unreported population characteristic does not mean those people were excluded; never infer pregnancy or kidney-disease exclusions from missing descriptions. "Does not establish effects beyond 12 weeks" does not mean those effects were never measured: retain "not established". Different statistical significance across studies does not itself prove conflicting treatment effects; describe positive and inconclusive findings as mixed evidence without claiming statistical incompatibility. In particular: a between-group endpoint difference does not show whether either group rose or fell from baseline; do not describe confidence intervals as the probability that the true effect is in a range, or as certainty of benefit. A non-significant result is inconclusive, not proof of no effect; correct wording such as "finds none" accordingly. Keep product identity, populations, comparisons, units, and study status exact. Preserve demo labels. Do not add findings. Use enough connected paragraphs to answer every requested part. Shorten repeated wording while preserving supported findings, requested safety information and the qualifications needed to interpret them. Explain the main findings rather than listing every adverse reaction or statistic; include detailed numbers when the question asks for them. Every paragraph describing evidence MUST contain its exact inline [citation] marker, even when the same citation is repeated; listing IDs only in cited_sources is invalid. Each citation must support its adjacent claim. When a comparison is statistically inconclusive, never paraphrase it as "no effect", "shows no effect", "no benefit", or "finds none"; state that it did not establish a clear difference. Return only the corrected final JSON."""
 
 
 class GeneratedAnswer(BaseModel):
@@ -469,14 +474,20 @@ class ConversationService:
                                       + "\nAnswer this latest question. For a simpler follow-up, use fewer sentences "
                                       "than the prior answer where possible. Explain the result once, keeping the "
                                       "relevant figures, comparison, design and main limitation. When explaining a "
-                                      "numerical trial comparison, keep explicitly reported random assignment with "
-                                      "the total participant count. Give per-group counts only when reported. When "
+                                      "numerical trial comparison, preserve random assignment when explicitly reported. "
+                                      "Distinguish randomized enrollment from participants analyzed for an outcome. "
+                                      "Never infer randomized group sizes from outcome denominators. When "
                                       "asked to distinguish a protocol from measured results, name the planned "
                                       "comparison, primary outcome and timeframe where supplied, then say what "
                                       "results are available. If asked for numerical adverse reactions, pair the "
                                       "relevant rates with their group denominators where reported. For voluntary "
                                       "postmarketing reports, explain the limits on frequency and causal inference "
-                                      "when the source supports them."}])
+                                      "when the source supports them. Preserve the reported group ordering for numerical "
+                                      "comparisons. If values and narrative conflict, explicitly describe the conflict "
+                                      "instead of choosing the interpretation that makes the conclusion coherent. "
+                                      "Include each requested outcome and distinguish combination treatment from "
+                                      "its individual ingredients. Do not turn older review statements into current "
+                                      "guideline claims."}])
                 annotate(revision_ran=True, revision_reason="baseline_always")
                 with phase("revision", messages):
                     content = completion(messages)
@@ -520,6 +531,14 @@ class ConversationService:
                 limitation_markers = set(re.findall(r"\[([^\]]+)\]", " ".join(generated.uncertainty)))
                 if not direct or len(direct) > 9000 or not cited.issubset(allowed) or markers != cited or not limitation_markers.issubset(cited):
                     raise ValueError("Invalid citation provenance")
+                # Keep substantive limitations, including those containing values.
+                # Stray numbers or citation-only entries are incomplete output.
+                limitations = []
+                for item in generated.uncertainty:
+                    prose = re.sub(r"\[[^\]]+\]", "", item)
+                    if any(character.isalpha() for character in prose):
+                        limitations.append(item.strip())
+                generated.uncertainty = limitations
                 # A citation in one paragraph cannot attribute a different one.
                 # Split rendered paragraphs too, including breaks inside one
                 # schema item. This checks attribution, not claim entailment.
@@ -543,6 +562,8 @@ class ConversationService:
                 from triallens.label_checks import pediatric_indication_issue
                 if pediatric_indication_issue(direct, records):
                     raise ValueError("Pediatric indication lost source age boundary")
+                if requested_comparison_order_issue(question, direct, records):
+                    raise ValueError("Requested numerical comparison order changed")
                 # Catch excerpt-dumping; short technical phrases and numerical results are allowed.
                 normalized = re.sub(r"\W+", " ", re.sub(r"\[[^\]]+\]", "", direct).lower()).split()
                 source_text = [re.sub(r"\W+", " ", text.lower()) for r in records

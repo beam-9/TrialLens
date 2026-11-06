@@ -107,3 +107,25 @@ def test_short_ids_cannot_resolve_collisions_or_ordinals():
     assert normalize_citations(text, allowed, aliases) == (
         "[example] [12345] [KNOWN-ID] [PubMed:known-id]"
     )
+
+
+def test_uncertainty_drops_numeric_fragments_after_provenance_checks(monkeypatch, conversation_context):
+    workspace, sources, fallback = conversation_context
+    _mock_completion(monkeypatch, {
+        "paragraphs": ["The study reports an outcome [PubMed:A]."],
+        "cited_sources": ["PubMed:A"],
+        "uncertainty": ["3", "[PubMed:A]", "Effects beyond 12 weeks are not established [PubMed:A]."],
+    })
+    answer = ConversationService().generate(workspace, fallback.question, [], sources, fallback)
+    assert answer.generation_mode == "conversational"
+    assert answer.uncertainty == ["Effects beyond 12 weeks are not established [PubMed:A]."]
+
+
+def test_uncertainty_cleanup_does_not_hide_unknown_citations(monkeypatch, conversation_context):
+    workspace, sources, fallback = conversation_context
+    _mock_completion(monkeypatch, {
+        "paragraphs": ["The study reports an outcome [PubMed:A]."],
+        "cited_sources": ["PubMed:A"], "uncertainty": ["[PubMed:UNKNOWN]"],
+    })
+    answer = ConversationService().generate(workspace, fallback.question, [], sources, fallback)
+    assert answer.generation_mode != "conversational"

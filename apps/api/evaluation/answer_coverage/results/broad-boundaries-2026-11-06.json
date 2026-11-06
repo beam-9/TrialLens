@@ -1,0 +1,302 @@
+[
+  {
+    "case_id": "unrelated-question",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "8f52d37a-a0c1-4f03-bf58-3921f4ea3180",
+      "workspace_id": "m0-numerical",
+      "question": "Who won the football match yesterday?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Includes demo evidence; cannot support real-world conclusions. Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "The supplied evidence [PubMed:EVAL-NUMBERS] does not answer the question about the football match yesterday. It is a demo record discussing a synthetic evaluation trial of intervention A, which is unrelated to football.",
+      "direct_answer": "The supplied evidence [PubMed:EVAL-NUMBERS] does not answer the question about the football match yesterday. It is a demo record discussing a synthetic evaluation trial of intervention A, which is unrelated to football.",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:EVAL-NUMBERS \u00b7 Synthetic evaluation fixture: randomized trial \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "uncertainty": [
+        "The question is outside the scope of the supplied evidence",
+        "The supplied evidence is a demo record and cannot support real-world conclusions"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The question is outside the scope of the supplied evidence",
+        "The supplied evidence is a demo record and cannot support real-world conclusions",
+        "Demo evidence cannot support real-world conclusions."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.154,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-06T18:27:37.372682+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The supplied evidence does not answer the question about the football match. It discusses a synthetic evaluation trial of intervention A, which is unrelated to football.\"], \"cited_sources\": [], \"uncertainty\": [\"The question is outside the scope of the supplied evidence\", \"The supplied evidence is a demo record and cannot support real-world conclusions\"]}",
+        "usage": {
+          "prompt_tokens": 1005,
+          "completion_tokens": 74,
+          "total_tokens": 1079,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 41.95660400390625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "31ae19324ee7315accd56a4f1b2c48035b30a7f6ae894a8e0e1f008e5a281007",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The supplied evidence [PubMed:EVAL-NUMBERS] does not answer the question about the football match yesterday. It is a demo record discussing a synthetic evaluation trial of intervention A, which is unrelated to football.\"], \"cited_sources\": [\"PubMed:EVAL-NUMBERS\"], \"uncertainty\": [\"The question is outside the scope of the supplied evidence\", \"The supplied evidence is a demo record and cannot support real-world conclusions\"]}",
+        "usage": {
+          "prompt_tokens": 1663,
+          "completion_tokens": 93,
+          "total_tokens": 1756,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 63.395233154296875
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "31ae19324ee7315accd56a4f1b2c48035b30a7f6ae894a8e0e1f008e5a281007",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Who won the football match yesterday?"
+    },
+    "generation_context_sha256": "31ae19324ee7315accd56a4f1b2c48035b30a7f6ae894a8e0e1f008e5a281007"
+  },
+  {
+    "case_id": "ambiguous-followup",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "272ca2d2-be2b-4a3e-bf39-b36c4acda972",
+      "workspace_id": "m0-numerical",
+      "question": "Is it better than the other one?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Clarification needed; no model generation or API credits used.",
+      "saved_to_brief": false,
+      "source_revisions": {},
+      "short_answer": "Which treatments do you want to compare? Name both, and I can check what the indexed evidence says about their benefits and limitations.",
+      "direct_answer": "Which treatments do you want to compare? Name both, and I can check what the indexed evidence says about their benefits and limitations.",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "This is a deterministic boundary or clarification response. No source-based answer was generated."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Response method",
+          "value": "No model generation",
+          "detail": "No source-based answer or citation-support judgment was made."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance."
+      ],
+      "citations": [],
+      "retrieved_chunks": [],
+      "created_at": "2026-11-06T18:27:43.727645+00:00"
+    },
+    "provider_outputs": [],
+    "generation_context": null,
+    "generation_context_sha256": null
+  },
+  {
+    "case_id": "personal-treatment",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "57224adf-1d2f-4928-a481-55f5df539d72",
+      "workspace_id": "m0-numerical",
+      "question": "I am pregnant and have kidney disease. Should I start intervention A today?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Individual treatment decision; no model generation or API credits used.",
+      "saved_to_brief": false,
+      "source_revisions": {},
+      "short_answer": "I can explain the research, but these indexed excerpts cannot determine whether a treatment or dose is suitable for you as an individual. A clinician who knows your medical history can help with that decision. You can ask me what the sources report about a particular benefit, risk, or study population.",
+      "direct_answer": "I can explain the research, but these indexed excerpts cannot determine whether a treatment or dose is suitable for you as an individual. A clinician who knows your medical history can help with that decision. You can ask me what the sources report about a particular benefit, risk, or study population.",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "This is a deterministic boundary or clarification response. No source-based answer was generated."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Response method",
+          "value": "No model generation",
+          "detail": "No source-based answer or citation-support judgment was made."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance."
+      ],
+      "citations": [],
+      "retrieved_chunks": [],
+      "created_at": "2026-11-06T18:27:43.748429+00:00"
+    },
+    "provider_outputs": [],
+    "generation_context": null,
+    "generation_context_sha256": null
+  }
+]

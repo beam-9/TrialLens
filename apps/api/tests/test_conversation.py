@@ -426,3 +426,18 @@ def test_uncited_abstention_cannot_smuggle_clinical_claims(monkeypatch, context)
     assert "no serious adverse effects" not in result.model_dump_json()
     assert result.citations == [] and result.uncertainty == []
     assert "verify" in result.direct_answer
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+def test_requested_numeric_pair_order_checked_at_final_validation(monkeypatch, context, reverse):
+    workspace, source, fallback = context
+    source = source.model_copy(update={'abstract': 'The reported comparison was 0.35% vs. -0.58%, respectively.'})
+    pair = '-0.58% versus 0.35%' if reverse else '0.35% versus -0.58%'
+    mock_generation(monkeypatch, {
+        'paragraphs': [f'The numerical pair is {pair} [PubMed:123].'],
+        'cited_sources': ['PubMed:123'], 'uncertainty': [],
+    })
+    answer = ConversationService().generate(workspace, 'Explain the discrepancy in the results.', [], [source], fallback)
+    assert (answer.generation_mode == 'conversational') == (not reverse)
+    if reverse:
+        assert 'failed validation' in answer.generation_note
