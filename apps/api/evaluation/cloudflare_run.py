@@ -74,6 +74,8 @@ def candidate_instructions(path):
 
 
 def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, cases_path=None, strategy=None):
+    if strategy == "coverage-plan" and prompt_path is not None:
+        raise ValueError("coverage-plan uses fixed experiment prompts; do not supply a prompt file")
     inventory = json.loads(benchmark.INVENTORY.read_text())
     if cases_path is not None:
         # New questions share the original hash-checked source snapshots. Never
@@ -118,9 +120,10 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
               "pipeline_variant": "two_pass", "status": "HOSTED CANDIDATE; not pilot verified", "complete": False,
               "strategy_experiment": strategy,
               "strategy_sha256": benchmark.sha256(Path(__file__).with_name("evidence_plan.py")) if strategy else None,
+              "coverage_plan_sha256": benchmark.sha256(Path(__file__).with_name("coverage_plan.py")) if strategy == "coverage-plan" else None,
               "whole_outcome_review_sha256": benchmark.sha256(Path(__file__).with_name("outcome_review.py")) if strategy == "outcome-records" else None,
               "outcome_checks_sha256": benchmark.sha256(Path(__file__).with_name("outcome_checks.py")) if strategy in {"outcome-claims", "outcome-records"} else None,
-              "numeric_checks_sha256": benchmark.sha256(Path(__file__).with_name("numeric_checks.py")) if strategy in {"outcome-claims", "outcome-records"} else None,
+              "numeric_checks_sha256": benchmark.sha256(Path(__file__).with_name("numeric_checks.py")) if strategy in {"outcome-claims", "outcome-records", "coverage-plan"} else None,
               "claim_repair_sha256": benchmark.sha256(Path(__file__).with_name("claim_review.py")) if strategy in {"repaired-claims", "outcome-claims", "outcome-records"} else None,
               "fixture_inventory_sha256": benchmark.sha256(benchmark.INVENTORY),
               "runner_sha256": benchmark.sha256(Path(__file__)),
@@ -131,7 +134,8 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                               "output_micro_neurons_per_token": cloudflare.OUTPUT_RATE,
                               "max_output_tokens": cloudflare.MAX_OUTPUT_TOKENS},
               "method": {"boundary": "loopback HTTP Ask API including serialization; hosted inference",
-                         "phase_labels": ("draft/revision timers represent selection/writing" if strategy == "verified-quotes" else
+                         "phase_labels": ("draft/revision timers represent planning/writing" if strategy == "coverage-plan" else
+                                          "draft/revision timers represent selection/writing" if strategy == "verified-quotes" else
                                           "draft/revision timers represent drafting/claim review" if strategy in {"reviewed-claims", "repaired-claims", "outcome-claims", "outcome-records"} else "draft/revision"),
                          "cold_warm": "provider cache/residency unknown; no cold/warm classification",
                          "paid_provider_fallbacks": 0, "local_model_calls": 0,
@@ -183,6 +187,9 @@ def run(output, answer_path, case_ids=None, quota_path=None, prompt_path=None, c
                                                         if strategy in {"repaired-claims", "outcome-claims", "outcome-records"} and len(request_messages) in (3, 4) else None,
                                  "verified_selection": json.loads(kwargs["json"]["messages"][2]["content"])
                                                        if strategy == "verified-quotes" and len(kwargs["json"]["messages"]) == 4 else None,
+                                 "coverage_plan": next((json.loads(item["content"]) for item in request_messages
+                                                       if item.get("role") == "assistant"), None)
+                                                  if strategy == "coverage-plan" else None,
                                  "generation_context_sha256": context_digest,
                                  "request_options": {key: kwargs["json"][key] for key in ("max_tokens", "max_output_tokens", "chat_template_kwargs", "reasoning_effort", "reasoning") if key in kwargs["json"]},
                                  "response_shape": {"result_keys": sorted(candidate),
@@ -263,7 +270,7 @@ def main():
     parser.add_argument("--prompt-file", type=Path, help="Evaluate a candidate without changing production instructions")
     parser.add_argument("--cases-file", type=Path, help="Independent questions using the unchanged frozen source snapshots")
     parser.add_argument("--model-experiment", choices=sorted(MODEL_EXPERIMENTS), help="Isolated Cloudflare model experiment; production default is unchanged")
-    parser.add_argument("--strategy-experiment", choices=["verified-quotes", "reviewed-claims", "repaired-claims", "outcome-claims", "outcome-records"], help="Evaluation-only two-call evidence strategy; final answer guards unchanged")
+    parser.add_argument("--strategy-experiment", choices=["verified-quotes", "reviewed-claims", "repaired-claims", "outcome-claims", "outcome-records", "coverage-plan"], help="Evaluation-only two-call evidence strategy; final answer guards unchanged")
     args = parser.parse_args()
     load_dotenv(API_ROOT / ".env", override=False)
     with candidate_model(args.model_experiment):

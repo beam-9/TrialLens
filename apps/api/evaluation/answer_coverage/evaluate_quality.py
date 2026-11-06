@@ -72,8 +72,10 @@ def main():
     parser.add_argument('--single-pass', action='store_true')
     parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     parser.add_argument('--reasoning-effort', choices=('low', 'medium', 'high'))
-    parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims', 'outcome-claims', 'outcome-records'))
+    parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims', 'outcome-claims', 'outcome-records', 'coverage-plan'))
     args = parser.parse_args()
+    if args.strategy_experiment == 'coverage-plan' and args.prompt_file:
+        parser.error('coverage-plan uses fixed experiment prompts; do not supply --prompt-file')
     if args.numeric_checks and args.strategy_experiment:
         parser.error('--numeric-checks applies to the prose writer, not a claim-review schema')
     if args.single_pass and any((args.revision_feedback, args.numeric_checks, args.repair_once, args.label_scope, args.ci_coverage, args.strategy_experiment)):

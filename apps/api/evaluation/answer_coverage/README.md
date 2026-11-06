@@ -108,3 +108,24 @@ A production percentage check now rejects a value absent from the paragraph's ci
 Artifacts and captured input contexts are [native medium](results/attribution-native-medium-2026-11-06.json), [native scoped](results/attribution-native-scoped-2026-11-06.json), [native single-pass](results/native-single-pass-2026-11-06.json) and [GLM single-pass](results/attribution-glm-single-2026-11-06.json), with matching timing/quota artifacts under `docs/performance/results/`. The numeric checker and replay wrapper were tightened after the hosted runs and their affected behavior rechecked offline.
 
 The evaluation ledger ends this iteration at 8,567.708879 neurons used/reserved, 432.291121 remaining and49 requests. Two conservative reservations remain for failed provider responses. No further large hosted runs are justified under this day's cap. Multi-source completeness, reliable source-specific attribution, and a fully qualified writer are still required before declaring chat complete.
+
+## 6 November: broader offline review and coverage-plan experiment
+
+An independent source-based review rechecked 12 captured answers. It confirmed
+coverage and attribution concerns, while distinguishing optional safety details
+and already-concise follow-up repetition from critical errors. An offline replay
+of the three current wording checks assessed 22 conversational outputs from 11
+dated capture files and flagged the two known reversed comparisons and one
+invented percentage. The [replay artifact](results/offline-wording-replay-2026-11-06.json)
+records exact inputs and checker hashes. These are historical observations, not
+new hosted generations or an accuracy estimate.
+
+The inactive `--strategy-experiment coverage-plan` uses the existing two-call
+budget for question-part planning and prose writing. It checks exact own-source
+quotes, selected numeric requirements and per-part paragraph mappings before
+the unchanged final answer validators. It rejects `--prompt-file`, since its
+prompts are fixed and hashed with the experiment. It is incompatible with the
+other revision strategies. Plans and mappings are not semantic proof; a model
+can still omit a question part or select insufficient or irrelevant support.
+No hosted quality or latency improvement is claimed, and production stays on
+the current two-pass writer. See the [review and qualification plan](../../../../docs/chat-quality-broader-review-2026-11-06.md).

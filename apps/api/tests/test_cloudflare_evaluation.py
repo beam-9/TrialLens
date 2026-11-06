@@ -25,6 +25,9 @@ def configured(monkeypatch, tmp_path):
 
 
 def test_fixture_dependencies_and_output_paths_fail_before_inference(configured, tmp_path):
+    with pytest.raises(ValueError, match="fixed experiment prompts"):
+        runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"],
+                   prompt_path=tmp_path / "unused-prompt.json", strategy="coverage-plan")
     with pytest.raises(ValueError, match="predecessor"):
         runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-simplify"])
     with pytest.raises(ValueError, match="different paths"):
@@ -230,6 +233,53 @@ def test_quote_strategy_retains_http_isolation_and_final_guards(configured, monk
     saved = json.loads((tmp_path / "answers").read_text())[0]
     assert saved["generation_context"] == json.loads(calls[0]["messages"][1]["content"])
     assert "quotes" not in saved["answer"]["direct_answer"]
+
+
+@pytest.mark.parametrize("native", [False, True])
+def test_coverage_plan_captures_original_context_plan_and_final_guards(configured, monkeypatch, tmp_path, native):
+    from triallens import conversation
+    calls = []
+    original = runner.cloudflare.completion
+
+    def post(url, **kwargs):
+        request = kwargs["json"]
+        calls.append(request)
+        messages = request["input"] if native else request["messages"]
+        source_message = next(m for m in messages if m["role"] == "user")
+        source = json.loads(source_message["content"])["evidence"][0]
+        if len(calls) == 1:
+            if not native:
+                assert "needs" in request["response_format"]["json_schema"]["properties"]
+            content = {"needs": [{"question_part": "Numerical comparison", "status": "supported", "support": [
+                {"citation": source["citation"], "quote": source["text"], "required_values": ["0.5", "12"]}]}]}
+        else:
+            first_messages = calls[0]["input"] if native else calls[0]["messages"]
+            assert source_message == next(m for m in first_messages if m["role"] == "user")
+            if not native:
+                assert "coverage" in request["response_format"]["json_schema"]["properties"]
+            content = {"paragraphs": ["In this synthetic trial, the adult HbA1c comparison was 0.5 percentage points lower than placebo at 12 weeks [" + source["citation"] + "]."],
+                       "cited_sources": [source["citation"]], "uncertainty": [],
+                       "coverage": [{"need_index": 0, "paragraph_indices": [0]}]}
+        result = ({"object": "response", "status": "completed", "output": [
+            {"type": "message", "role": "assistant", "status": "completed",
+             "content": [{"type": "output_text", "text": json.dumps(content)}]}],
+            "usage": {"input_tokens": 900, "output_tokens": 150}} if native else
+            {"response": content, "usage": {"prompt_tokens": 900, "completion_tokens": 150}})
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"success": True, "result": result})
+
+    monkeypatch.setattr(conversation.httpx, "post", post)
+    with runner.candidate_model("@cf/openai/gpt-oss-120b" if native else None):
+        result = runner.run(tmp_path / "metrics", tmp_path / "answers", ["numerical-hba1c"], strategy="coverage-plan")
+    assert result["coverage_plan_sha256"] and result["numeric_checks_sha256"]
+    assert result["isolation_verified"] and len(calls) == 2
+    assert result["requests"][0]["trace"]["result_kind"] == "model_answer"
+    assert runner.cloudflare.completion is original
+    saved = json.loads((tmp_path / "answers").read_text())[0]
+    writer_messages = calls[1]["input"] if native else calls[1]["messages"]
+    first_messages = calls[0]["input"] if native else calls[0]["messages"]
+    assert saved["provider_outputs"][1]["coverage_plan"] == json.loads(next(m["content"] for m in writer_messages if m["role"] == "assistant"))
+    assert saved["generation_context"] == json.loads(next(m["content"] for m in first_messages if m["role"] == "user"))
+    assert "coverage" not in saved["answer"]["direct_answer"]
 
 
 @pytest.mark.parametrize("kind", ["grounded", "not_approved", "copied"])

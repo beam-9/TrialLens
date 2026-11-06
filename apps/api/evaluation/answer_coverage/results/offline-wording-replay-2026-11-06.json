@@ -1,0 +1,306 @@
+{
+  "method": "Offline replay of three current final answer wording checks against every conversational answer with evidence context in the dated captured answer artifacts; repeated diagnostic outputs are separate observations, not independent questions. Direct paragraphs only, matching these production checks. No model calls. Passing is not semantic correctness, coverage or source entailment. Extractive/deterministic answers and missing contexts excluded.",
+  "validator_sha256": "32cc16f354533c5e8b9973906f30e211b4b3b1f9dd0c147c746f60f4ba31523d",
+  "text_helper_sha256": "c0b78ddb88d4dc89c63dd6ce9a1141b83730b696b47d6ef4937053e7e2f54cfc",
+  "inputs": [
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/attribution-glm-single-2026-11-06.json",
+      "sha256": "d24e5185518feb25190149ac11110a8b344d49fa16305dedf3d5f9e9070e39a4"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/attribution-native-medium-2026-11-06.json",
+      "sha256": "7fabc7c59ed41e1ebee78747bd21221769d4b9420406f28467b5d212a5b02613"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/attribution-native-scoped-2026-11-06.json",
+      "sha256": "596d36c8ee645258d60ce31ac045850272a2ed201cfe28e4e93c6fb3805fa2c8"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-boundaries-2026-11-06.json",
+      "sha256": "bd6f3083e3744990a47b9baba35e77bdd1fa0ff47e7d4d50266aaedc718eda03"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-coverage-candidate-2026-11-06.json",
+      "sha256": "de7ae09ff6edc3053a409907857174fc612c8df87c1ff9f2bc756e7256a7256c"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-default-2026-11-06.json",
+      "sha256": "23305fb26c2c7b209264d25275a0bb299b3f32c795c9e77a846d4dadd69e832a"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-posted-recheck-2026-11-06.json",
+      "sha256": "41c9019a5bc21c8a261aec07d3efbf915537715ab2af116a19c591530c45feff"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-posted-results-2026-11-06.json",
+      "sha256": "82dce2fa13c79251bf66b444fc050e25cb2b303b3e8fac748e9f374c8f22c59d"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-pubmed-2026-11-06.json",
+      "sha256": "416e493dd581ebd0bc783460fff54052586525da944b4b6ff6cc2037acb927d2"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/broad-pubmed-recheck-2026-11-06.json",
+      "sha256": "5593cc20f8a0de69c4e67a1191dbb675e6dd2c32fa1db6246443d0f9ed829686"
+    },
+    {
+      "path": "apps/api/evaluation/answer_coverage/results/native-single-pass-2026-11-06.json",
+      "sha256": "755f52c9056700eb17b89a95cdfb0a911e41c01c50cdce49025f0e9026311424"
+    }
+  ],
+  "summary": {
+    "captured_files": 11,
+    "reviewed_conversational_outputs": 22,
+    "excluded_outputs": 7,
+    "outputs_flagged": 3,
+    "flags_by_check": {
+      "confidence_interval": 0,
+      "comparison_order": 2,
+      "percentage_presence": 1
+    }
+  },
+  "outputs": [
+    {
+      "artifact": "broad-boundaries-2026-11-06.json",
+      "case_id": "unrelated-question",
+      "answer_sha256": "066731109eb81ea2d1fc49983346e525d4c2bc7c1ec086ea54e61f09c8549a55",
+      "generation_context_sha256": "31ae19324ee7315accd56a4f1b2c48035b30a7f6ae894a8e0e1f008e5a281007",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-coverage-candidate-2026-11-06.json",
+      "case_id": "m0-combined-benefits-risks",
+      "answer_sha256": "a1813b3edd19bed2a004c72fc3d9b3f34dd13e96ab839ca29de895f7af9317e1",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-coverage-candidate-2026-11-06.json",
+      "case_id": "m0-safety-frequency",
+      "answer_sha256": "eab6422b151868029c79ad3fbe70b08eab03b97ce5b9605878d1d9a4dfe417b7",
+      "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-coverage-candidate-2026-11-06.json",
+      "case_id": "m0-numeric-comparison",
+      "answer_sha256": "bf0c15616646892ffdd5e9a13cabbcf14a2a9bdc0ec82e240a1ff4289ee961f7",
+      "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-coverage-candidate-2026-11-06.json",
+      "case_id": "m0-protocol-versus-results",
+      "answer_sha256": "99e1fe4c8c30e710a9607a6d2ec72625c2c075100bb680e7ecd446d9087bba9a",
+      "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-coverage-candidate-2026-11-06.json",
+      "case_id": "m0-simplify-numeric-followup",
+      "answer_sha256": "1501ac7a9c8cbe60938b7e0c9615ccfbff2f1e1bab148008110fcb96e525c2fd",
+      "generation_context_sha256": "e7a1846dad668d0a189e1f25fb4fa467501e81ebc50427c5f38155adf3a1af4f",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-default-2026-11-06.json",
+      "case_id": "m0-combined-benefits-risks",
+      "answer_sha256": "9ef5efba196d319b9e589ec6eeaece04b8fd024bde11fcea5224c5bc4c4ec787",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-default-2026-11-06.json",
+      "case_id": "m0-safety-frequency",
+      "answer_sha256": "20465ff13afaef943c173c64bcca5d82aa3694d2dfc931c01cedf71a4947d11f",
+      "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-default-2026-11-06.json",
+      "case_id": "m0-numeric-comparison",
+      "answer_sha256": "55dc93d25c0cc02dbfb8c7d8e41a3a88a0c993e2ff03aaeabe550c4677fc2812",
+      "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-default-2026-11-06.json",
+      "case_id": "m0-protocol-versus-results",
+      "answer_sha256": "b270683233ea0b67804769b0badc73f4c0dc717ecec46dfc5c2023a3bf4a4d9c",
+      "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-default-2026-11-06.json",
+      "case_id": "m0-simplify-numeric-followup",
+      "answer_sha256": "55dc93d25c0cc02dbfb8c7d8e41a3a88a0c993e2ff03aaeabe550c4677fc2812",
+      "generation_context_sha256": "587db11e091d8bc79916c647c43297926629af723436a4b3644aa15294f3ffb4",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-recheck-2026-11-06.json",
+      "case_id": "posted-statistics",
+      "answer_sha256": "9c0fb7b5f7f6c55c492adeb91d4aa8d25cc9d44870d1a19de783f764d364b654",
+      "generation_context_sha256": "4e62de0c72f76ae123826e9efd43be272b4c90126bb5f5b78377d3dd23b9427b",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-recheck-2026-11-06.json",
+      "case_id": "posted-simplify",
+      "answer_sha256": "db35f5e48b737eb5f1e8875d4f33312b478b706c916151612a787fe15b1a4a0b",
+      "generation_context_sha256": "19b07d008eba3e692767d8d15ec129e7b1b92a5484367c764069e733db8269c1",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-recheck-2026-11-06.json",
+      "case_id": "posted-unreported",
+      "answer_sha256": "a42a8cf9f6ad03594af7c8540ae23312c2009ebd1561df8e4bd66b23f5668087",
+      "generation_context_sha256": "110b9a715f19f3b7682c88e0c3d5f3f824d32ebc01517af8e15f5f1089cfd8da",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-results-2026-11-06.json",
+      "case_id": "protocol-statistics",
+      "answer_sha256": "ee1f38c7722c2409cfe517048bd9ef09b9e776119eb015a3b72856714b8960b9",
+      "generation_context_sha256": "fdf9d3aeed52928be7360e88797de58c02e31ca57d44a4ff951affccaf17fbd0",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-results-2026-11-06.json",
+      "case_id": "posted-statistics",
+      "answer_sha256": "fcd24a1b19761570fe8584d066668b228085fd589a1fc4962a9afa63c93c1c68",
+      "generation_context_sha256": "4e62de0c72f76ae123826e9efd43be272b4c90126bb5f5b78377d3dd23b9427b",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-results-2026-11-06.json",
+      "case_id": "posted-simplify",
+      "answer_sha256": "27082d82929fb7677260eabe576746253671e35fe4fbe5c306ef73f95fe637a0",
+      "generation_context_sha256": "741a53c9e965ee515f47e1f3e137928f59ccc28254c941a81d70b69b659f7af9",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-posted-results-2026-11-06.json",
+      "case_id": "posted-unreported",
+      "answer_sha256": "a42a8cf9f6ad03594af7c8540ae23312c2009ebd1561df8e4bd66b23f5668087",
+      "generation_context_sha256": "110b9a715f19f3b7682c88e0c3d5f3f824d32ebc01517af8e15f5f1089cfd8da",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-pubmed-2026-11-06.json",
+      "case_id": "fresh-trial-versus-review",
+      "answer_sha256": "a69c6286fdf7a6f60e38c82d67d0f9f24d8988bc7e6cd28b7d8b87bb3b17efd1",
+      "generation_context_sha256": "13bec57dbb2ae82daf5e60d80ed9a6775699ce56e90bccd342dab94b72e89035",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": "Requested source comparison is presented in reversed numerical order",
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "broad-pubmed-recheck-2026-11-06.json",
+      "case_id": "fresh-trial-versus-review",
+      "answer_sha256": "ddda1a382fa192c1a8547be59767b9f4757d04aec3193948f709bfd49fd7c94d",
+      "generation_context_sha256": "13bec57dbb2ae82daf5e60d80ed9a6775699ce56e90bccd342dab94b72e89035",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": "Requested source comparison is presented in reversed numerical order",
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "native-single-pass-2026-11-06.json",
+      "case_id": "m0-combined-benefits-risks",
+      "answer_sha256": "ba59e30ff6db5314d38c41416e4eca48b4360f250c6f61fc16529a74843ee696",
+      "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": null
+      }
+    },
+    {
+      "artifact": "native-single-pass-2026-11-06.json",
+      "case_id": "m0-safety-frequency",
+      "answer_sha256": "e5164b5512970ca7046292d4c6736e15555d670543dbd9ffdfcd3823e8ce9f37",
+      "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+      "checks": {
+        "confidence_interval": null,
+        "comparison_order": null,
+        "percentage_presence": "An attributed percentage is absent from its cited source context"
+      }
+    }
+  ]
+}
