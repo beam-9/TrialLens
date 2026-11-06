@@ -119,3 +119,43 @@ def test_comparison_order_guard_is_scoped_to_question_and_cited_source():
     assert requested_comparison_order_issue(question, 'Reported 0.35% versus −0.58% [PubMed:1].', records) is None
     assert requested_comparison_order_issue(question, 'Reported -0.58% versus 0.35% [PubMed:2].', records) is None
     assert requested_comparison_order_issue('Summarize the study.', 'Reported -0.58% versus 0.35% [PubMed:1].', records) is None
+
+
+def test_comparison_order_preserves_typographic_negative_signs():
+    from triallens.answer_checks import requested_comparison_order_issue
+
+    records = [{'citation': 'PubMed:1', 'text': '0.35% vs. -0.58%', 'matched_passages': []}]
+    assert requested_comparison_order_issue('Explain the discrepancy', '0.35% versus ‑0.58% [PubMed:1]', records) is None
+    assert requested_comparison_order_issue('Explain the discrepancy', '‑0.58% versus 0.35% [PubMed:1]', records)
+
+
+def test_percentage_guard_rejects_observed_invented_safety_frequency():
+    import json
+    from pathlib import Path
+    from triallens.answer_checks import unreported_percentage_issue
+
+    path = Path(__file__).parents[1] / 'evaluation/answer_coverage/results/native-single-pass-2026-11-06.json'
+    run = next(r for r in json.loads(path.read_text()) if r['case_id'] == 'm0-safety-frequency')
+    assert unreported_percentage_issue(run['answer']['direct_answer'], run['generation_context']['evidence'])
+
+
+def test_percentage_guard_preserves_ranges_and_negative_signs_and_source_scope():
+    from triallens.answer_checks import unreported_percentage_issue
+
+    records = [{'citation': 'PubMed:1', 'text': 'Reported 1–5% and −0.58%.', 'matched_passages': []},
+               {'citation': 'PubMed:2', 'text': 'Reported 45%.', 'matched_passages': []}]
+    assert unreported_percentage_issue('Reported 1% and 5%, and ‑0.58% [PubMed:1].', records) is None
+    assert unreported_percentage_issue('Reported 45% [PubMed:1].', records)
+    assert unreported_percentage_issue('Reported 45% [PubMed:2].', records) is None
+    assert unreported_percentage_issue('Reported 45% [PubMed:1] [PubMed:2].', records) is None
+
+
+def test_percentage_guard_handles_written_units_and_multiple_attributions():
+    from triallens.answer_checks import unreported_percentage_issue
+
+    records = [{'citation': 'PubMed:1', 'text': 'Reported 1 to 5 percent.', 'matched_passages': []},
+               {'citation': 'PubMed:2', 'text': 'Reported 20%.', 'matched_passages': []}]
+    assert unreported_percentage_issue('Reported 5 per cent [PubMed:1].', records) is None
+    assert unreported_percentage_issue('Reported 45 percent [PubMed:1].', records)
+    assert unreported_percentage_issue('Reported 99% [PubMed:1] [PubMed:2].', records)
+    assert unreported_percentage_issue('Reported 5 percent and 20% [PubMed:1] [PubMed:2].', records) is None

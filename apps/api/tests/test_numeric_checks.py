@@ -221,3 +221,27 @@ def test_repair_once_corrects_numeric_failure_and_rejects_bad_third_answer_witho
             conversation.cloudflare.completion(draft, {})
     assert len(calls) == 3
     assert conversation.cloudflare.completion is installed
+
+
+def test_nonbreaking_hyphens_preserve_numeric_sign_and_range_meaning():
+    from triallens.text import normalize_numeric_signs
+
+    assert numeric_values('‑0.58% and ‐55.20%, 1‑5 and 16‑week') == {'-0.58', '-55.2', '1', '5', '16'}
+    assert normalize_numeric_signs('NCT‑123 trial‐12 1‑5 ‑.5') == 'NCT‑123 trial‐12 1‑5 -.5'
+
+
+def test_native_recorded_negatives_do_not_become_unreported_positive_values():
+    run_path = _EVALUATION / 'answer_coverage/results/attribution-native-medium-2026-11-06.json'
+    run = json.loads(run_path.read_text())[0]
+    final = json.loads(run['provider_outputs'][-1]['response'])
+    assert unsupported_numbers(final, run['generation_context']) == []
+
+
+def test_written_hundreds_can_support_numeric_sample_sizes():
+    assert numeric_values('One hundred eighty-five adults and two hundred and forty patients') == {'185', '240'}
+    assert numeric_values('Negative one hundred twenty-one; nine hundred ninety nine') == {'-121', '999'}
+    assert numeric_values('one hundred thousand and one hundred point five') == set()
+    run_path = _EVALUATION / 'answer_coverage/results/attribution-native-scoped-2026-11-06.json'
+    run = json.loads(run_path.read_text())[0]
+    answer = json.loads(run['provider_outputs'][-1]['response'])
+    assert unsupported_numbers(answer, run['generation_context']) == []

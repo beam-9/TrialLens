@@ -12,6 +12,14 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip()
 
 
+def normalize_numeric_signs(text: str) -> str:
+    """Canonicalize a leading typographic hyphen used as a numeric sign.
+
+    Preserve identifiers and between-digit separators, including ranges.
+    """
+    return re.sub(r"(?<![\w.])[‐‑](?=\d|\.\d)", "-", text)
+
+
 def tokenize(text: str) -> list[str]:
     return [token.lower() for token in WORD_RE.findall(text)]
 

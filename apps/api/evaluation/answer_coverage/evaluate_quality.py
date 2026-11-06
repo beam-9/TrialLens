@@ -18,6 +18,7 @@ from revision_feedback import revision_feedback_experiment
 from thinking_profile import disabled_thinking
 from label_scope import label_scope_experiment
 from ci_coverage import ci_coverage_experiment
+from single_pass import single_pass_experiment
 
 
 
@@ -68,12 +69,15 @@ def main():
     parser.add_argument('--repair-once', action='store_true')
     parser.add_argument('--label-scope', action='store_true')
     parser.add_argument('--ci-coverage', action='store_true')
+    parser.add_argument('--single-pass', action='store_true')
     parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     parser.add_argument('--reasoning-effort', choices=('low', 'medium', 'high'))
     parser.add_argument('--strategy-experiment', choices=('verified-quotes', 'reviewed-claims', 'repaired-claims', 'outcome-claims', 'outcome-records'))
     args = parser.parse_args()
     if args.numeric_checks and args.strategy_experiment:
         parser.error('--numeric-checks applies to the prose writer, not a claim-review schema')
+    if args.single_pass and any((args.revision_feedback, args.numeric_checks, args.repair_once, args.label_scope, args.ci_coverage, args.strategy_experiment)):
+        parser.error('--single-pass cannot be combined with revision experiments')
     if args.ci_coverage and (args.strategy_experiment or args.repair_once):
         parser.error('--ci-coverage requires the two-pass prose writer')
     if args.label_scope and args.strategy_experiment:
@@ -85,19 +89,24 @@ def main():
     load_dotenv(API_ROOT / '.env', override=False)
     experiment = revision_feedback_experiment(numeric_guard=args.numeric_checks, repair_once=args.repair_once) if args.revision_feedback or args.numeric_checks or args.repair_once else nullcontext()
     # Wrapping restores both the inventory and provider seam even on failures.
-    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort), disabled_thinking(args.disable_thinking), label_scope_experiment(args.label_scope), ci_coverage_experiment(args.ci_coverage):
+    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort), disabled_thinking(args.disable_thinking), label_scope_experiment(args.label_scope), ci_coverage_experiment(args.ci_coverage), single_pass_experiment(args.single_pass):
         result = cloudflare_run.run(args.output, args.answers, args.case,
             quota_path=API_ROOT / 'data/evaluation-usage.sqlite3',
             prompt_path=args.prompt_file, cases_path=args.cases_file, strategy=args.strategy_experiment)
+    if args.single_pass:
+        result['pipeline_variant'] = 'single_pass_evaluation'
+        result['method']['phase_labels'] = 'draft is hosted generation; revision is an in-memory replay, not a provider call'
     result['quality_experiment'] = {
         'revision_feedback': args.revision_feedback,
         'numeric_checks': args.numeric_checks,
+        'single_pass': args.single_pass,
+        'single_pass_sha256': hashlib.sha256((API_ROOT / 'evaluation/single_pass.py').read_bytes()).hexdigest() if args.single_pass else None,
         'disable_thinking': args.disable_thinking,
         'repair_once': args.repair_once,
         'label_scope': args.label_scope,
         'ci_coverage_sha256': hashlib.sha256((API_ROOT / 'evaluation/ci_coverage.py').read_bytes()).hexdigest() if args.ci_coverage else None,
         'label_scope_sha256': hashlib.sha256((API_ROOT / 'evaluation/label_scope.py').read_bytes() + (API_ROOT / 'triallens/label_checks.py').read_bytes()).hexdigest() if args.label_scope else None,
-        'max_provider_calls_per_question': 3 if args.repair_once else 2,
+        'max_provider_calls_per_question': 1 if args.single_pass else 3 if args.repair_once else 2,
         'thinking_profile_sha256': hashlib.sha256((API_ROOT / 'evaluation/thinking_profile.py').read_bytes()).hexdigest() if args.disable_thinking else None,
         'numeric_checks_sha256': hashlib.sha256((API_ROOT / 'evaluation/numeric_checks.py').read_bytes()).hexdigest() if args.numeric_checks else None,
         'strategy_experiment': args.strategy_experiment,

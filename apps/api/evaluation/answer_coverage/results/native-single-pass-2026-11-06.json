@@ -1,0 +1,1192 @@
+[
+  {
+    "case_id": "m0-combined-benefits-risks",
+    "snapshot_id": "real-metformin",
+    "answer": {
+      "id": "4cc0e497-8876-42c3-a5dc-2b01587b3772",
+      "workspace_id": "m0-real-metformin",
+      "question": "What do these sources directly establish about metformin's intended use and main limitations? Separate label indications and safety information from registry background or planned work, and keep ZITUVIMET claims scoped to that combination product.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "openFDA label:FDA-LABEL-metformin-1": "62b96e4f672ed80b2269f0d94a0b26f0861c139dbcb2e0ef0d37b49e1cbff0c6",
+        "ClinicalTrials.gov:NCT05689684": "cbf5a5ee4db4f135e7ab3516a6b79e7d61d52651d6eaafa1d1adb25b1019fc1c",
+        "openFDA label:FDA-LABEL-metformin-2": "f7f14c19ab1dc3238977df5d582b1f83d47f0e74b9a8a0bc4470d27c4063444e",
+        "openFDA label:FDA-LABEL-metformin-3": "27ab0d57262633c9aa2062305a769cacfe440d68b6993f9e927e292dd3e91170"
+      },
+      "short_answer": "Metformin hydrochloride tablets are labeled for use as an adjunct to diet and exercise to improve glycemic control in adults and in pediatric patients 10\u202fyears of age and older who have type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-2]\n\nMetformin hydrochloride extended\u2011release tablets are similarly indicated as an adjunct to diet and exercise to improve glycemic control, but the label specifies use in adults with type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-3]\n\nBoth immediate\u2011 and extended\u2011release formulations carry the same major safety warnings: a boxed warning for lactic acidosis, and additional cautions for vitamin\u00a0B12 deficiency and hypoglycemia when metformin is combined with insulin or insulin\u2011secretagogues. The most frequently reported adverse reactions (\u22655\u202f% of patients) include diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort and headache. The extended\u2011release label also highlights drug\u2011interaction risks with carbonic anhydrase inhibitors, OCT2/MATE transporter inhibitors, and alcohol, which can increase the risk of lactic acidosis. [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]\n\nThe combination product ZITUVIMET (sitagliptin\u202f+\u202fmetformin) is indicated only for adults with type\u00a02 diabetes mellitus as an adjunct to diet and exercise. Its label notes two specific limitations of use: it is not recommended for patients with type\u00a01 diabetes mellitus, and it has not been studied in patients with a history of pancreatitis, so the risk in that population is unknown. These limitations apply to the combination product, not to metformin alone. [openFDA label:FDA-LABEL-metformin-1]\n\nA separate clinical\u2011trial registry entry describes a planned 4\u2011month, blinded, parallel\u2011group study (N\u202f=\u202f100) evaluating a hybrid prebiotic product (containing arabinoxylan\u2011oligosaccharides) taken together with metformin to see whether it improves gut health, metformin adherence, and glucose metabolism in people with type\u00a02 diabetes. This study is investigational and does not alter the approved indication or safety profile of metformin. [ClinicalTrials.gov:NCT05689684]",
+      "direct_answer": "Metformin hydrochloride tablets are labeled for use as an adjunct to diet and exercise to improve glycemic control in adults and in pediatric patients 10\u202fyears of age and older who have type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-2]\n\nMetformin hydrochloride extended\u2011release tablets are similarly indicated as an adjunct to diet and exercise to improve glycemic control, but the label specifies use in adults with type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-3]\n\nBoth immediate\u2011 and extended\u2011release formulations carry the same major safety warnings: a boxed warning for lactic acidosis, and additional cautions for vitamin\u00a0B12 deficiency and hypoglycemia when metformin is combined with insulin or insulin\u2011secretagogues. The most frequently reported adverse reactions (\u22655\u202f% of patients) include diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort and headache. The extended\u2011release label also highlights drug\u2011interaction risks with carbonic anhydrase inhibitors, OCT2/MATE transporter inhibitors, and alcohol, which can increase the risk of lactic acidosis. [openFDA label:FDA-LABEL-metformin-2] [openFDA label:FDA-LABEL-metformin-3]\n\nThe combination product ZITUVIMET (sitagliptin\u202f+\u202fmetformin) is indicated only for adults with type\u00a02 diabetes mellitus as an adjunct to diet and exercise. Its label notes two specific limitations of use: it is not recommended for patients with type\u00a01 diabetes mellitus, and it has not been studied in patients with a history of pancreatitis, so the risk in that population is unknown. These limitations apply to the combination product, not to metformin alone. [openFDA label:FDA-LABEL-metformin-1]\n\nA separate clinical\u2011trial registry entry describes a planned 4\u2011month, blinded, parallel\u2011group study (N\u202f=\u202f100) evaluating a hybrid prebiotic product (containing arabinoxylan\u2011oligosaccharides) taken together with metformin to see whether it improves gut health, metformin adherence, and glucose metabolism in people with type\u00a02 diabetes. This study is investigational and does not alter the approved indication or safety profile of metformin. [ClinicalTrials.gov:NCT05689684]",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 8 source records; the final answer uses 4 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-1 \u00b7 FDA label: ZITUVIMET \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CITED IN ANSWER \u00b7 ClinicalTrials.gov:NCT05689684 \u00b7 Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes \u00b7 ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 PubMed:42374733 \u00b7 Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 PubMed:42373540 \u00b7 Shifts in Incident Glucose Lowering Drug Initiation in Type 2 Diabetes From 2014 to 2024: A Population-Based Study. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-3 \u00b7 FDA label: Metformin hydrochloride \u00b7 Stored FDA label sections available in TrialLens. \u00b7 partial excerpt",
+        "CONTEXT ONLY \u00b7 PubMed:42377443 \u00b7 Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article.",
+        "CONTEXT ONLY \u00b7 PubMed:42379510 \u00b7 GLP-1 Receptor Agonists and Age-related Macular Degeneration Risk in Diabetes or Non-diabetic Obesity: A Retrospective Cohort Study. \u00b7 PubMed abstract content stored in TrialLens, not necessarily the full article."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "8 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "4 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "uncertainty": [
+        "The label excerpts are truncated, so additional contraindications or safety details may exist beyond what is shown.",
+        "The AXOS trial results are not reported; only the study design is available."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The label excerpts are truncated, so additional contraindications or safety details may exist beyond what is shown.",
+        "The AXOS trial results are not reported; only the study design is available.",
+        "Trial registration records may describe planned methods rather than measured results."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-2",
+        "openFDA label:FDA-LABEL-metformin-3",
+        "openFDA label:FDA-LABEL-metformin-1",
+        "ClinicalTrials.gov:NCT05689684"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-real-chunk-010",
+          "source_id": "m0-real-source-08",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "text": "additional, 30-week placebo-controlled, trial of patients with type 2 diabetes mellitus inadequately controlled with metformin comparing the maintenance of sitagliptin 100 mg versus withdrawal of sitagliptin when initiating basal insulin therapy, the event rate and incidence of documented symptomatic hypoglycemia (blood glucose measurement \u226470 mg/dL) did not differ between the sitagliptin and placebo groups. Vital Signs and Electrocardiograms With the combination of sitagliptin and metformin, no clinically meaningful changes in vital signs or in ECG (including in QTc interval) were observed. Pancreatitis In a pooled analysis of 19 double-blind clinical trials that",
+          "score": 0.6229,
+          "section": "chunk 17",
+          "title": "FDA label: ZITUVIMET",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-1",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "that",
+            "type",
+            "zituvimet"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, that, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-008",
+          "source_id": "m0-real-source-06",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "text": "a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting",
+          "score": 0.4312,
+          "section": "chunk 2",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "url": "https://clinicaltrials.gov/study/NCT05689684",
+          "external_id": "NCT05689684",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "NA",
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "product",
+            "these",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, product, these, type in a trial record."
+        },
+        {
+          "chunk_id": "m0-real-chunk-039",
+          "source_id": "m0-real-source-13",
+          "source_type": "pubmed",
+          "citation": "PubMed:42374733",
+          "text": "noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in",
+          "score": 0.5475,
+          "section": "chunk 2",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42374733/",
+          "external_id": "42374733",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, that, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-006",
+          "source_id": "m0-real-source-07",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning",
+          "score": 0.542,
+          "section": "chunk 1",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "indications",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, indications, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-028",
+          "source_id": "m0-real-source-11",
+          "source_type": "pubmed",
+          "citation": "PubMed:42373540",
+          "text": "9.3% to 21.8% and incident triple therapy from 0.2% to 1.0%. The overall proportion of incident metformin therapy (monotherapy or in combination with other GLDs) decreased from 83.9% in 2014 to 40.1% in 2024, with incident metformin as monotherapy falling from 82.7% to 29.1% over the same period. Proportions of incident SGLT2i and GLP-1 RA (monotherapy or in combination with other GLDs) were 35.7% and 11.2%, respectively, in 2024. Over the study period, age at the time of incident prescribing increased for all GLD classes, except GLP-1 RA, which decreased. Over the",
+          "score": 0.5322,
+          "section": "chunk 2",
+          "title": "Shifts in Incident Glucose Lowering Drug Initiation in Type 2 Diabetes From 2014 to 2024: A Population-Based Study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42373540/",
+          "external_id": "42373540",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-048",
+          "source_id": "m0-real-source-01",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions ( 5.1 ) ] Vitamin B 12 Deficiency [",
+          "score": 0.504,
+          "section": "chunk 1",
+          "title": "FDA label: Metformin hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-3",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "indications",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, indications, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-real-chunk-073",
+          "source_id": "m0-real-source-02",
+          "source_type": "pubmed",
+          "citation": "PubMed:42377443",
+          "text": "Intensive lifestyle change intervention (LCI) programs and metformin are recommended to prevent the progression of prediabetes to type 2 diabetes. While social drivers of health are known to influence access to preventive health care the impact of neighborhood socioeconomic disadvantage on the uptake of diabetes prevention interventions remains underexplored. Examine the relationship between the social deprivation index and the use of diabetes prevention interventions among people with prediabetes. We analyzed commercial and Medicaid claims data from the Maryland Medical Care Data Base (2017-2019) to identify claims for LCIs and metformin prescriptions and",
+          "score": 0.481,
+          "section": "chunk 1",
+          "title": "Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42377443/",
+          "external_id": "42377443",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "claims",
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched claims, diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "m0-real-chunk-034",
+          "source_id": "m0-real-source-03",
+          "source_type": "pubmed",
+          "citation": "PubMed:42379510",
+          "text": "confidence interval [CI], 0.75-0.91) and dry age-related macular degeneration (HR, 0.84; 95% CI, 0.73-0.98) risks compared to metformin. In the obesity cohort, GLP-1RAs were associated with a lower risk of total age-related macular degeneration (HR, 0.77; 95% CI, 0.61-0.98) and dry age-related macular degeneration (HR, 0.65; 95% CI, 0.46-0.94) compared to other weight-loss medications. GLP-1RAs were associated with a lower risk of age-related macular degeneration, particularly dry form, compared with metformin or other weight-loss medications.",
+          "score": 0.4425,
+          "section": "chunk 2",
+          "title": "GLP-1 Receptor Agonists and Age-related Macular Degeneration Risk in Diabetes or Non-diabetic Obesity: A Retrospective Cohort Study.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42379510/",
+          "external_id": "42379510",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin"
+          ],
+          "relevance_note": "Matched diabetes, metformin in a literature source."
+        }
+      ],
+      "created_at": "2026-11-06T18:40:03.725553+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\n  \"paragraphs\": [\n    \"Metformin hydrochloride tablets are labeled for use as an adjunct to diet and exercise to improve glycemic control in adults and in pediatric patients 10\u202fyears of age and older who have type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-2]\",\n    \"Metformin hydrochloride extended\u2011release tablets are similarly indicated as an adjunct to diet and exercise to improve glycemic control, but the label specifies use in adults with type\u00a02 diabetes mellitus. [openFDA label:FDA-LABEL-metformin-3]\",\n    \"Both immediate\u2011 and extended\u2011release formulations carry the same major safety warnings: a boxed warning for lactic acidosis, and additional cautions for vitamin\u00a0B12 deficiency and hypoglycemia when metformin is combined with insulin or insulin\u2011secretagogues. The most frequently reported adverse reactions (\u22655\u202f% of patients) include diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort and headache. The extended\u2011release label also highlights drug\u2011interaction risks with carbonic anhydrase inhibitors, OCT2/MATE transporter inhibitors, and alcohol, which can increase the risk of lactic acidosis. [openFDA label:FDA-LABEL-metformin-2, openFDA label:FDA-LABEL-metformin-3]\",\n    \"The combination product ZITUVIMET (sitagliptin\u202f+\u202fmetformin) is indicated only for adults with type\u00a02 diabetes mellitus as an adjunct to diet and exercise. Its label notes two specific limitations of use: it is not recommended for patients with type\u00a01 diabetes mellitus, and it has not been studied in patients with a history of pancreatitis, so the risk in that population is unknown. These limitations apply to the combination product, not to metformin alone. [openFDA label:FDA-LABEL-metformin-1]\",\n    \"A separate clinical\u2011trial registry entry describes a planned 4\u2011month, blinded, parallel\u2011group study (N\u202f=\u202f100) evaluating a hybrid prebiotic product (containing arabinoxylan\u2011oligosaccharides) taken together with metformin to see whether it improves gut health, metformin adherence, and glucose metabolism in people with type\u00a02 diabetes. This study is investigational and does not alter the approved indication or safety profile of metformin. [ClinicalTrials.gov:NCT05689684]\"\n  ],\n  \"cited_sources\": [\n    \"openFDA label:FDA-LABEL-metformin-2\",\n    \"openFDA label:FDA-LABEL-metformin-3\",\n    \"openFDA label:FDA-LABEL-metformin-1\",\n    \"ClinicalTrials.gov:NCT05689684\"\n  ],\n  \"uncertainty\":  [\n    \"The label excerpts are truncated, so additional contraindications or safety details may exist beyond what is shown.\",\n    \"The AXOS trial results are not reported; only the study design is available.\"\n  ]\n}",
+        "usage": {
+          "input_tokens": 6624,
+          "output_tokens": 1736,
+          "total_tokens": 8360,
+          "neurons": 328.616943359375
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "medium"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": null,
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "completed",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-1",
+          "title": "FDA label: ZITUVIMET",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE ZITUVIMET is a combination of sitagliptin, a dipeptidyl peptidase-4 (DPP-4) inhibitor, and metformin hydrochloride (HCl), a biguanide, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) Limitations of Use: ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ( 1 ) ZITUVIMET has not been studied in patients with a history of pancreatitis. ( 1 ) ZITUVIMET is indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Limitations of Use ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ZITUVIMET has not been studied in patients with a history of pancreatitis. It is unknown whether patients with a history of pancreatitis are at increased risk for the development of pancreatitis while using ZITUVIMET. [see Warnings and Precautions ( 5.2 )]. 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the prescribing information: Lactic Acidosis [see Warnings and Precautions ( 5.1 )] Pancreatitis [see Warnings and Precautions ( 5.2 )] Heart Failure [see Warnings and Precautions ( 5.3 )] Acute Renal Failure [see Warnings and Precautions ( 5.4 )] Vitamin B12 Deficiency [see Warnings and Precautions ( 5.5 )] Hypoglycemia with Concomitant Use with Insulin or Insulin Secretagogues [see Warnings and Precautions ( 5.6 )] Hypersensitivity Reactions [see Warnings and Precautions ( 5.7 )] Severe and Disabling Arthralgia [see Warnings and Precautions ( 5.8 )] Bullous Pemphigoid [see Warnings and Precautions ( 5.9 )] Most common adverse reactions (incidence \u22655% of patients simultaneously started on sitagliptin and metformin and more commonly than in patients treated with placebo were diarrhea, upper respiratory tract infection, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Zydus Pharmaceuticals (USA) Inc. at 1-877-993-8779 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Trials Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Common Adverse Reactions Sitagliptin and Metformin Coadministration in Patients with Type 2 Diabetes Mellitus Inadequately Controlled on Diet and Exercise Table 1 summarizes the most common (\u22655% of patients) adverse reactions reported in a 24-week placebo-controlled factorial trial in which sitagliptin and metformin were coadministered to patients with type 2 diabetes mellitus inadequately controlled on diet and exercise. Table 1: Sitagliptin and Metformin Coadministered to Patients with Type 2 Diabetes Melli",
+          "matched_passages": [
+            "additional, 30-week placebo-controlled, trial of patients with type 2 diabetes mellitus inadequately controlled with metformin comparing the maintenance of sitagliptin 100 mg versus withdrawal of sitagliptin when initiating basal insulin therapy, the event rate and incidence of documented symptomatic hypoglycemia (blood glucose measurement \u226470 mg/dL) did not differ between the sitagliptin and placebo groups. Vital Signs and Electrocardiograms With the combination of sitagliptin and metformin, no clinically meaningful changes in vital signs or in ECG (including in QTc interval) were observed. Pancreatitis In a pooled analysis of 19 double-blind clinical trials that"
+          ]
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT05689684",
+          "title": "Arabinoxylan-oligosaccharides (AXOS) for the Management of Type-2 Diabetes",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "NA",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "indexed_section_names": [],
+          "content_truncated": true,
+          "demo": false,
+          "text": "The project aims to achieve significantly improved clinical care for type 2 diabetes. The current standard treatment metformin has low adherence due to its main side effect gut dysbiosis, which also results in more complications and high overall costs. Prebiotics have been suggested as a medical food and might be helpful as adjuvant management in type 2 diabetes and other metabolic diseases. Carbiotix AB has developed, a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, it will be investigated whether the intake of a hybrid product containing AXOS together with metformin can significantly improve glucose metabolism and gut health in patients with type 2 diabetes. The prevalence of type 2 diabetes (T2D) is a high prevalence and the leading cause of death and disability worldwide. The quality of life is significantly decreased in these patients and the costs for medical care are enormous. T2D patients are often treated with metformin, but adherence to the treatment is relatively poor, with gut dysbiosis as a major cause. Gut dysbiosis has not been addressed in the clinical setting although numerous studies support its role in disease development. There is an urgent need to improve existing treatments with metformin to improve adherence to drug therapy and the management of the disease. Prebiotics are dietary fibers that stimulate the growth and activity of beneficial gut microbiota. Prebiotics has been suggested as a medical food and might be very useful as an effective adjuvant approach in the management of T2D and other metabolic diseases. Carbiotix AB, a biotech company based in Lund, has developed a corn fiber extract containing arabinoxylan-oligosaccharides (AXOS), which have great potential for improving gut health. In this project, a clinical trial will be performed to investigate whether the corn fiber extract can significantly increase metformin adherence with improved gut health and glucose metabolism in patients with T2D. To maximize the potential efficacy of the intervention, a \"Hybrid Product\" containing arabinogalactan (AG), xylan-oligosaccharides (XOS), and AXOS will be used, building on the XOS and AXOS naturally present in the corn fiber extract. One hundred subjects with T2D and treated with metformin will be recruited for this blind parallel randomized controlled intervention study. After a screening visit, the subjects will be randomized to test the Hybrid Product or placebo (maltodextrin) group. The duration of the intervention is 4 months, and the study subjects will be asked to consume the Hybrid Product or placebo daily (2x 5g). At the start, of week 8 and week 16, the study subjects will visit the study center for the measurement of body weight, waist circumference, and blood pressure. At these 3 visits, fasting blood samples are taken for analysis of glucose and insulin metabolism, blood lipids, and inflammation markers. Fecal samples are also collected to investigate the effect of the Hybrid Product on microbiota composition. At regular times during the study, the subjects must do a 7-point blood glucose monitoring and fill in questionnaires about gastrointestinal symptoms. During the whole study period, all subjects are contacted regularly to follow up on their health status. If the Hybrid Product shows the strong potential to improve adherence to metformin treatment, this will lead to improving diabetes care with reduced ec",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42374733",
+          "title": "Clonal Hematopoiesis and Type 2 Diabetes: A Narrative Review.",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Clonal hematopoiesis (CH) refers to an expanded clonal hematopoietic cell population due to acquired mutations conferring a selective growth advantage. Once considered a premalignant hematological state, CH has now been causally associated with cardiovascular diseases (CVDs) and several aging-related clinical conditions. Emerging evidence suggests that CH is at the intersection of aging and metabolic disorders. CH carriers exhibit a higher risk of Type 2 diabetes, potentially through the obesity-inflammation-insulin resistance axis. Moreover, CH confers a higher risk of CVD and is associated with a poorer prognosis in patients with diabetes compared to noncarriers. In addition, CH has been associated with the development of microvascular complications, including retinopathy and kidney disease in patients with diabetes, although inconsistent findings exist. Preclinical studies found that antidiabetic medication metformin might slow down clonal expansion of CH, while clinical data suggest that anti-inflammatory medications confer better clinical outcomes for certain CH carriers, although their relevance for patients with diabetes remains to be elucidated. In this narrative review, we also briefly discuss the barriers to clinical adoption of CH detection and highlight the knowledge gaps that should be addressed in future work.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may increase the risk for lactic acidosis",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42373540",
+          "title": "Shifts in Incident Glucose Lowering Drug Initiation in Type 2 Diabetes From 2014 to 2024: A Population-Based Study.",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This study aimed to analyse incident glucose lowering drug (GLD) utilisation in Australia between the period 2014 and 2024. Australian Pharmaceutical Benefits Scheme (PBS) data (10% PBS dataset) were analysed to assess the proportions of incident monotherapy, dual therapy and triple therapy and the proportion of prescriptions dispensed for each GLD class. Annual changes in age at incident GLD initiation were also quantified. 49 129 individuals were included. The proportion of individuals prescribed incident GLD as monotherapy decreased from 90.4% in 2014 to 77.2% in 2024, while incident dual therapy rose from 9.3% to 21.8% and incident triple therapy from 0.2% to 1.0%. The overall proportion of incident metformin therapy (monotherapy or in combination with other GLDs) decreased from 83.9% in 2014 to 40.1% in 2024, with incident metformin as monotherapy falling from 82.7% to 29.1% over the same period. Proportions of incident SGLT2i and GLP-1 RA (monotherapy or in combination with other GLDs) were 35.7% and 11.2%, respectively, in 2024. Over the study period, age at the time of incident prescribing increased for all GLD classes, except GLP-1 RA, which decreased. Over the past decade, substantial changes in incident GLD prescribing have occurred in Australia. While metformin continues to play a central role as initial treatment, major shifts toward use of initial dual therapy, including SGLT2i and GLP-1RA, have occurred.",
+          "matched_passages": []
+        },
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-3",
+          "title": "FDA label: Metformin hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": true,
+          "demo": false,
+          "text": "1 INDICATIONS AND USAGE Metformin hydrochloride extended-release tablets, USP are indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. Metformin hydrochloride extended-release tablets, USP are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions ( 5.1 ) ] Vitamin B 12 Deficiency [ see Warnings and Precautions ( 5.2 ) ] Hypoglycemia [ see Warnings and Precautions ( 5.3 ) ] Common adverse reactions are diarrhea, nausea/vomiting, abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Ajanta Pharma USA Inc. at 855-664-7744 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch. 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. In placebo-controlled trials, 781 patients were administered metformin hydrochloride extended-release tablets. Adverse reactions reported in greater than 5% of the patients treated with metformin hydrochloride extended-release tablets and that were more common than in placebo-treated patients are listed in Table 1. Table 1: Adverse Reactions from Clinical Trials of Metformin Hydrochloride Extended-Release Tablets Occurring > 5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Adverse Reaction Metformin Hydrochloride Extended-Release Tablets (n=781) Placebo (n=195) Diarrhea 10% 3% Nausea/Vomiting 7% 2% Diarrhea led to the discontinuation of metformin hydrochloride extended-release tablets in 0.6% of patients. Additionally, the following adverse reactions were reported in 1.0% to 5.0% of patients treated with metformin hydrochloride extended-release tablets and were more commonly reported than in placebo-treated patients: abdominal pain, constipation, abdomen distention, dyspepsia/heartburn, flatulence, dizziness, headache, upper respiratory infection, taste disturbance. Laboratory Tests Vitamin B 12 Concentrations In clinical trials of 29-week duration with metformin HCl tablets, a decrease to subnormal levels of previously normal serum vitamin B12 levels was observed in approximately 7% of patients. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 2 presents clinically significant drug interactions with metformin hydrochloride extended-release tablets. Table 2: Clinically Significant Drug Interactions with Metformin hydrochloride extended-release tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride extended-release tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce Metformin hydrochloride extended-release tablets Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [see Clinical Pharmacology ( 12.3 )]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride extended-release tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride extended-release tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochlorid",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42377443",
+          "title": "Association of Neighborhood Socioeconomic Disadvantage and Uptake of Diabetes Prevention Interventions.",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Intensive lifestyle change intervention (LCI) programs and metformin are recommended to prevent the progression of prediabetes to type 2 diabetes. While social drivers of health are known to influence access to preventive health care the impact of neighborhood socioeconomic disadvantage on the uptake of diabetes prevention interventions remains underexplored. Examine the relationship between the social deprivation index and the use of diabetes prevention interventions among people with prediabetes. We analyzed commercial and Medicaid claims data from the Maryland Medical Care Data Base (2017-2019) to identify claims for LCIs and metformin prescriptions and Social Deprivation Index (SDI) 2015 data to measure enrollees' neighborhood socioeconomic disadvantage and examine associations between one or more diabetes prevention interventions. An adjusted multinomial logistic regression model estimating relative risk ratios was used to compare the relationship between SDI quintiles and use of LCI only, LCI and metformin, and metformin only (reference). Among enrollees who used any intervention those living in neighborhoods with SDI scores in the fifth quintile had a significantly higher relative risk (RRR: 1.49; 95% CI: 1.12-1.99) of using LCI only versus metformin only compared with those living in neighborhoods with SDI scores in the first quintile. Enrollees with prediabetes living in neighborhoods with higher levels of socioeconomic disadvantage were more likely to use LCI and more likely to use LCI only compared with metformin only as a diabetes prevention intervention. These findings are relevant for states targeting diabetes prevention in communities of high need.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:42379510",
+          "title": "GLP-1 Receptor Agonists and Age-related Macular Degeneration Risk in Diabetes or Non-diabetic Obesity: A Retrospective Cohort Study.",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "To examine the association between GLP-1RAs and age-related macular degeneration. This is a retrospective cohort study including two cohorts of adults aged \u226550 years free of macular degeneration at baseline, including (i) the diabetes cohort comparing age-related macular degeneration risk between GLP-1RAs and metformin users, and (ii) the obesity cohort, consisting of individuals with a body mass index \u226530 kg/m A total of 147,800 participants with diabetes and 49,518 participants with obesity were included. In the diabetes cohort, GLP-1RAs were associated with lower total age-related macular degeneration (hazard ratio [HR], 0.83; 95% confidence interval [CI], 0.75-0.91) and dry age-related macular degeneration (HR, 0.84; 95% CI, 0.73-0.98) risks compared to metformin. In the obesity cohort, GLP-1RAs were associated with a lower risk of total age-related macular degeneration (HR, 0.77; 95% CI, 0.61-0.98) and dry age-related macular degeneration (HR, 0.65; 95% CI, 0.46-0.94) compared to other weight-loss medications. GLP-1RAs were associated with a lower risk of age-related macular degeneration, particularly dry form, compared with metformin or other weight-loss medications.",
+          "matched_passages": []
+        }
+      ],
+      "question": "What do these sources directly establish about metformin's intended use and main limitations? Separate label indications and safety information from registry background or planned work, and keep ZITUVIMET claims scoped to that combination product."
+    },
+    "generation_context_sha256": "d55ace85dc777501181c51727ed40c3c23129cbe24fa7c126edce77afa6c8dfa"
+  },
+  {
+    "case_id": "m0-safety-frequency",
+    "snapshot_id": "standalone-label",
+    "answer": {
+      "id": "29bc2e14-44f9-496d-bceb-0225dc719fd9",
+      "workspace_id": "m0-standalone-label",
+      "question": "What numerical adverse-reaction information does this label report, and can its postmarketing reports tell us how often liver injury occurs?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "openFDA label:FDA-LABEL-metformin-2": "f7f14c19ab1dc3238977df5d582b1f83d47f0e74b9a8a0bc4470d27c4063444e"
+      },
+      "short_answer": "The label provides percentages from a U.S. clinical trial of 141 patients receiving metformin (up to 2550\u202fmg/day) and 145 receiving placebo. Adverse reactions occurring in >5% of metformin\u2011treated patients and more often than placebo were: diarrhea (53% vs 12% placebo), nausea/vomiting (26% vs 8%), flatulence (12% vs 6%), asthenia (9% vs 6%), indigestion (7% vs 4%), abdominal discomfort (6% vs 5%) and headache (6% vs 5%). Diarrhea led to discontinuation in 6% of metformin patients. In a 29\u2011week trial, about 7% of patients experienced a decrease of previously normal serum vitamin\u202fB12 to subnormal levels. The label also notes other reactions reported in \u22641% to \u226445% of patients (e.g., hypoglycemia, rash) without giving exact percentages. [openFDA label:FDA-LABEL-metformin-2]\n\nThe post\u2011marketing section lists cholestatic, hepatocellular, and mixed hepatocellular liver injury as adverse reactions that have been reported, but it explicitly states that these reports are voluntary and come from a population of uncertain size, so a reliable incidence or frequency cannot be derived from the label. Therefore, the label cannot tell us how often liver injury occurs in real\u2011world use. [openFDA label:FDA-LABEL-metformin-2]",
+      "direct_answer": "The label provides percentages from a U.S. clinical trial of 141 patients receiving metformin (up to 2550\u202fmg/day) and 145 receiving placebo. Adverse reactions occurring in >5% of metformin\u2011treated patients and more often than placebo were: diarrhea (53% vs 12% placebo), nausea/vomiting (26% vs 8%), flatulence (12% vs 6%), asthenia (9% vs 6%), indigestion (7% vs 4%), abdominal discomfort (6% vs 5%) and headache (6% vs 5%). Diarrhea led to discontinuation in 6% of metformin patients. In a 29\u2011week trial, about 7% of patients experienced a decrease of previously normal serum vitamin\u202fB12 to subnormal levels. The label also notes other reactions reported in \u22641% to \u226445% of patients (e.g., hypoglycemia, rash) without giving exact percentages. [openFDA label:FDA-LABEL-metformin-2]\n\nThe post\u2011marketing section lists cholestatic, hepatocellular, and mixed hepatocellular liver injury as adverse reactions that have been reported, but it explicitly states that these reports are voluntary and come from a population of uncertain size, so a reliable incidence or frequency cannot be derived from the label. Therefore, the label cannot tell us how often liver injury occurs in real\u2011world use. [openFDA label:FDA-LABEL-metformin-2]",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 openFDA label:FDA-LABEL-metformin-2 \u00b7 FDA label: Metformin Hydrochloride \u00b7 Stored FDA label sections available in TrialLens."
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The trial percentages come from a single study with 141 metformin\u2011treated participants, limiting generalizability.",
+        "Post\u2011marketing liver\u2011injury reports lack a denominator, so the true incidence cannot be estimated."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The trial percentages come from a single study with 141 metformin\u2011treated participants, limiting generalizability.",
+        "Post\u2011marketing liver\u2011injury reports lack a denominator, so the true incidence cannot be estimated."
+      ],
+      "citations": [
+        "openFDA label:FDA-LABEL-metformin-2"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-standalone-label-chunk-1",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning",
+          "score": 0.4078,
+          "section": "summary 1",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-7",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride",
+          "score": 0.3871,
+          "section": "summary 7",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-4",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased,",
+          "score": 0.3629,
+          "section": "summary 4",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-3",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5%",
+          "score": 0.3615,
+          "section": "summary 3",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-6",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may",
+          "score": 0.3487,
+          "section": "summary 6",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "injury",
+            "liver",
+            "metformin",
+            "postmarketing"
+          ],
+          "relevance_note": "Matched injury, liver, metformin, postmarketing in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-5",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population",
+          "score": 0.3393,
+          "section": "summary 5",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "diabetes",
+            "metformin",
+            "postmarketing",
+            "type"
+          ],
+          "relevance_note": "Matched diabetes, metformin, postmarketing, type in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-8",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead",
+          "score": 0.3087,
+          "section": "summary 8",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        },
+        {
+          "chunk_id": "m0-standalone-label-chunk-10",
+          "source_id": "m0-standalone-label-source-1",
+          "source_type": "fda_label",
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "text": "dolutegravir, and cimetidine) may increase the accumulation of metformin. Consider the benefits and risks of concomitant use ( 7 ) Alcohol can potentiate the effect of metformin on lactate metabolism. Warn patients against excessive alcohol intake ( 7 )",
+          "score": 0.303,
+          "section": "summary 10",
+          "title": "FDA label: Metformin Hydrochloride",
+          "url": "https://open.fda.gov/apis/drug/label/",
+          "external_id": "FDA-LABEL-metformin-2",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "metformin"
+          ],
+          "relevance_note": "Matched metformin in a FDA label passage."
+        }
+      ],
+      "created_at": "2026-11-06T18:40:28.104373+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\n  \"paragraphs\": [\n    \"The label provides percentages from a U.S. clinical trial of 141 patients receiving metformin (up to 2550\u202fmg/day) and 145 receiving placebo. Adverse reactions occurring in >5% of metformin\u2011treated patients and more often than placebo were: diarrhea (53% vs 12% placebo), nausea/vomiting (26% vs 8%), flatulence (12% vs 6%), asthenia (9% vs 6%), indigestion (7% vs 4%), abdominal discomfort (6% vs 5%) and headache (6% vs 5%). Diarrhea led to discontinuation in 6% of metformin patients. In a 29\u2011week trial, about 7% of patients experienced a decrease of previously normal serum vitamin\u202fB12 to subnormal levels. The label also notes other reactions reported in \u22641% to \u226445% of patients (e.g., hypoglycemia, rash) without giving exact percentages. [openFDA label:FDA-LABEL-metformin-2]\",\n    \"The post\u2011marketing section lists cholestatic, hepatocellular, and mixed hepatocellular liver injury as adverse reactions that have been reported, but it explicitly states that these reports are voluntary and come from a population of uncertain size, so a reliable incidence or frequency cannot be derived from the label. Therefore, the label cannot tell us how often liver injury occurs in real\u2011world use. [openFDA label:FDA-LABEL-metformin-2]\"\n  ],\n  \"cited_sources\": [\n    \"openFDA label:FDA-LABEL-metformin-2\"\n  ],\n  \"uncertainty\":  [\n     \"The trial percentages come from a single study with 141 metformin\u2011treated participants, limiting generalizability.\",\n    \"Post\u2011marketing liver\u2011injury reports lack a denominator, so the true incidence cannot be estimated.\"\n  ]\n}",
+        "usage": {
+          "input_tokens": 2410,
+          "output_tokens": 782,
+          "total_tokens": 3192,
+          "neurons": 101.49061584472656
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "medium"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": null,
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "completed",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "openFDA label:FDA-LABEL-metformin-2",
+          "title": "FDA label: Metformin Hydrochloride",
+          "source_type": "fda_label",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "Stored FDA label sections available in TrialLens.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": false,
+          "text": "1 INDICATIONS & USAGE Metformin hydrochloride tablets are indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. Metformin hydrochloride tablets are biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus. ( 1 ) 6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the labeling: Lactic Acidosis [ see Boxed Warning and Warnings and Precautions (5.1) ]. Vitamin B12 Deficiency [ see Warnings and Precautions (5.2) ]. Hypoglycemia [ see Warnings and Precautions (5.3) For metformin hydrochloride tablets, the most common adverse reactions (>5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache. ( 6.1 ) To report SUSPECTED ADVERSE REACTIONS, contact Granules Pharmaceuticals Inc at 1-877-770-3183 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch 6.1 Clinical Studies Experience Because clinical trials are conducted under widely varying conditions, adverse reaction rates observed in the clinical trials of a drug cannot be directly compared to rates in the clinical trials of another drug and may not reflect the rates observed in practice. Metformin Hydrochloride Tablets In a U.S. clinical trial of metformin hydrochloride tablets in patients with type 2 diabetes mellitus, a total of 141 patients received metformin hydrochloride tablets up to 2550 mg per day. Adverse reactions reported in greater than 5% of metformin hydrochloride tablets treated patients and that were more common than in placebo-treated patients, are listed in Table 1. Table 1: Adverse Reactions from a Clinical Trial of Metformin Hydrochloride Tablets Occurring >5% and More Common than Placebo in Patients with Type 2 Diabetes Mellitus Metformin Hydrochloride Tablets (n=141) Placebo (n=145) Diarrhea 53% 12% Nausea/Vomiting 26% 8% Flatulence 12% 6% Asthenia 9% 6% Indigestion 7% 4% Abdominal Discomfort 6% 5% Headache 6% 5% Diarrhea led to discontinuation of metformin hydrochloride tablets in 6% of patients. Additionally, the following adverse reactions were reported in \u22651 % to \u22645% of metformin hydrochloride tablets treated patients and were more commonly reported with metformin hydrochloride tablets than placebo: abnormal stools, hypoglycemia, myalgia, lightheaded, dyspnea, nail disorder, rash, sweating increased, taste disorder, chest discomfort, chills, flu syndrome, flushing, palpitation. In metformin hydrochloride tablets clinical trials of 29-week duration, a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients. Pediatric Patients In clinical trials with metformin hydrochloride tablets in pediatric patients with type 2 diabetes mellitus, the profile of adverse reactions was similar to that observed in adults. 6.2 Postmarketing Experience The following adverse reactions have been identified during post approval use of metformin. Because these reactions are reported voluntarily from a population of uncertain size, it is not always possible to reliably estimate their frequency or establish a causal relationship to drug exposure. Cholestatic, hepatocellular, and mixed hepatocellular liver injury have been reported with postmarketing use of metformin. 7 DRUG INTERACTIONS Table 3 presents clinically significant drug interactions with metformin hydrochloride tablets. Table 3: Clinically Significant Drug Interactions with Metformin Hydrochloride Tablets Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-anion gap, hyperchloremic metabolic acidosis. Concomitant use of these drugs with metformin hydrochloride tablets may increase the risk for lactic acidosis. Intervention: Consider more frequent monitoring of these patients. Examples: Topiramate, zonisamide, acetazolamide or dichlorphenamide. Drugs that Reduce metformin hydrochloride tablet Clearance Clinical Impact: Concomitant use of drugs that interfere with common renal tubular transport systems involved in the renal elimination of metformin (e.g., organic cationic transporter-2 [OCT2] / multidrug and toxin extrusion [MATE] inhibitors) could increase systemic exposure to metformin and may increase the risk for lactic acidosis [ see Clinical Pharmacology (12.3) ]. Intervention: Consider the benefits and risks of concomitant use with metformin hydrochloride tablets. Examples: Ranolazine, vandetanib, dolutegravir, and cimetidine. Alcohol Clinical Impact: Alcohol is known to potentiate the effect of metformin on lactate metabolism. Intervention: Warn patients against excessive alcohol intake while receiving metformin hydrochloride tablets. Insulin Secretagogues or Insulin Clinical Impact: Coadministration of metformin hydrochloride tablets with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia. Intervention: Patients receiving an insulin secretagogue or insulin may require lower doses of the insulin secretagogue or insulin. Drugs Affecting Glycemic Control Clinical Impact: Certain drugs tend to produce hyperglycemia and may lead to loss of glycemic control. Intervention: When such drugs are administered to a patient receiving metformin hydrochloride tablets, observe the patient closely for loss of blood glucose control. When such drugs are withdrawn from a patient receiving metformin hydrochloride tablets, observe the patient closely for hypoglycemia. Examples: Thiazides and other diuretics, corticosteroids, phenothiazines, thyroid products, estrogens, oral contraceptives, phenytoin, nicotinic acid, sympathomimetics, calcium channel blockers, and isoniazid. Carbonic anhydrase inhibitors may increase risk of lactic acidosis. Consider more frequent monitoring ( 7 ) Drugs that reduce metformin clearance (such as ranolazine, vandetanib, dolutegravir, and cimetidine) may increase the accumulation of metformin. Consider the benefits and risks of concomitant use ( 7 ) Alcohol can potentiate the effect of metformin on lactate metabolism. Warn patients against excessive alcohol intake ( 7 )",
+          "matched_passages": []
+        }
+      ],
+      "question": "What numerical adverse-reaction information does this label report, and can its postmarketing reports tell us how often liver injury occurs?"
+    },
+    "generation_context_sha256": "440d57c1f7f82dc1aa7a90422932978e5cbaa72906dcf5e064e43ef5d829e187"
+  },
+  {
+    "case_id": "m0-numeric-comparison",
+    "snapshot_id": "numerical",
+    "answer": {
+      "id": "e2d34f99-c3fb-40f4-a574-3b7944981c65",
+      "workspace_id": "m0-numerical",
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:EVAL-NUMBERS": "e822d8be838d0fac90de663dbdfbe9d3bcbc5281a509fcdafdd535e9358000e5"
+      },
+      "short_answer": "For intervention A evaluation condition, I found 1 retrieved passage with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "direct_answer": "For intervention A evaluation condition, I found 1 retrieved passage with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "Within the selected document, TrialLens found passages relevant to intervention A evaluation condition and the user's question.",
+        "The PubMed record \u201cSynthetic evaluation fixture: randomized trial\u201d provides the quantitative signal 95%, 0.5 percentage points, 0.8 percentage points, 12 weeks, 0.2 to 0.8; the relevant passage says at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) (PubMed, EVAL-NUMBERS). Reference: Synthetic evaluation fixture: randomized trial. (n.d.). PubMed. EVAL-NUMBERS."
+      ],
+      "supporting_evidence": [
+        "Within the selected document, TrialLens found passages relevant to intervention A evaluation condition and the user's question.",
+        "The PubMed record \u201cSynthetic evaluation fixture: randomized trial\u201d provides the quantitative signal 95%, 0.5 percentage points, 0.8 percentage points, 12 weeks, 0.2 to 0.8; the relevant passage says at 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower) (PubMed, EVAL-NUMBERS). Reference: Synthetic evaluation fixture: randomized trial. (n.d.). PubMed. EVAL-NUMBERS."
+      ],
+      "safety_limitations": [
+        "No safety-specific passage was retrieved strongly enough for this workspace/question."
+      ],
+      "uncertainty": [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+        "Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible."
+      ],
+      "limitations": [
+        "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:EVAL-NUMBERS"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-numerical-chunk-1",
+          "source_id": "m0-numerical-source-1",
+          "source_type": "pubmed",
+          "citation": "PubMed:EVAL-NUMBERS",
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "score": 0.7907,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "url": null,
+          "external_id": "EVAL-NUMBERS",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "hba1c",
+            "intervention"
+          ],
+          "relevance_note": "Matched evaluation, hba1c, intervention in a literature source."
+        }
+      ],
+      "created_at": "2026-11-06T18:40:39.164651+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\n  \"paragraphs\": [\n    \"In the synthetic randomized trial of 240 adults with the evaluated condition, participants were assigned to intervention A or to placebo. After 12 weeks, the mean HbA1c level in the intervention\u2011A group was 0.5 percentage points lower than in the placebo group. The reported between\u2011group difference was 0.5\u202f% (95\u202f%\u202fCI\u202f0.2 to\u202f0.8\u202f% lower)\u3010PubMed:EVAL-NUMBERS\u3011. This figure reflects the average difference between the two arms at the end of the 12\u2011week follow\u2011up, not a change from baseline within either group.\",\n    \"The comparison therefore applies to an adult population (n\u202f=\u202f240) receiving either intervention A or placebo, measured at a single post\u2011treatment time point of 12 weeks. The confidence interval indicates statistical uncertainty: the true difference could plausibly be as small as 0.2\u202f% lower or as large as 0.8\u202f% lower in the intervention\u2011A group compared with placebo. No data on mortality or longer\u2011term outcomes were collected.\"\n  ],\n  \"cited_sources\": [\n    \"PubMed:EVAL-NUMBERS\"\n  ],\n  \"uncertainty\":  \n  \n  [\n    \"Short follow\u2011up (12\u202fweeks) limits inference about longer\u2011term effects; the abstract does not provide baseline HbA1c values or absolute levels, so the clinical magnitude of the difference is unclear.\"\n  ]\n}",
+        "usage": {
+          "input_tokens": 1126,
+          "output_tokens": 599,
+          "total_tokens": 1725,
+          "neurons": 76.15887451171875
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "medium"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": null,
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "completed",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "completed",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:EVAL-NUMBERS",
+          "title": "Synthetic evaluation fixture: randomized trial",
+          "source_type": "pubmed",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "In this synthetic evaluation trial, 240 adults were randomized to intervention A or placebo. At 12 weeks, HbA1c was 0.5 percentage points lower with intervention A than placebo (95% CI 0.2 to 0.8 percentage points lower). This was a between-group difference. Mortality was not measured. The trial does not establish effects beyond 12 weeks.",
+          "matched_passages": []
+        }
+      ],
+      "question": "Give the trial's numerical HbA1c result and explain what the comparison means, including population, comparator, timeframe, and uncertainty."
+    },
+    "generation_context_sha256": "b37625bc90e2e1265f566899a39abd1be12a5cb184416649e4f0f68263bdd5b0"
+  },
+  {
+    "case_id": "m0-protocol-versus-results",
+    "snapshot_id": "planned-trial",
+    "answer": {
+      "id": "cb98def6-99a4-494e-9e6c-4686d1465408",
+      "workspace_id": "m0-planned-trial",
+      "question": "What can this registered trial currently tell us about intervention A and mortality? Distinguish the planned comparison and outcome from measured results.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Cloudflare generation was unavailable or returned an incomplete answer. Showing source excerpts; no local model or paid fallback was called.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:EVAL-PROTOCOL": "82b7f68d958db6a1239430418548c3c0afe93a20723881e55c5afe8cc38e00c6"
+      },
+      "short_answer": "I could not identify a usable numerical result for intervention A evaluation condition in the passages selected for this question. Other indexed passages or the original sources may contain relevant statistics; this is a gap in the current excerpt response.",
+      "direct_answer": "I could not identify a usable numerical result for intervention A evaluation condition in the passages selected for this question. Other indexed passages or the original sources may contain relevant statistics; this is a gap in the current excerpt response.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "A relevant numerical outcome and its comparison were not identified by this excerpt synthesis.",
+        "Try filtering to Literature or Trials, or rebuild the workspace with more result-focused sources if you need numerical efficacy estimates."
+      ],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "No safety-specific passage was retrieved strongly enough for this workspace/question."
+      ],
+      "uncertainty": [
+        "The selected excerpts may omit statistics available elsewhere in the workspace or original sources."
+      ],
+      "limitations": [
+        "This response does not establish that numerical evidence is absent from the workspace or full sources.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:EVAL-PROTOCOL"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "m0-planned-trial-chunk-1",
+          "source_id": "m0-planned-trial-source-1",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+          "text": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+          "score": 0.6887,
+          "section": "summary",
+          "title": "Synthetic evaluation fixture: planned trial",
+          "url": null,
+          "external_id": "EVAL-PROTOCOL",
+          "publication_date": null,
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "evaluation",
+            "intervention",
+            "mortality",
+            "outcome",
+            "planned",
+            "results"
+          ],
+          "relevance_note": "Matched evaluation, intervention, mortality, outcome, planned in a trial record."
+        }
+      ],
+      "created_at": "2026-11-06T18:40:48.783503+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": null,
+        "usage": {
+          "input_tokens": 1118,
+          "output_tokens": 4096,
+          "total_tokens": 5214,
+          "neurons": 286.33624267578125
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004",
+        "request_options": {
+          "max_output_tokens": 4096,
+          "reasoning": {
+            "effort": "medium"
+          }
+        },
+        "response_shape": {
+          "result_keys": [
+            "background",
+            "created_at",
+            "ec_transfer_params",
+            "frequency_penalty",
+            "id",
+            "incomplete_details",
+            "input_messages",
+            "instructions",
+            "kv_transfer_params",
+            "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "model",
+            "object",
+            "output",
+            "output_messages",
+            "parallel_tool_calls",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "reasoning",
+            "service_tier",
+            "status",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_logprobs",
+            "top_p",
+            "truncation",
+            "usage",
+            "user"
+          ],
+          "parse_error": "Incomplete or ambiguous Responses output",
+          "output_states": [
+            {
+              "type": "reasoning",
+              "role": null,
+              "status": null,
+              "phase": null,
+              "content_types": [
+                "other"
+              ]
+            },
+            {
+              "type": "message",
+              "role": "assistant",
+              "status": "incomplete",
+              "phase": null,
+              "content_types": [
+                "output_text"
+              ]
+            }
+          ],
+          "finish_reason": null,
+          "status": "incomplete",
+          "choice_finish_reasons": [],
+          "output_types": [
+            "reasoning",
+            "message"
+          ]
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "evaluation condition",
+        "intervention": "intervention A"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:EVAL-PROTOCOL",
+          "title": "Synthetic evaluation fixture: planned trial",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": null,
+          "phase": null,
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "ClinicalTrials.gov stored summary/description content; posted structured results may be incomplete unless indexed.",
+          "indexed_section_names": [],
+          "content_truncated": false,
+          "demo": true,
+          "text": "This synthetic trial protocol plans to enroll 200 adults to compare intervention A with placebo. The primary outcome will be symptom score at 16 weeks. Recruitment has not begun and no results have been posted. Mortality is not a listed outcome.",
+          "matched_passages": []
+        }
+      ],
+      "question": "What can this registered trial currently tell us about intervention A and mortality? Distinguish the planned comparison and outcome from measured results."
+    },
+    "generation_context_sha256": "4208da75ca73e5f8bb03bdfd84d3e6022cf4051655167b575853265afbe12004"
+  }
+]

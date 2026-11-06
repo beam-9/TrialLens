@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/openai/gpt-oss-120b",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "581444a04532eed56a6f2fd3ba1d88b2ec2290e4e209ef2c9085c224ee15e5c3",
+  "runner_sha256": "8faf50ece6a79a2033feb80a111bd2ffda04f973f972bea257accac6daf28546",
+  "question_inventory_sha256": "35c2bb3a70f8106061808dbca8396833a61e61bb40005fef5a3ec7cbe754b25d",
+  "candidate_prompt_sha256": "3c14ca8cd18809da11e89aa4a2e5aadf8f949b43c29132d402b93a4c41846ce5",
+  "code_sha256": "01a44046c33562dade55458abc2a2768c56d6bc30982535aea278cb435a948fa",
+  "model_rates": {
+    "input_micro_neurons_per_token": 31818,
+    "output_micro_neurons_per_token": 68182,
+    "max_output_tokens": 4096
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "fresh-trial-versus-review",
+      "snapshot_id": "relevance-probe",
+      "client_wall_ms": 21219.120542,
+      "trace": {
+        "trace_id": "f127168c-ea66-4436-ad60-8016e914279d",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 4,
+        "retrieved_passage_count": 8,
+        "context_char_count": 5536,
+        "phases_ms": {
+          "storage_read": 1.03725,
+          "retrieval": 5.710375,
+          "extractive_synthesis": 8.588125,
+          "context_build": 0.319792,
+          "draft": 8468.148208,
+          "revision": 12724.223958,
+          "validation": 0.0,
+          "store": 2.995417
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 12847,
+            "message_count": 2,
+            "serialized_messages_char_count": 13197,
+            "wall_ms": 8468.148208,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2691,
+            "eval_count": 1233,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 18924,
+            "message_count": 4,
+            "serialized_messages_char_count": 19758,
+            "wall_ms": 12724.223958,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 4073,
+            "eval_count": 1491,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/openai/gpt-oss-120b",
+        "http_status": 200,
+        "total_wall_ms": 21216.843166,
+        "serialization_ms": 0.749541
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7368.527403,
+    "remaining_neurons": 1631.472597,
+    "pending_requests": 0,
+    "requests": 44
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": true,
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 2,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": "f076a82e77ff99e8898624a84122f050e1359c25e56e099cde3fd7a6335be73b",
+    "strategy_experiment": null,
+    "model_experiment": "@cf/openai/gpt-oss-120b",
+    "reasoning_effort": "medium",
+    "wrapper_sha256": "27a45ade0f4edb497f59279dbf953864c51aaade9f8c22f356ecde30f78dcf46",
+    "feedback_sha256": "0f93884aed3868575e28cff926a50d5a5a62b2728b92e6d5bfb042ad77490fc2",
+    "inventory_path": "evaluation/cohorts/pubmed-relevance-2026-10-25/inventory.json"
+  }
+}

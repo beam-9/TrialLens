@@ -15,7 +15,7 @@ from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope, is_outcome_packet
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
-from triallens.answer_checks import confidence_interval_issue, requested_comparison_order_issue
+from triallens.answer_checks import confidence_interval_issue, requested_comparison_order_issue, unreported_percentage_issue
 from triallens.trial_design import sanitize_design_fields
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
@@ -562,6 +562,8 @@ class ConversationService:
                 from triallens.label_checks import pediatric_indication_issue
                 if pediatric_indication_issue(direct, records):
                     raise ValueError("Pediatric indication lost source age boundary")
+                if unreported_percentage_issue(direct, records):
+                    raise ValueError("Unreported percentage in final answer")
                 if requested_comparison_order_issue(question, direct, records):
                     raise ValueError("Requested numerical comparison order changed")
                 # Catch excerpt-dumping; short technical phrases and numerical results are allowed.

@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import re
 
+from triallens.text import normalize_numeric_signs
+
 
 _CI_CONTEXT = re.compile(r"\bconfidence intervals?\b|\b\d{1,3}\s*%\s*CI\b|\bCI\b", re.I)
 _TRUE_TARGET = (
@@ -100,7 +102,8 @@ def confidence_interval_issue(text: str) -> str | None:
     return None
 
 
-_PERCENT_VALUE = re.compile(r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%")
+_PERCENT_UNIT = r"(?:%|\bpercent\b(?!\s+points?\b)|\bper\s+cent\b)"
+_PERCENT_VALUE = re.compile(rf"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*{_PERCENT_UNIT}", re.I)
 _PERCENT_PAIR = re.compile(
     r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%\s*(?:vs\.?|versus)\s*"
     r"([+−-]?\d+(?:\.\d+)?)\s*%", re.I
@@ -122,9 +125,9 @@ def requested_comparison_order_issue(question: str, answer: str, records: list[d
 
     for record in records:
         texts = [record["text"], *record["matched_passages"]]
-        pairs = {(value(match[1]), value(match[2])) for text in texts
+        pairs = {(value(match[1]), value(match[2])) for text in map(normalize_numeric_signs, texts)
                  for match in _PERCENT_PAIR.finditer(text)}
-        for paragraph in re.split(r"\n\s*\n", answer):
+        for paragraph in re.split(r"\n\s*\n", normalize_numeric_signs(answer)):
             if f"[{record['citation']}]" not in paragraph:
                 continue
             numbers = [value(match[1]) for match in _PERCENT_VALUE.finditer(paragraph)]
@@ -132,4 +135,37 @@ def requested_comparison_order_issue(question: str, answer: str, records: list[d
                 if first != second and numbers.count(first) == numbers.count(second) == 1:
                     if numbers.index(first) > numbers.index(second):
                         return "Requested source comparison is presented in reversed numerical order"
+    return None
+
+
+_PERCENT_RANGE = re.compile(
+    r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*(?:to|[–—-])\s*"
+    rf"([+−-]?\d+(?:\.\d+)?)\s*{_PERCENT_UNIT}", re.I
+)
+
+
+def unreported_percentage_issue(answer: str, records: list[dict]) -> str | None:
+    """Reject percentage values absent from all of a paragraph's cited sources.
+
+    This checks value presence. It does not establish outcome/group attribution.
+    Sources without recognized percentage figures are outside this check's scope.
+    """
+    from decimal import Decimal
+
+    def values(text):
+        normalized = normalize_numeric_signs(text)
+        result = {Decimal(match[1].replace('−', '-')) for match in _PERCENT_VALUE.finditer(normalized)}
+        for match in _PERCENT_RANGE.finditer(normalized):
+            result.update(Decimal(raw.replace('−', '-')) for raw in match.groups())
+        return result
+
+    source_values = {record['citation']: values(' '.join([record['text'], *record['matched_passages']]))
+                     for record in records}
+    for paragraph in re.split(r'\n\s*\n', answer):
+        cited = set(re.findall(r'\[([^\]]+)\]', paragraph))
+        if not cited or not all(source_values.get(citation) for citation in cited):
+            continue
+        reported = set().union(*(source_values[citation] for citation in cited))
+        if values(paragraph) - reported:
+            return 'An attributed percentage is absent from its cited source context'
     return None

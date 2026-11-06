@@ -6,6 +6,7 @@ from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from triallens.conversation import normalize_citations
+from triallens.text import normalize_numeric_signs
 
 
 _NCT = re.compile(r"\bNCT\d{8}\b", re.IGNORECASE)
@@ -24,13 +25,43 @@ def _without_ids_and_citations(text: str) -> str:
     return _CITATION.sub(" ", text)
 
 
+_WORD_VALUES = dict(zip(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety".split(),
+    [*range(20), *range(20, 100, 10)],
+))
+_UNIT_WORD = r"(?:one|two|three|four|five|six|seven|eight|nine)"
+_SMALL_WORD = r"(?:ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)"
+_TENS_WORD = r"(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)"
+_JOIN_WORD = r"[\s‐‑-]+"
+_UNDER_HUNDRED = rf"(?:{_TENS_WORD}(?:{_JOIN_WORD}{_UNIT_WORD})?|{_SMALL_WORD}|{_UNIT_WORD})"
+_WRITTEN_HUNDREDS = re.compile(
+    rf"\b(?:(minus|negative)\s+)?({_UNIT_WORD}\s+hundred"
+    rf"(?:{_JOIN_WORD}(?:and\s+)?{_UNDER_HUNDRED})?)\b",
+    re.I,
+)
+
+
+def written_hundreds(text: str) -> set[str]:
+    """Recognize complete spelled-out hundreds without treating words as units."""
+    result = set()
+    for match in _WRITTEN_HUNDREDS.finditer(text):
+        # Do not take a partial value out of a larger number or decimal.
+        if re.match(r"[\s‐‑-]+(?:thousand|million|billion|point)\b", text[match.end():], re.I):
+            continue
+        words = re.findall(r"[a-z]+", match[2].lower())
+        total = _WORD_VALUES[words[0]] * 100
+        total += sum(_WORD_VALUES[word] for word in words[2:] if word != "and")
+        result.add(str(-total if match[1] else total))
+    return result
+
+
 def numeric_values(text: str) -> set[str]:
     """Return canonical Decimal strings for plainly written numeric values."""
-    text = _without_ids_and_citations(str(text))
+    text = normalize_numeric_signs(_without_ids_and_citations(str(text)))
     # A dash between two digits denotes a range, even when rendered with an
     # ASCII hyphen. A leading dash remains a possible negative sign.
-    text = re.sub(r"(?<=\d)[\-–—−](?=\d)", " ", text)
-    values: set[str] = set()
+    text = re.sub(r"(?<=\d)[\-‐‑–—−](?=\d)", " ", text)
+    values: set[str] = written_hundreds(text)
     for match in _NUMBER.finditer(text):
         token = match.group(1)
         if not token or token in {"+", "-", "−", ".", "+.", "-."}:

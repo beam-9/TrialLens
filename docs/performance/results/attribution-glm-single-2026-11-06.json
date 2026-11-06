@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "single_pass_evaluation",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "581444a04532eed56a6f2fd3ba1d88b2ec2290e4e209ef2c9085c224ee15e5c3",
+  "runner_sha256": "8faf50ece6a79a2033feb80a111bd2ffda04f973f972bea257accac6daf28546",
+  "question_inventory_sha256": "35c2bb3a70f8106061808dbca8396833a61e61bb40005fef5a3ec7cbe754b25d",
+  "candidate_prompt_sha256": "3c14ca8cd18809da11e89aa4a2e5aadf8f949b43c29132d402b93a4c41846ce5",
+  "code_sha256": "2df8df0c183ca5e8dcfc88da4f0ad2f3ca20ad5fbfd36b44743f8617769dc0eb",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft is hosted generation; revision is an in-memory replay, not a provider call",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "fresh-trial-versus-review",
+      "snapshot_id": "relevance-probe",
+      "client_wall_ms": 28395.597458999997,
+      "trace": {
+        "trace_id": "7c5a4c20-8e0a-4600-83e5-22e24ba65b94",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 4,
+        "retrieved_passage_count": 8,
+        "context_char_count": 5536,
+        "phases_ms": {
+          "storage_read": 1.005041,
+          "retrieval": 6.294292,
+          "extractive_synthesis": 8.2545,
+          "context_build": 0.399959,
+          "draft": 28367.304792,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 3.369167
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 12847,
+            "message_count": 2,
+            "serialized_messages_char_count": 13197,
+            "wall_ms": 28367.304792,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 28392.498583,
+        "serialization_ms": 0.583041
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8567.708879,
+    "remaining_neurons": 432.291121,
+    "pending_requests": 2,
+    "requests": 49
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "single_pass": true,
+    "single_pass_sha256": "f5a968377adf6402d11a0dafcd6af416c034d47f727bf78d52e16859b359c09c",
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 1,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": "@cf/zai-org/glm-4.7-flash",
+    "reasoning_effort": null,
+    "wrapper_sha256": "1a06f51957ac24e2e6c2491399697af2dc16a134de5fc8fd2aefa6ee4126cc3f",
+    "feedback_sha256": "0f93884aed3868575e28cff926a50d5a5a62b2728b92e6d5bfb042ad77490fc2",
+    "inventory_path": "evaluation/cohorts/pubmed-relevance-2026-10-25/inventory.json"
+  }
+}

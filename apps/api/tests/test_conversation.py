@@ -441,3 +441,13 @@ def test_requested_numeric_pair_order_checked_at_final_validation(monkeypatch, c
     assert (answer.generation_mode == 'conversational') == (not reverse)
     if reverse:
         assert 'failed validation' in answer.generation_note
+
+
+@pytest.mark.parametrize('percentage', [5, 45])
+def test_unreported_percentage_rejected_through_normal_generation(monkeypatch, context, percentage):
+    workspace, source, fallback = context
+    source = source.model_copy(update={'abstract': 'Reactions were reported in 1–5% of participants.'})
+    mock_generation(monkeypatch, {'paragraphs': [f'The reaction was reported in {percentage}% [PubMed:123].'],
+                                'cited_sources': ['PubMed:123'], 'uncertainty': []})
+    answer = ConversationService().generate(workspace, 'What percentage was reported?', [], [source], fallback)
+    assert (answer.generation_mode == 'conversational') == (percentage == 5)

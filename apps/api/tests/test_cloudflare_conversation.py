@@ -114,3 +114,55 @@ def test_health_and_usage_never_expose_cloudflare_credentials(context):
     assert health["model"] == cloudflare.MODEL
     assert "test-token-not-a-secret" not in json.dumps([health, usage])
     assert "a" * 32 not in json.dumps([health, usage])
+
+
+def test_single_pass_experiment_calls_provider_once_per_question_and_restores(monkeypatch, context):
+    from evaluation.single_pass import single_pass_experiment
+    from triallens import conversation
+
+    calls = provider(monkeypatch)
+    message_counts = []
+    original_post = conversation.httpx.post
+
+    def capture_message_count(url, **kwargs):
+        message_counts.append(len(kwargs['json']['messages']))
+        return original_post(url, **kwargs)
+
+    monkeypatch.setattr(conversation.httpx, 'post', capture_message_count)
+    original = conversation.cloudflare.completion
+    with single_pass_experiment(True):
+        first = generate(context)
+        second = generate(context)
+        assert first.generation_mode == second.generation_mode == 'conversational'
+    assert len(calls) == 2
+    assert message_counts == [2, 2]
+    assert conversation.cloudflare.completion is original
+
+
+def test_single_pass_preserves_final_citation_rejection_without_retry(monkeypatch, context):
+    from evaluation.single_pass import single_pass_experiment
+
+    calls = provider(monkeypatch, bad_citation=True)
+    with single_pass_experiment(True):
+        answer = generate(context)
+    assert len(calls) == 1
+    assert answer.generation_mode != 'conversational'
+    assert 'failed validation' in answer.generation_note
+    assert UsageLedger().status()['generated_answers'] == 0
+
+
+def test_single_pass_replay_rejects_changed_source_context(monkeypatch):
+    from evaluation.single_pass import single_pass_experiment
+    from triallens import conversation
+
+    calls = []
+    monkeypatch.setattr(conversation.cloudflare, 'completion', lambda messages, schema: calls.append(messages) or 'draft')
+    original = conversation.cloudflare.completion
+    first = [{'role': 'system', 'content': 'instructions'}, {'role': 'user', 'content': 'first evidence'}]
+    with pytest.raises(ValueError, match='context differs'), single_pass_experiment(True):
+        conversation.cloudflare.completion(first, {})
+        changed = [first[0], {'role': 'user', 'content': 'different evidence'},
+                   {'role': 'assistant', 'content': 'draft'}, {'role': 'user', 'content': 'revise'}]
+        conversation.cloudflare.completion(changed, {})
+    assert len(calls) == 1
+    assert conversation.cloudflare.completion is original
