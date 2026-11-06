@@ -130,7 +130,8 @@ def requested_comparison_order_issue(question: str, answer: str, records: list[d
         for paragraph in re.split(r"\n\s*\n", normalize_numeric_signs(answer)):
             if f"[{record['citation']}]" not in paragraph:
                 continue
-            numbers = [value(match[1]) for match in _PERCENT_VALUE.finditer(paragraph)]
+            prose = re.sub(r"\[[^\]]+\]", "", paragraph)
+            numbers = [value(match[1]) for match in _PERCENT_VALUE.finditer(prose)]
             for first, second in pairs:
                 if first != second and numbers.count(first) == numbers.count(second) == 1:
                     if numbers.index(first) > numbers.index(second):
@@ -144,11 +145,13 @@ _PERCENT_RANGE = re.compile(
 )
 
 
-def unreported_percentage_issue(answer: str, records: list[dict]) -> str | None:
+def unreported_percentage_issue(answer: str, records: list[dict], *, require_citations: bool = False) -> str | None:
     """Reject percentage values absent from all of a paragraph's cited sources.
 
     This checks value presence. It does not establish outcome/group attribution.
     Sources without recognized percentage figures are outside this check's scope.
+    Callers can require local citation markers for every percentage statement,
+    including uncertainty text that otherwise has no paragraph citation rule.
     """
     from decimal import Decimal
 
@@ -163,9 +166,12 @@ def unreported_percentage_issue(answer: str, records: list[dict]) -> str | None:
                      for record in records}
     for paragraph in re.split(r'\n\s*\n', answer):
         cited = set(re.findall(r'\[([^\]]+)\]', paragraph))
+        prose_values = values(re.sub(r'\[[^\]]+\]', '', paragraph))
+        if require_citations and prose_values and not cited:
+            return 'A percentage statement lacks its own source citation'
         if not cited or not all(source_values.get(citation) for citation in cited):
             continue
         reported = set().union(*(source_values[citation] for citation in cited))
-        if values(paragraph) - reported:
+        if prose_values - reported:
             return 'An attributed percentage is absent from its cited source context'
     return None

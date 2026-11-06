@@ -62,6 +62,8 @@ Return JSON with paragraphs (plain text including citations), cited_sources (exa
 citation strings used), and uncertainty (0–3 concise evidence-specific limitations).
 The cited_sources list must contain exactly the citations appearing in paragraphs,
 with no extra citations. Keep uncertainty to limitations, not additional clinical claims.
+If an uncertainty item includes a percentage or confidence level, cite that item
+with its supporting source already cited in the answer; do not leave figures unattributed.
 Do not put markdown headings, URLs, or bullet formatting into paragraphs.
 """
 
@@ -557,17 +559,18 @@ class ConversationService:
                     generated.uncertainty = []
                 # Reject a known high-risk statistical misinterpretation even
                 # when its citation and JSON shape are otherwise valid.
-                if confidence_interval_issue(direct + " " + " ".join(generated.uncertainty)):
+                final_text = "\n\n".join([direct, *generated.uncertainty])
+                if confidence_interval_issue(final_text):
                     raise ValueError("Invalid confidence-interval interpretation")
                 from triallens.label_checks import pediatric_indication_issue
                 if pediatric_indication_issue(direct, records):
                     raise ValueError("Pediatric indication lost source age boundary")
-                if unreported_percentage_issue(direct, records):
+                if unreported_percentage_issue(final_text, records, require_citations=True):
                     raise ValueError("Unreported percentage in final answer")
-                if requested_comparison_order_issue(question, direct, records):
+                if requested_comparison_order_issue(question, final_text, records):
                     raise ValueError("Requested numerical comparison order changed")
                 # Catch excerpt-dumping; short technical phrases and numerical results are allowed.
-                normalized = re.sub(r"\W+", " ", re.sub(r"\[[^\]]+\]", "", direct).lower()).split()
+                normalized = re.sub(r"\W+", " ", re.sub(r"\[[^\]]+\]", "", final_text).lower()).split()
                 source_text = [re.sub(r"\W+", " ", text.lower()) for r in records
                                for text in [r["text"], *r["matched_passages"]]]
                 if any(" ".join(normalized[i:i + 28]) in text

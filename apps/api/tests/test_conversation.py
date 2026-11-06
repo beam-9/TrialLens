@@ -451,3 +451,47 @@ def test_unreported_percentage_rejected_through_normal_generation(monkeypatch, c
                                 'cited_sources': ['PubMed:123'], 'uncertainty': []})
     answer = ConversationService().generate(workspace, 'What percentage was reported?', [], [source], fallback)
     assert (answer.generation_mode == 'conversational') == (percentage == 5)
+
+
+@pytest.mark.parametrize('limitation,accepted', [
+    ('The 5% observation does not establish causality [PubMed:123].', True),
+    ('The 45% observation does not establish causality [PubMed:123].', False),
+    ('The 45% observation does not establish causality.', False),
+    ('The 5% observation does not establish causality.', False),
+    ('These observations do not establish causality.', True),
+])
+def test_percentage_limitations_need_own_attribution_and_reported_values(monkeypatch, context, limitation, accepted):
+    workspace, source, fallback = context
+    source = source.model_copy(update={'abstract': 'Reactions were reported in 5% of participants. These observations do not establish causality.'})
+    mock_generation(monkeypatch, {'paragraphs': ['The reported reaction frequency was 5% [PubMed:123].'],
+                                'cited_sources': ['PubMed:123'], 'uncertainty': [limitation]})
+    answer = ConversationService().generate(workspace, 'What reaction frequency was reported?', [], [source], fallback)
+    assert (answer.generation_mode == 'conversational') == accepted
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+def test_reversed_discrepancy_cannot_hide_in_uncertainty(monkeypatch, context, reverse):
+    workspace, source, fallback = context
+    source = source.model_copy(update={'abstract': 'The reported comparison was 0.35% vs. -0.58%, respectively.'})
+    mock_generation(monkeypatch, {
+        'paragraphs': ['The numerical and narrative statements need careful interpretation [PubMed:123].'],
+        'cited_sources': ['PubMed:123'],
+        'uncertainty': [('The reported pair was -0.58% versus 0.35%' if reverse else
+                         'The reported pair was 0.35% versus -0.58%') + ' [PubMed:123].'],
+    })
+    answer = ConversationService().generate(workspace, 'Explain the discrepancy in the results.', [], [source], fallback)
+    assert (answer.generation_mode == 'conversational') == (not reverse)
+
+
+def test_long_copied_passage_cannot_hide_in_uncertainty(monkeypatch, context):
+    workspace, source, fallback = context
+    passage = ('This is an engineering fixture describing a limitation in enough distinct words to demonstrate '
+               'that moving a long copied source sentence into an uncertainty field must not bypass the normal '
+               'answer checks for source passage copying.')
+    source = source.model_copy(update={'abstract': passage})
+    mock_generation(monkeypatch, {
+        'paragraphs': ['The supplied material describes an engineering test limitation [PubMed:123].'],
+        'cited_sources': ['PubMed:123'], 'uncertainty': [passage + ' [PubMed:123].'],
+    })
+    answer = ConversationService().generate(workspace, 'Explain the limitation.', [], [source], fallback)
+    assert answer.generation_mode == 'extractive'

@@ -129,3 +129,65 @@ other revision strategies. Plans and mappings are not semantic proof; a model
 can still omit a question part or select insufficient or irrelevant support.
 No hosted quality or latency improvement is claimed, and production stays on
 the current two-pass writer. See the [review and qualification plan](../../../../docs/chat-quality-broader-review-2026-11-06.md).
+
+## 6 November: whole-answer validation and low-cost planner canary
+
+Production now applies percentage-presence, explicit discrepancy-order and
+long-passage-copy checks to uncertainty items as well as direct answer text.
+An uncertainty item containing a recognized percentage or confidence level must
+have its own citation, already used in the answer. Generic prose limitations do
+not need an added marker. The percentage checker still abstains when a cited
+source has no recognized percentage figures; presence does not verify group,
+unit, outcome or meaning. New service regressions reproduced five previously
+accepted failures before the fix: an invented cited percentage, two unattributed
+percentage limitations, a reversed comparison and a long copied passage in
+uncertainty. Valid cited figures, correct pair order and generic limitations
+remain accepted.
+
+The [whole-answer replay](results/whole-answer-wording-replay-2026-11-06.json)
+uses the exact hash-checked inputs from the preceding replay. Across the same
+22 captured outputs it flags the same three known failures; it adds no rejection
+in that set. This is an offline mechanical check, not a new generation or
+semantic qualification. Four older experimental outputs with uncited 95%
+confidence-level statements would fail the stricter attribution rule; those
+figures were not found to be invented by this observation.
+
+A small hosted `coverage-plan` diagnostic used the already-allowlisted Granite
+micro model on `m0-combined-benefits-risks`, sharing the unchanged evaluation
+ledger. It took 79.81 seconds and 30.205662 neurons across two provider calls.
+The planner marked all three selected parts as gaps despite available label
+indications and warnings. The writer then invented a type-1 approval claim,
+misattributed a combination-label pancreatitis limitation to metformin alone,
+and failed the exact inline citation format. Final validation rejected the
+response and returned the labeled excerpt fallback. Formal plan/mapping checks
+did not prevent those semantic failures. This profile is not promoted; a
+smaller model's low quota use does not establish adequate answering quality.
+See [captured inputs and outputs](results/coverage-plan-granite-canary-2026-11-06.json)
+and [timing/accounting](../../../../docs/performance/results/coverage-plan-granite-canary-2026-11-06.json).
+
+After the Granite canary, the evaluation ledger recorded 8,597.914541 neurons used/reserved,
+402.085459 remaining and51 requests. The same two conservative failed-request
+reservations remain. Rates were rechecked against the
+[official pricing table](https://developers.cloudflare.com/workers-ai/platform/pricing/).
+No paid or local inference was used. Current-writer versus coverage-plan
+qualification with a competent writer remains pending the normal daily reset.
+
+Independent review also found a citation-identifier parsing edge case. The
+percentage and pair-order checks now strip bracketed markers before scanning
+prose numbers, avoiding both false percentage flags and duplicate-value masking
+from an identifier. Source lookup still uses the original markers. The
+[final replay verification](results/whole-answer-wording-recheck-2026-11-06.json)
+matches all 22 prior output results and pins the final checker hashes. The full
+API suite passes 608 tests with two existing deprecation warnings.
+
+A second bounded diagnostic used the existing GLM allowlist with the same
+question and planner. It returned a plan in 25.33 seconds using 91.3164 neurons,
+but duplicated a question part with contradictory supported/gap statuses and
+did not plan the requested registry-role distinction. The exact duplicate-part
+check rejected it before a writing call; no final GLM answer was generated or
+qualified. Silent deduplication would not establish that all requested topics
+were covered. See [captured plan/context](results/coverage-plan-glm-canary-2026-11-06.json)
+and [timing/accounting](../../../../docs/performance/results/coverage-plan-glm-canary-2026-11-06.json).
+The final ledger records 8,689.230941 neurons used/reserved, 310.769059 remaining,
+52 requests and the same two retained reservations. Neither diagnostic justifies
+a production switch. Larger-writer qualification remains open.

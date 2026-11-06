@@ -125,3 +125,56 @@ Validation: `apps/api/.venv/bin/python -m pytest apps/api/tests -q` passed
 598 tests, with two existing websockets deprecation warnings. `git diff --check`
 also passed. Localhost integration tests required sandbox escalation; all model
 responses in those tests were mocked and used temporary ledgers/stores.
+
+## Follow-on: displayed uncertainty and a bounded hosted diagnostic
+
+Regression tests demonstrated that moving an invented cited percentage, an
+unattributed percentage, a reversed numerical pair, or a long copied passage
+into `uncertainty` could bypass the corresponding direct-answer checks.
+Production now checks those fields together. Percentage statements require
+their own citation, including confidence levels in uncertainty. Correct cited
+values and ordinary prose limitations remain accepted. The checks retain their
+documented numeric-presence and pattern-matching limits; they do not verify
+every clinical claim or establish semantic correctness. Four older experimental
+outputs with uncited confidence levels would fail the new attribution rule,
+even though this review did not find those levels invented.
+
+Replaying the whole-answer wording checks across the preceding 22 hash-checked
+captures flags the same three known failures and no additional output. The new
+replay is saved separately; the earlier observations are not overwritten.
+
+The low-cost Granite micro model was also tested with the new planner on the
+combined benefits/safety question. Its two provider calls used 30.205662 neurons
+and took 79.81 seconds. The plan falsely marked available indication/safety
+information as gaps; the writer added unsupported product claims and invalid
+inline citations. The normal final validator rejected the answer. No candidate
+was promoted. Both raw outputs and the exact source context are retained in
+`coverage-plan-granite-canary-2026-11-06.json` under the answer-results directory,
+with matching timing/accounting under `docs/performance/results/`.
+
+After the Granite canary, the shared ledger recorded 8,597.914541 neurons used/reserved,
+402.085459 remaining and51 requests, with the same two retained reservations.
+The [official Cloudflare pricing table](https://developers.cloudflare.com/workers-ai/platform/pricing/)
+confirmed the existing Granite rates before the run. No paid inference,
+local GPU, quota increase or production-store mutation was used. A competent
+writer's controlled comparison remains outstanding after the ordinary reset.
+
+An independent patch review also found that percentages embedded in citation
+identifiers could be read as prose values or mask the pair-order check. Both
+checks now remove citation markers before scanning the answer's numbers, while
+retaining markers for source lookup. Regression controls cover false rejection
+and a reversed-pair bypass. The final checker replay matches all 22 prior
+per-output outcomes; `whole-answer-wording-recheck-2026-11-06.json` pins the
+updated checker hashes to that replay. The full API suite passes 608 tests,
+with the same two existing deprecation warnings.
+
+The remaining allowance also permitted one GLM planner diagnostic on the same
+question. The plan took 25.33 seconds and 91.3164 neurons. It duplicated a
+question part as both supported and gap and omitted the requested registry-role
+distinction. The structural duplicate check rejected it before writing, so this
+run supplies no final GLM answer-quality evidence. Its captured plan and source
+context are in `coverage-plan-glm-canary-2026-11-06.json` with matching timing
+under `docs/performance/results/`. No silent deduplication or extra repair call
+was added. The final ledger records 8,689.230941 neurons used/reserved,
+310.769059 remaining, 52 requests and the same two retained reservations. Both
+diagnostics were isolated from production stores. Neither profile is promoted.

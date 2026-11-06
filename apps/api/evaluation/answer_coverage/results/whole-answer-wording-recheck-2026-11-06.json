@@ -1,0 +1,10 @@
+{
+  "method": "Post-review replay after stripping citation markers before numeric scanning. Exact source files verified by prior input hashes; every per-output check outcome compared with the prior whole-answer replay. No model calls. This does not assess scientific entailment or completeness.",
+  "prior_replay": "apps/api/evaluation/answer_coverage/results/whole-answer-wording-replay-2026-11-06.json",
+  "prior_replay_sha256": "67008c239d00326c98df2b5ff5b8692b66777b2327fe41c001096becabfe6a22",
+  "validator_sha256": "861ec7d9dc3b8e9fc1d7f9ee64c3e7bba5f9ad68f56aca0b64e54704a6a038d1",
+  "conversation_sha256": "e641866e728128474552287b0e4b259a188c7fce9d37d338adf875c1b78756d4",
+  "outputs_checked": 22,
+  "outputs_flagged": 3,
+  "all_per_output_results_match_prior": true
+}

@@ -159,3 +159,20 @@ def test_percentage_guard_handles_written_units_and_multiple_attributions():
     assert unreported_percentage_issue('Reported 45 percent [PubMed:1].', records)
     assert unreported_percentage_issue('Reported 99% [PubMed:1] [PubMed:2].', records)
     assert unreported_percentage_issue('Reported 5 percent and 20% [PubMed:1] [PubMed:2].', records) is None
+
+
+def test_percentage_text_in_citation_ids_is_not_an_answer_value():
+    from triallens.answer_checks import unreported_percentage_issue
+    records = [{'citation': 'PubMed:5%', 'text': 'Reported 10%.', 'matched_passages': []}]
+    assert unreported_percentage_issue('The estimate remains uncertain [PubMed:5%].', records,
+                                       require_citations=True) is None
+    assert unreported_percentage_issue('Reported 5% [PubMed:5%].', records, require_citations=True)
+
+
+def test_percentage_citation_id_cannot_hide_a_reversed_pair():
+    from triallens.answer_checks import requested_comparison_order_issue
+    records = [{'citation': 'PubMed:0.35%', 'text': '0.35% vs. -0.58%', 'matched_passages': []}]
+    assert requested_comparison_order_issue('Explain the discrepancy',
+        '-0.58% versus 0.35% [PubMed:0.35%].', records)
+    assert requested_comparison_order_issue('Explain the discrepancy',
+        '0.35% versus -0.58% [PubMed:0.35%].', records) is None

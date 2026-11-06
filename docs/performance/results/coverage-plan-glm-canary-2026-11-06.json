@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": "coverage-plan",
+  "strategy_sha256": "c21214167e70793306bae1166a6a5a4969ec1b6584a56e1e08ffda8fc1e89dd5",
+  "coverage_plan_sha256": "e9118f6c03e73fbd6fb1e9beb5b7d8508061a7820d7689419e8190050f7357d3",
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": "ff090e4379ece5c49d335ca25d0f74a77c9674c61472445686e61df366ad428a",
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "45fcf63d53e001160e001c22501804cb12cf7acca69122dd8a88a94a6697a0aa",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": null,
+  "code_sha256": "a7eb1484f9b65ea45c1755910b520b02b60da1b0c59c992cfc0381ebfb51a97e",
+  "model_rates": {
+    "input_micro_neurons_per_token": 5500,
+    "output_micro_neurons_per_token": 36400,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision timers represent planning/writing",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 25328.555125000003,
+      "trace": {
+        "trace_id": "e769afcf-8a9c-4460-a474-b40757268059",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 5.577959,
+          "retrieval": 9.987959,
+          "extractive_synthesis": 23.663708,
+          "context_build": 0.604625,
+          "draft": 25269.735958,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 10.833875
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 30099,
+            "message_count": 2,
+            "serialized_messages_char_count": 30593,
+            "wall_ms": 25269.735958,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6272,
+            "eval_count": 1561,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/zai-org/glm-4.7-flash",
+        "http_status": 200,
+        "total_wall_ms": 25326.077167,
+        "serialization_ms": 0.618167
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8689.230941,
+    "remaining_neurons": 310.769059,
+    "pending_requests": 2,
+    "requests": 52
+  },
+  "stop_reason": "validation_rejection",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "single_pass": false,
+    "single_pass_sha256": null,
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 2,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": "coverage-plan",
+    "model_experiment": "@cf/zai-org/glm-4.7-flash",
+    "reasoning_effort": null,
+    "wrapper_sha256": "36b60cc98ccc20e3049b87fc6c8793bbd4c247e0f89aac9c8c5e5678cb8fb78e",
+    "feedback_sha256": "0f93884aed3868575e28cff926a50d5a5a62b2728b92e6d5bfb042ad77490fc2",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}
