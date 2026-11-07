@@ -11,7 +11,7 @@ All records are authored synthetic engineering controls. They are not clinical e
 - `forbidden_interpretations`: material errors to reject even when other facts are covered.
 - `rubric`: relevance/coverage/faithfulness checks, including follow-up requirements where applicable.
 
-Run `apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/benchmark.py` from the repository root (or pass the inventory path). It validates inventory shape and passage/source links and prints case/category counts plus retrieval targets. The cases are divided before the context comparison in `splits.json`. After the production context helper lands, run `apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/context_compare.py --split development` or `--split holdout` to compare first-eight baseline context with helper-selected context. This offline runner makes no model calls. For answer quality, supply generated answers to a human adjudicator using the rubric. Report retrieval recall separately from semantic coverage, faithfulness, and relevance.
+Run `apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/benchmark.py` from the repository root (or pass the inventory path). It validates inventory shape and passage/source links and prints case/category counts plus retrieval targets. The cases are divided before the context comparison in `splits.json`. Run `apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/context_compare.py --split development` or `--split holdout` to compare first-eight baseline context with helper-selected context. This offline runner makes no model calls. For answer quality, supply generated answers to a human adjudicator using the rubric. Report retrieval recall separately from semantic coverage, faithfulness, and relevance.
 
 Fourteen authored cases are a diagnostic set, not a representative sample or a basis for a clinical accuracy percentage. Expand and review with realistic user questions before release claims.
 
@@ -191,3 +191,19 @@ and [timing/accounting](../../../../docs/performance/results/coverage-plan-glm-c
 The final ledger records 8,689.230941 neurons used/reserved, 310.769059 remaining,
 52 requests and the same two retained reservations. Neither diagnostic justifies
 a production switch. Larger-writer qualification remains open.
+
+## 7 November: first EGM workflow and same-model planner comparison
+
+The complete EGM plugin is installed locally and its drift-report workflow was
+applied to this README against the current source. The obsolete instruction to
+wait for the context helper was removed. Package checks passed in an isolated
+Python 3.12 environment with two optional editor probes skipped.
+
+A current-writer baseline and inactive coverage planner used identical frozen
+contexts and the normal Llama model on the combined-use/safety question. The
+baseline took 21.88 seconds and retained some supported label information but
+still omitted requested registry-role and safety coverage. The planner took
+57.20 seconds, selected 15 quotes against the 12-quote budget and was rejected
+before writing. Independent checking also found a quote attributed to the wrong
+PubMed record. Neither JSON parsing nor more selected quotes establishes better
+answer quality. No candidate was promoted. See the [first EGM pass and evidence](../../../../docs/chat-egm-first-pass-2026-11-07.md).

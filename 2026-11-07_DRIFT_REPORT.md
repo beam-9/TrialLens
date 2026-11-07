@@ -1,0 +1,3 @@
+## README.md
+
+- **Stale operating instruction:** `apps/api/evaluation/answer_coverage/README.md:14` says to run the context comparison “After the production context helper lands,” implying the helper is still pending. The same README documents completed corrected comparison runs at lines 20–25, and current production selection ranks retrieved source IDs before filling the eight-source limit in `apps/api/triallens/conversation.py:243–247`; the retained corrected artifacts report the completed development and holdout results in `apps/api/evaluation/answer_coverage/results/development-corrected.json` and `holdout-corrected.json`. Remove the obsolete condition so readers can follow the command as a current workflow.
