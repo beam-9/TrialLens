@@ -78,6 +78,19 @@ class GeneratedAnswer(BaseModel):
     uncertainty: list[str] = Field(max_length=3)
 
 
+def citation_bound_schema(allowed: set[str]) -> dict:
+    """Constrain citation spelling during generation; final grounding checks remain."""
+    schema = GeneratedAnswer.model_json_schema()
+    if not allowed:
+        return schema
+    schema['properties']['cited_sources']['items']['enum'] = sorted(allowed)
+    identifiers = '|'.join(re.escape(c).replace(r'\ ', ' ').replace(r'\-', '-') for c in sorted(allowed))
+    pattern = rf'^(?:[^\[\]【】［］]|\[(?:{identifiers})\])*$'
+    for field in ('paragraphs', 'uncertainty'):
+        schema['properties'][field]['items']['pattern'] = pattern
+    return schema
+
+
 def chat_provider() -> str:
     return os.getenv("TRIALLENS_CHAT_PROVIDER", "ollama").strip().lower()
 
@@ -467,7 +480,9 @@ class ConversationService:
                     payload["history"] = [{"question": a.question, "answer": a.direct_answer[:2000]} for a in history[-3:]]
                     messages = [{"role": "system", "content": INSTRUCTIONS},
                                 {"role": "user", "content": json.dumps(payload)}]
-                completion = (lambda items: cloudflare.completion(items, GeneratedAnswer.model_json_schema())) if hosted_free else self._local_completion
+                schema = (citation_bound_schema(allowed) if hosted_free and cloudflare.MODEL == '@cf/google/gemma-4-26b-a4b-it'
+                          else GeneratedAnswer.model_json_schema())
+                completion = (lambda items: cloudflare.completion(items, schema)) if hosted_free else self._local_completion
                 with phase("draft", messages):
                     content = completion(messages)
                 with phase("context_build"):

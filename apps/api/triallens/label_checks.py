@@ -48,18 +48,23 @@ def pediatric_indication_issue(answer: str, records: list[dict]) -> str | None:
     """Reject positive pediatric use losing a cited label's numeric age floor."""
     lookup = {record.get('citation'): record for record in records}
     for paragraph in re.split(r"\n\s*\n", answer):
+        prose = re.sub(r"\[[^\]]+\]", "", paragraph)
         # Only a positive use/indication assertion is in scope. Negative or
         # unknown pediatric-use statements are not turned into contraindications.
-        if not re.search(r"\b(?:used|approved|indicated)\b[^.!?]{0,140}\b(?:children|pediatric|paediatric)\b", paragraph, re.I):
+        if not re.search(r"\b(?:used|approved|indicated)\b[^.!?]{0,140}\b(?:children|pediatric|paediatric)\b", prose, re.I):
             continue
-        if re.search(r"\b(?:not|never)\s+(?:(?:been|currently)\s+)?(?:used|approved|indicated)\b|\b(?:unknown|unstudied)\b", paragraph, re.I):
+        if re.search(r"\b(?:not|never)\s+(?:(?:been|currently)\s+)?(?:used|approved|indicated)\b|\b(?:unknown|unstudied)\b", prose, re.I):
             continue
         cues = [cue['quote'] for citation in re.findall(r"\[([^\]]+)\]", paragraph) if citation in lookup
                 for cue in scope_clauses(lookup[citation])]
         floors = {m[1] for clause in cues if PEDIATRIC.search(clause) for m in AGE_FLOOR.finditer(clause)}
         for age in floors:
             # A matching number elsewhere in the paragraph is not an age limit.
-            boundary = rf"\b{re.escape(age)}\s+(?:years?\s+(?:of age\s+)?)?(?:and|or)\s+(?:older|over)\b|\bat least\s+{re.escape(age)}\s+years?\b"
-            if not re.search(boundary, paragraph, re.I):
+            pediatric_age = r"\b(?:children|pediatric|paediatric)\b(?:(?!\badults?\b)[^;.!?]){0,80}"
+            boundary = (rf"\b{re.escape(age)}\s+(?:years?\s+(?:of age\s+)?)?(?:and|or)\s+(?:older|over)\b"
+                        rf"|\bat least\s+{re.escape(age)}\s+years?\b"
+                        rf"|{pediatric_age}(?:≥|>=)\s*{re.escape(age)}\s*years?\b"
+                        rf"|{pediatric_age}\b{re.escape(age)}\+\s*years?\b")
+            if not re.search(boundary, prose, re.I):
                 return 'Pediatric indication omits an explicit cited label age boundary'
     return None

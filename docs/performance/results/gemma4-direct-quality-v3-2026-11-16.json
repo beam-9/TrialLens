@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "pipeline_variant": "single_pass_evaluation",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "coverage_plan_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "6e505df18d62d4b240516eda2dd451bd11e047e9223c9c38351873aef33b5467",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": "c5f3b2a7b90e913f9285991048b41696c226e0ee50d33e42c712bfce26a15a59",
+  "code_sha256": "c6c5348bdc6f5e2c89b0a854feb328329ab646334766e9464c9c0d5370d597cc",
+  "model_rates": {
+    "input_micro_neurons_per_token": 9091,
+    "output_micro_neurons_per_token": 27273,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft is hosted generation; revision is an in-memory replay, not a provider call",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 18816.340084,
+      "trace": {
+        "trace_id": "a1faee08-d5b6-4316-96b1-16c8e9b66fdb",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 6.164875,
+          "retrieval": 10.277417,
+          "extractive_synthesis": 24.118625,
+          "context_build": 0.6261260000000001,
+          "draft": 18742.264583,
+          "revision": 0.452333,
+          "validation": 9.779916,
+          "store": 11.232667
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 30401,
+            "message_count": 2,
+            "serialized_messages_char_count": 30895,
+            "wall_ms": 18742.264583,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 6629,
+            "eval_count": 792,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 37594,
+            "message_count": 4,
+            "serialized_messages_char_count": 38224,
+            "wall_ms": 0.452333,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 18813.353667,
+        "serialization_ms": 0.744
+      }
+    },
+    {
+      "case_id": "m0-safety-frequency",
+      "snapshot_id": "standalone-label",
+      "client_wall_ms": 9490.312166,
+      "trace": {
+        "trace_id": "0f0bbe4e-f7db-43b9-859e-1f65a5d9dd00",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 6294,
+        "phases_ms": {
+          "storage_read": 5.646208,
+          "retrieval": 1.893333,
+          "extractive_synthesis": 2.08625,
+          "context_build": 0.39225000000000004,
+          "draft": 9461.212,
+          "revision": 0.622,
+          "validation": 2.505,
+          "store": 12.453916
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 11443,
+            "message_count": 2,
+            "serialized_messages_char_count": 11634,
+            "wall_ms": 9461.212,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 2320,
+            "eval_count": 426,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 17068,
+            "message_count": 4,
+            "serialized_messages_char_count": 17371,
+            "wall_ms": 0.622,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 9489.321792,
+        "serialization_ms": 0.581459
+      }
+    },
+    {
+      "case_id": "m0-numeric-comparison",
+      "snapshot_id": "numerical",
+      "client_wall_ms": 5445.4337920000025,
+      "trace": {
+        "trace_id": "d155cd11-2593-4b03-8947-292ceec14252",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 5.524584,
+          "retrieval": 0.505667,
+          "extractive_synthesis": 1.374209,
+          "context_build": 0.058166999999999996,
+          "draft": 5421.397666,
+          "revision": 0.356417,
+          "validation": 0.452208,
+          "store": 12.893416
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 5510,
+            "message_count": 2,
+            "serialized_messages_char_count": 5699,
+            "wall_ms": 5421.397666,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1123,
+            "eval_count": 248,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 10359,
+            "message_count": 4,
+            "serialized_messages_char_count": 10660,
+            "wall_ms": 0.356417,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 5444.4075,
+        "serialization_ms": 0.3885
+      }
+    },
+    {
+      "case_id": "m0-protocol-versus-results",
+      "snapshot_id": "planned-trial",
+      "client_wall_ms": 5790.945541999996,
+      "trace": {
+        "trace_id": "982f04e3-acac-4f9f-9283-37ae7d9483a0",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 245,
+        "phases_ms": {
+          "storage_read": 6.786083,
+          "retrieval": 0.430292,
+          "extractive_synthesis": 0.332542,
+          "context_build": 0.066042,
+          "draft": 5767.15075,
+          "revision": 0.341791,
+          "validation": 0.395833,
+          "store": 12.100292
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 5611,
+            "message_count": 2,
+            "serialized_messages_char_count": 5800,
+            "wall_ms": 5767.15075,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1116,
+            "eval_count": 250,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 10640,
+            "message_count": 4,
+            "serialized_messages_char_count": 10941,
+            "wall_ms": 0.341791,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 5789.763292,
+        "serialization_ms": 0.409333
+      }
+    },
+    {
+      "case_id": "m0-simplify-numeric-followup",
+      "snapshot_id": "numerical",
+      "client_wall_ms": 6080.212625000002,
+      "trace": {
+        "trace_id": "07cb47f9-be74-44ec-93c9-657b832648f5",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 1,
+        "context_char_count": 340,
+        "phases_ms": {
+          "storage_read": 7.433209,
+          "retrieval": 0.580209,
+          "extractive_synthesis": 1.26975,
+          "context_build": 0.065959,
+          "draft": 6052.161541,
+          "revision": 0.419917,
+          "validation": 0.408666,
+          "store": 14.672833
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 6325,
+            "message_count": 2,
+            "serialized_messages_char_count": 6524,
+            "wall_ms": 6052.161541,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1322,
+            "eval_count": 250,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 11080,
+            "message_count": 4,
+            "serialized_messages_char_count": 11391,
+            "wall_ms": 0.419917,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 6079.062958,
+        "serialization_ms": 0.408458
+      }
+    }
+  ],
+  "summary": {
+    "n": 5,
+    "model_answers": 5,
+    "model_answer_p50_ms": 6079.062958,
+    "model_answer_p95_ms": 18813.353667,
+    "result_counts": {
+      "model_answer": 5
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 5636.001379,
+    "remaining_neurons": 3363.998621,
+    "pending_requests": 2,
+    "requests": 29
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "single_pass": true,
+    "single_pass_sha256": "ab880222676dc172e1e4ce6186baece40d889b7dfbe6251a77aad799f964296d",
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 1,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": "@cf/google/gemma-4-26b-a4b-it",
+    "reasoning_effort": null,
+    "wrapper_sha256": "36b60cc98ccc20e3049b87fc6c8793bbd4c247e0f89aac9c8c5e5678cb8fb78e",
+    "feedback_sha256": "9c3f5102473a2dfd5c85b9fae574edc3b98e3e37ecf77f15ec4665012379d27b",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

@@ -181,6 +181,10 @@ def test_model_experiment_restores_default_and_rates_on_failure():
     with runner.candidate_model("@cf/openai/gpt-oss-120b"):
         assert runner.cloudflare.MAX_OUTPUT_TOKENS == 4096
     assert runner.cloudflare.MAX_OUTPUT_TOKENS == previous[-1]
+    with runner.candidate_model("@cf/google/gemma-4-26b-a4b-it"):
+        assert runner.cloudflare.MAX_OUTPUT_TOKENS == previous[-1]
+        assert (runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE) == (9091, 27273)
+    assert (runner.cloudflare.MODEL, runner.cloudflare.INPUT_RATE, runner.cloudflare.OUTPUT_RATE, runner.cloudflare.MAX_OUTPUT_TOKENS) == previous
 
 
 def test_model_experiment_records_actual_endpoint_and_shared_quota(configured, monkeypatch, tmp_path):

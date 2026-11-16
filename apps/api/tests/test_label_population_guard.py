@@ -25,6 +25,16 @@ def test_observed_bad_canary_rejected_and_compact_controls_preserved():
     ('Example is indicated for pediatric patients 12 years and older', False),
     ('Example is indicated for children aged 12 and older', False),
     ('Example is approved for children at least 12 years old', False),
+    ('Example is approved for pediatric patients ≥12 years', False),
+    ('Example is approved for pediatric patients\u202f≥\u202f12\u202fyears', False),
+    ('Example is approved for children >= 12 years old', False),
+    ('Example is indicated for children 12+ years', False),
+    ('Example is approved for children ≥11 years', True),
+    ('Example is approved for children ≤12 years', True),
+    ('Example is approved for children >=120 years', True),
+    ('Example is approved for children under 12; adults are ≥12 years', True),
+    ('Example is approved for children under 12 and adults are >=12 years', True),
+    ('Example is approved for children under 12; another cohort is 12+ years', True),
     ('Example is not approved for children', False),
     ('Use in children is unknown', False),
 ])
@@ -35,8 +45,11 @@ def test_explicit_known_age_boundary_only(statement, rejected):
     assert pediatric_indication_issue(statement + ' [unrelated].', records) is None
 
 
-@pytest.mark.parametrize('preserve_age', [False, True])
-def test_final_guard_runs_after_two_passes_without_retry_or_answer_charge(monkeypatch, tmp_path, preserve_age):
+@pytest.mark.parametrize('qualification,accepted', [
+    ('', False), (' aged 12 and older', True), (' ≥12 years', True),
+    (' >= 12 years', True), (' 12+ years', True), (' ≥11 years', False),
+])
+def test_final_guard_runs_after_two_passes_without_retry_or_answer_charge(monkeypatch, tmp_path, qualification, accepted):
     monkeypatch.setenv('TRIALLENS_CHAT_PROVIDER', 'cloudflare')
     monkeypatch.setenv('TRIALLENS_USAGE_PATH', str(tmp_path / 'usage.sqlite3'))
     monkeypatch.setattr(conversation, 'chat_configured', lambda: True)
@@ -47,13 +60,34 @@ def test_final_guard_runs_after_two_passes_without_retry_or_answer_charge(monkey
     calls = []
     def complete(messages, schema):
         calls.append(messages)
-        wording = 'Example is approved for children' + (' aged 12 and older' if preserve_age else '')
+        wording = 'Example is approved for children' + qualification
         return json.dumps({'paragraphs': [wording + ' [openFDA label:EXAMPLE].'], 'cited_sources': ['openFDA label:EXAMPLE'], 'uncertainty': []})
     monkeypatch.setattr(conversation.cloudflare, 'completion', complete)
     answer = conversation.ConversationService().generate(w, fallback.question, [], [source], fallback)
     assert len(calls) == 2
-    assert (answer.generation_mode == 'conversational') == preserve_age
+    assert (answer.generation_mode == 'conversational') == accepted
     from triallens.usage import UsageLedger
-    assert UsageLedger().status()['generated_answers'] == int(preserve_age)
-    if not preserve_age:
+    assert UsageLedger().status()['generated_answers'] == int(accepted)
+    if not accepted:
         assert 'failed validation' in answer.generation_note and 'children' not in answer.direct_answer
+
+
+def test_age_notation_in_citation_identifier_cannot_supply_a_missing_boundary():
+    citation = 'label:12 years and older ≥12 years'
+    records = [{'source_type': 'fda_label', 'citation': citation, 'text':
+                'Example tablets are indicated for pediatric patients 12 years and older.', 'matched_passages': []}]
+    assert pediatric_indication_issue(f'Example is approved for children [{citation}].', records)
+
+
+def test_recorded_native_mathematical_age_floor_is_not_a_missing_boundary():
+    root = Path(__file__).parents[1] / 'evaluation/answer_coverage/results'
+    run = json.loads((root / 'revision-native-combined-2026-11-16.json').read_text())[0]
+    final = json.loads(run['provider_outputs'][-1]['response'])
+    records = run['generation_context']['evidence']
+    allowed = {record['citation'] for record in records}
+    direct = conversation.normalize_citations('\n\n'.join(final['paragraphs']), allowed)
+    assert pediatric_indication_issue(direct, records) is None
+    import re
+    broadened = re.sub(r'≥\s*10(?=\s*years)', '≥9', direct)
+    assert broadened != direct
+    assert pediatric_indication_issue(broadened, records)

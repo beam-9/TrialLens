@@ -137,8 +137,10 @@ def feedback_notes(messages: list[dict], *, numeric_guard: bool = False) -> list
     paragraphs = [normalize_citations(paragraph.strip(), allowed) for rendered in draft.paragraphs
                   for paragraph in re.split(r"\n\s*\n", rendered) if paragraph.strip()]
     marker_citations = {citation for paragraph in paragraphs for citation in _CITATION.findall(paragraph)}
+    uncertainty_citations = {citation for item in draft.uncertainty
+                             for citation in _CITATION.findall(normalize_citations(item, allowed))}
     listed_citations = set(draft.cited_sources)
-    unknown = sorted((marker_citations | listed_citations) - allowed)
+    unknown = sorted((marker_citations | listed_citations | uncertainty_citations) - allowed)
     if unknown:
         notes.append(_compact_note("unknown_citation", "Remove or replace citation IDs not present in the supplied evidence: " + ", ".join(unknown[:8])))
     unlisted = sorted(marker_citations - listed_citations)
@@ -147,6 +149,9 @@ def feedback_notes(messages: list[dict], *, numeric_guard: bool = False) -> list
     listed_only = sorted(listed_citations - marker_citations)
     if listed_only:
         notes.append(_compact_note("cited_source_not_inline", "Remove citations not used inline or add the exact citation beside the supported claim: " + ", ".join(listed_only[:8])))
+    if (uncertainty_citations & allowed) - marker_citations:
+        notes.append(_compact_note("source_only_in_uncertainty",
+            "A supplied source is cited only in uncertainty. If its explanation answers a requested part, move it into a paragraph with its exact citation rather than deleting that coverage."))
     has_any_citations = bool(marker_citations or listed_citations)
     missing_paragraphs = [str(index + 1) for index, paragraph in enumerate(paragraphs)
                           if not _CITATION.search(paragraph)

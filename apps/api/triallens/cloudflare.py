@@ -184,10 +184,9 @@ def completion(messages: list[dict], schema: dict) -> str:
     payload = {"messages": messages, "stream": False, "temperature": 0,
                "max_tokens": MAX_OUTPUT_TOKENS,
                "response_format": {"type": "json_schema", "json_schema": schema}}
-    if MODEL == "@cf/zai-org/glm-4.7-flash":
+    if MODEL in {"@cf/zai-org/glm-4.7-flash", "@cf/google/gemma-4-26b-a4b-it"}:
         payload["response_format"]["json_schema"] = {"name": "triallens_answer", "strict": True, "schema": schema}
-        # Cloudflare's documented chat-template option keeps this conversational
-        # profile within its final-answer budget instead of emitting reasoning.
+        # Keep these conversational profiles within the final-answer budget.
         payload["chat_template_kwargs"] = {"enable_thinking": False}
     if MODEL == "@cf/qwen/qwen3.8-27b":
         # Inactive unless selected by the isolated evaluation allowlist.

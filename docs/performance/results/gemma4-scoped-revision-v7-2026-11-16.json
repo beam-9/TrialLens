@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": true,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "coverage_plan_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "4d43d57b36afd5515d82109a2a6f8ba8ea6e01549a98f1de12f90d1b4f161738",
+  "runner_sha256": "6e505df18d62d4b240516eda2dd451bd11e047e9223c9c38351873aef33b5467",
+  "question_inventory_sha256": "51a06e9b493b9c7475980671a97fbfa26a18fe223c95681a947bcc67d71e2bd0",
+  "candidate_prompt_sha256": "fa988522cefd000248a199a5d7672576a9930d2c90aa1a4f7fde63f19ed31d5a",
+  "code_sha256": "cf4a91aca85777be7922c376387f52be5ec07b0ecad5959f0fd962774855e312",
+  "model_rates": {
+    "input_micro_neurons_per_token": 9091,
+    "output_micro_neurons_per_token": 27273,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "m0-combined-benefits-risks",
+      "snapshot_id": "real-metformin",
+      "client_wall_ms": 211077.844208,
+      "trace": {
+        "trace_id": "0c9df59d-39fd-4a8c-85e5-18d2ac58a73a",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "validation_rejection",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "validation_rejection",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 21360,
+        "phases_ms": {
+          "storage_read": 5.27825,
+          "retrieval": 9.626792,
+          "extractive_synthesis": 22.6245,
+          "context_build": 0.977666,
+          "draft": 92695.874083,
+          "revision": 118300.990958,
+          "validation": 13.003625,
+          "store": 20.0685
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 32657,
+            "message_count": 2,
+            "serialized_messages_char_count": 33236,
+            "wall_ms": 92695.874083,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 7305,
+            "eval_count": 755,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 39646,
+            "message_count": 4,
+            "serialized_messages_char_count": 40361,
+            "wall_ms": 118300.990958,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 8751,
+            "eval_count": 885,
+            "done": null,
+            "done_reason": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 211075.1985,
+        "serialization_ms": 1.055083
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 8549.972661,
+    "remaining_neurons": 450.027339,
+    "pending_requests": 4,
+    "requests": 51
+  },
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": true,
+    "numeric_checks": true,
+    "single_pass": false,
+    "single_pass_sha256": null,
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": true,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": "8f30294b6b9425f2420a85fed1e4edabc23a8f5d847a78b37ecbd20cbacdf1be",
+    "max_provider_calls_per_question": 2,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": "ff090e4379ece5c49d335ca25d0f74a77c9674c61472445686e61df366ad428a",
+    "strategy_experiment": null,
+    "model_experiment": "@cf/google/gemma-4-26b-a4b-it",
+    "reasoning_effort": null,
+    "wrapper_sha256": "36b60cc98ccc20e3049b87fc6c8793bbd4c247e0f89aac9c8c5e5678cb8fb78e",
+    "feedback_sha256": "9c3f5102473a2dfd5c85b9fae574edc3b98e3e37ecf77f15ec4665012379d27b",
+    "inventory_path": "/Users/beam.t/Documents/project/apps/api/evaluation/m0/inventory.json"
+  }
+}

@@ -66,6 +66,19 @@ def test_completion_restores_even_when_experiment_raises(monkeypatch):
     assert conversation.cloudflare.completion is previous
 
 
+@pytest.mark.parametrize('citation,expected', [
+    ('PubMed:999', {'source_only_in_uncertainty'}),
+    ('PubMed:123', set()),
+    ('PubMed:absent', {'unknown_citation'}),
+])
+def test_uncertainty_citations_are_checked_without_inventing_answer_requirements(citation, expected):
+    call = messages('Explain what these sources establish', ['A finding [PubMed:123].'], ['PubMed:123'])
+    draft = json.loads(call[2]['content'])
+    draft['uncertainty'] = [f'This source supplies only planned methods 【{citation}】.']
+    call[2]['content'] = json.dumps(draft)
+    assert codes(call) == expected
+
+
 def test_invalid_draft_unknown_citation_and_28_word_copy_are_machine_reported():
     invalid = messages("Explain the result", ["x"], [], source_text="short")
     invalid[2]["content"] = "{broken"
@@ -150,8 +163,7 @@ def test_explicit_give_statistics_question_requests_numbers():
 
 
 def test_demo_label_requirement_is_source_scoped():
-    from revision_feedback import missing_demo_label
     context = {'evidence': [{'citation':'PubMed:demo','demo':True},{'citation':'PubMed:real','demo':False}]}
-    assert missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:demo']},context)
-    assert not missing_demo_label({'paragraphs':['In this synthetic example, an effect was reported.'],'cited_sources':['PubMed:demo']},context)
-    assert not missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:real']},context)
+    assert feedback.missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:demo']},context)
+    assert not feedback.missing_demo_label({'paragraphs':['In this synthetic example, an effect was reported.'],'cited_sources':['PubMed:demo']},context)
+    assert not feedback.missing_demo_label({'paragraphs':['An effect was reported.'],'cited_sources':['PubMed:real']},context)

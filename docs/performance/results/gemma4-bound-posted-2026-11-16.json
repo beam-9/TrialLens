@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "pipeline_variant": "single_pass_evaluation",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "coverage_plan_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "953988435ad3b91485535296dedfef99ec9d49f5c16a16e2463c0bbab83b8eca",
+  "runner_sha256": "6e505df18d62d4b240516eda2dd451bd11e047e9223c9c38351873aef33b5467",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "f576768fc7d470e5126dafb4d02900517110c7c2d15eb54aea227ee7ed8b686e",
+  "code_sha256": "cf4a91aca85777be7922c376387f52be5ec07b0ecad5959f0fd962774855e312",
+  "model_rates": {
+    "input_micro_neurons_per_token": 9091,
+    "output_micro_neurons_per_token": 27273,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft is hosted generation; revision is an in-memory replay, not a provider call",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "protocol-statistics",
+      "snapshot_id": "protocol",
+      "client_wall_ms": 7979.698250000001,
+      "trace": {
+        "trace_id": "764524aa-a5c9-4ad8-a787-0ea88fbb9c39",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": null,
+        "busy_response": false,
+        "result_kind": "model_answer",
+        "error_kind": null,
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 4,
+        "context_char_count": 1886,
+        "phases_ms": {
+          "storage_read": 1.653459,
+          "retrieval": 2.969042,
+          "extractive_synthesis": 1.681,
+          "context_build": 0.158374,
+          "draft": 7957.9675,
+          "revision": 0.062875,
+          "validation": 1.428917,
+          "store": 2.988792
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 8811,
+            "message_count": 2,
+            "serialized_messages_char_count": 9009,
+            "wall_ms": 7957.9675,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 1777,
+            "eval_count": 323,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 14100,
+            "message_count": 4,
+            "serialized_messages_char_count": 14410,
+            "wall_ms": 0.062875,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 7977.066584,
+        "serialization_ms": 0.577
+      }
+    },
+    {
+      "case_id": "posted-statistics",
+      "snapshot_id": "posted-results",
+      "client_wall_ms": 39670.012584,
+      "trace": {
+        "trace_id": "8c3582a0-de7a-4765-8770-5e59d01ce3d6",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 24465,
+        "phases_ms": {
+          "storage_read": 1.628917,
+          "retrieval": 37.400542,
+          "extractive_synthesis": 0.06575,
+          "context_build": 2.370375,
+          "draft": 39621.074583,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 4.18575
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 33115,
+            "message_count": 2,
+            "serialized_messages_char_count": 33479,
+            "wall_ms": 39621.074583,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 39668.810917,
+        "serialization_ms": 0.64325
+      }
+    }
+  ],
+  "summary": {
+    "n": 2,
+    "model_answers": 1,
+    "model_answer_p50_ms": 7977.066584,
+    "model_answer_p95_ms": 7977.066584,
+    "result_counts": {
+      "excerpt_fallback": 1,
+      "model_answer": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 6251.616626,
+    "remaining_neurons": 2748.383374,
+    "pending_requests": 3,
+    "requests": 38
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "single_pass": true,
+    "single_pass_sha256": "ab880222676dc172e1e4ce6186baece40d889b7dfbe6251a77aad799f964296d",
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 1,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": "@cf/google/gemma-4-26b-a4b-it",
+    "reasoning_effort": null,
+    "wrapper_sha256": "36b60cc98ccc20e3049b87fc6c8793bbd4c247e0f89aac9c8c5e5678cb8fb78e",
+    "feedback_sha256": "9c3f5102473a2dfd5c85b9fae574edc3b98e3e37ecf77f15ec4665012379d27b",
+    "inventory_path": "apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/inventory.json"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "pipeline_variant": "single_pass_evaluation",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "coverage_plan_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "953988435ad3b91485535296dedfef99ec9d49f5c16a16e2463c0bbab83b8eca",
+  "runner_sha256": "6e505df18d62d4b240516eda2dd451bd11e047e9223c9c38351873aef33b5467",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": "948aa05deae7c52f8a461e0a1f46689a711e9901a111e72cc8ceef5830a039bd",
+  "code_sha256": "cf4a91aca85777be7922c376387f52be5ec07b0ecad5959f0fd962774855e312",
+  "model_rates": {
+    "input_micro_neurons_per_token": 9091,
+    "output_micro_neurons_per_token": 27273,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft is hosted generation; revision is an in-memory replay, not a provider call",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "posted-statistics",
+      "snapshot_id": "posted-results",
+      "client_wall_ms": 40473.514875,
+      "trace": {
+        "trace_id": "70818f8d-6b7e-4d09-89c9-ce19544fdbd2",
+        "pipeline_variant": "two_pass",
+        "revision_ran": false,
+        "revision_reason": "not_reached",
+        "fallback_reason": "cloudflare_invalidresponse",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_invalidresponse",
+        "model_digest_or_version": null,
+        "source_count_selected": 1,
+        "retrieved_passage_count": 8,
+        "context_char_count": 24465,
+        "phases_ms": {
+          "storage_read": 1.7205,
+          "retrieval": 38.441333,
+          "extractive_synthesis": 0.0665,
+          "context_build": 2.3541250000000002,
+          "draft": 40414.876541,
+          "revision": 0.0,
+          "validation": 0.0,
+          "store": 3.364917
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 33484,
+            "message_count": 2,
+            "serialized_messages_char_count": 33852,
+            "wall_ms": 40414.876541,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/google/gemma-4-26b-a4b-it",
+        "http_status": 200,
+        "total_wall_ms": 40470.510958,
+        "serialization_ms": 0.736333
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 6669.084437,
+    "remaining_neurons": 2330.915563,
+    "pending_requests": 4,
+    "requests": 40
+  },
+  "stop_reason": "cloudflare_invalidresponse",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "single_pass": true,
+    "single_pass_sha256": "ab880222676dc172e1e4ce6186baece40d889b7dfbe6251a77aad799f964296d",
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 1,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": "@cf/google/gemma-4-26b-a4b-it",
+    "reasoning_effort": null,
+    "wrapper_sha256": "36b60cc98ccc20e3049b87fc6c8793bbd4c247e0f89aac9c8c5e5678cb8fb78e",
+    "feedback_sha256": "9c3f5102473a2dfd5c85b9fae574edc3b98e3e37ecf77f15ec4665012379d27b",
+    "inventory_path": "apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/inventory.json"
+  }
+}

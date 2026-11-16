@@ -67,6 +67,35 @@ def test_two_pass_keeps_schema_history_citations_and_counts_once(monkeypatch, co
     assert cloudflare.quota_status()["requests"] == 2
 
 
+@pytest.mark.parametrize('bad_citation', [False, True])
+def test_gemma_binds_citation_schema_but_keeps_final_provenance_checks(monkeypatch, context, bad_citation):
+    monkeypatch.setattr(cloudflare, 'MODEL', '@cf/google/gemma-4-26b-a4b-it')
+    calls = provider(monkeypatch, bad_citation=bad_citation)
+    answer = generate(context)
+    schema = calls[0]['response_format']['json_schema']['schema']
+    assert schema['properties']['cited_sources']['items']['enum'] == ['PubMed:123']
+    assert 'pattern' in schema['properties']['paragraphs']['items']
+    assert schema == calls[1]['response_format']['json_schema']['schema']
+    assert (answer.generation_mode == 'conversational') == (not bad_citation)
+    assert len(calls) == 2
+
+
+def test_bound_schema_accepts_only_exact_citation_spellings_and_escapes_identifiers():
+    import re
+    from triallens.conversation import citation_bound_schema
+    ids = {'PubMed:123', 'openFDA label:LABEL-1', 'doi:10.5/a+b'}
+    schema = citation_bound_schema(ids)
+    pattern = schema['properties']['paragraphs']['items']['pattern']
+    for text in ('No answer is available.', 'A finding [PubMed:123].',
+                 'Two sources [openFDA label:LABEL-1] [doi:10.5/a+b].'):
+        assert re.fullmatch(pattern, text)
+    for text in ('A finding [demo].', 'A finding [1].', 'A finding [PubMed:999].',
+                 'A finding [doi:10X5/ab].', 'A finding 【PubMed:123】.'):
+        assert not re.fullmatch(pattern, text)
+    assert citation_bound_schema(set()) == GeneratedAnswer.model_json_schema()
+    assert 'enum' not in GeneratedAnswer.model_json_schema()['properties']['cited_sources']['items']
+
+
 @pytest.mark.parametrize("reject_pass", [1, 2])
 def test_quota_failure_never_exposes_draft_or_falls_back_to_another_provider(monkeypatch, context, reject_pass):
     calls = provider(monkeypatch, reject_pass=reject_pass)

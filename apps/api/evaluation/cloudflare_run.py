@@ -36,6 +36,8 @@ MODEL_EXPERIMENTS = {
     "@cf/zai-org/glm-4.7-flash": (5500, 36400),
     "@cf/qwen/qwen3.8-27b": (40909, 290909),
     "@cf/ibm-granite/granite-4.0-h-micro": (1542, 10158),
+    # Official Workers AI pricing verified 2026-11-16; evaluation only.
+    "@cf/google/gemma-4-26b-a4b-it": (9091, 27273),
 }
 
 
@@ -48,8 +50,8 @@ def candidate_model(name):
                 raise ValueError("Model experiment is not allowlisted")
             cloudflare.MODEL = name
             cloudflare.INPUT_RATE, cloudflare.OUTPUT_RATE = MODEL_EXPERIMENTS[name]
-            # This model's output budget includes reasoning. Retain truncation
-            # rejection; reserve its larger bounded allowance before dispatch.
+            # Reasoning profiles retain truncation rejection and reserve their
+            # larger bounded output allowance before dispatch.
             if name == "@cf/openai/gpt-oss-120b":
                 cloudflare.MAX_OUTPUT_TOKENS = 4096
         yield

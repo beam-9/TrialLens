@@ -63,8 +63,9 @@ def test_chat_choice_rejects_ambiguous_multiple_outputs(monkeypatch):
             call()
 
 
-def test_glm_conversation_profile_uses_named_schema_and_disables_reasoning(monkeypatch):
-    monkeypatch.setattr(cf, "MODEL", "@cf/zai-org/glm-4.7-flash")
+@pytest.mark.parametrize('model', ['@cf/zai-org/glm-4.7-flash', '@cf/google/gemma-4-26b-a4b-it'])
+def test_conversation_profile_uses_named_schema_and_configures_reasoning(monkeypatch, model):
+    monkeypatch.setattr(cf, "MODEL", model)
     def post(url, **kwargs):
         assert kwargs["json"]["chat_template_kwargs"] == {"enable_thinking": False}
         envelope = kwargs["json"]["response_format"]["json_schema"]

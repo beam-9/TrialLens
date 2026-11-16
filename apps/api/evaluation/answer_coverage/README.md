@@ -207,3 +207,14 @@ still omitted requested registry-role and safety coverage. The planner took
 before writing. Independent checking also found a quote attributed to the wrong
 PubMed record. Neither JSON parsing nor more selected quotes establishes better
 answer quality. No candidate was promoted. See the [first EGM pass and evidence](../../../../docs/chat-egm-first-pass-2026-11-07.md).
+
+## 16 November: answer completeness and model-profile comparisons
+
+The [experiment review](../../../../docs/chat-quality-experiments-2026-11-16.md)
+records paired revision tests, a mathematical pediatric-age validation repair,
+and inactive Gemma/native reasoning-model comparisons. Direct Gemma answers
+improve sampled numerical detail and safety denominators, but a long posted
+trial response truncates and a public abstract answer incorrectly endorses
+conflicting numerical and narrative findings. Valid citations and JSON do not
+establish semantic accuracy. Production remains the two-pass Llama profile;
+no paid API or local GPU inference was used.
