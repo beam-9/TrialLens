@@ -1,0 +1,32 @@
+{
+  "method": "Manual source-based review of displayed final answers; not a clinical accuracy estimate",
+  "answer_artifact": "apps/api/evaluation/answer_coverage/results/paper-grounding-default-2026-11-22.json",
+  "case_reviews": [
+    {
+      "case_id": "abstract-results",
+      "verdict": "needs_revision",
+      "finding": "Preserves abstract numerical order but calls +0.35% a smaller decrease; a positive reported change is not a decrease. Abstract-only qualification should be explicitly scoped to consulted evidence.",
+      "source": "Abstract RESULTS in PMID38763510"
+    },
+    {
+      "case_id": "full-text-results",
+      "verdict": "partial",
+      "supported": "Correctly reports 16-week HbA1c decrease 0.58% in combination arm and increase 0.35% in atorvastatin arm, reported difference 0.94% and P<0.0001, with partial-article qualification.",
+      "missing": "Asked-for uncertainty omits the accompanying plus/minus 0.11% figures for both arms. Do not invent a confidence interval or label dispersion type absent a supporting supplied statement.",
+      "source": "Full text paragraph 019 — RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+    },
+    {
+      "case_id": "full-text-simplify",
+      "verdict": "passes_narrow_check",
+      "supported": "Retains same groups, 16-week changes, reported difference and P value; partial-index limitation appears in uncertainty. This does not repair the predecessor's missing dispersion.",
+      "source": "Full text paragraph 019 — RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+    },
+    {
+      "case_id": "full-text-mortality",
+      "verdict": "passes_narrow_check",
+      "supported": "Says the supplied trial results do not establish a mortality benefit, distinguishes HbA1c/LDL-C findings from death risk, gives no prescribing recommendation.",
+      "source": "Indexed study Results and Discussion excerpts; no trial death-risk estimate supplied"
+    }
+  ],
+  "release_status": "Not complete. Add independent papers, broader semantic checks and browser verification. Four accepted model routes are not four semantic passes."
+}

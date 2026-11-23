@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from triallens.models import Answer, AnswerTraceItem, EvidenceSource, RetrievedChunk, SourceType, Workspace
 from triallens.usage import BudgetUnavailable, UsageLedger
-from triallens.rag import citation_for, document_content_scope, is_outcome_packet
+from triallens.rag import citation_for, document_content_scope, is_outcome_packet, atomic_passage_limit
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
 from triallens.answer_checks import confidence_interval_issue, requested_comparison_order_issue, unreported_percentage_issue
@@ -268,17 +268,20 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
                    if chunk.source_id == source.id and chunk.citation == citation_for(source)]
         matches = []
         atomic = set()
+        paper_sections = {}
         omitted_packets = 0
         for chunk in matched:
-            if is_outcome_packet(source, chunk.section):
+            packet_limit = atomic_passage_limit(source, chunk.section)
+            if packet_limit is not None:
                 full_packet = " ".join(source.metadata["sections"][chunk.section].split())
-                from triallens.trial_results import MAX_PACKET_CHARS
                 # Do not send legacy fragments or altered group/value records as
                 # if they were complete submitted result packets.
-                if " ".join(chunk.text.split()) != full_packet or len(chunk.text) > MAX_PACKET_CHARS:
+                if " ".join(chunk.text.split()) != full_packet or len(chunk.text) > packet_limit:
                     omitted_packets += 1
                     continue
                 atomic.add(chunk.text)
+                if source.source_type == SourceType.pubmed:
+                    paper_sections.setdefault(chunk.text, chunk.section)
             if chunk.text not in matches:
                 matches.append(chunk.text)
         # Complete outcome packets outrank ordinary excerpts from that record.
@@ -345,6 +348,14 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
             packet_count = sum(is_outcome_packet(source, name) for name in source.metadata.get("sections", {}))
             content_truncated |= packet_count > sum(text in atomic for text in passages)
             content_truncated |= bool(source.metadata.get("results_indexing", {}).get("truncated"))
+        paper = source.metadata.get("full_text")
+        paper_links = []
+        if (isinstance(paper, dict) and paper.get("status") == "available"
+                and all(isinstance(paper.get(key, []), list) for key in ("paragraph_sections", "table_sections"))):
+            content_truncated |= bool(paper.get("partial_indexing"))
+            for passage_index, passage in enumerate(passages):
+                if passage in paper_sections:
+                    paper_links.append({"matched_passage_index": passage_index, "section": paper_sections[passage]})
         records.append({
             "citation": citation_for(source), "title": source.title[:500],
             **({"registry_design": sanitize_design_fields(source.metadata.get("registry_design")),
@@ -365,6 +376,13 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
             "content_truncated": content_truncated,
             "demo": "DEMO" in source.external_id.upper() or bool(source.metadata.get("demo")),
             "text": prefix, "matched_passages": passages,
+            **({"text_scope": "PubMed abstract; full-text passages are identified separately below.",
+                "paper_passage_links": paper_links,
+                "full_text_provenance": {key: paper[key] for key in (
+                    "pmcid", "url", "xml_sha256", "license", "license_missing", "license_truncated",
+                    "scope", "indexed_paragraphs", "indexed_tables", "omitted_paragraphs", "omitted_tables"
+                ) if key in paper}}
+               if isinstance(paper, dict) and paper.get("status") == "available" else {}),
             **({"outcome_links": outcome_links} if outcome_links else {}),
         })
     return records

@@ -14,7 +14,7 @@ from triallens.models import (
     SourceType,
     Workspace,
 )
-from triallens.text import chunk_text, cosine, lexical_score, stable_embedding, tokenize
+from triallens.text import chunk_text, cosine, lexical_score, stable_embedding, tokenize, normalize
 
 GENERIC_MEDICAL_TERMS = {
     "about",
@@ -212,9 +212,9 @@ def build_chunks(sources: list[EvidenceSource]) -> list[EvidenceChunk]:
         for section_label, section_text in section_items:
             # Keep submitted outcomes with their arms, denominators and methods.
             # A partial statistical packet is not a usable independent passage.
-            if is_outcome_packet(source, section_label):
-                from triallens.trial_results import MAX_PACKET_CHARS
-                source_chunks = [section_text] if len(section_text) <= MAX_PACKET_CHARS else []
+            packet_limit = atomic_passage_limit(source, section_label)
+            if packet_limit is not None:
+                source_chunks = [section_text] if len(section_text) <= packet_limit else []
             else:
                 source_chunks = chunk_text(section_text)
             for text in source_chunks:
@@ -344,19 +344,37 @@ def is_outcome_packet(source: EvidenceSource, section: str) -> bool:
             and section in source.metadata["sections"])
 
 
+def atomic_passage_limit(source: EvidenceSource, section: str) -> int | None:
+    if is_outcome_packet(source, section):
+        from triallens.trial_results import MAX_PACKET_CHARS
+        return MAX_PACKET_CHARS
+    indexing = source.metadata.get("full_text")
+    if (source.source_type == SourceType.pubmed and source.metadata.get("paper_packet_version") == 1
+            and isinstance(indexing, dict) and indexing.get("status") == "available"
+            and all(isinstance(indexing.get(key, []), list) for key in ("paragraph_sections", "table_sections"))
+            and section in [*indexing.get("paragraph_sections", []), *indexing.get("table_sections", [])]
+            and isinstance(source.metadata.get("sections"), dict) and section in source.metadata["sections"]):
+        from triallens.paper_text import MAX_PACKET_CHARS
+        return MAX_PACKET_CHARS
+    return None
+
+
 def source_section_items(source: EvidenceSource) -> list[tuple[str, str]]:
     raw_sections = source.metadata.get("sections") if source.metadata else None
     if isinstance(raw_sections, dict):
-        return [
-            (str(label), normalize_passage(str(text)))
-            for label, text in raw_sections.items()
-            if normalize_passage(str(text))
-        ]
+        result = []
+        for label, text in raw_sections.items():
+            passage = normalize(str(text)) if atomic_passage_limit(source, str(label)) else normalize_passage(str(text))
+            if passage:
+                result.append((str(label), passage))
+        return result
     return []
 
 
 def source_sections_for(source: EvidenceSource) -> list[str]:
-    sections = [f"{label}: {trim_sentence(text, 420)}" for label, text in source_section_items(source)]
+    # Full paper packets belong to retrieval, not the abstract-derived extraction.
+    sections = [f"{label}: {trim_sentence(text, 420)}" for label, text in source_section_items(source)
+                if source.source_type != SourceType.pubmed or not label.startswith("Full text ")]
     if sections:
         return sections[:8]
     inferred = infer_source_sections(source)
@@ -1167,6 +1185,12 @@ def synthesize_document_supporting_evidence(
 
 def document_content_scope(source: EvidenceSource) -> str:
     if source.source_type == SourceType.pubmed:
+        indexing = source.metadata.get("full_text")
+        if isinstance(indexing, dict) and indexing.get("status") == "available":
+            return ("PubMed abstract plus selected open-access article paragraphs and complete supported tables. "
+                    "This is a partial article index: other sections, unsupported tables, figures and supplements "
+                    "may be missing. Absence here does not establish absence from the article. "
+                    "Structured extraction summaries remain based on the abstract.")
         return "PubMed abstract content stored in TrialLens, not necessarily the full article."
     if source.source_type == SourceType.clinical_trials:
         if source.metadata.get("outcome_packet_version") == 1:

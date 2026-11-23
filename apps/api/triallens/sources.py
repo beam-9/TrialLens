@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import html
+import asyncio
+import re
 import xml.etree.ElementTree as ET
 from urllib.parse import urlencode
 
@@ -11,6 +13,7 @@ from triallens.trial_design import parse_registry_design, render_registry_design
 
 from triallens.models import EvidenceSource, SourceType, Workspace
 from triallens.text import normalize
+from triallens.paper_text import MAX_XML_BYTES, parse_paper_text
 
 
 class SourceClient:
@@ -80,15 +83,53 @@ class PubMedClient(SourceClient):
                                 "publication_types": list(dict.fromkeys(
                                     normalize(node.text or "") for node in article.findall(".//PublicationType")
                                     if normalize(node.text or ""))),
+                                "pmcid": next((normalize(node.text or "") for node in article.findall(".//ArticleId")
+                                               if node.get("IdType") == "pmc"
+                                               and re.fullmatch(r"PMC[1-9][0-9]*", normalize(node.text or ""))), None),
                             },
                         )
                     )
             # EFetch response order need not become an accidental second rank.
             ranks = {identifier: index for index, identifier in enumerate(ids)}
-            return sorted(records, key=lambda source: ranks.get(source.external_id, len(ids)))
+            records.sort(key=lambda source: ranks.get(source.external_id, len(ids)))
+            await self._enrich_papers(records)
+            return records
         except Exception:
             self.errors[SourceType.pubmed] = "unavailable"
             return []
+
+    async def _enrich_papers(self, records: list[EvidenceSource]) -> None:
+        # Read only linked OA XML; unavailable text must never remove an abstract.
+        attempted = 0
+        async with httpx.AsyncClient(timeout=4.0, follow_redirects=False, trust_env=False) as client:
+            for source in records:
+                pmcid = source.metadata.get("pmcid")
+                reason = "not_linked" if not isinstance(pmcid, str) or not re.fullmatch(r"PMC[1-9][0-9]*", pmcid) else "fetch_limit"
+                source.metadata["full_text"] = {"status": "unavailable", "reason": reason}
+                if reason == "not_linked" or attempted == 2:
+                    continue
+                attempted += 1
+                url = f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML"
+                try:
+                    data = await asyncio.wait_for(self._read_paper(client, url), timeout=7.0)
+                    sections, indexing = parse_paper_text(data, source.external_id, pmcid)
+                    source.metadata["full_text"] = {**indexing, "url": url}
+                    if sections:
+                        source.metadata["sections"].update(sections)
+                        source.metadata["paper_packet_version"] = 1
+                except (httpx.HTTPError, asyncio.TimeoutError, ValueError):
+                    source.metadata["full_text"] = {"status": "unavailable", "reason": "unavailable", "url": url}
+
+    @staticmethod
+    async def _read_paper(client: httpx.AsyncClient, url: str) -> bytes:
+        async with client.stream("GET", url) as response:
+            response.raise_for_status()
+            data = bytearray()
+            async for block in response.aiter_bytes():
+                if len(data) + len(block) > MAX_XML_BYTES:
+                    raise ValueError("Paper exceeds indexing size limit")
+                data.extend(block)
+            return bytes(data)
 
 
 class ClinicalTrialsClient(SourceClient):

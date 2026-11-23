@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "purpose": "Public abstract versus bounded open-access body; engineering diagnostic, not clinical validation",
+  "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+  "source_xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+  "license": {
+    "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited.",
+    "links": [
+      "https://creativecommons.org/licenses/by-nc/4.0/"
+    ]
+  },
+  "snapshots": [
+    {
+      "id": "abstract",
+      "path": "abstract.json",
+      "sha256": "a6e351b9244046ecddaa09fbebda2a060274154177f05fe859e4e8c182b9e718"
+    },
+    {
+      "id": "full-text",
+      "path": "full-text.json",
+      "sha256": "e5430d3251657b708e419702d901acd20e4d01db0ba7fc7bfe1c5a34016e5ecd"
+    }
+  ],
+  "cases": [
+    {
+      "id": "abstract-results",
+      "snapshot_id": "abstract",
+      "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available.",
+      "history_case_id": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "full-text-results",
+      "snapshot_id": "full-text",
+      "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available.",
+      "history_case_id": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "full-text-simplify",
+      "snapshot_id": "full-text",
+      "question": "Explain that more simply, keeping the treatment groups, 16-week numbers and their limits.",
+      "history_case_id": "full-text-results",
+      "expected_route": "generated"
+    },
+    {
+      "id": "full-text-mortality",
+      "snapshot_id": "full-text",
+      "question": "Do these trial results establish that the combination lowers the risk of death?",
+      "history_case_id": null,
+      "expected_route": "generated"
+    }
+  ]
+}
