@@ -1,0 +1,58 @@
+{
+  "method": "Independent source/context-based semantic review; technical route acceptance is separate. Single run per variant, no clinical validation.",
+  "answers": "apps/api/evaluation/answer_coverage/results/paper-captions-v2-default-2026-11-23.json",
+  "summary": {
+    "pass": 2,
+    "partial": 1,
+    "fail": 1
+  },
+  "cases": [
+    {
+      "id": "full-text-results",
+      "grade": "partial",
+      "findings": [
+        "Correct 16-week arm directions and changes, but both reported \u00b10.11% terms omitted.",
+        "Positive 0.94% magnitude paired with negative confidence bounds without identifying the signed caption contrast.",
+        "Results P<0.0001 omitted.",
+        "Direct answer says full-text article available without clearly limiting it to selected sections; limitations separately acknowledge partial indexing."
+      ]
+    },
+    {
+      "id": "caption-interval",
+      "grade": "pass_with_qualification",
+      "findings": [
+        "Correct signed -0.94% estimate, 95% CI -1.25 to -0.63, treatment groups, 16-week timing and direction.",
+        "Prefer explicitly identifying the between-arm least-squares mean change-from-baseline contrast. P value was optional in this question."
+      ]
+    },
+    {
+      "id": "full-text-simplify",
+      "grade": "fail",
+      "findings": [
+        "Validation led to an excerpt fallback reporting passage counts rather than a coherent simpler explanation.",
+        "Raw drafts/final attempt also omit dispersion and pair a positive magnitude with negative interval bounds.",
+        "Fallback includes unrelated LDL-C excerpts. Safeguards were not relaxed."
+      ]
+    },
+    {
+      "id": "full-text-mortality",
+      "grade": "pass",
+      "findings": [
+        "Does not infer mortality benefit from biomarkers.",
+        "Limits missing mortality data to the supplied excerpt."
+      ]
+    }
+  ],
+  "prior_variant_summary": {
+    "pass": 1,
+    "partial": 2,
+    "fail": 1
+  },
+  "remaining_release_checks": [
+    "Requested uncertainty coverage and coherent simplified follow-ups",
+    "Signed effect/interval and unit consistency",
+    "Another independent paper",
+    "Broader existing holdouts",
+    "Actual browser workflow"
+  ]
+}

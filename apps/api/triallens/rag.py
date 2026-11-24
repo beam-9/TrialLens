@@ -351,8 +351,9 @@ def atomic_passage_limit(source: EvidenceSource, section: str) -> int | None:
     indexing = source.metadata.get("full_text")
     if (source.source_type == SourceType.pubmed and source.metadata.get("paper_packet_version") == 1
             and isinstance(indexing, dict) and indexing.get("status") == "available"
-            and all(isinstance(indexing.get(key, []), list) for key in ("paragraph_sections", "table_sections"))
-            and section in [*indexing.get("paragraph_sections", []), *indexing.get("table_sections", [])]
+            and all(isinstance(indexing.get(key, []), list) for key in ("paragraph_sections", "table_sections", "caption_sections"))
+            and section in [*indexing.get("paragraph_sections", []), *indexing.get("table_sections", []),
+                            *indexing.get("caption_sections", [])]
             and isinstance(source.metadata.get("sections"), dict) and section in source.metadata["sections"]):
         from triallens.paper_text import MAX_PACKET_CHARS
         return MAX_PACKET_CHARS
@@ -794,10 +795,22 @@ class Retriever:
         question_terms = meaningful_terms(question)
         topic_terms = meaningful_terms(f"{workspace.condition} {workspace.intervention or ''}")
         filtered = [chunk for chunk in chunks if source_types is None or chunk.source_type in source_types]
+        requested_figures = set(re.findall(r"\bfig(?:ure)?\.?\s*(\d+)[a-z]?\b", question, re.I))
+        figure_matches = set()
         scored = []
         for chunk in filtered:
             source = source_lookup.get(chunk.source_id)
             source_text = f"{source.title if source else ''} {chunk.text}"
+            if (requested_figures and source is not None
+                    and chunk.section.startswith("Full text figure caption ")
+                    and atomic_passage_limit(source, chunk.section) is not None):
+                labels = source.metadata["full_text"].get("caption_labels", {})
+                label_text = labels.get(chunk.section) if isinstance(labels, dict) else None
+                stored = source.metadata["sections"][chunk.section]
+                if isinstance(label_text, str) and isinstance(stored, str) and normalize(stored) == chunk.text:
+                    label = re.match(r"\s*fig(?:ure)?\.?\s*(\d+)[a-z]?\b", label_text, re.I)
+                    if label and label.group(1) in requested_figures:
+                        figure_matches.add(chunk.id)
             semantic = cosine(query_embedding, chunk.embedding)
             lexical = lexical_score(question, source_text)
             topic_overlap = term_overlap(topic_terms, source_text)
@@ -818,7 +831,7 @@ class Retriever:
                     score -= 0.1
             matched_terms = sorted((topic_terms | question_terms).intersection(tokenize(source_text)))[:8]
             scored.append((score, chunk, matched_terms, source))
-        ranked = sorted(scored, key=lambda item: item[0], reverse=True)[:limit]
+        ranked = sorted(scored, key=lambda item: (item[1].id in figure_matches, item[0]), reverse=True)[:limit]
         return [
             RetrievedChunk(
                 chunk_id=chunk.id,
@@ -838,7 +851,7 @@ class Retriever:
                 relevance_note=relevance_note(matched_terms, chunk.source_type),
             )
             for score, chunk, matched_terms, source in ranked
-            if score > 0.12 and matched_terms
+            if chunk.id in figure_matches or (score > 0.12 and matched_terms)
         ]
 
 
@@ -1187,8 +1200,9 @@ def document_content_scope(source: EvidenceSource) -> str:
     if source.source_type == SourceType.pubmed:
         indexing = source.metadata.get("full_text")
         if isinstance(indexing, dict) and indexing.get("status") == "available":
-            return ("PubMed abstract plus selected open-access article paragraphs and complete supported tables. "
-                    "This is a partial article index: other sections, unsupported tables, figures and supplements "
+            captions = " and complete figure-caption text" if indexing.get("indexed_captions", 0) else ""
+            return (f"PubMed abstract plus selected open-access article paragraphs, complete supported tables{captions}. "
+                    "This is a partial article index: other sections, unsupported tables, figure images and supplements "
                     "may be missing. Absence here does not establish absence from the article. "
                     "Structured extraction summaries remain based on the abstract.")
         return "PubMed abstract content stored in TrialLens, not necessarily the full article."

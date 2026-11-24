@@ -15,12 +15,14 @@ MAX_PARAGRAPH_CHARS = 16000
 MAX_TABLES = 6
 MAX_PACKET_CHARS = 8000
 MAX_TABLE_CHARS = MAX_PACKET_CHARS
+MAX_CAPTIONS = 6
+MAX_CAPTION_CHARS = 16000
 SCOPE = (
-    "Partial PMC article indexing: bounded body paragraphs and complete supported tables only. "
-    "Abstracts, references, figures, supplementary material and unsupported tables are excluded. "
+    "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. "
+    "Abstracts, references, figure images, supplementary material and unsupported tables are excluded. "
     "Missing values, arm definitions and statistics are not inferred."
 )
-_SKIP = {"abstract", "ref-list", "table-wrap", "table-wrap-group", "fig", "fig-group", "supplementary-material"}
+_SKIP = {"abstract", "ref-list", "ref", "table-wrap", "table-wrap-group", "fig", "fig-group", "supplementary-material"}
 
 
 def _tag(node: ET.Element) -> str:
@@ -38,6 +40,25 @@ def _prose(node: ET.Element) -> str:
             parts.append(_prose(child))
         parts.append(child.tail or "")
     # Normalize once at the outer boundary so inline numeric fragments stay joined.
+    return "".join(parts)
+
+
+def _caption_text(node: ET.Element) -> str:
+    if _tag(node) in {"math", "tex-math", "inline-formula", "disp-formula", "alternatives",
+                      "table-wrap", "table-wrap-group", "table", "thead", "tbody", "tfoot",
+                      "tr", "th", "td", "colgroup", "col", "array"}:
+        raise ValueError("unsupported_caption_markup")
+    parts = [node.text or ""]
+    for child in node:
+        tag = _tag(child)
+        block = tag in {"p", "title", "list", "list-item", "disp-quote", "break"}
+        if tag in {"abstract", "ref-list", "ref", "supplementary-material"}:
+            parts.append(child.tail or "")
+            continue
+        text = _caption_text(child)
+        if tag in {"sup", "sub"}:
+            text = f"<{tag}>{text}</{tag}>"
+        parts.extend(("\n" if block else "", text, "\n" if block else "", child.tail or ""))
     return "".join(parts)
 
 
@@ -70,6 +91,8 @@ def parse_paper_text(xml: bytes, expected_pmid: str, expected_pmcid: str) -> tup
 
     Table packets contain original semantic XML, preserving header/cell positions,
     labels, inline markup and footnotes together; no arm or statistic is derived.
+    Figure packets contain the label and complete supported caption text, with
+    explicit sup/sub notation; unsupported formula/table markup is omitted whole.
     """
     meta = {"status": "unavailable", "scope": SCOPE, "partial_indexing": True}
 
@@ -141,14 +164,68 @@ def parse_paper_text(xml: bytes, expected_pmid: str, expected_pmcid: str) -> tup
     if body is None:
         return unavailable("missing_body")
     sections: dict[str, str] = {}
+    caption_labels: dict[str, str] = {}
     reasons: Counter = Counter()
     paragraph_count = table_count = paragraph_chars = omitted_paragraphs = omitted_tables = 0
     paragraph_candidates: list[tuple[int, tuple[str, ...], str]] = []
     table_ordinal = 0
+    caption_count = caption_chars = omitted_captions = caption_ordinal = 0
+
+    def visit_embedded(node: ET.Element, headings: tuple[str, ...]) -> None:
+        for child in node:
+            tag = _tag(child)
+            if tag in {"table-wrap", "table-wrap-group", "fig", "fig-group"}:
+                visit(child, headings)
+            elif tag not in _SKIP:
+                visit_embedded(child, headings)
 
     def visit(node: ET.Element, headings: tuple[str, ...] = ()) -> None:
         nonlocal table_count, omitted_tables, table_ordinal
+        nonlocal caption_count, caption_chars, omitted_captions, caption_ordinal
         tag = _tag(node)
+        captions = [child for child in node if _tag(child) == "caption"] if tag in {"fig", "fig-group"} else []
+        if tag == "fig" or (tag == "fig-group" and captions):
+            caption_ordinal += 1
+            labels = [child for child in node if _tag(child) == "label"]
+            caption = label = ""
+            reason = None
+            if len(captions) != 1:
+                reason = "missing_or_ambiguous_caption"
+            elif len(labels) > 1:
+                reason = "ambiguous_caption_label"
+            else:
+                try:
+                    caption = "\n".join(filter(None, (normalize(line) for line in _caption_text(captions[0]).splitlines())))
+                    label = normalize(_caption_text(labels[0])) if labels else ""
+                except ValueError:
+                    reason = "unsupported_caption_markup"
+            packet = "\n".join(filter(None, (label, caption)))
+            if reason is None:
+                if not caption:
+                    reason = "missing_or_ambiguous_caption"
+                elif len(packet) > MAX_PACKET_CHARS:
+                    reason = "caption_size_limit"
+                elif caption_count >= MAX_CAPTIONS:
+                    reason = "caption_count_limit"
+                elif caption_chars + len(packet) > MAX_CAPTION_CHARS:
+                    reason = "caption_total_size_limit"
+            if reason:
+                omitted_captions += 1
+                reasons[reason] += 1
+            else:
+                caption_count += 1
+                caption_chars += len(packet)
+                section = f"Full text figure caption {caption_ordinal:03d}"
+                sections[section] = packet
+                if labels:
+                    caption_labels[section] = label
+            if tag == "fig":
+                return
+        if tag == "fig-group":
+            for child in node:
+                if _tag(child) in {"fig", "fig-group"}:
+                    visit(child, headings)
+            return
         if tag == "table-wrap":
             table_ordinal += 1
             complete_table = copy.deepcopy(node)
@@ -166,7 +243,7 @@ def parse_paper_text(xml: bytes, expected_pmid: str, expected_pmcid: str) -> tup
                 table_count += 1
                 sections[f"Full text table {table_ordinal:03d}"] = packet
             return
-        if tag in _SKIP - {"table-wrap-group"}:
+        if tag in _SKIP - {"table-wrap-group", "fig-group"}:
             return
         if tag == "sec":
             title = next((_text(child) for child in node if _tag(child) == "title"), "")
@@ -176,20 +253,18 @@ def parse_paper_text(xml: bytes, expected_pmid: str, expected_pmcid: str) -> tup
             text = normalize(_prose(node))
             if text:
                 paragraph_candidates.append((len(paragraph_candidates) + 1, headings, text))
-            # Tables occasionally occur within p; never silently mix them into prose.
-            for child in node:
-                if _tag(child) in {"table-wrap", "table-wrap-group"}:
-                    visit(child, headings)
+            # Embedded evidence stays separate from the surrounding prose.
+            visit_embedded(node, headings)
             return
         for child in node:
             visit(child, headings)
 
     visit(body)
-    # JATS commonly relocates body-referenced tables into article-level floats.
+    # JATS commonly relocates body-referenced tables and figures into article floats.
     for floats in article:
         if _tag(floats) == "floats-group":
             for child in floats:
-                if _tag(child) in {"table-wrap", "table-wrap-group"}:
+                if _tag(child) in {"table-wrap", "table-wrap-group", "fig", "fig-group"}:
                     visit(child)
 
     def paragraph_priority(item: tuple[int, tuple[str, ...], str]) -> tuple[int, int]:
@@ -212,6 +287,9 @@ def parse_paper_text(xml: bytes, expected_pmid: str, expected_pmcid: str) -> tup
     meta.update(status="available" if sections else "unavailable", indexed_paragraphs=paragraph_count,
                 indexed_tables=table_count, omitted_paragraphs=omitted_paragraphs,
                 omitted_tables=omitted_tables, omission_reasons=dict(reasons),
+                indexed_captions=caption_count, omitted_captions=omitted_captions,
+                caption_labels=caption_labels,
+                caption_sections=[key for key in sections if key.startswith("Full text figure caption ")],
                 table_sections=[key for key in sections if key.startswith("Full text table ")],
                 paragraph_sections=[key for key in sections if key.startswith("Full text paragraph ")])
     if not sections:

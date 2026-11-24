@@ -9,7 +9,7 @@ import pytest
 from triallens import conversation
 from triallens.models import EvidenceSource, RetrievedChunk, SourceType, Workspace
 from triallens.paper_text import MAX_PACKET_CHARS, MAX_XML_BYTES
-from triallens.rag import AnswerService, Retriever, build_chunks, document_content_scope
+from triallens.rag import AnswerService, Retriever, build_chunks, build_extractions, document_content_scope
 from triallens.sources import PubMedClient
 
 
@@ -205,3 +205,81 @@ def test_valid_paper_packet_is_omitted_whole_when_remaining_budget_is_too_small(
     assert packet in records[0]['matched_passages']
     assert records[-1]['matched_passages'] == [] and records[-1]['content_truncated']
     assert sum(len(r['text']) + sum(map(len, r['matched_passages'])) for r in records) <= 28000
+
+
+def test_caption_ci_reaches_both_ask_passes_as_complete_identified_evidence(monkeypatch, tmp_path):
+    caption = b'''<fig id="f2"><label>Figure 2</label><caption><title>Adjusted HbA1c difference</title>
+    <p>At 12 weeks, drug A versus placebo: -0.6 percentage points (95% CI -1.0 to -0.2).</p>
+    <p>Values are adjusted estimates; this is not a mortality outcome.</p></caption><graphic href="never-fetch"/></fig>'''
+    paper = PAPER.replace(b'</sec></body>', caption + b'</sec></body>')
+    workspace, source, requests = source_with_paper(monkeypatch, paper=paper)
+    assert len(requests) == 3
+    section = source.metadata['full_text']['caption_sections'][0]
+    chunk = next(c for c in build_chunks([source]) if c.section == section)
+    assert 'Figure 2' in chunk.text and '95% CI -1.0 to -0.2' in chunk.text
+    assert 'not a mortality outcome' in chunk.text and 'never-fetch' not in chunk.text
+    passage = RetrievedChunk(chunk_id=chunk.id, source_id=source.id, source_type=source.source_type,
+        citation='PubMed:123', text=chunk.text, section=section, score=1)
+    record = conversation.build_evidence_records([source], [passage])[0]
+    assert record['matched_passages'] == [chunk.text]
+    assert record['paper_passage_links'] == [{'matched_passage_index': 0, 'section': section}]
+    assert record['full_text_provenance']['indexed_captions'] == 1
+    assert 'complete figure-caption text' in record['content_scope']
+    altered = passage.model_copy(update={'text': '95% CI -1.0 to -0.2'})
+    assert conversation.build_evidence_records([source], [altered])[0]['matched_passages'] == []
+    assert '95% CI' not in json.dumps(build_extractions([source], workspace)[0].model_dump(mode='json'))
+    monkeypatch.setenv('TRIALLENS_CHAT_PROVIDER', 'cloudflare')
+    monkeypatch.setenv('TRIALLENS_USAGE_PATH', str(tmp_path / 'usage.sqlite3'))
+    monkeypatch.setattr(conversation, 'chat_configured', lambda: True)
+    question = 'What does Figure 2 report for HbA1c, with the confidence interval?'
+    fallback = AnswerService().answer(workspace, question, [passage], [])
+    calls = []
+    def complete(messages, schema):
+        evidence = json.loads(messages[1]['content'])['evidence'][0]
+        calls.append(evidence)
+        assert chunk.text in evidence['matched_passages']
+        assert {'matched_passage_index': evidence['matched_passages'].index(chunk.text), 'section': section} in evidence['paper_passage_links']
+        return json.dumps({'paragraphs': ['Figure 2 reports an adjusted difference of -0.6 percentage points at 12 weeks for drug A versus placebo (95% CI -1.0 to -0.2) [PubMed:123].'],
+                           'cited_sources': ['PubMed:123'], 'uncertainty': []})
+    monkeypatch.setattr(conversation.cloudflare, 'completion', complete)
+    result = conversation.ConversationService().generate(workspace, question, [], [source], fallback)
+    assert result.generation_mode == 'conversational' and len(calls) == 2
+
+
+@pytest.mark.parametrize('question,label', [('What does Figure 6 show for HbA1c?', 'Figure 6'),
+                                           ('What does Fig. 6B show for HbA1c?', 'Fig. 6.')])
+def test_requested_figure_number_ranks_ahead_of_other_identical_captions(monkeypatch, question, label):
+    figures = ''.join(f'<fig><label>{label if i == 6 else "Figure " + str(i)}</label><caption><p>Drug A HbA1c results.</p></caption></fig>' for i in range(1, 7))
+    paper = PAPER.replace(b'</sec></body>', figures.encode() + b'</sec></body>')
+    workspace, source, _ = source_with_paper(monkeypatch, paper=paper)
+    chunks = build_chunks([source])
+    retrieved = Retriever().retrieve_conversation(workspace, question, chunks, [source])
+    assert retrieved[0].section == 'Full text figure caption 006'
+    record = conversation.build_evidence_records([source], retrieved)[0]
+    assert any(label in passage for passage in record['matched_passages'])
+    # An absent label must not be replaced with the sixth parser ordinal.
+    missing = Retriever().retrieve_conversation(workspace, 'What does Figure 7 show for HbA1c?', chunks, [source])
+    assert all(c.section != 'Full text figure caption 007' for c in missing)
+
+
+def test_caption_sentence_cannot_impersonate_a_source_figure_label(monkeypatch):
+    figures = '<fig><caption><p>Figure 6 shows prior work; drug A HbA1c.</p></caption></fig>'
+    figures += '<fig><label>Figure 6</label><caption><p>Drug A HbA1c result.</p></caption></fig>'
+    paper = PAPER.replace(b'</sec></body>', figures.encode() + b'</sec></body>')
+    workspace, source, _ = source_with_paper(monkeypatch, paper=paper)
+    chunks = build_chunks([source])
+    selected = Retriever().retrieve_conversation(workspace, 'What does Figure 6 show for HbA1c?', chunks, [source])
+    assert selected[0].section == 'Full text figure caption 002'
+    # A tampered chunk with genuine section metadata cannot receive the label priority.
+    altered = [c.model_copy(update={'text': 'Unrelated text.'}) if c.section == selected[0].section else c for c in chunks]
+    ranked = Retriever().retrieve_conversation(workspace, 'What does Figure 6 show for HbA1c?', altered, [source])
+    assert ranked[0].section != 'Full text figure caption 002'
+
+
+@pytest.mark.parametrize('question', ['Fig. 6', 'What does Fig. 6 show?', 'Figure 6'])
+def test_verified_figure_label_does_not_require_shared_topic_words(monkeypatch, question):
+    paper = PAPER.replace(b'</sec></body>', b'<fig><label>Figure 6</label><caption><p>Adjusted estimates for placebo.</p></caption></fig></sec></body>')
+    workspace, source, _ = source_with_paper(monkeypatch, paper=paper)
+    source.title = 'Title'
+    retrieved = Retriever().retrieve_conversation(workspace, question, build_chunks([source]), [source])
+    assert retrieved[0].section == 'Full text figure caption 001'

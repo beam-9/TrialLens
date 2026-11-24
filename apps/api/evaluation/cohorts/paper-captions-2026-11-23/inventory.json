@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "purpose": "Caption-text ingestion diagnostic against the prior source XML, unchanged production model/prompts; not clinical validation",
+  "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+  "source_xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+  "license": {
+    "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited.",
+    "links": [
+      "https://creativecommons.org/licenses/by-nc/4.0/"
+    ]
+  },
+  "snapshots": [
+    {
+      "id": "captions",
+      "path": "captions.json",
+      "sha256": "062b88421ce4dbbaa4e98d2f7f95f846076d1d6aa60928130dc5e05b6b75db32"
+    }
+  ],
+  "cases": [
+    {
+      "id": "full-text-results",
+      "snapshot_id": "captions",
+      "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available.",
+      "history_case_id": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "caption-interval",
+      "snapshot_id": "captions",
+      "question": "What does Figure 2A report for the 16-week HbA1c difference between metformin plus atorvastatin and atorvastatin alone? Give the signed difference, 95% confidence interval, groups and units, and explain the direction without treating it as a mortality result.",
+      "history_case_id": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "full-text-simplify",
+      "snapshot_id": "captions",
+      "question": "Explain that more simply, keeping the treatment groups, 16-week numbers and their limits.",
+      "history_case_id": "full-text-results",
+      "expected_route": "generated"
+    },
+    {
+      "id": "full-text-mortality",
+      "snapshot_id": "captions",
+      "question": "Do these trial results establish that the combination lowers the risk of death?",
+      "history_case_id": null,
+      "expected_route": "generated"
+    }
+  ],
+  "parser_sha256": "3c0c975fddf490b3735be630902d0e52e2ec6792191f1baa26d14f8a7ff993ac"
+}

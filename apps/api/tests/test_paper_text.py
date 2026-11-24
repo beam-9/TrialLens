@@ -31,6 +31,10 @@ def test_identity_inline_numeric_text_scope_license_and_provenance():
     assert not meta['license_missing'] and meta['partial_indexing']
     assert 'Partial PMC' in meta['scope']
     assert meta['table_sections'] == []
+    assert meta['caption_sections'] == []
+    assert meta['caption_labels'] == {}
+    assert meta['indexed_captions'] == meta['omitted_captions'] == 0
+    assert 'figure caption text' in meta['scope'] and 'figure images' in meta['scope']
 
 
 @pytest.mark.parametrize('pmid,pmc', [('999', '456'), ('123', '999'), ('', '456')])
@@ -165,3 +169,128 @@ def test_license_metadata_is_bounded_and_truncation_disclosed():
 def test_deep_xml_fails_closed_without_recursion_error():
     sections, meta = parse_paper_text(article('<sec>' * 70 + '<p>Finding.</p>' + '</sec>' * 70), '123', 'PMC456')
     assert not sections and meta['reason'] == 'xml_nesting_limit'
+
+
+FIGURE = '''<fig id="f2"><label>Fig. 2</label><caption><title>Primary outcome.</title>
+<p>Adjusted difference −6.<italic>1</italic>% (95% CI −10.2 to −2.0).</p><p>Analysis population: all randomized participants.</p>
+</caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://example.invalid/figure.jpg"/></fig>'''
+
+
+def test_complete_figure_caption_keeps_label_ci_inline_text_and_paragraph_boundaries(monkeypatch):
+    import urllib.request
+    monkeypatch.setattr(urllib.request, 'urlopen', lambda *a, **k: pytest.fail('Image fetch attempted'))
+    sections, meta = parse_paper_text(article(FIGURE), '123', 'PMC456')
+    assert sections == {'Full text figure caption 001':
+        'Fig. 2\nPrimary outcome.\nAdjusted difference −6.1% (95% CI −10.2 to −2.0).\n'
+        'Analysis population: all randomized participants.'}
+    assert meta['indexed_captions'] == 1 and meta['omitted_captions'] == 0
+    assert meta['caption_sections'] == ['Full text figure caption 001']
+    assert meta['caption_labels'] == {'Full text figure caption 001': 'Fig. 2'}
+    assert meta['indexed_paragraphs'] == 0
+
+
+def test_body_fig_groups_article_floats_and_nested_paragraph_figures_stay_separate():
+    body = '<p>Before <named-content>' + FIGURE + '</named-content> after.</p>'
+    body += '<fig-group><label>Group 1</label><caption><p>Group caption.</p></caption>' + FIGURE + '</fig-group>'
+    xml = article(body).replace(b'</article>', ('<floats-group><fig-group>' + FIGURE + '</fig-group></floats-group></article>').encode())
+    sections, meta = parse_paper_text(xml, '123', 'PMC456')
+    assert meta['indexed_captions'] == 4
+    assert sections['Full text figure caption 002'] == 'Group 1\nGroup caption.'
+    assert sections['Full text paragraph 001 — Body'] == 'Before after.'
+    assert meta['indexed_paragraphs'] == 1
+
+
+@pytest.mark.parametrize('figure,reason', [
+    ('<fig><label>Fig. 1</label><graphic/></fig>', 'missing_or_ambiguous_caption'),
+    ('<fig><caption><p> </p></caption></fig>', 'missing_or_ambiguous_caption'),
+    ('<fig><caption><p>One.</p></caption><caption><p>Two.</p></caption></fig>', 'missing_or_ambiguous_caption'),
+    ('<fig><label>Fig. 1</label><caption><p>' + 'x' * MAX_PACKET_CHARS + '</p></caption></fig>', 'caption_size_limit'),
+])
+def test_unsupported_captions_are_omitted_whole_and_preserve_ordinals(figure, reason):
+    sections, meta = parse_paper_text(article(figure + FIGURE), '123', 'PMC456')
+    assert meta['caption_sections'] == ['Full text figure caption 002']
+    assert meta['omitted_captions'] == 1 and meta['omission_reasons'] == {reason: 1}
+    assert len(sections) == 1
+    assert meta['caption_labels'] == {'Full text figure caption 002': 'Fig. 2'}
+
+
+def test_caption_count_and_combined_character_limits_omit_whole_packets():
+    sections, meta = parse_paper_text(article(FIGURE * 8), '123', 'PMC456')
+    assert meta['indexed_captions'] == 6 and meta['omitted_captions'] == 2
+    assert meta['omission_reasons'] == {'caption_count_limit': 2}
+    large = '<fig><caption><p>' + 'x' * 7999 + '</p></caption></fig>'
+    sections, meta = parse_paper_text(article(large * 3 + FIGURE), '123', 'PMC456')
+    assert meta['caption_sections'] == ['Full text figure caption 001', 'Full text figure caption 002']
+    assert meta['omitted_captions'] == 2
+    assert meta['omission_reasons'] == {'caption_total_size_limit': 2}
+    assert sum(map(len, sections.values())) <= 16000
+    assert all(len(packet) <= MAX_PACKET_CHARS for packet in sections.values())
+
+
+def test_nested_caption_paragraphs_do_not_fuse_words():
+    figure = '<fig><label>Fig. 1</label><caption><p>First.<p>Nested <italic>CI</italic>.</p>Last.</p><p>Next.</p></caption></fig>'
+    sections, _ = parse_paper_text(article(figure), '123', 'PMC456')
+    assert sections['Full text figure caption 001'] == 'Fig. 1\nFirst.\nNested CI.\nLast.\nNext.'
+
+
+def test_figures_in_abstract_references_and_supplementary_material_are_excluded():
+    excluded = ''.join(f'<{tag}>' + FIGURE + f'</{tag}>' for tag in ('abstract', 'ref-list', 'ref', 'supplementary-material'))
+    xml = article('<p>Only body prose.</p>' + excluded)
+    xml = xml.replace(b'</article-meta>', ('<abstract>' + FIGURE + '</abstract></article-meta>').encode())
+    xml = xml.replace(b'</back>', (FIGURE + '</back>').encode())
+    xml = xml.replace(b'</article>', ('<floats-group>' + excluded + '</floats-group></article>').encode())
+    sections, meta = parse_paper_text(xml, '123', 'PMC456')
+    assert sections == {'Full text paragraph 001 — Body': 'Only body prose.'}
+    assert meta['indexed_captions'] == meta['omitted_captions'] == 0
+
+
+def test_excluded_figures_inside_caption_are_not_traversed():
+    figure = '<fig><label>Fig. 1</label><caption><p>Caption.</p><supplementary-material>' + FIGURE + '</supplementary-material></caption></fig>'
+    sections, meta = parse_paper_text(article(figure), '123', 'PMC456')
+    assert sections == {'Full text figure caption 001': 'Fig. 1\nCaption.'}
+    assert meta['indexed_captions'] == 1
+
+
+def test_caption_and_label_preserve_superscript_and_subscript_notation():
+    figure = '<fig><label>Fig. 10<sup>a</sup><sub>2</sub></label><caption><p>Risk 10<sup>−3</sup>, O<sub>2</sub> and 0.<italic>5</italic>%.</p></caption></fig>'
+    sections, meta = parse_paper_text(article(figure), '123', 'PMC456')
+    assert sections == {'Full text figure caption 001':
+        'Fig. 10<sup>a</sup><sub>2</sub>\nRisk 10<sup>−3</sup>, O<sub>2</sub> and 0.5%.'}
+    assert meta['indexed_captions'] == 1
+    assert meta['caption_labels'] == {'Full text figure caption 001': 'Fig. 10<sup>a</sup><sub>2</sub>'}
+
+
+@pytest.mark.parametrize('markup', [
+    '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>',
+    '<tex-math>x^2</tex-math>',
+    '<inline-formula>x^2</inline-formula>',
+    '<disp-formula>x^2</disp-formula>',
+    '<alternatives><tex-math>x^2</tex-math><math><mi>x</mi><mn>2</mn></math></alternatives>',
+    '<table-wrap><table><tr><td>1</td><td>2</td></tr></table></table-wrap>',
+])
+def test_unsupported_caption_or_label_markup_omits_complete_packet(markup):
+    for label, caption in [('Fig. 1', 'Finding. ' + markup), ('Fig. ' + markup, 'Finding.')]:
+        figure = f'<fig><label>{label}</label><caption><p>{caption}</p></caption></fig>'
+        sections, meta = parse_paper_text(article(figure + FIGURE), '123', 'PMC456')
+        assert meta['caption_sections'] == ['Full text figure caption 002']
+        assert len(sections) == 1
+        assert meta['omitted_captions'] == 1
+        assert meta['omission_reasons'] == {'unsupported_caption_markup': 1}
+
+
+def test_unsupported_markup_in_excluded_caption_subtrees_is_ignored():
+    excluded = ''.join(f'<{tag}><alternatives><math>x</math></alternatives></{tag}>'
+                       for tag in ('supplementary-material', 'ref', 'ref-list', 'abstract'))
+    figure = '<fig><caption><p>Complete supported caption.</p>' + excluded + '</caption></fig>'
+    sections, meta = parse_paper_text(article(figure), '123', 'PMC456')
+    assert sections == {'Full text figure caption 001': 'Complete supported caption.'}
+    assert meta['omission_reasons'] == {} and meta['indexed_captions'] == 1
+
+
+def test_multiple_figure_labels_are_ambiguous_but_missing_label_is_allowed():
+    duplicate = '<fig><label>Fig. 1</label><label>Fig. 2</label><caption><p>Finding.</p></caption></fig>'
+    unlabeled = '<fig><caption><p>Unlabeled finding.</p></caption></fig>'
+    sections, meta = parse_paper_text(article(duplicate + unlabeled), '123', 'PMC456')
+    assert sections == {'Full text figure caption 002': 'Unlabeled finding.'}
+    assert meta['omission_reasons'] == {'ambiguous_caption_label': 1}
+    assert meta['caption_labels'] == {}

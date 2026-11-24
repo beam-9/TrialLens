@@ -351,7 +351,7 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
         paper = source.metadata.get("full_text")
         paper_links = []
         if (isinstance(paper, dict) and paper.get("status") == "available"
-                and all(isinstance(paper.get(key, []), list) for key in ("paragraph_sections", "table_sections"))):
+                and all(isinstance(paper.get(key, []), list) for key in ("paragraph_sections", "table_sections", "caption_sections"))):
             content_truncated |= bool(paper.get("partial_indexing"))
             for passage_index, passage in enumerate(passages):
                 if passage in paper_sections:
@@ -380,7 +380,8 @@ def build_evidence_records(sources: list[EvidenceSource], retrieved_chunks: list
                 "paper_passage_links": paper_links,
                 "full_text_provenance": {key: paper[key] for key in (
                     "pmcid", "url", "xml_sha256", "license", "license_missing", "license_truncated",
-                    "scope", "indexed_paragraphs", "indexed_tables", "omitted_paragraphs", "omitted_tables"
+                    "scope", "indexed_paragraphs", "indexed_tables", "omitted_paragraphs", "omitted_tables",
+                    "indexed_captions", "omitted_captions"
                 ) if key in paper}}
                if isinstance(paper, dict) and paper.get("status") == "available" else {}),
             **({"outcome_links": outcome_links} if outcome_links else {}),
