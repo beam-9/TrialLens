@@ -62,6 +62,24 @@ Each full-text read has a seven-second overall deadline and a 2 MiB decompressed
 limit. A failed, unavailable or unlinked paper keeps its abstract and records an
 unavailable reason; later papers beyond the cap record `fetch_limit`.
 
+The adapter uses a four-second HTTP operation timeout, disables environment proxy
+inheritance and redirects, and enforces a seven-second total read deadline. Every
+attempted linked fetch consumes one of the two attempts, including failures;
+unlinked entries do not. Parser failure metadata always has status, scope,
+partial_indexing and reason; xml_sha256 appears once bounded input bytes have been
+accepted. Validated identity/license fields appear only after their parsing stages.
+Success additionally includes paragraph_sections/table_sections, indexed and omitted
+counts, and omission_reasons. License text is limited to 2,000 characters, four links
+and 500 characters per link, with license_truncated. Parser reasons distinguish
+oversized_or_invalid_xml, unsafe_xml_declaration, malformed_xml, xml_nesting_limit,
+missing_or_multiple_articles, missing_article_metadata,
+missing_or_ambiguous_article_ids, article_identity_mismatch, missing_body and
+no_supported_body_content. Article IDs must match their expected strings;
+pmc/pmcid aliases normalize a missing PMC prefix and must agree. Table validation
+rejects missing/nested tables, rows/cells, merged/nested cells, ragged rows or missing
+column headers before applying size/count limits. Section keys use source-document
+ordinals, not a new scientific outcome identity.
+
 Successful metadata adds `full_text` and `paper_packet_version=1`, plus the
 emitted sections under the existing `metadata.sections` dictionary. No source
 identity is replaced and no existing source is deleted. Missing license metadata
@@ -83,6 +101,19 @@ oversized fragments. Use the existing all-or-omit budget allocation. Supply
 section-to-passage links, bounded full-text provenance, abstract/body distinction,
 and partial-context flags to both generation passes. Citation grounding, numerical
 checks, source-copy rejection, treatment boundaries and quota accounting remain.
+
+A paper packet requires a PubMed source, paper_packet_version=1, available indexing
+metadata, a section in the parser-emitted paragraph/table lists and a stored section
+value. Ranked retrieved sources fill the eight source slots before remaining sources.
+Within a source, complete packets precede ordinary passages, keeping at most four.
+The remaining 28,000-character source-text budget is shared among remaining sources;
+a complete ranked packet may borrow enough room to fit, but cannot exceed the
+remaining global budget. Packets that cannot fit are omitted whole. Duplicate passage
+space is reclaimed for the abstract prefix, which is capped at 10,000 characters.
+A paper passage link carries matched_passage_index and its actually retrieved section.
+Full-text provenance exposes only PMCID, URL, XML hash, bounded license/missing/truncated
+flags, scope and indexed/omitted counts. It does not duplicate all section lists into
+the model context.
 
 Create `apps/api/tests/test_paper_pipeline.py` and the generated frozen cohort
 `apps/api/evaluation/cohorts/paper-grounding-2026-11-22/*.json`. These verify
@@ -111,9 +142,40 @@ or an accepted generation route is not a semantic pass.
 
 No paid API, local GPU, new inference provider, source migration or deployment is
 introduced. Existing workspaces need an explicit normal source refresh to gain new
-content; saved answers retain their original source revisions. Reverting these
-changes stops future enrichment; existing enriched source records would require
-refresh under the older code before their stored full-text sections disappear.
+content; saved answers retain their original source revisions.
+
+### Reproducible verification
+
+```sh
+apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/evaluate_quality.py \
+  --inventory apps/api/evaluation/cohorts/paper-grounding-2026-11-22/inventory.json \
+  --output docs/performance/results/paper-grounding-default-2026-11-22.json \
+  --answers apps/api/evaluation/answer_coverage/results/paper-grounding-default-2026-11-22.json
+```
+
+Preserve existing captures; use new result filenames for any rerun. Consult the
+cohort's adjudication.json. Abstract-only answers must scope availability and not
+call a positive change a decrease. Full-text Results answers must preserve the
+source's combination-arm decrease 0.58%±0.11%, atorvastatin-arm increase 0.35%±0.11%,
+reported difference 0.94%, 16-week timeframe and P<0.0001. Do not calculate a missing
+interval, invent the dispersion type, or claim the abstract/body wording is identical.
+Follow-ups must retain the requested groups, figures and source limits. Mortality
+answers must not infer a death-risk benefit from HbA1c/LDL-C findings. Route acceptance
+is not semantic acceptance. Existing captures are diagnostics, not a passing release gate.
+
+### Safe rollback
+
+To stop future enrichment, revert sources.py to a84b340 while retaining paper_text.py
+and the packet-aware RAG/context code for already stored evidence. This requires no
+data deletion. Before a full code rollback, disable public Ask access and back up
+the data store. Refresh affected workspaces through the enrichment-disabled backend's
+normal POST /workspaces/{workspace_id}/ingest path. Verify that active sources and
+chunks no longer contain full-text packet sections before reverting packet handling
+and reopening Ask. Provider failures/no matches can retain old evidence, so a successful
+HTTP response alone is insufficient; keep compatible packet handling until the check
+passes. Preserve archived evidence revisions, annotations and saved answers through
+the existing store replacement path. No automatic store restoration or user-work
+deletion is authorized by this plan.
 
 Remaining release gates: finish the hosted comparison; audit arm/value/direction,
 units, timepoint, missing uncertainty, source-scope claims and conversational

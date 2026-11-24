@@ -2,9 +2,10 @@
 
 **Target:** `docs/ask-paper-grounding-2026-11-22.md` (full file)
 
-Status: awaiting user decision on proposed document edits. The code fixes below
-were separately implemented and verified under the authorized development task.
-No proposed document replacements have been applied.
+Status: resolved — user completed the interactive breakdown. Items 1, 2, 3 and 6
+were agreed resolved after code repairs. Items 4, 5, 7 and 8 were accepted and their
+document edits applied. Accepted fixes: 4; contested/resolved findings: 4; escalated: 0;
+declined: 0. Answer-quality gaps and release checks below remain open.
 
 Two fresh-context reviewers read the installed EGM personas and standards:
 Codebase Details against the Re-Implementation Standard, and Implementation
@@ -105,5 +106,5 @@ apps/api/.venv/bin/python apps/api/evaluation/answer_coverage/evaluate_quality.p
 - Source-based answer review still found missing ±0.11% dispersion in the main result and follow-up. The generic uncertainty-prompt candidate also omitted these figures and is not promoted. The between-arm interval in figure captions was outside the selected evidence; the parser explicitly excludes figures. Caption-text ingestion is a concrete next experiment, separate from image/OCR interpretation.
 - No paid inference, local GPU, quota bypass or deployment. Browser workflow and a second independent paper remain unchecked.
 
-Requested next decision: approve these document repairs, request an interactive
-breakdown, comment on the target/report, or continue without applying them.
+Resolution complete. Continue with the remaining answer-quality experiments; this
+document approval does not certify Ask as complete.
