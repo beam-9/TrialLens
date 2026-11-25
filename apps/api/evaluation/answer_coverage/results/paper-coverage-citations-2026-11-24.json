@@ -1,0 +1,1814 @@
+[
+  {
+    "case_id": "full-text-results",
+    "snapshot_id": "captions",
+    "answer": {
+      "id": "d4e20c32-5c5c-476c-862a-f59bd6dfbd5b",
+      "workspace_id": "paper-captions-v2-1123",
+      "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:38763510": "c3f444e903a051fe04f48176b8aaa5ccffa09d765c6b0f92648df6f5449ff24e"
+      },
+      "short_answer": "For metformin type 2 diabetes, I found 8 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "direct_answer": "For metformin type 2 diabetes, I found 8 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "Within the selected document, TrialLens found passages relevant to metformin type 2 diabetes and the user's question.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 0.55%, 0.94%, P<0.0001, 16 weeks; the relevant passage says the difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d says additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035) (PubMed, 38763510). Section: Full text paragraph 027 \u2014 DISCUSSION. Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510."
+      ],
+      "supporting_evidence": [
+        "Within the selected document, TrialLens found passages relevant to metformin type 2 diabetes and the user's question.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 0.55%, 0.94%, P<0.0001, 16 weeks; the relevant passage says the difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d says additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035) (PubMed, 38763510). Section: Full text paragraph 027 \u2014 DISCUSSION. Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510."
+      ],
+      "safety_limitations": [
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d reports or describes based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15] (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510."
+      ],
+      "uncertainty": [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+        "Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible."
+      ],
+      "limitations": [
+        "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:38763510"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "705e0b7f-ff36-4823-8452-44130b5f7d8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+          "score": 1.1871,
+          "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched after, atorvastatin, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "2d300f24-6729-42f1-b456-241930a42a8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "The sample size to demonstrate the superiority of the combination group versus the metformin or atorvastatin groups with regards to mean change in HbA1c levels and percent change in LDL-C concentrations was determined using a significance level of 2.5% and a one-sided test. The planned enrolment was of 60 patients per group (total 180), which provided 90% power to detect a mean difference of 0.73% in the HbA1c levels between the combination and atorvastatin groups, assuming common standard deviations (SDs) of 1.1%. This calculation was based on the assumption of a 20% drop-out rate.",
+          "score": 1.1628,
+          "section": "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "da734d76-64b7-438a-a17a-4c2280db8b06",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 3. (A) Least square (LS) mean percent change in low-density lipoprotein cholesterol (LDL-C) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22124.73% [95% confidence interval, CI, \u221210.13 to 0.68; P=0.0859] at 8 weeks; \u22129.43% [95% CI, \u221215.02 to \u22123.84; P=0.0011] at 16 weeks). (B) Mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to week 8 and 16 in the combination, metformin, and atorvastatin group (combination vs. metformin; differences: 0.27% [95% CI, 0.09 to 0.44; P=0.0035] at 8 weeks and 0.33% [95% CI, 0.11 to 0.55; P=0.0035] at 16 weeks) (combination vs. atorvastatin; difference: \u22120.55% [95% CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks and \u22120.94 [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). <sup>a</sup>P<0.05, <sup>b</sup>P<0.001.",
+          "score": 1.1583,
+          "section": "Full text figure caption 003",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "79ed49ea-a840-4fcf-b207-bbff7272258d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 2. (A) Least square (LS) mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22120.55% [95% confidence interval, CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks; \u22120.94% [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). (B) LS mean percent change in low-density lipoprotein cholesterol (LDL-C) levels from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and metformin alone (metformin group) (LS mean differences: \u221244.95% [95% CI, \u221250.68 to \u221239.21; P<0.001] at 8 weeks; \u221247.51% [95% CI, \u221253.66 to \u221241.36; P<0.001] at 16 weeks). <sup>a</sup>P<0.001.",
+          "score": 1.1367,
+          "section": "Full text figure caption 002",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, groups, hba1c in a literature source."
+        },
+        {
+          "chunk_id": "d2809f85-a23c-4425-b43d-00e00010c970",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+          "score": 1.133,
+          "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "3915dfd6-08b3-4cfa-9c70-5b485ac8356e",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "This study demonstrated that the difference in the rate of change in LDL-C after 16 weeks of treatment compared to the baseline between the combination and metformin groups was \u221247.51%, which was statistically significant (P<0.0001). Additionally, the difference in the amount of change in HbA1c from the baseline to the end of the study between the combination and atorvastatin groups was \u22120.94%, which was also statistically significant (P<0.0001).",
+          "score": 1.1272,
+          "section": "Full text paragraph 025 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin"
+          ],
+          "relevance_note": "Matched after, atorvastatin, change, diabetes, difference in a literature source."
+        },
+        {
+          "chunk_id": "30c54eed-1699-469c-a373-93678d0914d9",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035). The increase in fasting blood glucose and HbA1c in statin-based drugs is also reported in the cautions for use in the U.S. Food and Drug Administration Lipitor monograph. LDL-C is lowered by 1 mmol/L (38.61 mg/dL) and HbA1c is increased by 0.12% with the administration of statins. Hence, it has been reported that the major factors of CVD are reduced by 20% [14]. Based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15]. Based on the results of the previous studies, we could suggest that the 2.05 mmol/L (79.02 mg/dL) reduction in LDL-C in the combination group, the result of this trial, might reduce the CV risk by more than 40%. In this context, the increase in HbA1c might not be clinically meaningful as it outweighs the benefit of significantly reducing the risk of CVD due to statins. Additionally, it is noteworthy that high-dose atorvastatin could increase the HbA1c in 4 months and a metformin combination could significantly prevent the statin-induced aggravation of hyperglycemia in diabetic patients. However, according to this study\u2019s results, HbA1c does not decrease in about 15% of patients despite administering metformin in addition to atorvastatin. We performed additional statistical analyses to find factors that could predict either responders or nonresponders to metformin. However, we could not identify any significant predictive factors mainly due to the small number of participants. Hence, further research should be done on a larger number of patients.",
+          "score": 1.1255,
+          "section": "Full text paragraph 027 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched after, atorvastatin, change, diabetes, difference in a literature source."
+        },
+        {
+          "chunk_id": "f19a3aed-08e0-419d-aee0-aa782be6609f",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 5. (A) Percentage of patients with increased glycosylated hemoglobin (HbA1c) in the combination and atorvastatin groups (15.02% vs. 62.07%) (least square [LS] mean differences: \u221246.55% [95% confidence interval, CI, \u221262.13 to \u221230.97; P<0.001]). (B) Extent of increased HbA1c in the combination and atorvastatin groups (LS mean differences: \u22120.44% [95% CI, \u22120.96 to 0.07; P=0.0880]). <sup>a</sup>P<0.001.",
+          "score": 1.1171,
+          "section": "Full text figure caption 005",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "diabetes",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, diabetes, groups, hba1c, mean in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:13:35.628149+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The change in HbA1c after 16 weeks in the metformin plus atorvastatin group was a decrease of 0.58% \u00b1 0.11% [PubMed:38763510].\", \"The change in HbA1c after 16 weeks in the atorvastatin-only group was an increase of 0.35% \u00b1 0.11% [PubMed:38763510].\", \"The reported difference between the metformin plus atorvastatin group and the atorvastatin-only group was -0.94% (95% confidence interval: -1.25 to -0.63) [PubMed:38763510].\", \"These figures mean that the combination of metformin and atorvastatin resulted in a significantly greater reduction in HbA1c levels compared to atorvastatin alone after 16 weeks of treatment.\", \"The full-text paragraphs, in addition to the abstract, are available for this article, providing more detailed information about the results [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The uncertainty of the HbA1c change in the metformin plus atorvastatin group is \u00b1 0.11% [PubMed:38763510].\", \"The uncertainty of the HbA1c change in the atorvastatin-only group is \u00b1 0.11% [PubMed:38763510].\", \"The 95% confidence interval of the difference between the two groups is (-1.25, -0.63) [PubMed:38763510].\"]}",
+        "usage": {
+          "prompt_tokens": 2851,
+          "completion_tokens": 353,
+          "total_tokens": 3204,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 148.3258056640625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "25d7ef09d082760e0620ac6b47e979495be664eff2725a839e9101c6fa13843f",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The indexed Results paragraphs report that after 16 weeks, HbA1c was decreased by 0.58% in the combination group and increased by 0.35% in the atorvastatin group [PubMed:38763510].\", \"The reported difference between the combination group and the atorvastatin group was -0.94% ((-1.25, -0.63)) [PubMed:38763510].\", \"This means that the combination of metformin and atorvastatin resulted in a significantly greater reduction in HbA1c levels compared to atorvastatin alone after 16 weeks of treatment in this randomized trial.\", \"Only partial full-text paragraphs and the abstract are available for this article, limiting the information about the results [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The 95% confidence interval of the difference between the two groups is (-1.25, -0.63) [PubMed:38763510].\"]}",
+        "usage": {
+          "prompt_tokens": 3645,
+          "completion_tokens": 225,
+          "total_tokens": 3870,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 143.28485107421875
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "25d7ef09d082760e0620ac6b47e979495be664eff2725a839e9101c6fa13843f",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2024",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "BACKGRUOUND",
+            "CONCLUSION",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 001 \u2014 Highlights",
+            "Full text paragraph 002 \u2014 Highlights",
+            "Full text paragraph 003 \u2014 Highlights",
+            "Full text paragraph 011 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 012 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 013 \u2014 METHODS / Study subjects",
+            "Full text paragraph 014 \u2014 METHODS / Study endpoints",
+            "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 016 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 017 \u2014 METHODS / Ethical approval and consent to participate",
+            "Full text paragraph 018 \u2014 RESULTS / Baseline characteristics",
+            "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+            "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia. This randomized, double-blind, placebo-controlled, parallel-group and phase III multicenter study included adults with glycosylated hemoglobin (HbA1c) levels >7.0% and <10.0%, low-density lipoprotein cholesterol (LDL-C) >100 and <250 mg/dL. One hundred eighty-five eligible subjects were randomized to the combination group (metformin+atorvastatin), metformin group (metformin+atorvastatin placebo), and atorvastatin group (atorvastatin+metformin placebo). The primary efficacy endpoints were the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment. After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events. The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "matched_passages": [
+            "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+            "The sample size to demonstrate the superiority of the combination group versus the metformin or atorvastatin groups with regards to mean change in HbA1c levels and percent change in LDL-C concentrations was determined using a significance level of 2.5% and a one-sided test. The planned enrolment was of 60 patients per group (total 180), which provided 90% power to detect a mean difference of 0.73% in the HbA1c levels between the combination and atorvastatin groups, assuming common standard deviations (SDs) of 1.1%. This calculation was based on the assumption of a 20% drop-out rate.",
+            "Fig. 3. (A) Least square (LS) mean percent change in low-density lipoprotein cholesterol (LDL-C) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22124.73% [95% confidence interval, CI, \u221210.13 to 0.68; P=0.0859] at 8 weeks; \u22129.43% [95% CI, \u221215.02 to \u22123.84; P=0.0011] at 16 weeks). (B) Mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to week 8 and 16 in the combination, metformin, and atorvastatin group (combination vs. metformin; differences: 0.27% [95% CI, 0.09 to 0.44; P=0.0035] at 8 weeks and 0.33% [95% CI, 0.11 to 0.55; P=0.0035] at 16 weeks) (combination vs. atorvastatin; difference: \u22120.55% [95% CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks and \u22120.94 [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). <sup>a</sup>P<0.05, <sup>b</sup>P<0.001.",
+            "Fig. 2. (A) Least square (LS) mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22120.55% [95% confidence interval, CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks; \u22120.94% [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). (B) LS mean percent change in low-density lipoprotein cholesterol (LDL-C) levels from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and metformin alone (metformin group) (LS mean differences: \u221244.95% [95% CI, \u221250.68 to \u221239.21; P<0.001] at 8 weeks; \u221247.51% [95% CI, \u221253.66 to \u221241.36; P<0.001] at 16 weeks). <sup>a</sup>P<0.001."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+            },
+            {
+              "matched_passage_index": 1,
+              "section": "Full text paragraph 015 \u2014 METHODS / Statistical analyses"
+            },
+            {
+              "matched_passage_index": 2,
+              "section": "Full text figure caption 003"
+            },
+            {
+              "matched_passage_index": 3,
+              "section": "Full text figure caption 002"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC11307122",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+            "xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+            "license": {
+              "links": [
+                "https://creativecommons.org/licenses/by-nc/4.0/"
+              ],
+              "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 21,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 11,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 1
+          }
+        }
+      ],
+      "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available."
+    },
+    "generation_context_sha256": "25d7ef09d082760e0620ac6b47e979495be664eff2725a839e9101c6fa13843f"
+  },
+  {
+    "case_id": "caption-interval",
+    "snapshot_id": "captions",
+    "answer": {
+      "id": "3242645b-ac3d-405b-acb1-c6c1ccb7d7f0",
+      "workspace_id": "paper-captions-v2-1123",
+      "question": "What does Figure 2A report for the 16-week HbA1c difference between metformin plus atorvastatin and atorvastatin alone? Give the signed difference, 95% confidence interval, groups and units, and explain the direction without treating it as a mortality result.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:38763510": "c3f444e903a051fe04f48176b8aaa5ccffa09d765c6b0f92648df6f5449ff24e"
+      },
+      "short_answer": "For metformin type 2 diabetes, I found 8 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "direct_answer": "For metformin type 2 diabetes, I found 8 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "Within the selected document, TrialLens found passages relevant to metformin type 2 diabetes and the user's question.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 0.55%, 0.94%, P<0.0001, 16 weeks; the relevant passage says the difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 55.1%, 55.2%, 10.18%, 7.69%, 44.95%; the relevant passage says 2B showed that LDL-C was decreased by 55.1% and 55.2% in the combination group and by 10.18% and 7.69% in the metformin group in 8 and 16 weeks of treatment, respectively, which resulted in a significant difference between the two groups, 44.95% and 47.51% (P<0.001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d says there was a significant difference between the groups administered with atorvastatin (combination and atorvastatin groups) and the group not treated with atorvastatin (metformin group) (PubMed, 38763510). Section: Full text paragraph 022 \u2014 RESULTS / Secondary outcome analysis. Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510."
+      ],
+      "supporting_evidence": [
+        "Within the selected document, TrialLens found passages relevant to metformin type 2 diabetes and the user's question.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 0.55%, 0.94%, P<0.0001, 16 weeks; the relevant passage says the difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d provides the quantitative signal 55.1%, 55.2%, 10.18%, 7.69%, 44.95%; the relevant passage says 2B showed that LDL-C was decreased by 55.1% and 55.2% in the combination group and by 10.18% and 7.69% in the metformin group in 8 and 16 weeks of treatment, respectively, which resulted in a significant difference between the two groups, 44.95% and 47.51% (P<0.001) (PubMed, 38763510). Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510.",
+        "The PubMed record \u201cEfficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.\u201d says there was a significant difference between the groups administered with atorvastatin (combination and atorvastatin groups) and the group not treated with atorvastatin (metformin group) (PubMed, 38763510). Section: Full text paragraph 022 \u2014 RESULTS / Secondary outcome analysis. Reference: Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. (2024). PubMed. 38763510."
+      ],
+      "safety_limitations": [
+        "No safety-specific passage was retrieved strongly enough for this workspace/question."
+      ],
+      "uncertainty": [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+        "Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible."
+      ],
+      "limitations": [
+        "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:38763510"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "79ed49ea-a840-4fcf-b207-bbff7272258d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 2. (A) Least square (LS) mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22120.55% [95% confidence interval, CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks; \u22120.94% [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). (B) LS mean percent change in low-density lipoprotein cholesterol (LDL-C) levels from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and metformin alone (metformin group) (LS mean differences: \u221244.95% [95% CI, \u221250.68 to \u221239.21; P<0.001] at 8 weeks; \u221247.51% [95% CI, \u221253.66 to \u221241.36; P<0.001] at 16 weeks). <sup>a</sup>P<0.001.",
+          "score": 1.1605,
+          "section": "Full text figure caption 002",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "alone",
+            "atorvastatin",
+            "confidence",
+            "diabetes",
+            "groups",
+            "hba1c",
+            "interval",
+            "metformin"
+          ],
+          "relevance_note": "Matched alone, atorvastatin, confidence, diabetes, groups in a literature source."
+        },
+        {
+          "chunk_id": "705e0b7f-ff36-4823-8452-44130b5f7d8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+          "score": 1.2648,
+          "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "between",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, between, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "d2809f85-a23c-4425-b43d-00e00010c970",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+          "score": 1.2543,
+          "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "between",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "result"
+          ],
+          "relevance_note": "Matched atorvastatin, between, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "da734d76-64b7-438a-a17a-4c2280db8b06",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 3. (A) Least square (LS) mean percent change in low-density lipoprotein cholesterol (LDL-C) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22124.73% [95% confidence interval, CI, \u221210.13 to 0.68; P=0.0859] at 8 weeks; \u22129.43% [95% CI, \u221215.02 to \u22123.84; P=0.0011] at 16 weeks). (B) Mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to week 8 and 16 in the combination, metformin, and atorvastatin group (combination vs. metformin; differences: 0.27% [95% CI, 0.09 to 0.44; P=0.0035] at 8 weeks and 0.33% [95% CI, 0.11 to 0.55; P=0.0035] at 16 weeks) (combination vs. atorvastatin; difference: \u22120.55% [95% CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks and \u22120.94 [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). <sup>a</sup>P<0.05, <sup>b</sup>P<0.001.",
+          "score": 1.1988,
+          "section": "Full text figure caption 003",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "alone",
+            "atorvastatin",
+            "confidence",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "interval"
+          ],
+          "relevance_note": "Matched alone, atorvastatin, confidence, diabetes, difference in a literature source."
+        },
+        {
+          "chunk_id": "f19a3aed-08e0-419d-aee0-aa782be6609f",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 5. (A) Percentage of patients with increased glycosylated hemoglobin (HbA1c) in the combination and atorvastatin groups (15.02% vs. 62.07%) (least square [LS] mean differences: \u221246.55% [95% confidence interval, CI, \u221262.13 to \u221230.97; P<0.001]). (B) Extent of increased HbA1c in the combination and atorvastatin groups (LS mean differences: \u22120.44% [95% CI, \u22120.96 to 0.07; P=0.0880]). <sup>a</sup>P<0.001.",
+          "score": 1.1683,
+          "section": "Full text figure caption 005",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "confidence",
+            "diabetes",
+            "groups",
+            "hba1c",
+            "interval",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, confidence, diabetes, groups, hba1c in a literature source."
+        },
+        {
+          "chunk_id": "bef591d7-dada-4f4b-aa27-a49801014262",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 2B showed that LDL-C was decreased by 55.1% and 55.2% in the combination group and by 10.18% and 7.69% in the metformin group in 8 and 16 weeks of treatment, respectively, which resulted in a significant difference between the two groups, 44.95% and 47.51% (P<0.001).",
+          "score": 1.1579,
+          "section": "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "between",
+            "diabetes",
+            "difference",
+            "groups",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, between, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "ad3a5bc4-6676-4bed-b478-01d4e5d4205e",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Percentages of patients achieving the LDL-C target of <100 mg/dL after 16 weeks of treatment were 86.2%, 15.5%, and 79.3% in the combination, metformin, and atorvastatin groups, respectively (Fig. 4A). There was a significant difference between the groups administered with atorvastatin (combination and atorvastatin groups) and the group not treated with atorvastatin (metformin group). In cases of increase in HbA1c, the percentages of patients controlled under 6.5% or 7.0% were 31.0%, 50.0%, and 12.1% or 65.5%, 72.4%, and 27.6% in the combination, metformin, and atorvastatin groups, respectively (Fig. 4B). A significant difference was confirmed between groups treated with metformin (combination and metformin groups) and the group not treated with metformin (atorvastatin group).",
+          "score": 1.1439,
+          "section": "Full text paragraph 022 \u2014 RESULTS / Secondary outcome analysis",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "between",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, between, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "2d300f24-6729-42f1-b456-241930a42a8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "The sample size to demonstrate the superiority of the combination group versus the metformin or atorvastatin groups with regards to mean change in HbA1c levels and percent change in LDL-C concentrations was determined using a significance level of 2.5% and a one-sided test. The planned enrolment was of 60 patients per group (total 180), which provided 90% power to detect a mean difference of 0.73% in the HbA1c levels between the combination and atorvastatin groups, assuming common standard deviations (SDs) of 1.1%. This calculation was based on the assumption of a 20% drop-out rate.",
+          "score": 1.1133,
+          "section": "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "between",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, between, diabetes, difference, groups in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:13:56.188252+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"Figure 2A reports a least square mean percent change in HbA1c level from baseline to 16 weeks in groups treated with a combination of metformin and atorvastatin, and atorvastatin alone, with a signed difference of -0.94% (95% confidence interval: -1.25 to -0.63; P<0.001) between the combination group and the atorvastatin group, measured in percent HbA1c units. \", \"This comparison establishes that the combination of metformin and atorvastatin results in a greater reduction in HbA1c levels compared to atorvastatin alone, indicating a beneficial effect of adding metformin to atorvastatin on glucose control in patients with type 2 diabetes mellitus and dyslipidemia. \"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study only reports results for 16 weeks, and the long-term effects of the combination therapy are unknown [PubMed:38763510].\", \"The study does not provide information on potential predictors for patients who would benefit from metformin's addition to offset atorvastatin's diabetogenic effect [PubMed:38763510].\", \"The study has a limited sample size, which may affect the generalizability of the results [PubMed:38763510].\"]}",
+        "usage": {
+          "prompt_tokens": 3005,
+          "completion_tokens": 298,
+          "total_tokens": 3303,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 141.1683349609375
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "d169ccf2d68c50f68ab169204530c207c11612dcb240d9827755564b5fff7f56",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"Figure 2A reports the least square mean percent change in HbA1c level from baseline to 16 weeks, with a comparison between the combination group (metformin and atorvastatin) and the atorvastatin group, showing a signed difference of -0.94% (95% confidence interval: -1.25 to -0.63) in percent HbA1c units. This indicates a greater reduction in HbA1c levels in the combination group compared to the atorvastatin group, suggesting a beneficial effect of adding metformin to atorvastatin on glucose control. \", \"The primary limitation of this result is that it is based on a randomized controlled trial with a limited timeframe of 16 weeks, which may not capture the long-term effects of the combination therapy [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study's limited timeframe may not capture the long-term effects of the combination therapy.\", \"The study does not provide information on potential predictors for patients who would benefit from metformin's addition to offset atorvastatin's diabetogenic effect.\"]}",
+        "usage": {
+          "prompt_tokens": 3744,
+          "completion_tokens": 254,
+          "total_tokens": 3998,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 151.86431884765625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "d169ccf2d68c50f68ab169204530c207c11612dcb240d9827755564b5fff7f56",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2024",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "BACKGRUOUND",
+            "CONCLUSION",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 001 \u2014 Highlights",
+            "Full text paragraph 002 \u2014 Highlights",
+            "Full text paragraph 003 \u2014 Highlights",
+            "Full text paragraph 011 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 012 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 013 \u2014 METHODS / Study subjects",
+            "Full text paragraph 014 \u2014 METHODS / Study endpoints",
+            "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 016 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 017 \u2014 METHODS / Ethical approval and consent to participate",
+            "Full text paragraph 018 \u2014 RESULTS / Baseline characteristics",
+            "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+            "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia. This randomized, double-blind, placebo-controlled, parallel-group and phase III multicenter study included adults with glycosylated hemoglobin (HbA1c) levels >7.0% and <10.0%, low-density lipoprotein cholesterol (LDL-C) >100 and <250 mg/dL. One hundred eighty-five eligible subjects were randomized to the combination group (metformin+atorvastatin), metformin group (metformin+atorvastatin placebo), and atorvastatin group (atorvastatin+metformin placebo). The primary efficacy endpoints were the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment. After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events. The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "matched_passages": [
+            "Fig. 2. (A) Least square (LS) mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22120.55% [95% confidence interval, CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks; \u22120.94% [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). (B) LS mean percent change in low-density lipoprotein cholesterol (LDL-C) levels from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and metformin alone (metformin group) (LS mean differences: \u221244.95% [95% CI, \u221250.68 to \u221239.21; P<0.001] at 8 weeks; \u221247.51% [95% CI, \u221253.66 to \u221241.36; P<0.001] at 16 weeks). <sup>a</sup>P<0.001.",
+            "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+            "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+            "Fig. 3. (A) Least square (LS) mean percent change in low-density lipoprotein cholesterol (LDL-C) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22124.73% [95% confidence interval, CI, \u221210.13 to 0.68; P=0.0859] at 8 weeks; \u22129.43% [95% CI, \u221215.02 to \u22123.84; P=0.0011] at 16 weeks). (B) Mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to week 8 and 16 in the combination, metformin, and atorvastatin group (combination vs. metformin; differences: 0.27% [95% CI, 0.09 to 0.44; P=0.0035] at 8 weeks and 0.33% [95% CI, 0.11 to 0.55; P=0.0035] at 16 weeks) (combination vs. atorvastatin; difference: \u22120.55% [95% CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks and \u22120.94 [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). <sup>a</sup>P<0.05, <sup>b</sup>P<0.001."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text figure caption 002"
+            },
+            {
+              "matched_passage_index": 1,
+              "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+            },
+            {
+              "matched_passage_index": 2,
+              "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin"
+            },
+            {
+              "matched_passage_index": 3,
+              "section": "Full text figure caption 003"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC11307122",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+            "xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+            "license": {
+              "links": [
+                "https://creativecommons.org/licenses/by-nc/4.0/"
+              ],
+              "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 21,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 11,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 1
+          }
+        }
+      ],
+      "question": "What does Figure 2A report for the 16-week HbA1c difference between metformin plus atorvastatin and atorvastatin alone? Give the signed difference, 95% confidence interval, groups and units, and explain the direction without treating it as a mortality result."
+    },
+    "generation_context_sha256": "d169ccf2d68c50f68ab169204530c207c11612dcb240d9827755564b5fff7f56"
+  },
+  {
+    "case_id": "full-text-simplify",
+    "snapshot_id": "captions",
+    "answer": {
+      "id": "20f78482-0cab-46b4-9fd7-94d6fcbad972",
+      "workspace_id": "paper-captions-v2-1123",
+      "question": "Explain that more simply, keeping the treatment groups, 16-week numbers and their limits.",
+      "previous_answer_id": "d4e20c32-5c5c-476c-862a-f59bd6dfbd5b",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:38763510": "c3f444e903a051fe04f48176b8aaa5ccffa09d765c6b0f92648df6f5449ff24e"
+      },
+      "short_answer": "The combination group had a decrease in HbA1c of 0.58% \u00b1 0.11% after 16 weeks of treatment, while the atorvastatin group had an increase of 0.35% \u00b1 0.11% [PubMed:38763510]. The difference between the combination group and the atorvastatin group was 0.94% (P<0.0001) [PubMed:38763510].",
+      "direct_answer": "The combination group had a decrease in HbA1c of 0.58% \u00b1 0.11% after 16 weeks of treatment, while the atorvastatin group had an increase of 0.35% \u00b1 0.11% [PubMed:38763510]. The difference between the combination group and the atorvastatin group was 0.94% (P<0.0001) [PubMed:38763510].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:38763510 \u00b7 Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. \u00b7 PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract. \u00b7 partial excerpt"
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The study had a planned enrollment of 60 patients per group, but the actual number of patients analyzed for the outcome is not explicitly stated, which may limit the interpretation of the results [PubMed:38763510]."
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The study had a planned enrollment of 60 patients per group, but the actual number of patients analyzed for the outcome is not explicitly stated, which may limit the interpretation of the results [PubMed:38763510]."
+      ],
+      "citations": [
+        "PubMed:38763510"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "705e0b7f-ff36-4823-8452-44130b5f7d8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+          "score": 1.18,
+          "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched after, atorvastatin, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "d2809f85-a23c-4425-b43d-00e00010c970",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+          "score": 1.1391,
+          "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin",
+            "that"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "2d300f24-6729-42f1-b456-241930a42a8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "The sample size to demonstrate the superiority of the combination group versus the metformin or atorvastatin groups with regards to mean change in HbA1c levels and percent change in LDL-C concentrations was determined using a significance level of 2.5% and a one-sided test. The planned enrolment was of 60 patients per group (total 180), which provided 90% power to detect a mean difference of 0.73% in the HbA1c levels between the combination and atorvastatin groups, assuming common standard deviations (SDs) of 1.1%. This calculation was based on the assumption of a 20% drop-out rate.",
+          "score": 1.1235,
+          "section": "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "30c54eed-1699-469c-a373-93678d0914d9",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035). The increase in fasting blood glucose and HbA1c in statin-based drugs is also reported in the cautions for use in the U.S. Food and Drug Administration Lipitor monograph. LDL-C is lowered by 1 mmol/L (38.61 mg/dL) and HbA1c is increased by 0.12% with the administration of statins. Hence, it has been reported that the major factors of CVD are reduced by 20% [14]. Based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15]. Based on the results of the previous studies, we could suggest that the 2.05 mmol/L (79.02 mg/dL) reduction in LDL-C in the combination group, the result of this trial, might reduce the CV risk by more than 40%. In this context, the increase in HbA1c might not be clinically meaningful as it outweighs the benefit of significantly reducing the risk of CVD due to statins. Additionally, it is noteworthy that high-dose atorvastatin could increase the HbA1c in 4 months and a metformin combination could significantly prevent the statin-induced aggravation of hyperglycemia in diabetic patients. However, according to this study\u2019s results, HbA1c does not decrease in about 15% of patients despite administering metformin in addition to atorvastatin. We performed additional statistical analyses to find factors that could predict either responders or nonresponders to metformin. However, we could not identify any significant predictive factors mainly due to the small number of participants. Hence, further research should be done on a larger number of patients.",
+          "score": 1.1101,
+          "section": "Full text paragraph 027 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched after, atorvastatin, change, diabetes, difference in a literature source."
+        },
+        {
+          "chunk_id": "3915dfd6-08b3-4cfa-9c70-5b485ac8356e",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "This study demonstrated that the difference in the rate of change in LDL-C after 16 weeks of treatment compared to the baseline between the combination and metformin groups was \u221247.51%, which was statistically significant (P<0.0001). Additionally, the difference in the amount of change in HbA1c from the baseline to the end of the study between the combination and atorvastatin groups was \u22120.94%, which was also statistically significant (P<0.0001).",
+          "score": 1.1087,
+          "section": "Full text paragraph 025 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "after",
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "metformin"
+          ],
+          "relevance_note": "Matched after, atorvastatin, change, diabetes, difference in a literature source."
+        },
+        {
+          "chunk_id": "bef591d7-dada-4f4b-aa27-a49801014262",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 2B showed that LDL-C was decreased by 55.1% and 55.2% in the combination group and by 10.18% and 7.69% in the metformin group in 8 and 16 weeks of treatment, respectively, which resulted in a significant difference between the two groups, 44.95% and 47.51% (P<0.001).",
+          "score": 1.1066,
+          "section": "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "diabetes",
+            "difference",
+            "groups",
+            "metformin",
+            "that",
+            "type",
+            "weeks"
+          ],
+          "relevance_note": "Matched atorvastatin, diabetes, difference, groups, metformin in a literature source."
+        },
+        {
+          "chunk_id": "da734d76-64b7-438a-a17a-4c2280db8b06",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 3. (A) Least square (LS) mean percent change in low-density lipoprotein cholesterol (LDL-C) level from baseline to weeks 8 and 16 in groups treated with a combination of metformin and atorvastatin (combination group), and atorvastatin alone (atorvastatin group) (LS mean differences: \u22124.73% [95% confidence interval, CI, \u221210.13 to 0.68; P=0.0859] at 8 weeks; \u22129.43% [95% CI, \u221215.02 to \u22123.84; P=0.0011] at 16 weeks). (B) Mean percent change in glycosylated hemoglobin (HbA1c) level from baseline to week 8 and 16 in the combination, metformin, and atorvastatin group (combination vs. metformin; differences: 0.27% [95% CI, 0.09 to 0.44; P=0.0035] at 8 weeks and 0.33% [95% CI, 0.11 to 0.55; P=0.0035] at 16 weeks) (combination vs. atorvastatin; difference: \u22120.55% [95% CI, \u22120.76 to \u22120.34; P<0.001] at 8 weeks and \u22120.94 [95% CI, \u22121.25 to \u22120.63; P<0.001] at 16 weeks). <sup>a</sup>P<0.05, <sup>b</sup>P<0.001.",
+          "score": 1.1059,
+          "section": "Full text figure caption 003",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "change",
+            "diabetes",
+            "difference",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin"
+          ],
+          "relevance_note": "Matched atorvastatin, change, diabetes, difference, groups in a literature source."
+        },
+        {
+          "chunk_id": "f19a3aed-08e0-419d-aee0-aa782be6609f",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 5. (A) Percentage of patients with increased glycosylated hemoglobin (HbA1c) in the combination and atorvastatin groups (15.02% vs. 62.07%) (least square [LS] mean differences: \u221246.55% [95% confidence interval, CI, \u221262.13 to \u221230.97; P<0.001]). (B) Extent of increased HbA1c in the combination and atorvastatin groups (LS mean differences: \u22120.44% [95% CI, \u22120.96 to 0.07; P=0.0880]). <sup>a</sup>P<0.001.",
+          "score": 1.0944,
+          "section": "Full text figure caption 005",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "atorvastatin",
+            "diabetes",
+            "groups",
+            "hba1c",
+            "mean",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched atorvastatin, diabetes, groups, hba1c, mean in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:14:17.986340+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The combination group, which received metformin and atorvastatin, had a decrease in HbA1c of 0.58% \u00b1 0.11% after 16 weeks of treatment, while the atorvastatin group had an increase of 0.35% \u00b1 0.11% [PubMed:38763510].\", \"The difference in HbA1c change between the combination group and the atorvastatin group was 0.94% (P<0.0001) [PubMed:38763510].\", \"The metformin group had a decrease in HbA1c of 0.25% (calculated from 0.58% - 0.33%) after 16 weeks of treatment, with the difference between the combination group and the metformin group being 0.33% (P=0.0035) [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study only reported results after 16 weeks of treatment, and the long-term effects of the combination therapy are unknown [PubMed:38763510].\", \"The study had a limited sample size, which may not be representative of the entire population [PubMed:38763510].\", \"The study did not identify any significant predictive factors for patients who would benefit from metformin's addition to offset atorvastatin's diabetogenic effect, possibly due to the small number of participants [PubMed:38763510].\"]}",
+        "usage": {
+          "prompt_tokens": 2997,
+          "completion_tokens": 327,
+          "total_tokens": 3324,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 146.89434814453125
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "0adf390949d1083ef5e7dc15d32f0bc9912f0627626b7edb3ad086f7890aef6c",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The combination group had a decrease in HbA1c of 0.58% \u00b1 0.11% after 16 weeks of treatment, while the atorvastatin group had an increase of 0.35% \u00b1 0.11% [PubMed:38763510]. The difference between the combination group and the atorvastatin group was 0.94% (P<0.0001) [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study had a planned enrollment of 60 patients per group, but the actual number of patients analyzed for the outcome is not explicitly stated, which may limit the interpretation of the results [PubMed:38763510].\"]}",
+        "usage": {
+          "prompt_tokens": 3795,
+          "completion_tokens": 164,
+          "total_tokens": 3959,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 134.7918701171875
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "0adf390949d1083ef5e7dc15d32f0bc9912f0627626b7edb3ad086f7890aef6c",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [
+        {
+          "question": "What do the indexed Results paragraphs report for HbA1c after 16 weeks in the metformin plus atorvastatin and atorvastatin-only groups? Give each change, the reported difference and its uncertainty, and explain what those figures mean. Say if only an abstract is available.",
+          "answer": "For metformin type 2 diabetes, I found 8 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "PubMed:38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2024",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "BACKGRUOUND",
+            "CONCLUSION",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 001 \u2014 Highlights",
+            "Full text paragraph 002 \u2014 Highlights",
+            "Full text paragraph 003 \u2014 Highlights",
+            "Full text paragraph 011 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 012 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 013 \u2014 METHODS / Study subjects",
+            "Full text paragraph 014 \u2014 METHODS / Study endpoints",
+            "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 016 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 017 \u2014 METHODS / Ethical approval and consent to participate",
+            "Full text paragraph 018 \u2014 RESULTS / Baseline characteristics",
+            "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+            "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia. This randomized, double-blind, placebo-controlled, parallel-group and phase III multicenter study included adults with glycosylated hemoglobin (HbA1c) levels >7.0% and <10.0%, low-density lipoprotein cholesterol (LDL-C) >100 and <250 mg/dL. One hundred eighty-five eligible subjects were randomized to the combination group (metformin+atorvastatin), metformin group (metformin+atorvastatin placebo), and atorvastatin group (atorvastatin+metformin placebo). The primary efficacy endpoints were the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment. After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events. The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "matched_passages": [
+            "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+            "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+            "The sample size to demonstrate the superiority of the combination group versus the metformin or atorvastatin groups with regards to mean change in HbA1c levels and percent change in LDL-C concentrations was determined using a significance level of 2.5% and a one-sided test. The planned enrolment was of 60 patients per group (total 180), which provided 90% power to detect a mean difference of 0.73% in the HbA1c levels between the combination and atorvastatin groups, assuming common standard deviations (SDs) of 1.1%. This calculation was based on the assumption of a 20% drop-out rate.",
+            "Additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035). The increase in fasting blood glucose and HbA1c in statin-based drugs is also reported in the cautions for use in the U.S. Food and Drug Administration Lipitor monograph. LDL-C is lowered by 1 mmol/L (38.61 mg/dL) and HbA1c is increased by 0.12% with the administration of statins. Hence, it has been reported that the major factors of CVD are reduced by 20% [14]. Based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15]. Based on the results of the previous studies, we could suggest that the 2.05 mmol/L (79.02 mg/dL) reduction in LDL-C in the combination group, the result of this trial, might reduce the CV risk by more than 40%. In this context, the increase in HbA1c might not be clinically meaningful as it outweighs the benefit of significantly reducing the risk of CVD due to statins. Additionally, it is noteworthy that high-dose atorvastatin could increase the HbA1c in 4 months and a metformin combination could significantly prevent the statin-induced aggravation of hyperglycemia in diabetic patients. However, according to this study\u2019s results, HbA1c does not decrease in about 15% of patients despite administering metformin in addition to atorvastatin. We performed additional statistical analyses to find factors that could predict either responders or nonresponders to metformin. However, we could not identify any significant predictive factors mainly due to the small number of participants. Hence, further research should be done on a larger number of patients."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+            },
+            {
+              "matched_passage_index": 1,
+              "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin"
+            },
+            {
+              "matched_passage_index": 2,
+              "section": "Full text paragraph 015 \u2014 METHODS / Statistical analyses"
+            },
+            {
+              "matched_passage_index": 3,
+              "section": "Full text paragraph 027 \u2014 DISCUSSION"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC11307122",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+            "xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+            "license": {
+              "links": [
+                "https://creativecommons.org/licenses/by-nc/4.0/"
+              ],
+              "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 21,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 11,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 1
+          }
+        }
+      ],
+      "question": "Explain that more simply, keeping the treatment groups, 16-week numbers and their limits."
+    },
+    "generation_context_sha256": "0adf390949d1083ef5e7dc15d32f0bc9912f0627626b7edb3ad086f7890aef6c"
+  },
+  {
+    "case_id": "full-text-mortality",
+    "snapshot_id": "captions",
+    "answer": {
+      "id": "acd430aa-4fea-457b-9214-3aedfe42b270",
+      "workspace_id": "paper-captions-v2-1123",
+      "question": "Do these trial results establish that the combination lowers the risk of death?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "conversational",
+      "generation_note": "Generated with Cloudflare Workers AI using indexed sources. Check citations for support.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:38763510": "c3f444e903a051fe04f48176b8aaa5ccffa09d765c6b0f92648df6f5449ff24e"
+      },
+      "short_answer": "The trial results do not establish that the combination of metformin and atorvastatin lowers the risk of death. The study primarily focused on the efficacy and safety of the combination therapy in patients with type 2 diabetes mellitus and dyslipidemia, with primary endpoints being the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment [PubMed:38763510].\n\nThe combination group showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) and a significant difference in HbA1c change compared to the atorvastatin group (0.94%, P<0.0001) [PubMed:38763510].",
+      "direct_answer": "The trial results do not establish that the combination of metformin and atorvastatin lowers the risk of death. The study primarily focused on the efficacy and safety of the combination therapy in patients with type 2 diabetes mellitus and dyslipidemia, with primary endpoints being the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment [PubMed:38763510].\n\nThe combination group showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) and a significant difference in HbA1c change compared to the atorvastatin group (0.94%, P<0.0001) [PubMed:38763510].",
+      "evidence_map": [],
+      "reasoning_summary": [
+        "Generation received 1 source records; the final answer uses 1 citation markers.",
+        "Context-only records and retrieved passage match scores do not establish support for the final answer."
+      ],
+      "evidence_synthesis": [],
+      "source_readouts": [
+        "CITED IN ANSWER \u00b7 PubMed:38763510 \u00b7 Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial. \u00b7 PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract. \u00b7 partial excerpt"
+      ],
+      "evidence_quality": [
+        "Citation checks verify that markers name supplied sources. They do not independently verify that each source supports every claim; inspect the original sources."
+      ],
+      "facet_coverage": [],
+      "answer_trace": [
+        {
+          "label": "Generation context",
+          "value": "1 source records",
+          "detail": "Selected context may include records that the final answer does not cite."
+        },
+        {
+          "label": "Final attribution",
+          "value": "1 citations",
+          "detail": "Citation use is distinct from independent claim verification."
+        }
+      ],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [
+        "The study does not provide direct evidence on the effect of the combination on the risk of death",
+        "The primary outcomes were changes in HbA1c and LDL-C levels, not mortality"
+      ],
+      "limitations": [
+        "Limited to indexed source excerpts; this is research assistance, not individual clinical guidance.",
+        "The study does not provide direct evidence on the effect of the combination on the risk of death",
+        "The primary outcomes were changes in HbA1c and LDL-C levels, not mortality"
+      ],
+      "citations": [
+        "PubMed:38763510"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "30c54eed-1699-469c-a373-93678d0914d9",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035). The increase in fasting blood glucose and HbA1c in statin-based drugs is also reported in the cautions for use in the U.S. Food and Drug Administration Lipitor monograph. LDL-C is lowered by 1 mmol/L (38.61 mg/dL) and HbA1c is increased by 0.12% with the administration of statins. Hence, it has been reported that the major factors of CVD are reduced by 20% [14]. Based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15]. Based on the results of the previous studies, we could suggest that the 2.05 mmol/L (79.02 mg/dL) reduction in LDL-C in the combination group, the result of this trial, might reduce the CV risk by more than 40%. In this context, the increase in HbA1c might not be clinically meaningful as it outweighs the benefit of significantly reducing the risk of CVD due to statins. Additionally, it is noteworthy that high-dose atorvastatin could increase the HbA1c in 4 months and a metformin combination could significantly prevent the statin-induced aggravation of hyperglycemia in diabetic patients. However, according to this study\u2019s results, HbA1c does not decrease in about 15% of patients despite administering metformin in addition to atorvastatin. We performed additional statistical analyses to find factors that could predict either responders or nonresponders to metformin. However, we could not identify any significant predictive factors mainly due to the small number of participants. Hence, further research should be done on a larger number of patients.",
+          "score": 1.1658,
+          "section": "Full text paragraph 027 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "results",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, results, that in a literature source."
+        },
+        {
+          "chunk_id": "3915dfd6-08b3-4cfa-9c70-5b485ac8356e",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "This study demonstrated that the difference in the rate of change in LDL-C after 16 weeks of treatment compared to the baseline between the combination and metformin groups was \u221247.51%, which was statistically significant (P<0.0001). Additionally, the difference in the amount of change in HbA1c from the baseline to the end of the study between the combination and atorvastatin groups was \u22120.94%, which was also statistically significant (P<0.0001).",
+          "score": 1.1418,
+          "section": "Full text paragraph 025 \u2014 DISCUSSION",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, that, type in a literature source."
+        },
+        {
+          "chunk_id": "705e0b7f-ff36-4823-8452-44130b5f7d8d",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+          "score": 1.1059,
+          "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "these",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, these, type in a literature source."
+        },
+        {
+          "chunk_id": "d2809f85-a23c-4425-b43d-00e00010c970",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect.",
+          "score": 1.0884,
+          "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "that",
+            "these",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, that, these in a literature source."
+        },
+        {
+          "chunk_id": "13812764-dc4e-49d5-8b2e-4f3f4ca18af9",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events.",
+          "score": 1.0839,
+          "section": "RESULTS",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "f19a3aed-08e0-419d-aee0-aa782be6609f",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 5. (A) Percentage of patients with increased glycosylated hemoglobin (HbA1c) in the combination and atorvastatin groups (15.02% vs. 62.07%) (least square [LS] mean differences: \u221246.55% [95% confidence interval, CI, \u221262.13 to \u221230.97; P<0.001]). (B) Extent of increased HbA1c in the combination and atorvastatin groups (LS mean differences: \u22120.44% [95% CI, \u22120.96 to 0.07; P=0.0880]). <sup>a</sup>P<0.001.",
+          "score": 1.0716,
+          "section": "Full text figure caption 005",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, type in a literature source."
+        },
+        {
+          "chunk_id": "bef591d7-dada-4f4b-aa27-a49801014262",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "Fig. 2B showed that LDL-C was decreased by 55.1% and 55.2% in the combination group and by 10.18% and 7.69% in the metformin group in 8 and 16 weeks of treatment, respectively, which resulted in a significant difference between the two groups, 44.95% and 47.51% (P<0.001).",
+          "score": 1.0651,
+          "section": "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, that, type in a literature source."
+        },
+        {
+          "chunk_id": "d51543d2-71bc-4a97-8309-62e61a103c28",
+          "source_id": "atomic-captions-v2-1123",
+          "source_type": "pubmed",
+          "citation": "PubMed:38763510",
+          "text": "The ATOMIC study also showed that the difference in LDL-C levels between the combination and atorvastatin groups was 4.73% in 8 weeks and 9.43% in 16 weeks of treatment. In the mid-study period, the difference between the two groups was not significant (P=0.086). However, this difference became significant at the end of the study (P=0.0011) (Fig. 3A). Additionally, changes in HbA1c between the combination and metformin group showed a difference of 0.27% and 0.33% in the 8 and 16 weeks of the study, respectively. Furthermore, it was significant throughout the study period (all P=0.0035) (Fig. 3B).",
+          "score": 1.0246,
+          "section": "Full text paragraph 021 \u2014 RESULTS / Secondary outcome analysis",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38763510/",
+          "external_id": "38763510",
+          "publication_date": "2024",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "combination",
+            "diabetes",
+            "metformin",
+            "that",
+            "type"
+          ],
+          "relevance_note": "Matched combination, diabetes, metformin, that, type in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:14:34.759657+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial results do not establish that the combination of metformin and atorvastatin lowers the risk of death [PubMed:38763510].\", \"The combination group showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) and a significant difference in HbA1c change compared to the atorvastatin group (0.94%, P<0.0001) [PubMed:38763510].\", \"The study suggests that the addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients, which might reduce the risk of cardiovascular disease (CVD) [PubMed:38763510].\", \"However, the study does not provide direct evidence on the effect of the combination on the risk of death, and further research would be needed to establish this [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study does not provide direct evidence on the effect of the combination on the risk of death\", \"Further research would be needed to establish the effect of the combination on the risk of death\", \"The study only provides evidence on the effect of the combination on HbA1c and LDL-C levels, which are surrogate outcomes for CVD risk\"]}",
+        "usage": {
+          "prompt_tokens": 2842,
+          "completion_tokens": 313,
+          "total_tokens": 3155,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 139.89358520507812
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "b0580a8c6ade679b3115a62856f9b096a8170e24e1c1d43288d6d1e1b08733aa",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial results do not establish that the combination of metformin and atorvastatin lowers the risk of death. The study primarily focused on the efficacy and safety of the combination therapy in patients with type 2 diabetes mellitus and dyslipidemia, with primary endpoints being the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment [PubMed:38763510].\", \"The combination group showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) and a significant difference in HbA1c change compared to the atorvastatin group (0.94%, P<0.0001) [PubMed:38763510].\"], \"cited_sources\": [\"PubMed:38763510\"], \"uncertainty\": [\"The study does not provide direct evidence on the effect of the combination on the risk of death\", \"The primary outcomes were changes in HbA1c and LDL-C levels, not mortality\"]}",
+        "usage": {
+          "prompt_tokens": 3547,
+          "completion_tokens": 225,
+          "total_tokens": 3772,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 140.67141723632812
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "b0580a8c6ade679b3115a62856f9b096a8170e24e1c1d43288d6d1e1b08733aa",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "type 2 diabetes",
+        "intervention": "metformin"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:38763510",
+          "title": "Efficacy and Safety of Metformin and Atorvastatin Combination Therapy vs. Monotherapy with Either Drug in Type 2 Diabetes Mellitus and Dyslipidemia Patients (ATOMIC): Double-Blinded Randomized Controlled Trial.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Randomized Controlled Trial",
+            "Multicenter Study",
+            "Clinical Trial, Phase III"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2024",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "BACKGRUOUND",
+            "CONCLUSION",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 001 \u2014 Highlights",
+            "Full text paragraph 002 \u2014 Highlights",
+            "Full text paragraph 003 \u2014 Highlights",
+            "Full text paragraph 011 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 012 \u2014 METHODS / Study design and procedures",
+            "Full text paragraph 013 \u2014 METHODS / Study subjects",
+            "Full text paragraph 014 \u2014 METHODS / Study endpoints",
+            "Full text paragraph 015 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 016 \u2014 METHODS / Statistical analyses",
+            "Full text paragraph 017 \u2014 METHODS / Ethical approval and consent to participate",
+            "Full text paragraph 018 \u2014 RESULTS / Baseline characteristics",
+            "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment",
+            "Full text paragraph 020 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "It is well known that a large number of patients with diabetes also have dyslipidemia, which significantly increases the risk of cardiovascular disease (CVD). This study aimed to evaluate the efficacy and safety of combination drugs consisting of metformin and atorvastatin, widely used as therapeutic agents for diabetes and dyslipidemia. This randomized, double-blind, placebo-controlled, parallel-group and phase III multicenter study included adults with glycosylated hemoglobin (HbA1c) levels >7.0% and <10.0%, low-density lipoprotein cholesterol (LDL-C) >100 and <250 mg/dL. One hundred eighty-five eligible subjects were randomized to the combination group (metformin+atorvastatin), metformin group (metformin+atorvastatin placebo), and atorvastatin group (atorvastatin+metformin placebo). The primary efficacy endpoints were the percent changes in HbA1c and LDL-C levels from baseline at the end of the treatment. After 16 weeks of treatment compared to baseline, HbA1c showed a significant difference of 0.94% compared to the atorvastatin group in the combination group (0.35% vs. -0.58%, respectively; P<0.0001), whereas the proportion of patients with increased HbA1c was also 62% and 15%, respectively, showing a significant difference (P<0.001). The combination group also showed a significant decrease in LDL-C levels compared to the metformin group (-55.20% vs. -7.69%, P<0.001) without previously unknown adverse drug events. The addition of atorvastatin to metformin improved HbA1c and LDL-C levels to a significant extent compared to metformin or atorvastatin alone in diabetes and dyslipidemia patients. This study also suggested metformin's preventive effect on the glucose-elevating potential of atorvastatin in patients with type 2 diabetes mellitus and dyslipidemia, insufficiently controlled with exercise and diet. Metformin and atorvastatin combination might be an effective treatment in reducing the CVD risk in patients with both diabetes and dyslipidemia because of its lowering effect on LDL-C and glucose.",
+          "matched_passages": [
+            "Additionally, the difference in the mean change in HbA1c after 16 weeks of administration compared to the baseline between the combination group and the metformin group was 0.33% (P=0.0035). The increase in fasting blood glucose and HbA1c in statin-based drugs is also reported in the cautions for use in the U.S. Food and Drug Administration Lipitor monograph. LDL-C is lowered by 1 mmol/L (38.61 mg/dL) and HbA1c is increased by 0.12% with the administration of statins. Hence, it has been reported that the major factors of CVD are reduced by 20% [14]. Based on another report, the risk of CVD was reduced in proportion to the amount of LDLC reduction, with a 1 mmol/L decrease in LDL-C reducing the CV risk by 22%, 40% at 2 mmol/L, and 50% at 3 mmol/L, respectively [15]. Based on the results of the previous studies, we could suggest that the 2.05 mmol/L (79.02 mg/dL) reduction in LDL-C in the combination group, the result of this trial, might reduce the CV risk by more than 40%. In this context, the increase in HbA1c might not be clinically meaningful as it outweighs the benefit of significantly reducing the risk of CVD due to statins. Additionally, it is noteworthy that high-dose atorvastatin could increase the HbA1c in 4 months and a metformin combination could significantly prevent the statin-induced aggravation of hyperglycemia in diabetic patients. However, according to this study\u2019s results, HbA1c does not decrease in about 15% of patients despite administering metformin in addition to atorvastatin. We performed additional statistical analyses to find factors that could predict either responders or nonresponders to metformin. However, we could not identify any significant predictive factors mainly due to the small number of participants. Hence, further research should be done on a larger number of patients.",
+            "This study demonstrated that the difference in the rate of change in LDL-C after 16 weeks of treatment compared to the baseline between the combination and metformin groups was \u221247.51%, which was statistically significant (P<0.0001). Additionally, the difference in the amount of change in HbA1c from the baseline to the end of the study between the combination and atorvastatin groups was \u22120.94%, which was also statistically significant (P<0.0001).",
+            "HbA1c was decreased by 0.43%\u00b10.07% and 0.58%\u00b10.11% in the combination group and increased by 0.12%\u00b10.07% and 0.35%\u00b10.11% in the atorvastatin group compared to baseline after 8 and 16 weeks of treatment, respectively (Fig. 2A). The difference between these two groups was 0.55% and 0.94% in 8 and 16 weeks, which demonstrated a superior effect on HbA1c reduction in the combination group than in the atorvastatin group (P<0.0001).",
+            "There was a significant difference in HbA1c change in the combination and atorvastatin groups (0.94%, P<0.0001) (Fig. 3B), and the proportion of patients with elevated HbA1c compared to baseline were 15.52% and 62.07%, respectively, which showed a significant difference. However, the extent of increase in HbA1c was not significant at 0.45% and 0.9%, respectively (0.44%, P=0.0880) (Fig. 5). When 58 participants taking metformin in addition to atorvastatin (combination group) were divided into a group with a decrease (responder group) and an increase (non-responder group) in HbA1c corresponding to 49 and nine participants, respectively, about 15% of participants of the combination group showed an increase in HbA1c despite taking metformin. As a result of the comparative analysis of the responder and non-responder groups, there was no clinical factor that showed a significant difference between these two groups (data not shown). Therefore, no potential predictors were identified for patients who would benefit from metformin\u2019s addition to offset the atorvastatin\u2019s diabetogenic effect."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 027 \u2014 DISCUSSION"
+            },
+            {
+              "matched_passage_index": 1,
+              "section": "Full text paragraph 025 \u2014 DISCUSSION"
+            },
+            {
+              "matched_passage_index": 2,
+              "section": "Full text paragraph 019 \u2014 RESULTS / Changes in HbA1c and LDL-C levels after 16 weeks of treatment"
+            },
+            {
+              "matched_passage_index": 3,
+              "section": "Full text paragraph 023 \u2014 RESULTS / Clinical factors affecting HbA1c reduction by adding metformin to atorvastatin"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC11307122",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11307122/fullTextXML",
+            "xml_sha256": "8568d77ae9436395e3190eafc35adec74d59756ca144b0fc598eb6da3512e15c",
+            "license": {
+              "links": [
+                "https://creativecommons.org/licenses/by-nc/4.0/"
+              ],
+              "text": "https://creativecommons.org/licenses/by-nc/4.0/This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/) which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 21,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 11,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 1
+          }
+        }
+      ],
+      "question": "Do these trial results establish that the combination lowers the risk of death?"
+    },
+    "generation_context_sha256": "b0580a8c6ade679b3115a62856f9b096a8170e24e1c1d43288d6d1e1b08733aa"
+  }
+]

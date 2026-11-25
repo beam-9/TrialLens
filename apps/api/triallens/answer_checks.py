@@ -238,17 +238,16 @@ def unreported_percentage_issue(answer: str, records: list[dict], *, require_cit
     Callers can require local citation markers for every percentage statement,
     including uncertainty text that otherwise has no paragraph citation rule.
     """
-    def values(text, *, source=False):
+    def values(text):
         normalized = normalize_numeric_signs(text)
         result = {Decimal(match[1].replace('−', '-')) for match in _PERCENT_VALUE.finditer(normalized)}
         for match in _PERCENT_RANGE.finditer(normalized):
             result.update(Decimal(raw.replace('−', '-')) for raw in match.groups())
-        if source:
-            for _, (_, _, lower, upper) in _percentage_ci_tuples(normalized):
-                result.update((lower, upper))
+        for _, (_, _, lower, upper) in _percentage_ci_tuples(normalized):
+            result.update((lower, upper))
         return result
 
-    source_values = {record['citation']: set().union(*(values(text, source=True)
+    source_values = {record['citation']: set().union(*(values(text)
                                                       for text in [record['text'], *record['matched_passages']]))
                      for record in records}
     for paragraph in re.split(r'\n\s*\n', answer):

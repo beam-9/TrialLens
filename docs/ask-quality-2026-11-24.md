@@ -35,3 +35,15 @@ Capture: `apps/api/evaluation/answer_coverage/results/paper-linked-interval-2026
 All four questions returned generated answers. The Results and simplification responses still omitted both ± terms and the interval. In this run the follow-up received both relevant captions after a conversational parent, so the interval omission persisted even when the evidence reached the model. Figure 2A again preserved the signed contrast and interval but conflated percent change from baseline with HbA1c level. The mortality answer correctly limited the inference to the outcomes studied. The result does not meet the numerical coverage requirement.
 
 The API suite passed all 720 tests with loopback permitted. The rebuilt Cloudflare-profile API image returned HTTP 200 from `/health` in a network-isolated smoke test.
+
+## Question coverage prompt experiment
+
+The first evaluation-only prompt recovered both arm estimates with ± terms and the signed interval in the raw Results revision. The final validation rejected that response. The model used square brackets for the confidence interval and abbreviated the source ID. The caption and simplification cases also fell back. The mortality case generated a response. This experiment did not change the production prompts.
+
+The second candidate reserves square brackets for complete citation markers and asks for confidence intervals in parentheses. That targets the observed formatting failure while preserving citation validation.
+
+On the paper cohort the citation-format candidate produced two fallbacks and two generated answers. The rejected Results and figure outputs still had uncited evidence paragraphs. The simplification preserved both ± values but omitted the interval and followed an extractive parent. The mortality answer correctly denied a demonstrated reduction in deaths, then added an unnecessary secondary comparison. The candidate remains inactive.
+
+The percentage check now applies implied units to attached confidence intervals on both sides of validation. An invented bound such as −0.64 is rejected even if the answer omits its percent sign. The full API suite, frontend lint and typecheck, and the rebuilt API health check passed.
+
+The same citation-format candidate returned three fallbacks on STOIC. The rejected corrected-counts response supplied per-protocol denominators but cited the correction only for a dosing detail the question did not ask for. The simplification dropped the intention-to-treat counts. The published correction must support the corrected denominators directly, and a rewrite must retain both requested analyses.

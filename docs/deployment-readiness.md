@@ -1,6 +1,15 @@
 # TrialLens deployment readiness
 
-> Provider note (22 October): these instructions primarily describe the retained native Ollama profile. For the explicitly selected Cloudflare provider and standalone hosting profile, use [Cloudflare setup](inference/cloudflare.md). See the [current functional audit](functional-audit-2026-10-22.md) for measured checks and unresolved release gates. Do not start the local-model stack when you intend hosted inference.
+## Current status — 24 November 2026
+
+TrialLens uses [Cloudflare Workers Free](inference/cloudflare.md) with the standalone `compose.cloudflare.yaml` profile. Local setup validation reports Cloudflare with the configured Llama 3.3 model.
+
+- The API suite passed 720 tests. The rebuilt API image passed its isolated health check.
+- The prior production browser run passed 14 fixture-based tests. Local routing, persistence and backup/restore were exercised on the prior build. [Container readiness report](container-readiness-2026-11-23.md)
+- Live Ask evaluation still found omitted uncertainty, incomplete correction attribution and missing figures in follow-ups. These defects remain release blockers. [Ask quality review](ask-quality-2026-11-24.md)
+- A trusted pilot requires a private access boundary protecting both the site and API, persistent workspace and usage stores, and a verified Cloudflare Free configuration after restart. Verify these on the selected HTTPS host before release. A public multiuser deployment additionally requires account authentication and workspace authorization.
+
+## Historical assessment — October 2026
 
 Assessment date: 20 October 2026. Scope: source/API review, isolated backend tests, real public-source ingestion, local-model integration and deployment configuration. Browser/design and live-model semantic reviews are tracked separately. This is a readiness assessment, not a claim of clinical validation.
 

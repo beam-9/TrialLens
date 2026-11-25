@@ -173,6 +173,9 @@ def test_percentage_guard_recognizes_implied_units_for_adjacent_confidence_bound
         answer = 'The estimate was -0.94% with a 95% CI of -1.25% to -0.63% [PubMed:1].'
         assert unreported_percentage_issue(answer, records, require_citations=True) is None
         assert unreported_percentage_issue(answer.replace('-0.63%', '-0.64%'), records, require_citations=True)
+        implied_answer = answer.replace('-1.25% to -0.63%', '-1.25 to -0.63')
+        assert unreported_percentage_issue(implied_answer, records, require_citations=True) is None
+        assert unreported_percentage_issue(implied_answer.replace('-0.63', '-0.64'), records, require_citations=True)
         assert unreported_percentage_issue(answer.replace(' [PubMed:1]', ''), records, require_citations=True)
 
 

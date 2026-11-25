@@ -1,0 +1,1179 @@
+[
+  {
+    "case_id": "stoic-corrected-counts",
+    "snapshot_id": "stoic",
+    "answer": {
+      "id": "f600943e-e079-449f-8b89-5d97685058d9",
+      "workspace_id": "stoic-correction-1123",
+      "question": "What does the STOIC trial report for COVID-19 urgent-care or hospital outcomes in its intention-to-treat and per-protocol analyses? Give the group counts and denominators, use the published correction where relevant, distinguish the analyses, and explain the main design limitation without claiming a mortality benefit.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:33844996": "7b287801e644da945526c37f5b964a7f331955322c8b2c7749457ee6107eb078",
+        "PubMed:33864735": "a380d41f8cf35746384369caf4e4ef53d522168e3cf9fb535b7ee8e29b2eba52"
+      },
+      "short_answer": "For inhaled budesonide early COVID-19, I found 2 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "direct_answer": "For inhaled budesonide early COVID-19, I found 2 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "Within the selected document, TrialLens found passages relevant to inhaled budesonide early COVID-19 and the user's question.",
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d provides the quantitative signal 14%, 1%, 95%, 91%; the relevant passage says in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996.",
+        "The PubMed record \u201cCorrection to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0\u201d says inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed, 33864735). Section: Full text paragraph 001 \u2014 Body. Reference: Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0. (2021). PubMed. 33864735."
+      ],
+      "supporting_evidence": [
+        "Within the selected document, TrialLens found passages relevant to inhaled budesonide early COVID-19 and the user's question.",
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d provides the quantitative signal 14%, 1%, 95%, 91%; the relevant passage says in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996.",
+        "The PubMed record \u201cCorrection to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0\u201d says inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed, 33864735). Section: Full text paragraph 001 \u2014 Body. Reference: Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0. (2021). PubMed. 33864735."
+      ],
+      "safety_limitations": [
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d reports or describes in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996."
+      ],
+      "uncertainty": [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+        "Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible."
+      ],
+      "limitations": [
+        "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:33844996",
+        "PubMed:33864735"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "cbc52a52-2f65-4279-8ee0-2ed46da1610f",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportion 0\u00b7123, 95% CI 0\u00b7033\u20130\u00b7213; p=0\u00b7009). In the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide. The number needed to treat with inhaled budesonide to reduce COVID-19-related urgent care or hospitalisation was eight. Sensitivity analysis in participants with confirmed COVID-19 (eight [14%] in the usual care group vs one [2%] in the budesonide group), showed that the difference in proportions was 0\u00b7125 (95% CI 0\u00b7035\u20130\u00b7216; p=0\u00b7007). There was no difference participants with a primary outcome event compared with participants without a primary outcome event (appendix p 7). For all primary outcome events in the per-protocol population, three participants were symptomatically breathless with oxygen saturations below 94%; one developed diabetic ketoacidosis; one developed acute kidney injury; one had suspected pulmonary embolism; one had suspected rib fractures; three were seen at least twice by an out of hours general practitioner (which included one participant in the budesonide group); and one was seen by a paramedic crew on day 6 and subsequently seen again by a general practitioner on day 8 and sent to the emergency department, where they were directly admitted to the respiratory high dependency unit, requiring continuous positive pressure ventilation for 8 days. All participants not admitted to hospital had daily telephone checks with the COVID hub general practitioner team.",
+          "score": 1.176,
+          "section": "Full text paragraph 027 \u2014 Results",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "group",
+            "hospital",
+            "inhaled",
+            "per-protocol",
+            "stoic"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, group, hospital in a literature source."
+        },
+        {
+          "chunk_id": "7a46a84f-99b4-4996-8fa6-39b83e04a029",
+          "source_id": "stoic-33864735",
+          "source_type": "pubmed",
+          "citation": "PubMed:33864735",
+          "text": "Ramakrishnan S, Nicolau DV Jr, Langford B, et al. Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. Lancet Respir Med 2021; published online April 9. https://doi.org/10.1016/S2213-2600(21)00160-0\u2014In this Article, the findings section of the summary should have read, \u201cFor the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group\u201d. Additionally, in the Summary and Results, the dose of budesonide should have been 400 \u03bcg per actuation, to a total dose (two puffs to be taken twice per day) of 1600 \u03bcg. These corrections have been made to the online version as of April 14, 2021, and the printed version is correct.",
+          "score": 1.0373,
+          "section": "Full text paragraph 001 \u2014 Body",
+          "title": "Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33864735/",
+          "external_id": "33864735",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "correction",
+            "covid-19",
+            "early",
+            "group",
+            "inhaled",
+            "per-protocol",
+            "published"
+          ],
+          "relevance_note": "Matched budesonide, correction, covid-19, early, group in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:14:53.515281+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The STOIC trial reports that for the intention-to-treat (ITT) population, the primary outcome of COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group [PubMed:33844996].\", \"For the per-protocol population, the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group [PubMed:33844996]. The correction to the original article confirms the dose of budesonide as 400 \u00b5g per actuation, to a total dose of 1600 \u00b5g [PubMed:33864735].\", \"The main design limitation of the STOIC trial is that it was an open-label trial, which may introduce bias in the assessment of outcomes [PubMed:33844996]. Additionally, the trial was stopped early after independent statistical review concluded that the study outcome would not change with further participant enrolment, which may limit the generalizability of the results.\"], \"cited_sources\": [\"PubMed:33844996\", \"PubMed:33864735\"], \"uncertainty\": [\"The open-label design of the trial may introduce bias in the assessment of outcomes.\", \"The trial was stopped early, which may limit the generalizability of the results.\", \"The correction to the original article may indicate errors in the original reporting, which could impact the interpretation of the results.\"]}",
+        "usage": {
+          "prompt_tokens": 3715,
+          "completion_tokens": 324,
+          "total_tokens": 4039,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 165.42730712890625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "95b284f501173977e073ac8b3e8e61ba132946b933a5efa7cca11ca61197a0d3",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The STOIC trial reports that for the intention-to-treat (ITT) population, the primary outcome of COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group, with a difference in proportions of 0.123 (0.033 to 0.213) [PubMed:33844996].\", \"For the per-protocol population, the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group, with a difference in proportions of 0.131 (0.043 to 0.218) [PubMed:33844996]. The published correction confirms the dose of budesonide [PubMed:33864735].\", \"The main design limitation of the STOIC trial is that it was an open-label trial, which may introduce bias in the assessment of outcomes, as participants and investigators were aware of the treatment assignments, potentially influencing the reporting and interpretation of outcomes.\"], \"cited_sources\": [\"PubMed:33844996\", \"PubMed:33864735\"], \"uncertainty\": [\"The open-label design may introduce bias in the assessment of outcomes.\", \"The trial was stopped early, which may limit the generalizability of the results.\"]}",
+        "usage": {
+          "prompt_tokens": 4477,
+          "completion_tokens": 295,
+          "total_tokens": 4772,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 179.80873107910156
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "95b284f501173977e073ac8b3e8e61ba132946b933a5efa7cca11ca61197a0d3",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "early COVID-19",
+        "intervention": "inhaled budesonide"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:33844996",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Randomized Controlled Trial"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Abstract",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 010 \u2014 Methods / Study design and participants",
+            "Full text paragraph 011 \u2014 Methods / Study design and participants",
+            "Full text paragraph 012 \u2014 Methods / Study design and participants",
+            "Full text paragraph 013 \u2014 Methods / Randomisation",
+            "Full text paragraph 014 \u2014 Methods / Procedures",
+            "Full text paragraph 015 \u2014 Methods / Procedures",
+            "Full text paragraph 016 \u2014 Methods / Procedures",
+            "Full text paragraph 017 \u2014 Methods / Outcomes",
+            "Full text paragraph 018 \u2014 Methods / Outcomes",
+            "Full text paragraph 019 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 020 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 021 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 022 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 024 \u2014 Results"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "AbstractBackgroundMultiple early reports of patients admitted to hospital with COVID-19 showed that patients with chronic respiratory disease were significantly under-represented in these cohorts. We hypothesised that the widespread use of inhaled glucocorticoids among these patients was responsible for this finding, and tested if inhaled glucocorticoids would be an effective treatment for early COVID-19.MethodsWe performed an open-label, parallel-group, phase 2, randomised controlled trial (Steroids in COVID-19; STOIC) of inhaled budesonide, compared with usual care, in adults within 7 days of the onset of mild COVID-19 symptoms. The trial was done in the community in Oxfordshire, UK. Participants were randomly assigned to inhaled budsonide or usual care stratified for age (\u226440 years or >40 years), sex (male or female), and number of comorbidities (\u22641 and \u22652). Randomisation was done using random sequence generation in block randomisation in a 1:1 ratio. Budesonide dry powder was delivered using a turbohaler at a dose of 400 \u03bcg per actuation. Participants were asked to take two inhalations twice a day until symptom resolution. The primary endpoint was COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, analysed for both the per-protocol and intention-to-treat (ITT) populations. The secondary outcomes were self-reported clinical recovery (symptom resolution), viral symptoms measured using the Common Cold Questionnare (CCQ) and the InFLUenza Patient Reported Outcome Questionnaire (FLUPro), body temperature, blood oxygen saturations, and SARS-CoV-2 viral load. The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment. This trial is registered with ClinicalTrials.gov, NCT04416399.FindingsFrom July 16 to Dec 9, 2020, 167 participants were recruited and assessed for eligibility. 21 did not meet eligibility criteria and were excluded. 146 participants were randomly assigned\u201473 to usual care and 73 to budesonide. For the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043 to 0\u00b7218; p=0\u00b7004). For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportions 0\u00b7123, 95% CI 0\u00b7033 to 0\u00b7213; p=0\u00b7009). The number needed to treat with inhaled budesonide to reduce COVID-19 deterioration was eight. Clinical recovery was 1 day shorter in the budesonide group compared with the usual care group (median 7 days [95% CI 6 to 9] in the budesonide group vs 8 days [7 to 11] in the usual care group; log-rank test p=0\u00b7007). The mean proportion of days with a fever in the first 14 days was lower in the budesonide group (2%, SD 6) than the usual care group (8%, SD 18; Wilcoxon test p=0\u00b7051) and the proportion of participants with at least 1 day of fever was lower in the budesonide group when compared with the usual care group. As-needed antipyretic medication was required for fewer proportion of days in the budesonide group compared with the usual care group (27% [IQR 0\u201350] vs 50% [15\u201371]; p=0\u00b7025) Fewer participants randomly assigned to budesonide had persistent symptoms at days 14 and 28 compared with participants receiving usual care (difference in proportions 0\u00b7204, 95% CI 0\u00b7075 to 0\u00b7334; p=0\u00b7003). The mean total score change in the CCQ and FLUPro over 14 days was significantly better in the budesonide group compared with the usual care group (CCQ mean difference \u22120\u00b712, 95% CI \u22120\u00b721 to \u22120\u00b702 [p=0\u00b7016]; FLUPro mean difference \u22120\u00b710, 95% CI \u22120\u00b721 to \u22120\u00b700 [p=0\u00b7044]). Blood oxygen saturations and SARS-CoV-2 load, measured by cycle threshold, were not different between the groups. Budesonide was safe, with only five (7%) participants reporting self-limiting adverse events.InterpretationEarly administration of inhaled budesonide reduced the likelihood of needing urgent medical care and reduced time to recovery after early COVID-19.FundingNational Institute for Health Research Biomedical Research Centre and AstraZeneca.",
+          "matched_passages": [
+            "For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportion 0\u00b7123, 95% CI 0\u00b7033\u20130\u00b7213; p=0\u00b7009). In the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide. The number needed to treat with inhaled budesonide to reduce COVID-19-related urgent care or hospitalisation was eight. Sensitivity analysis in participants with confirmed COVID-19 (eight [14%] in the usual care group vs one [2%] in the budesonide group), showed that the difference in proportions was 0\u00b7125 (95% CI 0\u00b7035\u20130\u00b7216; p=0\u00b7007). There was no difference participants with a primary outcome event compared with participants without a primary outcome event (appendix p 7). For all primary outcome events in the per-protocol population, three participants were symptomatically breathless with oxygen saturations below 94%; one developed diabetic ketoacidosis; one developed acute kidney injury; one had suspected pulmonary embolism; one had suspected rib fractures; three were seen at least twice by an out of hours general practitioner (which included one participant in the budesonide group); and one was seen by a paramedic crew on day 6 and subsequently seen again by a general practitioner on day 8 and sent to the emergency department, where they were directly admitted to the respiratory high dependency unit, requiring continuous positive pressure ventilation for 8 days. All participants not admitted to hospital had daily telephone checks with the COVID hub general practitioner team."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 027 \u2014 Results"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC8040526",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8040526/fullTextXML",
+            "xml_sha256": "3090640cc36cd0397194038ad0b2fb357156277ee6c77156b827919d480d659e",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 24,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 24,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 0
+          }
+        },
+        {
+          "citation": "PubMed:33864735",
+          "title": "Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Published Erratum"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Full text paragraph 001 \u2014 Body"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "",
+          "matched_passages": [
+            "Ramakrishnan S, Nicolau DV Jr, Langford B, et al. Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. Lancet Respir Med 2021; published online April 9. https://doi.org/10.1016/S2213-2600(21)00160-0\u2014In this Article, the findings section of the summary should have read, \u201cFor the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group\u201d. Additionally, in the Summary and Results, the dose of budesonide should have been 400 \u03bcg per actuation, to a total dose (two puffs to be taken twice per day) of 1600 \u03bcg. These corrections have been made to the online version as of April 14, 2021, and the printed version is correct."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 001 \u2014 Body"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC8445290",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8445290/fullTextXML",
+            "xml_sha256": "ce5cfebc4eda1a9bad540a6807134f3b45cdbe1c2cd3edd8bd98719715d9a900",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 1,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 0,
+            "omitted_tables": 0,
+            "indexed_captions": 0,
+            "omitted_captions": 0
+          }
+        }
+      ],
+      "question": "What does the STOIC trial report for COVID-19 urgent-care or hospital outcomes in its intention-to-treat and per-protocol analyses? Give the group counts and denominators, use the published correction where relevant, distinguish the analyses, and explain the main design limitation without claiming a mortality benefit."
+    },
+    "generation_context_sha256": "95b284f501173977e073ac8b3e8e61ba132946b933a5efa7cca11ca61197a0d3"
+  },
+  {
+    "case_id": "stoic-simplify",
+    "snapshot_id": "stoic",
+    "answer": {
+      "id": "fae3b118-d07c-436e-9e05-9496ab6f582a",
+      "workspace_id": "stoic-correction-1123",
+      "question": "Explain that more simply, keeping the key numbers and the main limitation.",
+      "previous_answer_id": "f600943e-e079-449f-8b89-5d97685058d9",
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:33844996": "7b287801e644da945526c37f5b964a7f331955322c8b2c7749457ee6107eb078",
+        "PubMed:33864735": "a380d41f8cf35746384369caf4e4ef53d522168e3cf9fb535b7ee8e29b2eba52"
+      },
+      "short_answer": "For inhaled budesonide early COVID-19, I found 2 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "direct_answer": "For inhaled budesonide early COVID-19, I found 2 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "Within the selected document, TrialLens found passages relevant to inhaled budesonide early COVID-19 and the user's question.",
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d provides the quantitative signal 14%, 1%, 95%, 91%; the relevant passage says in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996.",
+        "The PubMed record \u201cCorrection to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0\u201d says inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed, 33864735). Section: Full text paragraph 001 \u2014 Body. Reference: Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0. (2021). PubMed. 33864735."
+      ],
+      "supporting_evidence": [
+        "Within the selected document, TrialLens found passages relevant to inhaled budesonide early COVID-19 and the user's question.",
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d provides the quantitative signal 14%, 1%, 95%, 91%; the relevant passage says in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996.",
+        "The PubMed record \u201cCorrection to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0\u201d says inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed, 33864735). Section: Full text paragraph 001 \u2014 Body. Reference: Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0. (2021). PubMed. 33864735."
+      ],
+      "safety_limitations": [
+        "The PubMed record \u201cInhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial\u201d reports or describes in the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide (PubMed, 33844996). Reference: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. (2021). PubMed. 33844996."
+      ],
+      "uncertainty": [
+        "The answer is limited to the abstracts, trial summaries, labels, and adverse-event summaries indexed in this workspace; full-text results and unpublished evidence may be missing.",
+        "Some retrieved numbers may describe eligibility, dose, formulation, or adverse-event frequency rather than effectiveness; TrialLens separates those from true outcome statistics when possible."
+      ],
+      "limitations": [
+        "This answer is generated only from retrieved workspace sources and may omit evidence not indexed here.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "PubMed:33844996",
+        "PubMed:33864735"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "cbc52a52-2f65-4279-8ee0-2ed46da1610f",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportion 0\u00b7123, 95% CI 0\u00b7033\u20130\u00b7213; p=0\u00b7009). In the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide. The number needed to treat with inhaled budesonide to reduce COVID-19-related urgent care or hospitalisation was eight. Sensitivity analysis in participants with confirmed COVID-19 (eight [14%] in the usual care group vs one [2%] in the budesonide group), showed that the difference in proportions was 0\u00b7125 (95% CI 0\u00b7035\u20130\u00b7216; p=0\u00b7007). There was no difference participants with a primary outcome event compared with participants without a primary outcome event (appendix p 7). For all primary outcome events in the per-protocol population, three participants were symptomatically breathless with oxygen saturations below 94%; one developed diabetic ketoacidosis; one developed acute kidney injury; one had suspected pulmonary embolism; one had suspected rib fractures; three were seen at least twice by an out of hours general practitioner (which included one participant in the budesonide group); and one was seen by a paramedic crew on day 6 and subsequently seen again by a general practitioner on day 8 and sent to the emergency department, where they were directly admitted to the respiratory high dependency unit, requiring continuous positive pressure ventilation for 8 days. All participants not admitted to hospital had daily telephone checks with the COVID hub general practitioner team.",
+          "score": 1.1853,
+          "section": "Full text paragraph 027 \u2014 Results",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "group",
+            "hospital",
+            "inhaled",
+            "per-protocol",
+            "stoic"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, group, hospital in a literature source."
+        },
+        {
+          "chunk_id": "7a46a84f-99b4-4996-8fa6-39b83e04a029",
+          "source_id": "stoic-33864735",
+          "source_type": "pubmed",
+          "citation": "PubMed:33864735",
+          "text": "Ramakrishnan S, Nicolau DV Jr, Langford B, et al. Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. Lancet Respir Med 2021; published online April 9. https://doi.org/10.1016/S2213-2600(21)00160-0\u2014In this Article, the findings section of the summary should have read, \u201cFor the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group\u201d. Additionally, in the Summary and Results, the dose of budesonide should have been 400 \u03bcg per actuation, to a total dose (two puffs to be taken twice per day) of 1600 \u03bcg. These corrections have been made to the online version as of April 14, 2021, and the printed version is correct.",
+          "score": 1.0284,
+          "section": "Full text paragraph 001 \u2014 Body",
+          "title": "Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33864735/",
+          "external_id": "33864735",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "correction",
+            "covid-19",
+            "early",
+            "group",
+            "inhaled",
+            "per-protocol",
+            "published"
+          ],
+          "relevance_note": "Matched budesonide, correction, covid-19, early, group in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:15:16.922327+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The STOIC trial reported that inhaled budesonide reduced the likelihood of needing urgent medical care and reduced time to recovery after early COVID-19. For the per-protocol population, the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group, with a difference in proportions of 0.131 (95% CI 0.043 to 0.218; p=0.004) [PubMed:33844996]. For the intention-to-treat population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group, with a difference in proportions of 0.123 (95% CI 0.033 to 0.213; p=0.009) [PubMed:33844996].\", \"The main limitation of the study is that it was stopped early after independent statistical review concluded that the study outcome would not change with further participant enrolment, which may affect the accuracy of the results. Additionally, the study had a small sample size, with 146 participants randomly assigned to either usual care or budesonide [PubMed:33844996].\", \"A correction was published to clarify the dose of budesonide, which was 400 \u03bcg per actuation, to a total dose of 1600 \u03bcg per day [PubMed:33864735].\"], \"cited_sources\": [\"PubMed:33844996\", \"PubMed:33864735\"], \"uncertainty\": [\"The study was stopped early, which may affect the accuracy of the results.\", \"The sample size was small, with 146 participants.\", \"The study had a limited follow-up period.\"]}",
+        "usage": {
+          "prompt_tokens": 3785,
+          "completion_tokens": 373,
+          "total_tokens": 4158,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 177.3295135498047
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "5d001ad8e5383b02756fb87785659c0f7aeb294c222a8881744b4716e62deac7",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The STOIC trial compared inhaled budesonide to usual care in adults with early COVID-19. The primary outcome, COVID-19-related urgent care visit or hospitalization, occurred in 10 (14%) of 70 participants in the usual care group and 1 (1%) of 69 participants in the budesonide group, with a difference in proportions of 0.131 (0.043 to 0.218; p=0.004) in the per-protocol population [PubMed:33844996].\", \"The main limitation of the study is that it was stopped early, which may affect the accuracy of the results. The study had 146 participants randomly assigned to either usual care or budesonide, but the analysis was based on the per-protocol population of 139 participants [PubMed:33844996].\"], \"cited_sources\": [\"PubMed:33844996\", \"PubMed:33864735\"], \"uncertainty\": [\"The study was stopped early, which may affect the accuracy of the results.\", \"The sample size was limited.\"]}",
+        "usage": {
+          "prompt_tokens": 4550,
+          "completion_tokens": 229,
+          "total_tokens": 4779,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 168.23831176757812
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "5d001ad8e5383b02756fb87785659c0f7aeb294c222a8881744b4716e62deac7",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "early COVID-19",
+        "intervention": "inhaled budesonide"
+      },
+      "history": [
+        {
+          "question": "What does the STOIC trial report for COVID-19 urgent-care or hospital outcomes in its intention-to-treat and per-protocol analyses? Give the group counts and denominators, use the published correction where relevant, distinguish the analyses, and explain the main design limitation without claiming a mortality benefit.",
+          "answer": "For inhaled budesonide early COVID-19, I found 2 retrieved passages with quantitative signals. The evidence section separates actual numbers from broader effectiveness context, and it will not treat non-outcome numbers as proof of effectiveness."
+        }
+      ],
+      "evidence": [
+        {
+          "citation": "PubMed:33844996",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Randomized Controlled Trial"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Abstract",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 010 \u2014 Methods / Study design and participants",
+            "Full text paragraph 011 \u2014 Methods / Study design and participants",
+            "Full text paragraph 012 \u2014 Methods / Study design and participants",
+            "Full text paragraph 013 \u2014 Methods / Randomisation",
+            "Full text paragraph 014 \u2014 Methods / Procedures",
+            "Full text paragraph 015 \u2014 Methods / Procedures",
+            "Full text paragraph 016 \u2014 Methods / Procedures",
+            "Full text paragraph 017 \u2014 Methods / Outcomes",
+            "Full text paragraph 018 \u2014 Methods / Outcomes",
+            "Full text paragraph 019 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 020 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 021 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 022 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 024 \u2014 Results"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "AbstractBackgroundMultiple early reports of patients admitted to hospital with COVID-19 showed that patients with chronic respiratory disease were significantly under-represented in these cohorts. We hypothesised that the widespread use of inhaled glucocorticoids among these patients was responsible for this finding, and tested if inhaled glucocorticoids would be an effective treatment for early COVID-19.MethodsWe performed an open-label, parallel-group, phase 2, randomised controlled trial (Steroids in COVID-19; STOIC) of inhaled budesonide, compared with usual care, in adults within 7 days of the onset of mild COVID-19 symptoms. The trial was done in the community in Oxfordshire, UK. Participants were randomly assigned to inhaled budsonide or usual care stratified for age (\u226440 years or >40 years), sex (male or female), and number of comorbidities (\u22641 and \u22652). Randomisation was done using random sequence generation in block randomisation in a 1:1 ratio. Budesonide dry powder was delivered using a turbohaler at a dose of 400 \u03bcg per actuation. Participants were asked to take two inhalations twice a day until symptom resolution. The primary endpoint was COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, analysed for both the per-protocol and intention-to-treat (ITT) populations. The secondary outcomes were self-reported clinical recovery (symptom resolution), viral symptoms measured using the Common Cold Questionnare (CCQ) and the InFLUenza Patient Reported Outcome Questionnaire (FLUPro), body temperature, blood oxygen saturations, and SARS-CoV-2 viral load. The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment. This trial is registered with ClinicalTrials.gov, NCT04416399.FindingsFrom July 16 to Dec 9, 2020, 167 participants were recruited and assessed for eligibility. 21 did not meet eligibility criteria and were excluded. 146 participants were randomly assigned\u201473 to usual care and 73 to budesonide. For the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043 to 0\u00b7218; p=0\u00b7004). For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportions 0\u00b7123, 95% CI 0\u00b7033 to 0\u00b7213; p=0\u00b7009). The number needed to treat with inhaled budesonide to reduce COVID-19 deterioration was eight. Clinical recovery was 1 day shorter in the budesonide group compared with the usual care group (median 7 days [95% CI 6 to 9] in the budesonide group vs 8 days [7 to 11] in the usual care group; log-rank test p=0\u00b7007). The mean proportion of days with a fever in the first 14 days was lower in the budesonide group (2%, SD 6) than the usual care group (8%, SD 18; Wilcoxon test p=0\u00b7051) and the proportion of participants with at least 1 day of fever was lower in the budesonide group when compared with the usual care group. As-needed antipyretic medication was required for fewer proportion of days in the budesonide group compared with the usual care group (27% [IQR 0\u201350] vs 50% [15\u201371]; p=0\u00b7025) Fewer participants randomly assigned to budesonide had persistent symptoms at days 14 and 28 compared with participants receiving usual care (difference in proportions 0\u00b7204, 95% CI 0\u00b7075 to 0\u00b7334; p=0\u00b7003). The mean total score change in the CCQ and FLUPro over 14 days was significantly better in the budesonide group compared with the usual care group (CCQ mean difference \u22120\u00b712, 95% CI \u22120\u00b721 to \u22120\u00b702 [p=0\u00b7016]; FLUPro mean difference \u22120\u00b710, 95% CI \u22120\u00b721 to \u22120\u00b700 [p=0\u00b7044]). Blood oxygen saturations and SARS-CoV-2 load, measured by cycle threshold, were not different between the groups. Budesonide was safe, with only five (7%) participants reporting self-limiting adverse events.InterpretationEarly administration of inhaled budesonide reduced the likelihood of needing urgent medical care and reduced time to recovery after early COVID-19.FundingNational Institute for Health Research Biomedical Research Centre and AstraZeneca.",
+          "matched_passages": [
+            "For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportion 0\u00b7123, 95% CI 0\u00b7033\u20130\u00b7213; p=0\u00b7009). In the per-protocol analysis, the primary outcome occurred in ten (14%) participants in the usual care group and one (1%) participant in budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043\u20130\u00b7218; p=0\u00b7004), indicating a relative risk reduction of 91% for budesonide. The number needed to treat with inhaled budesonide to reduce COVID-19-related urgent care or hospitalisation was eight. Sensitivity analysis in participants with confirmed COVID-19 (eight [14%] in the usual care group vs one [2%] in the budesonide group), showed that the difference in proportions was 0\u00b7125 (95% CI 0\u00b7035\u20130\u00b7216; p=0\u00b7007). There was no difference participants with a primary outcome event compared with participants without a primary outcome event (appendix p 7). For all primary outcome events in the per-protocol population, three participants were symptomatically breathless with oxygen saturations below 94%; one developed diabetic ketoacidosis; one developed acute kidney injury; one had suspected pulmonary embolism; one had suspected rib fractures; three were seen at least twice by an out of hours general practitioner (which included one participant in the budesonide group); and one was seen by a paramedic crew on day 6 and subsequently seen again by a general practitioner on day 8 and sent to the emergency department, where they were directly admitted to the respiratory high dependency unit, requiring continuous positive pressure ventilation for 8 days. All participants not admitted to hospital had daily telephone checks with the COVID hub general practitioner team."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 027 \u2014 Results"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC8040526",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8040526/fullTextXML",
+            "xml_sha256": "3090640cc36cd0397194038ad0b2fb357156277ee6c77156b827919d480d659e",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 24,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 24,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 0
+          }
+        },
+        {
+          "citation": "PubMed:33864735",
+          "title": "Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Published Erratum"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Full text paragraph 001 \u2014 Body"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "",
+          "matched_passages": [
+            "Ramakrishnan S, Nicolau DV Jr, Langford B, et al. Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial. Lancet Respir Med 2021; published online April 9. https://doi.org/10.1016/S2213-2600(21)00160-0\u2014In this Article, the findings section of the summary should have read, \u201cFor the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group\u201d. Additionally, in the Summary and Results, the dose of budesonide should have been 400 \u03bcg per actuation, to a total dose (two puffs to be taken twice per day) of 1600 \u03bcg. These corrections have been made to the online version as of April 14, 2021, and the printed version is correct."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text paragraph 001 \u2014 Body"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC8445290",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8445290/fullTextXML",
+            "xml_sha256": "ce5cfebc4eda1a9bad540a6807134f3b45cdbe1c2cd3edd8bd98719715d9a900",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 1,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 0,
+            "omitted_tables": 0,
+            "indexed_captions": 0,
+            "omitted_captions": 0
+          }
+        }
+      ],
+      "question": "Explain that more simply, keeping the key numbers and the main limitation."
+    },
+    "generation_context_sha256": "5d001ad8e5383b02756fb87785659c0f7aeb294c222a8881744b4716e62deac7"
+  },
+  {
+    "case_id": "stoic-mortality",
+    "snapshot_id": "stoic",
+    "answer": {
+      "id": "e0b183b5-ef58-460d-85ef-b4bc182aeafc",
+      "workspace_id": "stoic-correction-1123",
+      "question": "Does this small trial establish that budesonide prevents death?",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Conversational generation was unavailable or failed validation. Showing source excerpts; try again.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "PubMed:33844996": "7b287801e644da945526c37f5b964a7f331955322c8b2c7749457ee6107eb078",
+        "PubMed:33864735": "a380d41f8cf35746384369caf4e4ef53d522168e3cf9fb535b7ee8e29b2eba52"
+      },
+      "short_answer": "For inhaled budesonide early COVID-19, the extraction table does not contain enough direct trial evidence to answer this question directly.",
+      "direct_answer": "For inhaled budesonide early COVID-19, the extraction table does not contain enough direct trial evidence to answer this question directly.",
+      "evidence_map": [
+        "Workspace coverage: TrialLens considered 2 extracted source rows across 2 literature sources.",
+        "Question fit: 0 rows matched the question strongly enough for direct synthesis; 0 are cited in the answer.",
+        "Safety coverage: 1 rows include safety, warning, label, or adverse-event context.",
+        "Review coverage: 1 rows are marked low confidence and should be inspected before relying on them.",
+        "Known limitation: The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables",
+        "Known limitation: Long record was compressed into source-level fields; inspect the original source for full context"
+      ],
+      "reasoning_summary": [
+        "Question intent: treated as a trial question about inhaled budesonide early COVID-19.",
+        "Selection basis: rows were scored for topic overlap, question-term overlap, intent fit, source type, confidence, and review status.",
+        "Question anchors: budesonide, death, establish, prevents, small, that.",
+        "Synthesis scope: no extraction row met the direct-answer threshold, so TrialLens abstained rather than filling gaps.",
+        "Caution applied: answer still remains limited to indexed workspace sources and is not clinical guidance."
+      ],
+      "evidence_synthesis": [
+        "Whole-workspace read: 2 extracted rows were available across 2 literature sources; this answer focused on 2 literature sources.",
+        "Shared signal: no row was strong enough for direct synthesis, so TrialLens reports closest context rather than a firm answer.",
+        "Literature view: 2 PubMed rows provide abstract-level study or review context.",
+        "Answer gap: extracted rows did not directly match the requested evidence type strongly enough.",
+        "Review gap: low-confidence rows remain in the workspace and may need human inspection before synthesis is trusted.",
+        "Detail gap: indexed summaries can omit full-text methods, subgroup results, and detailed outcome tables."
+      ],
+      "source_readouts": [
+        "CONTEXT \u00b7 PubMed:33844996 \u00b7 literature source \u00b7 relevance 0: Clinical recovery was 1 day shorter in the budesonide group compared with the usual care group (median 7 days [95% CI 6 to 9] in the budesonide group vs 8 days [7 to 11] in the usual care group; log-rank test p=0\u00b7007) Limit: The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables",
+        "CONTEXT \u00b7 PubMed:33864735 \u00b7 literature source \u00b7 relevance 0: No direct outcome/result extracted from the indexed abstract Limit: The indexed summary may omit full-text methods, subgroup findings, and detailed outcome tables"
+      ],
+      "evidence_quality": [
+        "Directness: low. No extracted row met the direct-answer threshold for this question.",
+        "Source strength: low. No directly used rows were available for appraisal.",
+        "Review risk: no directly used row is currently marked low confidence.",
+        "Completeness caution: indexed summaries may omit full-text methods, subgroup analyses, and detailed outcome tables."
+      ],
+      "facet_coverage": [
+        "Trial evidence: partial context exists in 2 rows, but none met the direct-answer threshold."
+      ],
+      "answer_trace": [
+        {
+          "label": "Question read",
+          "value": "Trial evidence",
+          "detail": "TrialLens treated this as a trial question about inhaled budesonide early COVID-19."
+        },
+        {
+          "label": "Question anchors",
+          "value": "budesonide, death, establish, prevents, small, that",
+          "detail": "These terms were matched against source profiles, extracted fields, source passages, and limitations."
+        },
+        {
+          "label": "Workspace scan",
+          "value": "2 rows scanned",
+          "detail": "0 rows met the synthesis threshold; 2 stayed as context or were not relevant enough."
+        },
+        {
+          "label": "Cited rows",
+          "value": "0 rows cited",
+          "detail": "Main source mix: no cited rows."
+        },
+        {
+          "label": "Closest context",
+          "value": "PubMed:33844996",
+          "detail": "Clinical recovery was 1 day shorter in the budesonide group compared with the usual care group (median 7 days [95% CI 6 to 9] in the budesonide group vs 8 days [7 to 11] in the usual care group; log-rank test p=0\u00b7007)"
+        },
+        {
+          "label": "Caution",
+          "value": "Indexed evidence only",
+          "detail": "The answer does not use evidence outside the current workspace and is not clinical guidance."
+        }
+      ],
+      "evidence": [
+        "TrialLens is abstaining because the structured extraction rows do not directly support the requested answer.",
+        "Closest available row: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed:33844996) has confidence 94%."
+      ],
+      "supporting_evidence": [
+        "TrialLens is abstaining because the structured extraction rows do not directly support the requested answer.",
+        "Closest available row: Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial (PubMed:33844996) has confidence 94%."
+      ],
+      "safety_limitations": [],
+      "uncertainty": [
+        "Try changing the source filter, rebuilding with a more specific intervention, or inspecting sources manually.",
+        "TrialLens avoids filling gaps when extracted fields and retrieved passages do not support the question."
+      ],
+      "limitations": [
+        "TrialLens does not provide medical advice or patient-specific recommendations."
+      ],
+      "citations": [
+        "PubMed:33844996",
+        "PubMed:33864735"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "a6845b8c-6b78-4af9-bc4c-ae28419f69a4",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "Figure 1 Trial profile",
+          "score": 0.5257,
+          "section": "Full text figure caption 001",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "9b17e40e-dd99-430e-9c43-5da35f9fb3c6",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "All participants provided written informed consent.",
+          "score": 0.4784,
+          "section": "Full text paragraph 012 \u2014 Methods / Study design and participants",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "3e4b0d28-2215-4bf6-900b-2565d66bec8a",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "Figure 4 Daily mean scores over 14 days using the FLUPro questionnaire (A) Total symptoms. (B) Systemic symptoms. (C) Nasal symptoms. (D) Throat. (E) Chest. (F) Eyes. (G) Gastrointestinal. Vertical bars indicate standard error.",
+          "score": 0.4647,
+          "section": "Full text figure caption 004",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "b3568c9e-fc64-44de-abfa-b973d69889e2",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "AbstractBackgroundMultiple early reports of patients admitted to hospital with COVID-19 showed that patients with chronic respiratory disease were significantly under-represented in these cohorts. We hypothesised that the widespread use of inhaled glucocorticoids among these patients was responsible for this finding, and tested if inhaled glucocorticoids would be an effective treatment for early COVID-19.MethodsWe performed an open-label, parallel-group, phase 2, randomised controlled trial (Steroids in COVID-19; STOIC) of inhaled budesonide, compared with usual care, in adults within 7 days of the onset of mild COVID-19 symptoms. The trial was done in the community",
+          "score": 0.4467,
+          "section": "Abstract 1",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled",
+            "that"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled, that in a literature source."
+        },
+        {
+          "chunk_id": "0811da7a-af28-4f82-a80e-d8374e69b083",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "the per-protocol and intention-to-treat (ITT) populations. The secondary outcomes were self-reported clinical recovery (symptom resolution), viral symptoms measured using the Common Cold Questionnare (CCQ) and the InFLUenza Patient Reported Outcome Questionnaire (FLUPro), body temperature, blood oxygen saturations, and SARS-CoV-2 viral load. The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment. This trial is registered with ClinicalTrials.gov, NCT04416399.FindingsFrom July 16 to Dec 9, 2020, 167 participants were recruited and assessed for eligibility. 21 did not meet eligibility criteria and were excluded. 146",
+          "score": 0.4424,
+          "section": "Abstract 3",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled",
+            "that"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled, that in a literature source."
+        },
+        {
+          "chunk_id": "4021296c-b71a-44ab-8b1d-bcd9284b42c3",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "The median cycle threshold nasopharyngeal SARS-CoV-2 viral load at day 0 was 32\u00b71 (IQR 21\u00b77\u201340\u00b70), day 7 was 35\u00b73 (32\u00b74 to 40\u00b70), and day 14 was 36\u00b74 (34\u00b72 to 40\u00b70). Cycle threshold reduction was significantly different between visits 1 and 2 for both study groups (Wilcoxon matched pairs p=0\u00b7063 budesonide, p=0\u00b7004 usual care; appendix p 14); but not between groups (mean change between visits 1 and 2 in the budesonide was 3\u00b720 [95% CI 0\u00b746 to 5\u00b794] and usual care was 3\u00b775 [1\u00b700 to 6\u00b750]; mean difference \u22120\u00b755, 95% CI \u22122\u00b739 to 1\u00b729; p=0\u00b7554).",
+          "score": 0.4153,
+          "section": "Full text paragraph 032 \u2014 Results",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "5bbc3e24-7067-4694-bce1-74f56849e72d",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "Figure 2 Time to self-reported clinical recovery of per-protocol population using data censoring for primary outcome",
+          "score": 0.4061,
+          "section": "Full text figure caption 002",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "903b5680-603b-4978-8ad5-3cd0f868544c",
+          "source_id": "stoic-33844996",
+          "source_type": "pubmed",
+          "citation": "PubMed:33844996",
+          "text": "Stochastic simulations, in a virtual twin post-hoc study design, showed that the daily odds ratio of reaching the primary outcome, with budesonide reduced by a significant factor of 30-times (figure 5 ).",
+          "score": 0.4047,
+          "section": "Full text paragraph 034 \u2014 Results",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33844996/",
+          "external_id": "33844996",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "budesonide",
+            "covid-19",
+            "early",
+            "inhaled",
+            "that"
+          ],
+          "relevance_note": "Matched budesonide, covid-19, early, inhaled, that in a literature source."
+        }
+      ],
+      "created_at": "2026-11-25T01:15:49.305959+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The trial established that inhaled budesonide reduced the likelihood of needing urgent medical care and reduced time to recovery after early COVID-19, with the primary outcome occurring in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportions 0.123, 95% CI 0.033 to 0.213; p=0.009) [PubMed:33844996].\", \"However, the trial does not provide information on mortality outcomes, as the primary endpoint was COVID-19-related urgent care visit, including emergency department assessment or hospitalisation [PubMed:33844996].\", \"Therefore, this small trial does not establish that budesonide prevents death, as mortality was not a reported outcome [PubMed:33844996].\"], \"cited_sources\": [\"PubMed:33844996\"], \"uncertainty\": [\"The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment [PubMed:33844996].\", \"The sample size of the trial was small, with 146 participants randomly assigned to either usual care or budesonide [PubMed:33844996].\", \"The trial only reported on urgent care visits and recovery time, and not on mortality outcomes [PubMed:33844996].\"]}",
+        "usage": {
+          "prompt_tokens": 3365,
+          "completion_tokens": 280,
+          "total_tokens": 3645,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 147.0821990966797
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "c7ac580d850f516b0f6bcbdd033554f6cc4ee7590d1753ce3ed6935541487122",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": "{\"paragraphs\": [\"The trial does not establish that budesonide prevents death, as mortality was not a reported outcome [PubMed:33844996].\", \"The primary outcome was COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, and the trial found a difference in proportions of 0.123 (0.033 to 0.213) between the budesonide and usual care groups [PubMed:33844996].\", \"The trial had a small sample size and was stopped early, which is a design limitation that may affect the interpretation of the results [PubMed:33844996].\"], \"cited_sources\": [\"PubMed:33844996\", \"PubMed:33864735\"], \"uncertainty\": [\"The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment [PubMed:33844996].\", \"The sample size of the trial was small, with 146 participants randomly assigned to either usual care or budesonide [PubMed:33844996].\"]}",
+        "usage": {
+          "prompt_tokens": 4036,
+          "completion_tokens": 216,
+          "total_tokens": 4252,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 151.86866760253906
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "c7ac580d850f516b0f6bcbdd033554f6cc4ee7590d1753ce3ed6935541487122",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "early COVID-19",
+        "intervention": "inhaled budesonide"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "PubMed:33844996",
+          "title": "Inhaled budesonide in the treatment of early COVID-19 (STOIC): a phase 2, open-label, randomised controlled trial",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Randomized Controlled Trial"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables and complete figure-caption text. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Abstract",
+            "Full text figure caption 001",
+            "Full text figure caption 002",
+            "Full text figure caption 003",
+            "Full text figure caption 004",
+            "Full text figure caption 005",
+            "Full text paragraph 010 \u2014 Methods / Study design and participants",
+            "Full text paragraph 011 \u2014 Methods / Study design and participants",
+            "Full text paragraph 012 \u2014 Methods / Study design and participants",
+            "Full text paragraph 013 \u2014 Methods / Randomisation",
+            "Full text paragraph 014 \u2014 Methods / Procedures",
+            "Full text paragraph 015 \u2014 Methods / Procedures",
+            "Full text paragraph 016 \u2014 Methods / Procedures",
+            "Full text paragraph 017 \u2014 Methods / Outcomes",
+            "Full text paragraph 018 \u2014 Methods / Outcomes",
+            "Full text paragraph 019 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 020 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 021 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 022 \u2014 Methods / Statistical analysis",
+            "Full text paragraph 024 \u2014 Results"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "AbstractBackgroundMultiple early reports of patients admitted to hospital with COVID-19 showed that patients with chronic respiratory disease were significantly under-represented in these cohorts. We hypothesised that the widespread use of inhaled glucocorticoids among these patients was responsible for this finding, and tested if inhaled glucocorticoids would be an effective treatment for early COVID-19.MethodsWe performed an open-label, parallel-group, phase 2, randomised controlled trial (Steroids in COVID-19; STOIC) of inhaled budesonide, compared with usual care, in adults within 7 days of the onset of mild COVID-19 symptoms. The trial was done in the community in Oxfordshire, UK. Participants were randomly assigned to inhaled budsonide or usual care stratified for age (\u226440 years or >40 years), sex (male or female), and number of comorbidities (\u22641 and \u22652). Randomisation was done using random sequence generation in block randomisation in a 1:1 ratio. Budesonide dry powder was delivered using a turbohaler at a dose of 400 \u03bcg per actuation. Participants were asked to take two inhalations twice a day until symptom resolution. The primary endpoint was COVID-19-related urgent care visit, including emergency department assessment or hospitalisation, analysed for both the per-protocol and intention-to-treat (ITT) populations. The secondary outcomes were self-reported clinical recovery (symptom resolution), viral symptoms measured using the Common Cold Questionnare (CCQ) and the InFLUenza Patient Reported Outcome Questionnaire (FLUPro), body temperature, blood oxygen saturations, and SARS-CoV-2 viral load. The trial was stopped early after independent statistical review concluded that study outcome would not change with further participant enrolment. This trial is registered with ClinicalTrials.gov, NCT04416399.FindingsFrom July 16 to Dec 9, 2020, 167 participants were recruited and assessed for eligibility. 21 did not meet eligibility criteria and were excluded. 146 participants were randomly assigned\u201473 to usual care and 73 to budesonide. For the per-protocol population (n=139), the primary outcome occurred in ten (14%) of 70 participants in the usual care group and one (1%) of 69 participants in the budesonide group (difference in proportions 0\u00b7131, 95% CI 0\u00b7043 to 0\u00b7218; p=0\u00b7004). For the ITT population, the primary outcome occurred in 11 (15%) participants in the usual care group and two (3%) participants in the budesonide group (difference in proportions 0\u00b7123, 95% CI 0\u00b7033 to 0\u00b7213; p=0\u00b7009). The number needed to treat with inhaled budesonide to reduce COVID-19 deterioration was eight. Clinical recovery was 1 day shorter in the budesonide group compared with the usual care group (median 7 days [95% CI 6 to 9] in the budesonide group vs 8 days [7 to 11] in the usual care group; log-rank test p=0\u00b7007). The mean proportion of days with a fever in the first 14 days was lower in the budesonide group (2%, SD 6) than the usual care group (8%, SD 18; Wilcoxon test p=0\u00b7051) and the proportion of participants with at least 1 day of fever was lower in the budesonide group when compared with the usual care group. As-needed antipyretic medication was required for fewer proportion of days in the budesonide group compared with the usual care group (27% [IQR 0\u201350] vs 50% [15\u201371]; p=0\u00b7025) Fewer participants randomly assigned to budesonide had persistent symptoms at days 14 and 28 compared with participants receiving usual care (difference in proportions 0\u00b7204, 95% CI 0\u00b7075 to 0\u00b7334; p=0\u00b7003). The mean total score change in the CCQ and FLUPro over 14 days was significantly better in the budesonide group compared with the usual care group (CCQ mean difference \u22120\u00b712, 95% CI \u22120\u00b721 to \u22120\u00b702 [p=0\u00b7016]; FLUPro mean difference \u22120\u00b710, 95% CI \u22120\u00b721 to \u22120\u00b700 [p=0\u00b7044]). Blood oxygen saturations and SARS-CoV-2 load, measured by cycle threshold, were not different between the groups. Budesonide was safe, with only five (7%) participants reporting self-limiting adverse events.InterpretationEarly administration of inhaled budesonide reduced the likelihood of needing urgent medical care and reduced time to recovery after early COVID-19.FundingNational Institute for Health Research Biomedical Research Centre and AstraZeneca.",
+          "matched_passages": [
+            "Figure 1 Trial profile",
+            "All participants provided written informed consent.",
+            "Figure 4 Daily mean scores over 14 days using the FLUPro questionnaire (A) Total symptoms. (B) Systemic symptoms. (C) Nasal symptoms. (D) Throat. (E) Chest. (F) Eyes. (G) Gastrointestinal. Vertical bars indicate standard error.",
+            "The median cycle threshold nasopharyngeal SARS-CoV-2 viral load at day 0 was 32\u00b71 (IQR 21\u00b77\u201340\u00b70), day 7 was 35\u00b73 (32\u00b74 to 40\u00b70), and day 14 was 36\u00b74 (34\u00b72 to 40\u00b70). Cycle threshold reduction was significantly different between visits 1 and 2 for both study groups (Wilcoxon matched pairs p=0\u00b7063 budesonide, p=0\u00b7004 usual care; appendix p 14); but not between groups (mean change between visits 1 and 2 in the budesonide was 3\u00b720 [95% CI 0\u00b746 to 5\u00b794] and usual care was 3\u00b775 [1\u00b700 to 6\u00b750]; mean difference \u22120\u00b755, 95% CI \u22122\u00b739 to 1\u00b729; p=0\u00b7554)."
+          ],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [
+            {
+              "matched_passage_index": 0,
+              "section": "Full text figure caption 001"
+            },
+            {
+              "matched_passage_index": 1,
+              "section": "Full text paragraph 012 \u2014 Methods / Study design and participants"
+            },
+            {
+              "matched_passage_index": 2,
+              "section": "Full text figure caption 004"
+            },
+            {
+              "matched_passage_index": 3,
+              "section": "Full text paragraph 032 \u2014 Results"
+            }
+          ],
+          "full_text_provenance": {
+            "pmcid": "PMC8040526",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8040526/fullTextXML",
+            "xml_sha256": "3090640cc36cd0397194038ad0b2fb357156277ee6c77156b827919d480d659e",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 24,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 24,
+            "omitted_tables": 1,
+            "indexed_captions": 5,
+            "omitted_captions": 0
+          }
+        },
+        {
+          "citation": "PubMed:33864735",
+          "title": "Correction to Lancet Respir Med 2021; published online April 9. https://doi. org/10.1016/S2213-2600(21)00160-0",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Published Erratum"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract plus selected open-access article paragraphs, complete supported tables. This is a partial article index: other sections, unsupported tables, figure images and supplements may be missing. Absence here does not establish absence from the article. Structured extraction summaries remain based on the abstract.",
+          "indexed_section_names": [
+            "Full text paragraph 001 \u2014 Body"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "",
+          "matched_passages": [],
+          "text_scope": "PubMed abstract; full-text passages are identified separately below.",
+          "paper_passage_links": [],
+          "full_text_provenance": {
+            "pmcid": "PMC8445290",
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8445290/fullTextXML",
+            "xml_sha256": "ce5cfebc4eda1a9bad540a6807134f3b45cdbe1c2cd3edd8bd98719715d9a900",
+            "license": {
+              "links": [],
+              "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active."
+            },
+            "license_missing": false,
+            "license_truncated": false,
+            "scope": "Partial PMC article indexing: bounded body paragraphs, complete supported tables and figure caption text. Abstracts, references, figure images, supplementary material and unsupported tables are excluded. Missing values, arm definitions and statistics are not inferred.",
+            "indexed_paragraphs": 1,
+            "indexed_tables": 0,
+            "omitted_paragraphs": 0,
+            "omitted_tables": 0,
+            "indexed_captions": 0,
+            "omitted_captions": 0
+          }
+        }
+      ],
+      "question": "Does this small trial establish that budesonide prevents death?"
+    },
+    "generation_context_sha256": "c7ac580d850f516b0f6bcbdd033554f6cc4ee7590d1753ce3ed6935541487122"
+  }
+]
