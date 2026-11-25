@@ -47,3 +47,11 @@ On the paper cohort the citation-format candidate produced two fallbacks and two
 The percentage check now applies implied units to attached confidence intervals on both sides of validation. An invented bound such as −0.64 is rejected even if the answer omits its percent sign. The full API suite, frontend lint and typecheck, and the rebuilt API health check passed.
 
 The same citation-format candidate returned three fallbacks on STOIC. The rejected corrected-counts response supplied per-protocol denominators but cited the correction only for a dosing detail the question did not ask for. The simplification dropped the intention-to-treat counts. The published correction must support the corrected denominators directly, and a rewrite must retain both requested analyses.
+
+## Broader production-pipeline holdout
+
+The M0 holdout returned five generated answers. The protocol answer correctly distinguished planned enrollment, comparison and outcome from available results. The synthetic numerical answer preserved its core comparison and confidence interval, but overstated what a single endpoint established across the full 12 weeks. Its follow-up retained the figures and barely shortened the wording. The label safety answer omitted both trial denominators and the limitation on causal inference from voluntary reports. The mixed-source answer omitted the adult extended-release indication and lost the AXOS registry and ZITUVIMET pancreatitis qualifications in revision.
+
+The separate personal-treatment case took the deterministic guard route with zero model calls. These findings come from reviewing the displayed answers and exact evidence packets.
+
+The packet cohort stopped at `protocol-statistics` after a Cloudflare quota error during revision. The displayed fallback is a provider-limited observation, so it has no semantic pass. The other packet cases and the refreshed asthma cohort did not run. Local accounting showed 1,374.91 neurons remaining with one pending reservation, which does not establish availability on the Cloudflare account. The runner verified evaluation-store isolation and stopped without retrying or switching providers.

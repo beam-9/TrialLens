@@ -1,0 +1,239 @@
+[
+  {
+    "case_id": "protocol-statistics",
+    "snapshot_id": "protocol",
+    "answer": {
+      "id": "9853750f-cbfe-4501-bcbc-69e249264e9a",
+      "workspace_id": "packet-protocol",
+      "question": "For FF 50 micrograms once daily versus placebo in this trial, give the primary morning PEF result over 12 weeks, including each group's change, analyzed group sizes and the reported between-group estimate and confidence interval. Explain what the comparison means.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Cloudflare's free allowance or request limit is unavailable. Try later or after the daily reset. Showing source excerpts; no local model or paid fallback was called.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT01563029": "e7098d20533bbb925e3a5782679989920bb4fea74cd36bc62be5eaa34207c959"
+      },
+      "short_answer": "I could not identify a usable numerical result for fluticasone furoate asthma in the passages selected for this question. Other indexed passages or the original sources may contain relevant statistics; this is a gap in the current excerpt response.",
+      "direct_answer": "I could not identify a usable numerical result for fluticasone furoate asthma in the passages selected for this question. Other indexed passages or the original sources may contain relevant statistics; this is a gap in the current excerpt response.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [
+        "A relevant numerical outcome and its comparison were not identified by this excerpt synthesis.",
+        "Try filtering to Literature or Trials, or rebuild the workspace with more result-focused sources if you need numerical efficacy estimates."
+      ],
+      "supporting_evidence": [],
+      "safety_limitations": [
+        "The ClinicalTrials.gov record \u201cA Dose-ranging Study of Fluticasone Furoate (FF)\u201d (COMPLETED, PHASE2) reports or describes safety assessments include adverse events, oropharyngeal examinations, clinical chemistry, urinary cortisol, and vital signs (ClinicalTrials.gov, NCT01563029). Reference: ClinicalTrials.gov. (n.d.). A Dose-ranging Study of Fluticasone Furoate (FF). NCT01563029."
+      ],
+      "uncertainty": [
+        "The selected excerpts may omit statistics available elsewhere in the workspace or original sources."
+      ],
+      "limitations": [
+        "This response does not establish that numerical evidence is absent from the workspace or full sources.",
+        "It is not medical advice, diagnosis, or treatment guidance."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT01563029"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "protocol-chunk-000",
+          "source_id": "source-protocol",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT01563029",
+          "text": "This is a Phase IIb, multi-centre, stratified, randomised, double-blind, double-dummy, parallel-group, placebo and active controlled study in children aged 5-11 years with persistent uncontrolled asthma. Subjects meeting all of the inclusion criteria and none of the exclusion criteria at the screening visit (Visit 1) will enter a four week run-in period during which time they will continue their current medications. Visit 2 will occur two weeks into the run-in period to allow a review of compliance with daily diary and run-in medication. At Visit 3 (end of run-in/randomization visit), subjects meeting the",
+          "score": 0.6586,
+          "section": "Brief summary 1",
+          "title": "A Dose-ranging Study of Fluticasone Furoate (FF)",
+          "url": "https://clinicaltrials.gov/study/NCT01563029",
+          "external_id": "NCT01563029",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "asthma",
+            "daily",
+            "fluticasone",
+            "furoate",
+            "placebo",
+            "weeks"
+          ],
+          "relevance_note": "Matched asthma, daily, fluticasone, furoate, placebo in a trial record."
+        },
+        {
+          "chunk_id": "protocol-chunk-001",
+          "source_id": "source-protocol",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT01563029",
+          "text": "eligibility criteria who remain uncontrolled despite baseline therapy will be stratified based on pre screening inhaled corticosteroid (ICS) use. Once stratified, subjects will be randomised to the treatment phase of the study where they will receive one of five treatments for 12 weeks. Approx 1200 subjects ages 5 to 11 will be screened to achieve 575 randomized for a total of 115 randomized/evaluable subjects per treatment arm. Subjects will attend on-treatment visits at 2, 4, 8 and 12 weeks (Visits 4, 5, 6 and 7 respectively). A follow-up contact will be performed",
+          "score": 0.453,
+          "section": "Brief summary 2",
+          "title": "A Dose-ranging Study of Fluticasone Furoate (FF)",
+          "url": "https://clinicaltrials.gov/study/NCT01563029",
+          "external_id": "NCT01563029",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "fluticasone",
+            "furoate",
+            "once",
+            "weeks"
+          ],
+          "relevance_note": "Matched fluticasone, furoate, once, weeks in a trial record."
+        },
+        {
+          "chunk_id": "protocol-chunk-002",
+          "source_id": "source-protocol",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT01563029",
+          "text": "one week after completing study medication. All subjects must attempt spirometry measurements at Visits 1 and 3. For all subjects, a timed 24-hour urine collection for urinary cortisol and creatinine excretion will be performed prior to randomization at Visit 2 and within 7 days prior to Visit 7. All subjects must perform PEF daily between visits 1 and 7. The primary endpoint will be change from baseline in pre-dose (i.e. dosing trough) PM PEF from patient hand held electronic daily diary at Endpoint (Endpoint is defined as the mean over the last",
+          "score": 0.413,
+          "section": "Brief summary 3",
+          "title": "A Dose-ranging Study of Fluticasone Furoate (FF)",
+          "url": "https://clinicaltrials.gov/study/NCT01563029",
+          "external_id": "NCT01563029",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "change",
+            "daily",
+            "fluticasone",
+            "furoate",
+            "over",
+            "pef",
+            "primary"
+          ],
+          "relevance_note": "Matched change, daily, fluticasone, furoate, over in a trial record."
+        },
+        {
+          "chunk_id": "protocol-chunk-003",
+          "source_id": "source-protocol",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT01563029",
+          "text": "7 days of treatment). Safety assessments include adverse events, oropharyngeal examinations, clinical chemistry, urinary cortisol, and vital signs.",
+          "score": 0.2084,
+          "section": "Brief summary 4",
+          "title": "A Dose-ranging Study of Fluticasone Furoate (FF)",
+          "url": "https://clinicaltrials.gov/study/NCT01563029",
+          "external_id": "NCT01563029",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "fluticasone",
+            "furoate"
+          ],
+          "relevance_note": "Matched fluticasone, furoate in a trial record."
+        }
+      ],
+      "created_at": "2026-11-25T01:18:06.042377+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [\"The supplied excerpt from ClinicalTrials.gov:NCT01563029 does not report the primary morning PEF result over 12 weeks for FF 50 micrograms once daily versus placebo. \", \"The primary endpoint is defined as the change from baseline in pre-dose PM PEF from patient hand-held electronic daily diary at Endpoint, which is the mean over the last 7 days of treatment [ClinicalTrials.gov:NCT01563029]. \", \"Since the result is not reported in the supplied excerpt, the comparison between FF 50 micrograms once daily and placebo cannot be made. \"], \"cited_sources\": [\"ClinicalTrials.gov:NCT01563029\"], \"uncertainty\": [\"The supplied excerpt does not include the results of the trial\", \"The primary endpoint is defined, but the result is not reported\", \"The comparison between FF 50 micrograms once daily and placebo cannot be made due to lack of reported results\"]}",
+        "usage": {
+          "prompt_tokens": 1470,
+          "completion_tokens": 196,
+          "total_tokens": 1666,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 79.34332275390625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "fdf9d3aeed52928be7360e88797de58c02e31ca57d44a4ff951affccaf17fbd0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      },
+      {
+        "response": null,
+        "usage": null,
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "fdf9d3aeed52928be7360e88797de58c02e31ca57d44a4ff951affccaf17fbd0",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "fluticasone furoate"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT01563029",
+          "title": "A Dose-ranging Study of Fluticasone Furoate (FF)",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE2",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This is a Phase IIb, multi-centre, stratified, randomised, double-blind, double-dummy, parallel-group, placebo and active controlled study in children aged 5-11 years with persistent uncontrolled asthma. Subjects meeting all of the inclusion criteria and none of the exclusion criteria at the screening visit (Visit 1) will enter a four week run-in period during which time they will continue their current medications. Visit 2 will occur two weeks into the run-in period to allow a review of compliance with daily diary and run-in medication. At Visit 3 (end of run-in/randomization visit), subjects meeting the eligibility criteria who remain uncontrolled despite baseline therapy will be stratified based on pre screening inhaled corticosteroid (ICS) use. Once stratified, subjects will be randomised to the treatment phase of the study where they will receive one of five treatments for 12 weeks. Approx 1200 subjects ages 5 to 11 will be screened to achieve 575 randomized for a total of 115 randomized/evaluable subjects per treatment arm. Subjects will attend on-treatment visits at 2, 4, 8 and 12 weeks (Visits 4, 5, 6 and 7 respectively). A follow-up contact will be performed one week after completing study medication. All subjects must attempt spirometry measurements at Visits 1 and 3. For all subjects, a timed 24-hour urine collection for urinary cortisol and creatinine excretion will be performed prior to randomization at Visit 2 and within 7 days prior to Visit 7. All subjects must perform PEF daily between visits 1 and 7. The primary endpoint will be change from baseline in pre-dose (i.e. dosing trough) PM PEF from patient hand held electronic daily diary at Endpoint (Endpoint is defined as the mean over the last 7 days of treatment). Safety assessments include adverse events, oropharyngeal examinations, clinical chemistry, urinary cortisol, and vital signs.",
+          "matched_passages": []
+        }
+      ],
+      "question": "For FF 50 micrograms once daily versus placebo in this trial, give the primary morning PEF result over 12 weeks, including each group's change, analyzed group sizes and the reported between-group estimate and confidence interval. Explain what the comparison means."
+    },
+    "generation_context_sha256": "fdf9d3aeed52928be7360e88797de58c02e31ca57d44a4ff951affccaf17fbd0"
+  }
+]
