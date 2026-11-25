@@ -105,9 +105,21 @@ test("opens a real workspace and exposes every evidence view", async ({ page }) 
   await expect(page.getByRole("table")).toBeVisible({ timeout: 20_000 });
   expect(await page.getByRole("row").count()).toBeGreaterThan(1);
 
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  const navigationGeometry = () => page.evaluate(() => ({
+    scrollY: window.scrollY,
+    headerBottom: document.querySelector(".field-header")!.getBoundingClientRect().bottom,
+    sidebarTop: document.querySelector(".dashboard-sidebar")!.getBoundingClientRect().top,
+    tabsTop: document.querySelector('[role="tablist"]')!.getBoundingClientRect().top,
+  }));
+  const beforeScroll = await navigationGeometry();
   await page.evaluate(() => window.scrollTo({ top: 2_000, behavior: "instant" }));
-  await expect.poll(async () => (await page.getByRole("tablist", { name: "Workspace views" }).boundingBox())?.y ?? -1).toBeGreaterThan(70);
-  await expect.poll(async () => (await page.getByRole("tablist", { name: "Workspace views" }).boundingBox())?.y ?? 999).toBeLessThan(110);
+  await expect.poll(async () => (await navigationGeometry()).scrollY).toBeGreaterThan(beforeScroll.scrollY + 100);
+  const afterScroll = await navigationGeometry();
+  expect(Math.abs(afterScroll.sidebarTop - afterScroll.headerBottom)).toBeLessThanOrEqual(1);
+  expect(Math.abs(afterScroll.sidebarTop - beforeScroll.sidebarTop)).toBeLessThanOrEqual(1);
+  expect(Math.abs(afterScroll.tabsTop - beforeScroll.tabsTop)).toBeLessThanOrEqual(1);
+  expect(afterScroll.tabsTop).toBeGreaterThanOrEqual(afterScroll.headerBottom);
 
   const viewExpectations = [
     ["Ask", "Ask the evidence."],

@@ -1,6 +1,7 @@
 """Narrow answer wording checks that do not claim scientific entailment."""
 from __future__ import annotations
 
+from decimal import Decimal
 import re
 
 from triallens.text import normalize_numeric_signs
@@ -102,8 +103,9 @@ def confidence_interval_issue(text: str) -> str | None:
     return None
 
 
-_PERCENT_UNIT = r"(?:%|\bpercent\b(?!\s+points?\b)|\bper\s+cent\b)"
-_PERCENT_VALUE = re.compile(rf"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*{_PERCENT_UNIT}", re.I)
+_STAT_NUMBER = r"[+−-]?(?:\d+(?:\.\d+)?|\.\d+)"
+_PERCENT_UNIT = r"(?:%|\bpercent\b(?!\s+points?\b)|\bper\s+cent\b(?!\s+points?\b))"
+_PERCENT_VALUE = re.compile(rf"(?<![\w.])({_STAT_NUMBER})\s*{_PERCENT_UNIT}", re.I)
 _PERCENT_PAIR = re.compile(
     r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%\s*(?:vs\.?|versus)\s*"
     r"([+−-]?\d+(?:\.\d+)?)\s*%", re.I
@@ -144,6 +146,89 @@ _PERCENT_RANGE = re.compile(
     rf"([+−-]?\d+(?:\.\d+)?)\s*{_PERCENT_UNIT}", re.I
 )
 
+# An interval attached directly to a percentage estimate inherits its unit
+# when its bounds have no conflicting unit, as in -0.94% [95% CI, -1.25 to -0.63].
+_PERCENT_ESTIMATE_CI = re.compile(
+    rf"{_PERCENT_VALUE.pattern}\s*(?:[\[(]|,\s*(?:with\s+(?:an?\s+)?)?|with\s+(?:an?\s+)?)\s*"
+    rf"(\d{{1,3}})\s*%\s*(?:CI|confidence interval(?:,\s*CI)?)\s*(?:[:,]|of\b)?\s*"
+    rf"({_STAT_NUMBER})(?:\s*{_PERCENT_UNIT})?\s*(?:to|[–—-])\s*"
+    rf"({_STAT_NUMBER})(?:\s*{_PERCENT_UNIT})?"
+    r"(?=\s*(?:$|[\]),;!?]|\.(?!\d)))", re.I
+)
+
+
+def _percentage_ci_tuples(text: str):
+    for match in _PERCENT_ESTIMATE_CI.finditer(normalize_numeric_signs(text)):
+        yield match.start(), tuple(Decimal(raw.replace("−", "-")) for raw in match.groups())
+
+
+def estimate_interval_issue(answer: str, records: list[dict]) -> str | None:
+    """Flag a sign reversal for an otherwise identical, unambiguous cited percentage CI tuple."""
+    reported = {}
+    for record in records:
+        intervals = reported.setdefault(record["citation"], {})
+        for text in [record["text"], *record["matched_passages"]]:
+            for _, (estimate, level, lower, upper) in _percentage_ci_tuples(text):
+                intervals.setdefault((level, lower, upper), set()).add(estimate)
+    for paragraph in re.split(r"\n\s*\n", answer):
+        cited = set(re.findall(r"\[([^\]]+)\]", paragraph)).intersection(reported)
+        if not cited:
+            continue
+        prose = re.sub(r"\[([^\]]+)\]", lambda match: "" if match[1] in cited else match[0], paragraph)
+        prose = re.sub(
+            rf"({_STAT_NUMBER}\s*{_PERCENT_UNIT})\s*\.\s+This (?:reported )?(?:difference|estimate),\s*"
+            rf"(?=with\s+(?:an?\s+)?\d{{1,3}}\s*%)",
+            r"\1 ", prose, flags=re.I,
+        )
+        for start, (estimate, level, lower, upper) in _percentage_ci_tuples(prose):
+            if re.search(r"\b(?:not|(?:incorrect|wrong) to (?:pair|report|state))\s*$", prose[:start], re.I):
+                continue
+            candidates = set().union(*(reported[citation].get((level, lower, upper), set()) for citation in cited))
+            if estimate and candidates == {-estimate}:
+                return (f"The estimate paired with these confidence bounds reverses the sign in its cited source. "
+                        f"The cited tuple is {-estimate}% ({level}% CI {lower} to {upper}).")
+    return None
+
+
+_PERCENT_DISPERSION = re.compile(
+    r"(?<![\w.])([+−-]?\d+(?:\.\d+)?)\s*%\s*(?:±|\bplus[- ]minus\b)\s*(\d+(?:\.\d+)?)\s*%", re.I
+)
+
+
+def requested_dispersion_notes(question: str, draft: str, records: list[dict]) -> list[str]:
+    """Surface source-reported dispersion pairs for percentages already in a cited draft."""
+    if not re.search(r"\b(?:uncertainty|dispersion|standard (?:error|deviation)|plus[- ]minus)\b|±", question, re.I):
+        return []
+    reported = {}
+    for record in records:
+        pairs = reported.setdefault(record["citation"], {})
+        for text in [record["text"], *record["matched_passages"]]:
+            for match in _PERCENT_DISPERSION.finditer(normalize_numeric_signs(text)):
+                mean = Decimal(match[1].replace("−", "-"))
+                pairs.setdefault(mean, {})[Decimal(match[2])] = match[0]
+    notes = []
+    for paragraph in re.split(r"\n\s*\n", draft):
+        cited = sorted(set(re.findall(r"\[([^\]]+)\]", paragraph)).intersection(reported))
+        prose = normalize_numeric_signs(re.sub(r"\[[^\]]+\]", "", paragraph))
+        paired = {Decimal(match[1].replace("−", "-")) for match in _PERCENT_DISPERSION.finditer(prose)}
+        unpaired = _PERCENT_DISPERSION.sub(" ", prose)
+        for match in _PERCENT_VALUE.finditer(unpaired):
+            mean = Decimal(match[1].replace("−", "-"))
+            if mean in paired or re.match(r"\s*(?:CI|confidence interval)\b", unpaired[match.end():], re.I):
+                continue
+            candidates = {dispersion: (phrase, citation) for citation in cited
+                          for dispersion, phrase in reported[citation].get(mean, {}).items()}
+            if len(candidates) != 1:
+                continue
+            phrase, citation = next(iter(candidates.values()))
+            note = (f"Cited context also reports {phrase} [{citation}]. Check whether its outcome, arm and timepoint "
+                    "match the drafted value before using it; do not transfer dispersion between results.")
+            if note not in notes:
+                notes.append(note)
+                if len(notes) == 4:
+                    return notes
+    return notes
+
 
 def unreported_percentage_issue(answer: str, records: list[dict], *, require_citations: bool = False) -> str | None:
     """Reject percentage values absent from all of a paragraph's cited sources.
@@ -153,16 +238,18 @@ def unreported_percentage_issue(answer: str, records: list[dict], *, require_cit
     Callers can require local citation markers for every percentage statement,
     including uncertainty text that otherwise has no paragraph citation rule.
     """
-    from decimal import Decimal
-
-    def values(text):
+    def values(text, *, source=False):
         normalized = normalize_numeric_signs(text)
         result = {Decimal(match[1].replace('−', '-')) for match in _PERCENT_VALUE.finditer(normalized)}
         for match in _PERCENT_RANGE.finditer(normalized):
             result.update(Decimal(raw.replace('−', '-')) for raw in match.groups())
+        if source:
+            for _, (_, _, lower, upper) in _percentage_ci_tuples(normalized):
+                result.update((lower, upper))
         return result
 
-    source_values = {record['citation']: values(' '.join([record['text'], *record['matched_passages']]))
+    source_values = {record['citation']: set().union(*(values(text, source=True)
+                                                      for text in [record['text'], *record['matched_passages']]))
                      for record in records}
     for paragraph in re.split(r'\n\s*\n', answer):
         cited = set(re.findall(r'\[([^\]]+)\]', paragraph))

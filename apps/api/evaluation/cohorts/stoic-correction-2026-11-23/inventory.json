@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "purpose": "Independent historical paper/correction diagnostic; not current treatment advice or clinical validation",
+  "sources": [
+    {
+      "pmid": "33844996",
+      "pmcid": "PMC8040526",
+      "xml_sha256": "3090640cc36cd0397194038ad0b2fb357156277ee6c77156b827919d480d659e",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8040526/fullTextXML",
+      "license": {
+        "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active.",
+        "links": []
+      },
+      "license_missing": false
+    },
+    {
+      "pmid": "33864735",
+      "pmcid": "PMC8445290",
+      "xml_sha256": "ce5cfebc4eda1a9bad540a6807134f3b45cdbe1c2cd3edd8bd98719715d9a900",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8445290/fullTextXML",
+      "license": {
+        "text": "Since January 2020 Elsevier has created a COVID-19 resource centre with free information in English and Mandarin on the novel coronavirus COVID-19. The COVID-19 resource centre is hosted on Elsevier Connect, the company's public news and information website. Elsevier hereby grants permission to make all its COVID-19-related research that is available on the COVID-19 resource centre - including this research content - immediately available in PubMed Central and other publicly funded repositories, such as the WHO COVID database with rights for unrestricted research re-use and analyses in any form or by any means with acknowledgement of the original source. These permissions are granted for free by Elsevier for as long as the COVID-19 resource centre remains active.",
+        "links": []
+      },
+      "license_missing": false
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "stoic",
+      "path": "snapshot.json",
+      "sha256": "7d572de9f99ea43016077863f85aa52e1f10be562d566765c5e74ba627e6d152"
+    }
+  ],
+  "cases": [
+    {
+      "id": "stoic-corrected-counts",
+      "snapshot_id": "stoic",
+      "question": "What does the STOIC trial report for COVID-19 urgent-care or hospital outcomes in its intention-to-treat and per-protocol analyses? Give the group counts and denominators, use the published correction where relevant, distinguish the analyses, and explain the main design limitation without claiming a mortality benefit.",
+      "history_case_id": null,
+      "expected_route": "generated"
+    },
+    {
+      "id": "stoic-simplify",
+      "snapshot_id": "stoic",
+      "question": "Explain that more simply, keeping the key numbers and the main limitation.",
+      "history_case_id": "stoic-corrected-counts",
+      "expected_route": "generated"
+    },
+    {
+      "id": "stoic-mortality",
+      "snapshot_id": "stoic",
+      "question": "Does this small trial establish that budesonide prevents death?",
+      "history_case_id": null,
+      "expected_route": "generated"
+    }
+  ]
+}

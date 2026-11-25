@@ -1,21 +1,27 @@
 from __future__ import annotations
 
 import os
+import re
 
 from typing import Union
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from triallens.conversation import ConversationService, chat_configured, chat_provider, chat_model, retrieval_question, scope_product_sources
+from triallens.conversation import (
+    ConversationService, build_evidence_records, chat_configured, chat_model, chat_provider,
+    retrieval_question, scope_product_sources,
+)
 from triallens.evals import static_eval_report
 from triallens.models import (
     Answer,
     AskRequest,
+    EvidenceChunk,
     EvidenceBrief,
     EvidenceExtraction,
     EvidenceSource,
     ExtractionUpdate,
+    RetrievedChunk,
     Workspace,
     WorkspaceCreate,
 )
@@ -186,6 +192,55 @@ def update_extraction(workspace_id: str, extraction_id: str, payload: Extraction
     return updated
 
 
+def _carry_paper_evidence(question: str, previous: Answer, chunks: list[EvidenceChunk],
+                          sources: list[EvidenceSource], retrieved: list[RetrievedChunk]) -> list[RetrievedChunk]:
+    if previous.generation_mode != "conversational" or not previous.citations:
+        return retrieved
+    # Restrict reuse to rewrites with no new named outcomes or comparators.
+    if not re.fullmatch(
+        r"(?:please\s+)?(?:explain (?:that|this|it) (?:more simply|in plain (?:english|language))|"
+        r"(?:simplify|rephrase) (?:that|this|it|the (?:previous )?answer))"
+        r"(?:,?\s+keeping (?:the )?(?:treatment groups,\s+)?(?:\d+-week )?"
+        r"(?:key )?(?:numbers|figures)(?: and (?:their |the )?(?:main )?(?:limits|limitations?))?)?[.?!]?",
+        question.strip(), re.I,
+    ):
+        return retrieved
+    weeks = re.findall(r"(\d+)-week\b", question, re.I)
+    if any(not re.search(rf"\b{week}[- ]weeks?\b", previous.question, re.I) for week in weeks):
+        return retrieved
+
+    prior_ids = {chunk.source_id for chunk in previous.retrieved_chunks}
+    eligible = {
+        source.id: source for source in sources
+        if source.id in prior_ids
+        and (citation := citation_for(source)) in previous.citations
+        and previous.source_revisions.get(citation) == source_revision(source)
+    }
+    if not eligible:
+        return retrieved
+    current = {(chunk.source_id, chunk.source_type, chunk.citation, chunk.section, chunk.text): chunk
+               for chunk in chunks if chunk.source_id in eligible}
+    verified = {}
+    for passage in previous.retrieved_chunks:
+        key = (passage.source_id, passage.source_type, passage.citation, passage.section, passage.text)
+        if chunk := current.get(key):
+            verified.setdefault(chunk.id, passage.model_copy(update={
+                "chunk_id": chunk.id,
+                "matched_terms": [],
+                "relevance_note": "Ranked for the prior question and verified against the current source.",
+            }))
+    # Use the same packet checks and per-record budget as generation.
+    retained = {(record["citation"], link["section"], record["matched_passages"][link["matched_passage_index"]])
+                for record in build_evidence_records(list(eligible.values()), list(verified.values()))
+                for link in record.get("paper_passage_links", [])}
+    carried = [passage for passage in verified.values()
+               if (passage.citation, passage.section, passage.text) in retained]
+    if not carried:
+        return retrieved
+    carried_ids = {passage.chunk_id for passage in carried}
+    return [*carried, *(passage for passage in retrieved if passage.chunk_id not in carried_ids)][:8]
+
+
 @app.post("/workspaces/{workspace_id}/ask", response_model=Answer)
 def ask(workspace_id: str, payload: AskRequest) -> Answer:
     with phase("storage_read"):
@@ -225,6 +280,8 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
         document_extractions = [row for row in extractions if row.source_id == source.id]
         with phase("retrieval"):
             retrieved = retriever.retrieve(workspace, query, document_chunks, [source], [source.source_type])
+            if history:
+                retrieved = _carry_paper_evidence(payload.question, history[-1], document_chunks, [source], retrieved)
         with phase("extractive_synthesis"):
             answer = answer_service.answer_document(workspace, source, query, document_chunks, retrieved, document_extractions)
     else:
@@ -236,6 +293,8 @@ def ask(workspace_id: str, payload: AskRequest) -> Answer:
             extractions = [row for row in extractions if row.source_id in scoped_ids]
         with phase("retrieval"):
             retrieved = retriever.retrieve_conversation(workspace, query, chunks, sources, payload.source_types)
+            if history:
+                retrieved = _carry_paper_evidence(payload.question, history[-1], chunks, sources, retrieved)
         with phase("extractive_synthesis"):
             answer = answer_service.answer(workspace, query, retrieved, extractions)
     answer.question = payload.question

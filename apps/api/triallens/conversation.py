@@ -15,7 +15,9 @@ from triallens.usage import BudgetUnavailable, UsageLedger
 from triallens.rag import citation_for, document_content_scope, is_outcome_packet, atomic_passage_limit
 from triallens.performance import annotate, phase, provider_usage
 from triallens import cloudflare
-from triallens.answer_checks import confidence_interval_issue, requested_comparison_order_issue, unreported_percentage_issue
+from triallens.answer_checks import (confidence_interval_issue, estimate_interval_issue,
+                                    requested_comparison_order_issue, requested_dispersion_notes,
+                                    unreported_percentage_issue)
 from triallens.trial_design import sanitize_design_fields
 
 INSTRUCTIONS = """You are TrialLens, a thoughtful biomedical research colleague.
@@ -68,7 +70,7 @@ Do not put markdown headings, URLs, or bullet formatting into paragraphs.
 """
 
 
-REVISION_INSTRUCTIONS = """Check the draft against the evidence and return a concise corrected answer in the same JSON schema. Remove unsupported claims and speculation from both paragraphs and uncertainty. An outcome missing from an excerpt is not necessarily unmeasured: do not assert that outcomes were not assessed unless the evidence explicitly says so. An unreported population characteristic does not mean those people were excluded; never infer pregnancy or kidney-disease exclusions from missing descriptions. "Does not establish effects beyond 12 weeks" does not mean those effects were never measured: retain "not established". Different statistical significance across studies does not itself prove conflicting treatment effects; describe positive and inconclusive findings as mixed evidence without claiming statistical incompatibility. In particular: a between-group endpoint difference does not show whether either group rose or fell from baseline; do not describe confidence intervals as the probability that the true effect is in a range, or as certainty of benefit. A non-significant result is inconclusive, not proof of no effect; correct wording such as "finds none" accordingly. Keep product identity, populations, comparisons, units, and study status exact. Preserve demo labels. Do not add findings. Use enough connected paragraphs to answer every requested part. Shorten repeated wording while preserving supported findings, requested safety information and the qualifications needed to interpret them. Explain the main findings rather than listing every adverse reaction or statistic; include detailed numbers when the question asks for them. Every paragraph describing evidence MUST contain its exact inline [citation] marker, even when the same citation is repeated; listing IDs only in cited_sources is invalid. Each citation must support its adjacent claim. When a comparison is statistically inconclusive, never paraphrase it as "no effect", "shows no effect", "no benefit", or "finds none"; state that it did not establish a clear difference. Return only the corrected final JSON."""
+REVISION_INSTRUCTIONS = """Check the draft against the evidence and return a concise corrected answer in the same JSON schema. Remove unsupported claims and speculation from both paragraphs and uncertainty. An outcome missing from an excerpt is not necessarily unmeasured: do not assert that outcomes were not assessed unless the evidence explicitly says so. An unreported population characteristic does not mean those people were excluded; never infer pregnancy or kidney-disease exclusions from missing descriptions. "Does not establish effects beyond 12 weeks" does not mean those effects were never measured: retain "not established". Different statistical significance across studies does not itself prove conflicting treatment effects; describe positive and inconclusive findings as mixed evidence without claiming statistical incompatibility. In particular: a between-group endpoint difference does not show whether either group rose or fell from baseline; do not describe confidence intervals as the probability that the true effect is in a range, or as certainty of benefit. A non-significant result is inconclusive, not proof of no effect; correct wording such as "finds none" accordingly. Keep product identity, populations, comparisons, units, and study status exact. Preserve demo labels. Restore omitted details only when the question requests them and the indexed evidence directly supports them. Use enough connected paragraphs to answer every requested part. Shorten repeated wording while preserving supported findings, requested safety information and the qualifications needed to interpret them. Explain the main findings rather than listing every adverse reaction or statistic; include detailed numbers when the question asks for them. Every paragraph describing evidence MUST contain its exact inline [citation] marker, even when the same citation is repeated; listing IDs only in cited_sources is invalid. Each citation must support its adjacent claim. When a comparison is statistically inconclusive, never paraphrase it as "no effect", "shows no effect", "no benefit", or "finds none"; state that it did not establish a clear difference. Return only the corrected final JSON."""
 
 
 class GeneratedAnswer(BaseModel):
@@ -505,6 +507,20 @@ class ConversationService:
                 with phase("draft", messages):
                     content = completion(messages)
                 with phase("context_build"):
+                    numerical_notes = []
+                    try:
+                        draft = GeneratedAnswer.model_validate_json(content)
+                        draft_text = normalize_citations("\n\n".join(draft.paragraphs), allowed, citation_aliases(allowed))
+                        issue = estimate_interval_issue(draft_text, records)
+                        if issue:
+                            numerical_notes.append(issue + " Check the signed estimate and its own interval together.")
+                        numerical_notes.extend(requested_dispersion_notes(retrieval_question(question, history), draft_text, records))
+                    except (ValueError, TypeError):
+                        pass  # The existing revision can still repair malformed draft JSON.
+                    revision_checks = ("\nMechanical numerical checks (not evidence of outcome/group attribution): "
+                                       + json.dumps(numerical_notes[:4], ensure_ascii=False)
+                                       + " Verify each against its own source and requested comparison; do not add unrelated statistics."
+                                       if numerical_notes else "")
                     messages.extend([{"role": "assistant", "content": content},
                                      {"role": "user", "content": REVISION_INSTRUCTIONS + "\nLatest research question: " + question
                                       + "\nAnswer this latest question. For a simpler follow-up, use fewer sentences "
@@ -523,7 +539,7 @@ class ConversationService:
                                       "instead of choosing the interpretation that makes the conclusion coherent. "
                                       "Include each requested outcome and distinguish combination treatment from "
                                       "its individual ingredients. Do not turn older review statements into current "
-                                      "guideline claims."}])
+                                      "guideline claims." + revision_checks}])
                 annotate(revision_ran=True, revision_reason="baseline_always")
                 with phase("revision", messages):
                     content = completion(messages)
@@ -594,6 +610,8 @@ class ConversationService:
                 # Reject a known high-risk statistical misinterpretation even
                 # when its citation and JSON shape are otherwise valid.
                 final_text = "\n\n".join([direct, *generated.uncertainty])
+                if estimate_interval_issue(final_text, records):
+                    raise ValueError("Estimate reverses its cited confidence-interval sign")
                 if confidence_interval_issue(final_text):
                     raise ValueError("Invalid confidence-interval interpretation")
                 from triallens.label_checks import pediatric_indication_issue
