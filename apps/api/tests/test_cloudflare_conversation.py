@@ -195,3 +195,99 @@ def test_single_pass_replay_rejects_changed_source_context(monkeypatch):
         conversation.cloudflare.completion(changed, {})
     assert len(calls) == 1
     assert conversation.cloudflare.completion is original
+
+
+@pytest.mark.parametrize(("draft", "revision", "expected"), [
+    (
+        {"paragraphs": [{"text": "The 0.5 percentage-point difference favored treatment.", "source_indices": [0]}], "uncertainty": []},
+        {"paragraphs": [{"text": "HbA1c was 0.5 percentage points lower than placebo.", "source_indices": [0]}], "uncertainty": []},
+        "HbA1c was 0.5 percentage points lower than placebo. [PubMed:123]",
+    ),
+    (
+        {"paragraphs": [{"text": "The first draft used an unknown source.", "source_indices": [12]}], "uncertainty": []},
+        {"paragraphs": [{"text": "That outcome is not reported in the excerpts.", "source_indices": []}], "uncertainty": []},
+        "I couldn't verify a sourced answer",
+    ),
+    (
+        {"paragraphs": [{"text": "That outcome is not reported in the excerpts.", "source_indices": []}], "uncertainty": []},
+        {"paragraphs": [{"text": "The treatment improved HbA1c by 80%.", "source_indices": [0]}], "uncertainty": []},
+        None,
+    ),
+])
+def test_structured_attribution_keeps_two_pass_context_and_production_validation(monkeypatch, context, draft, revision, expected):
+    from evaluation.structured_attribution import structured_attribution_experiment
+
+    monkeypatch.setattr(cloudflare, "MODEL", "@cf/meta/llama-3.3-70b-instruct-fp8-fast")
+    context[1].abstract += " At baseline, mean HbA1c was 7.2%."
+    calls = []
+    original = cloudflare.completion
+
+    def post(url, **kwargs):
+        calls.append(kwargs["json"])
+        answer = draft if len(calls) == 1 else revision
+        return httpx.Response(200, request=httpx.Request("POST", url), json={
+            "success": True, "result": {"response": answer, "usage": {"prompt_tokens": 100, "completion_tokens": 50}},
+        })
+
+    monkeypatch.setattr(cloudflare.httpx, "post", post)
+    with structured_attribution_experiment(True):
+        answer = generate(context)
+    assert cloudflare.completion is original
+    assert len(calls) == 2
+    assert calls[0]["messages"][1] == calls[1]["messages"][1]
+    payload = json.loads(calls[0]["messages"][1]["content"])
+    assert payload["evidence"][0]["citation"] == "PubMed:123"
+    assert "zero-based" in calls[0]["messages"][0]["content"]
+    assert "zero-based" in calls[1]["messages"][-1]["content"]
+    for call in calls:
+        schema = call["response_format"]["json_schema"]
+        props = schema["properties"]["paragraphs"]["items"]["properties"]
+        assert props["source_indices"]["items"]["enum"] == [0]
+    forwarded_draft = json.loads(calls[1]["messages"][2]["content"])
+    if draft["paragraphs"][0]["source_indices"] == [12]:
+        assert forwarded_draft == {}
+    elif draft["paragraphs"][0]["source_indices"] == [0]:
+        assert forwarded_draft["cited_sources"] == ["PubMed:123"]
+    if expected is None:
+        assert answer.generation_mode == "extractive"
+    else:
+        assert answer.generation_mode == "conversational"
+        assert answer.direct_answer.startswith(expected)
+
+
+@pytest.mark.parametrize(("paragraphs", "uncertainty"), [
+    ([{"text": "A result", "source_indices": [True]}], []),
+    ([{"text": "A result", "source_indices": ["0"]}], []),
+    ([{"text": "A result", "source_indices": [0, 0]}], []),
+    ([{"text": "A result", "source_indices": [2]}], []),
+    ([{"text": "A result [PubMed:123].", "source_indices": [0]}], []),
+    ([{"text": "The interval was [0.2, 0.8].", "source_indices": [0]}], []),
+    ([{"text": "First paragraph.\n\nSecond paragraph.", "source_indices": [0]}], []),
+    ([{"text": "A result", "source_indices": [0]}, {"text": "Another result", "source_indices": []}], []),
+    ([{"text": "A result", "source_indices": [0]}], [{"text": "A limitation", "source_indices": [1]}]),
+])
+def test_structured_attribution_rejects_malformed_or_unowned_citations(paragraphs, uncertainty):
+    from evaluation.structured_attribution import render_answer
+
+    with pytest.raises(ValueError):
+        render_answer(json.dumps({"paragraphs": paragraphs, "uncertainty": uncertainty}), ["PubMed:123", "PubMed:456"])
+
+
+def test_structured_attribution_renders_exact_markers_per_block():
+    from evaluation.structured_attribution import render_answer
+
+    raw = json.dumps({
+        "paragraphs": [
+            {"text": "First finding (95% CI 0.2 to 0.8).", "source_indices": [1]},
+            {"text": "Second finding.", "source_indices": [0, 1]},
+        ],
+        "uncertainty": [{"text": "Limited to 95% intervals.", "source_indices": [1]}],
+    })
+    assert json.loads(render_answer(raw, ["PubMed:123", "openFDA label:LABEL-1"])) == {
+        "paragraphs": [
+            "First finding (95% CI 0.2 to 0.8). [openFDA label:LABEL-1]",
+            "Second finding. [PubMed:123] [openFDA label:LABEL-1]",
+        ],
+        "cited_sources": ["openFDA label:LABEL-1", "PubMed:123"],
+        "uncertainty": ["Limited to 95% intervals. [openFDA label:LABEL-1]"],
+    }

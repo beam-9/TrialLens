@@ -1,0 +1,41 @@
+# TrialLens Ask quality plan
+
+## Evidence and objectives
+
+The November 24 displayed answers missed requested uncertainty, dropped figures in rewrites, and attributed corrected counts solely to the original study. The model received the relevant passages in several failures. Other failures came from missing caption context or rejections of malformed citation markup. The engineering objective is accurate, directly useful and traceable answers within Cloudflare Workers Free. The prior [quality review](ask-quality-2026-11-24.md) contains case-level evidence.
+
+## First experiment
+
+Use the existing two-pass runner with an opt-in structured attribution wrapper. Each prose block carries source indexes from the exact evidence array. Render known markers server-side and submit the resulting paragraphs to the unchanged final production checks. The provider prompt receives the same selected evidence, including its limitations and section metadata. Reject unknown indexes, unsupported numeric provenance and malformed outputs using the existing fallback path. A legitimate no-source abstention receives the existing abstention treatment.
+
+The experiment wraps `triallens.cloudflare.completion` in `apps/api/evaluation/structured_attribution.py`. The entry point is `--structured-attribution` in `apps/api/evaluation/answer_coverage/evaluate_quality.py`. The file changes are Create `apps/api/evaluation/structured_attribution.py`, Modify `apps/api/evaluation/answer_coverage/evaluate_quality.py`, and Modify `apps/api/tests/test_cloudflare_conversation.py`. The wrapper reuses `apps/api/evaluation/cloudflare_run.py` without editing it. The production API shape, model, retrieval, scope filters and quota stay as shipped. Two provider calls remain the maximum. Remove the evaluation flag and the original writer runs. The context manager restores the original completion callable on exit, including exceptions.
+
+Both passes require a JSON object with exactly `paragraphs` (1–5 entries) and `uncertainty` (0–3 entries). The server appends each selected record’s exact bracketed citation value to the entry and derives `cited_sources` from first occurrence in paragraph indexes. Uncertainty entries can omit indexes if the existing final rules allow that uncited limitation. An entry is a single nonempty prose line without citation brackets and an array of distinct, zero-based integer indexes into that turn's evidence. For example, `{"text":"The reported comparison was inconclusive.","source_indices":[0]}` cites record 0. A mixed attributed/unattributed answer, unknown index, unexpected field or an uncertainty citation absent from paragraphs is invalid. An all-empty-index answer without uncertainty can reach the existing abstention validator. If Cloudflare returns JSON text that fails wrapper validation in the draft, the wrapper supplies an empty JSON object so revision can rebuild it. Provider failures raised before the wrapper receives an answer follow the existing provider fallback. The flag rejects single-pass, evidence-strategy, revision-feedback, numeric-check and repair-once combinations. A malformed revision produces the existing fallback. Production validation still checks rendered provenance, numerical content and other guards. The captured `provider_outputs` contains the raw calls, `generation_context` records the submitted evidence, and `answer` contains the displayed result. The metadata records the wrapper hash.
+
+This experiment addresses rendering failures. Matching a source index does not establish claim support, distinguish figures from prose, or establish coverage. A source-based review remains required.
+
+## Acceptance and experiment order
+
+1. Run `apps/api/.venv/bin/python -m pytest apps/api/tests -q` from the repository root with isolated loopback available. Verify two calls, unchanged evidence, exact rendered markers, unknown-index rejection, an unsupported numeric bound reaching final rejection, uncited abstention, and restoration of the same completion callable on exit.
+2. Re-run the HbA1c Results parent and rewrite together when quota allows. Require arm, outcome, timepoint and both ± terms, the signed contrast and its own interval, and a truthful partial-index description. Require the figure case to identify change from baseline and the mortality case to stay within endpoint scope.
+3. Re-run the frozen STOIC correction parent and rewrite together. Require both analysis populations and denominators, correct attribution to the published correction, and the effect of open-label design on interpretation. Explicitly distinguish the audited urgent-care composite from mortality.
+4. Review M0 source roles and safety, trial protocol versus posted results, synthetic numerical boundaries and refreshed asthma using the preserved inventories. Compare against displayed production outputs. If a quota rejection interrupts benchmarking, preserve the exact prefix and mark the missed cases untested.
+
+Use `apps/api/evaluation/answer_coverage/evaluate_quality.py` for hosted runs with `--structured-attribution` and paired baseline runs without it. Supply distinct `--output docs/performance/results/<run>.json` and `--answers apps/api/evaluation/answer_coverage/results/<run>.json` paths for every run. For partial diagnostics supply `--case` for each selected case and include its predecessor. A qualifying run executes all cases in each required inventory without case filters.
+
+| Cohort | Inventory or question file | Baseline capture prefix |
+| --- | --- | --- |
+| HbA1c | `--inventory apps/api/evaluation/cohorts/paper-captions-v2-2026-11-23/inventory.json` | `paper-linked-interval-2026-11-24` |
+| Published correction | `--inventory apps/api/evaluation/cohorts/stoic-correction-2026-11-23/inventory.json` | `stoic-default-2026-11-24` |
+| General and synthetic | `--cases-file apps/api/evaluation/answer_coverage/m0-quality-holdout-cases.json` | `m0-current-2026-11-24` |
+| Registry protocols/results | `--inventory apps/api/evaluation/answer_coverage/packet-cohort-2026-10-29/inventory.json` | Baseline prefix `packet-current-2026-11-25` is partial |
+| Refreshed asthma | `--inventory apps/api/evaluation/cohorts/refreshed-asthma-2026-10-29/inventory.json` | Baseline rerun pending |
+| Personal treatment boundary | `--case personal-treatment` on the default inventory | `treatment-guard-current-2026-11-24`, require zero provider calls |
+
+Refresh incomplete or changed baselines before paired qualification. A follow-up inherits its own pipeline's preceding answer; compare generation context with the history field separated. Reviewers score coverage of question-derived obligations and support for emitted claims independently. Capture reviewer disagreements and resolve them from exact evidence before scoring. Flag any obligation missing because its packet failed retrieval separately from a model omission.
+
+The release threshold for these named cases is zero critical findings and every required fact either supported and correctly attributed or explicitly unavailable when the exact context cannot supply it. Critical findings include fabricated or misassigned estimates, incorrect source role or population, medical advice, unsupported scope, and any missing requested material fact in available evidence. Unhelpful fallbacks fail answerable cases. A valid route or citation ID earns no semantic credit by itself. Independent source review checks every displayed answer and its parent where applicable. An engineering holdout pass applies only to the frozen cohort.
+
+## Follow-on experiments
+
+If formatting improves and omissions persist, investigate source-owned reporting units before further prose prompt edits. A unit should keep the passage, analysis/outcome, arm or contrast, measure, unit, timepoint and uncertainty together. Use existing complete registry outcome packets and paper passage links as anchors. Keep correction, original abstract and Results as separately attributed evidence. Missing or conflicting fields stay explicit. Do not turn history prose into evidence. Test this as a distinct candidate with matching baselines before considering activation. The [research note](ask-quality-research-2026-11-25.md) records primary sources and a claim-verification design for this separate experiment.
