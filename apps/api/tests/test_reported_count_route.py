@@ -80,3 +80,44 @@ def test_repeated_simple_followups_keep_validated_original_request(no_provider):
     third=conversation.ConversationService().generate(w,q,[first,second],[s],fallback(w,c,q))
     assert 'No AI inference' in third.generation_note
     assert 'Missing: 1' in third.direct_answer
+
+
+def test_refreshed_asthma_snapshot_with_verified_design_answers_through_ask(monkeypatch, tmp_path, no_provider):
+    from fastapi.testclient import TestClient
+
+    from triallens import main
+    from triallens.store import JsonStore
+
+    evaluation = Path(__file__).resolve().parents[1] / 'evaluation'
+    cohort = evaluation / 'cohorts/refreshed-asthma-2026-10-29'
+    inventory = json.loads((cohort / 'inventory.json').read_text())
+    snapshot = json.loads((cohort / 'snapshot.json').read_text())
+    raw = json.loads((evaluation / 'answer_coverage/fixtures/ctgov-NCT00545844-2026-10-31.json').read_text())
+    external_id = raw['protocolSection']['identificationModule']['nctId']
+    source = next(item for item in snapshot['sources'] if item['external_id'] == external_id)
+    packets, _ = parse_outcome_measures(raw['resultsSection'])
+    assert source['metadata']['sections']['Results outcome 001'] == packets['Results outcome 001']
+    source['metadata']['registry_design'] = parse_registry_design(raw['protocolSection']['designModule'])
+
+    workspace_id = snapshot['workspace']['id']
+    data = {key: {item['id']: item for item in snapshot[key]} for key in ('sources', 'chunks', 'extractions')}
+    store = JsonStore(tmp_path / 'workspace.json')
+    store._write({**data, 'workspaces': {workspace_id: snapshot['workspace']}, 'answers': {}, 'briefs': {}})
+    monkeypatch.setattr(main, 'store', store)
+
+    previous = None
+    with TestClient(main.app) as client:
+        for case in inventory['cases'][1:]:
+            response = client.post(f'/workspaces/{workspace_id}/ask', json={
+                'question': case['question'],
+                'source_types': case['source_types'],
+                'previous_answer_id': previous,
+            })
+            assert response.status_code == 200
+            answer = response.json()
+            assert 'No AI inference' in answer['generation_note']
+            assert all(value in answer['direct_answer'] for value in ('312', '313', '72', '301', '229', 'Missing: 1', 'Controlled: 0'))
+            assert 'nonrandomized' in answer['direct_answer'] and 'do not establish' in answer['direct_answer']
+            assert 'montelukast' in answer['direct_answer'].casefold()
+            assert answer['citations'] == [f'ClinicalTrials.gov:{external_id}']
+            previous = answer['id']

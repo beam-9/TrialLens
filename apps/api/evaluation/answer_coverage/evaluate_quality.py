@@ -75,6 +75,7 @@ def main():
     parser.add_argument('--paper-reading', action='store_true')
     parser.add_argument('--paper-body-scope', action='store_true')
     parser.add_argument('--structured-attribution', action='store_true', help='Use source-index attribution in both hosted passes')
+    parser.add_argument('--passage-attribution', action='store_true', help='Require exact passage indexes with structured attribution')
     parser.add_argument('--single-pass', action='store_true')
     parser.add_argument('--model-experiment', choices=sorted(cloudflare_run.MODEL_EXPERIMENTS))
     parser.add_argument('--reasoning-effort', choices=('low', 'medium', 'high'))
@@ -100,13 +101,15 @@ def main():
         parser.error('--paper-body-scope requires the existing prose path')
     if args.structured_attribution and any((args.single_pass, args.strategy_experiment, args.revision_feedback, args.numeric_checks, args.repair_once)):
         parser.error('--structured-attribution requires the existing two-pass writer')
+    if args.passage_attribution and not args.structured_attribution:
+        parser.error('--passage-attribution requires --structured-attribution')
     attribution_path = API_ROOT / 'evaluation/structured_attribution.py'
     attribution_hash = hashlib.sha256(attribution_path.read_bytes()).hexdigest() if args.structured_attribution else None
     wrapper_hash = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     load_dotenv(API_ROOT / '.env', override=False)
     experiment = revision_feedback_experiment(numeric_guard=args.numeric_checks, repair_once=args.repair_once) if args.revision_feedback or args.numeric_checks or args.repair_once else nullcontext()
     # Wrapping restores both the inventory and provider seam even on failures.
-    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort), disabled_thinking(args.disable_thinking), structured_attribution_experiment(args.structured_attribution), label_scope_experiment(args.label_scope), ci_coverage_experiment(args.ci_coverage), single_pass_experiment(args.single_pass), paper_reading_experiment(args.paper_reading), paper_body_scope_experiment(args.paper_body_scope):
+    with patch.object(cloudflare_run.benchmark, 'INVENTORY', args.inventory.resolve()), experiment, cloudflare_run.candidate_model(args.model_experiment), reasoning_effort_experiment(args.reasoning_effort), disabled_thinking(args.disable_thinking), structured_attribution_experiment(args.structured_attribution, passage_attribution=args.passage_attribution), label_scope_experiment(args.label_scope), ci_coverage_experiment(args.ci_coverage), single_pass_experiment(args.single_pass), paper_reading_experiment(args.paper_reading), paper_body_scope_experiment(args.paper_body_scope):
         result = cloudflare_run.run(args.output, args.answers, args.case,
             quota_path=API_ROOT / 'data/evaluation-usage.sqlite3',
             prompt_path=args.prompt_file, cases_path=args.cases_file, strategy=args.strategy_experiment)
@@ -117,6 +120,7 @@ def main():
         'revision_feedback': args.revision_feedback,
         'numeric_checks': args.numeric_checks,
         'structured_attribution': args.structured_attribution,
+        'passage_attribution': args.passage_attribution,
         'structured_attribution_sha256': attribution_hash,
         'single_pass': args.single_pass,
         'single_pass_sha256': hashlib.sha256((API_ROOT / 'evaluation/single_pass.py').read_bytes()).hexdigest() if args.single_pass else None,

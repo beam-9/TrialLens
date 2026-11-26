@@ -38,7 +38,7 @@ def test_generic_outcome_title_match_and_simple_preserves_values():
     source, _, _, chunk = setup_data()
     result = reported_counts(QUESTION.replace("Asthma Control", "asthma control"), [source], [chunk], simple=True)
     assert result
-    assert "Singulair(R)" not in result["direct_answer"]
+    assert "Singulair(R)" in result["direct_answer"]
     assert "Controlled: 229" in result["direct_answer"]
     assert "denominator 301 participants" in result["direct_answer"]
     assert "nonrandomized" in result["direct_answer"]

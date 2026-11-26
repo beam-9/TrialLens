@@ -291,3 +291,52 @@ def test_structured_attribution_renders_exact_markers_per_block():
         "cited_sources": ["openFDA label:LABEL-1", "PubMed:123"],
         "uncertainty": ["Limited to 95% intervals. [openFDA label:LABEL-1]"],
     }
+
+
+def test_passage_attribution_binds_percentages_to_selected_passages():
+    from evaluation.structured_attribution import render_answer
+
+    citations = ["PubMed:123", "PubMed:123", "PubMed:456"]
+    passages = ["The treatment changed HbA1c by -0.94%.", "The second outcome changed by 2%.", "A correction reports 3%."]
+    answer = {"paragraphs": [{"text": "The change was -0.94%.", "passage_indices": [0]}], "uncertainty": []}
+    assert json.loads(render_answer(json.dumps(answer), citations, passages=passages))["cited_sources"] == ["PubMed:123"]
+    for wrong_index in (1, 2, 3, True):
+        answer["paragraphs"][0]["passage_indices"] = [wrong_index]
+        with pytest.raises(ValueError):
+            render_answer(json.dumps(answer), citations, passages=passages)
+
+
+def test_passage_attribution_catalog_keeps_exact_evidence_and_final_validation(monkeypatch, context):
+    from evaluation.structured_attribution import structured_attribution_experiment
+
+    monkeypatch.setattr(cloudflare, "MODEL", "@cf/meta/llama-3.3-70b-instruct-fp8-fast")
+    context[1].abstract += " At baseline, HbA1c was 7.2%."
+    calls = []
+    original = cloudflare.completion
+
+    def post(url, **kwargs):
+        calls.append(kwargs["json"])
+        request = json.loads(calls[-1]["messages"][1]["content"])
+        source = request["evidence"][0]
+        index = request["passage_catalog"].index({"source_index": 0, "field": "text"})
+        assert "HbA1c" in source["text"]
+        text = "HbA1c was 80%." if len(calls) == 1 else "HbA1c was 0.5 percentage points lower than placebo."
+        entry = {"text": text, "passage_indices": [index]}
+        return httpx.Response(200, request=httpx.Request("POST", url), json={
+            "success": True, "result": {"response": {"paragraphs": [entry], "uncertainty": []},
+                                         "usage": {"prompt_tokens": 100, "completion_tokens": 50}},
+        })
+
+    monkeypatch.setattr(cloudflare.httpx, "post", post)
+    with structured_attribution_experiment(True, passage_attribution=True):
+        answer = generate(context)
+    assert cloudflare.completion is original
+    assert len(calls) == 2
+    assert calls[0]["messages"][1] == calls[1]["messages"][1]
+    draft_feedback = json.loads(calls[1]["messages"][2]["content"])
+    assert "inconsistent with its selected passage" in draft_feedback["draft_validation"]
+    assert "80%" not in calls[1]["messages"][2]["content"]
+    properties = calls[0]["response_format"]["json_schema"]["properties"]["paragraphs"]["items"]["properties"]
+    assert properties["passage_indices"]["items"]["enum"]
+    assert "source_indices" not in properties
+    assert answer.direct_answer.startswith("HbA1c was 0.5 percentage points lower than placebo. [PubMed:123]")

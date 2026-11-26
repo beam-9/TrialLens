@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "provider": "cloudflare",
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "pipeline_variant": "two_pass",
+  "status": "HOSTED CANDIDATE; not pilot verified",
+  "complete": false,
+  "strategy_experiment": null,
+  "strategy_sha256": null,
+  "coverage_plan_sha256": null,
+  "whole_outcome_review_sha256": null,
+  "outcome_checks_sha256": null,
+  "numeric_checks_sha256": null,
+  "claim_repair_sha256": null,
+  "fixture_inventory_sha256": "d5f3b36c439a0efbd2c6b9f404472fb8f613aa84e66e27a4b751254ff4de7c1a",
+  "runner_sha256": "6e505df18d62d4b240516eda2dd451bd11e047e9223c9c38351873aef33b5467",
+  "question_inventory_sha256": null,
+  "candidate_prompt_sha256": null,
+  "code_sha256": "4e1628d20b54c94aada0391159244a32f83470da9938ef7da4a867664eb8c856",
+  "model_rates": {
+    "input_micro_neurons_per_token": 26668,
+    "output_micro_neurons_per_token": 204805,
+    "max_output_tokens": 1800
+  },
+  "method": {
+    "boundary": "loopback HTTP Ask API including serialization; hosted inference",
+    "phase_labels": "draft/revision",
+    "cold_warm": "provider cache/residency unknown; no cold/warm classification",
+    "paid_provider_fallbacks": 0,
+    "local_model_calls": 0,
+    "tokens": "provider reported only; distinct tokenizer from native baseline",
+    "store": "isolated frozen public fixtures; separate evaluation SQLite ledger",
+    "quota": "persistent evaluation ledger"
+  },
+  "requests": [
+    {
+      "case_id": "asthma-broad",
+      "snapshot_id": "refreshed-asthma-public",
+      "client_wall_ms": 28681.494583000003,
+      "trace": {
+        "trace_id": "b52b3a3c-fa64-4809-b1ca-1ab0ddb542df",
+        "pipeline_variant": "two_pass",
+        "revision_ran": true,
+        "revision_reason": "baseline_always",
+        "fallback_reason": "cloudflare_quota",
+        "busy_response": false,
+        "result_kind": "excerpt_fallback",
+        "error_kind": "cloudflare_quota",
+        "model_digest_or_version": null,
+        "source_count_selected": 8,
+        "retrieved_passage_count": 8,
+        "context_char_count": 12863,
+        "phases_ms": {
+          "storage_read": 2.287,
+          "retrieval": 38.32425,
+          "extractive_synthesis": 0.044875,
+          "context_build": 2.614749,
+          "draft": 28618.414792,
+          "revision": 1.555292,
+          "validation": 0.0,
+          "store": 8.148583
+        },
+        "model_calls": [
+          {
+            "pass": "draft",
+            "prompt_char_count": 23427,
+            "message_count": 2,
+            "serialized_messages_char_count": 24018,
+            "wall_ms": 28618.414792,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": 5657,
+            "eval_count": 580,
+            "done": null,
+            "done_reason": null
+          },
+          {
+            "pass": "revision",
+            "prompt_char_count": 29309,
+            "message_count": 4,
+            "serialized_messages_char_count": 30011,
+            "wall_ms": 1.555292,
+            "load_duration_ns": null,
+            "prompt_eval_duration_ns": null,
+            "eval_duration_ns": null,
+            "total_duration_ns": null,
+            "prompt_eval_count": null,
+            "eval_count": null
+          }
+        ],
+        "model_name": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "http_status": 200,
+        "total_wall_ms": 28678.092708,
+        "serialization_ms": 0.618041
+      }
+    }
+  ],
+  "summary": {
+    "n": 1,
+    "model_answers": 0,
+    "model_answer_p50_ms": null,
+    "model_answer_p95_ms": null,
+    "result_counts": {
+      "excerpt_fallback": 1
+    }
+  },
+  "quota": {
+    "daily_limit_neurons": 9000.0,
+    "used_or_reserved_neurons": 7818.393956,
+    "remaining_neurons": 1181.606044,
+    "pending_requests": 0,
+    "requests": 43
+  },
+  "stop_reason": "cloudflare_quota",
+  "isolation_verified": true,
+  "quality_experiment": {
+    "revision_feedback": false,
+    "numeric_checks": false,
+    "structured_attribution": true,
+    "passage_attribution": true,
+    "structured_attribution_sha256": "3d5b5f1d958832576fa23d07c1e346090bd6a14c02acedfd543f05fcc6a83564",
+    "single_pass": false,
+    "single_pass_sha256": null,
+    "disable_thinking": false,
+    "repair_once": false,
+    "label_scope": false,
+    "paper_body_scope": false,
+    "paper_body_scope_sha256": null,
+    "paper_reading": false,
+    "paper_reading_sha256": null,
+    "ci_coverage_sha256": null,
+    "label_scope_sha256": null,
+    "max_provider_calls_per_question": 2,
+    "thinking_profile_sha256": null,
+    "numeric_checks_sha256": null,
+    "strategy_experiment": null,
+    "model_experiment": null,
+    "reasoning_effort": null,
+    "wrapper_sha256": "f5c0d638461b7e55de255d71d25450f0bf8f72179e5b25e49b408dd2ae01764c",
+    "feedback_sha256": "9c3f5102473a2dfd5c85b9fae574edc3b98e3e37ecf77f15ec4665012379d27b",
+    "inventory_path": "apps/api/evaluation/cohorts/refreshed-asthma-2026-10-29/inventory.json"
+  }
+}

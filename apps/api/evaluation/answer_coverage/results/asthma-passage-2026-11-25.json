@@ -1,0 +1,549 @@
+[
+  {
+    "case_id": "asthma-broad",
+    "snapshot_id": "refreshed-asthma-public",
+    "answer": {
+      "id": "a298558c-a2e2-4431-a15c-7d30c2ce3ad0",
+      "workspace_id": "refreshed-asthma-public",
+      "question": "What do these sources show about the benefits and limitations of inhaled corticosteroids for asthma? Include useful reported numbers where relevant.",
+      "previous_answer_id": null,
+      "mode": "workspace",
+      "source_id": null,
+      "source_types": null,
+      "generation_mode": "extractive",
+      "generation_note": "Cloudflare's free allowance or request limit is unavailable. Try later or after the daily reset. Showing source excerpts; no local model or paid fallback was called.",
+      "saved_to_brief": false,
+      "source_revisions": {
+        "ClinicalTrials.gov:NCT00545844": "8d41ece8789accb1dd5dacee4cf8b65c9c02a8d56794200d6213bd361a2a163d",
+        "PubMed:31194879": "2478afd21dfdef7d7d90230c8d62eff4d17f3e612644b2771675b80074462a4b",
+        "PubMed:10711858": "b356cbd59d7c90fdc939decd88b1b95ca22ddb3c9746a4cdf64b6fe05821cf53",
+        "PubMed:19125898": "b25663f1a77a4b7ddd4ccd223917128d21df19e266fc767a2c56881d4913b3be",
+        "PubMed:41733139": "ee5dc9aab5df002c9a12ac756f233722634c60316a68f281754bc69953353044",
+        "ClinicalTrials.gov:NCT05110976": "0a7d0e5c79a1732f623f8bd133740b949b042793cbb54ce29f236c4f2aa2e8cc",
+        "PubMed:34024646": "d138a1feb1796d181b9f98c0f1868dea21d401440b0cf63fc692e9af047402e3",
+        "ClinicalTrials.gov:NCT00967590": "378ebcb3a5e1704e354ad672f0b8fc48ef6427f2f34158bf6a711f4ab08d284b"
+      },
+      "short_answer": "Posted trial outcome records are indexed for this question. This source-excerpt view does not interpret those statistics; inspect the supporting outcome passages, or try again for a cited conversational explanation.",
+      "direct_answer": "Posted trial outcome records are indexed for this question. This source-excerpt view does not interpret those statistics; inspect the supporting outcome passages, or try again for a cited conversational explanation.",
+      "evidence_map": [],
+      "reasoning_summary": [],
+      "evidence_synthesis": [],
+      "source_readouts": [],
+      "evidence_quality": [],
+      "facet_coverage": [],
+      "answer_trace": [],
+      "evidence": [],
+      "supporting_evidence": [],
+      "safety_limitations": [],
+      "uncertainty": [],
+      "limitations": [
+        "No statistical interpretation was generated in this source-excerpt response."
+      ],
+      "citations": [
+        "ClinicalTrials.gov:NCT00545844",
+        "PubMed:31194879",
+        "PubMed:10711858",
+        "PubMed:19125898",
+        "PubMed:41733139",
+        "ClinicalTrials.gov:NCT05110976",
+        "PubMed:34024646",
+        "ClinicalTrials.gov:NCT00967590"
+      ],
+      "retrieved_chunks": [
+        {
+          "chunk_id": "public-chunk-015",
+          "source_id": "public-source-03",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "text": "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001",
+          "score": 1.0403,
+          "section": "Results outcome 003",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "url": "https://clinicaltrials.gov/study/NCT00545844",
+          "external_id": "NCT00545844",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, these in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-005",
+          "source_id": "public-source-02",
+          "source_type": "pubmed",
+          "citation": "PubMed:31194879",
+          "text": "At least two review authors independently selected studies and assessed risk of bias in included studies. The data were extracted by one author and checked by another. The primary outcome was linear growth velocity. We conducted meta-analyses using Review Manager 5.3 software. We used mean differences (MDs) and 95% confidence intervals (CIs ) as the metrics for treatment effects, and the random-effects model for meta-analyses. We did not perform planned subgroup analyses due to there being too few included trials.",
+          "score": 0.8581,
+          "section": "DATA COLLECTION AND ANALYSIS",
+          "title": "Inhaled corticosteroids in children with persistent asthma: effects of different drugs and delivery devices on growth.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31194879/",
+          "external_id": "31194879",
+          "publication_date": "2019",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-025",
+          "source_id": "public-source-05",
+          "source_type": "pubmed",
+          "citation": "PubMed:10711858",
+          "text": "or 0.5 mg, indicating that once-daily therapy is an effective option that can be considered in many patients. In view of the time-consuming nature of nebuliser administration, reduction of the frequency of corticosteroid administration from twice to once daily may be useful in simplifying the treatment programme and improving compliance with it. This may be beneficial in reducing under-utilisation of inhaled corticosteroids in children with asthma and improving long term control of the disease.",
+          "score": 0.7976,
+          "section": "Abstract 1 3",
+          "title": "Once-daily inhaled corticosteroids in children with asthma: nebulisation.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10711858/",
+          "external_id": "10711858",
+          "publication_date": "1999",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "useful"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, useful in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-031",
+          "source_id": "public-source-07",
+          "source_type": "pubmed",
+          "citation": "PubMed:19125898",
+          "text": "PubMed was searched for relevant reviews and original articles. Information from these studies was synthesized and critically assessed.",
+          "score": 0.5991,
+          "section": "METHODS",
+          "title": "Inhaled corticosteroids for asthma: are they all the same?",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19125898/",
+          "external_id": "19125898",
+          "publication_date": "2009",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "relevant",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, relevant, these in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-027",
+          "source_id": "public-source-06",
+          "source_type": "pubmed",
+          "citation": "PubMed:41733139",
+          "text": "In 2019, the Global Initiative for Asthma (GINA) recommended against the use of short-acting beta agonist (SABA) monotherapy and officially endorsed the use of as-needed inhaled corticosteroid with a fast-acting bronchodilator [anti-inflammatory reliever (AIR)] as the preferred strategy across all treatment steps. In 2020, the US NHLBI asthma guidelines recommended ICS+SABA at step 2, and ICS/formoterol to be used as maintenance and reliever therapy (MART) at treatment steps 3 and 4. Despite these strong recommendations, uptake of this strategy in the United States has been slow. Barriers to MART implementation are explained,",
+          "score": 0.5687,
+          "section": "RECENT FINDINGS 2",
+          "title": "As-needed inhaled corticosteroids in asthma: from evidence to implementation.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41733139/",
+          "external_id": "41733139",
+          "publication_date": "2026",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled",
+            "these"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled, these in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-020",
+          "source_id": "public-source-04",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "text": "The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose",
+          "score": 0.5454,
+          "section": "Detailed description 2",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "url": "https://clinicaltrials.gov/study/NCT05110976",
+          "external_id": "NCT05110976",
+          "publication_date": null,
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a trial record."
+        },
+        {
+          "chunk_id": "public-chunk-035",
+          "source_id": "public-source-08",
+          "source_type": "pubmed",
+          "citation": "PubMed:34024646",
+          "text": "Asthma is a common respiratory condition characterized by chronic inflammation of the airways. Most asthmatics have a mild-to-moderate form of the disease, but are still at risk of severe exacerbations and significantly impaired quality of life. This article reviews the strategies for prescription of inhaled corticosteroids in patients with mild-to-moderate asthma. The definition of asthma severity, the goals of asthma management and the adjustment of therapeutics are successively addressed. The major changes proposed by the GINA group in 2019 are also discussed.",
+          "score": 0.5385,
+          "section": "Abstract 1",
+          "title": "[Strategies for prescription of inhaled corticosteroids in mild-to-moderate asthma].",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34024646/",
+          "external_id": "34024646",
+          "publication_date": "2021",
+          "status": null,
+          "phase": null,
+          "matched_terms": [
+            "asthma",
+            "corticosteroids",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, corticosteroids, inhaled in a literature source."
+        },
+        {
+          "chunk_id": "public-chunk-036",
+          "source_id": "public-source-09",
+          "source_type": "clinical_trials",
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "score": 0.4884,
+          "section": "Brief summary",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "url": "https://clinicaltrials.gov/study/NCT00967590",
+          "external_id": "NCT00967590",
+          "publication_date": null,
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "matched_terms": [
+            "asthma",
+            "inhaled"
+          ],
+          "relevance_note": "Matched asthma, inhaled in a trial record."
+        }
+      ],
+      "created_at": "2026-11-26T02:38:01.225630+00:00"
+    },
+    "provider_outputs": [
+      {
+        "response": "{\"paragraphs\": [{\"text\": \"The sources show that inhaled corticosteroids are effective in improving asthma control, with one study showing a mean score decrease from 2.03 to 0.92 on the Asthma Control Questionnaire over 8 weeks, with a standard deviation of 0.80, in 300 patients who completed the questionnaire at week 8, compared to 313 patients at week 0, with a p-value of less than 0.001, as reported in ClinicalTrials.gov:NCT00545844.\", \"passage_indices\": [0, 2]}, {\"text\": \"Another source, PubMed:31194879, reports that fluticasone given at an equivalent dose was associated with a significant greater linear growth velocity, with a mean difference of 0.81 cm/year and a 95% confidence interval of 0.46 to 1.16, compared to beclomethasone, in a trial with 23 participants, providing low certainty evidence.\", \"passage_indices\": [3]}, {\"text\": \"The same source also reports that fluticasone had a less suppressive effect than budesonide on growth, with a mean difference of 0.97 cm and a 95% confidence interval of 0.62 to 1.32, in two trials with 359 participants, providing moderate certainty evidence, but no significant difference in linear growth velocity was observed between fluticasone and budesonide, with a mean difference of 0.39 cm/year and a 95% confidence interval of -0.94 to 1.73, in two trials with 236 participants, providing very low certainty evidence.\", \"passage_indices\": [3]}, {\"text\": \"Inhaled corticosteroids can be administered once daily via nebulisation, as shown in PubMed:10711858, which found that once-daily nebulised doses of 1.0 mg budesonide were as effective as twice-daily doses of 0.25 or 0.5 mg in maintaining control of asthma symptoms in children with moderately severe persistent asthma.\", \"passage_indices\": [5]}], \"uncertainty\": [{\"text\": \"The evidence has limitations due to the small number of participants in some trials, such as the 23 participants in the trial comparing fluticasone and beclomethasone, as reported in PubMed:31194879, indexed by passage 3.\", \"passage_indices\": [3]}, {\"text\": \"Additionally, the certainty of the evidence varies, with some comparisons, such as the comparison between fluticasone and budesonide, providing very low certainty evidence, as reported in PubMed:31194879, indexed by passage 3.\", \"passage_indices\": [3]}]}",
+        "usage": {
+          "prompt_tokens": 5657,
+          "completion_tokens": 580,
+          "total_tokens": 6237,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 269.6461181640625
+        },
+        "claim_support_index": null,
+        "verified_selection": null,
+        "coverage_plan": null,
+        "generation_context_sha256": "799151239a8a2755a23ec07daaeef12c8f469662a5f6afa3a6f1b247b19166a9",
+        "request_options": {
+          "max_tokens": 1800
+        },
+        "response_shape": {
+          "result_keys": [
+            "choices",
+            "created",
+            "ec_transfer_params",
+            "id",
+            "kv_transfer_params",
+            "metrics",
+            "model",
+            "object",
+            "prompt_logprobs",
+            "prompt_text",
+            "prompt_token_ids",
+            "response",
+            "service_tier",
+            "tool_calls",
+            "usage"
+          ],
+          "parse_error": null,
+          "output_states": [],
+          "finish_reason": null,
+          "status": null,
+          "choice_finish_reasons": [
+            "stop"
+          ],
+          "output_types": []
+        }
+      }
+    ],
+    "generation_context": {
+      "topic": {
+        "condition": "asthma",
+        "intervention": "inhaled corticosteroids"
+      },
+      "history": [],
+      "evidence": [
+        {
+          "citation": "ClinicalTrials.gov:NCT00545844",
+          "title": "Singulair(R) In Asthma And Allergic Rhinitis (0476-383)",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE4",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Indexed submitted outcome measurements with group definitions, denominators, units and timeframes. Protocol descriptions are stored separately. This is not the full results record: participant flow, baseline characteristics and adverse-event tables are not indexed; outcome packets may also be omitted from this context because of size or retrieval limits.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Results outcome 001",
+            "Results outcome 002",
+            "Results outcome 003",
+            "Results outcome 004",
+            "Results outcome 005",
+            "Results outcome 006"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Effectiveness of adding montelukast to inhaled corticosteroids in adult subjects with both uncontrolled asthma and allergic rhinitis.",
+          "matched_passages": [
+            "Outcome: Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ) Type: SECONDARY Time frame: 8 weeks (from Week 0 to Week 8) Description: The Asthma Control Questionnaire consists of 7 specific questions that were used to assess patient asthma control at week 0 and week 8. The mean score per question is used to determine the level of control, with a final score ranging from 0 (well-controlled) to 6 (extremely poorly controlled) units on a scale. Population: There were 313 patients who qualified for inclusion in the intent to treat (ITT) analysis and completed the first visit; of these, 300 patients completed the ACQ at week 8. Reporting status: POSTED Group: Treatment Phase (All Patients) Week 0 | id=OG000 Group: Treatment Phase (All Patients) Week 8 | id=OG001 Units: Units on a Scale Measure parameter type: MEAN Measure dispersion type: Standard Deviation Denominator (Participants): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=313 Denominator (Participants): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=300 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 0 (id=OG000); value=2.03; spread=0.80 Measurement (Units on a Scale): group=Treatment Phase (All Patients) Week 8 (id=OG001); value=0.92; spread=0.80 Analysis groups: Treatment Phase (All Patients) Week 0 (id=OG000), Treatment Phase (All Patients) Week 8 (id=OG001) Analysis: statistical method=t-test, 2 sided; non-inferiority type=SUPERIORITY_OR_OTHER_LEGACY; p value=<0.001"
+          ],
+          "outcome_links": [
+            {
+              "id": "Results outcome 003",
+              "matched_passage_index": 0,
+              "title": "Effectiveness of Montelukast Therapy Used in Combination With Inhaled Corticosteroids or Inhaled Corticosteroids / Long-Acting Beta 2-Agonist in Improving the Symptoms of Asthma Using the Asthma Control Questionnaire (ACQ)",
+              "has_reported_analysis": true
+            }
+          ]
+        },
+        {
+          "citation": "PubMed:31194879",
+          "title": "Inhaled corticosteroids in children with persistent asthma: effects of different drugs and delivery devices on growth.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Meta-Analysis",
+            "Research Support, Non-U.S. Gov't",
+            "Systematic Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2019",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "AUTHORS' CONCLUSIONS",
+            "BACKGROUND",
+            "DATA COLLECTION AND ANALYSIS",
+            "MAIN RESULTS",
+            "OBJECTIVES",
+            "SEARCH METHODS",
+            "SELECTION CRITERIA"
+          ],
+          "content_truncated": true,
+          "demo": false,
+          "text": "Inhaled corticosteroids (ICS) are the most effective treatment for children with persistent asthma. Although treatment with ICS is generally considered to be safe in children, the potential adverse effects of these drugs on growth remains a matter of concern for parents and physicians. To assess the impact of different inhaled corticosteroid drugs and delivery devices on the linear growth of children with persistent asthma. We searched the Cochrane Airways Trials Register, which is derived from systematic searches of bibliographic databases including CENTRAL, MEDLINE, Embase, CINAHL, AMED and PsycINFO. We handsearched respiratory journals and meeting abstracts. We also conducted a search of ClinicalTrials.gov and manufacturers' clinical trial databases, or contacted the manufacturer, to search for potential relevant unpublished studies. The literature search was initially conducted in September 2014, and updated in November 2015, September 2018, and April 2019. We selected parallel-group randomized controlled trials of at least three months' duration. To be included, trials had to compare linear growth between different inhaled corticosteroid molecules at equivalent doses, delivered by the same type of device, or between different devices used to deliver the same inhaled corticosteroid molecule at the same dose, in children up to 18 years of age with persistent asthma. At least two review authors independently selected studies and assessed risk of bias in included studies. The data were extracted by one author and checked by another. The primary outcome was linear growth velocity. We conducted meta-analyses using Review Manager 5.3 software. We used mean differences (MDs) and 95% confidence intervals (CIs ) as the metrics for treatment effects, and the random-effects model for meta-analyses. We did not perform planned subgroup analyses due to there being too few included trials. We included six randomized trials involving 1199 children aged from 4 to 12 years (per-protocol population: 1008), with mild-to-moderate persistent asthma. Two trials were from single hospitals, and the remaining four trials were multicentre studies. The duration of trials varied from six to 20 months.One trial with 23 participants compared fluticasone with beclomethasone, and showed that fluticasone given at an equivalent dose was associated with a significant greater linear growth velocity (MD 0.81 cm/year, 95% CI 0.46 to 1.16, low certainty evidence). Three trials compared fluticasone with budesonide. Fluticasone given at an equivalent dose had a less suppressive effect than budesonide on growth, as measured by change in height over a period from 20 weeks to 12 months (MD 0.97 cm, 95% CI 0.62 to 1.32; 2 trials, 359 participants; moderate certainty evidence). However, we observed no significant difference in linear growth velocity between fluticasone and budesonide at equivalent doses (MD 0.39 cm/year, 95% CI -0.94 to 1.73; 2 trials, 236 participants; very low certainty evidence).Two trials compared inhalation devices. One trial with 212 participants revealed a comparable linear growth velocity between beclomethasone administered via hydrofluoroalkane-metered dose inhaler (HFA-MDI) and beclomethasone administered via chlorofluorocarbon-metered dose inhaler (CFC-MDI) at an equivalent dose (MD -0.44 cm/year, 95% CI -1.00 to 0.12; low certainty evidence). Another trial with 229 participants showed a small but statistically significant greater increase in height over a period of six months in favour of budesonide via Easyhaler, compared to budesonide given at the same dose via Turbuhaler (MD 0.37 cm, 95% CI 0.12 to 0.62; low certainty evidence). This review suggests that the drug molecule and deliver",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:10711858",
+          "title": "Once-daily inhaled corticosteroids in children with asthma: nebulisation.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "1999",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Current guidelines on the management of childhood asthma have emphasised the important preventive role of inhaled corticosteroids, which should be used at the lowest possible doses that are compatible with good disease control. However, some children do not respond to inhaled corticosteroids, the most common reasons for which are inability to use conventional hand-held inhalers (plus spacers and face masks) effectively or lack of cooperation with them, particularly among infants and young children. In these patients, nebulisers have proved effective in administering corticosteroids, and this form of delivery is often preferred by both the children and their parents, despite their longer administration times (commonly around 10 minutes). Compliance with these devices may therefore be better than with a conventional pressurised metered-dose inhaler plus spacer and face mask. Recent studies with nebulised budesonide have demonstrated that once-daily administration is as effective in maintaining control of asthma symptoms in children as the usual twice-daily administration. In children with moderately severe persistent asthma, the improvement provided by once-daily nebulised doses of 1.0 mg budesonide has been found to be equivalent to that with twice-daily doses of 0.25 or 0.5 mg, indicating that once-daily therapy is an effective option that can be considered in many patients. In view of the time-consuming nature of nebuliser administration, reduction of the frequency of corticosteroid administration from twice to once daily may be useful in simplifying the treatment programme and improving compliance with it. This may be beneficial in reducing under-utilisation of inhaled corticosteroids in children with asthma and improving long term control of the disease.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:19125898",
+          "title": "Inhaled corticosteroids for asthma: are they all the same?",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Comparative Study",
+            "Journal Article",
+            "Research Support, N.I.H., Extramural",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2009",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "CONCLUSIONS",
+            "METHODS",
+            "OBJECTIVES",
+            "RESULTS"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "To assess similarities and differences among currently available inhaled corticosteroids (ICS) for treatment of asthma, with special emphasis on factors that may affect the relative safety of these medications. PubMed was searched for relevant reviews and original articles. Information from these studies was synthesized and critically assessed. Differences in corticosteroid formulations and delivery systems can create variations in therapeutic efficacy. Chemical properties of the various corticosteroids may also affect their relative safety. Ciclesonide and beclomethasone dipropionate are administered as prodrugs activated by enzymes present in the lungs but not the oropharynx. Corticosteroid-specific adverse effects in the oropharynx are thus avoided, although formulation-specific effects may remain. Other adverse effects require systemic availability, either via the gastrointestinal tract or the lung. Once they enter the systemic circulation, all ICS are rapidly metabolized by the liver. Oral bioavailability of ICS such as fluticasone, ciclesonide and mometasone is minimal, as a result of their essentially complete first-pass metabolism in the liver. Ciclesonide also undergoes extrahepatic metabolism that eliminates it even more rapidly. Additionally, ciclesonide and mometasone exhibit very high levels of binding to serum proteins that reduces their ability to stimulate glucocorticoid receptors outside the lung. Despite acting by similar mechanisms, currently available ICS and their delivery systems differ in ways that can potentially affect both safety and therapeutic effectiveness for individual patients.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:41733139",
+          "title": "As-needed inhaled corticosteroids in asthma: from evidence to implementation.",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2026",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "PURPOSE OF REVIEW",
+            "RECENT FINDINGS",
+            "SUMMARY"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This review aims to clarify the role of as-needed ICS through the severity spectrum of adult asthma and explores the challenges associated with implementation. This review is timely following the recent US Food and Drug Administration (FDA) approval of an ICS/SABA combination inhaler. In 2019, the Global Initiative for Asthma (GINA) recommended against the use of short-acting beta agonist (SABA) monotherapy and officially endorsed the use of as-needed inhaled corticosteroid with a fast-acting bronchodilator [anti-inflammatory reliever (AIR)] as the preferred strategy across all treatment steps. In 2020, the US NHLBI asthma guidelines recommended ICS+SABA at step 2, and ICS/formoterol to be used as maintenance and reliever therapy (MART) at treatment steps 3 and 4. Despite these strong recommendations, uptake of this strategy in the United States has been slow. Barriers to MART implementation are explained, and implementation strategies are reviewed. Transition to a single ICS/formoterol inhaler as MART from traditional multiinhaler regimens offers the opportunity for multidomain benefits. The role of novel ICS/SABA combination inhalers remains to be determined across the continuum of asthma.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT05110976",
+          "title": "A Study to Investigate the Safety, Tolerability and Effects of AZD8630 in Healthy Subjects and Subjects With Asthma on Inhaled Corticosteroids and Long-acting Beta-agonists",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "COMPLETED",
+          "phase": "PHASE1",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary",
+            "Detailed description"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This is a first in human (FIH) clinical study to evaluate the safety, tolerability, pharmacokinetics and pharmacodynamics of AZD8630 in healthy adults (Part A) and adult asthma patients on medium to high dose inhaled corticosteroids / Long-acting beta-agonists (Part B) The study is divided in 2 parts, A and B. Part A will be conducted in healthy adults, whereas Part B will be conducted in adult asthma patients on medium/high dose inhaled corticosteroids (ICS)/long-acting beta-agonists (LABA) to evaluate the safety, tolerability, pharmacokinetics (PK), and immunogenicity of AZD8630 by dry powder inhaler (DPI) administration. Part A includes the assessment of the PK and safety of intravenous (IV) AZD8630. Part A consists of single ascending dose (SAD) and multiple ascending dose (MAD) cohorts in sequential order and Part B will be evaluating multiple dose levels. Part A: This part will consist 4 sub-parts and will include healthy participants and healthy participants of Chinese and Japanese ethnicity. These participants will randomized to receive AZD8630 and to receive placebo. * Sub-Part A1, SAD in healthy participants (one cohort in Sub-Part A1 will receive IV AZD8630 \\[IV formulation\\]) * Sub-Part A2, SAD in healthy participants of Chinese and Japanese ethnicity * Sub-Part A3, MAD in healthy participants * Sub-Part A4, MAD in healthy participants of Chinese and Japanese ethnicity Part B: Adult asthma patients will be randomized to one of 3 inhaled dose levels of AZD8630 or placebo. The expected duration of study participation for each participants in the part A is up to 87 days, and each patients in the Part B is up to 70 days.",
+          "matched_passages": []
+        },
+        {
+          "citation": "PubMed:34024646",
+          "title": "[Strategies for prescription of inhaled corticosteroids in mild-to-moderate asthma].",
+          "source_type": "pubmed",
+          "publication_types": [
+            "Journal Article",
+            "Review"
+          ],
+          "status": null,
+          "phase": null,
+          "publication_date": "2021",
+          "metadata_scope": "Stored source metadata; missing fields are unknown.",
+          "content_scope": "PubMed abstract content stored in TrialLens, not necessarily the full article.",
+          "indexed_section_names": [
+            "Abstract 1"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "Asthma is a common respiratory condition characterized by chronic inflammation of the airways. Most asthmatics have a mild-to-moderate form of the disease, but are still at risk of severe exacerbations and significantly impaired quality of life. This article reviews the strategies for prescription of inhaled corticosteroids in patients with mild-to-moderate asthma. The definition of asthma severity, the goals of asthma management and the adjustment of therapeutics are successively addressed. The major changes proposed by the GINA group in 2019 are also discussed.",
+          "matched_passages": []
+        },
+        {
+          "citation": "ClinicalTrials.gov:NCT00967590",
+          "title": "A Study of RO5036505 in Patients With Moderate to Severe Asthma",
+          "source_type": "clinical_trials",
+          "publication_types": [],
+          "status": "WITHDRAWN",
+          "phase": "PHASE2",
+          "publication_date": null,
+          "metadata_scope": "Stored registry status and phase describe study progress/design, not whether measured results are posted. Protocol wording alone does not establish that a study is still ongoing.",
+          "content_scope": "Only protocol brief summary/detailed description were indexed from this fetched record; structured results tables were not indexed. Results may exist elsewhere.",
+          "indexed_section_names": [
+            "Brief summary"
+          ],
+          "content_truncated": false,
+          "demo": false,
+          "text": "This randomized, double-blind, placebo-controlled study will evaluate the efficacy, safety and tolerability of RO5036505 in patients with inadequately controlled moderate to severe asthma. Patients will be randomized to receive either RO5036505 (380mg iv infusion once weekly) or placebo for 8 weeks. Patients will be on a standardized inhaled corticosteroid/long-acting beta-agonist regimen during study treatment. Target sample size is 50-100 individuals.",
+          "matched_passages": []
+        }
+      ],
+      "question": "What do these sources show about the benefits and limitations of inhaled corticosteroids for asthma? Include useful reported numbers where relevant.",
+      "passage_catalog": [
+        {
+          "source_index": 0,
+          "field": "text"
+        },
+        {
+          "source_index": 0,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 0,
+          "matched_passage_index": 0
+        },
+        {
+          "source_index": 1,
+          "field": "text"
+        },
+        {
+          "source_index": 1,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 2,
+          "field": "text"
+        },
+        {
+          "source_index": 2,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 3,
+          "field": "text"
+        },
+        {
+          "source_index": 3,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 4,
+          "field": "text"
+        },
+        {
+          "source_index": 4,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 5,
+          "field": "text"
+        },
+        {
+          "source_index": 5,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 6,
+          "field": "text"
+        },
+        {
+          "source_index": 6,
+          "field": "content_scope"
+        },
+        {
+          "source_index": 7,
+          "field": "text"
+        },
+        {
+          "source_index": 7,
+          "field": "content_scope"
+        }
+      ]
+    },
+    "generation_context_sha256": "799151239a8a2755a23ec07daaeef12c8f469662a5f6afa3a6f1b247b19166a9"
+  }
+]

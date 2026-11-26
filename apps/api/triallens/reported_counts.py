@@ -165,14 +165,20 @@ def _render(source: EvidenceSource, parsed: dict, simple: bool) -> str:
         categories = ", ".join(f"{cat}: {parsed['values'][group_id][cat]}" for cat in parsed["categories"])
         out.append(f"{label}: {categories}; denominator {parsed['denoms'][group_id]} participants")
     study = source.title
-    first = (f"ClinicalTrials.gov reports {fields['Outcome']} ({fields['Time frame']}) for {study}: " if not simple else f"The registry reports these participant counts for {fields['Outcome']} ({fields['Time frame']}): ") + "; ".join(out) + "."
+    outcome = fields["Outcome"]
+    brief = source.metadata.get("sections", {}).get("Brief summary", "")
+    has_short_summary = isinstance(brief, str) and brief.strip() and len(brief) <= 250 and len(brief.split()) <= 24
+    if simple:
+        first = f"{outcome} counts in {study}: "
+    else:
+        first = f"ClinicalTrials.gov reports {outcome} ({fields['Time frame']}) for {study}: "
+    first += "; ".join(out) + "."
     unequal_denominators = len(set(parsed["denoms"].values())) > 1
     design = "This was a single-group, nonrandomized study, so the results do not establish that the treatment caused any change. "
     design += ("Different group denominators do not show which individual participants changed categories." if unequal_denominators else "Group totals do not show whether individual participants changed categories.")
     if source.metadata.get("demo") or "DEMO" in source.external_id.upper():
         first = "Demo/synthetic registry data: " + first
-    brief = source.metadata.get("sections", {}).get("Brief summary", "")
-    if not simple and isinstance(brief, str) and len(brief) <= 250 and len(brief.split()) <= 24:
+    if has_short_summary:
         purpose = f" The registry describes the study as: {brief}"
     else:
         purpose = ""
