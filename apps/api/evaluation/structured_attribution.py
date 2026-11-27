@@ -29,6 +29,18 @@ supports as data. Choose the passage containing the reported numbers, groups,
 endpoint and uncertainty. Split a paragraph if its claims require different
 supports. Use content_scope for claims about what the excerpts cover.
 """
+REPORTING_UNIT_FORMAT = """
+When a catalog entry has span_start and span_end, its support is that exact
+substring of the matched passage (start included, end excluded). If support_text
+is present, it repeats that exact substring. The intact passage provides
+context. The reported_dispersion and reported_signed_intervals
+arrays point out literal values in that unit. In a request for uncertainty,
+keep the applicable reported plus/minus terms beside their arm estimates and
+attach confidence bounds to their own signed estimate. Treat Results and
+figure-caption claims separately when they use different supports. Attribute
+amended values directly to a published correction when applicable. Cite
+content_scope for indexing claims.
+"""
 
 
 class PassagePercentageMismatch(ValueError):
@@ -114,24 +126,49 @@ def render_answer(raw, citations, *, passages=None):
     }, ensure_ascii=False)
 
 
-def _passage_catalog(records):
+def _passage_catalog(records, *, reporting_units=False):
+    from evaluation.paper_reporting_units import reporting_units_for
+
     catalog, citations, texts = [], [], []
+    remaining_support_chars = 3000
     for source_index, record in enumerate(records):
         fields = [({"field": field}, record.get(field)) for field in ("text", "content_scope")]
         fields.extend(
             ({"matched_passage_index": index}, passage)
             for index, passage in enumerate(record.get("matched_passages", []))
         )
+        paper_sections = {
+            link["matched_passage_index"]: link["section"] for link in record.get("paper_passage_links", [])
+        } if reporting_units else {}
+        correction = reporting_units and any(
+            value.casefold() == "published erratum" for value in record.get("publication_types", [])
+        )
         for location, passage in fields:
-            if isinstance(passage, str) and passage.strip():
-                catalog.append({"source_index": source_index, **location})
+            if not isinstance(passage, str) or not passage.strip():
+                continue
+            section = paper_sections.get(location.get("matched_passage_index"))
+            units = reporting_units_for(passage, section) if section and not correction else []
+            if not units:
+                metadata = {}
+                if correction and section:
+                    metadata = {"role": "published_correction", "section": section}
+                elif section:
+                    metadata = {"section": section}
+                units = [metadata]
+            for unit in units:
+                support = passage[unit.get("span_start"):unit.get("span_end")]
+                entry = {"source_index": source_index, **location, **unit}
+                if "span_start" in unit and len(support) <= remaining_support_chars:
+                    entry["support_text"] = support
+                    remaining_support_chars -= len(support)
+                catalog.append(entry)
                 citations.append(record["citation"])
-                texts.append(passage)
+                texts.append(support)
     return catalog, citations, texts
 
 
 @contextmanager
-def structured_attribution_experiment(enabled, *, passage_attribution=False):
+def structured_attribution_experiment(enabled, *, passage_attribution=False, reporting_units=False):
     if not enabled:
         yield
         return
@@ -147,7 +184,7 @@ def structured_attribution_experiment(enabled, *, passage_attribution=False):
         index_field = "source_indices"
         passages = None
         if passage_attribution:
-            catalog, citations, passages = _passage_catalog(payload["evidence"])
+            catalog, citations, passages = _passage_catalog(payload["evidence"], reporting_units=reporting_units)
             payload["passage_catalog"] = catalog
             submitted[1] = {**messages[1], "content": json.dumps(payload, ensure_ascii=False)}
             format_rules = FORMAT.replace("source_indices", "passage_indices")
@@ -155,6 +192,8 @@ def structured_attribution_experiment(enabled, *, passage_attribution=False):
                 "supplied evidence array: 0 is the first record and 1 is the second.",
                 "passage_catalog: 0 is the first entry and 1 is the second.",
             ) + PASSAGE_FORMAT
+            if reporting_units:
+                format_rules += REPORTING_UNIT_FORMAT
             index_field = "passage_indices"
         submitted[0] = {**messages[0], "content": messages[0]["content"] + format_rules}
         if revision:
